@@ -1,5 +1,11 @@
+import { Routes } from 'react-router-dom';
+
 function App() {
-  return <>Hello World!</>;
+  return (
+    <>
+      <Routes></Routes>
+    </>
+  );
 }
 
 export default App;
