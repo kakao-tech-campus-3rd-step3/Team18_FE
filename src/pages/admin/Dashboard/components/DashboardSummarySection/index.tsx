@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import type { ReactNode } from 'react';
 import { SummaryCard } from './SummaryCard';
+import type { DashboardCard } from '@/types/dashboard';
 
 export const DashboardSummarySection = () => {
   return (
@@ -33,12 +33,6 @@ const Wrapper = styled.section(({ theme }) => ({
   },
 }));
 
-export type DashboardCard = {
-  id: number;
-  label: string;
-  value: string | number;
-  image: ReactNode;
-};
 // 더미 데이터
 const DASHBOARD_CARDS: DashboardCard[] = [
   {
