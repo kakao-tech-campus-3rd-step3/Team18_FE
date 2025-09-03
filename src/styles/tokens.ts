@@ -1,12 +1,12 @@
+import { base, background, primarys, red, gray, blue } from "./colors";
+
 export const colors = {
-  primary: "#00782C",
-  secondary: "#F2F9F7",
-  textPrimary: "#212121",
-  textSecondary: "#757575",
-  background: "#FFFFFF",
-  border: "#EEEEEE",
-  success: "#1B67FF",
-  error: "#F43636",
+  ...base,
+  ...background,
+  ...primarys,
+  ...gray,
+  ...red,
+  ...blue,
 };
 
 export const font = {
