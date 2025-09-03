@@ -6,3 +6,5 @@ export type DashboardCard = {
   value: string | number;
   image: ReactNode;
 };
+
+export type ApplicationFilterOption = '전체' | '검토중' | '승인됨' | '거절됨';
