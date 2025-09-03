@@ -1,7 +1,12 @@
 import styled from '@emotion/styled';
+import { DashboardSummarySection } from './components/DashboardSummarySection';
 
 export const DashboardPage = () => {
-  return <Layout></Layout>;
+  return (
+    <Layout>
+      <DashboardSummarySection />
+    </Layout>
+  );
 };
 
 const Layout = styled.main(({ theme }) => ({
