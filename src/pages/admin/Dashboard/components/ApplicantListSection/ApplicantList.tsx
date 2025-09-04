@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { ApplicantListItem } from './ApplicantListItem';
+import { Button } from '@/shared/components/Button';
 import { MOCK_APPLICANT_DATA_LIST } from './mock';
 
 export const ApplicantList = () => {
@@ -23,6 +24,11 @@ export const ApplicantList = () => {
           />
         ))}
       </ApplicantInfoDataList>
+      <ButtonWrapper>
+        <Button borderRadius={'lg'} color={'primary00'} width={'15rem'} opacity=''>
+          결과 전송하기
+        </Button>
+      </ButtonWrapper>
     </Container>
   );
 };
@@ -49,6 +55,13 @@ const CategoryText = styled.div(({ theme }) => ({
   color: theme.colors.textPrimary,
   textAlign: 'center',
 }));
+
+const ButtonWrapper = styled.div({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '3rem',
+  width: '100%',
+});
 
 type ApplicateInfoCategory = '이름' | '학번' | '학과' | '전화번호' | '이메일' | '결과';
 const INFO_CATEGORY: ApplicateInfoCategory[] = [
