@@ -1,16 +1,16 @@
 import { CLUB_CATEGORY } from '@/pages/main/constant/clubCategory';
-import CategoryTap, {
-  CategoryTapContainer,
-} from '@/pages/main/components/ClubCategorySection/CategoryTap';
+import CategoryTab, {
+  CategoryTabContainer,
+} from '@/pages/main/components/ClubCategorySection/CategoryTab';
 
 const ClubCategorySection = () => {
   return (
     <>
-      <CategoryTapContainer>
+      <CategoryTabContainer>
         {CLUB_CATEGORY.map((category) => (
-          <CategoryTap>{category}</CategoryTap>
+          <CategoryTab>{category}</CategoryTab>
         ))}
-      </CategoryTapContainer>
+      </CategoryTabContainer>
     </>
   );
 };
