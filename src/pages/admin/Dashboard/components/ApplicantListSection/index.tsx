@@ -36,7 +36,7 @@ const PageTitle = styled.h1(({ theme }) => ({
 
 const ListWrapper = styled.main(({ theme }) => ({
   backgroundColor: theme.colors.bg,
-  minHeight: '100vh',
-  padding: '2.6rem 3rem 0',
+  minHeight: 'auto',
+  padding: '2.6rem 3rem',
   borderRadius: theme.radius.lg,
 }));
