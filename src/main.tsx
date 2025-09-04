@@ -5,10 +5,19 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </StrictMode>,
-);
+async function enableMocking() {
+  if (import.meta.env.VITE_ENABLE_MSW === 'true') {
+    const { client } = await import('./mocks/client');
+    return client.start({});
+  }
+}
+
+enableMocking().then(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </StrictMode>,
+  );
+});
