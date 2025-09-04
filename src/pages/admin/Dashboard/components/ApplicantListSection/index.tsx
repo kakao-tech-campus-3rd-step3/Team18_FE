@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { ApplicationStatusFilter } from './ApplicationFilter';
+import { ApplicantList } from './ApplicantList';
 import type { ApplicationFilterOption } from '@/types/dashboard';
 
 export const ApplicantListSection = () => {
@@ -12,6 +13,9 @@ export const ApplicantListSection = () => {
         <PageTitle>지원자 관리</PageTitle>
         <ApplicationStatusFilter option={filterOption} onOptionChange={setFilterOption} />
       </ApplicantFilterTopBarWrapper>
+      <ListWrapper>
+        <ApplicantList />
+      </ListWrapper>
     </>
   );
 };
@@ -28,4 +32,11 @@ const PageTitle = styled.h1(({ theme }) => ({
   fontSize: theme.font.size.xl,
   fontWeight: theme.font.weight.bold,
   color: theme.colors.textPrimary,
+}));
+
+const ListWrapper = styled.main(({ theme }) => ({
+  backgroundColor: theme.colors.bg,
+  minHeight: '100vh',
+  padding: '2.6rem 3rem 0',
+  borderRadius: theme.radius.lg,
 }));
