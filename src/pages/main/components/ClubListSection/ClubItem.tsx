@@ -7,8 +7,8 @@ export const ClubItem = styled.div(({ theme }) => ({
   height: 130,
   marginBottom: 10,
   border: `1px solid ${theme.colors.border}`,
-  borderRadius: `${theme.radius.lg}`,
-  boxShadow: `${theme.shadow.md}`,
+  borderRadius: theme.radius.lg,
+  boxShadow: theme.shadow.md,
   padding: 16,
   gap: 16,
 }));
