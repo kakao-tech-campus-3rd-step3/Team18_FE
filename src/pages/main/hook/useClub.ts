@@ -1,6 +1,6 @@
 import { getClubs } from '@/pages/main/api/club';
 import { useEffect, useState } from 'react';
-import type { Club } from '@/pages/main/domain/club';
+import type { Club } from '@/pages/main/type/club';
 
 export const useClub = () => {
   const [clubs, setClubs] = useState<Club[]>();

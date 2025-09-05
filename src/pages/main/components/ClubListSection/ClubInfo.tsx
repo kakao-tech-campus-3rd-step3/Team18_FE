@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import type { RecruitStatus } from '@/pages/main/domain/club';
+import type { RecruitStatus } from '@/pages/main/type/club';
 
 export const ClubCateogryText = styled.div(({ theme }) => ({
   fontSize: theme?.font?.size?.xs,
