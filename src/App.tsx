@@ -1,5 +1,6 @@
 import { Routes } from './pages/Routes';
 import { ThemeProvider } from '@emotion/react';
+import { theme } from '@/styles/theme';
 import { theme } from './styles/theme';
 import Navbar from './components/Navbar';
 
