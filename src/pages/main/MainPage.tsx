@@ -1,7 +1,7 @@
 import ClubListSection from '@/pages/main/components/ClubListSection';
 import { ClubListContainer } from '@/pages/main/components/ClubListSection/ClubListContainer';
-import BannerSection from './components/BannerSection';
-import ClubCategorySection from './components/ClubCategorySection';
+import BannerSection from '@/pages/main/components/BannerSection';
+import ClubCategorySection from '@/pages/main/components//ClubCategorySection';
 
 const MainPage = () => {
   return (

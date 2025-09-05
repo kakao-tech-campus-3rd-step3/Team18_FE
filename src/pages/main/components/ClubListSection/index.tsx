@@ -7,7 +7,7 @@ import {
   ClubNameText,
   RecruitStatusBox,
   RecruitStatusText,
-} from './ClubInfo';
+} from '@/pages/main/components/ClubListSection/ClubInfo';
 
 const ClubListSection = () => {
   const { clubs, isLoading, error } = useClub();
