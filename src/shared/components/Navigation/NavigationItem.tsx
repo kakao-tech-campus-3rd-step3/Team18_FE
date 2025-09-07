@@ -3,24 +3,31 @@ import { Link } from 'react-router-dom';
 import type { ReactNode } from 'react';
 import type { NavItemData } from '@/types/navigation';
 
-type Props = { children: ReactNode } & Pick<NavItemData, 'to' | 'isLogo'>;
+type Props = {
+  children: ReactNode;
+  onClick: (children: React.ReactNode) => void;
+  selected: boolean;
+} & Pick<NavItemData, 'to' | 'isLogo'>;
 
-export const NavigationItem = ({ to, children, isLogo }: Props) => {
-  if (isLogo) return <LogoLink to={to || '#'}>{children}</LogoLink>;
+export const NavigationItem = ({ to, children, isLogo, onClick, selected }: Props) => {
+  if (isLogo)
+    return (
+      <LogoLink to={to || '#'} onClick={() => onClick(children)}>
+        {children}
+      </LogoLink>
+    );
 
-  return <NavLink to={to || '#'}>{children}</NavLink>;
+  return (
+    <NavLink
+      to={to || '#'}
+      selected={selected}
+      onClick={() => onClick(children)}
+      data-selected={selected}
+    >
+      {children}
+    </NavLink>
+  );
 };
-
-export const NavContainer = styled.nav(({ theme }) => ({
-  width: '100%',
-  backgroundColor: theme.colors.bg,
-  boxShadow: theme.shadow.sm,
-  padding: '20px 56px',
-  display: 'flex',
-  alignItems: 'center',
-  gap: 88,
-  zIndex: theme.zIndex.header,
-}));
 
 const LogoLink = styled(Link)(({ theme }) => ({
   fontSize: theme.font.size.lg,
@@ -30,13 +37,16 @@ const LogoLink = styled(Link)(({ theme }) => ({
   cursor: 'pointer',
 }));
 
-const NavLink = styled(Link)(({ theme }) => ({
+const NavLink = styled(Link)<{ selected: boolean }>(({ theme, selected }) => ({
   fontSize: theme.font.size.base,
-  fontWeight: theme.font.weight.medium,
-  color: theme.colors.textPrimary,
   textDecoration: 'none',
-  transition: 'color 0.2s',
+  transition: 'color 0.2s, font-weight 0.2s',
+  color: selected ? theme.colors.primary : theme.colors.textPrimary,
+  fontWeight: selected ? theme.font.weight.bold : theme.font.weight.medium,
+  padding: '8px 0',
+  position: 'relative',
+
   '&:hover': {
-    color: theme.colors.primary700,
+    fontWeight: selected ? theme.font.weight.medium : theme.font.weight.bold,
   },
 }));
