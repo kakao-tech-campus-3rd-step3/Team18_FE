@@ -1,13 +1,13 @@
-import { useClub } from '@/pages/main/hook/useClub';
-import { Grid } from '@/pages/main/components/ClubListSection/ClubGrid';
-import { ClubItem } from '@/pages/main/components/ClubListSection/ClubItem';
+import { useClub } from '@/pages/user/Main/hook/useClub';
+import { Grid } from '@/pages/user/Main/components/ClubListSection/ClubGrid';
+import { ClubItem } from '@/pages/user/Main/components/ClubListSection/ClubItem';
 import {
   ClubCateogryText,
   ClubIntroduction,
   ClubNameText,
   RecruitStatusBox,
   RecruitStatusText,
-} from '@/pages/main/components/ClubListSection/ClubInfo';
+} from '@/pages/user/Main/components/ClubListSection/ClubInfo';
 
 const ClubListSection = () => {
   const { clubs, isLoading, error } = useClub();
