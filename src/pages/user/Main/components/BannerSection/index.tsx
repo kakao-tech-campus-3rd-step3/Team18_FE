@@ -1,6 +1,6 @@
-import { BannerText } from '@/pages/main/components/BannerSection/BannerText';
-import { BannerWrapper } from '@/pages/main/components/BannerSection/BannerWrapper';
-import ClubSearchInput from '@/pages/main/components/BannerSection/ClubSearchInput';
+import { BannerText } from '@/pages/user/Main/components/BannerSection/BannerText';
+import { BannerWrapper } from '@/pages/user/Main/components/BannerSection/BannerWrapper';
+import ClubSearchInput from '@/pages/user/Main/components/BannerSection/ClubSearchInput';
 
 const BannerSection = () => {
   return (
