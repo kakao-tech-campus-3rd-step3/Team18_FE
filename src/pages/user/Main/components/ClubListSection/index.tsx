@@ -1,13 +1,17 @@
 import { useClub } from '@/pages/user/Main/hook/useClub';
-import { Grid } from '@/pages/user/Main/components/ClubListSection/ClubGrid';
-import { ClubItem } from '@/pages/user/Main/components/ClubListSection/ClubItem';
 import {
   ClubCateogryText,
   ClubIntroduction,
+  ClubItem,
+  ClubListContainer,
   ClubNameText,
+  Grid,
   RecruitStatusBox,
   RecruitStatusText,
-} from '@/pages/user/Main/components/ClubListSection/ClubInfo';
+} from '@/pages/user/Main/components/ClubListSection/Club.style.tsx';
+
+
+
 
 const ClubListSection = () => {
   const { clubs, isLoading, error } = useClub();
@@ -16,7 +20,7 @@ const ClubListSection = () => {
   if (error) return <div>에러발생 : {error.message}</div>;
 
   return (
-    <>
+    <ClubListContainer>
       <Grid>
         {clubs?.map((club) => (
           <ClubItem key={club.id}>
@@ -32,7 +36,7 @@ const ClubListSection = () => {
           </ClubItem>
         ))}
       </Grid>
-    </>
+    </ClubListContainer>
   );
 };
 
