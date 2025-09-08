@@ -1,5 +1,5 @@
 import ClubSearchInput from '@/pages/user/Main/components/BannerSection/ClubSearchInput.tsx';
-import { BannerWrapper,BannerText } from '@/pages/user/Main/components/BannerSection/Banner.style.tsx';
+import { BannerWrapper,BannerText } from '@/pages/user/Main/components/BannerSection/Banner.styled.tsx';
 
 
 export const BannerSection = () => {

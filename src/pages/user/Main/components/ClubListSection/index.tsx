@@ -8,7 +8,7 @@ import {
   Grid,
   RecruitStatusBox,
   RecruitStatusText,
-} from '@/pages/user/Main/components/ClubListSection/Club.style.tsx';
+} from '@/pages/user/Main/components/ClubListSection/Club.styled.tsx';
 
 
 

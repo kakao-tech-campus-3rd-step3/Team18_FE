@@ -1,7 +1,8 @@
 import { CLUB_CATEGORY } from '@/pages/user/Main/constant/clubCategory';
-import CategoryTabStyle, {
+import  {
   CategoryTabContainer,
-} from '@/pages/user/Main/components/ClubCategorySection/CategoryTab.style.tsx';
+  CategoryTabStyle
+} from '@/pages/user/Main/components/ClubCategorySection/index.styled.tsx';
 
 const ClubCategorySection = () => {
   return (
