@@ -1,6 +1,6 @@
 import { getClubs } from '@/pages/user/Main/api/club.ts';
 import { useEffect, useState } from 'react';
-import type { Club } from '@/pages/user/Main/type/club.ts';
+import type { Club } from '@/types/club.ts';
 
 export const useClub = () => {
   const [clubs, setClubs] = useState<Club[]>();
