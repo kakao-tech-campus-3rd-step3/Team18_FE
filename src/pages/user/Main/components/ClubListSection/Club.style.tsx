@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import type { RecruitStatus } from '@/pages/user/Main/type/club';
 
+
 export const ClubCateogryText = styled.div(({ theme }) => ({
   fontSize: theme?.font?.size?.xs,
   fontWeight: theme.font.weight.regular,
@@ -36,3 +37,31 @@ export const RecruitStatusText = styled.div<Props>(({ theme, status }) => ({
   fontWeight: theme.font.weight.bold,
   color: status === '모집중' ? theme.colors.primary700 : theme.colors.red700,
 }));
+
+
+
+export const Grid = styled.div(() => ({
+  display: 'grid',
+  gap: 15,
+  gridTemplateColumns: 'repeat(4, 1fr)',
+}));
+
+export const ClubListContainer = styled.div({
+  maxWidth: '1200px',
+  margin: '0 auto',
+});
+
+export const ClubItem = styled.div(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  width: 240,
+  height: 130,
+  marginBottom: 10,
+  border: `1px solid ${theme.colors.border}`,
+  borderRadius: theme.radius.lg,
+  boxShadow: theme.shadow.md,
+  padding: 16,
+  gap: 16,
+}));
+
+
