@@ -1,6 +1,6 @@
 import { useClub } from '@/pages/user/Main/hook/useClub';
 import {
-  ClubCateogryText,
+  ClubCategoryText,
   ClubIntroduction,
   ClubItem,
   ClubListContainer,
@@ -14,7 +14,7 @@ import {
 
 
 const ClubListSection = () => {
-  const { clubs, isLoading, error } = useClub();
+  const { clubs, isLoading } = useClub();
 
   if (isLoading) return <div>로딩중입니다...</div>;
   if (error) return <div>에러발생 : {error.message}</div>;
@@ -24,7 +24,7 @@ const ClubListSection = () => {
       <Grid>
         {clubs?.map((club) => (
           <ClubItem key={club.id}>
-            <ClubCateogryText>{club.category}</ClubCateogryText>
+            <ClubCategoryText>{club.category}</ClubCategoryText>
 
             <ClubNameText>{club.name}</ClubNameText>
             <ClubIntroduction>{club.short_Introduction}</ClubIntroduction>

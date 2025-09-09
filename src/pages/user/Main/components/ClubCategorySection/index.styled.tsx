@@ -15,13 +15,13 @@ export const CategoryTabStyle = styled.div(({ theme }) => ({
   padding: 2,
 }));
 
-export const CategoryTabContainer = styled.div(({ theme }) => ({
+export const CategoryTabContainer = styled.div({
   display: 'flex',
   flexDirection: 'row',
   gap: '8px',
   justifyContent: 'center',
   alignItems: 'center',
   padding: 20,
-}));
+});
 
 

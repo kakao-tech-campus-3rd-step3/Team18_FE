@@ -45,9 +45,9 @@ const ApplicantInfoCategoryList = styled.div(({ theme }) => ({
   borderBottom: `1px solid ${theme.colors.gray300}`,
 }));
 
-const ApplicantInfoDataList = styled.div(({ theme }) => ({
+const ApplicantInfoDataList = styled.div({
   paddingTop: '0.7rem',
-}));
+});
 
 const CategoryText = styled.div(({ theme }) => ({
   fontSize: '1.4rem',
