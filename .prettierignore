@@ -1,0 +1,8 @@
+node_modules
+dist
+build
+.git
+.vscode
+*.min.js
+*.bundle.js
+package-lock.json 
