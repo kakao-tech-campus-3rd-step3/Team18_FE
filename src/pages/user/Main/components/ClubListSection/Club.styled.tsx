@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import type { RecruitStatus } from '@/types/club.ts';
 
-
 export const ClubCategoryText = styled.div(({ theme }) => ({
   fontSize: theme?.font?.size?.xs,
   fontWeight: theme.font.weight.regular,
