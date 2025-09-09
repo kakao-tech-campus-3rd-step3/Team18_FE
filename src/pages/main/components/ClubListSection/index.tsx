@@ -2,7 +2,7 @@ import { useClub } from '@/pages/main/hook/useClub';
 import { Grid } from '@/pages/main/components/ClubListSection/ClubGrid';
 import { ClubItem } from '@/pages/main/components/ClubListSection/ClubItem';
 import {
-  ClubCateogryText,
+  ClubCategoryText,
   ClubIntroduction,
   ClubNameText,
   RecruitStatusBox,
@@ -10,7 +10,7 @@ import {
 } from '@/pages/main/components/ClubListSection/ClubInfo';
 
 const ClubListSection = () => {
-  const { clubs, isLoading, error } = useClub();
+  const { clubs, isLoading } = useClub();
 
   return (
     <>
@@ -18,7 +18,7 @@ const ClubListSection = () => {
       <Grid>
         {clubs?.map((club) => (
           <ClubItem key={club.id}>
-            <ClubCateogryText>{club.category}</ClubCateogryText>
+            <ClubCategoryText>{club.category}</ClubCategoryText>
 
             <ClubNameText>{club.name}</ClubNameText>
             <ClubIntroduction>{club.short_Introduction}</ClubIntroduction>
