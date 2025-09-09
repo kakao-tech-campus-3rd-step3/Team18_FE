@@ -21,7 +21,7 @@ export const ApplicantListItem = ({
   );
 };
 
-const ItemWrapper = styled.div(({ theme }) => ({
+const ItemWrapper = styled.div({
   display: 'grid',
   gridTemplateColumns: '1fr 1fr 1fr 2fr 2fr 1fr',
   gap: '2rem',
@@ -31,7 +31,7 @@ const ItemWrapper = styled.div(({ theme }) => ({
   '&:hover': {
     cursor: 'pointer',
   },
-}));
+});
 
 const InfoText = styled.p(({ theme }) => ({
   fontSize: '1.2rem',
