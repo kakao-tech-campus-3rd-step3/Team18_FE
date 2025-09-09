@@ -3,6 +3,7 @@ import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/styles/theme';
 import { Navigation } from '@/shared/components/Navigation';
 
+
 function App() {
   return (
     <>
