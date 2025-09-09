@@ -2,7 +2,7 @@ import ClubListSection from '@/pages/user/Main/components/ClubListSection';
 import { BannerSection } from '@/pages/user/Main/components/BannerSection';
 import ClubCategorySection from '@/pages/user/Main/components/ClubCategorySection';
 
-const Page = () => {
+const MainPage = () => {
   return (
     <>
       <BannerSection />
@@ -12,4 +12,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default MainPage;
