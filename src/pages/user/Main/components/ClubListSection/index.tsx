@@ -1,20 +1,23 @@
-import { useClub } from '@/pages/main/hook/useClub';
-import { Grid } from '@/pages/main/components/ClubListSection/ClubGrid';
-import { ClubItem } from '@/pages/main/components/ClubListSection/ClubItem';
+import { useClub } from '@/pages/user/Main/hook/useClub';
 import {
   ClubCategoryText,
   ClubIntroduction,
+  ClubItem,
+  ClubListContainer,
   ClubNameText,
+  Grid,
   RecruitStatusBox,
   RecruitStatusText,
-} from '@/pages/main/components/ClubListSection/ClubInfo';
+} from '@/pages/user/Main/components/ClubListSection/Club.styled.tsx';
 
 const ClubListSection = () => {
-  const { clubs, isLoading } = useClub();
+  const { clubs, isLoading, error } = useClub();
+
+  if (isLoading) return <div>로딩중입니다...</div>;
+  if (error) return <div>에러발생 : {error.message}</div>;
 
   return (
-    <>
-      {isLoading && <div>로딩중입니다...</div>}
+    <ClubListContainer>
       <Grid>
         {clubs?.map((club) => (
           <ClubItem key={club.id}>
@@ -30,7 +33,7 @@ const ClubListSection = () => {
           </ClubItem>
         ))}
       </Grid>
-    </>
+    </ClubListContainer>
   );
 };
 

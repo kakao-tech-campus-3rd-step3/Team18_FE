@@ -1,6 +1,6 @@
 import { Route, Routes as RouterRoutes } from 'react-router-dom';
 import { DashboardPage } from '@/pages/admin/Dashboard/Page';
-import MainPage from '@/pages/main/MainPage';
+import { MainPage } from '@/pages/user/Main/Page.tsx';
 
 export const Routes = () => {
   return (

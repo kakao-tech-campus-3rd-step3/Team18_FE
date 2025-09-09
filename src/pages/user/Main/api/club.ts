@@ -1,6 +1,7 @@
-import type { ClubResponse } from '@/pages/main/type/club';
+import type { ClubResponse } from '@/types/club.ts';
 
 export async function getClubs(): Promise<ClubResponse> {
   const response = await fetch('/api/clubs');
-  return response.json();
+  const data = await response.json();
+  return data;
 }
