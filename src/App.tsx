@@ -1,13 +1,14 @@
 import { Routes } from './pages/Routes';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/styles/theme';
-import Navbar from './components/Navbar';
+import { Navigation } from '@/shared/components/Navigation';
+
 
 function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Navbar role='guest' />
+        <Navigation role='president' />
         <Routes />
       </ThemeProvider>
     </>

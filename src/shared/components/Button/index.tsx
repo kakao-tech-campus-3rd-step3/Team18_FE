@@ -14,6 +14,7 @@ type Props = {
   opacity?: string;
   borderRadius?: borderRadiusKeys;
   disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 };
 
 export const Button = ({
@@ -27,7 +28,8 @@ export const Button = ({
   width = 'auto',
   opacity,
   borderRadius = 'sm',
-  disabled = false,
+  disabled,
+  type = 'button',
 }: Props) => {
   return (
     <StyledButton
@@ -41,6 +43,7 @@ export const Button = ({
       opacity={opacity}
       borderRadius={borderRadius}
       disabled={disabled}
+      type={type}
     >
       {children}
     </StyledButton>
@@ -55,13 +58,14 @@ const StyledButton = styled.button<Props>(({ theme, ...props }) => ({
   padding: props.padding,
   width: props.width,
   color: theme.colors[props.color || 'textPrimary'],
-  backgroundColor: theme.colors[props.backgroundColor || 'primary'],
   fontWeight: theme.font.weight[props.weight || 'medium'],
   fontSize: props.size,
   border: 'none',
+  backgroundColor: theme.colors[props.backgroundColor || 'primary'],
+
   borderRadius: theme.radius[props.borderRadius || 'sm'],
   cursor: props.disabled ? 'not-allowed' : 'pointer',
-  opacity: props.disabled ? '0.5' : props.opacity || '1',
+  opacity: props.disabled ? '0.4' : props.opacity || '1',
 }));
 
 type fontColorKeys = keyof typeof theme.colors;
