@@ -1,7 +1,7 @@
 import { CLUB_CATEGORY } from '@/pages/user/Main/constant/clubCategory';
 import  {
   CategoryTabContainer,
-  CategoryTabStyle
+  CategoryTab
 } from '@/pages/user/Main/components/ClubCategorySection/index.styled.tsx';
 
 const ClubCategorySection = () => {
@@ -9,7 +9,7 @@ const ClubCategorySection = () => {
     <>
       <CategoryTabContainer>
         {CLUB_CATEGORY.map((category) => (
-          <CategoryTabStyle key={category}>{category}</CategoryTabStyle>
+          <CategoryTab key={category}>{category}</CategoryTab>
         ))}
       </CategoryTabContainer>
     </>

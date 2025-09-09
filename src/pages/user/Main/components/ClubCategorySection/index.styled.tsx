@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const CategoryTabStyle = styled.div(({ theme }) => ({
+export const CategoryTab = styled.div(({ theme }) => ({
   width: 50,
   height: 20,
   display: 'flex',
@@ -23,5 +23,4 @@ export const CategoryTabContainer = styled.div({
   alignItems: 'center',
   padding: 20,
 });
-
 

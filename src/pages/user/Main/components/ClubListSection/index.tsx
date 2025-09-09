@@ -14,7 +14,7 @@ import {
 
 
 const ClubListSection = () => {
-  const { clubs, isLoading } = useClub();
+  const { clubs, isLoading,error } = useClub();
 
   if (isLoading) return <div>로딩중입니다...</div>;
   if (error) return <div>에러발생 : {error.message}</div>;
