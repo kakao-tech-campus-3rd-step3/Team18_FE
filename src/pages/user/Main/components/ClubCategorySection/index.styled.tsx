@@ -24,4 +24,3 @@ export const CategoryTabContainer = styled.div({
   padding: 20,
 });
 
-export default CategoryTab;
