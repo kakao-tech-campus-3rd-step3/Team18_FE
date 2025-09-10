@@ -16,8 +16,8 @@ export type ApplicantData = {
   name: string;
   studentId: string;
   department: string;
-  phone: string;
+  phoneNumber: string;
   email: string;
   status: '합격' | '불합격' | '미정';
-  onClick: (id: number) => void;
+  submittedAt: string;
 };

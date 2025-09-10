@@ -6,7 +6,7 @@ export const ApplicantListItem = ({
   name,
   studentId,
   department,
-  phone,
+  phoneNumber,
   email,
   status,
   onClick,
@@ -16,7 +16,7 @@ export const ApplicantListItem = ({
       <InfoText>{name}</InfoText>
       <InfoText>{studentId}</InfoText>
       <InfoText>{department}</InfoText>
-      <InfoText>{phone}</InfoText>
+      <InfoText>{phoneNumber}</InfoText>
       <InfoText>{email}</InfoText>
       <StatusBadge status={status}>{status}</StatusBadge>
     </ItemWrapper>
