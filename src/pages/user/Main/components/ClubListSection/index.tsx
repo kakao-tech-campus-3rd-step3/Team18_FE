@@ -10,7 +10,7 @@ import {
   RecruitStatusText,
 } from '@/pages/user/Main/components/ClubListSection/Club.styled.tsx';
 
-const ClubListSection = () => {
+export const ClubListSection = () => {
   const { data, isLoading, error } = useClub();
 
   if (isLoading) return <div>로딩중입니다...</div>;
@@ -36,5 +36,3 @@ const ClubListSection = () => {
     </ClubListContainer>
   );
 };
-
-export default ClubListSection;

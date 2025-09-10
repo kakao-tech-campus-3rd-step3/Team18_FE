@@ -1,10 +1,10 @@
 import { CLUB_CATEGORY } from '@/pages/user/Main/constant/clubCategory';
-import  {
+import {
   CategoryTabContainer,
-  CategoryTab
+  CategoryTab,
 } from '@/pages/user/Main/components/ClubCategorySection/index.styled.tsx';
 
-const ClubCategorySection = () => {
+export const ClubCategorySection = () => {
   return (
     <>
       <CategoryTabContainer>
@@ -15,5 +15,3 @@ const ClubCategorySection = () => {
     </>
   );
 };
-
-export default ClubCategorySection;

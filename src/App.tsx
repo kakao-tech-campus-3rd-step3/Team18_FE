@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
-function App() {
+export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
@@ -16,5 +16,3 @@ function App() {
     </QueryClientProvider>
   );
 }
-
-export default App;
