@@ -10,7 +10,7 @@ export const MainPage = () => {
     <>
       <BannerSection />
       <ClubCategorySection selected={filter} onSelect={(c: ClubCategory) => setFilter(c)} />
-      <ClubListSection />
+      <ClubListSection filter={filter} />
     </>
   );
 };

@@ -9,9 +9,14 @@ import {
   RecruitStatusBox,
   RecruitStatusText,
 } from '@/pages/user/Main/components/ClubListSection/Club.styled.tsx';
+import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
 
-export const ClubListSection = () => {
-  const { data, isLoading, error } = useClub();
+type Props = {
+  filter: ClubCategory;
+};
+
+export const ClubListSection = ({ filter }: Props) => {
+  const { data, isLoading, error } = useClub(filter);
 
   if (isLoading) return <div>로딩중입니다...</div>;
   if (error) return <div>에러발생 : {error.message}</div>;
