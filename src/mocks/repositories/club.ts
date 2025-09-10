@@ -1,62 +1,90 @@
-const clubs = [
+import type { Club } from '@/types/club.ts';
+
+export const clubs: Club[] = [
+  // 문예
   {
     id: 1,
-    name: '동아리1',
-    category: '사회연구',
-    short_Introduction: '지역 사회문제를 탐구하고 해결 방안을 모색합니다.',
+    name: '시향 동아리',
+    category: '문예',
+    short_Introduction: '시를 쓰고 낭송하며 문학적 감성을 키우는 모임입니다.',
     recruit_status: '모집중',
   },
   {
     id: 2,
-    name: '동아리2',
-    category: '예술',
-    short_Introduction: '창작 활동과 전시회를 통해 예술적 감각을 키워요.',
+    name: '소설창작회',
+    category: '문예',
+    short_Introduction: '단편 소설을 집필하고 합평회를 진행합니다.',
     recruit_status: '모집마감',
   },
+
+  // 학술
   {
     id: 3,
-    name: '동아리3',
-    category: '체육',
-    short_Introduction: '주 2회 모여 풋살과 농구 등 다양한 운동을 즐깁니다.',
+    name: 'AI 연구회',
+    category: '학술',
+    short_Introduction: '머신러닝과 인공지능 논문을 함께 읽고 프로젝트를 진행합니다.',
     recruit_status: '모집중',
   },
   {
     id: 4,
-    name: '동아리4',
-    category: '공학',
-    short_Introduction: '로봇 제작과 프로그래밍 스터디를 진행합니다.',
-    recruit_status: '모집마감',
+    name: '경제 토론 동아리',
+    category: '학술',
+    short_Introduction: '경제 현안을 주제로 토론과 발표를 진행합니다.',
+    recruit_status: '모집중',
   },
+
+  // 종교
   {
     id: 5,
-    name: '동아리5',
-    category: '문학',
-    short_Introduction: '시와 소설을 함께 읽고 창작 작품을 공유합니다.',
-    recruit_status: '모집중',
+    name: '기독교 학생회',
+    category: '종교',
+    short_Introduction: '성경 공부와 봉사활동을 함께하는 모임입니다.',
+    recruit_status: '모집마감',
   },
   {
     id: 6,
-    name: '동아리6',
-    category: '음악',
-    short_Introduction: '버스킹 공연을 준비하고 합주 연습을 해요.',
+    name: '불교 명상회',
+    category: '종교',
+    short_Introduction: '명상을 통해 마음 수양과 수행을 함께합니다.',
     recruit_status: '모집중',
   },
+
+  // 체육
   {
     id: 7,
-    name: '동아리7',
-    category: '봉사',
-    short_Introduction: '지역 아동센터와 협력해 봉사활동을 진행합니다.',
-    recruit_status: '모집마감',
+    name: '풋살 클럽',
+    category: '체육',
+    short_Introduction: '주말마다 풋살 경기를 즐기며 친목을 다집니다.',
+    recruit_status: '모집중',
   },
   {
     id: 8,
-    name: '동아리8',
-    category: 'IT',
-    short_Introduction: '웹 서비스와 앱 개발 프로젝트를 함께 만들어요.',
+    name: '배드민턴 동아리',
+    category: '체육',
+    short_Introduction: '초보부터 고수까지 함께 치는 배드민턴 모임입니다.',
+    recruit_status: '모집마감',
+  },
+
+  // 봉사
+  {
+    id: 9,
+    name: '지역 봉사단',
+    category: '봉사',
+    short_Introduction: '지역 사회에서 다양한 봉사활동을 실천합니다.',
     recruit_status: '모집중',
+  },
+  {
+    id: 10,
+    name: '해외 봉사단',
+    category: '봉사',
+    short_Introduction: '방학 기간에 해외로 봉사활동을 나가는 모임입니다.',
+    recruit_status: '모집마감',
   },
 ];
 
 export const clubRepoitory = {
-  getClubs: () => clubs,
+  getClubsByCategory: (filter: string) => {
+    if (filter === '전체') return clubs;
+    return clubs.filter((club) => club.category === filter);
+  },
 };
