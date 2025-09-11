@@ -23,7 +23,7 @@ const SearchIcon = styled(FiSearch)({
   color: '#666',
 });
 
-export default function ClubSearchInput() {
+export function ClubSearchInput() {
   return (
     <InputWrapper>
       <Input placeholder='동아리를 검색하세요.' />
