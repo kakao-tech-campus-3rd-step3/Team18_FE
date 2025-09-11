@@ -6,11 +6,13 @@ import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
 
 export const MainPage = () => {
   const [filter, setFilter] = useState<ClubCategory>('전체');
+  const [searchText, setSearchText] = useState('');
+
   return (
     <>
-      <BannerSection />
+      <BannerSection onChange={(s: string) => setSearchText(s)} />
       <ClubCategorySection selected={filter} onSelect={(c: ClubCategory) => setFilter(c)} />
-      <ClubListSection filter={filter} />
+      <ClubListSection filter={filter} searchText={searchText} />
     </>
   );
 };

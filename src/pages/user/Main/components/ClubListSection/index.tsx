@@ -13,18 +13,23 @@ import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
 
 type Props = {
   filter: ClubCategory;
+  searchText: string;
 };
 
-export const ClubListSection = ({ filter }: Props) => {
+export const ClubListSection = ({ filter, searchText }: Props) => {
   const { data, isLoading, error } = useClub(filter);
 
   if (isLoading) return <div>로딩중입니다...</div>;
   if (error) return <div>에러발생 : {error.message}</div>;
 
+  const clubs = searchText
+    ? data?.clubs.filter((club) => club.name.includes(searchText))
+    : data?.clubs;
+
   return (
     <ClubListContainer>
       <Grid>
-        {data?.clubs.map((club) => (
+        {clubs?.map((club) => (
           <ClubItem key={club.id}>
             <ClubCategoryText>{club.category}</ClubCategoryText>
 
