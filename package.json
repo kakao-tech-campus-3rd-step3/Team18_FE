@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.14.1",
     "@tanstack/react-query": "^5.87.1",
     "axios": "^1.11.0",
+    "lodash": "^4.17.21",
     "msw": "^2.11.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@emotion/babel-plugin": "^11.13.5",
     "@eslint/js": "^9.33.0",
+    "@types/lodash": "^4.17.20",
     "@types/node": "^24.3.0",
     "@types/react": "^19.1.11",
     "@types/react-dom": "^19.1.7",

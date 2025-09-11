@@ -43,11 +43,28 @@ export const Grid = styled.div(() => ({
   display: 'grid',
   gap: 15,
   gridTemplateColumns: 'repeat(4, 1fr)',
+  justifyItems: 'center',
+
+  '@media (max-width: 1024px)': {
+    gridTemplateColumns: 'repeat(2, 1fr)',
+  },
+  '@media (max-width: 600px)': {
+    gridTemplateColumns: '1fr',
+  },
 }));
 
 export const ClubListContainer = styled.div({
   maxWidth: '1200px',
   margin: '0 auto',
+
+  '@media (max-width: 1024px)': {
+    maxWidth: '90%',
+  },
+
+  '@media (max-width: 600px)': {
+    maxWidth: '100%',
+    padding: '0 12px',
+  },
 });
 
 export const ClubItem = styled.div(({ theme }) => ({
