@@ -1,74 +1,64 @@
+import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import type { ReactNode } from 'react';
-import { theme } from '@/styles/theme';
 
 type Props = {
   children: ReactNode;
   onClick?: () => void;
-  color?: fontColorKeys;
-  backgroundColor?: backgroundColorKeys;
-  weight?: WeightKeys;
-  size?: string;
-  padding?: string;
-  width?: string;
-  opacity?: string;
-  borderRadius?: borderRadiusKeys;
+  to?: string;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
 };
 
-export const Button = ({
-  children,
-  onClick,
-  color = 'textPrimary',
-  backgroundColor = 'primary',
-  weight = 'medium',
-  size = 'medium',
-  padding = '0.7rem',
-  width = 'auto',
-  opacity,
-  borderRadius = 'sm',
-  disabled,
-  type = 'button',
-}: Props) => {
+export const Button = ({ children, onClick, to, disabled, type = 'button' }: Props) => {
+  if (to) {
+    return (
+      <ButtonLink to={to} $disabled={disabled}>
+        {children}
+      </ButtonLink>
+    );
+  }
+
   return (
-    <StyledButton
-      onClick={onClick}
-      color={color}
-      backgroundColor={backgroundColor}
-      weight={weight}
-      size={size}
-      padding={padding}
-      width={width}
-      opacity={opacity}
-      borderRadius={borderRadius}
-      disabled={disabled}
-      type={type}
-    >
+    <StyledButton onClick={onClick} $disabled={disabled} type={type}>
       {children}
     </StyledButton>
   );
 };
 
-const StyledButton = styled.button<Props>(({ theme, ...props }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  textAlign: 'center',
-  padding: props.padding,
-  width: props.width,
-  color: theme.colors[props.color || 'textPrimary'],
-  fontWeight: theme.font.weight[props.weight || 'medium'],
-  fontSize: props.size,
+type StyledProps = {
+  $disabled?: boolean;
+};
+
+const baseStyles = ({ theme, $disabled }: StyledProps & { theme?: any }) => ({
+  fontSize: '1rem',
+  fontWeight: '500',
+  color: '#fff',
+  backgroundColor: $disabled ? theme?.colors?.gray400 : theme?.colors?.primary,
   border: 'none',
-  backgroundColor: theme.colors[props.backgroundColor || 'primary'],
+  borderRadius: theme?.radius?.md,
+  width: '20rem',
+  padding: '0.75rem 0',
+  cursor: $disabled ? 'not-allowed' : 'pointer',
+  textDecoration: 'none',
+  display: 'inline-flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  textAlign: 'center' as const,
+  transition: 'background-color 0.2s, transform 0.1s',
 
-  borderRadius: theme.radius[props.borderRadius || 'sm'],
-  cursor: props.disabled ? 'not-allowed' : 'pointer',
-  opacity: props.disabled ? '0.4' : props.opacity || '1',
-}));
+  '&:hover': {
+    backgroundColor: $disabled ? theme?.colors?.gray400 : theme?.colors?.primary700,
+    transform: $disabled ? 'none' : 'translateY(-0.0625rem)',
+  },
 
-type fontColorKeys = keyof typeof theme.colors;
-type backgroundColorKeys = keyof typeof theme.colors;
-type WeightKeys = keyof typeof theme.font.weight;
-type borderRadiusKeys = keyof typeof theme.radius;
+  '&:active': {
+    transform: $disabled ? 'none' : 'translateY(0)',
+  },
+});
+
+const StyledButton = styled.button<StyledProps>(baseStyles);
+
+const ButtonLink = styled(Link, {
+  shouldForwardProp: (prop) => !['$disabled'].includes(prop),
+})<StyledProps>(baseStyles);
