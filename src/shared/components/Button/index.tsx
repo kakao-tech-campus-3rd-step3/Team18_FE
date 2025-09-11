@@ -2,25 +2,43 @@ import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import type { ReactNode } from 'react';
 
+type Variant = 'primary' | 'primaryLight' | 'primaryOutline';
+
 type Props = {
   children: ReactNode;
   onClick?: () => void;
   to?: string;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
+  variant?: Variant;
+  width?: string;
 };
 
-export const Button = ({ children, onClick, to, disabled, type = 'button' }: Props) => {
+export const Button = ({
+  children,
+  onClick,
+  to,
+  disabled,
+  type = 'button',
+  variant = 'primary',
+  width,
+}: Props) => {
   if (to) {
     return (
-      <ButtonLink to={to} $disabled={disabled}>
+      <ButtonLink to={to} $disabled={disabled} $variant={variant} $width={width}>
         {children}
       </ButtonLink>
     );
   }
 
   return (
-    <StyledButton onClick={onClick} $disabled={disabled} type={type}>
+    <StyledButton
+      onClick={onClick}
+      $disabled={disabled}
+      $variant={variant}
+      $width={width}
+      type={type}
+    >
       {children}
     </StyledButton>
   );
@@ -28,16 +46,47 @@ export const Button = ({ children, onClick, to, disabled, type = 'button' }: Pro
 
 type StyledProps = {
   $disabled?: boolean;
+  $variant: Variant;
+  $width?: string;
 };
 
-const baseStyles = ({ theme, $disabled }: StyledProps & { theme?: any }) => ({
+const getVariantStyles = (theme: any, variant: Variant, disabled?: boolean) => {
+  switch (variant) {
+    case 'primaryLight':
+      return {
+        backgroundColor: disabled ? theme?.colors?.gray200 : theme?.colors?.primary100,
+        color: theme?.colors?.primary700,
+        '&:hover': {
+          backgroundColor: disabled ? theme?.colors?.gray200 : theme?.colors?.primary200,
+        },
+      };
+    case 'primaryOutline':
+      return {
+        backgroundColor: '#fff',
+        color: theme?.colors?.primary,
+        border: `1px solid ${theme?.colors?.primary}`,
+        '&:hover': {
+          backgroundColor: disabled ? '#fff' : theme?.colors?.primary100,
+        },
+      };
+    case 'primary':
+    default:
+      return {
+        backgroundColor: disabled ? theme?.colors?.gray400 : theme?.colors?.primary,
+        color: '#fff',
+        '&:hover': {
+          backgroundColor: disabled ? theme?.colors?.gray400 : theme?.colors?.primary700,
+        },
+      };
+  }
+};
+
+const baseStyles = ({ theme, $disabled, $variant, $width }: StyledProps & { theme?: any }) => ({
   fontSize: '1rem',
   fontWeight: '500',
-  color: '#fff',
-  backgroundColor: $disabled ? theme?.colors?.gray400 : theme?.colors?.primary,
   border: 'none',
   borderRadius: theme?.radius?.md,
-  width: '20rem',
+  width: $width || '20rem',
   padding: '0.75rem 0',
   cursor: $disabled ? 'not-allowed' : 'pointer',
   textDecoration: 'none',
@@ -47,10 +96,7 @@ const baseStyles = ({ theme, $disabled }: StyledProps & { theme?: any }) => ({
   textAlign: 'center' as const,
   transition: 'background-color 0.2s, transform 0.1s',
 
-  '&:hover': {
-    backgroundColor: $disabled ? theme?.colors?.gray400 : theme?.colors?.primary700,
-    transform: $disabled ? 'none' : 'translateY(-0.0625rem)',
-  },
+  ...getVariantStyles(theme, $variant, $disabled),
 
   '&:active': {
     transform: $disabled ? 'none' : 'translateY(0)',
@@ -60,5 +106,5 @@ const baseStyles = ({ theme, $disabled }: StyledProps & { theme?: any }) => ({
 const StyledButton = styled.button<StyledProps>(baseStyles);
 
 const ButtonLink = styled(Link, {
-  shouldForwardProp: (prop) => !['$disabled'].includes(prop),
+  shouldForwardProp: (prop) => !['$disabled', '$variant', '$width'].includes(prop),
 })<StyledProps>(baseStyles);
