@@ -3,6 +3,7 @@ import {
   CategoryTabContainer,
   CategoryTab,
 } from '@/pages/user/Main/components/ClubCategorySection/index.styled.tsx';
+import { useSearchParams } from 'react-router-dom';
 
 type Props = {
   onSelect: (category: ClubCategory) => void;
@@ -10,6 +11,14 @@ type Props = {
 };
 
 export const ClubCategorySection = ({ onSelect, selected }: Props) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleClick = (newCategory: ClubCategory) => {
+    onSelect(newCategory);
+    searchParams.set('category', newCategory);
+    setSearchParams(searchParams);
+  };
+
   return (
     <>
       <CategoryTabContainer>
@@ -17,7 +26,7 @@ export const ClubCategorySection = ({ onSelect, selected }: Props) => {
           <CategoryTab
             key={category}
             onClick={() => {
-              onSelect(category);
+              handleClick(category);
             }}
             selected={selected === category}
           >
