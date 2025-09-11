@@ -7,7 +7,7 @@ export type DashboardCard = {
   image: ReactNode;
 };
 
-export type ApplicationFilterOption = '전체' | '검토중' | '승인됨' | '거절됨';
+export type ApplicationFilterOption = 'ALL' | 'ACCEPTED' | 'REJECTED' | 'UNDER_REVIEW';
 
 export type ApplicantStatus = 'ACCEPTED' | 'REJECTED' | 'PENDING';
 
