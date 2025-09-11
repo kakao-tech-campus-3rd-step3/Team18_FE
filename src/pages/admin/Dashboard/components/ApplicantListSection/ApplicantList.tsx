@@ -1,10 +1,19 @@
 import styled from '@emotion/styled';
 import { ApplicantListItem } from './ApplicantListItem';
 import { Button } from '@/shared/components/Button';
-import { MOCK_APPLICANT_DATA_LIST } from './mock';
+import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
 
 export const ApplicantList = () => {
+  const { data: applicantList, error, isLoading } = useApplicants(1);
+
+  if (isLoading) return <LoadingSpinner />;
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
+
   const navigate = useNavigate();
   const handleItemClick = (applicantId: number) => {
     const clubId = 1;
@@ -20,7 +29,7 @@ export const ApplicantList = () => {
         ))}
       </ApplicantInfoCategoryList>
       <ApplicantInfoDataList>
-        {MOCK_APPLICANT_DATA_LIST.map((applicant) => (
+        {applicantList?.map((applicant) => (
           <ApplicantListItem
             key={applicant.id}
             onClick={() => handleItemClick(applicant.id)}
@@ -28,7 +37,7 @@ export const ApplicantList = () => {
             name={applicant.name}
             studentId={applicant.studentId}
             department={applicant.department}
-            phone={applicant.phone}
+            phoneNumber={applicant.phoneNumber}
             email={applicant.email}
             status={applicant.status}
           />
