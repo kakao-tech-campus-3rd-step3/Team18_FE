@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import type { ReactNode } from 'react';
 
-type Variant = 'primary' | 'primaryLight' | 'primaryOutline';
+type Variant = 'light' | 'outline';
 
 type Props = {
   children: ReactNode;
@@ -20,7 +20,7 @@ export const Button = ({
   to,
   disabled,
   type = 'button',
-  variant = 'primary',
+  variant,
   width,
 }: Props) => {
   if (to) {
@@ -32,13 +32,7 @@ export const Button = ({
   }
 
   return (
-    <StyledButton
-      onClick={onClick}
-      $disabled={disabled}
-      $variant={variant}
-      $width={width}
-      type={type}
-    >
+    <StyledButton onClick={onClick} $disabled={disabled} $variant={variant} $width={width} type={type}>
       {children}
     </StyledButton>
   );
@@ -46,39 +40,39 @@ export const Button = ({
 
 type StyledProps = {
   $disabled?: boolean;
-  $variant: Variant;
+  $variant?: Variant;
   $width?: string;
 };
 
-const getVariantStyles = (theme: any, variant: Variant, disabled?: boolean) => {
-  switch (variant) {
-    case 'primaryLight':
-      return {
-        backgroundColor: disabled ? theme?.colors?.gray200 : theme?.colors?.primary100,
-        color: theme?.colors?.primary700,
-        '&:hover': {
-          backgroundColor: disabled ? theme?.colors?.gray200 : theme?.colors?.primary200,
-        },
-      };
-    case 'primaryOutline':
-      return {
-        backgroundColor: '#fff',
-        color: theme?.colors?.primary,
-        border: `1px solid ${theme?.colors?.primary}`,
-        '&:hover': {
-          backgroundColor: disabled ? '#fff' : theme?.colors?.primary100,
-        },
-      };
-    case 'primary':
-    default:
-      return {
-        backgroundColor: disabled ? theme?.colors?.gray400 : theme?.colors?.primary,
-        color: '#fff',
-        '&:hover': {
-          backgroundColor: disabled ? theme?.colors?.gray400 : theme?.colors?.primary700,
-        },
-      };
+const getVariantStyles = (theme: any, variant?: Variant, disabled?: boolean) => {
+  if (variant === 'light') {
+    return {
+      backgroundColor: disabled ? theme?.colors?.gray200 : theme?.colors?.primary100,
+      color: theme?.colors?.primary700,
+      '&:hover': {
+        backgroundColor: disabled ? theme?.colors?.gray200 : theme?.colors?.primary200,
+      },
+    };
   }
+
+  if (variant === 'outline') {
+    return {
+      backgroundColor: '#fff',
+      color: theme?.colors?.primary,
+      border: `1px solid ${theme?.colors?.primary}`,
+      '&:hover': {
+        backgroundColor: disabled ? '#fff' : theme?.colors?.primary100,
+      },
+    };
+  }
+
+  return {
+    backgroundColor: disabled ? theme?.colors?.gray400 : theme?.colors?.primary,
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: disabled ? theme?.colors?.gray400 : theme?.colors?.primary700,
+    },
+  };
 };
 
 const baseStyles = ({ theme, $disabled, $variant, $width }: StyledProps & { theme?: any }) => ({
