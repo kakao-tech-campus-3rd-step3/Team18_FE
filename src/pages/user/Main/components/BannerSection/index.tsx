@@ -1,4 +1,4 @@
-import ClubSearchInput from '@/pages/user/Main/components/BannerSection/ClubSearchInput.tsx';
+import { ClubSearchInput } from '@/pages/user/Main/components/BannerSection/ClubSearchInput.tsx';
 import {
   BannerWrapper,
   BannerText,

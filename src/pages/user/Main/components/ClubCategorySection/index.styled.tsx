@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 
-export const CategoryTab = styled.div(({ theme }) => ({
+type Props = {
+  selected: boolean;
+};
+
+export const CategoryTab = styled.div<Props>(({ theme, selected }) => ({
   width: 50,
   height: 20,
   display: 'flex',
@@ -10,9 +14,11 @@ export const CategoryTab = styled.div(({ theme }) => ({
   color: theme.colors.textPrimary,
   textAlign: `center`,
   fontSize: theme.font.size.xs,
+  fontWeight: selected ? theme.font.weight.bold : theme.font.weight.regular,
   border: `1px solid ${theme.colors.gray200}`,
-  backgroundColor: `white`,
+  backgroundColor: selected ? theme.colors.primary200 : '',
   padding: 2,
+  cursor: 'pointer',
 }));
 
 export const CategoryTabContainer = styled.div({
@@ -23,4 +29,3 @@ export const CategoryTabContainer = styled.div({
   alignItems: 'center',
   padding: 20,
 });
-
