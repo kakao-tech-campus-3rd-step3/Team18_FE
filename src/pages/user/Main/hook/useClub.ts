@@ -4,10 +4,8 @@ import type { ClubResponse } from '@/types/club.ts';
 import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
 
 export const useClub = (filter: ClubCategory) => {
-  const { data, error, isLoading } = useQuery<ClubResponse>({
+  return useQuery<ClubResponse>({
     queryKey: ['clubData', filter],
     queryFn: () => getClubsByCategory(filter),
   });
-
-  return { data, isLoading, error };
 };
