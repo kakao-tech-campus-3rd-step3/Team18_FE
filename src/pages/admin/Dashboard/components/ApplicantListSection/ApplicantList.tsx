@@ -15,6 +15,7 @@ export const ApplicantList = () => {
         {MOCK_APPLICANT_DATA_LIST.map((applicant) => (
           <ApplicantListItem
             key={applicant.id}
+            id={applicant.id}
             name={applicant.name}
             studentId={applicant.studentId}
             department={applicant.department}
