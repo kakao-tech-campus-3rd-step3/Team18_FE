@@ -8,9 +8,10 @@ export const ApplicantListItem = ({
   phone,
   email,
   status,
+  onClick,
 }: ApplicantData) => {
   return (
-    <ItemWrapper>
+    <ItemWrapper onClick={onClick}>
       <InfoText>{name}</InfoText>
       <InfoText>{studentId}</InfoText>
       <InfoText>{department}</InfoText>
