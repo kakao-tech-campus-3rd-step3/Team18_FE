@@ -6,8 +6,6 @@ export const BannerText = styled.div(({ theme }) => ({
   color: theme.colors.textPrimary,
 }));
 
-
-
 export const BannerWrapper = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -18,5 +16,3 @@ export const BannerWrapper = styled.div(({ theme }) => ({
   gap: 30,
   backgroundColor: theme.colors.primary100,
 }));
-
-
