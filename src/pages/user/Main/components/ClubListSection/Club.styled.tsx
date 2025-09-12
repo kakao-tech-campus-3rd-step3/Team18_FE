@@ -37,8 +37,6 @@ export const RecruitStatusText = styled.div<Props>(({ theme, status }) => ({
   color: status === '모집중' ? theme.colors.primary700 : theme.colors.red700,
 }));
 
-
-
 export const Grid = styled.div(() => ({
   display: 'grid',
   gap: 15,
@@ -79,5 +77,3 @@ export const ClubItem = styled.div(({ theme }) => ({
   padding: 16,
   gap: 16,
 }));
-
-
