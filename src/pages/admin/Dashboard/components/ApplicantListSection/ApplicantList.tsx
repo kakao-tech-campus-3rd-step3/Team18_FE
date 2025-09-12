@@ -24,6 +24,7 @@ export const ApplicantList = () => {
           <ApplicantListItem
             key={applicant.id}
             onClick={() => handleItemClick(applicant.id)}
+            id={applicant.id}
             name={applicant.name}
             studentId={applicant.studentId}
             department={applicant.department}
