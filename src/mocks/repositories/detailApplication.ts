@@ -3,6 +3,7 @@ import type { DetailApplication } from '@/types/detailApplication';
 export const detailApplication: DetailApplication = {
   applicationId: 123,
   status: 'PENDING',
+  rating: 3.5,
   applicantInfo: {
     applicantId: 45,
     name: '김김김',

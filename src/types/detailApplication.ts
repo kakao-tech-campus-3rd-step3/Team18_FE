@@ -1,6 +1,7 @@
 export type DetailApplication = {
   applicationId: number;
   status: string;
+  rating: number;
   applicantInfo: {
     applicantId: number;
     name: string;
