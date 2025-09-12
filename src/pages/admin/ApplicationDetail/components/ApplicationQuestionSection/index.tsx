@@ -35,14 +35,14 @@ const Wrapper = styled.div(({ theme }) => ({
   backgroundColor: 'white',
 }));
 
-const QuestionWrapper = styled.div(({ theme }) => ({
+const QuestionWrapper = styled.div(() => ({
   marginBottom: '40px',
   '&:last-child': {
     marginBottom: 0,
   },
 }));
 
-const QuestionText = styled.div(({ theme }) => ({
+const QuestionText = styled.div(() => ({
   marginBottom: '16px',
   lineHeight: '1.6',
 }));
