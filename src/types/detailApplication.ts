@@ -1,6 +1,8 @@
+import type { ApplicantStatus } from '@/types/dashboard';
+
 export type DetailApplication = {
   applicationId: number;
-  status: string;
+  status: ApplicantStatus;
   rating: number;
   applicantInfo: {
     applicantId: number;
