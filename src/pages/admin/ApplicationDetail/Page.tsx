@@ -1,16 +1,34 @@
 import styled from '@emotion/styled';
-import { ApplicantProfileSection } from './components/ApplicantProfileSection/indext';
+import { ApplicantProfileSection } from './components/ApplicantProfileSection/index';
 import { ApplicantInfoSection } from './components/ApplicantInfoSection';
 import { ApplicantQuestionSection } from './components/ApplicationQuestionSection';
 import { CommentSection } from './components/CommentSection';
+import { useDetailApplications } from './hooks/useDetailApplication';
+import { useParams } from 'react-router-dom';
 
 export const ApplicationDetailPage = () => {
+  const { clubId, applicantId } = useParams();
+
+  const { data, error, isLoading } = useDetailApplications(Number(clubId), Number(applicantId));
+
+  if (isLoading) return <div> 로딩중</div>;
+  if (error) return <div>{error.message}</div>;
+
   return (
     <Layout>
       <ApplicationDetailView>
-        <ApplicantProfileSection />
-        <ApplicantInfoSection />
-        <ApplicantQuestionSection />
+        <ApplicantProfileSection
+          name={data?.applicantInfo.name}
+          department={data?.applicantInfo.department}
+          status={data?.status}
+          rating={data?.rating}
+        />
+        <ApplicantInfoSection
+          studentId={data?.applicantInfo.studentId}
+          email={data?.applicantInfo.email}
+          phoneNumber={data?.applicantInfo.phoneNumber}
+        />
+        <ApplicantQuestionSection questionsAndAnswers={data?.questionsAndAnswers || []} />
       </ApplicationDetailView>
       <CommentView>
         <CommentSection />
@@ -21,7 +39,7 @@ export const ApplicationDetailPage = () => {
 
 const Layout = styled.main(({ theme }) => ({
   backgroundColor: theme.colors.bgBlue,
-  height: 'calc(100vh - 2.6rem)',
+  height: '100vh',
   display: 'flex',
   flexDirection: 'row',
 
@@ -34,7 +52,7 @@ const ApplicationDetailView = styled.section(({ theme }) => ({
   backgroundColor: theme.colors.bg,
   width: '66%',
   height: 'calc(100vh - 5rem)',
-  padding: '32px 32px 0 32px',
+  padding: '45px',
   display: 'flex',
   flexDirection: 'column',
   gap: '32px',
