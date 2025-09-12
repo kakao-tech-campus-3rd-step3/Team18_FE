@@ -9,6 +9,8 @@ export type DashboardCard = {
 
 export type ApplicationFilterOption = '전체' | '검토중' | '승인됨' | '거절됨';
 
+export type ApplicantStatus = 'ACCEPTED' | 'REJECTED' | 'PENDING';
+
 export type ApplicantData = {
   id: number;
   name: string;
