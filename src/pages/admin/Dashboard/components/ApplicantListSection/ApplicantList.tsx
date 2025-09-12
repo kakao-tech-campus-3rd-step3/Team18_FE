@@ -2,8 +2,16 @@ import styled from '@emotion/styled';
 import { ApplicantListItem } from './ApplicantListItem';
 import { Button } from '@/shared/components/Button';
 import { MOCK_APPLICANT_DATA_LIST } from './mock';
+import { useNavigate } from 'react-router-dom';
 
 export const ApplicantList = () => {
+  const navigate = useNavigate();
+  const handleItemClick = (applicantId: number) => {
+    const clubId = 1;
+
+    navigate(`/admin/clubs/${clubId}/applicants/${applicantId}`);
+  };
+
   return (
     <Container>
       <ApplicantInfoCategoryList>
@@ -15,6 +23,7 @@ export const ApplicantList = () => {
         {MOCK_APPLICANT_DATA_LIST.map((applicant) => (
           <ApplicantListItem
             key={applicant.id}
+            onClick={() => handleItemClick(applicant.id)}
             id={applicant.id}
             name={applicant.name}
             studentId={applicant.studentId}
