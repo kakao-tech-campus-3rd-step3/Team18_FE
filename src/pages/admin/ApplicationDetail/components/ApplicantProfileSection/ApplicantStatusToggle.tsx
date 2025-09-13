@@ -34,7 +34,7 @@ export const ApplicantStatusToggle = ({ status }: Props) => {
   );
 };
 
-const Container = styled.div(({ theme }) => ({
+const Container = styled.div(() => ({
   display: 'flex',
   gap: '2rem',
 }));
