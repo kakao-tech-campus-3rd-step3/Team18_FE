@@ -39,19 +39,19 @@ const Layout = styled.div(({ theme }) => ({
   backgroundColor: 'white',
 }));
 
-const Title = styled.div(({ theme }) => ({
+const Title = styled.div(() => ({
   marginBottom: '2.5rem',
 }));
 
-const InfoContainer = styled.div(({ theme }) => ({
+const InfoContainer = styled.div(() => ({
   display: 'flex',
   justifyContent: 'space-between',
   gap: '40px',
 }));
 
-const Wrapper = styled.div(({ theme }) => ({
+const Wrapper = styled.div(() => ({
   display: 'flex',
-  flexDirection: 'column',
+  flexDirection: 'column' as const,
   flex: 1,
   gap: '1.2rem',
 }));

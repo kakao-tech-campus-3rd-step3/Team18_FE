@@ -9,6 +9,7 @@ export const MOCK_APPLICANT_DATA_LIST: ApplicantData[] = [
     phone: '010-1234-5678',
     email: '22222@jnu.ac.kr',
     status: '불합격',
+    onClick: () => {},
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ export const MOCK_APPLICANT_DATA_LIST: ApplicantData[] = [
     phone: '010-1234-5678',
     email: '22222@jnu.ac.kr',
     status: '합격',
+    onClick: () => {},
   },
   {
     id: 3,
@@ -27,5 +29,6 @@ export const MOCK_APPLICANT_DATA_LIST: ApplicantData[] = [
     phone: '010-1234-5678',
     email: '22222@jnu.ac.kr',
     status: '미정',
+    onClick: () => {},
   },
 ];
