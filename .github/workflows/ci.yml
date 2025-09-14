@@ -105,7 +105,7 @@ jobs:
         run: npm run build
 
       - name: Upload dist as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: react-dist
           path: ./dist
