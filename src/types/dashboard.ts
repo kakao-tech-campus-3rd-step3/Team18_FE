@@ -19,5 +19,4 @@ export type ApplicantData = {
   phoneNumber: string;
   email: string;
   status: '합격' | '불합격' | '미정';
-  submittedAt: string;
 };

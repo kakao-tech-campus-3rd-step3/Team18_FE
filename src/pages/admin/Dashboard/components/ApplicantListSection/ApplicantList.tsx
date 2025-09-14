@@ -6,18 +6,17 @@ import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
 
 export const ApplicantList = () => {
+  const navigate = useNavigate();
+
   const { data: applicantList, error, isLoading } = useApplicants(1);
 
   if (isLoading) return <LoadingSpinner />;
-
   if (error) {
     return <div>{error.message}</div>;
   }
 
-  const navigate = useNavigate();
   const handleItemClick = (applicantId: number) => {
     const clubId = 1;
-
     navigate(`/admin/clubs/${clubId}/applicants/${applicantId}`);
   };
 
@@ -32,7 +31,6 @@ export const ApplicantList = () => {
         {applicantList?.map((applicant) => (
           <ApplicantListItem
             key={applicant.id}
-            onClick={() => handleItemClick(applicant.id)}
             id={applicant.id}
             name={applicant.name}
             studentId={applicant.studentId}
@@ -40,6 +38,7 @@ export const ApplicantList = () => {
             phoneNumber={applicant.phoneNumber}
             email={applicant.email}
             status={applicant.status}
+            onClick={handleItemClick}
           />
         ))}
       </ApplicantInfoDataList>

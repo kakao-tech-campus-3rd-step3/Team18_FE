@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 import type { ApplicantData } from '@/types/dashboard';
 
+type Props = ApplicantData & {
+  onClick: (id: number) => void;
+};
+
 export const ApplicantListItem = ({
   id,
   name,
@@ -10,7 +14,7 @@ export const ApplicantListItem = ({
   email,
   status,
   onClick,
-}: ApplicantData) => {
+}: Props) => {
   return (
     <ItemWrapper onClick={() => onClick(id)}>
       <InfoText>{name}</InfoText>
