@@ -4,7 +4,7 @@ import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
 import type { Club } from '@/types/club.ts';
 
 export interface UseClubResult {
-  clubs?: Club[];
+  clubs: Club[];
   error?: Error | null;
   isLoading: boolean;
 }

@@ -21,14 +21,12 @@ export const ClubListSection = ({ filter, searchText }: Props) => {
 
   if (isLoading) return <div>로딩중입니다...</div>;
   if (error) return <div>에러발생 : {error.message}</div>;
-  const filteredClubs = searchText
-    ? clubs?.filter((club) => club.name.includes(searchText))
-    : clubs;
+  const filteredClubs = searchText ? clubs.filter((club) => club.name.includes(searchText)) : clubs;
 
   return (
     <ClubListContainer>
       <Grid>
-        {filteredClubs?.map((club) => (
+        {filteredClubs.map((club) => (
           <ClubItem key={club.id}>
             <ClubCategoryText>{club.category}</ClubCategoryText>
 
