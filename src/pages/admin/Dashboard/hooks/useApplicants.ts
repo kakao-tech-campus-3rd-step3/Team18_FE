@@ -7,10 +7,11 @@ interface useApplicantsResult {
   isLoading: boolean;
   isError: boolean;
 }
-export const useApplicants = (clubId: number): useApplicantsResult => {
+
+export const useApplicants = (clubId: number, status?: string): useApplicantsResult => {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['applicants', clubId],
-    queryFn: () => fetchApplicants(clubId),
+    queryKey: ['applicants', clubId, status],
+    queryFn: () => fetchApplicants(clubId, status),
   });
 
   return {

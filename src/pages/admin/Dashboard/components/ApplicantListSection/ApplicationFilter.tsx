@@ -29,9 +29,9 @@ export const ApplicationStatusFilter = ({ option, onOptionChange }: Props) => {
         onClick={onOptionChange}
       />
       <ApplicantFilterButton
-        value={'UNDER_REVIEW'}
+        value={'PENDING'}
         label={'심사중'}
-        selected={option === 'UNDER_REVIEW'}
+        selected={option === 'PENDING'}
         onClick={onOptionChange}
       />
     </Wrapper>

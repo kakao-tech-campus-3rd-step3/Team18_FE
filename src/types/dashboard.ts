@@ -7,7 +7,7 @@ export type DashboardCard = {
   image: ReactNode;
 };
 
-export type ApplicationFilterOption = 'ALL' | 'ACCEPTED' | 'REJECTED' | 'UNDER_REVIEW';
+export type ApplicationFilterOption = 'ALL' | 'ACCEPTED' | 'REJECTED' | 'PENDING';
 
 export type ApplicantStatus = 'ACCEPTED' | 'REJECTED' | 'PENDING';
 

@@ -40,5 +40,8 @@ const applicants: ApplicantData[] = [
 ];
 
 export const applicantRepository = {
-  getApplicants: () => applicants,
+  getApplicantsResolver: (filter: string) => {
+    if (filter === '전체') return applicants;
+    return applicants.filter((applicant) => applicant.status === filter);
+  },
 };

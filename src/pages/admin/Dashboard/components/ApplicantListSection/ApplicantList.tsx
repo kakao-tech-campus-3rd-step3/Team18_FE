@@ -5,10 +5,14 @@ import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
 
-export const ApplicantList = () => {
+type Props = {
+  filterOption: string;
+};
+
+export const ApplicantList = ({ filterOption }: Props) => {
   const navigate = useNavigate();
 
-  const { applicants, isLoading, isError } = useApplicants(1);
+  const { applicants, isLoading, isError } = useApplicants(1, filterOption);
 
   if (isLoading) return <LoadingSpinner />;
   if (isError) {
