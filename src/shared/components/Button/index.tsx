@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import type { ReactNode } from 'react';
-
 type Variant = 'light' | 'outline';
+import type { Theme } from '@emotion/react';
 
 type Props = {
   children: ReactNode;
@@ -32,7 +32,13 @@ export const Button = ({
   }
 
   return (
-    <StyledButton onClick={onClick} $disabled={disabled} $variant={variant} $width={width} type={type}>
+    <StyledButton
+      onClick={onClick}
+      $disabled={disabled}
+      $variant={variant}
+      $width={width}
+      type={type}
+    >
       {children}
     </StyledButton>
   );
@@ -44,7 +50,7 @@ type StyledProps = {
   $width?: string;
 };
 
-const getVariantStyles = (theme: any, variant?: Variant, disabled?: boolean) => {
+const getVariantStyles = (theme: Theme, variant?: Variant, disabled?: boolean) => {
   if (variant === 'light') {
     return {
       backgroundColor: disabled ? theme?.colors?.gray200 : theme?.colors?.primary100,
@@ -75,7 +81,7 @@ const getVariantStyles = (theme: any, variant?: Variant, disabled?: boolean) => 
   };
 };
 
-const baseStyles = ({ theme, $disabled, $variant, $width }: StyledProps & { theme?: any }) => ({
+const baseStyles = ({ theme, $disabled, $variant, $width }: StyledProps & { theme?: Theme }) => ({
   fontSize: '1rem',
   fontWeight: '500',
   border: 'none',
