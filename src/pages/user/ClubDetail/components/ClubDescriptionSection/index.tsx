@@ -1,9 +1,8 @@
-import React from 'react';
 import { SectionTitle } from '@/shared/components/SectionTitle';
 import styled from '@emotion/styled';
 import { mockClubDetail } from '../mock';
 
-const ClubDescriptionSection: React.FC = () => {
+export const ClubDescriptionSection = () => {
   return (
     <DescriptionContainer>
       <SectionTitle>동아리 소개</SectionTitle>
@@ -17,8 +16,6 @@ const ClubDescriptionSection: React.FC = () => {
     </DescriptionContainer>
   );
 };
-
-export default ClubDescriptionSection;
 
 const DescriptionContainer = styled.div(({ theme }) => ({
   backgroundColor: theme.colors.bg,
