@@ -1,5 +1,5 @@
 import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
-import type { Club } from '@/types/club.ts';
+import type { Club } from '@/pages/user/Main/types/club';
 
 export type ClubResponse = {
   clubs: Club[];
