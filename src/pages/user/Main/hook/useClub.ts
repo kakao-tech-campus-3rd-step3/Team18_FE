@@ -15,7 +15,7 @@ export const useClub = (filter: ClubCategory): UseClubResult => {
     queryFn: () => getClubsByCategory(filter),
   });
   return {
-    clubs: data?.clubs,
+    clubs: data?.clubs || [],
     error: error,
     isLoading: isLoading,
   };
