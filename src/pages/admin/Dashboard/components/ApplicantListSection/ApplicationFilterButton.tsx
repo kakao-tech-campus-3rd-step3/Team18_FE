@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import type { ApplicationFilterOption } from '@/types/dashboard';
+import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = {
   label: ApplicationFilterOption;
