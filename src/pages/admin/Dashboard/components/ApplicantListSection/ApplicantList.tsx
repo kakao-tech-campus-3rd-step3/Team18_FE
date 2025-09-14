@@ -4,9 +4,10 @@ import { Button } from '@/shared/components/Button';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
+import type { ApplicationFilterOption } from '@/types/dashboard';
 
 type Props = {
-  filterOption: string;
+  filterOption: ApplicationFilterOption;
 };
 
 export const ApplicantList = ({ filterOption }: Props) => {

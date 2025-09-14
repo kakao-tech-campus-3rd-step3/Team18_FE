@@ -1,8 +1,8 @@
-import type { ApplicantData } from '@/types/dashboard';
+import type { ApplicantData, ApplicationFilterOption } from '@/types/dashboard';
 
 export const fetchApplicants = async (
   clubId: number,
-  status?: string,
+  status?: ApplicationFilterOption,
 ): Promise<ApplicantData[]> => {
   const url = new URL(`/api/clubs/${clubId}/applicants`, window.location.origin);
   if (status && status !== 'ALL') {
