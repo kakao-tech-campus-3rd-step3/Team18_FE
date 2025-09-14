@@ -10,13 +10,13 @@ export interface UseClubResult {
 }
 
 export const useClub = (filter: ClubCategory): UseClubResult => {
-  const result = useQuery<ClubResponse>({
+  const { data, isLoading, error } = useQuery<ClubResponse>({
     queryKey: ['clubData', filter],
     queryFn: () => getClubsByCategory(filter),
   });
   return {
-    clubs: result.data?.clubs,
-    error: result.error,
-    isLoading: result.isLoading,
+    clubs: data?.clubs,
+    error: error,
+    isLoading: isLoading,
   };
 };
