@@ -8,11 +8,11 @@ import { useNavigate } from 'react-router-dom';
 export const ApplicantList = () => {
   const navigate = useNavigate();
 
-  const { data: applicantList, error, isLoading } = useApplicants(1);
+  const { applicants, isLoading, isError } = useApplicants(1);
 
   if (isLoading) return <LoadingSpinner />;
-  if (error) {
-    return <div>{error.message}</div>;
+  if (isError) {
+    return <div>데이터를 불러오는 중 에러가 발생했습니다.</div>;
   }
 
   const handleItemClick = (applicantId: number) => {
@@ -28,7 +28,7 @@ export const ApplicantList = () => {
         ))}
       </ApplicantInfoCategoryList>
       <ApplicantInfoDataList>
-        {applicantList?.map((applicant) => (
+        {applicants.map((applicant) => (
           <ApplicantListItem
             key={applicant.id}
             id={applicant.id}
