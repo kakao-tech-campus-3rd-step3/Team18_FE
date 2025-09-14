@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchApplicants } from '@/pages/admin/Dashboard/api/applicant';
-import type { ApplicantData } from '@/types/dashboard';
+import type { ApplicantData, ApplicationFilterOption } from '@/types/dashboard';
 
 interface useApplicantsResult {
   applicants: ApplicantData[];
@@ -8,7 +8,10 @@ interface useApplicantsResult {
   isError: boolean;
 }
 
-export const useApplicants = (clubId: number, status?: string): useApplicantsResult => {
+export const useApplicants = (
+  clubId: number,
+  status?: ApplicationFilterOption,
+): useApplicantsResult => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['applicants', clubId, status],
     queryFn: () => fetchApplicants(clubId, status),
