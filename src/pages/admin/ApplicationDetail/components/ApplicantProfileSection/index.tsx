@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Text } from '@/shared/components/Text';
 import { ApplicantStarRating } from './ApplicantStarRating';
 import { ApplicantStatusToggle } from './ApplicantStatusToggle';
-import type { ApplicantStatus } from '@/types/dashboard';
+import type { ApplicantStatus } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = {
   name?: string;
