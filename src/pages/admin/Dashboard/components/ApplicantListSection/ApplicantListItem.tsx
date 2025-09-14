@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import type { ApplicantData } from '@/types/dashboard';
 
 export const ApplicantListItem = ({
+  id,
   name,
   studentId,
   department,
@@ -11,7 +12,7 @@ export const ApplicantListItem = ({
   onClick,
 }: ApplicantData) => {
   return (
-    <ItemWrapper onClick={onClick}>
+    <ItemWrapper onClick={() => onClick(id)}>
       <InfoText>{name}</InfoText>
       <InfoText>{studentId}</InfoText>
       <InfoText>{department}</InfoText>

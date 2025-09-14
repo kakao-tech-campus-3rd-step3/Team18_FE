@@ -35,9 +35,7 @@ export const ApplicantList = () => {
         ))}
       </ApplicantInfoDataList>
       <ButtonWrapper>
-        <Button borderRadius={'lg'} color={'primary00'} width={'15rem'} opacity=''>
-          결과 전송하기
-        </Button>
+        <Button width={'15rem'}>결과 전송하기</Button>
       </ButtonWrapper>
     </Container>
   );
