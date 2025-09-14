@@ -3,14 +3,14 @@ import { Button } from '@/shared/components/Button';
 import { mockClubDetail } from '../mock';
 
 export const ClubInfoSidebarSection = () => {
-  const { 
+  const {
     presidentName,
     presidentPhoneNumber,
     location,
     recruitStart,
     recruitEnd,
     regularMeetingInfo,
-    recruitStatus
+    recruitStatus,
   } = mockClubDetail;
 
   const formatDate = (dateStr: string) => {
