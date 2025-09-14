@@ -1,4 +1,4 @@
-import type { ApplicantData } from '@/types/dashboard';
+import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
 
 export const MOCK_APPLICANT_DATA_LIST: ApplicantData[] = [
   {
