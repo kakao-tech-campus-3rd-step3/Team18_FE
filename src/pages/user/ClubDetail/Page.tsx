@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import ClubHeaderSection from './components/ClubHeaderSection';
-import ClubActivityPhotosSection from './components/ClubActivityPhotosSection';
-import ClubDescriptionSection from './components/ClubDescriptionSection';
-import ClubReviewsSection from './components/ClubReviewsSection';
-import ClubInfoSidebarSection from './components/ClubInfoSidebarSection';
+import { ClubHeaderSection } from './components/ClubHeaderSection';
+import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
+import { ClubDescriptionSection } from './components/ClubDescriptionSection';
+import { ClubReviewsSection } from './components/ClubReviewsSection';
+import { ClubInfoSidebarSection } from './components/ClubInfoSidebarSection';
 
 export const ClubDetailPage = () => {
   return (

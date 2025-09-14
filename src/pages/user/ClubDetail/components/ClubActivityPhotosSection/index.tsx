@@ -1,9 +1,8 @@
-import React from 'react';
 import { SectionTitle } from '@/shared/components/SectionTitle';
 import * as S from './index.styled';
 import { mockClubDetail } from '../mock';
 
-const ClubActivityPhotosSection: React.FC = () => {
+export const ClubActivityPhotosSection = () => {
   return (
     <>
       <S.TitleWrapper>
@@ -19,5 +18,3 @@ const ClubActivityPhotosSection: React.FC = () => {
     </>
   );
 };
-
-export default ClubActivityPhotosSection;

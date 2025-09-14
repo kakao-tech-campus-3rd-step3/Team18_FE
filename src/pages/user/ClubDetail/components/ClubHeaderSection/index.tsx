@@ -1,8 +1,7 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import { mockClubDetail } from '../mock';
 
-const ClubHeaderSection: React.FC = () => {
+export const ClubHeaderSection = () => {
   return (
     <HeaderContainer>
       <TextContainer>
@@ -12,8 +11,6 @@ const ClubHeaderSection: React.FC = () => {
     </HeaderContainer>
   );
 };
-
-export default ClubHeaderSection;
 
 const HeaderContainer = styled.div({
   display: 'flex',

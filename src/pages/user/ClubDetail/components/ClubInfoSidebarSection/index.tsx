@@ -1,9 +1,8 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import { Button } from '@/shared/components/Button';
 import { mockClubDetail } from '../mock';
 
-const ClubInfoSidebarSection: React.FC = () => {
+export const ClubInfoSidebarSection = () => {
   const { 
     presidentName,
     presidentPhoneNumber,
@@ -34,8 +33,6 @@ const ClubInfoSidebarSection: React.FC = () => {
     </SidebarContainer>
   );
 };
-
-export default ClubInfoSidebarSection;
 
 const SidebarContainer = styled.div(({ theme }) => ({
   backgroundColor: theme.colors.bg,
