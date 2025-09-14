@@ -28,23 +28,23 @@ export const ApplicantProfileSection = ({ name, department, status, rating }: Pr
   );
 };
 
-const Container = styled.div(({ theme }) => ({
+const Container = styled.div(() => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'flex-start',
   width: '100%',
 }));
 
-const LeftSection = styled.div(({ theme }) => ({
+const LeftSection = styled.div(() => ({
   display: 'flex',
   alignItems: 'flex-start',
   gap: '16px',
 }));
 
-const RightSection = styled.div(({ theme }) => ({}));
+const RightSection = styled.div(() => ({}));
 
-const ProfileWrapper = styled.div(({ theme }) => ({
+const ProfileWrapper = styled.div(() => ({
   display: 'flex',
-  flexDirection: 'column',
+  flexDirection: 'column' as const,
   gap: '8px',
 }));
