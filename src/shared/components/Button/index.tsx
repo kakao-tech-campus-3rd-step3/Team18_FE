@@ -64,19 +64,19 @@ const getVariantStyles = (theme: Theme, variant?: Variant, disabled?: boolean) =
   if (variant === 'outline') {
     return {
       backgroundColor: '#fff',
-      color: theme?.colors?.primary,
-      border: `1px solid ${theme?.colors?.primary}`,
+      color: theme.colors.primary,
+      border: `1px solid ${theme.colors.primary}`,
       '&:hover': {
-        backgroundColor: disabled ? '#fff' : theme?.colors?.primary100,
+        backgroundColor: disabled ? '#fff' : theme.colors.primary100,
       },
     };
   }
 
   return {
-    backgroundColor: disabled ? theme?.colors?.gray400 : theme?.colors?.primary,
+    backgroundColor: disabled ? theme.colors.gray400 : theme.colors.primary,
     color: '#fff',
     '&:hover': {
-      backgroundColor: disabled ? theme?.colors?.gray400 : theme?.colors?.primary700,
+      backgroundColor: disabled ? theme.colors.gray400 : theme.colors.primary700,
     },
   };
 };
