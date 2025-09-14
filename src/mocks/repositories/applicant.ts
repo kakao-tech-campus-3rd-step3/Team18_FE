@@ -9,7 +9,6 @@ const applicants: ApplicantData[] = [
     phoneNumber: '010-1010-1010',
     email: 'ddd@naver.com',
     status: '미정',
-    submittedAt: '2025-09-02T02:41:38',
   },
   {
     id: 2,
@@ -19,7 +18,6 @@ const applicants: ApplicantData[] = [
     phoneNumber: '010-1010-1010',
     email: 'ddd@naver.com',
     status: '합격',
-    submittedAt: '2025-09-02T02:41:38',
   },
   {
     id: 3,
@@ -29,7 +27,6 @@ const applicants: ApplicantData[] = [
     phoneNumber: '010-1010-1010',
     email: 'ddd@naver.com',
     status: '불합격',
-    submittedAt: '2025-09-02T02:41:38',
   },
   {
     id: 4,
@@ -39,7 +36,6 @@ const applicants: ApplicantData[] = [
     phoneNumber: '010-1010-1010',
     email: 'ddd@naver.com',
     status: '미정',
-    submittedAt: '2025-09-02T02:41:38',
   },
 ];
 
