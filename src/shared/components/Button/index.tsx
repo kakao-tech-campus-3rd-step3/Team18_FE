@@ -81,7 +81,7 @@ const getVariantStyles = (theme: Theme, variant?: Variant, disabled?: boolean) =
   };
 };
 
-const baseStyles = ({ theme, $disabled, $variant, $width }: StyledProps & { theme?: Theme }) => ({
+const baseStyles = ({ theme, $disabled, $variant, $width }: StyledProps & { theme: Theme }) => ({
   fontSize: '1rem',
   fontWeight: '500',
   border: 'none',
