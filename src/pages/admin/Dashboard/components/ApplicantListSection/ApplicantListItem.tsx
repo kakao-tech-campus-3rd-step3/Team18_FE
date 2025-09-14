@@ -17,12 +17,12 @@ export const ApplicantListItem = ({
 }: Props) => {
   return (
     <ItemWrapper onClick={() => onClick(id)}>
-      <InfoText>{name}</InfoText>
-      <InfoText>{studentId}</InfoText>
-      <InfoText>{department}</InfoText>
-      <InfoText>{phoneNumber}</InfoText>
-      <InfoText>{email}</InfoText>
-      <StatusBadge status={status}>{status}</StatusBadge>
+      <InfoText>{name || '-'}</InfoText>
+      <InfoText>{studentId || '-'}</InfoText>
+      <InfoText>{department || '-'}</InfoText>
+      <InfoText>{phoneNumber || '-'}</InfoText>
+      <InfoText>{email || '-'}</InfoText>
+      <StatusBadge status={status}>{status || '-'}</StatusBadge>
     </ItemWrapper>
   );
 };
