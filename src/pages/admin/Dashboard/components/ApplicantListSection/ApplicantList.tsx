@@ -4,7 +4,7 @@ import { Button } from '@/shared/components/Button';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
-import type { ApplicationFilterOption } from '@/types/dashboard';
+import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = {
   filterOption: ApplicationFilterOption;
