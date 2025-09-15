@@ -7,19 +7,33 @@ export type Props = {
   onOptionChange: (option: ApplicationFilterOption) => void;
 };
 
-const FILTER_OPTIONS: ApplicationFilterOption[] = ['전체', '검토중', '승인됨', '거절됨'];
-
 export const ApplicationStatusFilter = ({ option, onOptionChange }: Props) => {
   return (
     <Wrapper>
-      {FILTER_OPTIONS.map((label) => (
-        <ApplicantFilterButton
-          key={label}
-          label={label}
-          selected={option === label}
-          onClick={onOptionChange}
-        />
-      ))}
+      <ApplicantFilterButton
+        value={'ALL'}
+        label={'전체'}
+        selected={option === 'ALL'}
+        onClick={onOptionChange}
+      />
+      <ApplicantFilterButton
+        value={'ACCEPTED'}
+        label={'합격'}
+        selected={option === 'ACCEPTED'}
+        onClick={onOptionChange}
+      />
+      <ApplicantFilterButton
+        value={'REJECTED'}
+        label={'불합격'}
+        selected={option === 'REJECTED'}
+        onClick={onOptionChange}
+      />
+      <ApplicantFilterButton
+        value={'PENDING'}
+        label={'심사중'}
+        selected={option === 'PENDING'}
+        onClick={onOptionChange}
+      />
     </Wrapper>
   );
 };

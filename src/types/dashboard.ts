@@ -7,7 +7,7 @@ export type DashboardCard = {
   image: ReactNode;
 };
 
-export type ApplicationFilterOption = '전체' | '검토중' | '승인됨' | '거절됨';
+export type ApplicationFilterOption = 'ALL' | 'ACCEPTED' | 'REJECTED' | 'PENDING';
 
 export type ApplicantStatus = 'ACCEPTED' | 'REJECTED' | 'PENDING';
 
@@ -16,8 +16,7 @@ export type ApplicantData = {
   name: string;
   studentId: string;
   department: string;
-  phone: string;
+  phoneNumber: string;
   email: string;
   status: '합격' | '불합격' | '미정';
-  onClick: (id: number) => void;
 };
