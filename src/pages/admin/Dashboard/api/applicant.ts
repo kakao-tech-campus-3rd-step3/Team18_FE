@@ -1,4 +1,7 @@
-import type { ApplicantData, ApplicationFilterOption } from '@/types/dashboard';
+import type {
+  ApplicantData,
+  ApplicationFilterOption,
+} from '@/pages/admin/Dashboard/types/dashboard';
 
 export const fetchApplicants = async (
   clubId: number,
