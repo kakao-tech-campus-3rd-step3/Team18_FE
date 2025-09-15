@@ -9,26 +9,31 @@ import { useParams } from 'react-router-dom';
 export const ApplicationDetailPage = () => {
   const { clubId, applicantId } = useParams();
 
-  const { data, error, isLoading } = useDetailApplications(Number(clubId), Number(applicantId));
+  const { detailApplicants, isError, isLoading } = useDetailApplications(
+    Number(clubId),
+    Number(applicantId),
+  );
 
   if (isLoading) return <div> 로딩중</div>;
-  if (error) return <div>{error.message}</div>;
+  if (isError) return <div>데이터를 불러오는 중 에러가 발생했습니다.</div>;
 
   return (
     <Layout>
       <ApplicationDetailView>
         <ApplicantProfileSection
-          name={data?.applicantInfo.name}
-          department={data?.applicantInfo.department}
-          status={data?.status}
-          rating={data?.rating}
+          name={detailApplicants?.applicantInfo.name}
+          department={detailApplicants?.applicantInfo.department}
+          status={detailApplicants?.status}
+          rating={detailApplicants?.rating}
         />
         <ApplicantInfoSection
-          studentId={data?.applicantInfo.studentId}
-          email={data?.applicantInfo.email}
-          phoneNumber={data?.applicantInfo.phoneNumber}
+          studentId={detailApplicants?.applicantInfo.studentId}
+          email={detailApplicants?.applicantInfo.email}
+          phoneNumber={detailApplicants?.applicantInfo.phoneNumber}
         />
-        <ApplicantQuestionSection questionsAndAnswers={data?.questionsAndAnswers || []} />
+        <ApplicantQuestionSection
+          questionsAndAnswers={detailApplicants?.questionsAndAnswers || []}
+        />
       </ApplicationDetailView>
       <CommentView>
         <CommentSection />

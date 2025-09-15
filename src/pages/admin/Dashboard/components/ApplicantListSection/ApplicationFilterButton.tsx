@@ -2,14 +2,15 @@ import styled from '@emotion/styled';
 import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = {
-  label: ApplicationFilterOption;
+  value: ApplicationFilterOption;
+  label: string;
   selected: boolean;
   onClick: (value: ApplicationFilterOption) => void;
 };
 
-export const ApplicantFilterButton = ({ label, selected, onClick }: Props) => {
+export const ApplicantFilterButton = ({ label, value, selected, onClick }: Props) => {
   return (
-    <Wrapper selected={selected} onClick={() => onClick(label)}>
+    <Wrapper selected={selected} onClick={() => onClick(value)}>
       {label}
     </Wrapper>
   );
