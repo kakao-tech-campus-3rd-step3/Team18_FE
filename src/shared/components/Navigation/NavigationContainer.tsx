@@ -41,12 +41,14 @@ export const NavigationContainer = ({ children, selectedItem }: NavigationContai
 
 const NavContainer = styled.nav(({ theme }) => ({
   width: '100%',
+  padding: '20px 5vw',
+  display: 'flex',
+  flexWrap: 'wrap',
+  alignItems: 'center',
+  gap: '4rem',
+  boxSizing: 'border-box',
   backgroundColor: theme.colors.bg,
   boxShadow: theme.shadow.sm,
-  padding: '20px 56px',
-  display: 'flex',
-  alignItems: 'center',
-  gap: 88,
   zIndex: theme.zIndex.header,
   position: 'relative',
 }));
