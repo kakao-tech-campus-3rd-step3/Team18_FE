@@ -10,6 +10,7 @@ import {
   RecruitStatusText,
 } from '@/pages/user/Main/components/ClubListSection/Club.styled.tsx';
 import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
+import { searchClubs } from '@/pages/user/Main/utils/searchClubs.ts';
 
 type Props = {
   filter: ClubCategory;
@@ -21,12 +22,13 @@ export const ClubListSection = ({ filter, searchText }: Props) => {
 
   if (isLoading) return <div>로딩중입니다...</div>;
   if (error) return <div>에러발생 : {error.message}</div>;
-  const filteredClubs = searchText ? clubs.filter((club) => club.name.includes(searchText)) : clubs;
+
+  const searchedClubs = searchClubs(clubs, searchText.replace(/\s+/g, ''));
 
   return (
     <ClubListContainer>
       <Grid>
-        {filteredClubs.map((club) => (
+        {searchedClubs.map((club) => (
           <ClubItem key={club.id}>
             <ClubCategoryText>{club.category}</ClubCategoryText>
 
