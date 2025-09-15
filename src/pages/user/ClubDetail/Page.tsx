@@ -3,7 +3,7 @@ import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSectio
 import { ClubDescriptionSection } from './components/ClubDescriptionSection';
 import { ClubReviewsSection } from './components/ClubReviewsSection';
 import { ClubInfoSidebarSection } from './components/ClubInfoSidebarSection';
-import { Layout, ContentLeft, ContentRight } from '@/shared/components/ClubDetailLayout';
+import { Layout, ContentLeft, ContentRight } from '@/shared/components/ClubDetailLayout/index.styled';
 
 export const ClubDetailPage = () => {
   return (
