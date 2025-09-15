@@ -17,15 +17,15 @@ export const ApplicantInfoSection = ({ studentId, email, phoneNumber }: Props) =
       <InfoContainer>
         <Wrapper>
           <Text color='#616677'>학번</Text>
-          <Text>{studentId}</Text>
+          <Text>{studentId || '-'}</Text>
         </Wrapper>
         <Wrapper>
           <Text color='#616677'>이메일</Text>
-          <Text>{email}</Text>
+          <Text>{email || '-'}</Text>
         </Wrapper>
         <Wrapper>
           <Text color='#616677'>전화번호</Text>
-          <Text>{phoneNumber}</Text>
+          <Text>{phoneNumber || '-'}</Text>
         </Wrapper>
       </InfoContainer>
     </Layout>
