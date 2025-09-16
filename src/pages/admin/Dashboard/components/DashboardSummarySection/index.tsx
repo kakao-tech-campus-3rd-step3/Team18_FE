@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { SummaryCard } from './SummaryCard';
-import type { DashboardCard } from '@/types/dashboard';
+import type { DashboardCard } from '@/pages/admin/Dashboard/types/dashboard';
 
 export const DashboardSummarySection = () => {
   return (

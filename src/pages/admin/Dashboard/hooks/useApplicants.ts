@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchApplicants } from '@/pages/admin/Dashboard/api/applicant';
-import type { ApplicantData, ApplicationFilterOption } from '@/types/dashboard';
+import type {
+  ApplicantData,
+  ApplicationFilterOption,
+} from '@/pages/admin/Dashboard/types/dashboard';
 
 interface useApplicantsResult {
   applicants: ApplicantData[];

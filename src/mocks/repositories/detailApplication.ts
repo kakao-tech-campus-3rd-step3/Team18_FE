@@ -1,4 +1,4 @@
-import type { DetailApplication } from '@/types/detailApplication';
+import type { DetailApplication } from '@/pages/admin/ApplicationDetail/types/detailApplication';
 
 export const detailApplication: DetailApplication = {
   applicationId: 123,
