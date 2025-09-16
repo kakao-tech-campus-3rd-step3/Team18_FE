@@ -6,9 +6,11 @@ import {
   ClubListContainer,
   ClubNameText,
   Grid,
-  NoSearchResultWrapper,
+  NoSearchResultContainer,
   RecruitStatusBox,
   RecruitStatusText,
+  SearchImage,
+  TextWrapper,
 } from '@/pages/user/Main/components/ClubListSection/Club.styled.ts';
 import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
 import { searchClubs } from '@/pages/user/Main/utils/searchClubs.ts';
@@ -30,10 +32,25 @@ export const ClubListSection = ({ filter, searchText }: Props) => {
   if (searchedClubs.length === 0)
     return (
       <ClubListContainer>
-        <NoSearchResultWrapper>
-          <Text size={'xl'} weight={'bold'}>{`\`${searchText}\`검색 결과가 없습니다`}</Text>
-          <Text size={'xs'}>{`동아리명, 카테고리, 동아리 소개로 검색해 보세요.`}</Text>
-        </NoSearchResultWrapper>
+        <NoSearchResultContainer>
+          <SearchImage
+            src='/public/assets/noSearchResults.svg'
+            alt='이미지 없음'
+            width={100}
+            height={100}
+          ></SearchImage>
+          <TextWrapper>
+            <Text
+              color={'#757575'}
+              size={'xl'}
+              weight={'regular'}
+            >{`\`${searchText}\`검색 결과가 없습니다`}</Text>
+            <Text
+              color={'#7E8691'}
+              size={'sm'}
+            >{`동아리명, 카테고리, 동아리 소개로 검색해 보세요.`}</Text>
+          </TextWrapper>
+        </NoSearchResultContainer>
       </ClubListContainer>
     );
 
