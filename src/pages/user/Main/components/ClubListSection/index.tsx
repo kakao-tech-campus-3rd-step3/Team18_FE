@@ -6,11 +6,13 @@ import {
   ClubListContainer,
   ClubNameText,
   Grid,
+  NoSearchResultWrapper,
   RecruitStatusBox,
   RecruitStatusText,
 } from '@/pages/user/Main/components/ClubListSection/Club.styled.tsx';
 import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
 import { searchClubs } from '@/pages/user/Main/utils/searchClubs.ts';
+import { Text } from '@/shared/components/Text';
 
 type Props = {
   filter: ClubCategory;
@@ -24,6 +26,16 @@ export const ClubListSection = ({ filter, searchText }: Props) => {
   if (error) return <div>에러발생 : {error.message}</div>;
 
   const searchedClubs = searchClubs(clubs, searchText.replace(/\s+/g, ''));
+
+  if (searchedClubs.length === 0)
+    return (
+      <ClubListContainer>
+        <NoSearchResultWrapper>
+          <Text size={'xl'} weight={'bold'}>{`\`${searchText}\`검색 결과가 없습니다`}</Text>
+          <Text size={'xs'}>{`동아리명, 카테고리, 동아리 소개로 검색해 보세요.`}</Text>
+        </NoSearchResultWrapper>
+      </ClubListContainer>
+    );
 
   return (
     <ClubListContainer>
