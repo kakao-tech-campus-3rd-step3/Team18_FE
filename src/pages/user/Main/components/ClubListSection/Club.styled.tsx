@@ -77,3 +77,13 @@ export const ClubItem = styled.div(({ theme }) => ({
   padding: 16,
   gap: 16,
 }));
+
+export const NoSearchResultWrapper = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  textAlign: 'center',
+  height: 130,
+  marginBottom: 10,
+  padding: 16,
+  gap: 16,
+});
