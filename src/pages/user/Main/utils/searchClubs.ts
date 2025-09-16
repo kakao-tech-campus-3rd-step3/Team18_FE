@@ -1,4 +1,4 @@
-import type { Club } from '@/types/club.ts';
+import type { Club } from '../types/club.ts';
 
 export const searchClubs = (clubs: Club[], searchKeyword: string): Club[] => {
   return searchKeyword
