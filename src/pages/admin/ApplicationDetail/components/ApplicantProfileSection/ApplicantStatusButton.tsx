@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
-import type { ApplicantData } from '@/types/dashboard';
-import type { ApplicantStatus } from '@/types/dashboard';
+import type { ApplicantData, ApplicantStatus } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = {
   label: ApplicantData['status'];

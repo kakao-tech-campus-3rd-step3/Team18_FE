@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { ApplicantStatusButton } from './ApplicantStatusButton';
 import { useState } from 'react';
-import type { ApplicantStatus } from '@/types/dashboard';
+import type { ApplicantStatus } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = {
   status?: ApplicantStatus;

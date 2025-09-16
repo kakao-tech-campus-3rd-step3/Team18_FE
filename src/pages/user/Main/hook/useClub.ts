@@ -1,7 +1,7 @@
 import { type ClubResponse, getClubsByCategory } from '@/pages/user/Main/api/club.ts';
 import { useQuery } from '@tanstack/react-query';
 import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
-import type { Club } from '@/types/club.ts';
+import type { Club } from '@/pages/user/Main/types/club';
 
 export interface UseClubResult {
   clubs: Club[];
