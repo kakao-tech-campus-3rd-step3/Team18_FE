@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { ApplicantFilterButton } from './ApplicationFilterButton';
-import type { ApplicationFilterOption } from '@/types/dashboard';
+import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
 
 export type Props = {
   option: ApplicationFilterOption;

@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import { ApplicationStatusFilter } from './ApplicationFilter';
 import { ApplicantList } from './ApplicantList';
-import type { ApplicationFilterOption } from '@/types/dashboard';
+import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
 import { useSearchParams } from 'react-router-dom';
 
 export const ApplicantListSection = () => {

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import type { ApplicantData } from '@/types/dashboard';
+import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = ApplicantData & {
   onClick: (id: number) => void;

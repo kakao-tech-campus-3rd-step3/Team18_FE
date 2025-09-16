@@ -1,4 +1,4 @@
-import type { Club } from '@/types/club.ts';
+import type { Club } from '@/pages/user/Main/types/club';
 
 export const clubs: Club[] = [
   // 문예
