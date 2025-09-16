@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchDetailApplication } from '../api/detailApplication';
-import type { DetailApplication } from '@/types/detailApplication';
+import { fetchDetailApplication } from '@/pages/admin/ApplicationDetail/api/detailApplication';
+import type { DetailApplication } from '@/pages/admin/ApplicationDetail/types/detailApplication';
 
 interface UseDetailApplicationResult {
   detailApplicants: DetailApplication | null;
