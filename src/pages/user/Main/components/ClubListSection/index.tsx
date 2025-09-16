@@ -9,7 +9,7 @@ import {
   NoSearchResultWrapper,
   RecruitStatusBox,
   RecruitStatusText,
-} from '@/pages/user/Main/components/ClubListSection/Club.styled.tsx';
+} from '@/pages/user/Main/components/ClubListSection/Club.styled.ts';
 import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
 import { searchClubs } from '@/pages/user/Main/utils/searchClubs.ts';
 import { Text } from '@/shared/components/Text';
