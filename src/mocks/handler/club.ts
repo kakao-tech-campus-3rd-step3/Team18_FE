@@ -8,4 +8,4 @@ const getClubsResolver = ({ request }: { request: Request }) => {
   return HttpResponse.json({ clubs }, { status: 200 });
 };
 
-export const handlers = [http.get('/api/clubs/search/category', getClubsResolver)];
+export const clubHandlers = [http.get('/api/clubs/search/category', getClubsResolver)];
