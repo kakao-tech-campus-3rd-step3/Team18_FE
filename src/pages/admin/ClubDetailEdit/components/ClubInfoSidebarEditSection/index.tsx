@@ -1,7 +1,6 @@
-import styled from '@emotion/styled';
 import { mockClubDetail } from '../mock';
 import { useState } from 'react';
-import { FiEdit2 } from 'react-icons/fi';
+import * as S from './index.styled';
 
 export const ClubInfoSidebarEditSection = () => {
   const {
@@ -31,10 +30,10 @@ export const ClubInfoSidebarEditSection = () => {
     const isEditing = editingField === fieldKey;
 
     return (
-      <InfoItem>
+      <S.InfoItem>
         <span>{label}:</span>
         {isEditing ? (
-          <InlineInput
+          <S.InlineInput
             value={value}
             onChange={(e) => onChange(e.target.value)}
             onBlur={() => setEditingField(null)}
@@ -43,66 +42,23 @@ export const ClubInfoSidebarEditSection = () => {
         ) : (
           <span>{value}</span>
         )}
-        {!isEditing && <EditIcon onClick={() => setEditingField(fieldKey)} />}
-      </InfoItem>
+        {!isEditing && <S.EditIcon onClick={() => setEditingField(fieldKey)} />}
+      </S.InfoItem>
     );
   };
 
   return (
-    <SidebarContainer>
+    <S.SidebarContainer>
       {renderEditableItem('회장 이름', presidentName, 'presidentName', setPresidentName)}
       {renderEditableItem('연락처', initialPresidentPhoneNumber, 'presidentPhoneNumber', () => {})}
       {renderEditableItem('동방 위치', initialLocation, 'location', () => {})}
-      <InfoItem>
+      <S.InfoItem>
         모집 기간: {formatDate(recruitStart)} ~ {formatDate(recruitEnd)}
-      </InfoItem>
+      </S.InfoItem>
       {renderEditableItem('정기 모임', initialRegularMeetingInfo, 'regularMeetingInfo', () => {})}
       {renderEditableItem('모집 상태', initialRecruitStatus, 'recruitStatus', () => {})}
-      <Notice>지원 시 유의사항이 여기에 들어갑니다.</Notice>
-    </SidebarContainer>
+      <S.Notice>지원 시 유의사항이 여기에 들어갑니다.</S.Notice>
+    </S.SidebarContainer>
   );
 };
 
-const SidebarContainer = styled.div(({ theme }) => ({
-  backgroundColor: theme.colors.bg,
-  padding: '16px',
-  borderRadius: theme.radius.md,
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '12px',
-}));
-
-const InfoItem = styled.div(({ theme }) => ({
-  fontSize: theme.font.size.sm,
-  color: theme.colors.textPrimary,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  gap: '8px',
-}));
-
-const InlineInput = styled.input(({ theme }) => ({
-  border: 'none',
-  borderBottom: `1px solid ${theme.colors.gray300}`,
-  fontSize: theme.font.size.sm,
-  padding: '2px 4px',
-  flex: 1,
-  textAlign: 'center',
-  '&:focus': {
-    outline: 'none',
-    borderBottom: `1px solid ${theme.colors.primary}`,
-  },
-}));
-
-const EditIcon = styled(FiEdit2)(({ theme }) => ({
-  cursor: 'pointer',
-  color: theme.colors.gray500,
-  '&:hover': {
-    color: theme.colors.primary,
-  },
-}));
-
-const Notice = styled.div(({ theme }) => ({
-  fontSize: theme.font.size.xs,
-  color: theme.colors.textSecondary,
-}));
