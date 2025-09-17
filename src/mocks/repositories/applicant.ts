@@ -77,10 +77,26 @@ export const detailApplication: DetailApplication = {
 };
 
 export const applicantRepository = {
-  getApplicantsResolver: (filter: string) => {
-    if (filter === '전체') return applicants;
-    return applicants.filter((applicant) => applicant.status === filter);
+  getApplicants: (status: string | null) => {
+    const statusLabelMap: Record<string, string> = {
+      ACCEPTED: '합격',
+      REJECTED: '불합격',
+      PENDING: '미정',
+    };
+
+    if (!status || status === 'ALL') {
+      return applicants;
+    }
+
+    const mappedStatus = statusLabelMap[status];
+    if (!mappedStatus) {
+      return applicants;
+    }
+
+    return applicants.filter((applicant) => applicant.status === mappedStatus);
   },
 
-  getDetailApplication: () => detailApplication,
+  getDetailApplication: (applicantId: string) => {
+    return detailApplication;
+  },
 };
