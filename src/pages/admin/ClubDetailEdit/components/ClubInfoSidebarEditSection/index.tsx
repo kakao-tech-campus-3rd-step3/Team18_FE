@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { Button } from '@/shared/components/Button';
 import { mockClubDetail } from '../mock';
 import { useState } from 'react';
 import { FiEdit2 } from 'react-icons/fi';
@@ -59,8 +58,6 @@ export const ClubInfoSidebarEditSection = () => {
       </InfoItem>
       {renderEditableItem('정기 모임', initialRegularMeetingInfo, 'regularMeetingInfo', () => {})}
       {renderEditableItem('모집 상태', initialRecruitStatus, 'recruitStatus', () => {})}
-
-      <Button to='/'>지원하기</Button>
       <Notice>지원 시 유의사항이 여기에 들어갑니다.</Notice>
     </SidebarContainer>
   );
