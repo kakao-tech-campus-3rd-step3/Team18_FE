@@ -4,29 +4,25 @@ import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
 import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
 import { createBrowserRouter } from 'react-router-dom';
 import { App } from '@/App.tsx';
+import { ROUTE_PATH } from '@/constants/routerPath.ts';
 
-export const ROUTE_PATH = {
-  DASHBOARD: 'club/dashboard',
-  APPLICATIONDETAIL: '/admin/clubs/:clubId/applicants/:applicantId',
-  MAIN: '/',
-  CLUBDETAIL: 'club/:id',
-};
+const { MAIN, CLUBDETAIL, APPLICATIONDETAIL, DASHBOARD } = ROUTE_PATH;
 
 export const router = createBrowserRouter([
   {
     element: <App />,
     children: [
-      { path: ROUTE_PATH.MAIN, element: <MainPage /> },
-      { path: ROUTE_PATH.CLUBDETAIL, element: <ClubDetailPage /> },
+      { path: MAIN, element: <MainPage /> },
+      { path: CLUBDETAIL, element: <ClubDetailPage /> },
       {
         path: '/admin',
         children: [
           {
-            path: ROUTE_PATH.DASHBOARD,
+            path: DASHBOARD,
             element: <DashboardPage />,
           },
           {
-            path: ROUTE_PATH.APPLICATIONDETAIL,
+            path: APPLICATIONDETAIL,
             element: <ApplicationDetailPage />,
           },
         ],
