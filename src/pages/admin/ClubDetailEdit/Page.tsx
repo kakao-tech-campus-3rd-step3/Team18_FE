@@ -1,7 +1,6 @@
 import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
 // import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
 import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
-// import { ClubReviewsSection } from './components/ClubReviewsSection';
 // import { ClubInfoSidebarSection } from './components/ClubInfoSidebarSection';
 import {
   Layout,
@@ -27,7 +26,6 @@ export const ClubDetailEditPage = () => {
         <ClubHeaderSection clubName={mockClubDetail.clubName} category={mockClubDetail.category} />
         {/* <ClubActivityPhotosSection /> */}
         <ClubDescriptionEditSection />
-        {/* <ClubReviewsSection /> */}
         <ButtonGroup>
           <Button onClick={handleSave}>수정하기</Button>
           <Button variant='light' onClick={handleCancel}>
@@ -42,6 +40,7 @@ export const ClubDetailEditPage = () => {
 
 const ButtonGroup = styled.div({
   display: 'flex',
+  justifyContent: 'center',
   gap: '1rem',
   marginTop: '2rem',
 });
