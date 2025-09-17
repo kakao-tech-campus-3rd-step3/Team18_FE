@@ -1,4 +1,4 @@
-import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection'
+import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
 import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
 import { ClubDescriptionSection } from './components/ClubDescriptionSection';
 import { ClubReviewsSection } from './components/ClubReviewsSection';
@@ -14,10 +14,7 @@ export const ClubDetailPage = () => {
   return (
     <Layout>
       <ContentLeft>
-        <ClubHeaderSection
-                clubName={mockClubDetail.clubName}
-                category={mockClubDetail.category}
-              />
+        <ClubHeaderSection clubName={mockClubDetail.clubName} category={mockClubDetail.category} />
         <ClubActivityPhotosSection />
         <ClubDescriptionSection />
         <ClubReviewsSection />
