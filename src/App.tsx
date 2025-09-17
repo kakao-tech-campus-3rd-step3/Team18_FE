@@ -1,8 +1,9 @@
-import { Routes } from './pages/Routes';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@/styles/theme';
 import { Navigation } from '@/shared/components/Navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { router } from '@/pages/Routes.tsx';
+import { RouterProvider } from 'react-router-dom';
 
 const queryClient = new QueryClient();
 
@@ -11,7 +12,7 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <Navigation role='president' />
-        <Routes />
+        <RouterProvider router={router} />
       </ThemeProvider>
     </QueryClientProvider>
   );
