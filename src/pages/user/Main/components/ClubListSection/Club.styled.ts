@@ -77,3 +77,32 @@ export const ClubItem = styled.div(({ theme }) => ({
   padding: 16,
   gap: 16,
 }));
+
+export const NoSearchResultContainer = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  height: 130,
+  marginBottom: 10,
+  padding: 16,
+  gap: 16,
+});
+
+export const TextWrapper = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  textAlign: 'center',
+  justifyContent: 'center',
+  alignItems: 'center',
+  gap: '16px',
+});
+
+type ImageWrapperProps = {
+  width?: number;
+  height?: number;
+};
+
+export const SearchImage = styled.img<ImageWrapperProps>`
+  width: ${({ width }) => (width ? `${width}px` : 'auto')};
+  height: ${({ height }) => (height ? `${height}px` : 'auto')};
+`;
