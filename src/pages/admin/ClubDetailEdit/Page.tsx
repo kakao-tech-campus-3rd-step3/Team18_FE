@@ -1,7 +1,7 @@
 import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
 // import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
 import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
-// import { ClubInfoSidebarSection } from './components/ClubInfoSidebarSection';
+import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
 import {
   Layout,
   ContentLeft,
@@ -33,7 +33,9 @@ export const ClubDetailEditPage = () => {
           </Button>
         </ButtonGroup>
       </ContentLeft>
-      <ContentRight>{/* <ClubInfoSidebarSection /> */}</ContentRight>
+      <ContentRight>
+        <ClubInfoSidebarEditSection />
+      </ContentRight>
     </Layout>
   );
 };
