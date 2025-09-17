@@ -34,10 +34,21 @@ const DescriptionContainer = styled.div(({ theme }) => ({
 const InputArea = styled.textarea(({ theme }) => ({
   fontSize: theme.font.size.sm,
   lineHeight: 1.6,
-  margin: 0,
-  padding: '0.5rem',
-  borderRadius: theme.radius.sm,
-  border: `1px solid ${theme.colors.gray300}`,
+  padding: '0.75rem 1rem',
+  borderRadius: theme.radius.md,
+  border: `1px solid ${theme.colors.border}`,
+  backgroundColor: theme.colors.bg,
   resize: 'vertical',
-  minHeight: '80px',
+  minHeight: '100px',
+  transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+
+  '&:focus': {
+    outline: 'none',
+    borderColor: theme.colors.primary,
+    boxShadow: `0 0 0 2px ${theme.colors.primary}33`,
+  },
+
+  '&::placeholder': {
+    color: theme.colors.textSecondary,
+  },
 }));
