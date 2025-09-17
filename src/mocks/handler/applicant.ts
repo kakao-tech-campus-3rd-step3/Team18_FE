@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw';
 import { applicantRepository } from '../repositories/applicant';
+import { detailApplicationRepository } from '../repositories/detailApplication';
 
 const getApplicantsResolver = ({ request }: { request: Request }) => {
   const url = new URL(request.url);
@@ -18,4 +19,12 @@ const getApplicantsResolver = ({ request }: { request: Request }) => {
   return HttpResponse.json(applicants, { status: 200 });
 };
 
-export const applicantHandlers = [http.get('/api/clubs/:clubId/applicants', getApplicantsResolver)];
+const getDetailApplicationResolver = () => {
+  const applicants = detailApplicationRepository.getDetailApplication();
+  return HttpResponse.json(applicants, { status: 200 });
+};
+
+export const applicantHandlers = [
+  http.get('/api/clubs/:clubId/applicants', getApplicantsResolver),
+  http.get('/api/clubs/:clubId/applicants/:applicantId/application', getDetailApplicationResolver),
+];
