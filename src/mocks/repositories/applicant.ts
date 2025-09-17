@@ -96,7 +96,7 @@ export const applicantRepository = {
     return applicants.filter((applicant) => applicant.status === mappedStatus);
   },
 
-  getDetailApplication: (applicantId: string) => {
+  getDetailApplication: () => {
     return detailApplication;
   },
 };
