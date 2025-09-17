@@ -1,19 +1,36 @@
-import { CLUB_CATEGORY } from '@/pages/user/Main/constant/clubCategory';
-import  {
-  CategoryTabContainer,
-  CategoryTab
-} from '@/pages/user/Main/components/ClubCategorySection/index.styled.tsx';
+import { CLUB_CATEGORY, type ClubCategory } from '@/pages/user/Main/constant/clubCategory';
+import * as S from './index.styled.ts';
+import { useSearchParams } from 'react-router-dom';
 
-const ClubCategorySection = () => {
+type Props = {
+  onSelect: (category: ClubCategory) => void;
+  selected?: ClubCategory;
+};
+
+export const ClubCategorySection = ({ onSelect, selected }: Props) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleClick = (newCategory: ClubCategory) => {
+    onSelect(newCategory);
+    searchParams.set('category', newCategory);
+    setSearchParams(searchParams);
+  };
+
   return (
     <>
-      <CategoryTabContainer>
+      <S.CategoryTabContainer>
         {CLUB_CATEGORY.map((category) => (
-          <CategoryTab key={category}>{category}</CategoryTab>
+          <S.CategoryTab
+            key={category}
+            onClick={() => {
+              handleClick(category);
+            }}
+            selected={selected === category}
+          >
+            {category}
+          </S.CategoryTab>
         ))}
-      </CategoryTabContainer>
+      </S.CategoryTabContainer>
     </>
   );
 };
-
-export default ClubCategorySection;

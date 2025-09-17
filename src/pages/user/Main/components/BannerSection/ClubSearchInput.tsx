@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { FiSearch } from 'react-icons/fi';
+import _ from 'lodash';
 
 const InputWrapper = styled.div(({ theme }) => ({
   display: 'flex',
@@ -23,10 +24,19 @@ const SearchIcon = styled(FiSearch)({
   color: '#666',
 });
 
-export default function ClubSearchInput() {
+type Props = {
+  onChange: (s: string) => void;
+};
+
+export function ClubSearchInput({ onChange }: Props) {
+  const handleSearchText = _.debounce((text) => onChange(text), 200);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleSearchText(e.target.value);
+  };
+
   return (
     <InputWrapper>
-      <Input placeholder='동아리를 검색하세요.' />
+      <Input onChange={handleChange} placeholder='동아리를 검색하세요.' />
       <SearchIcon />
     </InputWrapper>
   );

@@ -1,5 +1,5 @@
 import type { Role, NavItemData } from '@/types/navigation';
-import { ROUTE_PATH } from '@/pages/Routes';
+import { ROUTE_PATH } from '@/constants/routerPath.ts';
 
 export const NAV_CONFIG: Record<Role, NavItemData[]> = {
   guest: [

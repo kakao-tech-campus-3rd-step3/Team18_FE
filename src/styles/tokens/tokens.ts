@@ -39,3 +39,8 @@ export const zIndex = {
   header: 100,
   modal: 1000,
 };
+
+export const breakpoints = {
+  mobile: '480px',
+  web: '1024px',
+};

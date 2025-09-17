@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import type { DashboardCard } from '@/types/dashboard';
+import type { DashboardCard } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = Omit<DashboardCard, 'id'>;
 
