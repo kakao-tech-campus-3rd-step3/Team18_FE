@@ -10,10 +10,8 @@ const getApplicantsResolver = ({ request }: { request: Request }) => {
   return HttpResponse.json(applicants, { status: 200 });
 };
 
-const getDetailApplicationResolver = ({ params }: { params: { applicantId: string } }) => {
-  const { applicantId } = params;
-
-  const application = applicantRepository.getDetailApplication(applicantId);
+const getDetailApplicationResolver = () => {
+  const application = applicantRepository.getDetailApplication();
 
   return HttpResponse.json(application, { status: 200 });
 };
