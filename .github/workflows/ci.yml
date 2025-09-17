@@ -102,6 +102,8 @@ jobs:
         run: npm install
 
       - name: Run Build
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
         run: npm run build
 
       - name: Upload dist as artifact
