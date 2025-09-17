@@ -2,7 +2,7 @@ import { CLUB_CATEGORY, type ClubCategory } from '@/pages/user/Main/constant/clu
 import {
   CategoryTabContainer,
   CategoryTab,
-} from '@/pages/user/Main/components/ClubCategorySection/index.styled.tsx';
+} from '@/pages/user/Main/components/ClubCategorySection/index.styled.ts';
 import { useSearchParams } from 'react-router-dom';
 
 type Props = {
