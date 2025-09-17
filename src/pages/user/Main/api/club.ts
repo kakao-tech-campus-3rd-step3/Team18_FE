@@ -1,7 +1,11 @@
-import type { ClubResponse } from '@/types/club.ts';
+import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
+import type { Club } from '@/pages/user/Main/types/club';
 
-export async function getClubs(): Promise<ClubResponse> {
-  const response = await fetch('/api/clubs');
-  const data = await response.json();
-  return data;
+export type ClubResponse = {
+  clubs: Club[];
+};
+
+export async function getClubsByCategory(filter: ClubCategory): Promise<ClubResponse> {
+  const response = await fetch(`/api/clubs/search/category?categoryName=${filter}`);
+  return await response.json();
 }

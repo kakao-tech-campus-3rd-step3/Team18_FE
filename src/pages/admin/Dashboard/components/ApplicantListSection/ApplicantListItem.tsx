@@ -1,22 +1,28 @@
 import styled from '@emotion/styled';
-import type { ApplicantData } from '@/types/dashboard';
+import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
+
+type Props = ApplicantData & {
+  onClick: (id: number) => void;
+};
 
 export const ApplicantListItem = ({
+  id,
   name,
   studentId,
   department,
-  phone,
+  phoneNumber,
   email,
   status,
-}: ApplicantData) => {
+  onClick,
+}: Props) => {
   return (
-    <ItemWrapper>
-      <InfoText>{name}</InfoText>
-      <InfoText>{studentId}</InfoText>
-      <InfoText>{department}</InfoText>
-      <InfoText>{phone}</InfoText>
-      <InfoText>{email}</InfoText>
-      <StatusBadge status={status}>{status}</StatusBadge>
+    <ItemWrapper onClick={() => onClick(id)}>
+      <InfoText>{name || '-'}</InfoText>
+      <InfoText>{studentId || '-'}</InfoText>
+      <InfoText>{department || '-'}</InfoText>
+      <InfoText>{phoneNumber || '-'}</InfoText>
+      <InfoText>{email || '-'}</InfoText>
+      <StatusBadge status={status}>{status || '-'}</StatusBadge>
     </ItemWrapper>
   );
 };

@@ -1,9 +1,30 @@
 import styled from '@emotion/styled';
 import { ApplicantListItem } from './ApplicantListItem';
 import { Button } from '@/shared/components/Button';
-import { MOCK_APPLICANT_DATA_LIST } from './mock';
+import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
+import { useNavigate } from 'react-router-dom';
+import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
 
-export const ApplicantList = () => {
+type Props = {
+  filterOption: ApplicationFilterOption;
+};
+
+export const ApplicantList = ({ filterOption }: Props) => {
+  const navigate = useNavigate();
+
+  const { applicants, isLoading, isError } = useApplicants(1, filterOption);
+
+  if (isLoading) return <LoadingSpinner />;
+  if (isError) {
+    return <div>데이터를 불러오는 중 에러가 발생했습니다.</div>;
+  }
+
+  const handleItemClick = (applicantId: number) => {
+    const clubId = 1;
+    navigate(`/admin/clubs/${clubId}/applicants/${applicantId}`);
+  };
+
   return (
     <Container>
       <ApplicantInfoCategoryList>
@@ -12,22 +33,22 @@ export const ApplicantList = () => {
         ))}
       </ApplicantInfoCategoryList>
       <ApplicantInfoDataList>
-        {MOCK_APPLICANT_DATA_LIST.map((applicant) => (
+        {applicants.map((applicant) => (
           <ApplicantListItem
             key={applicant.id}
+            id={applicant.id}
             name={applicant.name}
             studentId={applicant.studentId}
             department={applicant.department}
-            phone={applicant.phone}
+            phoneNumber={applicant.phoneNumber}
             email={applicant.email}
             status={applicant.status}
+            onClick={handleItemClick}
           />
         ))}
       </ApplicantInfoDataList>
       <ButtonWrapper>
-        <Button borderRadius={'lg'} color={'primary00'} width={'15rem'} opacity=''>
-          결과 전송하기
-        </Button>
+        <Button width={'15rem'}>결과 전송하기</Button>
       </ButtonWrapper>
     </Container>
   );

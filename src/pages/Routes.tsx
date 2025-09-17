@@ -1,17 +1,32 @@
-import { Route, Routes as RouterRoutes } from 'react-router-dom';
 import { DashboardPage } from '@/pages/admin/Dashboard/Page';
 import { MainPage } from '@/pages/user/Main/Page.tsx';
+import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
+import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
+import { createBrowserRouter } from 'react-router-dom';
+import { App } from '@/App.tsx';
+import { ROUTE_PATH } from '@/constants/routerPath.ts';
 
-export const Routes = () => {
-  return (
-    <RouterRoutes>
-      <Route path={ROUTE_PATH.DASHBOARD} element={<DashboardPage />} />
-      <Route path={ROUTE_PATH.MAIN} element={<MainPage />} />
-    </RouterRoutes>
-  );
-};
+const { MAIN, CLUBDETAIL, APPLICATIONDETAIL, DASHBOARD } = ROUTE_PATH;
 
-export const ROUTE_PATH = {
-  DASHBOARD: '/admin/club/dashboard',
-  MAIN: '/',
-};
+export const router = createBrowserRouter([
+  {
+    element: <App />,
+    children: [
+      { path: MAIN, element: <MainPage /> },
+      { path: CLUBDETAIL, element: <ClubDetailPage /> },
+      {
+        path: '/admin',
+        children: [
+          {
+            path: DASHBOARD,
+            element: <DashboardPage />,
+          },
+          {
+            path: APPLICATIONDETAIL,
+            element: <ApplicationDetailPage />,
+          },
+        ],
+      },
+    ],
+  },
+]);

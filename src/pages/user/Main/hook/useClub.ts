@@ -1,26 +1,22 @@
-import { getClubs } from '@/pages/user/Main/api/club.ts';
-import { useEffect, useState } from 'react';
-import type { Club } from '@/types/club.ts';
+import { type ClubResponse, getClubsByCategory } from '@/pages/user/Main/api/club.ts';
+import { useQuery } from '@tanstack/react-query';
+import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
+import type { Club } from '@/pages/user/Main/types/club';
 
-export const useClub = () => {
-  const [clubs, setClubs] = useState<Club[]>();
-  const [isLoading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<Error | null>(null);
+export interface UseClubResult {
+  clubs: Club[];
+  error?: Error | null;
+  isLoading: boolean;
+}
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await getClubs();
-        setClubs(response.clubs);
-      } catch (error) {
-        setError(error as Error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  return { clubs, isLoading, error };
+export const useClub = (filter: ClubCategory): UseClubResult => {
+  const { data, isLoading, error } = useQuery<ClubResponse>({
+    queryKey: ['clubData', filter],
+    queryFn: () => getClubsByCategory(filter),
+  });
+  return {
+    clubs: data?.clubs || [],
+    error: error,
+    isLoading: isLoading,
+  };
 };
