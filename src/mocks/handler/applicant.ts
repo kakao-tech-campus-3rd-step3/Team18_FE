@@ -1,27 +1,21 @@
 import { http, HttpResponse } from 'msw';
 import { applicantRepository } from '../repositories/applicant';
-import { detailApplicationRepository } from '../repositories/detailApplication';
 
 const getApplicantsResolver = ({ request }: { request: Request }) => {
   const url = new URL(request.url);
   const status = url.searchParams.get('status');
 
-  const applicants = applicantRepository.getApplicantsResolver(
-    status === 'ACCEPTED'
-      ? '합격'
-      : status === 'REJECTED'
-        ? '불합격'
-        : status === 'PENDING'
-          ? '미정'
-          : '전체',
-  );
+  const applicants = applicantRepository.getApplicants(status);
 
   return HttpResponse.json(applicants, { status: 200 });
 };
 
-const getDetailApplicationResolver = () => {
-  const applicants = detailApplicationRepository.getDetailApplication();
-  return HttpResponse.json(applicants, { status: 200 });
+const getDetailApplicationResolver = ({ params }: { params: { applicantId: string } }) => {
+  const { applicantId } = params;
+
+  const application = applicantRepository.getDetailApplication(applicantId);
+
+  return HttpResponse.json(application, { status: 200 });
 };
 
 export const applicantHandlers = [
