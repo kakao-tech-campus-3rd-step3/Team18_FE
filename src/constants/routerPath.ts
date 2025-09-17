@@ -3,4 +3,5 @@ export const ROUTE_PATH = {
   APPLICATIONDETAIL: '/admin/clubs/:clubId/applicants/:applicantId',
   MAIN: '/',
   CLUBDETAIL: 'club/:id',
+  CLUBEDIT: '/admin/clubs/:clubId/edit',
 };
