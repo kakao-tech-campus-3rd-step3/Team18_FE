@@ -1,17 +1,5 @@
 import { useClub } from '@/pages/user/Main/hook/useClub';
-import {
-  ClubCategoryText,
-  ClubIntroduction,
-  ClubItem,
-  ClubListContainer,
-  ClubNameText,
-  Grid,
-  NoSearchResultContainer,
-  RecruitStatusBox,
-  RecruitStatusText,
-  SearchImage,
-  TextWrapper,
-} from '@/pages/user/Main/components/ClubListSection/Club.styled.ts';
+import * as S from './Club.styled.ts';
 import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
 import { searchClubs } from '@/pages/user/Main/utils/searchClubs.ts';
 import { Text } from '@/shared/components/Text';
@@ -31,15 +19,15 @@ export const ClubListSection = ({ filter, searchText }: Props) => {
 
   if (searchedClubs.length === 0)
     return (
-      <ClubListContainer>
-        <NoSearchResultContainer>
-          <SearchImage
+      <S.ClubListContainer>
+        <S.NoSearchResultContainer>
+          <S.SearchImage
             src='/public/assets/noSearchResults.svg'
             alt='이미지 없음'
             width={100}
             height={100}
-          ></SearchImage>
-          <TextWrapper>
+          ></S.SearchImage>
+          <S.TextWrapper>
             <Text
               color={'#757575'}
               size={'xl'}
@@ -49,28 +37,28 @@ export const ClubListSection = ({ filter, searchText }: Props) => {
               color={'#7E8691'}
               size={'sm'}
             >{`동아리명, 카테고리, 동아리 소개로 검색해 보세요.`}</Text>
-          </TextWrapper>
-        </NoSearchResultContainer>
-      </ClubListContainer>
+          </S.TextWrapper>
+        </S.NoSearchResultContainer>
+      </S.ClubListContainer>
     );
 
   return (
-    <ClubListContainer>
-      <Grid>
+    <S.ClubListContainer>
+      <S.Grid>
         {searchedClubs.map((club) => (
-          <ClubItem key={club.id}>
-            <ClubCategoryText>{club.category}</ClubCategoryText>
+          <S.ClubItem key={club.id}>
+            <S.ClubCategoryText>{club.category}</S.ClubCategoryText>
 
-            <ClubNameText>{club.name}</ClubNameText>
-            <ClubIntroduction>{club.shortIntroduction}</ClubIntroduction>
-            <RecruitStatusBox status={club.recruitStatus}>
-              <RecruitStatusText status={club.recruitStatus}>
+            <S.ClubNameText>{club.name}</S.ClubNameText>
+            <S.ClubIntroduction>{club.shortIntroduction}</S.ClubIntroduction>
+            <S.RecruitStatusBox status={club.recruitStatus}>
+              <S.RecruitStatusText status={club.recruitStatus}>
                 {club.recruitStatus}
-              </RecruitStatusText>
-            </RecruitStatusBox>
-          </ClubItem>
+              </S.RecruitStatusText>
+            </S.RecruitStatusBox>
+          </S.ClubItem>
         ))}
-      </Grid>
-    </ClubListContainer>
+      </S.Grid>
+    </S.ClubListContainer>
   );
 };

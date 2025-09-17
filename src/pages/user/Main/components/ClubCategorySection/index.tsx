@@ -1,8 +1,5 @@
 import { CLUB_CATEGORY, type ClubCategory } from '@/pages/user/Main/constant/clubCategory';
-import {
-  CategoryTabContainer,
-  CategoryTab,
-} from '@/pages/user/Main/components/ClubCategorySection/index.styled.ts';
+import * as S from './index.styled.ts';
 import { useSearchParams } from 'react-router-dom';
 
 type Props = {
@@ -21,9 +18,9 @@ export const ClubCategorySection = ({ onSelect, selected }: Props) => {
 
   return (
     <>
-      <CategoryTabContainer>
+      <S.CategoryTabContainer>
         {CLUB_CATEGORY.map((category) => (
-          <CategoryTab
+          <S.CategoryTab
             key={category}
             onClick={() => {
               handleClick(category);
@@ -31,9 +28,9 @@ export const ClubCategorySection = ({ onSelect, selected }: Props) => {
             selected={selected === category}
           >
             {category}
-          </CategoryTab>
+          </S.CategoryTab>
         ))}
-      </CategoryTabContainer>
+      </S.CategoryTabContainer>
     </>
   );
 };
