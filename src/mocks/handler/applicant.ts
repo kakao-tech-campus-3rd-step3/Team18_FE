@@ -17,6 +17,9 @@ const getDetailApplicationResolver = () => {
 };
 
 export const applicantHandlers = [
-  http.get('/api/clubs/:clubId/applicants', getApplicantsResolver),
-  http.get('/api/clubs/:clubId/applicants/:applicantId/application', getDetailApplicationResolver),
+  http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/applicants', getApplicantsResolver),
+  http.get(
+    import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/applicants/:applicantId/application',
+    getDetailApplicationResolver,
+  ),
 ];

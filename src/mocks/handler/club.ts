@@ -8,4 +8,6 @@ const getClubsResolver = ({ request }: { request: Request }) => {
   return HttpResponse.json({ clubs }, { status: 200 });
 };
 
-export const clubHandlers = [http.get('/api/clubs/search/category', getClubsResolver)];
+export const clubHandlers = [
+  http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/search/category', getClubsResolver),
+];
