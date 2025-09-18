@@ -7,7 +7,10 @@ export const fetchApplicants = async (
   clubId: number,
   status?: ApplicationFilterOption,
 ): Promise<ApplicantData[]> => {
-  const url = new URL(`/api/clubs/${clubId}/applicants`, window.location.origin);
+  const url = new URL(
+    import.meta.env.VITE_API_BASE_URL + `/clubs/${clubId}/applicants`,
+    window.location.origin,
+  );
   if (status && status !== 'ALL') {
     url.searchParams.set('status', status);
   }
