@@ -1,24 +1,27 @@
+import { useMemo } from 'react';
 import styled from '@emotion/styled';
 
+const getFillPercentage = (rating: number, index: number) => {
+  if (rating >= index) return 100;
+  if (rating > index - 1) return (rating - (index - 1)) * 100;
+  return 0;
+};
+
+const STAR_INDICES = [1, 2, 3, 4, 5];
+
 export const ApplicantStarRating = ({ rating = 0 }: { rating?: number }) => {
-  const stars = [];
+  const stars = useMemo(() => {
+    return STAR_INDICES.map((i) => {
+      const fillPercentage = getFillPercentage(rating, i);
 
-  for (let i = 1; i <= 5; i++) {
-    let fillPercentage = 0;
-
-    if (rating >= i) {
-      fillPercentage = 100;
-    } else if (rating > i - 1) {
-      fillPercentage = (rating - (i - 1)) * 100;
-    }
-
-    stars.push(
-      <StarWrapper key={i}>
-        <StarEmpty>★</StarEmpty>
-        <StarFilled fillPercentage={fillPercentage}>★</StarFilled>
-      </StarWrapper>,
-    );
-  }
+      return (
+        <StarWrapper key={i}>
+          <StarEmpty>★</StarEmpty>
+          <StarFilled fillPercentage={fillPercentage}>★</StarFilled>
+        </StarWrapper>
+      );
+    });
+  }, [rating]);
 
   return <StarContainer>{stars}</StarContainer>;
 };
