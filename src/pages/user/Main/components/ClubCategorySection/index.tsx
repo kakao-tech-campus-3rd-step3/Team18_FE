@@ -1,13 +1,14 @@
 import { CLUB_CATEGORY, type ClubCategory } from '@/pages/user/Main/constant/clubCategory';
 import * as S from './index.styled.ts';
 import { useSearchParams } from 'react-router-dom';
+import { memo } from 'react';
 
 type Props = {
   onSelect: (category: ClubCategory) => void;
   selected?: ClubCategory;
 };
 
-export const ClubCategorySection = ({ onSelect, selected }: Props) => {
+const ClubCategorySection = ({ onSelect, selected }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleClick = (newCategory: ClubCategory) => {
@@ -34,3 +35,4 @@ export const ClubCategorySection = ({ onSelect, selected }: Props) => {
     </>
   );
 };
+export const MemoizedClubCategorySection = memo(ClubCategorySection);
