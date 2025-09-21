@@ -2,6 +2,7 @@ import { ClubDescription } from '@/pages/user/Apply/components/ClubDescriptionSe
 import { useParams } from 'react-router-dom';
 import { useApplicationForm } from './hook/useApplicationForm';
 import styled from '@emotion/styled';
+import { ApplicationForm } from './components/ApplicantInfo/ApplicationForm';
 
 export const ClubApplicatonPage = () => {
   const { id } = useParams();
@@ -12,10 +13,8 @@ export const ClubApplicatonPage = () => {
   return (
     <Layout>
       <FormContainer>
-        <ClubDescription
-          title={formData.title}
-          description={formData?.description ?? ''}
-        ></ClubDescription>
+        <ClubDescription title={formData.title} description={formData?.description ?? ''} />
+        <ApplicationForm />
       </FormContainer>
     </Layout>
   );
