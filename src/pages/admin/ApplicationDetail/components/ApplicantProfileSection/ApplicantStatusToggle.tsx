@@ -5,10 +5,16 @@ import type { ApplicantStatus } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = {
   status?: ApplicantStatus;
+  updateStatus: (status: ApplicantStatus) => void;
 };
 
-export const ApplicantStatusToggle = ({ status }: Props) => {
+export const ApplicantStatusToggle = ({ status, updateStatus }: Props) => {
   const [statusOption, setStatusOption] = useState(status);
+
+  const handleClick = (newStatus: ApplicantStatus) => {
+    setStatusOption(newStatus);
+    updateStatus(newStatus);
+  };
 
   return (
     <Container>
@@ -16,19 +22,19 @@ export const ApplicantStatusToggle = ({ status }: Props) => {
         label={'합격'}
         value={'ACCEPTED'}
         selected={statusOption === 'ACCEPTED'}
-        onClick={setStatusOption}
+        onClick={handleClick}
       />
       <ApplicantStatusButton
         label={'불합격'}
         value={'REJECTED'}
         selected={statusOption === 'REJECTED'}
-        onClick={setStatusOption}
+        onClick={handleClick}
       />
       <ApplicantStatusButton
         label={'미정'}
         value={'PENDING'}
         selected={statusOption === 'PENDING'}
-        onClick={setStatusOption}
+        onClick={handleClick}
       />
     </Container>
   );
