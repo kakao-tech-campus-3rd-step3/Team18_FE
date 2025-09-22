@@ -9,7 +9,9 @@ type props = {
 export const ClubDescription = ({ title, description }: props) => {
   return (
     <TextWrapper>
-      <Text size='xl' weight='bold' children={title}></Text>
+      <Text size='xl' weight='bold'>
+        {title}
+      </Text>
       <Text>{description}</Text>
     </TextWrapper>
   );
