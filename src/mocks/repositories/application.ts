@@ -22,6 +22,7 @@ export const Application: ApplicationForm = {
       questionType: 'RADIO',
       question: '개발 경험이 있으신가요?',
       required: false,
+      optionList: ['예', '아니오'],
     },
   ],
 };
