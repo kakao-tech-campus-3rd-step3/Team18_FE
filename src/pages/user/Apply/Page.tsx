@@ -2,7 +2,7 @@ import { ClubDescription } from '@/pages/user/Apply/components/ClubDescriptionSe
 import { useParams } from 'react-router-dom';
 import { useApplicationForm } from './hook/useApplicationForm';
 import styled from '@emotion/styled';
-import { ApplicationForm } from './components/ApplicantInfo/ApplicationForm';
+import { ApplicationForm } from './components/ApplicantionForm/ApplicationForm';
 
 export const ClubApplicatonPage = () => {
   const { id } = useParams();
