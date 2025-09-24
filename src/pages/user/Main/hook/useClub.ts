@@ -11,7 +11,7 @@ export const useClub = (filter: ClubCategory): UseApiQueryResult<Club[]> => {
   });
   return {
     data: data?.clubs || [],
-    error,
     isLoading,
+    error,
   };
 };
