@@ -1,18 +1,11 @@
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { theme } from '@/styles/theme';
-import type { Question } from '../../type/apply';
+import type { FormInputs, Question } from '../../type/apply';
 import { Button } from '@/shared/components/Button';
 import { OptionInput, TextAreaInput, TextInput } from './Input';
-
-type FormInputs = {
-  name: string;
-  studentId: string;
-  department: string;
-  phoneNumber: string;
-  email: string;
-  answers?: string[];
-};
+import { useParams } from 'react-router-dom';
+import { postApplicationForm } from '../../api/apply';
 
 type Props = {
   questions: Question[];
@@ -32,11 +25,16 @@ export const ApplicationForm = ({ questions }: Props) => {
       phoneNumber: '',
       email: '',
       answers: [],
+      questions: [],
     },
   });
 
+  const { id } = useParams<{ id: string }>();
+  const clubId = Number(id);
+  const questionArray = questions.map((e) => e.question);
+
   const onSubmit = (data: FormInputs) => {
-    alert(`Name: ${data.name}`);
+    postApplicationForm(clubId, data, questionArray);
   };
 
   return (
