@@ -146,8 +146,9 @@ export const ApplicationForm = ({ questions }: Props) => {
           ))}
         </QuestionWrapper>
 
-        <Button type='submit'>{isSubmitting ? 'Submitting...' : 'Submit'}</Button>
-        {isSubmitSuccessful && <ErrorMessage>Form submitted successfully!</ErrorMessage>}
+        <Button type='submit'>{isSubmitting ? '제출중...' : '제출하기'}</Button>
+        {/* 제출 완료 후 toast 알림 적용 부분*/}
+        {isSubmitSuccessful && <span>제출 성공!</span>}
       </FormContainer>
     </form>
   );
