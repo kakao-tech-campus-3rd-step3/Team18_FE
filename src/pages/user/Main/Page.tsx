@@ -5,7 +5,7 @@ import { useCallback, useState } from 'react';
 import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
 
 export const MainPage = () => {
-  const [filter, setFilter] = useState<ClubCategoryEng>('all');
+  const [filter, setFilter] = useState<ClubCategoryEng>('ALL');
   const [searchText, setSearchText] = useState('');
 
   const handleFilter = useCallback((c: ClubCategoryEng) => {
