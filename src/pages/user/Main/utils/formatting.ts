@@ -1,10 +1,10 @@
 import type { ClubCategory, ClubCategoryEng } from '../constant/clubCategory';
 
 export const korToEngCategory: Record<ClubCategory, ClubCategoryEng> = {
-  전체: 'all',
-  문예: 'arts',
-  학술: 'academics',
-  체육: 'sports',
-  종교: 'religion',
-  봉사: 'volunteer',
+  전체: 'ALL',
+  문예: 'ARTS',
+  학술: 'ACADEMICS',
+  체육: 'SPORTS',
+  종교: 'RELIGION',
+  봉사: 'VOLUNTEER',
 };
