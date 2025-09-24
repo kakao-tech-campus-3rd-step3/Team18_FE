@@ -1,6 +1,48 @@
-import type { ApplicationForm } from '@/pages/user/Apply/type/apply.ts';
+import type {
+  ApplicationForm,
+  ApplicationFormRequest,
+  FormInputs,
+} from '@/pages/user/Apply/type/apply.ts';
 
 export const fetchApplicationForm = async (Id: number): Promise<ApplicationForm> => {
   const response = await fetch(import.meta.env.VITE_API_BASE_URL + `/clubs/${Id}/apply`);
   return await response.json();
+};
+
+export const postApplicationForm = async (
+  clubId: number,
+  formData: FormInputs,
+  questionArray: string[],
+): Promise<ApplicationFormRequest> => {
+  const s = applicationFormDto(formData, questionArray);
+  console.log(s);
+
+  const response = await fetch(
+    import.meta.env.VITE_API_BASE_URL + `/clubs/${clubId}/apply-submit`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(s),
+    },
+  );
+  return await response.json();
+};
+
+export const applicationFormDto = (formData: FormInputs, questionArray: string[]) => {
+  return {
+    email: formData.email,
+    name: formData.name,
+    studentId: formData.studentId,
+    phoneNumber: formData.phoneNumber,
+    department: formData.department,
+    answers: formData.answers.map((answer, index) => {
+      return {
+        questionNum: index + 1,
+        question: questionArray[index],
+        answer: answer,
+      };
+    }),
+  };
 };
