@@ -1,14 +1,15 @@
-import { ClubDescription } from '@/pages/user/Apply/components/ClubDescriptionSection/ClubDescription';
+import { ClubDescription } from '@/pages/user/Apply/components/ClubDescriptionSection';
 import { useParams } from 'react-router-dom';
 import { useApplicationForm } from './hook/useApplicationForm';
 import styled from '@emotion/styled';
-import { ApplicationForm } from './components/ApplicantionForm/ApplicationForm';
+import { ApplicationForm } from './components/ApplicantionForm';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 
 export const ClubApplicatonPage = () => {
   const { id } = useParams();
   const formData = useApplicationForm(Number(id));
 
-  if (!formData) return <div>Loading...</div>;
+  if (!formData) return <LoadingSpinner />;
 
   return (
     <Layout>
