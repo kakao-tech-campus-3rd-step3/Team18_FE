@@ -16,7 +16,7 @@ export const useDetailApplications = (
 ): UseDetailApplicationResult => {
   const queryClient = useQueryClient();
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ['detailApplications', clubId, applicantId],
     queryFn: () => fetchDetailApplication(clubId!, applicantId!),
     staleTime: 1000 * 60 * 5,
@@ -46,7 +46,7 @@ export const useDetailApplications = (
   return {
     data: data || null,
     isLoading,
-    isError,
+    error,
     updateStatus,
   };
 };

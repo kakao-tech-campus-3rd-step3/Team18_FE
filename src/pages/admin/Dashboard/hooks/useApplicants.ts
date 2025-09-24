@@ -10,7 +10,7 @@ export const useApplicants = (
   clubId: number,
   status?: ApplicationFilterOption,
 ): UseApiQueryResult<ApplicantData[]> => {
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ['applicants', clubId, status],
     queryFn: () => fetchApplicants(clubId, status),
     staleTime: 1000 * 60 * 2,
@@ -19,6 +19,6 @@ export const useApplicants = (
   return {
     data: data || [],
     isLoading,
-    isError,
+    error,
   };
 };
