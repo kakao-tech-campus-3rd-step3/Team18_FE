@@ -4,17 +4,12 @@ import type {
   ApplicantData,
   ApplicationFilterOption,
 } from '@/pages/admin/Dashboard/types/dashboard';
-
-interface useApplicantsResult {
-  applicants: ApplicantData[];
-  isLoading: boolean;
-  isError: boolean;
-}
+import type { UseApiQueryResult } from '@/types/useApiQueryResult';
 
 export const useApplicants = (
   clubId: number,
   status?: ApplicationFilterOption,
-): useApplicantsResult => {
+): UseApiQueryResult<ApplicantData[]> => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['applicants', clubId, status],
     queryFn: () => fetchApplicants(clubId, status),
@@ -22,8 +17,8 @@ export const useApplicants = (
   });
 
   return {
-    applicants: data || [],
-    isLoading: isLoading,
-    isError: isError,
+    data: data || [],
+    isLoading,
+    isError,
   };
 };
