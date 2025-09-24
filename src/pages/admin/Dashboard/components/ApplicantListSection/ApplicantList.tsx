@@ -13,7 +13,7 @@ type Props = {
 export const ApplicantList = ({ filterOption }: Props) => {
   const navigate = useNavigate();
 
-  const { applicants, isLoading, isError } = useApplicants(1, filterOption);
+  const { data: applicants, isLoading, isError } = useApplicants(1, filterOption);
 
   if (isLoading) return <LoadingSpinner />;
   if (isError) {

@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const ClubListSection = ({ filter, searchText }: Props) => {
-  const { clubs, isLoading, error } = useClub(filter);
+  const { data: clubs, isLoading, error } = useClub(filter);
 
   if (isLoading) return <div>로딩중입니다...</div>;
   if (error) return <div>에러발생 : {error.message}</div>;
