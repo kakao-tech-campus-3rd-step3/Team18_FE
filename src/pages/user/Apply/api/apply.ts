@@ -14,8 +14,7 @@ export const postApplicationForm = async (
   formData: FormInputs,
   questionArray: string[],
 ): Promise<ApplicationFormRequest> => {
-  const s = applicationFormDto(formData, questionArray);
-  console.log(s);
+  const applicationDto = applicationFormDto(formData, questionArray);
 
   const response = await fetch(
     import.meta.env.VITE_API_BASE_URL + `/clubs/${clubId}/apply-submit`,
@@ -24,7 +23,7 @@ export const postApplicationForm = async (
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(s),
+      body: JSON.stringify(applicationDto),
     },
   );
   return await response.json();
