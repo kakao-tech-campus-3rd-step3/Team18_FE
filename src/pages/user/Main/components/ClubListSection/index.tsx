@@ -1,18 +1,19 @@
 import { useClub } from '@/pages/user/Main/hook/useClub';
 import * as S from './Club.styled.ts';
-import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
+import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
 import { searchClubs } from '@/pages/user/Main/utils/searchClubs.ts';
 import { Text } from '@/shared/components/Text';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
 
 type Props = {
-  filter: ClubCategory;
+  filter: ClubCategoryEng;
   searchText: string;
 };
 
 export const ClubListSection = ({ filter, searchText }: Props) => {
   const { clubs, isLoading, error } = useClub(filter);
 
-  if (isLoading) return <div>로딩중입니다...</div>;
+  if (isLoading) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;
 
   const searchedClubs = searchClubs(clubs, searchText.replace(/\s+/g, ''));
