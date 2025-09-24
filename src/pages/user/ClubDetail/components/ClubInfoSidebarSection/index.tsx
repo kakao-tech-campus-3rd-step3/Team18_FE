@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Button } from '@/shared/components/Button';
 import { mockClubDetail } from '../mock';
+import { formatDate } from '@/utils/dateUtils';
 
 export const ClubInfoSidebarSection = () => {
   const {
@@ -12,11 +13,6 @@ export const ClubInfoSidebarSection = () => {
     regularMeetingInfo,
     recruitStatus,
   } = mockClubDetail;
-
-  const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr);
-    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-  };
 
   return (
     <SidebarContainer>
