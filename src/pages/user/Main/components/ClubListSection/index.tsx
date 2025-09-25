@@ -1,12 +1,12 @@
 import { useClub } from '@/pages/user/Main/hook/useClub';
 import * as S from './Club.styled.ts';
-import type { ClubCategory } from '@/pages/user/Main/constant/clubCategory.ts';
+import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
 import { searchClubs } from '@/pages/user/Main/utils/searchClubs.ts';
 import { Text } from '@/shared/components/Text';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
 
 type Props = {
-  filter: ClubCategory;
+  filter: ClubCategoryEng;
   searchText: string;
 };
 

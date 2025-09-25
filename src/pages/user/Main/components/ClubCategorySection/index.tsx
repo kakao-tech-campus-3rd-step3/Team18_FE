@@ -1,19 +1,25 @@
-import { CLUB_CATEGORY, type ClubCategory } from '@/pages/user/Main/constant/clubCategory';
+import {
+  CLUB_CATEGORY,
+  type ClubCategory,
+  type ClubCategoryEng,
+} from '@/pages/user/Main/constant/clubCategory';
 import * as S from './index.styled.ts';
 import { useSearchParams } from 'react-router-dom';
 import { memo } from 'react';
+import { korToEngCategory } from '@/pages/user/Main/utils/formatting.ts';
 
 type Props = {
-  onSelect: (category: ClubCategory) => void;
-  selected?: ClubCategory;
+  onSelect: (category: ClubCategoryEng) => void;
+  selected?: ClubCategoryEng;
 };
 
 const ClubCategorySection = ({ onSelect, selected }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleClick = (newCategory: ClubCategory) => {
-    onSelect(newCategory);
-    searchParams.set('category', newCategory);
+    const engCategory = korToEngCategory[newCategory];
+    onSelect(engCategory);
+    searchParams.set('category', engCategory);
     setSearchParams(searchParams);
   };
 
@@ -26,7 +32,7 @@ const ClubCategorySection = ({ onSelect, selected }: Props) => {
             onClick={() => {
               handleClick(category);
             }}
-            selected={selected === category}
+            selected={selected === korToEngCategory[category]}
           >
             {category}
           </S.CategoryTab>
