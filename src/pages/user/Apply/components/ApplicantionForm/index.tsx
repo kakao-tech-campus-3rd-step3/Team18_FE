@@ -3,9 +3,11 @@ import styled from '@emotion/styled';
 import { theme } from '@/styles/theme';
 import type { FormInputs, Question } from '@/pages/user/Apply/type/apply';
 import { Button } from '@/shared/components/Button';
-import { OptionInput, TextAreaInput, TextInput } from './index.styled';
+import { OptionInput } from './index.styled';
 import { useParams } from 'react-router-dom';
 import { postApplicationForm } from '@/pages/user/Apply/api/apply';
+import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
+import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 
 type Props = {
   questions: Question[];
@@ -43,19 +45,15 @@ export const ApplicationForm = ({ questions }: Props) => {
         <UserInfoWrapper>
           <FormFiled>
             <Label>이름</Label>
-            <TextInput
-              type='text'
+            <OutlineInputField
               placeholder='이름을 입력하세요.'
-              width='12rem'
               {...register('name', { required: true })}
             />
             {errors.name && <ErrorMessage>이름을 입력하세요</ErrorMessage>}
           </FormFiled>
           <FormFiled>
             <Label>학번</Label>
-            <TextInput
-              type='text'
-              width='12rem'
+            <OutlineInputField
               placeholder='학번을 입력하세요.'
               {...register('studentId', {
                 required: '학번을 입력하세요.',
@@ -70,20 +68,16 @@ export const ApplicationForm = ({ questions }: Props) => {
           </FormFiled>
           <FormFiled>
             <Label>학과</Label>
-            <TextInput
-              type='text'
+            <OutlineInputField
               placeholder='학과를 입력하세요.'
-              width='12rem'
               {...register('department', { required: '학과를 입력하세요.' })}
             />
             {<ErrorMessage>{errors.department?.message}</ErrorMessage>}
           </FormFiled>
           <FormFiled>
             <Label>전화번호</Label>
-            <TextInput
-              type='text'
+            <OutlineInputField
               placeholder='010-0000-0000'
-              width='24rem'
               {...register('phoneNumber', {
                 required: '전화번호를 입력하세요.',
                 pattern: {
@@ -98,10 +92,8 @@ export const ApplicationForm = ({ questions }: Props) => {
           </FormFiled>
           <FormFiled>
             <Label>이메일</Label>
-            <TextInput
-              type='text'
+            <OutlineInputField
               placeholder='이메일을 입력하세요.'
-              width='24rem'
               {...register('email', {
                 required: '이메일을 입력하세요.',
                 pattern: {
@@ -135,10 +127,8 @@ export const ApplicationForm = ({ questions }: Props) => {
                 ))}
 
               {field.questionType === 'TEXT' && (
-                <TextAreaInput
+                <OutlineTextareaField
                   placeholder='1000자 미만으로 입력하세요.'
-                  width='48rem'
-                  height='15rem'
                   {...register(`answers.${index}`)}
                 />
               )}
@@ -181,6 +171,7 @@ const Label = styled.label(({ theme }) => ({
 }));
 
 const QuestionWrapper = styled.div({
+  width: '48rem',
   display: 'flex',
   flexDirection: 'column',
   gap: 60,
