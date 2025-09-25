@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 export const ApplicationDetailPage = () => {
   const { clubId, applicantId } = useParams();
 
-  const { detailApplicants, isError, isLoading } = useDetailApplications(
+  const { detailApplicants, isError, isLoading, updateStatus } = useDetailApplications(
     Number(clubId),
     Number(applicantId),
   );
@@ -25,6 +25,7 @@ export const ApplicationDetailPage = () => {
           department={detailApplicants?.applicantInfo.department}
           status={detailApplicants?.status}
           rating={detailApplicants?.rating}
+          updateStatus={updateStatus}
         />
         <ApplicantInfoSection
           studentId={detailApplicants?.applicantInfo.studentId}
