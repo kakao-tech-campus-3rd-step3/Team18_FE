@@ -4,26 +4,21 @@ import type {
   ApplicantData,
   ApplicationFilterOption,
 } from '@/pages/admin/Dashboard/types/dashboard';
-
-interface useApplicantsResult {
-  applicants: ApplicantData[];
-  isLoading: boolean;
-  isError: boolean;
-}
+import type { UseApiQueryResult } from '@/types/useApiQueryResult';
 
 export const useApplicants = (
   clubId: number,
   status?: ApplicationFilterOption,
-): useApplicantsResult => {
-  const { data, isLoading, isError } = useQuery({
+): UseApiQueryResult<ApplicantData[]> => {
+  const { data, isLoading, error } = useQuery({
     queryKey: ['applicants', clubId, status],
     queryFn: () => fetchApplicants(clubId, status),
     staleTime: 1000 * 60 * 2,
   });
 
   return {
-    applicants: data || [],
-    isLoading: isLoading,
-    isError: isError,
+    data: data || [],
+    isLoading,
+    error,
   };
 };

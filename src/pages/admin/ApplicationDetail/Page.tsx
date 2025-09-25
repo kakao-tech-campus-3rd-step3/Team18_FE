@@ -9,13 +9,15 @@ import { useParams } from 'react-router-dom';
 export const ApplicationDetailPage = () => {
   const { clubId, applicantId } = useParams();
 
-  const { detailApplicants, isError, isLoading, updateStatus } = useDetailApplications(
-    Number(clubId),
-    Number(applicantId),
-  );
+  const {
+    data: detailApplicants,
+    isLoading,
+    error,
+    updateStatus,
+  } = useDetailApplications(Number(clubId), Number(applicantId));
 
   if (isLoading) return <div> 로딩중</div>;
-  if (isError) return <div>데이터를 불러오는 중 에러가 발생했습니다.</div>;
+  if (error) return <div>에러발생 : {error.message}</div>;
 
   return (
     <Layout>

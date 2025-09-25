@@ -4,13 +4,11 @@ import {
   updateApplicationStatus,
 } from '@/pages/admin/ApplicationDetail/api/detailApplication';
 import type { DetailApplication } from '@/pages/admin/ApplicationDetail/types/detailApplication';
+import type { UseApiQueryResult } from '@/types/useApiQueryResult';
 
-interface UseDetailApplicationResult {
-  detailApplicants: DetailApplication | null;
-  isLoading: boolean;
-  isError: boolean;
+type UseDetailApplicationResult = UseApiQueryResult<DetailApplication | null> & {
   updateStatus: (status: DetailApplication['status']) => void;
-}
+};
 
 export const useDetailApplications = (
   clubId: number,
@@ -18,7 +16,7 @@ export const useDetailApplications = (
 ): UseDetailApplicationResult => {
   const queryClient = useQueryClient();
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ['detailApplications', clubId, applicantId],
     queryFn: () => fetchDetailApplication(clubId!, applicantId!),
     staleTime: 1000 * 60 * 5,
@@ -46,9 +44,9 @@ export const useDetailApplications = (
   });
 
   return {
-    detailApplicants: data || null,
-    isLoading: isLoading,
-    isError: isError,
+    data: data || null,
+    isLoading,
+    error,
     updateStatus,
   };
 };
