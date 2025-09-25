@@ -4,7 +4,7 @@ import { ApplicationRepoitory } from '@/mocks/repositories/application.ts';
 
 const getClubsResolver = ({ request }: { request: Request }) => {
   const url = new URL(request.url);
-  const categoryName = url.searchParams.get('categoryName') ?? '전체';
+  const categoryName = url.searchParams.get('categoryName') ?? 'all';
   const clubs = clubRepoitory.getClubsByCategory(categoryName);
   return HttpResponse.json({ clubs }, { status: 200 });
 };
