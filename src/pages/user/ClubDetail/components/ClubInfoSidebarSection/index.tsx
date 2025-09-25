@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { Button } from '@/shared/components/Button';
 import { mockClubDetail } from '../mock';
 import { formatDate } from '@/utils/dateUtils';
+import { useParams } from 'react-router-dom';
 
 export const ClubInfoSidebarSection = () => {
   const {
@@ -14,6 +15,14 @@ export const ClubInfoSidebarSection = () => {
     recruitStatus,
   } = mockClubDetail;
 
+  const clubId = useParams();
+
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+
+    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+  };
+
   return (
     <SidebarContainer>
       <InfoItem>회장 이름: {presidentName}</InfoItem>
@@ -24,7 +33,7 @@ export const ClubInfoSidebarSection = () => {
       </InfoItem>
       <InfoItem>정기 모임: {regularMeetingInfo}</InfoItem>
       <InfoItem>모집 상태: {recruitStatus}</InfoItem>
-      <Button to='/'>지원하기</Button>
+      <Button to={`/club/${clubId.id}/apply`}>지원하기</Button>
       <Notice>지원 시 유의사항이 여기에 들어갑니다.</Notice>
     </SidebarContainer>
   );

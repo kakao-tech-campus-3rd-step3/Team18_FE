@@ -1,0 +1,53 @@
+import { ClubDescription } from '@/pages/user/Apply/components/ClubDescriptionSection';
+import { useParams } from 'react-router-dom';
+import { useApplicationForm } from './hook/useApplicationForm';
+import styled from '@emotion/styled';
+import { ApplicationForm } from './components/ApplicantionForm';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
+
+export const ClubApplicatonPage = () => {
+  const { id } = useParams();
+  const formData = useApplicationForm(Number(id));
+
+  if (!formData) return <LoadingSpinner />;
+
+  return (
+    <Layout>
+      <FormContainer>
+        <ClubDescription title={formData.title} description={formData?.description ?? ''} />
+        <ApplicationForm questions={formData.questions} />
+      </FormContainer>
+    </Layout>
+  );
+};
+
+export const Layout = styled.main(({ theme }) => ({
+  backgroundColor: theme.colors.bgBlue,
+  minHeight: '100vh',
+  padding: '5.2rem 3rem',
+  display: 'flex',
+  gap: '1.5rem',
+  justifyContent: 'center',
+  maxWidth: '1200px',
+  margin: '0 auto',
+
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    padding: '1.5rem',
+  },
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    flexDirection: 'column',
+    padding: '1rem',
+  },
+}));
+
+export const FormContainer = styled.div({
+  backgroundColor: 'white',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  padding: '2.6rem 3rem',
+  width: '80%',
+  maxWidth: '1200px',
+  margin: '0 auto',
+  borderRadius: '4rem',
+});

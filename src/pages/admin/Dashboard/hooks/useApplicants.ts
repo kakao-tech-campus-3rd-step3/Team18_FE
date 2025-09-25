@@ -18,6 +18,7 @@ export const useApplicants = (
   const { data, isLoading, isError } = useQuery({
     queryKey: ['applicants', clubId, status],
     queryFn: () => fetchApplicants(clubId, status),
+    staleTime: 1000 * 60 * 2,
   });
 
   return {
