@@ -15,8 +15,12 @@ export const InfoItem = styled.div(({ theme }) => ({
   color: theme.colors.textPrimary,
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
+  justifyContent: 'flex-start',
   gap: '8px',
+  span: {
+    flex: 1,
+    textAlign: 'center',
+  },
 }));
 
 export const InlineInput = styled.input(({ theme }) => ({
