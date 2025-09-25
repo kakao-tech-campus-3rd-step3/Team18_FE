@@ -9,9 +9,16 @@ type Props = {
   department?: string;
   status?: ApplicantStatus;
   rating?: number;
+  updateStatus: (status: ApplicantStatus) => void;
 };
 
-export const ApplicantProfileSection = ({ name, department, status, rating }: Props) => {
+export const ApplicantProfileSection = ({
+  name,
+  department,
+  status,
+  rating,
+  updateStatus,
+}: Props) => {
   return (
     <Container>
       <LeftSection>
@@ -22,7 +29,7 @@ export const ApplicantProfileSection = ({ name, department, status, rating }: Pr
         <ApplicantStarRating rating={rating} />
       </LeftSection>
       <RightSection>
-        <ApplicantStatusToggle status={status} />
+        <ApplicantStatusToggle status={status} updateStatus={updateStatus} />
       </RightSection>
     </Container>
   );
