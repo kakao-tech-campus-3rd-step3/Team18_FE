@@ -17,12 +17,6 @@ export const ClubInfoSidebarSection = () => {
 
   const clubId = useParams();
 
-  const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr);
-
-    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-  };
-
   return (
     <SidebarContainer>
       <InfoItem>회장 이름: {presidentName}</InfoItem>
