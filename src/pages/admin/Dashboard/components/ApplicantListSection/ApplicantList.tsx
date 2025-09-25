@@ -13,12 +13,10 @@ type Props = {
 export const ApplicantList = ({ filterOption }: Props) => {
   const navigate = useNavigate();
 
-  const { applicants, isLoading, isError } = useApplicants(1, filterOption);
+  const { data: applicants, isLoading, error } = useApplicants(1, filterOption);
 
   if (isLoading) return <LoadingSpinner />;
-  if (isError) {
-    return <div>데이터를 불러오는 중 에러가 발생했습니다.</div>;
-  }
+  if (error) return <div>에러발생 : {error.message}</div>;
 
   const handleItemClick = (applicantId: number) => {
     const clubId = 1;
