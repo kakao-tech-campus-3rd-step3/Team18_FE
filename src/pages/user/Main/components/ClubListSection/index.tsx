@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const ClubListSection = ({ filter, searchText }: Props) => {
-  const { clubs, isLoading, error } = useClub(filter);
+  const { data: clubs, isLoading, error } = useClub(filter);
 
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;
