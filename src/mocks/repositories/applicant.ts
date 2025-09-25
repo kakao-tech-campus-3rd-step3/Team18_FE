@@ -99,4 +99,12 @@ export const applicantRepository = {
   getDetailApplication: () => {
     return detailApplication;
   },
+
+  updateApplicationStatus: (applicationId: number, status: DetailApplication['status']) => {
+    if (detailApplication.applicationId === applicationId) {
+      detailApplication.status = status;
+      return { success: true };
+    }
+    return { success: false };
+  },
 };

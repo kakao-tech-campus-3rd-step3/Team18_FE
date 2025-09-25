@@ -9,3 +9,16 @@ export const fetchDetailApplication = async (
   );
   return await response.json();
 };
+
+export const updateApplicationStatus = async (
+  applicationId: number,
+  status: DetailApplication['status'],
+): Promise<void> => {
+  await fetch(import.meta.env.VITE_API_BASE_URL + `/applications/${applicationId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ status }),
+  });
+};
