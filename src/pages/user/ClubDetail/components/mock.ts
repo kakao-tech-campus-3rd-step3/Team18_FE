@@ -5,16 +5,16 @@ export type Club = {
   category: string;
   shortIntroduction: string;
   introductionImages: string[];
-  introductionOverview: string;  
+  introductionOverview: string;
   introductionActivity: string;
-  introductionIdeal: string; 
+  introductionIdeal: string;
   regularMeetingInfo: string;
   recruitStatus: string;
   presidentName: string;
   presidentPhoneNumber: string;
   recruitStart: string;
   recruitEnd: string;
-  applicationNotices: string; 
+  applicationNotices: string;
 };
 
 export const mockClubDetail: Club = {
@@ -44,5 +44,6 @@ export const mockClubDetail: Club = {
   presidentPhoneNumber: '010-9619-7677',
   recruitStart: '2025-09-03T00:00:00',
   recruitEnd: '2025-09-20T23:59:00',
-  applicationNotices: '저희 동아리는 졸업생 또는 휴학생의 경우 지원이 반려될 수 있습니다. 1~3학년만 지원 부탁드려요'
+  applicationNotices:
+    '저희 동아리는 졸업생 또는 휴학생의 경우 지원이 반려될 수 있습니다. 1~3학년만 지원 부탁드려요',
 };

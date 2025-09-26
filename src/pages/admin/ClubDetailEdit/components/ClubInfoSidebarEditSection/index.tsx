@@ -27,7 +27,6 @@ export const ClubInfoSidebarEditSection = () => {
   );
   const [applicationNotices, setApplicationNotices] = useState(initialApplicationNotices);
 
-
   const renderEditableItem = (
     label: string,
     value: string,
@@ -103,8 +102,12 @@ export const ClubInfoSidebarEditSection = () => {
 
       {renderEditableItem('정기 모임', initialRegularMeetingInfo, 'regularMeetingInfo', () => {})}
       {renderEditableItem('모집 상태', initialRecruitStatus, 'recruitStatus', () => {})}
-      {renderEditableItem('지원 시 유의사항', applicationNotices, 'applicationNotices', setApplicationNotices )}
-      
+      {renderEditableItem(
+        '지원 시 유의사항',
+        applicationNotices,
+        'applicationNotices',
+        setApplicationNotices,
+      )}
     </S.SidebarContainer>
   );
 };
