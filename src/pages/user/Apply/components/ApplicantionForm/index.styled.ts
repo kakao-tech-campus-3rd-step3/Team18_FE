@@ -77,3 +77,12 @@ export const ErrorMessage = styled.span(({ theme }) => ({
   fontSize: theme.font.size.xs,
   padding: 0,
 }));
+
+interface TimeSpanProps {
+  selected?: boolean;
+}
+
+export const TimeSpan = styled.span<TimeSpanProps>(({ theme, selected }) => ({
+  backgroundColor: selected ? theme.colors.primary200 : 'white',
+  border: '1px solid ',
+}));
