@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form';
-import styled from '@emotion/styled';
-import { theme } from '@/styles/theme';
 import type { FormInputs, Question } from '@/pages/user/Apply/type/apply';
 import { Button } from '@/shared/components/Button';
-import { OptionInput, TextAreaInput, TextInput } from './index.styled';
 import { useParams } from 'react-router-dom';
 import { postApplicationForm } from '@/pages/user/Apply/api/apply';
+import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
+import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
+import * as S from './index.styled';
 
 type Props = {
   questions: Question[];
@@ -39,23 +39,19 @@ export const ApplicationForm = ({ questions }: Props) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormContainer>
-        <UserInfoWrapper>
-          <FormFiled>
-            <Label>이름</Label>
-            <TextInput
-              type='text'
+      <S.FormContainer>
+        <S.UserInfoWrapper>
+          <S.FormFiled>
+            <S.Label>이름</S.Label>
+            <OutlineInputField
               placeholder='이름을 입력하세요.'
-              width='12rem'
               {...register('name', { required: true })}
             />
-            {errors.name && <ErrorMessage>이름을 입력하세요</ErrorMessage>}
-          </FormFiled>
-          <FormFiled>
-            <Label>학번</Label>
-            <TextInput
-              type='text'
-              width='12rem'
+            {errors.name && <S.ErrorMessage>이름을 입력하세요</S.ErrorMessage>}
+          </S.FormFiled>
+          <S.FormFiled>
+            <S.Label>학번</S.Label>
+            <OutlineInputField
               placeholder='학번을 입력하세요.'
               {...register('studentId', {
                 required: '학번을 입력하세요.',
@@ -66,24 +62,20 @@ export const ApplicationForm = ({ questions }: Props) => {
                 },
               })}
             />
-            {<ErrorMessage>{errors.studentId?.message}</ErrorMessage>}
-          </FormFiled>
-          <FormFiled>
-            <Label>학과</Label>
-            <TextInput
-              type='text'
+            {<S.ErrorMessage>{errors.studentId?.message}</S.ErrorMessage>}
+          </S.FormFiled>
+          <S.FormFiled>
+            <S.Label>학과</S.Label>
+            <OutlineInputField
               placeholder='학과를 입력하세요.'
-              width='12rem'
               {...register('department', { required: '학과를 입력하세요.' })}
             />
-            {<ErrorMessage>{errors.department?.message}</ErrorMessage>}
-          </FormFiled>
-          <FormFiled>
-            <Label>전화번호</Label>
-            <TextInput
-              type='text'
+            {<S.ErrorMessage>{errors.department?.message}</S.ErrorMessage>}
+          </S.FormFiled>
+          <S.FormFiled>
+            <S.Label>전화번호</S.Label>
+            <OutlineInputField
               placeholder='010-0000-0000'
-              width='24rem'
               {...register('phoneNumber', {
                 required: '전화번호를 입력하세요.',
                 pattern: {
@@ -93,15 +85,13 @@ export const ApplicationForm = ({ questions }: Props) => {
               })}
             />
             {errors.phoneNumber?.message && (
-              <ErrorMessage>{errors.phoneNumber.message}</ErrorMessage>
+              <S.ErrorMessage>{errors.phoneNumber.message}</S.ErrorMessage>
             )}
-          </FormFiled>
-          <FormFiled>
-            <Label>이메일</Label>
-            <TextInput
-              type='text'
+          </S.FormFiled>
+          <S.FormFiled>
+            <S.Label>이메일</S.Label>
+            <OutlineInputField
               placeholder='이메일을 입력하세요.'
-              width='24rem'
               {...register('email', {
                 required: '이메일을 입력하세요.',
                 pattern: {
@@ -110,105 +100,48 @@ export const ApplicationForm = ({ questions }: Props) => {
                 },
               })}
             />
-            {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-          </FormFiled>
-        </UserInfoWrapper>
-        <QuestionWrapper>
+            {errors.email && <S.ErrorMessage>{errors.email.message}</S.ErrorMessage>}
+          </S.FormFiled>
+        </S.UserInfoWrapper>
+        <S.QuestionWrapper>
           {questions.map((field, index) => (
-            <ChoiceFormFiled key={field.questionNum}>
-              <Label>{field.question}</Label>
+            <S.ChoiceFormFiled key={field.questionNum}>
+              <S.Label>{field.question}</S.Label>
 
               {field.questionType === 'CHECKBOX' &&
                 field.optionList?.map((option, optIndex) => (
-                  <Label key={optIndex}>
-                    <OptionInput type='checkbox' value={option} {...register(`answers.${index}`)} />
+                  <S.Label key={optIndex}>
+                    <S.OptionInput
+                      type='checkbox'
+                      value={option}
+                      {...register(`answers.${index}`)}
+                    />
                     {option}
-                  </Label>
+                  </S.Label>
                 ))}
 
               {field.questionType === 'RADIO' &&
                 field.optionList?.map((option, optIndex) => (
-                  <Label key={optIndex}>
-                    <OptionInput type='radio' value={option} {...register(`answers.${index}`)} />
+                  <S.Label key={optIndex}>
+                    <S.OptionInput type='radio' value={option} {...register(`answers.${index}`)} />
                     {option}
-                  </Label>
+                  </S.Label>
                 ))}
 
               {field.questionType === 'TEXT' && (
-                <TextAreaInput
+                <OutlineTextareaField
                   placeholder='1000자 미만으로 입력하세요.'
-                  width='48rem'
-                  height='15rem'
                   {...register(`answers.${index}`)}
                 />
               )}
-            </ChoiceFormFiled>
+            </S.ChoiceFormFiled>
           ))}
-        </QuestionWrapper>
+        </S.QuestionWrapper>
 
         <Button type='submit'>{isSubmitting ? '제출중...' : '제출하기'}</Button>
         {/* 제출 완료 후 toast 알림 적용 부분*/}
         {isSubmitSuccessful && <span>제출 성공!</span>}
-      </FormContainer>
+      </S.FormContainer>
     </form>
   );
 };
-
-const UserInfoWrapper = styled.div({
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  alignItems: 'center',
-  justifyContent: 'flex-start',
-  gap: 60,
-  padding: 40,
-  border: `1px none ${theme.colors.gray200}`,
-  borderRadius: '1rem',
-  boxShadow: theme.shadow.md,
-});
-
-const FormFiled = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 10,
-});
-
-const Label = styled.label(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '4px',
-  fontWeight: theme.font.weight.medium,
-}));
-
-const QuestionWrapper = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 60,
-  padding: 40,
-  border: `1px none ${theme.colors.gray200}`,
-  borderRadius: '1rem',
-  boxShadow: theme.shadow.md,
-});
-
-const ChoiceFormFiled = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
-  padding: 40,
-  gap: 10,
-  border: `1px none ${theme.colors.gray200}`,
-  borderRadius: '1rem',
-  boxShadow: theme.shadow.md,
-});
-
-const FormContainer = styled.main({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '60px',
-  alignItems: 'center',
-});
-
-const ErrorMessage = styled.span(({ theme }) => ({
-  color: theme.colors.warning,
-  fontSize: theme.font.size.xs,
-  padding: 0,
-}));
