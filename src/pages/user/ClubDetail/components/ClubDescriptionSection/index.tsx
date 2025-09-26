@@ -6,13 +6,13 @@ export const ClubDescriptionSection = () => {
   return (
     <DescriptionContainer>
       <SectionTitle>동아리 소개</SectionTitle>
-      <DescriptionText>{mockClubDetail.introductionIntroduce}</DescriptionText>
+      <DescriptionText>{mockClubDetail.introductionOverview}</DescriptionText>
 
       <SectionTitle>활동 내용</SectionTitle>
       <DescriptionText>{mockClubDetail.introductionActivity}</DescriptionText>
 
       <SectionTitle>모집하는 사람</SectionTitle>
-      <DescriptionText>{mockClubDetail.introductionWannabe}</DescriptionText>
+      <DescriptionText>{mockClubDetail.introductionIdeal}</DescriptionText>
     </DescriptionContainer>
   );
 };
