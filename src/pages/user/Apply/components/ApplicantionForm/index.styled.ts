@@ -31,7 +31,7 @@ export const UserInfoWrapper = styled.div({
   boxShadow: theme.shadow.md,
 });
 
-export const FormFiled = styled.div({
+export const FormField = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: 10,
