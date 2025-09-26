@@ -1,3 +1,11 @@
+import { CommentForm } from './CommentForm';
+import { CommentList } from './CommentList';
+
 export const CommentSection = () => {
-  return <div>index</div>;
+  return (
+    <>
+      <CommentForm />
+      <CommentList />
+    </>
+  );
 };
