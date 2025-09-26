@@ -31,7 +31,7 @@ export const UserInfoWrapper = styled.div({
   boxShadow: theme.shadow.md,
 });
 
-export const FormFiled = styled.div({
+export const FormField = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: 10,
@@ -76,4 +76,13 @@ export const ErrorMessage = styled.span(({ theme }) => ({
   color: theme.colors.warning,
   fontSize: theme.font.size.xs,
   padding: 0,
+}));
+
+interface TimeSpanProps {
+  selected?: boolean;
+}
+
+export const TimeSpan = styled.span<TimeSpanProps>(({ theme, selected }) => ({
+  backgroundColor: selected ? theme.colors.primary200 : 'white',
+  border: '1px solid ',
 }));
