@@ -7,6 +7,7 @@ import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineIn
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import * as S from './index.styled';
 import { QuestionType } from '@/pages/user/Apply/constant/questionType';
+import { InterviewSchedule } from './Schedule';
 
 type Props = {
   questions: Question[];
@@ -109,6 +110,15 @@ export const ApplicationForm = ({ questions }: Props) => {
             <S.ChoiceFormFiled key={field.questionNum}>
               <S.Label>{field.question}</S.Label>
 
+              {field.questionType === QuestionType.TIME_SLOT &&
+                field.timeSlotOption?.map((option, idx) => (
+                  <InterviewSchedule
+                    key={idx}
+                    availableTime={option.availableTime}
+                    date={option.date}
+                  />
+                ))}
+
               {field.questionType === QuestionType.CHECKBOX &&
                 field.optionList?.map((option, optIndex) => (
                   <S.Label key={optIndex}>
@@ -129,7 +139,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                   </S.Label>
                 ))}
 
-              {field.questionType === 'TEXT' && (
+              {field.questionType === QuestionType.TEXT && (
                 <OutlineTextareaField
                   placeholder='1000자 미만으로 입력하세요.'
                   {...register(`answers.${index}`)}
