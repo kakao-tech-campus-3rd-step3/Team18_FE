@@ -13,12 +13,12 @@ export const CommentForm = () => {
   );
 };
 
-const Layout = styled.div(({}) => ({
+const Layout = styled.div({
   display: 'flex',
-  flexDirection: 'column',
   gap: '0.8rem',
   marginBottom: '3rem',
-}));
+  flexDirection: 'column',
+});
 
 const Wrapper = styled.div(() => ({
   display: 'flex',
