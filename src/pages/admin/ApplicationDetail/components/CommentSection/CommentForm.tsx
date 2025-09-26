@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { OutlineTextareaField } from '@/shared/components/Form/TextareaField/OutlineTextareaField';
+import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { Text } from '@/shared/components/Text';
 
 export const CommentForm = () => {
