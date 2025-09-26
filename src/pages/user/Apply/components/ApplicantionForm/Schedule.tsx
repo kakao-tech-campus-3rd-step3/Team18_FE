@@ -4,12 +4,12 @@ import { TimeSpan } from './index.styled';
 import { parseTime } from '@/pages/user/Apply/utils/time';
 import styled from '@emotion/styled';
 
-type interviewSchedule = {
+type InterviewSchedule = {
   date: string;
   availableTime: AvailableTime;
 };
 
-export const InterviewSchedule = ({ availableTime, date }: interviewSchedule) => {
+export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) => {
   const startNum = parseTime(availableTime.start);
   const endNum = parseTime(availableTime.end);
   const [isDragging, setIsDragging] = useState(false);
