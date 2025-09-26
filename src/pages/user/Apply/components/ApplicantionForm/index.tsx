@@ -6,6 +6,7 @@ import { postApplicationForm } from '@/pages/user/Apply/api/apply';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import * as S from './index.styled';
+import { QuestionType } from '@/pages/user/Apply/constant/questionType';
 
 type Props = {
   questions: Question[];
@@ -108,7 +109,7 @@ export const ApplicationForm = ({ questions }: Props) => {
             <S.ChoiceFormFiled key={field.questionNum}>
               <S.Label>{field.question}</S.Label>
 
-              {field.questionType === 'CHECKBOX' &&
+              {field.questionType === QuestionType.CHECKBOX &&
                 field.optionList?.map((option, optIndex) => (
                   <S.Label key={optIndex}>
                     <S.OptionInput
@@ -120,7 +121,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                   </S.Label>
                 ))}
 
-              {field.questionType === 'RADIO' &&
+              {field.questionType === QuestionType.RADIO &&
                 field.optionList?.map((option, optIndex) => (
                   <S.Label key={optIndex}>
                     <S.OptionInput type='radio' value={option} {...register(`answers.${index}`)} />
