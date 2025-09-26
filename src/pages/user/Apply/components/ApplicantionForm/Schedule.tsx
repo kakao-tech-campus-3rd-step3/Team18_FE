@@ -9,7 +9,7 @@ type interviewSchedule = {
   availableTime: AvailableTime;
 };
 
-export const InterviewSchedule = ({ availableTime }: interviewSchedule) => {
+export const InterviewSchedule = ({ availableTime, date }: interviewSchedule) => {
   const startNum = parseTime(availableTime.start);
   const endNum = parseTime(availableTime.end);
   const [isDragging, setIsDragging] = useState(false);
@@ -53,6 +53,7 @@ export const InterviewSchedule = ({ availableTime }: interviewSchedule) => {
   return (
     <div>
       <Wrapper>
+        {date}
         {hoursArray.map((e, idx) => {
           return (
             <TimeSpan
@@ -91,4 +92,5 @@ function generateHours(startHour: number, endHour: number) {
 export const Wrapper = styled.div({
   display: 'flex',
   flexDirection: 'column',
+  width: '100px',
 });
