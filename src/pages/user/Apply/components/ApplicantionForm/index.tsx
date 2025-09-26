@@ -43,15 +43,15 @@ export const ApplicationForm = ({ questions }: Props) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <S.FormContainer>
         <S.UserInfoWrapper>
-          <S.FormFiled>
+          <S.FormField>
             <S.Label>이름</S.Label>
             <OutlineInputField
               placeholder='이름을 입력하세요.'
               {...register('name', { required: true })}
             />
             {errors.name && <S.ErrorMessage>이름을 입력하세요</S.ErrorMessage>}
-          </S.FormFiled>
-          <S.FormFiled>
+          </S.FormField>
+          <S.FormField>
             <S.Label>학번</S.Label>
             <OutlineInputField
               placeholder='학번을 입력하세요.'
@@ -65,16 +65,16 @@ export const ApplicationForm = ({ questions }: Props) => {
               })}
             />
             {<S.ErrorMessage>{errors.studentId?.message}</S.ErrorMessage>}
-          </S.FormFiled>
-          <S.FormFiled>
+          </S.FormField>
+          <S.FormField>
             <S.Label>학과</S.Label>
             <OutlineInputField
               placeholder='학과를 입력하세요.'
               {...register('department', { required: '학과를 입력하세요.' })}
             />
             {<S.ErrorMessage>{errors.department?.message}</S.ErrorMessage>}
-          </S.FormFiled>
-          <S.FormFiled>
+          </S.FormField>
+          <S.FormField>
             <S.Label>전화번호</S.Label>
             <OutlineInputField
               placeholder='010-0000-0000'
@@ -89,8 +89,8 @@ export const ApplicationForm = ({ questions }: Props) => {
             {errors.phoneNumber?.message && (
               <S.ErrorMessage>{errors.phoneNumber.message}</S.ErrorMessage>
             )}
-          </S.FormFiled>
-          <S.FormFiled>
+          </S.FormField>
+          <S.FormField>
             <S.Label>이메일</S.Label>
             <OutlineInputField
               placeholder='이메일을 입력하세요.'
@@ -103,7 +103,7 @@ export const ApplicationForm = ({ questions }: Props) => {
               })}
             />
             {errors.email && <S.ErrorMessage>{errors.email.message}</S.ErrorMessage>}
-          </S.FormFiled>
+          </S.FormField>
         </S.UserInfoWrapper>
         <S.QuestionWrapper>
           {questions.map((field, index) => (
