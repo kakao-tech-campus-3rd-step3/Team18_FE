@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { mockClubDetail } from '../mock';
 
 export const ClubDescriptionEditSection = () => {
-  const [introduce, setIntroduce] = useState(mockClubDetail.introductionIntroduce);
+  const [introduce, setIntroduce] = useState(mockClubDetail.introductionOverview);
   const [activity, setActivity] = useState(mockClubDetail.introductionActivity);
-  const [wannabe, setWannabe] = useState(mockClubDetail.introductionWannabe);
+  const [wannabe, setWannabe] = useState(mockClubDetail.introductionIdeal);
 
   return (
     <DescriptionContainer>
