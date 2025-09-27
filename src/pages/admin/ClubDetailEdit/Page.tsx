@@ -1,5 +1,5 @@
 import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
-// import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
+import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
 import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
 import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
 import {
@@ -24,7 +24,7 @@ export const ClubDetailEditPage = () => {
     <Layout>
       <ContentLeft>
         <ClubHeaderSection clubName={mockClubDetail.clubName} category={mockClubDetail.category} />
-        {/* <ClubActivityPhotosSection /> */}
+        <ClubActivityPhotosEditSection />
         <ClubDescriptionEditSection />
         <ButtonGroup>
           <Button onClick={handleSave}>수정하기</Button>
