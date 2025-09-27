@@ -10,19 +10,26 @@ module.exports = {
     react: {
       version: 'detect',
     },
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+        project: './tsconfig.json',
+      },
+    },
   },
   env: {
     browser: true,
     es2021: true,
     node: true,
   },
-  plugins: ['react', 'react-hooks', 'react-refresh', '@typescript-eslint', 'prettier'],
+  plugins: ['react', 'react-hooks', 'react-refresh', '@typescript-eslint', 'prettier', 'import'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
+    'plugin:import/recommended',
   ],
   rules: {
     'prettier/prettier': 'error',
