@@ -7,9 +7,11 @@ export const useApplicationForm = (Id: number) => {
 
   useEffect(() => {
     if (!Id) return;
-    fetchApplicationForm(Id).then((res) => {
-      setClubApplicationForm(res);
-    });
+    const setFormStateAfterFetch = async () => {
+      const applicationForm = await fetchApplicationForm(Id);
+      setClubApplicationForm(applicationForm);
+    };
+    setFormStateAfterFetch();
   }, [Id]);
 
   return clubApplicationForm;
