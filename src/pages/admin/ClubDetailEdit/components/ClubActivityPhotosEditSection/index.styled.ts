@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
+import type { CSSObject } from '@emotion/react';
 
 export const TitleWrapper = styled.div(() => ({
   display: 'flex',
@@ -76,16 +78,19 @@ export const Overlay = styled.div(({ theme }) => ({
   zIndex: theme.zIndex.header,
 }));
 
-export const Circle = styled.div(({}) => ({
-  position: 'absolute',
-  width: '120px',
-  height: '120px',
-  borderRadius: '50%',
-  background: 'rgba(255,255,255,0.6)',
-  animation: 'ripple 0.3s ease',
-  zIndex: 0,
-  '@keyframes ripple': {
-    from: { transform: 'scale(0)', opacity: 0.8 },
-    to: { transform: 'scale(1.2)', opacity: 0 },
-  },
-}));
+const ripple = keyframes`
+  from { transform: scale(0); opacity: 0.8; }
+  to { transform: scale(1.2); opacity: 0; }
+`;
+
+export const Circle = styled.div(
+  (): CSSObject => ({
+    position: 'absolute',
+    width: '120px',
+    height: '120px',
+    borderRadius: '50%',
+    background: 'rgba(255,255,255,0.6)',
+    animation: `${ripple} 0.3s ease`,
+    zIndex: 0,
+  }),
+);
