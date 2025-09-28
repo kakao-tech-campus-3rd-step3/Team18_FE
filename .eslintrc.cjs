@@ -63,11 +63,6 @@ module.exports = {
             position: 'before',
           },
           {
-            pattern: 'logLevel*',
-            group: 'external',
-            position: 'after',
-          },
-          {
             pattern: '@/hooks/*',
             group: 'internal',
             position: 'before',
