@@ -1,5 +1,5 @@
-import { type ClubResponse, getClubsByCategory } from '@/pages/user/Main/api/club.ts';
 import { useQuery } from '@tanstack/react-query';
+import { type ClubResponse, getClubsByCategory } from '@/pages/user/Main/api/club.ts';
 import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
 import type { Club } from '@/pages/user/Main/types/club';
 import type { UseApiQueryResult } from '@/types/useApiQueryResult';

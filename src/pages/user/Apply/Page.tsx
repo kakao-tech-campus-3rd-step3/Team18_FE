@@ -1,11 +1,11 @@
-import { ClubDescription } from '@/pages/user/Apply/components/ClubDescriptionSection';
-import { useParams } from 'react-router-dom';
-import { useApplicationForm } from './hook/useApplicationForm';
 import styled from '@emotion/styled';
-import { ApplicationForm } from './components/ApplicantionForm';
+import { useParams } from 'react-router-dom';
+import { ClubDescription } from '@/pages/user/Apply/components/ClubDescriptionSection';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
+import { ApplicationForm } from './components/ApplicationForm';
+import { useApplicationForm } from './hook/useApplicationForm';
 
-export const ClubApplicatonPage = () => {
+export const ClubApplicationPage = () => {
   const { id } = useParams();
   const formData = useApplicationForm(Number(id));
 

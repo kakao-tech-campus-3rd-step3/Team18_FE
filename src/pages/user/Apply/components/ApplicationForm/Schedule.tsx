@@ -1,8 +1,8 @@
-import type { AvailableTime } from '@/pages/user/Apply/type/apply';
-import { useState } from 'react';
-import { TimeSpan } from './index.styled';
-import { parseTime } from '@/pages/user/Apply/utils/time';
 import styled from '@emotion/styled';
+import { useState } from 'react';
+import { parseTime } from '@/pages/user/Apply/utils/time';
+import { TimeSpan } from './index.styled';
+import type { AvailableTime } from '@/pages/user/Apply/type/apply';
 
 type InterviewSchedule = {
   date: string;
