@@ -10,13 +10,13 @@ export const ClubDescriptionEditSection = () => {
 
   return (
     <DescriptionContainer>
-      <SectionTitle>동아리 소개</SectionTitle>
+      <SectionTitle required>동아리 소개</SectionTitle>
       <InputArea value={introduce} onChange={(e) => setIntroduce(e.target.value)} />
 
-      <SectionTitle>활동 내용</SectionTitle>
+      <SectionTitle required>활동 내용</SectionTitle>
       <InputArea value={activity} onChange={(e) => setActivity(e.target.value)} />
 
-      <SectionTitle>모집하는 사람</SectionTitle>
+      <SectionTitle required>모집하는 사람</SectionTitle>
       <InputArea value={wannabe} onChange={(e) => setWannabe(e.target.value)} />
     </DescriptionContainer>
   );

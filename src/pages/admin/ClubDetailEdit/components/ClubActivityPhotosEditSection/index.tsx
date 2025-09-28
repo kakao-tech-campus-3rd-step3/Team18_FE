@@ -17,7 +17,7 @@ export const ClubActivityPhotosEditSection = () => {
   return (
     <>
       <S.TitleWrapper>
-        <SectionTitle>
+        <SectionTitle required>
           활동 사진
           <S.AddButton onClick={handleAdd}>
             <FiPlus />
