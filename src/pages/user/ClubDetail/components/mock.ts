@@ -14,6 +14,7 @@ export type Club = {
   presidentPhoneNumber: string;
   recruitStart: string;
   recruitEnd: string;
+  applicationNotice: string;
 };
 
 export const mockClubDetail: Club = {
@@ -43,4 +44,5 @@ export const mockClubDetail: Club = {
   presidentPhoneNumber: '010-9619-7677',
   recruitStart: '2025-09-03T00:00:00',
   recruitEnd: '2025-09-20T23:59:00',
+  applicationNotice: '현재 지원은 휴학생을 제외한 1~3학년만 받고 있습니다.',
 };

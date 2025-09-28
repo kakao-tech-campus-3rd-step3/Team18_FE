@@ -13,6 +13,7 @@ export const ClubInfoSidebarEditSection = () => {
     recruitEnd: initialRecruitEnd,
     regularMeetingInfo: initialRegularMeetingInfo,
     recruitStatus: initialRecruitStatus,
+    applicationNotice: initialApplicationNotice,
   } = mockClubDetail;
 
   const [presidentName, setPresidentName] = useState(initialPresidentName);
@@ -100,7 +101,7 @@ export const ClubInfoSidebarEditSection = () => {
 
       {renderEditableItem('정기 모임', initialRegularMeetingInfo, 'regularMeetingInfo', () => {})}
       {renderEditableItem('모집 상태', initialRecruitStatus, 'recruitStatus', () => {})}
-      <S.Notice>지원 시 유의사항이 여기에 들어갑니다.</S.Notice>
+      {renderEditableItem('지원 시 유의사항', initialApplicationNotice, 'applicationNotice', () => {})}
     </S.SidebarContainer>
   );
 };
