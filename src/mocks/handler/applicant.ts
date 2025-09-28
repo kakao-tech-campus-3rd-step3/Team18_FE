@@ -1,4 +1,4 @@
-import { http, HttpResponse } from 'msw';
+import { http, HttpResponse, type PathParams } from 'msw';
 import { applicantRepository } from '../repositories/applicant';
 import type { DetailApplication } from '@/pages/admin/ApplicationDetail/types/detailApplication';
 
@@ -18,7 +18,13 @@ interface UpdateApplicationStatusRequest {
   status: DetailApplication['status'];
 }
 
-const updateApplicationStatusResolver = async ({ params, request }: any) => {
+const updateApplicationStatusResolver = async ({
+  params,
+  request,
+}: {
+  params: PathParams;
+  request: Request;
+}) => {
   const { applicationId } = params as { applicationId: string };
   const body = (await request.json()) as UpdateApplicationStatusRequest;
 
