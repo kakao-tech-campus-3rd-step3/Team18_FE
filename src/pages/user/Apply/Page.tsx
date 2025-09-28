@@ -2,10 +2,11 @@ import { ClubDescription } from '@/pages/user/Apply/components/ClubDescriptionSe
 import { useParams } from 'react-router-dom';
 import { useApplicationForm } from './hook/useApplicationForm';
 import styled from '@emotion/styled';
-import { ApplicationForm } from './components/ApplicantionForm';
-import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 
-export const ClubApplicatonPage = () => {
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
+import { ApplicationForm } from './components/ApplicationForm';
+
+export const ClubApplicationPage = () => {
   const { id } = useParams();
   const formData = useApplicationForm(Number(id));
 

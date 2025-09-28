@@ -36,7 +36,7 @@ export const Application: ApplicationForm = {
   ],
 };
 
-export const ApplicationRepoitory = {
+export const ApplicationRepository = {
   getClubApplication: (Id: string) => {
     Number(Id);
     return Application;
