@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { FiSearch } from 'react-icons/fi';
 import _ from 'lodash';
+import { FiSearch } from 'react-icons/fi';
 
 const InputWrapper = styled.div(({ theme }) => ({
   display: 'flex',

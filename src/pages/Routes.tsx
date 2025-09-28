@@ -1,12 +1,13 @@
-import { DashboardPage } from '@/pages/admin/Dashboard/Page';
-import { MainPage } from '@/pages/user/Main/Page.tsx';
-import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
-import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
-import { ClubDetailEditPage } from '@/pages/admin/ClubDetailEdit/Page';
 import { createBrowserRouter } from 'react-router-dom';
 import { App } from '@/App.tsx';
 import { ROUTE_PATH } from '@/constants/routerPath.ts';
-import { ClubApplicatonPage } from '@/pages/user/Apply/Page.tsx';
+import { ClubDetailEditPage } from '@/pages/admin/ClubDetailEdit/Page';
+import { DashboardPage } from '@/pages/admin/Dashboard/Page';
+
+import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
+import { MainPage } from '@/pages/user/Main/Page.tsx';
+import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
+import { ClubApplicationPage } from './user/Apply/Page';
 
 const { MAIN, CLUBDETAIL, CLUBEDIT, APPLICATIONDETAIL, DASHBOARD, CLUBAPPLICATION } = ROUTE_PATH;
 
@@ -21,7 +22,7 @@ export const router = createBrowserRouter([
       },
       {
         path: CLUBAPPLICATION,
-        element: <ClubApplicatonPage />,
+        element: <ClubApplicationPage />,
       },
       {
         path: '/admin',

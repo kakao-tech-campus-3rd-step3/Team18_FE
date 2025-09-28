@@ -1,5 +1,5 @@
-import { Text } from '@/shared/components/Text';
 import styled from '@emotion/styled';
+import { Text } from '@/shared/components/Text';
 
 type Props = {
   invalid?: boolean;

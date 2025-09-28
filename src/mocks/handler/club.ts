@@ -1,11 +1,11 @@
 import { http, HttpResponse, type PathParams } from 'msw';
-import { clubRepoitory } from '../repositories/club';
-import { ApplicationRepoitory } from '@/mocks/repositories/application.ts';
+import { ApplicationRepository } from '@/mocks/repositories/application.ts';
+import { clubRepository } from '../repositories/club';
 
 const getClubsResolver = ({ request }: { request: Request }) => {
   const url = new URL(request.url);
   const categoryName = url.searchParams.get('categoryName') ?? 'all';
-  const clubs = clubRepoitory.getClubsByCategory(categoryName);
+  const clubs = clubRepository.getClubsByCategory(categoryName);
   return HttpResponse.json({ clubs }, { status: 200 });
 };
 
@@ -15,7 +15,7 @@ interface ClubApplicationParams extends PathParams {
 
 const getClubApplicationResolver = ({ params }: { params: ClubApplicationParams }) => {
   const { clubId } = params;
-  const applicationFromData = ApplicationRepoitory.getClubApplication(clubId);
+  const applicationFromData = ApplicationRepository.getClubApplication(clubId);
   return HttpResponse.json(applicationFromData, {
     status: 200,
   });

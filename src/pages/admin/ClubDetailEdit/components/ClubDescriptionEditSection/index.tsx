@@ -1,6 +1,6 @@
-import { SectionTitle } from '@/shared/components/SectionTitle';
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import { SectionTitle } from '@/shared/components/SectionTitle';
 import { mockClubDetail } from '../mock';
 
 export const ClubDescriptionEditSection = () => {
