@@ -58,11 +58,6 @@ module.exports = {
             position: 'before',
           },
           {
-            pattern: 'axios*',
-            group: 'external',
-            position: 'before',
-          },
-          {
             pattern: '@/hooks/*',
             group: 'internal',
             position: 'before',
