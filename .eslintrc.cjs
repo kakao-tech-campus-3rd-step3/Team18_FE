@@ -35,5 +35,60 @@ module.exports = {
     'prettier/prettier': 'error',
     'react/react-in-jsx-scope': 'off',
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    'import/order': [
+      'error',
+      {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          ['sibling', 'parent', 'index'],
+          'type',
+          'unknown',
+        ],
+        pathGroups: [
+          {
+            pattern: 'react',
+            group: 'external',
+            position: 'before',
+          },
+          {
+            pattern: 'react*',
+            group: 'external',
+            position: 'before',
+          },
+          {
+            pattern: 'axios*',
+            group: 'external',
+            position: 'before',
+          },
+          {
+            pattern: 'logLevel*',
+            group: 'external',
+            position: 'after',
+          },
+          {
+            pattern: '@/hooks/*',
+            group: 'internal',
+            position: 'before',
+          },
+          {
+            pattern: '@/components/*',
+            group: 'internal',
+            position: 'before',
+          },
+          {
+            pattern: '@/pages/*',
+            group: 'internal',
+            position: 'before',
+          },
+        ],
+        // 'newlines-between': 'always',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+      },
+    ],
   },
 };
