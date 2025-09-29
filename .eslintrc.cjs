@@ -63,6 +63,11 @@ module.exports = {
             position: 'before',
           },
           {
+            pattern: '@emotion/styled',
+            group: 'external',
+            position: 'after',
+          },
+          {
             pattern: '@/hooks/*',
             group: 'internal',
             position: 'before',
