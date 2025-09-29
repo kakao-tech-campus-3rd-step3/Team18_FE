@@ -3,8 +3,6 @@ import { useState } from 'react';
 import { parseTime } from '@/pages/user/Apply/utils/time';
 import { TimeSpan } from './index.styled';
 import type { AvailableTime } from '@/pages/user/Apply/type/apply';
-import styled from '@emotion/styled';
-
 
 type InterviewSchedule = {
   date: string;

@@ -58,6 +58,11 @@ module.exports = {
             position: 'before',
           },
           {
+            pattern: 'react*',
+            group: 'external',
+            position: 'before',
+          },
+          {
             pattern: '@/hooks/*',
             group: 'internal',
             position: 'before',
