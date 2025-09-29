@@ -20,11 +20,11 @@ export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) =>
   const lastHoveredIndex = useRef<string | null>(null);
   const startIndex = useRef<string | undefined>('');
   const selectedIndex = useRef<string | undefined>('');
-  const hoursArray = generateHours(startNum, endNum);
-  const timeIntervalArray = getTimeIntervalArray(hoursArray);
+  const timeIntervalArray = getTimeIntervalArray(generateHours(startNum, endNum));
   const [selected, setSelected] = useState<boolean[]>(() =>
     new Array(timeIntervalArray.length).fill(false),
   );
+  const selectedInterviewTime = useRef<Set<string>>(new Set());
 
   function handleIndexChange(newIndex: number) {
     const diff = newIndex - Number(lastHoveredIndex.current);
@@ -41,7 +41,6 @@ export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) =>
     }
 
     setPrevDiffSign(currentSign);
-    lastHoveredIndex.current = String(newIndex);
   }
 
   const handleMouseDown = (e: React.MouseEvent<HTMLSpanElement>) => {
@@ -82,7 +81,18 @@ export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) =>
 
   const handleMouseUp = () => {
     [isDragging.current, isMouseDown.current] = [false, false];
-    console.log('선택된 시간:', selected);
+    handleIndexChange(Number(selectedIndex.current));
+
+    selected.forEach((curVal, index) => {
+      const [start, end] = timeIntervalArray[index];
+      if (curVal) {
+        selectedInterviewTime.current.add(`${start}-${end}`);
+      } else {
+        selectedInterviewTime.current.delete(`${start}-${end}`);
+      }
+    });
+
+    console.log(selectedInterviewTime);
   };
 
   return (
@@ -93,7 +103,6 @@ export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) =>
           <TimeSpan
             key={idx}
             data-index={idx}
-            data-timeinterval={e[0] + '-' + e[1]}
             selected={selected[idx]}
             onMouseDown={handleMouseDown}
             onMouseEnter={handleMouseMove}
@@ -107,7 +116,7 @@ export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) =>
   );
 };
 
-function generateHours(startHour: number, endHour: number): string[] {
+export function generateHours(startHour: number, endHour: number): string[] {
   const hours: string[] = [];
 
   for (let h = startHour; h <= endHour; h++) {
