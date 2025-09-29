@@ -3,13 +3,15 @@ import { useEffect, useState } from 'react';
 import type { ApplicationForm } from '../type/apply';
 
 export const useApplicationForm = (Id: number) => {
-  const [clubApplicationForm, setclubApplicationForm] = useState<ApplicationForm | null>(null);
+  const [clubApplicationForm, setClubApplicationForm] = useState<ApplicationForm | null>(null);
 
   useEffect(() => {
     if (!Id) return;
-    fetchApplicationForm(Id).then((res) => {
-      setclubApplicationForm(res);
-    });
+    const setFormStateAfterFetch = async () => {
+      const applicationForm = await fetchApplicationForm(Id);
+      setClubApplicationForm(applicationForm);
+    };
+    setFormStateAfterFetch();
   }, [Id]);
 
   return clubApplicationForm;
