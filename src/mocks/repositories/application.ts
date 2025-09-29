@@ -6,10 +6,19 @@ export const Application: ApplicationForm = {
   questions: [
     {
       questionNum: 1,
-      questionType: 'CHECKBOX',
-      question: '면접가능요일은?',
+      questionType: 'TIME_SLOT',
+      question: '면접가능 날짜는?',
       required: true,
-      optionList: ['월', '화', '수', '목', '금'],
+      timeSlotOption: [
+        {
+          date: '2025-09-24',
+          availableTime: { start: '10:00', end: '12:00' },
+        },
+        {
+          date: '2025-09-27',
+          availableTime: { start: '10:00', end: '21:00' },
+        },
+      ],
     },
     {
       questionNum: 2,
@@ -27,7 +36,7 @@ export const Application: ApplicationForm = {
   ],
 };
 
-export const ApplicationRepoitory = {
+export const ApplicationRepository = {
   getClubApplication: (Id: string) => {
     Number(Id);
     return Application;
