@@ -6,7 +6,7 @@ import { ClubDetailEditPage } from '@/pages/admin/ClubDetailEdit/Page';
 import { createBrowserRouter } from 'react-router-dom';
 import { App } from '@/App.tsx';
 import { ROUTE_PATH } from '@/constants/routerPath.ts';
-import { ClubApplicatonPage } from '@/pages/user/Apply/Page.tsx';
+import { ClubApplicationPage } from '@/pages/user/Apply/Page.tsx';
 
 const { MAIN, CLUBDETAIL, CLUBEDIT, APPLICATIONDETAIL, DASHBOARD, CLUBAPPLICATION } = ROUTE_PATH;
 
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
       },
       {
         path: CLUBAPPLICATION,
-        element: <ClubApplicatonPage />,
+        element: <ClubApplicationPage />,
       },
       {
         path: '/admin',

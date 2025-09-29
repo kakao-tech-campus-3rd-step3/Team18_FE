@@ -6,6 +6,8 @@ import { postApplicationForm } from '@/pages/user/Apply/api/apply';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import * as S from './index.styled';
+import { QuestionType } from '@/pages/user/Apply/constant/questionType';
+import { InterviewSchedule } from './Schedule';
 
 type Props = {
   questions: Question[];
@@ -41,15 +43,15 @@ export const ApplicationForm = ({ questions }: Props) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <S.FormContainer>
         <S.UserInfoWrapper>
-          <S.FormFiled>
+          <S.FormField>
             <S.Label>이름</S.Label>
             <OutlineInputField
               placeholder='이름을 입력하세요.'
               {...register('name', { required: true })}
             />
             {errors.name && <S.ErrorMessage>이름을 입력하세요</S.ErrorMessage>}
-          </S.FormFiled>
-          <S.FormFiled>
+          </S.FormField>
+          <S.FormField>
             <S.Label>학번</S.Label>
             <OutlineInputField
               placeholder='학번을 입력하세요.'
@@ -63,16 +65,16 @@ export const ApplicationForm = ({ questions }: Props) => {
               })}
             />
             {<S.ErrorMessage>{errors.studentId?.message}</S.ErrorMessage>}
-          </S.FormFiled>
-          <S.FormFiled>
+          </S.FormField>
+          <S.FormField>
             <S.Label>학과</S.Label>
             <OutlineInputField
               placeholder='학과를 입력하세요.'
               {...register('department', { required: '학과를 입력하세요.' })}
             />
             {<S.ErrorMessage>{errors.department?.message}</S.ErrorMessage>}
-          </S.FormFiled>
-          <S.FormFiled>
+          </S.FormField>
+          <S.FormField>
             <S.Label>전화번호</S.Label>
             <OutlineInputField
               placeholder='010-0000-0000'
@@ -87,8 +89,8 @@ export const ApplicationForm = ({ questions }: Props) => {
             {errors.phoneNumber?.message && (
               <S.ErrorMessage>{errors.phoneNumber.message}</S.ErrorMessage>
             )}
-          </S.FormFiled>
-          <S.FormFiled>
+          </S.FormField>
+          <S.FormField>
             <S.Label>이메일</S.Label>
             <OutlineInputField
               placeholder='이메일을 입력하세요.'
@@ -101,14 +103,23 @@ export const ApplicationForm = ({ questions }: Props) => {
               })}
             />
             {errors.email && <S.ErrorMessage>{errors.email.message}</S.ErrorMessage>}
-          </S.FormFiled>
+          </S.FormField>
         </S.UserInfoWrapper>
         <S.QuestionWrapper>
           {questions.map((field, index) => (
             <S.ChoiceFormFiled key={field.questionNum}>
               <S.Label>{field.question}</S.Label>
 
-              {field.questionType === 'CHECKBOX' &&
+              {field.questionType === QuestionType.TIME_SLOT &&
+                field.timeSlotOption?.map((option, idx) => (
+                  <InterviewSchedule
+                    key={idx}
+                    availableTime={option.availableTime}
+                    date={option.date}
+                  />
+                ))}
+
+              {field.questionType === QuestionType.CHECKBOX &&
                 field.optionList?.map((option, optIndex) => (
                   <S.Label key={optIndex}>
                     <S.OptionInput
@@ -120,7 +131,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                   </S.Label>
                 ))}
 
-              {field.questionType === 'RADIO' &&
+              {field.questionType === QuestionType.RADIO &&
                 field.optionList?.map((option, optIndex) => (
                   <S.Label key={optIndex}>
                     <S.OptionInput type='radio' value={option} {...register(`answers.${index}`)} />
@@ -128,7 +139,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                   </S.Label>
                 ))}
 
-              {field.questionType === 'TEXT' && (
+              {field.questionType === QuestionType.TEXT && (
                 <OutlineTextareaField
                   placeholder='1000자 미만으로 입력하세요.'
                   {...register(`answers.${index}`)}
