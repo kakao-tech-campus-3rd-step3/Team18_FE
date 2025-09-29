@@ -1,7 +1,8 @@
-import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { formatHour, getTimeIntervalArray, parseTime } from '@/pages/user/Apply/utils/time';
-import { TimeSpan } from './index.styled';
+import { Text } from '@/shared/components/Text';
+import { TimeSpan, Wrapper, DateText } from './index.styled';
+import { getSign, type Sign } from '../../utils/math';
 import type { AvailableTime } from '@/pages/user/Apply/type/apply';
 
 type InterviewSchedule = {
@@ -21,7 +22,7 @@ export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) =>
   const selectedIndex = useRef<string | undefined>('');
   const hoursArray = generateHours(startNum, endNum);
   const timeIntervalArray = getTimeIntervalArray(hoursArray);
-const [selected, setSelected] = useState<boolean[]>(() =>
+  const [selected, setSelected] = useState<boolean[]>(() =>
     new Array(timeIntervalArray.length).fill(false),
   );
 
@@ -57,52 +58,52 @@ const [selected, setSelected] = useState<boolean[]>(() =>
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLSpanElement>) => {
-    if (!mouseDown) return;
-    setIsDragging(true);
+    if (!isMouseDown.current) return;
+    isDragging.current = true;
 
-    const selectedTime: string | undefined = e.currentTarget.dataset.timeinterval;
-    if (!selectedTime || !isDragging) return;
+    selectedIndex.current = e.currentTarget.dataset.index;
+    if (!e.currentTarget.dataset.index || selectedIndex.current === lastHoveredIndex.current)
+      return;
 
-    if (selectedTime === lastHoveredHour) return;
-    if (selectedTime && !selectedHours.has(selectedTime)) {
-      setSelectedHours((prev) => new Set([...prev, selectedTime]));
-      setLastHoveredHour(selectedTime);
-    } else if (selectedTime && selectedHours.has(selectedTime)) {
-      setSelectedHours((prev) => {
-        const newSet = new Set(prev);
-        newSet.delete(selectedTime);
-        return newSet;
-      });
-      setLastHoveredHour(selectedTime);
-    }
+    handleIndexChange(Number(selectedIndex.current));
+
+    setSelected((prev) => {
+      const newSelected = [...prev];
+      const start = Math.min(Number(startIndex.current), Number(selectedIndex.current));
+      const end = Math.max(Number(startIndex.current), Number(selectedIndex.current));
+
+      for (let i = start; i <= end; i++) {
+        newSelected[i] = mode.current;
+      }
+      return newSelected;
+    });
+    lastHoveredIndex.current = selectedIndex.current!;
   };
 
   const handleMouseUp = () => {
-    setIsDragging(false);
-    setMouseDown(false);
-    console.log('선택된 시간:', selectedHours);
+    [isDragging.current, isMouseDown.current] = [false, false];
+    console.log('선택된 시간:', selected);
   };
 
   return (
-    <div>
-      <Wrapper>
-        {date}
-        {timeIntervalArray.map((e, idx) => {
-          return (
-            <TimeSpan
-              key={idx}
-              data-timeinterval={e[0] + '-' + e[1]}
-              selected={selectedHours.has(e[0] + '-' + e[1])}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-            >
-              {e[0] + '~' + e[1]}
-            </TimeSpan>
-          );
-        })}
-      </Wrapper>
-    </div>
+    <Wrapper>
+      <DateText>{date}</DateText>
+      {timeIntervalArray.map((e, idx) => {
+        return (
+          <TimeSpan
+            key={idx}
+            data-index={idx}
+            data-timeinterval={e[0] + '-' + e[1]}
+            selected={selected[idx]}
+            onMouseDown={handleMouseDown}
+            onMouseEnter={handleMouseMove}
+            onMouseUp={handleMouseUp}
+          >
+            <Text>{e[0] + '~' + e[1]}</Text>
+          </TimeSpan>
+        );
+      })}
+    </Wrapper>
   );
 };
 
@@ -119,12 +120,5 @@ function generateHours(startHour: number, endHour: number): string[] {
       hours.push(halfHourStr);
     }
   }
-
   return hours;
 }
-
-export const Wrapper = styled.div({
-  display: 'flex',
-  flexDirection: 'column',
-  width: '100px',
-});
