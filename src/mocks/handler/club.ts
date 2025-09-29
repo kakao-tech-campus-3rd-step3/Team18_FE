@@ -1,6 +1,6 @@
 import { http, HttpResponse, type PathParams } from 'msw';
-import { clubRepository } from '../repositories/club';
 import { ApplicationRepository } from '@/mocks/repositories/application.ts';
+import { clubRepository } from '../repositories/club';
 
 const getClubsResolver = ({ request }: { request: Request }) => {
   const url = new URL(request.url);
