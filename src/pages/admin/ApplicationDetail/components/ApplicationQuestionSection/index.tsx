@@ -16,10 +16,10 @@ export const ApplicantQuestionSection = ({ questionsAndAnswers }: Props) => {
         return (
           <QuestionWrapper key={index}>
             <QuestionText>
-              <Text weight='bold' size='sm'>{`${index + 1}.  ${item.question}`}</Text>
+              <Text weight='bold' size='base'>{`${index + 1}.  ${item.question}`}</Text>
             </QuestionText>
             <AnswerText>
-              <Text size='sm'>{item.answer}</Text>
+              <Text size='base'>{item.answer}</Text>
             </AnswerText>
           </QuestionWrapper>
         );

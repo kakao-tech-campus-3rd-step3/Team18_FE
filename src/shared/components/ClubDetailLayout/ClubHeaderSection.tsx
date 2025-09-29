@@ -1,12 +1,16 @@
 import styled from '@emotion/styled';
-import { mockClubDetail } from '../mock';
 
-export const ClubHeaderSection = () => {
+interface ClubHeaderSectionProps {
+  clubName: string;
+  category: string;
+}
+
+export const ClubHeaderSection = ({ clubName, category }: ClubHeaderSectionProps) => {
   return (
     <HeaderContainer>
       <TextContainer>
-        <Title>{mockClubDetail.clubName}</Title>
-        <Category>{mockClubDetail.category}</Category>
+        <Title>{clubName}</Title>
+        <Category>{category}</Category>
       </TextContainer>
     </HeaderContainer>
   );
