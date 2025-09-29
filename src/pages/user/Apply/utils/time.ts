@@ -20,9 +20,7 @@ export function getTimeIntervalArray(hourArray: string[]) {
   const thirtyMinuteArray: [string, string][] = [];
 
   for (let i = 0; i < hourArray.length - 1; i++) {
-    if (thirtyMinuteArray[i] !== thirtyMinuteArray[i + 1]) {
-      thirtyMinuteArray.push([hourArray[i], hourArray[i + 1]]);
-    }
+    thirtyMinuteArray.push([hourArray[i], hourArray[i + 1]]);
   }
 
   return thirtyMinuteArray;
