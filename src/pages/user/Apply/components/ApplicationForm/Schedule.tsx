@@ -44,21 +44,16 @@ const [selected, setSelected] = useState<boolean[]>(() =>
   }
 
   const handleMouseDown = (e: React.MouseEvent<HTMLSpanElement>) => {
-    setMouseDown(true);
+    e.preventDefault();
+    isMouseDown.current = true;
+    startIndex.current = e.currentTarget.dataset.index;
+    if (startIndex.current) mode.current = !selected[Number(startIndex.current)];
 
-    const selectedTime: string | undefined = e.currentTarget.dataset.timeinterval;
-    if (!selectedTime) return;
+    const newValue = [...selected];
+    newValue[Number(startIndex.current)] = mode.current;
 
-    if (selectedHours.has(selectedTime)) {
-      setSelectedHours((prev) => {
-        const newSet = new Set(prev);
-        newSet.delete(selectedTime);
-        return newSet;
-      });
-      return;
-    }
-
-    setSelectedHours((prev) => new Set([...prev, selectedTime]));
+    setSelected(newValue);
+    lastHoveredIndex.current = String(startIndex.current);
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLSpanElement>) => {
