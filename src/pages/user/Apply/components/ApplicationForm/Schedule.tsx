@@ -12,13 +12,36 @@ type InterviewSchedule = {
 export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) => {
   const startNum: number = parseTime(availableTime.start);
   const endNum: number = parseTime(availableTime.end);
-  const [isDragging, setIsDragging] = useState(false);
-  const [selectedHours, setSelectedHours] = useState<Set<string>>(new Set());
-  const [lastHoveredHour, setLastHoveredHour] = useState<string | null>(null);
-  const [mouseDown, setMouseDown] = useState(false);
-
+  const isDragging = useRef<boolean>(false);
+  const isMouseDown = useRef<boolean>(false);
+  const mode = useRef<boolean>(false);
+  const [prevDiffSign, setPrevDiffSign] = useState<Sign>(0);
+  const lastHoveredIndex = useRef<string | null>(null);
+  const startIndex = useRef<string | undefined>('');
+  const selectedIndex = useRef<string | undefined>('');
   const hoursArray = generateHours(startNum, endNum);
   const timeIntervalArray = getTimeIntervalArray(hoursArray);
+const [selected, setSelected] = useState<boolean[]>(() =>
+    new Array(timeIntervalArray.length).fill(false),
+  );
+
+  function handleIndexChange(newIndex: number) {
+    const diff = newIndex - Number(lastHoveredIndex.current);
+    const currentSign = getSign(diff);
+
+    if (prevDiffSign !== 0 && currentSign !== 0 && currentSign !== prevDiffSign) {
+      mode.current = !mode.current;
+
+      if (currentSign < 0) {
+        startIndex.current = String(newIndex + 1);
+      } else if (currentSign > 0) {
+        startIndex.current = String(newIndex - 1);
+      }
+    }
+
+    setPrevDiffSign(currentSign);
+    lastHoveredIndex.current = String(newIndex);
+  }
 
   const handleMouseDown = (e: React.MouseEvent<HTMLSpanElement>) => {
     setMouseDown(true);
