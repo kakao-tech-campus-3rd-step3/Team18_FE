@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { mockClubDetail } from '../mock';
 
 export const ClubDescriptionEditSection = () => {
-  const [introduce, setIntroduce] = useState(mockClubDetail.introductionIntroduce);
+  const [introduce, setIntroduce] = useState(mockClubDetail.introductionOverview);
   const [activity, setActivity] = useState(mockClubDetail.introductionActivity);
-  const [wannabe, setWannabe] = useState(mockClubDetail.introductionWannabe);
+  const [ideal, setIdeal] = useState(mockClubDetail.introductionIdeal);
 
   return (
     <DescriptionContainer>
@@ -16,8 +16,9 @@ export const ClubDescriptionEditSection = () => {
       <SectionTitle required>활동 내용</SectionTitle>
       <InputArea value={activity} onChange={(e) => setActivity(e.target.value)} />
 
-      <SectionTitle required>모집하는 사람</SectionTitle>
-      <InputArea value={wannabe} onChange={(e) => setWannabe(e.target.value)} />
+      <SectionTitle>모집하는 사람</SectionTitle>
+      <InputArea value={ideal} onChange={(e) => setIdeal(e.target.value)} />
+
     </DescriptionContainer>
   );
 };
