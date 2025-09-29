@@ -9,6 +9,7 @@ import { MainPage } from '@/pages/user/Main/Page.tsx';
 import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
 import { ClubApplicationPage } from './user/Apply/Page';
 
+
 const { MAIN, CLUBDETAIL, CLUBEDIT, APPLICATIONDETAIL, DASHBOARD, CLUBAPPLICATION } = ROUTE_PATH;
 
 export const router = createBrowserRouter([

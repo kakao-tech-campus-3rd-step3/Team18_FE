@@ -9,6 +9,7 @@ import * as S from './index.styled';
 import { InterviewSchedule } from './Schedule';
 import type { FormInputs, Question } from '@/pages/user/Apply/type/apply';
 
+
 type Props = {
   questions: Question[];
 };
