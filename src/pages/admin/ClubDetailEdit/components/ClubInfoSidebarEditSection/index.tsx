@@ -24,7 +24,6 @@ export const ClubInfoSidebarEditSection = () => {
   const [recruitEnd, setRecruitEnd] = useState<Date | null>(
     initialRecruitEnd ? new Date(initialRecruitEnd) : null,
   );
-  const [applicationNotices, setApplicationNotices] = useState(initialApplicationNotices);
 
   const renderEditableItem = (
     label: string,
