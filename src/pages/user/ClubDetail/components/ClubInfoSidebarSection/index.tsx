@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import { Button } from '@/shared/components/Button';
-import { mockClubDetail } from '../mock';
-import { formatDate } from '@/utils/dateUtils';
 import { useParams } from 'react-router-dom';
+import { Button } from '@/shared/components/Button';
+import { formatDate } from '@/utils/dateUtils';
+import { mockClubDetail } from '../mock';
 
 export const ClubInfoSidebarSection = () => {
   const {

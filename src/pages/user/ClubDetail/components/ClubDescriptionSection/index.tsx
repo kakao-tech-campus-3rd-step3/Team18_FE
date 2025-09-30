@@ -1,5 +1,5 @@
-import { SectionTitle } from '@/shared/components/SectionTitle';
 import styled from '@emotion/styled';
+import { SectionTitle } from '@/shared/components/SectionTitle';
 import { mockClubDetail } from '../mock';
 
 export const ClubDescriptionSection = () => {
