@@ -6,8 +6,8 @@ import { postApplicationForm } from '@/pages/user/Apply/api/apply';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import * as S from './index.styled';
-import { QuestionType } from '@/pages/user/Apply/constant/questionType';
 import { InterviewSchedule } from './Schedule';
+import { QuestionTypes } from '@/pages/user/Apply/constant/questionType';
 
 type Props = {
   questions: Question[];
@@ -110,7 +110,7 @@ export const ApplicationForm = ({ questions }: Props) => {
             <S.ChoiceFormFiled key={field.questionNum}>
               <S.Label>{field.question}</S.Label>
 
-              {field.questionType === QuestionType.TIME_SLOT &&
+              {field.questionType === QuestionTypes.TIME_SLOT &&
                 field.timeSlotOption?.map((option, idx) => (
                   <InterviewSchedule
                     key={idx}
@@ -119,7 +119,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                   />
                 ))}
 
-              {field.questionType === QuestionType.CHECKBOX &&
+              {field.questionType === QuestionTypes.CHECKBOX &&
                 field.optionList?.map((option, optIndex) => (
                   <S.Label key={optIndex}>
                     <S.OptionInput
@@ -131,7 +131,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                   </S.Label>
                 ))}
 
-              {field.questionType === QuestionType.RADIO &&
+              {field.questionType === QuestionTypes.RADIO &&
                 field.optionList?.map((option, optIndex) => (
                   <S.Label key={optIndex}>
                     <S.OptionInput type='radio' value={option} {...register(`answers.${index}`)} />
@@ -139,7 +139,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                   </S.Label>
                 ))}
 
-              {field.questionType === QuestionType.TEXT && (
+              {field.questionType === QuestionTypes.TEXT && (
                 <OutlineTextareaField
                   placeholder='1000자 미만으로 입력하세요.'
                   {...register(`answers.${index}`)}

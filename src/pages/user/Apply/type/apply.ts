@@ -1,3 +1,5 @@
+import type { QuestionTypes } from '../constant/questionType';
+
 export type Question =
   | {
       questionNum: number;
@@ -13,9 +15,6 @@ export type Question =
       required: boolean;
       timeSlotOption?: interviewSchedule[];
     };
-
-type normalQuestionType = 'CHECKBOX' | 'RADIO' | 'TEXT';
-type ScheduleQuestionType = 'TIME_SLOT';
 
 export type AvailableTime = {
   start: string;
@@ -55,3 +54,8 @@ export type FormInputs = {
   answers: { answer: string | string[] }[];
   questions: string[];
 };
+
+export type QuestionType = (typeof QuestionTypes)[keyof typeof QuestionTypes];
+
+export type normalQuestionType = Omit<QuestionType, 'TIME_SLOT'>;
+export type ScheduleQuestionType = Extract<QuestionType, 'TIME_SLOT'>;
