@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import { ApplicationStatusFilter } from './ApplicationFilter';
-import { ApplicantList } from './ApplicantList';
-import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
 import { useSearchParams } from 'react-router-dom';
+import { ApplicantList } from './ApplicantList';
+import { ApplicationStatusFilter } from './ApplicationFilter';
+import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
 
 export const ApplicantListSection = () => {
   const [searchParams, setSearchParams] = useSearchParams();
