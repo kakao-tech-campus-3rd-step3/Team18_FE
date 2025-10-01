@@ -6,6 +6,19 @@ export const Application: ApplicationForm = {
   questions: [
     {
       questionNum: 1,
+      questionType: 'RADIO',
+      question: '개발 경험이 있으신가요?',
+      required: false,
+      optionList: ['예', '아니오'],
+    },
+    {
+      questionNum: 2,
+      questionType: 'TEXT',
+      question: '자기소개를 간단히 적어주세요.',
+      required: true,
+    },
+    {
+      questionNum: 3,
       questionType: 'TIME_SLOT',
       question: '면접가능 날짜는?',
       required: true,
@@ -19,19 +32,6 @@ export const Application: ApplicationForm = {
           availableTime: { start: '10:00', end: '21:00' },
         },
       ],
-    },
-    {
-      questionNum: 2,
-      questionType: 'TEXT',
-      question: '자기소개를 간단히 적어주세요.',
-      required: true,
-    },
-    {
-      questionNum: 3,
-      questionType: 'RADIO',
-      question: '개발 경험이 있으신가요?',
-      required: false,
-      optionList: ['예', '아니오'],
     },
   ],
 };
