@@ -25,6 +25,8 @@ export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) =>
     new Array(timeIntervalArray.length).fill(false),
   );
   const selectedInterviewTime = useRef<Set<string>>(new Set());
+const mergedInterviewTime: string[] = [];
+  const { setValue, getValues } = useFormContext();
 
   function handleIndexChange(newIndex: number) {
     const diff = newIndex - Number(lastHoveredIndex.current);
