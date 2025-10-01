@@ -35,7 +35,7 @@ export const clubHandlers = [
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/search/category', getClubsResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:Id/apply', getClubApplicationResolver),
   http.post(
-    import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/apply-submit',
+    'https://nonprotuberant-florine-irreversibly.ngrok-free.dev/api/clubs/:clubId/apply-submit',
     postApplicationSubmitResolver,
   ),
 ];
