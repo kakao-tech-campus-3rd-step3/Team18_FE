@@ -46,6 +46,11 @@ export type ApplicationFormRequest = {
   }[];
 };
 
+export type PostInterviewSchedule = {
+  date: string;
+  selectedTimes: string[];
+};
+
 export type FormInputs = {
   name: string;
   studentId: string;
