@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
-import { formatHour, getTimeIntervalArray, parseTime } from '@/pages/user/Apply/utils/time';
+import { useFormContext } from 'react-hook-form';
+import { getSign, type Sign } from '@/pages/user/Apply/utils/math';
+import { generateHours, getTimeIntervalArray, parseTime } from '@/pages/user/Apply/utils/time';
 import { Text } from '@/shared/components/Text';
 import { TimeSpan, Wrapper, DateText } from './index.styled';
-import { getSign, type Sign } from '@/pages/user/Apply/utils/math';
 import type { AvailableTime, PostInterviewSchedule } from '@/pages/user/Apply/type/apply';
-import { useFormContext } from 'react-hook-form';
 
 type InterviewSchedule = {
   date: string;
@@ -164,19 +164,3 @@ export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) =>
     </Wrapper>
   );
 };
-
-export function generateHours(startHour: number, endHour: number): string[] {
-  const hours: string[] = [];
-
-  for (let h = startHour; h <= endHour; h++) {
-    const hourStr = formatHour(h);
-
-    hours.push(hourStr);
-
-    if (h < endHour) {
-      const halfHourStr = h.toString().padStart(2, '0') + ':30';
-      hours.push(halfHourStr);
-    }
-  }
-  return hours;
-}
