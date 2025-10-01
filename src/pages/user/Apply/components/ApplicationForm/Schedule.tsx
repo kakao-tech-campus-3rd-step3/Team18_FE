@@ -94,7 +94,54 @@ const mergedInterviewTime: string[] = [];
       }
     });
 
-    console.log(selectedInterviewTime);
+    const selectedTimeIntervalArray: string[] = [...selectedInterviewTime.current].sort();
+
+    selectedTimeIntervalArray.forEach((e, idx) => {
+      if (mergedInterviewTime.length < 1) {
+        mergedInterviewTime.push(e);
+        return;
+      }
+
+      if (mergedInterviewTime.length > 0) {
+        if (mergedInterviewTime.length > idx) {
+          return;
+        }
+      }
+
+      const prevVal = mergedInterviewTime[mergedInterviewTime.length - 1];
+
+      const [prevStart, prevEnd] = prevVal.split('-');
+      const [currStart, currEnd] = e.split('-');
+
+      if (prevEnd === currStart) {
+        mergedInterviewTime.pop();
+        mergedInterviewTime.push(prevStart + '-' + currEnd);
+      } else {
+        mergedInterviewTime.push(e);
+      }
+    });
+
+    const currentInterviewTime: PostInterviewSchedule = {
+      date: date,
+      selectedTimes: mergedInterviewTime ?? [],
+    };
+
+    const currentInterviewSchedule = getValues('selectedInterviewSchedule') || [];
+
+    const sameDateIndex: number = currentInterviewSchedule.findIndex(
+      (schedule: PostInterviewSchedule) => schedule.date === date,
+    );
+
+    let updatedSchedule: PostInterviewSchedule[];
+
+    if (sameDateIndex !== -1) {
+      updatedSchedule = [...currentInterviewSchedule];
+      updatedSchedule[sameDateIndex] = currentInterviewTime;
+    } else {
+      updatedSchedule = [...currentInterviewSchedule, currentInterviewTime];
+    }
+
+    setValue('selectedInterviewSchedule', updatedSchedule);
   };
 
   return (
