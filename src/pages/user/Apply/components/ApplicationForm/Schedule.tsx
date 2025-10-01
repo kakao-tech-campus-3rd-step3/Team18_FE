@@ -2,8 +2,9 @@ import { useRef, useState } from 'react';
 import { formatHour, getTimeIntervalArray, parseTime } from '@/pages/user/Apply/utils/time';
 import { Text } from '@/shared/components/Text';
 import { TimeSpan, Wrapper, DateText } from './index.styled';
-import { getSign, type Sign } from '../../utils/math';
-import type { AvailableTime } from '@/pages/user/Apply/type/apply';
+import { getSign, type Sign } from '@/pages/user/Apply/utils/math';
+import type { AvailableTime, PostInterviewSchedule } from '@/pages/user/Apply/type/apply';
+import { useFormContext } from 'react-hook-form';
 
 type InterviewSchedule = {
   date: string;
@@ -25,7 +26,7 @@ export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) =>
     new Array(timeIntervalArray.length).fill(false),
   );
   const selectedInterviewTime = useRef<Set<string>>(new Set());
-const mergedInterviewTime: string[] = [];
+  const mergedInterviewTime: string[] = [];
   const { setValue, getValues } = useFormContext();
 
   function handleIndexChange(newIndex: number) {
@@ -41,7 +42,6 @@ const mergedInterviewTime: string[] = [];
         startIndex.current = String(newIndex - 1);
       }
     }
-
     setPrevDiffSign(currentSign);
   }
 
