@@ -57,6 +57,6 @@ export type FormInputs = {
   department: string;
   phoneNumber: string;
   email: string;
-  answers: { answer: string | string[] }[];
-  questions: string[];
+  answers: object[];
+  selectedInterviewSchedule: string[];
 };
