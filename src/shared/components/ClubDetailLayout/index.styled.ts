@@ -16,7 +16,7 @@ export const Layout = styled.main(({ theme }) => ({
     padding: '1.5rem',
   },
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    flexDirection: 'column',
+    display: 'block',
     padding: '1rem',
   },
 }));
@@ -56,6 +56,7 @@ export const ContentRight = styled.div(({ theme }) => ({
     margin: '1.5rem auto 0 auto',
   },
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    flex: 'initial',
     maxWidth: '100%',
     margin: '1rem 0 0 0',
     padding: '1rem',
