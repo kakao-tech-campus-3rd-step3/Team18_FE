@@ -13,23 +13,22 @@ export const ClubApplicationPage = () => {
 
   return (
     <Layout>
-      <FormContainer>
-        <ClubDescription title={formData.title} description={formData?.description ?? ''} />
-        <ApplicationForm questions={formData.questions} />
-      </FormContainer>
+      <ClubDescription title={formData.title} description={formData?.description ?? ''} />
+      <ApplicationForm questions={formData.questions} />
     </Layout>
   );
 };
 
 export const Layout = styled.main(({ theme }) => ({
-  backgroundColor: theme.colors.bgBlue,
   minHeight: '100vh',
-  padding: '5.2rem 3rem',
   display: 'flex',
   gap: '1.5rem',
-  justifyContent: 'center',
+  flexWrap: 'wrap',
   maxWidth: '1200px',
+  width: '100%',
   margin: '0 auto',
+  padding: '0 1.5rem',
+  boxSizing: 'border-box',
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
     padding: '1.5rem',
@@ -39,15 +38,3 @@ export const Layout = styled.main(({ theme }) => ({
     padding: '1rem',
   },
 }));
-
-export const FormContainer = styled.div({
-  backgroundColor: 'white',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  padding: '2.6rem 3rem',
-  width: '80%',
-  maxWidth: '1200px',
-  margin: '0 auto',
-  borderRadius: '4rem',
-});

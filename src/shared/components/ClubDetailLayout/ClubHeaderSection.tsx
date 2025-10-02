@@ -29,7 +29,7 @@ const TextContainer = styled.div({
 });
 
 const Title = styled.h1(({ theme }) => ({
-  fontSize: '2rem',
+  fontSize: '2.5rem',
   fontWeight: theme.font.weight.medium,
   margin: '1rem 0 0 0.5rem',
 }));

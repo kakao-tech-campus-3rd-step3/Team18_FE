@@ -26,9 +26,6 @@ export const UserInfoWrapper = styled.div({
   justifyContent: 'flex-start',
   gap: 60,
   padding: 40,
-  border: `1px none ${theme.colors.gray200}`,
-  borderRadius: '1rem',
-  boxShadow: theme.shadow.md,
 });
 
 export const FormField = styled.div({
@@ -50,9 +47,6 @@ export const QuestionWrapper = styled.div({
   flexDirection: 'column',
   gap: 60,
   padding: 40,
-  border: `1px none ${theme.colors.gray200}`,
-  borderRadius: '1rem',
-  boxShadow: theme.shadow.md,
 });
 
 export const ChoiceFormFiled = styled.div({
@@ -60,9 +54,6 @@ export const ChoiceFormFiled = styled.div({
   flexDirection: 'column',
   padding: 40,
   gap: 10,
-  border: `1px none ${theme.colors.gray200}`,
-  borderRadius: '1rem',
-  boxShadow: theme.shadow.md,
 });
 
 export const FormContainer = styled.main({
