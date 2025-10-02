@@ -1,13 +1,10 @@
 import styled from '@emotion/styled';
 import { Text } from '@/shared/components/Text';
+import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 
-type CommentItemProps = {
-  author?: string;
-  createdAt?: string;
-  content?: string;
-};
+type Props = Pick<Comment, 'author' | 'content' | 'createdAt'>;
 
-export const CommentItem = ({ author, createdAt, content }: CommentItemProps) => {
+export const CommentItem = ({ author, content, createdAt }: Props) => {
   const handleEdit = () => {
     console.log('수정 클릭');
   };
@@ -20,8 +17,8 @@ export const CommentItem = ({ author, createdAt, content }: CommentItemProps) =>
     <Layout>
       <Header>
         <AuthorInfo>
-          <Text size={'sm'} weight={'medium'}>
-            {author}
+          <Text size={'base'} weight={'medium'}>
+            {author.name}
           </Text>
           <Text size={'xs'} weight={'medium'} color={'#616677'}>
             {createdAt}
@@ -45,7 +42,7 @@ export const CommentItem = ({ author, createdAt, content }: CommentItemProps) =>
 const Layout = styled.div(({ theme }) => ({
   borderLeft: `3px solid ${theme.colors.primary}`,
   paddingLeft: '1rem',
-  marginBottom: '2.8125rem',
+  marginBottom: '2.4rem',
 }));
 
 const Header = styled.div({

@@ -33,6 +33,11 @@ const updateApplicationStatusResolver = async ({
   return HttpResponse.json({ status: 200 });
 };
 
+const getCommentsResolver = () => {
+  const comments = applicantRepository.getComments();
+  return HttpResponse.json(comments, { status: 200 });
+};
+
 export const applicantHandlers = [
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/applicants', getApplicantsResolver),
   http.get(
@@ -42,5 +47,9 @@ export const applicantHandlers = [
   http.patch(
     import.meta.env.VITE_API_BASE_URL + '/applications/:applicationId',
     updateApplicationStatusResolver,
+  ),
+  http.get(
+    import.meta.env.VITE_API_BASE_URL + '/applications/:applicationId/comments',
+    getCommentsResolver,
   ),
 ];
