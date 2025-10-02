@@ -13,20 +13,33 @@ export const ClubApplicationPage = () => {
 
   return (
     <Layout>
-      <ClubDescription title={formData.title} description={formData?.description ?? ''} />
-      <ApplicationForm questions={formData.questions} />
+      <ContentContainer>
+        <ClubDescription title={formData.title} description={formData?.description ?? ''} />
+        <ApplicationForm questions={formData.questions} />
+      </ContentContainer>
     </Layout>
   );
 };
 
+const ContentContainer = styled.div`
+  width: 48rem;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 48rem) {
+    width: 100%;
+  }
+`;
+
 export const Layout = styled.main(({ theme }) => ({
   minHeight: '100vh',
   display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
   gap: '1.5rem',
-  flexWrap: 'wrap',
   maxWidth: '1200px',
   width: '100%',
-  margin: '0 auto',
+  margin: '0 auto 4rem auto',
   padding: '0 1.5rem',
   boxSizing: 'border-box',
 
@@ -34,7 +47,6 @@ export const Layout = styled.main(({ theme }) => ({
     padding: '1.5rem',
   },
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    flexDirection: 'column',
     padding: '1rem',
   },
 }));

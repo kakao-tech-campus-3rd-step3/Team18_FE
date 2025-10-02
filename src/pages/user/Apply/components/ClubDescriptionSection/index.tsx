@@ -20,8 +20,8 @@ export const ClubDescription = ({ title }: props) => {
 const TextWrapper = styled.div({
   display: 'flex',
   flexDirection: 'column',
-  gap: 35,
-  padding: 20,
+  gap: '2rem',
+  padding: '4rem 0',
 });
 
 const Title = styled.h1(({ theme }) => ({
