@@ -1,10 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import { useClub } from '@/pages/user/Main/hook/useClub';
 import { searchClubs } from '@/pages/user/Main/utils/searchClubs.ts';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
 import { Text } from '@/shared/components/Text';
 import * as S from './Club.styled.ts';
 import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
-import { useNavigate } from 'react-router-dom';
 
 type Props = {
   filter: ClubCategoryEng;
