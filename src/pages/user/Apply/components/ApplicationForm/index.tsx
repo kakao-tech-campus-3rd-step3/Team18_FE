@@ -1,13 +1,13 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { postApplicationForm } from '@/pages/user/Apply/api/apply';
-import { QuestionTypes } from '@/pages/user/Apply/constant/questionType';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import * as S from './index.styled';
 import { InterviewSchedule } from './Schedule';
 import type { FormInputs, Question } from '@/pages/user/Apply/type/apply';
+import { QuestionTypes } from '../../constant/questionType';
 
 type Props = {
   questions: Question[];
@@ -37,10 +37,10 @@ export const ApplicationForm = ({ questions }: Props) => {
 
   const questionsWithIndex = questions.map((q, i) => ({ ...q, originalIndex: i }));
   const timeSlotQuestions = questionsWithIndex.filter(
-    (q) => q.questionType === QuestionType.TIME_SLOT,
+    (q) => q.questionType === QuestionTypes.TIME_SLOT,
   );
   const otherQuestions = questionsWithIndex.filter(
-    (q) => q.questionType !== QuestionType.TIME_SLOT,
+    (q) => q.questionType !== QuestionTypes.TIME_SLOT,
   );
 
   return (
@@ -121,17 +121,8 @@ export const ApplicationForm = ({ questions }: Props) => {
               <S.ChoiceFormFiled key={field.questionNum}>
                 <S.Label>{field.question}</S.Label>
 
-                {question.questionType === QuestionTypes.TIME_SLOT &&
-                  question.timeSlotOption?.map((interviewSchedule, idx) => (
-                    <InterviewSchedule
-                      key={idx}
-                      availableTime={interviewSchedule.availableTime}
-                      date={interviewSchedule.date}
-                    />
-                  ))}
-
-                {question.questionType === QuestionTypes.CHECKBOX &&
-                  question.optionList?.map((option, optIndex) => (
+                {field.questionType === QuestionTypes.CHECKBOX &&
+                  field.optionList?.map((option, optIndex) => (
                     <S.Label key={optIndex}>
                       <S.OptionInput
                         type='checkbox'
@@ -142,8 +133,8 @@ export const ApplicationForm = ({ questions }: Props) => {
                     </S.Label>
                   ))}
 
-                {question.questionType === QuestionTypes.RADIO &&
-                  question.optionList?.map((option, optIndex) => (
+                {field.questionType === QuestionTypes.RADIO &&
+                  field.optionList?.map((option, optIndex) => (
                     <S.Label key={optIndex}>
                       <S.OptionInput
                         type='radio'
@@ -154,7 +145,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                     </S.Label>
                   ))}
 
-                {question.questionType === QuestionTypes.TEXT && (
+                {field.questionType === QuestionTypes.TEXT && (
                   <OutlineTextareaField
                     placeholder='1000자 미만으로 입력하세요.'
                     {...methods.register(`answers.${field.originalIndex}`)}
