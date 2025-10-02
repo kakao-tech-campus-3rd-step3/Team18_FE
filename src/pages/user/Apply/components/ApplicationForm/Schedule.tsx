@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react';
-import { formatHour, getTimeIntervalArray, parseTime } from '@/pages/user/Apply/utils/time';
+import { useFormContext } from 'react-hook-form';
+import { getSign, type Sign } from '@/pages/user/Apply/utils/math';
+import { generateHours, getTimeIntervalArray, parseTime } from '@/pages/user/Apply/utils/time';
 import { Text } from '@/shared/components/Text';
 import { TimeSpan, Wrapper, DateText } from './index.styled';
-import { getSign, type Sign } from '../../utils/math';
-import type { AvailableTime } from '@/pages/user/Apply/type/apply';
+import type { AvailableTime, PostInterviewSchedule } from '@/pages/user/Apply/type/apply';
 
 type InterviewSchedule = {
   date: string;
@@ -25,6 +26,8 @@ export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) =>
     new Array(timeIntervalArray.length).fill(false),
   );
   const selectedInterviewTime = useRef<Set<string>>(new Set());
+  const mergedInterviewTime: string[] = [];
+  const { setValue, getValues } = useFormContext();
 
   function handleIndexChange(newIndex: number) {
     const diff = newIndex - Number(lastHoveredIndex.current);
@@ -39,7 +42,6 @@ export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) =>
         startIndex.current = String(newIndex - 1);
       }
     }
-
     setPrevDiffSign(currentSign);
   }
 
@@ -92,7 +94,54 @@ export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) =>
       }
     });
 
-    console.log(selectedInterviewTime);
+    const selectedTimeIntervalArray: string[] = [...selectedInterviewTime.current].sort();
+
+    selectedTimeIntervalArray.forEach((e, idx) => {
+      if (mergedInterviewTime.length < 1) {
+        mergedInterviewTime.push(e);
+        return;
+      }
+
+      if (mergedInterviewTime.length > 0) {
+        if (mergedInterviewTime.length > idx) {
+          return;
+        }
+      }
+
+      const prevVal = mergedInterviewTime[mergedInterviewTime.length - 1];
+
+      const [prevStart, prevEnd] = prevVal.split('-');
+      const [currStart, currEnd] = e.split('-');
+
+      if (prevEnd === currStart) {
+        mergedInterviewTime.pop();
+        mergedInterviewTime.push(prevStart + '-' + currEnd);
+      } else {
+        mergedInterviewTime.push(e);
+      }
+    });
+
+    const currentInterviewTime: PostInterviewSchedule = {
+      date: date,
+      selectedTimes: mergedInterviewTime ?? [],
+    };
+
+    const currentInterviewSchedule = getValues('selectedInterviewSchedule') || [];
+
+    const sameDateIndex: number = currentInterviewSchedule.findIndex(
+      (schedule: PostInterviewSchedule) => schedule.date === date,
+    );
+
+    let updatedSchedule: PostInterviewSchedule[];
+
+    if (sameDateIndex !== -1) {
+      updatedSchedule = [...currentInterviewSchedule];
+      updatedSchedule[sameDateIndex] = currentInterviewTime;
+    } else {
+      updatedSchedule = [...currentInterviewSchedule, currentInterviewTime];
+    }
+
+    setValue('selectedInterviewSchedule', updatedSchedule);
   };
 
   return (
@@ -115,19 +164,3 @@ export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) =>
     </Wrapper>
   );
 };
-
-export function generateHours(startHour: number, endHour: number): string[] {
-  const hours: string[] = [];
-
-  for (let h = startHour; h <= endHour; h++) {
-    const hourStr = formatHour(h);
-
-    hours.push(hourStr);
-
-    if (h < endHour) {
-      const halfHourStr = h.toString().padStart(2, '0') + ':30';
-      hours.push(halfHourStr);
-    }
-  }
-  return hours;
-}

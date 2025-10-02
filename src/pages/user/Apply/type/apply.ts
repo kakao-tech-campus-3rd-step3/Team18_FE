@@ -11,7 +11,7 @@ export type Question =
       questionType: ScheduleQuestionType;
       question: string;
       required: boolean;
-      timeSlotOption?: interviewSchedule[];
+      timeSlotOption?: InterviewSchedule[];
     };
 
 type normalQuestionType = 'CHECKBOX' | 'RADIO' | 'TEXT';
@@ -22,7 +22,7 @@ export type AvailableTime = {
   end: string;
 };
 
-export type interviewSchedule = {
+export type InterviewSchedule = {
   date: string;
   availableTime: AvailableTime;
 };
@@ -46,12 +46,17 @@ export type ApplicationFormRequest = {
   }[];
 };
 
+export type PostInterviewSchedule = {
+  date: string;
+  selectedTimes: string[];
+};
+
 export type FormInputs = {
   name: string;
   studentId: string;
   department: string;
   phoneNumber: string;
   email: string;
-  answers: { answer: string | string[] }[];
-  questions: string[];
+  answers: object[];
+  selectedInterviewSchedule: string[];
 };
