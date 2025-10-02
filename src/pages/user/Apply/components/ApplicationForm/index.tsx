@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { postApplicationForm } from '@/pages/user/Apply/api/apply';
 import { QuestionType } from '@/pages/user/Apply/constant/questionType';
@@ -14,11 +14,7 @@ type Props = {
 };
 
 export const ApplicationForm = ({ questions }: Props) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
-  } = useForm<FormInputs>({
+  const methods = useForm<FormInputs>({
     mode: 'onTouched',
     defaultValues: {
       name: '',
@@ -27,7 +23,6 @@ export const ApplicationForm = ({ questions }: Props) => {
       phoneNumber: '',
       email: '',
       answers: [],
-      questions: [],
     },
   });
 
@@ -132,9 +127,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                       value={option}
                       {...register(`answers.${field.originalIndex}`)}
                     />
-                    {option}
-                  </S.Label>
-                ))}
+                  ))}
 
               {field.questionType === QuestionType.RADIO &&
                 field.optionList?.map((option, optIndex) => (
