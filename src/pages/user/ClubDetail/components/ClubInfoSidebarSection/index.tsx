@@ -16,7 +16,7 @@ export const ClubInfoSidebarSection = () => {
     applicationNotice,
   } = mockClubDetail;
 
-  const clubId = useParams();
+  const { clubId } = useParams<{ clubId: string }>();
 
   return (
     <SidebarContainer>
@@ -28,7 +28,7 @@ export const ClubInfoSidebarSection = () => {
       </InfoItem>
       <InfoItem>정기 모임: {regularMeetingInfo}</InfoItem>
       <InfoItem>모집 상태: {recruitStatus}</InfoItem>
-      <Button to={`/club/${clubId.id}/apply`} width={'auto'}>
+      <Button to={`/clubs/${clubId}/apply`} width={'auto'}>
         지원하기
       </Button>
       <Notice>{applicationNotice}</Notice>
