@@ -137,6 +137,17 @@ export const deleteComment = (commentId: number) => {
   return { success: false };
 };
 
+export const updateComment = (commentId: number, content: string, rating: number) => {
+  const commentToUpdate = comments.find((comment) => comment.commentId === commentId);
+  if (commentToUpdate) {
+    commentToUpdate.content = content;
+    commentToUpdate.rating = rating;
+    commentToUpdate.updatedAt = new Date().toISOString();
+    return commentToUpdate;
+  }
+  return null;
+};
+
 export const applicantRepository = {
   getApplicants: (status: string | null) => {
     const statusLabelMap: Record<string, string> = {
@@ -179,5 +190,9 @@ export const applicantRepository = {
 
   deleteComment: (commentId: number) => {
     return deleteComment(commentId);
+  },
+
+  updateComment: (commentId: number, content: string, rating: number) => {
+    return updateComment(commentId, content, rating);
   },
 };

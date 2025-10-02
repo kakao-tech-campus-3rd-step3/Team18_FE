@@ -33,3 +33,22 @@ export const deleteComment = async (applicationId: number, commentId: number): P
     },
   );
 };
+
+export const updateComment = async (
+  applicationId: number,
+  commentId: number,
+  content: string,
+  rating: number,
+): Promise<Comment> => {
+  const response = await fetch(
+    import.meta.env.VITE_API_BASE_URL + `/applications/${applicationId}/comments/${commentId}`,
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ content, rating }),
+    },
+  );
+  return await response.json();
+};

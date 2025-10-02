@@ -1,11 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { fetchComments, createComment, deleteComment } from '@/pages/admin/ApplicationDetail/api/comments';
+import { fetchComments, createComment, deleteComment, updateComment } from '@/pages/admin/ApplicationDetail/api/comments';
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 import type { UseApiQueryResult } from '@/types/useApiQueryResult';
 
 type UseCommentsResult = UseApiQueryResult<Comment[]> & {
   createComment: (comment: { content: string; rating: number }) => void;
   deleteComment: (commentId: number) => void;
+  updateComment: (comment: { commentId: number; content: string; rating: number }) => void;
 };
 
 export const useComments = (applicationId: number): UseCommentsResult => {
@@ -41,11 +42,27 @@ export const useComments = (applicationId: number): UseCommentsResult => {
     },
   });
 
+  const { mutate: updateCommentMutation } = useMutation({
+    mutationFn: ({ commentId, content, rating }: { commentId: number; content: string; rating: number }) =>
+      updateComment(applicationId, commentId, content, rating),
+    onSuccess: (updatedComment) => {
+      queryClient.setQueryData(['comments', applicationId], (oldData: Comment[] | undefined) => {
+        if (oldData) {
+          return oldData.map((comment) =>
+            comment.commentId === updatedComment.commentId ? updatedComment : comment,
+          );
+        }
+        return [];
+      });
+    },
+  });
+
   return {
     data: data || [],
     isLoading,
     error,
     createComment: createCommentMutation,
     deleteComment: deleteCommentMutation,
+    updateComment: updateCommentMutation,
   };
 };

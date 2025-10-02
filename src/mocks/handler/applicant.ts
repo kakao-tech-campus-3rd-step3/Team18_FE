@@ -55,6 +55,28 @@ const deleteCommentResolver = ({ params }: { params: PathParams }) => {
   return HttpResponse.json(null, { status: 200 });
 };
 
+interface UpdateCommentRequest {
+  content: string;
+  rating: number;
+}
+
+const updateCommentResolver = async ({
+  params,
+  request,
+}: { params: PathParams; request: Request }) => {
+  const { commentId } = params as { commentId: string };
+  const { content, rating } = (await request.json()) as UpdateCommentRequest;
+  const updatedComment = applicantRepository.updateComment(
+    Number(commentId),
+    content,
+    rating,
+  );
+  if (updatedComment) {
+    return HttpResponse.json(updatedComment, { status: 200 });
+  }
+  return HttpResponse.json({ message: 'Comment not found' }, { status: 404 });
+};
+
 export const applicantHandlers = [
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/applicants', getApplicantsResolver),
   http.get(
@@ -76,5 +98,9 @@ export const applicantHandlers = [
   http.delete(
     import.meta.env.VITE_API_BASE_URL + '/applications/:applicationId/comments/:commentId',
     deleteCommentResolver,
+  ),
+  http.put(
+    import.meta.env.VITE_API_BASE_URL + '/applications/:applicationId/comments/:commentId',
+    updateCommentResolver,
   ),
 ];
