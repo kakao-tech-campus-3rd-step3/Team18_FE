@@ -1,3 +1,5 @@
+import styled from '@emotion/styled';
+import { Button } from '@/shared/components/Button';
 import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
 import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
@@ -8,8 +10,6 @@ import {
   ContentRight,
 } from '@/shared/components/ClubDetailLayout/index.styled';
 import { mockClubDetail } from './components/mock';
-import { Button } from '@/shared/components/Button';
-import styled from '@emotion/styled';
 
 export const ClubDetailEditPage = () => {
   const handleSave = () => {
