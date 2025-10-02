@@ -1,8 +1,4 @@
 import styled from '@emotion/styled';
-import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
-import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
-import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
-import { mockClubDetail } from './components/mock';
 import { Button } from '@/shared/components/Button';
 import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
 import {
@@ -10,6 +6,10 @@ import {
   ContentLeft,
   ContentRight,
 } from '@/shared/components/ClubDetailLayout/index.styled';
+import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
+import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
+import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
+import { mockClubDetail } from './components/mock';
 
 export const ClubDetailEditPage = () => {
   const handleSave = () => {

@@ -1,7 +1,7 @@
 import { FiTrash2, FiPlus } from 'react-icons/fi';
+import { SectionTitle } from '@/shared/components/SectionTitle';
 import * as S from './index.styled';
 import { mockClubDetail } from '../mock';
-import { SectionTitle } from '@/shared/components/SectionTitle';
 
 export const ClubActivityPhotosEditSection = () => {
   const handleDelete = (idx: number) => {
