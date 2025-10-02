@@ -1,13 +1,13 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { postApplicationForm } from '@/pages/user/Apply/api/apply';
+import { QuestionTypes } from '@/pages/user/Apply/constant/questionType';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import * as S from './index.styled';
 import { InterviewSchedule } from './Schedule';
 import type { FormInputs, Question } from '@/pages/user/Apply/type/apply';
-import { QuestionTypes } from '../../constant/questionType';
 
 type Props = {
   questions: Question[];
