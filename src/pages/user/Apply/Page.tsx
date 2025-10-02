@@ -25,6 +25,7 @@ const ContentContainer = styled.div`
   width: 48rem;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 
   @media (max-width: 48rem) {
     width: 100%;
