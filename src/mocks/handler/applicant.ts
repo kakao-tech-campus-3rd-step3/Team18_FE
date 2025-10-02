@@ -38,7 +38,7 @@ const getCommentsResolver = () => {
   return HttpResponse.json(comments, { status: 200 });
 };
 
-interface CreateCommentRequest {
+export interface CreateCommentRequest {
   content: string;
   rating: number;
 }

@@ -7,14 +7,14 @@ import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 export const CommentSection = () => {
   const { applicantId } = useParams();
 
-  const { data, isLoading, error } = useComments(Number(applicantId));
+  const { data, isLoading, error, createComment } = useComments(Number(applicantId));
 
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;
 
   return (
     <>
-      <CommentForm />
+      <CommentForm createComment={createComment} />
       <CommentList comments={data} />
     </>
   );
