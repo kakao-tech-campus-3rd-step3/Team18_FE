@@ -1,12 +1,12 @@
+import { memo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   CLUB_CATEGORY,
   type ClubCategory,
   type ClubCategoryEng,
 } from '@/pages/user/Main/constant/clubCategory';
-import * as S from './index.styled.ts';
-import { useSearchParams } from 'react-router-dom';
-import { memo } from 'react';
 import { korToEngCategory } from '@/pages/user/Main/utils/formatting.ts';
+import * as S from './index.styled.ts';
 
 type Props = {
   onSelect: (category: ClubCategoryEng) => void;
