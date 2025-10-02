@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
 import type { CSSObject } from '@emotion/react';
 
 export const TitleWrapper = styled.div(() => ({
