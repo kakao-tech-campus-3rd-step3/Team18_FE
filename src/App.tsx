@@ -1,8 +1,8 @@
 import { ThemeProvider } from '@emotion/react';
-import { theme } from '@/styles/theme';
-import { Navigation } from '@/shared/components/Navigation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Outlet } from 'react-router-dom';
+import { Navigation } from '@/shared/components/Navigation';
+import { theme } from '@/styles/theme';
 
 const queryClient = new QueryClient();
 
