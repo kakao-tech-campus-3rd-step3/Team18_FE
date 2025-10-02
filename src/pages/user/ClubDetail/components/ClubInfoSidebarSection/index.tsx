@@ -35,12 +35,14 @@ export const ClubInfoSidebarSection = () => {
 };
 
 const SidebarContainer = styled.div(({ theme }) => ({
+  marginTop: '1rem',
   backgroundColor: theme.colors.bg,
-  padding: '16px',
+  padding: '1.3rem',
   borderRadius: theme.radius.md,
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: '1rem',
+  border: '1px solid #E5E7ED',
 }));
 
 const InfoItem = styled.div(({ theme }) => ({
