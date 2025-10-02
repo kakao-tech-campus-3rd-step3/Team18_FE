@@ -13,7 +13,7 @@ export const ClubInfoSidebarSection = () => {
     recruitEnd,
     regularMeetingInfo,
     recruitStatus,
-    applicationNotices,
+    applicationNotice,
   } = mockClubDetail;
 
   const clubId = useParams();
@@ -31,7 +31,7 @@ export const ClubInfoSidebarSection = () => {
       <Button to={`/club/${clubId.id}/apply`} width={'auto'}>
         지원하기
       </Button>
-      <Notice>{applicationNotices}</Notice>
+      <Notice>{applicationNotice}</Notice>
     </SidebarContainer>
   );
 };
