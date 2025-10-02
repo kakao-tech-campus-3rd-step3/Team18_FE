@@ -1,21 +1,28 @@
+import type { QuestionTypes } from '../constant/questionType';
+
+export type QuestionType = (typeof QuestionTypes)[keyof typeof QuestionTypes];
+
 export type Question =
   | {
       questionNum: number;
-      questionType: normalQuestionType;
+      questionType: typeof QuestionTypes.CHECKBOX | typeof QuestionTypes.RADIO;
       question: string;
       required: boolean;
-      optionList?: string[];
+      optionList: string[];
     }
   | {
       questionNum: number;
-      questionType: ScheduleQuestionType;
+      questionType: typeof QuestionTypes.TIME_SLOT;
       question: string;
       required: boolean;
-      timeSlotOption?: InterviewSchedule[];
+      timeSlotOption: InterviewSchedule[];
+    }
+  | {
+      questionNum: number;
+      questionType: typeof QuestionTypes.TEXT;
+      question: string;
+      required: boolean;
     };
-
-type normalQuestionType = 'CHECKBOX' | 'RADIO' | 'TEXT';
-type ScheduleQuestionType = 'TIME_SLOT';
 
 export type AvailableTime = {
   start: string;
