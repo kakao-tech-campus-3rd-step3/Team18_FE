@@ -16,7 +16,7 @@ export const ClubInfoSidebarSection = () => {
     applicationNotice,
   } = mockClubDetail;
 
-  const clubId = useParams();
+  const { clubId } = useParams<{ clubId: string }>();
 
   return (
     <SidebarContainer>
@@ -28,19 +28,23 @@ export const ClubInfoSidebarSection = () => {
       </InfoItem>
       <InfoItem>정기 모임: {regularMeetingInfo}</InfoItem>
       <InfoItem>모집 상태: {recruitStatus}</InfoItem>
-      <Button to={`/clubs/${clubId.clubId}/apply`}>지원하기</Button>
+      <Button to={`/clubs/${clubId}/apply`} width={'auto'}>
+        지원하기
+      </Button>
       <Notice>{applicationNotice}</Notice>
     </SidebarContainer>
   );
 };
 
 const SidebarContainer = styled.div(({ theme }) => ({
+  marginTop: '1rem',
   backgroundColor: theme.colors.bg,
-  padding: '16px',
+  padding: '1.3rem',
   borderRadius: theme.radius.md,
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: '1rem',
+  border: '1px solid #E5E7ED',
 }));
 
 const InfoItem = styled.div(({ theme }) => ({
