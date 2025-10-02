@@ -112,6 +112,22 @@ export const comments = [
   },
 ];
 
+export const createComment = (content: string, rating: number) => {
+  const newComment = {
+    commentId: comments.length + 1,
+    content,
+    rating,
+    author: {
+      id: 103,
+      name: '박영희',
+    },
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  comments.push(newComment);
+  return newComment;
+};
+
 export const applicantRepository = {
   getApplicants: (status: string | null) => {
     const statusLabelMap: Record<string, string> = {
@@ -146,5 +162,9 @@ export const applicantRepository = {
 
   getComments: () => {
     return comments;
+  },
+
+  createComment: (content: string, rating: number) => {
+    return createComment(content, rating);
   },
 };

@@ -38,6 +38,17 @@ const getCommentsResolver = () => {
   return HttpResponse.json(comments, { status: 200 });
 };
 
+interface CreateCommentRequest {
+  content: string;
+  rating: number;
+}
+
+const createCommentResolver = async ({ request }: { request: Request }) => {
+  const { content, rating } = (await request.json()) as CreateCommentRequest;
+  const newComment = applicantRepository.createComment(content, rating);
+  return HttpResponse.json(newComment, { status: 201 });
+};
+
 export const applicantHandlers = [
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/applicants', getApplicantsResolver),
   http.get(
@@ -51,5 +62,9 @@ export const applicantHandlers = [
   http.get(
     import.meta.env.VITE_API_BASE_URL + '/applications/:applicationId/comments',
     getCommentsResolver,
+  ),
+  http.post(
+    import.meta.env.VITE_API_BASE_URL + '/applications/:applicationId/comments',
+    createCommentResolver,
   ),
 ];
