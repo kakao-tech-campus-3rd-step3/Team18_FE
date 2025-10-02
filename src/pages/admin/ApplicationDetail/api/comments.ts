@@ -24,3 +24,12 @@ export const createComment = async (
   );
   return await response.json();
 };
+
+export const deleteComment = async (applicationId: number, commentId: number): Promise<void> => {
+  await fetch(
+    import.meta.env.VITE_API_BASE_URL + `/applications/${applicationId}/comments/${commentId}`,
+    {
+      method: 'DELETE',
+    },
+  );
+};
