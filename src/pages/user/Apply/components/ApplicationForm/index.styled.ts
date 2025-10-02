@@ -84,5 +84,23 @@ interface TimeSpanProps {
 
 export const TimeSpan = styled.span<TimeSpanProps>(({ theme, selected }) => ({
   backgroundColor: selected ? theme.colors.primary200 : 'white',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   border: '1px solid ',
+  width: '100px',
+  height: '30px',
+}));
+
+export const Wrapper = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+});
+
+export const DateText = styled.span(({ theme }) => ({
+  textAlign: 'center',
+  width: '100px',
+  padding: '10px 0 20px 0',
+  fontWeight: theme.font.weight.bold,
+  fontSize: theme.font.size.base,
 }));
