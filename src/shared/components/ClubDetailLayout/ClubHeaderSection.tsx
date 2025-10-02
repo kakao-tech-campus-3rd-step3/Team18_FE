@@ -29,13 +29,13 @@ const TextContainer = styled.div({
 });
 
 const Title = styled.h1(({ theme }) => ({
-  fontSize: theme.font.size.xl,
-  fontWeight: theme.font.weight.bold,
+  fontSize: '2rem',
+  fontWeight: theme.font.weight.medium,
   margin: '1rem 0 0 0.5rem',
 }));
 
 const Category = styled.span(({ theme }) => ({
-  fontSize: theme.font.size.sm,
+  fontSize: theme.font.size.base,
   color: theme.colors.textSecondary,
   margin: '0.5rem 0 0 0.5rem',
 }));
