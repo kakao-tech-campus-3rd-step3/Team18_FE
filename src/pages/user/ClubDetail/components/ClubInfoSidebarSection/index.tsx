@@ -13,7 +13,7 @@ export const ClubInfoSidebarSection = () => {
     recruitEnd,
     regularMeetingInfo,
     recruitStatus,
-    applicationNotices,
+    applicationNotice,
   } = mockClubDetail;
 
   const clubId = useParams();
