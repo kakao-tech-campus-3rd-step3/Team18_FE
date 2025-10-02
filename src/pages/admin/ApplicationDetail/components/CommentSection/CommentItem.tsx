@@ -1,16 +1,22 @@
+import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Text } from '@/shared/components/Text';
+import { useComments } from '@/pages/admin/ApplicationDetail/hooks/useComments';
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 
-type Props = Pick<Comment, 'author' | 'content' | 'createdAt'>;
+type Props = Pick<Comment, 'author' | 'content' | 'createdAt' | 'commentId'>;
 
-export const CommentItem = ({ author, content, createdAt }: Props) => {
+export const CommentItem = ({ author, commentId, content, createdAt }: Props) => {
+  const { applicantId } = useParams();
+
+  const { deleteComment } = useComments(Number(applicantId));
+
   const handleEdit = () => {
     console.log('수정 클릭');
   };
 
   const handleDelete = () => {
-    console.log('삭제 클릭');
+    deleteComment(commentId);
   };
 
   return (
