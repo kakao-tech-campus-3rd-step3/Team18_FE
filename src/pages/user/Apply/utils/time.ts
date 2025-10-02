@@ -25,3 +25,19 @@ export function getTimeIntervalArray(hourArray: string[]) {
 
   return thirtyMinuteArray;
 }
+
+export function generateHours(startHour: number, endHour: number): string[] {
+  const hours: string[] = [];
+
+  for (let h = startHour; h <= endHour; h++) {
+    const hourStr = formatHour(h);
+
+    hours.push(hourStr);
+
+    if (h < endHour) {
+      const halfHourStr = h.toString().padStart(2, '0') + ':30';
+      hours.push(halfHourStr);
+    }
+  }
+  return hours;
+}

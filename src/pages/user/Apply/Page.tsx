@@ -6,8 +6,9 @@ import { ApplicationForm } from './components/ApplicationForm';
 import { useApplicationForm } from './hook/useApplicationForm';
 
 export const ClubApplicationPage = () => {
-  const { id } = useParams();
-  const formData = useApplicationForm(Number(id));
+  const { clubId } = useParams();
+
+  const formData = useApplicationForm(Number(clubId));
 
   if (!formData) return <LoadingSpinner />;
 

@@ -28,8 +28,7 @@ export const ClubInfoSidebarSection = () => {
       </InfoItem>
       <InfoItem>정기 모임: {regularMeetingInfo}</InfoItem>
       <InfoItem>모집 상태: {recruitStatus}</InfoItem>
-      <Button to={`/club/${clubId.id}/apply`}>지원하기</Button>
-      <Notice>[지원 시 유의사항]</Notice>
+      <Button to={`/clubs/${clubId.clubId}/apply`}>지원하기</Button>
       <Notice>{applicationNotice}</Notice>
     </SidebarContainer>
   );
