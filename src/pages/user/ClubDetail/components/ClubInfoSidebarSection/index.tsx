@@ -29,7 +29,7 @@ export const ClubInfoSidebarSection = () => {
       <InfoItem>정기 모임: {regularMeetingInfo}</InfoItem>
       <InfoItem>모집 상태: {recruitStatus}</InfoItem>
       <Button to={`/clubs/${clubId.clubId}/apply`}>지원하기</Button>
-      <Notice>{applicationNotices}</Notice>
+      <Notice>{applicationNotice}</Notice>
     </SidebarContainer>
   );
 };
