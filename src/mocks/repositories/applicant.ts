@@ -128,6 +128,15 @@ export const createComment = (content: string, rating: number) => {
   return newComment;
 };
 
+export const deleteComment = (commentId: number) => {
+  const index = comments.findIndex((comment) => comment.commentId === commentId);
+  if (index !== -1) {
+    comments.splice(index, 1);
+    return { success: true };
+  }
+  return { success: false };
+};
+
 export const applicantRepository = {
   getApplicants: (status: string | null) => {
     const statusLabelMap: Record<string, string> = {
@@ -166,5 +175,9 @@ export const applicantRepository = {
 
   createComment: (content: string, rating: number) => {
     return createComment(content, rating);
+  },
+
+  deleteComment: (commentId: number) => {
+    return deleteComment(commentId);
   },
 };

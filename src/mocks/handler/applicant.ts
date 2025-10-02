@@ -49,6 +49,12 @@ const createCommentResolver = async ({ request }: { request: Request }) => {
   return HttpResponse.json(newComment, { status: 201 });
 };
 
+const deleteCommentResolver = ({ params }: { params: PathParams }) => {
+  const { commentId } = params as { commentId: string };
+  applicantRepository.deleteComment(Number(commentId));
+  return HttpResponse.json(null, { status: 200 });
+};
+
 export const applicantHandlers = [
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/applicants', getApplicantsResolver),
   http.get(
@@ -66,5 +72,9 @@ export const applicantHandlers = [
   http.post(
     import.meta.env.VITE_API_BASE_URL + '/applications/:applicationId/comments',
     createCommentResolver,
+  ),
+  http.delete(
+    import.meta.env.VITE_API_BASE_URL + '/applications/:applicationId/comments/:commentId',
+    deleteCommentResolver,
   ),
 ];
