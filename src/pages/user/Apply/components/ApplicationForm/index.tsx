@@ -37,10 +37,10 @@ export const ApplicationForm = ({ questions }: Props) => {
 
   const questionsWithIndex = questions.map((q, i) => ({ ...q, originalIndex: i }));
   const timeSlotQuestions = questionsWithIndex.filter(
-    (q) => q.questionType === QuestionType.TIME_SLOT
+    (q) => q.questionType === QuestionType.TIME_SLOT,
   );
   const otherQuestions = questionsWithIndex.filter(
-    (q) => q.questionType !== QuestionType.TIME_SLOT
+    (q) => q.questionType !== QuestionType.TIME_SLOT,
   );
 
   return (
