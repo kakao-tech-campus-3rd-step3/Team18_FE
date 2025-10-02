@@ -1,13 +1,13 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { postApplicationForm } from '@/pages/user/Apply/api/apply';
-import { QuestionType } from '@/pages/user/Apply/constant/questionType';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import * as S from './index.styled';
 import { InterviewSchedule } from './Schedule';
 import type { FormInputs, Question } from '@/pages/user/Apply/type/apply';
+import { QuestionTypes } from '@/pages/user/Apply/constant/questionType';
 
 type Props = {
   questions: Question[];
@@ -108,7 +108,7 @@ export const ApplicationForm = ({ questions }: Props) => {
               <S.ChoiceFormFiled key={question.questionNum}>
                 <S.Label>{question.question}</S.Label>
 
-                {question.questionType === QuestionType.TIME_SLOT &&
+                {question.questionType === QuestionTypes.TIME_SLOT &&
                   question.timeSlotOption?.map((interviewSchedule, idx) => (
                     <InterviewSchedule
                       key={idx}
@@ -117,7 +117,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                     />
                   ))}
 
-                {question.questionType === QuestionType.CHECKBOX &&
+                {question.questionType === QuestionTypes.CHECKBOX &&
                   question.optionList?.map((option, optIndex) => (
                     <S.Label key={optIndex}>
                       <S.OptionInput
@@ -129,7 +129,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                     </S.Label>
                   ))}
 
-                {question.questionType === QuestionType.RADIO &&
+                {question.questionType === QuestionTypes.RADIO &&
                   question.optionList?.map((option, optIndex) => (
                     <S.Label key={optIndex}>
                       <S.OptionInput
@@ -141,7 +141,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                     </S.Label>
                   ))}
 
-                {question.questionType === QuestionType.TEXT && (
+                {question.questionType === QuestionTypes.TEXT && (
                   <OutlineTextareaField
                     placeholder='1000자 미만으로 입력하세요.'
                     {...methods.register(`answers.${index}`)}
