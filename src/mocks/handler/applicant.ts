@@ -33,6 +33,49 @@ const updateApplicationStatusResolver = async ({
   return HttpResponse.json({ status: 200 });
 };
 
+const getCommentsResolver = () => {
+  const comments = applicantRepository.getComments();
+  return HttpResponse.json(comments, { status: 200 });
+};
+
+export interface CreateCommentRequest {
+  content: string;
+  rating: number;
+}
+
+const createCommentResolver = async ({ request }: { request: Request }) => {
+  const { content, rating } = (await request.json()) as CreateCommentRequest;
+  const newComment = applicantRepository.createComment(content, rating);
+  return HttpResponse.json(newComment, { status: 201 });
+};
+
+const deleteCommentResolver = ({ params }: { params: PathParams }) => {
+  const { commentId } = params as { commentId: string };
+  applicantRepository.deleteComment(Number(commentId));
+  return HttpResponse.json(null, { status: 200 });
+};
+
+interface UpdateCommentRequest {
+  content: string;
+  rating: number;
+}
+
+const updateCommentResolver = async ({
+  params,
+  request,
+}: {
+  params: PathParams;
+  request: Request;
+}) => {
+  const { commentId } = params as { commentId: string };
+  const { content, rating } = (await request.json()) as UpdateCommentRequest;
+  const updatedComment = applicantRepository.updateComment(Number(commentId), content, rating);
+  if (updatedComment) {
+    return HttpResponse.json(updatedComment, { status: 200 });
+  }
+  return HttpResponse.json({ message: 'Comment not found' }, { status: 404 });
+};
+
 export const applicantHandlers = [
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/applicants', getApplicantsResolver),
   http.get(
@@ -42,5 +85,21 @@ export const applicantHandlers = [
   http.patch(
     import.meta.env.VITE_API_BASE_URL + '/applications/:applicationId',
     updateApplicationStatusResolver,
+  ),
+  http.get(
+    import.meta.env.VITE_API_BASE_URL + '/applications/:applicationId/comments',
+    getCommentsResolver,
+  ),
+  http.post(
+    import.meta.env.VITE_API_BASE_URL + '/applications/:applicationId/comments',
+    createCommentResolver,
+  ),
+  http.delete(
+    import.meta.env.VITE_API_BASE_URL + '/applications/:applicationId/comments/:commentId',
+    deleteCommentResolver,
+  ),
+  http.put(
+    import.meta.env.VITE_API_BASE_URL + '/applications/:applicationId/comments/:commentId',
+    updateCommentResolver,
   ),
 ];

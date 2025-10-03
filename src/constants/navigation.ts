@@ -13,7 +13,7 @@ export const NAV_CONFIG: Record<Role, NavItemData[]> = {
   ],
   president: [
     { key: 'logo', label: '동아리움', to: '/', isLogo: true },
-    { key: 'applicants', label: '지원자관리', to: '/admin/club/dashboard' },
+    { key: 'applicants', label: '지원자관리', to: '/admin/clubs/dashboard' },
     { key: 'club', label: '동아리페이지관리', to: '/club' },
     { key: 'form', label: '지원폼관리', to: '/form' },
   ],
