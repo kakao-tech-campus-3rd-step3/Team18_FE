@@ -76,6 +76,78 @@ export const detailApplication: DetailApplication = {
   ],
 };
 
+export const comments = [
+  {
+    commentId: 20,
+    content: '지원자의 경험이 우리 동아리와 잘 맞는 것 같습니다.',
+    rating: 4.5,
+    author: {
+      id: 5,
+      name: '김운영',
+    },
+    createdAt: '2025-10-02T12:20:54.974Z',
+    updatedAt: '2025-10-02T12:20:54.974Z',
+  },
+  {
+    commentId: 21,
+    content: '지원자의 경험이 우리 동아리와 잘 맞는 것 같습니다.',
+    rating: 4.5,
+    author: {
+      id: 6,
+      name: '김호영',
+    },
+    createdAt: '2025-10-03T12:20:54.974Z',
+    updatedAt: '2025-10-03T12:20:54.974Z',
+  },
+  {
+    commentId: 22,
+    content: '지원자의 경험이 우리 동아리와 잘 맞는 것 같습니다.',
+    rating: 4.5,
+    author: {
+      id: 7,
+      name: '김자영',
+    },
+    createdAt: '2025-10-04T12:20:54.974Z',
+    updatedAt: '2025-10-04T12:20:54.974Z',
+  },
+];
+
+export const createComment = (content: string, rating: number) => {
+  const newComment = {
+    commentId: comments.length + 1,
+    content,
+    rating,
+    author: {
+      id: 103,
+      name: '박영희',
+    },
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  comments.push(newComment);
+  return newComment;
+};
+
+export const deleteComment = (commentId: number) => {
+  const index = comments.findIndex((comment) => comment.commentId === commentId);
+  if (index !== -1) {
+    comments.splice(index, 1);
+    return { success: true };
+  }
+  return { success: false };
+};
+
+export const updateComment = (commentId: number, content: string, rating: number) => {
+  const commentToUpdate = comments.find((comment) => comment.commentId === commentId);
+  if (commentToUpdate) {
+    commentToUpdate.content = content;
+    commentToUpdate.rating = rating;
+    commentToUpdate.updatedAt = new Date().toISOString();
+    return commentToUpdate;
+  }
+  return null;
+};
+
 export const applicantRepository = {
   getApplicants: (status: string | null) => {
     const statusLabelMap: Record<string, string> = {
@@ -106,5 +178,21 @@ export const applicantRepository = {
       return { success: true };
     }
     return { success: false };
+  },
+
+  getComments: () => {
+    return comments;
+  },
+
+  createComment: (content: string, rating: number) => {
+    return createComment(content, rating);
+  },
+
+  deleteComment: (commentId: number) => {
+    return deleteComment(commentId);
+  },
+
+  updateComment: (commentId: number, content: string, rating: number) => {
+    return updateComment(commentId, content, rating);
   },
 };
