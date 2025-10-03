@@ -63,14 +63,13 @@ interface UpdateCommentRequest {
 const updateCommentResolver = async ({
   params,
   request,
-}: { params: PathParams; request: Request }) => {
+}: {
+  params: PathParams;
+  request: Request;
+}) => {
   const { commentId } = params as { commentId: string };
   const { content, rating } = (await request.json()) as UpdateCommentRequest;
-  const updatedComment = applicantRepository.updateComment(
-    Number(commentId),
-    content,
-    rating,
-  );
+  const updatedComment = applicantRepository.updateComment(Number(commentId), content, rating);
   if (updatedComment) {
     return HttpResponse.json(updatedComment, { status: 200 });
   }

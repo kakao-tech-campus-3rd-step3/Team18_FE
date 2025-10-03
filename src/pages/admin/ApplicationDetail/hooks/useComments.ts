@@ -1,5 +1,10 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { fetchComments, createComment, deleteComment, updateComment } from '@/pages/admin/ApplicationDetail/api/comments';
+import {
+  fetchComments,
+  createComment,
+  deleteComment,
+  updateComment,
+} from '@/pages/admin/ApplicationDetail/api/comments';
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 import type { UseApiQueryResult } from '@/types/useApiQueryResult';
 
@@ -43,8 +48,15 @@ export const useComments = (applicationId: number): UseCommentsResult => {
   });
 
   const { mutate: updateCommentMutation } = useMutation({
-    mutationFn: ({ commentId, content, rating }: { commentId: number; content: string; rating: number }) =>
-      updateComment(applicationId, commentId, content, rating),
+    mutationFn: ({
+      commentId,
+      content,
+      rating,
+    }: {
+      commentId: number;
+      content: string;
+      rating: number;
+    }) => updateComment(applicationId, commentId, content, rating),
     onSuccess: (updatedComment) => {
       queryClient.setQueryData(['comments', applicationId], (oldData: Comment[] | undefined) => {
         if (oldData) {

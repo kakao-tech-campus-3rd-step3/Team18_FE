@@ -3,7 +3,6 @@ import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 
 type Props = {
   comments: Comment[];
-  deleteComment: (commentId: number) => void;
 };
 
 export const CommentList = ({ comments }: Props) => {
