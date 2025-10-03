@@ -1,22 +1,50 @@
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 import styled from '@emotion/styled';
 import { Text } from '@/shared/components/Text';
+import { Button } from '@/shared/components/Button';
 import { useComments } from '@/pages/admin/ApplicationDetail/hooks/useComments';
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
+import { UnderlineTextareaField } from '@/shared/components/Form/TextAreaField/UnderlineTextareaField';
 
-type Props = Pick<Comment, 'author' | 'content' | 'createdAt' | 'commentId'>;
+type Props = Pick<Comment, 'author' | 'content' | 'createdAt' | 'commentId' | 'rating'>;
 
-export const CommentItem = ({ author, commentId, content, createdAt }: Props) => {
+export const CommentItem = ({ author, commentId, content, createdAt, rating }: Props) => {
   const { applicantId } = useParams();
+  const { deleteComment, updateComment } = useComments(Number(applicantId));
 
-  const { deleteComment } = useComments(Number(applicantId));
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedContent, setEditedContent] = useState(content);
 
   const handleEdit = () => {
-    console.log('수정 클릭');
+    setIsEditing(true);
+  };
+
+  const handleSave = () => {
+    // 추후 모달 및 토스트로 띄우기
+    if (!editedContent.trim()) {
+      alert('댓글 내용을 입력해주세요');
+      return;
+    }
+
+    updateComment({
+      commentId,
+      content: editedContent,
+      rating,
+    });
+    setIsEditing(false);
+  };
+
+  const handleCancel = () => {
+    setEditedContent(content);
+    setIsEditing(false);
   };
 
   const handleDelete = () => {
-    deleteComment(commentId);
+    // 추후 모달 및 토스트로 띄우기
+    if (window.confirm('댓글을 삭제하시겠습니까?')) {
+      deleteComment(commentId);
+    }
   };
 
   return (
@@ -30,17 +58,33 @@ export const CommentItem = ({ author, commentId, content, createdAt }: Props) =>
             {createdAt}
           </Text>
         </AuthorInfo>
-        <ButtonContainer>
-          <ActionButton onClick={handleEdit}>수정</ActionButton>
-          <Divider>|</Divider>
-          <ActionButton onClick={handleDelete}>삭제</ActionButton>
-        </ButtonContainer>
+        {!isEditing && (
+          <ButtonContainer>
+            <ActionButton onClick={handleEdit}>수정</ActionButton>
+            <Divider>|</Divider>
+            <ActionButton onClick={handleDelete}>삭제</ActionButton>
+          </ButtonContainer>
+        )}
       </Header>
-      <CommentContent>
-        <Text size={'sm'} color={'#333'}>
-          {content}
-        </Text>
-      </CommentContent>
+
+      {isEditing ? (
+        <EditMode>
+          <UnderlineTextareaField
+            value={editedContent}
+            onChange={(e) => setEditedContent(e.target.value)}
+          />
+          <EditButtonContainer>
+            <Button onClick={handleSave}>저장</Button>
+            <Button variant='outline' onClick={handleCancel}>
+              취소
+            </Button>
+          </EditButtonContainer>
+        </EditMode>
+      ) : (
+        <CommentContent>
+          <Text size={'sm'}>{content}</Text>
+        </CommentContent>
+      )}
     </Layout>
   );
 };
@@ -77,6 +121,10 @@ const ActionButton = styled.div(({ theme }) => ({
   fontSize: '0.8rem',
   cursor: 'pointer',
   padding: '0.25rem',
+
+  '&:hover': {
+    color: theme.colors.primary,
+  },
 }));
 
 const Divider = styled.span(({ theme }) => ({
@@ -87,4 +135,16 @@ const Divider = styled.span(({ theme }) => ({
 
 const CommentContent = styled.div({
   lineHeight: '1.6',
+});
+
+const EditMode = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.5rem',
+});
+
+const EditButtonContainer = styled.div({
+  display: 'flex',
+  justifyContent: 'flex-end',
+  gap: '0.5rem',
 });
