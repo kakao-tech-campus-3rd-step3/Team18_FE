@@ -9,34 +9,34 @@ import { MainPage } from '@/pages/user/Main/Page.tsx';
 import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
 import { ClubApplicationPage } from './user/Apply/Page';
 
-const { MAIN, CLUBDETAIL, CLUBEDIT, APPLICATIONDETAIL, DASHBOARD, CLUBAPPLICATION } = ROUTE_PATH;
+const { USER, ADMIN, COMMON } = ROUTE_PATH;
 
 export const router = createBrowserRouter([
   {
     element: <App />,
     children: [
-      { path: MAIN, element: <MainPage /> },
+      { path: COMMON.MAIN, element: <MainPage /> },
       {
-        path: CLUBDETAIL,
+        path: COMMON.CLUBDETAIL,
         element: <ClubDetailPage />,
       },
       {
-        path: CLUBAPPLICATION,
+        path: USER.APPLICATION,
         element: <ClubApplicationPage />,
       },
       {
         path: '/admin',
         children: [
           {
-            path: DASHBOARD,
+            path: ADMIN.DASHBOARD,
             element: <DashboardPage />,
           },
           {
-            path: APPLICATIONDETAIL,
+            path: ADMIN.APPLICATIONDETAIL,
             element: <ApplicationDetailPage />,
           },
           {
-            path: CLUBEDIT,
+            path: ADMIN.CLUBEDIT,
             element: <ClubDetailEditPage />,
           },
         ],
