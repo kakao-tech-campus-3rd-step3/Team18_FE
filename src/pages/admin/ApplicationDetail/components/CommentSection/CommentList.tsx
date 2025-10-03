@@ -16,6 +16,7 @@ export const CommentList = ({ comments }: Props) => {
           content={comment.content}
           author={comment.author}
           createdAt={comment.createdAt.split('T')[0]}
+          rating={comment.rating}
         />
       ))}
     </div>
