@@ -236,7 +236,7 @@ export const clubs: Club[] = [
   },
 ];
 
-export const clubRepoitory = {
+export const clubRepository = {
   getClubsByCategory: (filter: string) => {
     if (filter === 'ALL') return clubs;
     return clubs.filter((club) => club.category === filter);

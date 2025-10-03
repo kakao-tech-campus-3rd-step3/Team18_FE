@@ -1,14 +1,53 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
+import { Form } from 'react-router-dom';
+import { Button } from '@/shared/components/Button';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { Text } from '@/shared/components/Text';
+import type { CreateCommentRequest } from '@/mocks/handler/applicant';
 
-export const CommentForm = () => {
+type Props = {
+  createComment: (comment: CreateCommentRequest) => void;
+};
+
+export const CommentForm = ({ createComment }: Props) => {
+  const [content, setContent] = useState('');
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!content.trim()) {
+      alert('댓글을 입력해주세요');
+      return;
+    }
+
+    const newComment = {
+      content: content.trim(),
+      rating: 5,
+    };
+
+    createComment(newComment);
+    setContent('');
+  };
+
   return (
     <Layout>
       <Wrapper>
         <Text weight={'medium'}>댓글</Text>
       </Wrapper>
-      <OutlineTextareaField />
+      <Form onSubmit={handleSubmit}>
+        <OutlineTextareaField
+          value={content}
+          onChange={(e) => {
+            setContent(e.target.value);
+          }}
+        />
+        <ButtonWrapper>
+          <Button variant='outline' type='submit' width='3.5rem'>
+            등록
+          </Button>
+        </ButtonWrapper>
+      </Form>
     </Layout>
   );
 };
@@ -20,7 +59,13 @@ const Layout = styled.div({
   flexDirection: 'column',
 });
 
-const Wrapper = styled.div(() => ({
+const Wrapper = styled.div({
   display: 'flex',
   gap: '16px',
-}));
+});
+
+const ButtonWrapper = styled.div({
+  display: 'flex',
+  justifyContent: 'flex-end',
+  marginRight: '-1.65rem',
+});

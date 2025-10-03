@@ -1,8 +1,8 @@
+import { useState } from 'react';
+import { NAV_CONFIG } from '@/constants/navigation';
 import { NavigationContainer } from './NavigationContainer';
 import { NavigationItem } from './NavigationItem';
-import { NAV_CONFIG } from '@/constants/navigation';
 import type { Role } from '@/types/navigation';
-import { useState } from 'react';
 
 interface NavbarProps {
   role: Role;

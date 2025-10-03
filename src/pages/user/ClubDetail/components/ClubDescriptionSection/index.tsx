@@ -1,18 +1,18 @@
-import { SectionTitle } from '@/shared/components/SectionTitle';
 import styled from '@emotion/styled';
+import { SectionTitle } from '@/shared/components/SectionTitle';
 import { mockClubDetail } from '../mock';
 
 export const ClubDescriptionSection = () => {
   return (
     <DescriptionContainer>
       <SectionTitle>동아리 소개</SectionTitle>
-      <DescriptionText>{mockClubDetail.introductionIntroduce}</DescriptionText>
+      <DescriptionText>{mockClubDetail.introductionOverview}</DescriptionText>
 
       <SectionTitle>활동 내용</SectionTitle>
       <DescriptionText>{mockClubDetail.introductionActivity}</DescriptionText>
 
       <SectionTitle>모집하는 사람</SectionTitle>
-      <DescriptionText>{mockClubDetail.introductionWannabe}</DescriptionText>
+      <DescriptionText>{mockClubDetail.introductionIdeal}</DescriptionText>
     </DescriptionContainer>
   );
 };
@@ -27,7 +27,7 @@ const DescriptionContainer = styled.div(({ theme }) => ({
 }));
 
 const DescriptionText = styled.p(({ theme }) => ({
-  fontSize: theme.font.size.sm,
+  fontSize: theme.font.size.base,
   lineHeight: 1.6,
   margin: 0,
 }));

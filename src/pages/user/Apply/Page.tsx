@@ -1,53 +1,54 @@
-import { ClubDescription } from '@/pages/user/Apply/components/ClubDescriptionSection';
-import { useParams } from 'react-router-dom';
-import { useApplicationForm } from './hook/useApplicationForm';
 import styled from '@emotion/styled';
-import { ApplicationForm } from './components/ApplicantionForm';
+import { useParams } from 'react-router-dom';
+import { ClubDescription } from '@/pages/user/Apply/components/ClubDescriptionSection';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
+import { ApplicationForm } from './components/ApplicationForm';
+import { useApplicationForm } from './hook/useApplicationForm';
 
-export const ClubApplicatonPage = () => {
-  const { id } = useParams();
-  const formData = useApplicationForm(Number(id));
+export const ClubApplicationPage = () => {
+  const { clubId } = useParams();
+
+  const formData = useApplicationForm(Number(clubId));
 
   if (!formData) return <LoadingSpinner />;
 
   return (
     <Layout>
-      <FormContainer>
+      <ContentContainer>
         <ClubDescription title={formData.title} description={formData?.description ?? ''} />
         <ApplicationForm questions={formData.questions} />
-      </FormContainer>
+      </ContentContainer>
     </Layout>
   );
 };
 
+const ContentContainer = styled.div`
+  width: 48rem;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  @media (max-width: 48rem) {
+    width: 100%;
+  }
+`;
+
 export const Layout = styled.main(({ theme }) => ({
-  backgroundColor: theme.colors.bgBlue,
   minHeight: '100vh',
-  padding: '5.2rem 3rem',
   display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
   gap: '1.5rem',
-  justifyContent: 'center',
   maxWidth: '1200px',
-  margin: '0 auto',
+  width: '100%',
+  margin: '0 auto 4rem auto',
+  padding: '0 1.5rem',
+  boxSizing: 'border-box',
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
     padding: '1.5rem',
   },
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    flexDirection: 'column',
     padding: '1rem',
   },
 }));
-
-export const FormContainer = styled.div({
-  backgroundColor: 'white',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  padding: '2.6rem 3rem',
-  width: '80%',
-  maxWidth: '1200px',
-  margin: '0 auto',
-  borderRadius: '4rem',
-});

@@ -1,23 +1,23 @@
-import { SectionTitle } from '@/shared/components/SectionTitle';
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import { SectionTitle } from '@/shared/components/SectionTitle';
 import { mockClubDetail } from '../mock';
 
 export const ClubDescriptionEditSection = () => {
-  const [introduce, setIntroduce] = useState(mockClubDetail.introductionIntroduce);
+  const [introduce, setIntroduce] = useState(mockClubDetail.introductionOverview);
   const [activity, setActivity] = useState(mockClubDetail.introductionActivity);
-  const [wannabe, setWannabe] = useState(mockClubDetail.introductionWannabe);
+  const [ideal, setIdeal] = useState(mockClubDetail.introductionIdeal);
 
   return (
     <DescriptionContainer>
-      <SectionTitle>동아리 소개</SectionTitle>
+      <SectionTitle required>동아리 소개</SectionTitle>
       <InputArea value={introduce} onChange={(e) => setIntroduce(e.target.value)} />
 
-      <SectionTitle>활동 내용</SectionTitle>
+      <SectionTitle required>활동 내용</SectionTitle>
       <InputArea value={activity} onChange={(e) => setActivity(e.target.value)} />
 
-      <SectionTitle>모집하는 사람</SectionTitle>
-      <InputArea value={wannabe} onChange={(e) => setWannabe(e.target.value)} />
+      <SectionTitle required>모집하는 사람</SectionTitle>
+      <InputArea value={ideal} onChange={(e) => setIdeal(e.target.value)} />
     </DescriptionContainer>
   );
 };

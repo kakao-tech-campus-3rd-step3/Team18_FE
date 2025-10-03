@@ -39,7 +39,7 @@ export const useDetailApplications = (
           return oldData;
         },
       );
-      queryClient.invalidateQueries({ queryKey: ['applicants'] });
+      queryClient.invalidateQueries({ queryKey: ['applicants', clubId] });
     },
   });
 

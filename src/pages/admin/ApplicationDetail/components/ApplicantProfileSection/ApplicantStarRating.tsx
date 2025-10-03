@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
 import styled from '@emotion/styled';
+import { useMemo } from 'react';
 
 const getFillPercentage = (rating: number, index: number) => {
   if (rating >= index) return 100;

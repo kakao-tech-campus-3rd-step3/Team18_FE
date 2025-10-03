@@ -1,28 +1,35 @@
+import type { QuestionTypes } from '../constant/questionType';
+
+export type QuestionType = (typeof QuestionTypes)[keyof typeof QuestionTypes];
+
 export type Question =
   | {
       questionNum: number;
-      questionType: normalQuestionType;
+      questionType: typeof QuestionTypes.CHECKBOX | typeof QuestionTypes.RADIO;
       question: string;
       required: boolean;
-      optionList?: string[];
+      optionList: string[];
     }
   | {
       questionNum: number;
-      questionType: ScheduleQuestionType;
+      questionType: typeof QuestionTypes.TIME_SLOT;
       question: string;
       required: boolean;
-      timeSlotOption?: interviewSchedule[];
+      timeSlotOption: InterviewSchedule[];
+    }
+  | {
+      questionNum: number;
+      questionType: typeof QuestionTypes.TEXT;
+      question: string;
+      required: boolean;
     };
-
-type normalQuestionType = 'CHECKBOX' | 'RADIO' | 'TEXT';
-type ScheduleQuestionType = 'TIME_SLOT';
 
 export type AvailableTime = {
   start: string;
   end: string;
 };
 
-export type interviewSchedule = {
+export type InterviewSchedule = {
   date: string;
   availableTime: AvailableTime;
 };
@@ -46,12 +53,17 @@ export type ApplicationFormRequest = {
   }[];
 };
 
+export type PostInterviewSchedule = {
+  date: string;
+  selectedTimes: string[];
+};
+
 export type FormInputs = {
   name: string;
   studentId: string;
   department: string;
   phoneNumber: string;
   email: string;
-  answers: { answer: string | string[] }[];
-  questions: string[];
+  answers: object[];
+  selectedInterviewSchedule: string[];
 };

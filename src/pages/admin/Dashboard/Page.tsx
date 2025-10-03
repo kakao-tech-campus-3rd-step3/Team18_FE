@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { DashboardSummarySection } from './components/DashboardSummarySection';
 import { ApplicantListSection } from './components/ApplicantListSection';
+import { DashboardSummarySection } from './components/DashboardSummarySection';
 
 export const DashboardPage = () => {
   return (

@@ -1,7 +1,7 @@
-import { ClubListSection } from '@/pages/user/Main/components/ClubListSection';
+import { useCallback, useState } from 'react';
 import { BannerSection } from '@/pages/user/Main/components/BannerSection';
 import { MemoizedClubCategorySection } from '@/pages/user/Main/components/ClubCategorySection';
-import { useCallback, useState } from 'react';
+import { ClubListSection } from '@/pages/user/Main/components/ClubListSection';
 import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
 
 export const MainPage = () => {

@@ -1,6 +1,6 @@
+import type { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { useState, useRef, useEffect } from 'react';
-import type { ReactNode } from 'react';
 
 type NavigationContainerProps = {
   children: ReactNode;

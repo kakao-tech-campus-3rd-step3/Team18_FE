@@ -1,6 +1,6 @@
+import type { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import type { ReactNode } from 'react';
 import type { NavItemData } from '@/types/navigation';
 
 type Props = {

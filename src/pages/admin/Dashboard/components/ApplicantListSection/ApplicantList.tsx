@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import { ApplicantListItem } from './ApplicantListItem';
-import { Button } from '@/shared/components/Button';
-import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
-import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
+import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
+import { Button } from '@/shared/components/Button';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
+import { ApplicantListItem } from './ApplicantListItem';
 import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = {
