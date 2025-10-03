@@ -4,6 +4,7 @@ import { Form } from 'react-router-dom';
 import { Button } from '@/shared/components/Button';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { Text } from '@/shared/components/Text';
+import { ApplicantStarRating } from './ApplicantStarRating';
 import type { CreateCommentRequest } from '@/mocks/handler/applicant';
 
 type Props = {
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export const CommentForm = ({ createComment }: Props) => {
+  const [rating, setRating] = useState(0);
   const [content, setContent] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,6 +36,7 @@ export const CommentForm = ({ createComment }: Props) => {
     <Layout>
       <Wrapper>
         <Text weight={'medium'}>댓글</Text>
+        <ApplicantStarRating rating={rating} onRatingChange={setRating} />
       </Wrapper>
       <Form onSubmit={handleSubmit}>
         <OutlineTextareaField
