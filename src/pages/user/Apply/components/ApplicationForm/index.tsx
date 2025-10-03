@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { postApplicationForm } from '@/pages/user/Apply/api/apply';
-import { QuestionType } from '@/pages/user/Apply/constant/questionType';
+import { QuestionTypes } from '@/pages/user/Apply/constant/questionType';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
@@ -37,10 +37,10 @@ export const ApplicationForm = ({ questions }: Props) => {
 
   const questionsWithIndex = questions.map((q, i) => ({ ...q, originalIndex: i }));
   const timeSlotQuestions = questionsWithIndex.filter(
-    (q) => q.questionType === QuestionType.TIME_SLOT,
+    (q) => q.questionType === QuestionTypes.TIME_SLOT,
   );
   const otherQuestions = questionsWithIndex.filter(
-    (q) => q.questionType !== QuestionType.TIME_SLOT,
+    (q) => q.questionType !== QuestionTypes.TIME_SLOT,
   );
 
   return (
@@ -121,7 +121,7 @@ export const ApplicationForm = ({ questions }: Props) => {
               <S.ChoiceFormFiled key={field.questionNum}>
                 <S.Label>{field.question}</S.Label>
 
-                {field.questionType === QuestionType.CHECKBOX &&
+                {field.questionType === QuestionTypes.CHECKBOX &&
                   field.optionList?.map((option, optIndex) => (
                     <S.Label key={optIndex}>
                       <S.OptionInput
@@ -133,7 +133,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                     </S.Label>
                   ))}
 
-                {field.questionType === QuestionType.RADIO &&
+                {field.questionType === QuestionTypes.RADIO &&
                   field.optionList?.map((option, optIndex) => (
                     <S.Label key={optIndex}>
                       <S.OptionInput
@@ -145,7 +145,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                     </S.Label>
                   ))}
 
-                {field.questionType === QuestionType.TEXT && (
+                {field.questionType === QuestionTypes.TEXT && (
                   <OutlineTextareaField
                     placeholder='1000자 미만으로 입력하세요.'
                     {...methods.register(`answers.${field.originalIndex}`)}
