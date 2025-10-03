@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
-import { Text } from '@/shared/components/Text';
+import { useState } from 'react';
 import { Form } from 'react-router-dom';
 import { Button } from '@/shared/components/Button';
-import { useState } from 'react';
+import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
+import { Text } from '@/shared/components/Text';
 import type { CreateCommentRequest } from '@/mocks/handler/applicant';
 
 type Props = {

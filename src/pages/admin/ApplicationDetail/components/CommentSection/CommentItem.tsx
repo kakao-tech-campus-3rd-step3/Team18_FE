@@ -1,11 +1,11 @@
-import { useParams } from 'react-router-dom';
-import { useState } from 'react';
 import styled from '@emotion/styled';
-import { Text } from '@/shared/components/Text';
-import { Button } from '@/shared/components/Button';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useComments } from '@/pages/admin/ApplicationDetail/hooks/useComments';
-import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
+import { Button } from '@/shared/components/Button';
 import { UnderlineTextareaField } from '@/shared/components/Form/TextAreaField/UnderlineTextareaField';
+import { Text } from '@/shared/components/Text';
+import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 
 type Props = Pick<Comment, 'author' | 'content' | 'createdAt' | 'commentId' | 'rating'>;
 
