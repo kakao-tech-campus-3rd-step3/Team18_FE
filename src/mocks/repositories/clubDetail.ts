@@ -37,10 +37,10 @@ export const mockClubDetail: ClubDetail[] = [
     category: '프로그래밍',
     shortIntroduction: '프로그래밍과 최신 기술을 탐구하는 동아리',
     introductionImages: [
-      'https://plus.unsplash.com/premium_photo-1700000000001-abcdef?q=80&w=1587',
-      'https://plus.unsplash.com/premium_photo-1700000000002-abcdef?q=80&w=1470',
-      'https://plus.unsplash.com/premium_photo-1700000000003-abcdef?q=80&w=1470',
-      'https://plus.unsplash.com/premium_photo-1700000000004-abcdef?q=80&w=1470',
+      'https://images.unsplash.com/photo-1622675363311-3e1904dc1885?w=1600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRldmVsb3BlcnN8ZW58MHx8MHx8fDA%3D',
+      'https://images.unsplash.com/photo-1637073849667-91120a924221?w=1600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGV2ZWxvcGVyc3xlbnwwfHwwfHx8MA%3D%3D',
+      'https://plus.unsplash.com/premium_photo-1683134153517-32015af21911?w=1600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGV2ZWxvcGVyc3xlbnwwfHwwfHx8MA%3D%3D',
+      'https://plus.unsplash.com/premium_photo-1704756437647-559e43344877?q=80&w=1470',
     ],
     introductionOverview: `코드마스터는 최신 프로그래밍 언어와 프레임워크를 학습하고, 
 팀 단위 프로젝트를 진행하며 실무 경험을 쌓는 동아리입니다. 
@@ -65,10 +65,10 @@ export const mockClubDetail: ClubDetail[] = [
     category: '예술',
     shortIntroduction: '창작 활동과 전시를 즐기는 예술 동아리',
     introductionImages: [
-      'https://plus.unsplash.com/premium_photo-1710000000001-abcdef?q=80&w=1587',
-      'https://plus.unsplash.com/premium_photo-1710000000002-abcdef?q=80&w=1470',
-      'https://plus.unsplash.com/premium_photo-1710000000003-abcdef?q=80&w=1470',
-      'https://plus.unsplash.com/premium_photo-1710000000004-abcdef?q=80&w=1470',
+      'https://plus.unsplash.com/premium_photo-1729880132913-4ca7d67f8eeb?q=80&w=1587',
+      'https://plus.unsplash.com/premium_photo-1723917604890-418aa2307d2f?q=80&w=1470',
+      'https://plus.unsplash.com/premium_photo-1704756437707-e9fee5c04bcf?q=80&w=1470',
+      'https://plus.unsplash.com/premium_photo-1704756437647-559e43344877?q=80&w=1470',
     ],
     introductionOverview: `아트픽은 회원들이 창작 활동을 통해 자신만의 작품을 제작하고, 
 전시회를 통해 작품을 공유하는 것을 목표로 하는 동아리입니다. 
