@@ -25,7 +25,7 @@ export const CommentForm = ({ createComment }: Props) => {
 
     const newComment = {
       content: content.trim(),
-      rating: 5,
+      rating: rating,
     };
 
     createComment(newComment);
