@@ -9,6 +9,10 @@ import type { InterviewSchedule, PostInterviewSchedule } from '@/pages/user/Appl
 export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSchedule) => {
   const startNum: number = parseTime(availableTime.start);
   const endNum: number = parseTime(availableTime.end);
+  const timeIntervalArray = getTimeIntervalArray(generateHours(startNum, endNum));
+  const [selectedTime, setSelectedTime] = useState<boolean[]>(() =>
+    new Array(timeIntervalArray.length).fill(false),
+  );
   const isDragging = useRef<boolean>(false);
   const isMouseDown = useRef<boolean>(false);
   const mode = useRef<boolean>(false);
@@ -16,10 +20,6 @@ export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSche
   const lastHoveredIndex = useRef<string | null>(null);
   const startIndex = useRef<string | undefined>('');
   const selectedIndex = useRef<string | undefined>('');
-  const timeIntervalArray = getTimeIntervalArray(generateHours(startNum, endNum));
-  const [selected, setSelected] = useState<boolean[]>(() =>
-    new Array(timeIntervalArray.length).fill(false),
-  );
   const selectedInterviewTime = useRef<Set<string>>(new Set());
   const mergedInterviewTime: string[] = [];
   const { setValue, getValues } = useFormContext();
@@ -44,12 +44,12 @@ export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSche
     e.preventDefault();
     isMouseDown.current = true;
     startIndex.current = e.currentTarget.dataset.index;
-    if (startIndex.current) mode.current = !selected[Number(startIndex.current)];
+    if (startIndex.current) mode.current = !selectedTime[Number(startIndex.current)];
 
-    const newValue = [...selected];
+    const newValue = [...selectedTime];
     newValue[Number(startIndex.current)] = mode.current;
 
-    setSelected(newValue);
+    setSelectedTime(newValue);
     lastHoveredIndex.current = String(startIndex.current);
   };
 
@@ -63,7 +63,7 @@ export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSche
 
     handleIndexChange(Number(selectedIndex.current));
 
-    setSelected((prev) => {
+    setSelectedTime((prev) => {
       const newSelected = [...prev];
       const start = Math.min(Number(startIndex.current), Number(selectedIndex.current));
       const end = Math.max(Number(startIndex.current), Number(selectedIndex.current));
@@ -80,7 +80,7 @@ export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSche
     [isDragging.current, isMouseDown.current] = [false, false];
     handleIndexChange(Number(selectedIndex.current));
 
-    selected.forEach((curVal, index) => {
+    selectedTime.forEach((curVal, index) => {
       const [start, end] = timeIntervalArray[index];
       if (curVal) {
         selectedInterviewTime.current.add(`${start}-${end}`);
@@ -147,7 +147,7 @@ export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSche
           <TimeSpan
             key={idx}
             data-index={idx}
-            selected={selected[idx]}
+            selected={selectedTime[idx]}
             onMouseDown={handleMouseDown}
             onMouseEnter={handleMouseMove}
             onMouseUp={handleMouseUp}
