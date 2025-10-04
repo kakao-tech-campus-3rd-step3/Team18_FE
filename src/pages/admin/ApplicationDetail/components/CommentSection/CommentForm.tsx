@@ -14,12 +14,17 @@ type Props = {
 export const CommentForm = ({ createComment }: Props) => {
   const [rating, setRating] = useState(0);
   const [content, setContent] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const isContentInvalid = !content.trim();
+  const isRatingInvalid = rating === 0;
+  const isSubmitDisabled = isRatingInvalid || isContentInvalid;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitted(true);
 
-    if (!content.trim()) {
-      alert('댓글을 입력해주세요');
+    if (isSubmitDisabled) {
       return;
     }
 
@@ -30,7 +35,20 @@ export const CommentForm = ({ createComment }: Props) => {
 
     createComment(newComment);
     setContent('');
+    setRating(0);
+    setIsSubmitted(false);
   };
+
+  let errorMessage = '';
+  if (isSubmitted && isSubmitDisabled) {
+    if (isRatingInvalid && isContentInvalid) {
+      errorMessage = '별점과 댓글을 모두 입력해주세요.';
+    } else if (isRatingInvalid) {
+      errorMessage = '별점을 선택해주세요.';
+    } else {
+      errorMessage = '댓글을 입력해주세요.';
+    }
+  }
 
   return (
     <Layout>
@@ -44,6 +62,8 @@ export const CommentForm = ({ createComment }: Props) => {
           onChange={(e) => {
             setContent(e.target.value);
           }}
+          invalid={isSubmitted && isSubmitDisabled}
+          message={errorMessage}
         />
         <ButtonWrapper>
           <Button variant='outline' type='submit' width='3.5rem'>
