@@ -19,12 +19,17 @@ export const CommentForm = ({ createComment }: Props) => {
   const isContentInvalid = !content.trim();
   const isRatingInvalid = rating === 0;
   const isSubmitDisabled = isRatingInvalid || isContentInvalid;
+  const isContentTooLong = content.length > 500;
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitted(true);
 
-    if (isSubmitDisabled) {
+    if (isSubmitDisabled || isContentTooLong) {
       return;
     }
 
@@ -40,7 +45,9 @@ export const CommentForm = ({ createComment }: Props) => {
   };
 
   let errorMessage = '';
-  if (isSubmitted && isSubmitDisabled) {
+  if (isContentTooLong) {
+    errorMessage = '댓글은 500자 이하로 입력해주세요.';
+  } else if (isSubmitted && isSubmitDisabled) {
     if (isRatingInvalid && isContentInvalid) {
       errorMessage = '별점과 댓글을 모두 입력해주세요.';
     } else if (isRatingInvalid) {
@@ -59,13 +66,14 @@ export const CommentForm = ({ createComment }: Props) => {
       <Form onSubmit={handleSubmit}>
         <OutlineTextareaField
           value={content}
-          onChange={(e) => {
-            setContent(e.target.value);
-          }}
-          invalid={isSubmitted && isSubmitDisabled}
+          onChange={handleChange}
+          invalid={(isSubmitted && isSubmitDisabled) || isContentTooLong}
           message={errorMessage}
         />
         <ButtonWrapper>
+          <Text size={'sm'} color={isContentTooLong ? '#fa342c' : '#b0b3ba'}>
+            {content.length} / 500
+          </Text>
           <Button variant='outline' type='submit' width='3.5rem'>
             등록
           </Button>
@@ -89,6 +97,8 @@ const Wrapper = styled.div({
 
 const ButtonWrapper = styled.div({
   display: 'flex',
-  justifyContent: 'flex-end',
-  marginRight: '-1.65rem',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginRight: '-2rem',
+  padding: '0 0.3rem',
 });
