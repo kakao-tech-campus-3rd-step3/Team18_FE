@@ -4,12 +4,7 @@ import { getSign, type Sign } from '@/pages/user/Apply/utils/math';
 import { generateHours, getTimeIntervalArray, parseTime } from '@/pages/user/Apply/utils/time';
 import { Text } from '@/shared/components/Text';
 import { TimeSpan, Wrapper, DateText } from './index.styled';
-import type { AvailableTime, PostInterviewSchedule } from '@/pages/user/Apply/type/apply';
-
-type InterviewSchedule = {
-  date: string;
-  availableTime: AvailableTime;
-};
+import type { InterviewSchedule, PostInterviewSchedule } from '@/pages/user/Apply/type/apply';
 
 export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) => {
   const startNum: number = parseTime(availableTime.start);
