@@ -6,7 +6,7 @@ import { Text } from '@/shared/components/Text';
 import { TimeSpan, Wrapper, DateText } from './index.styled';
 import type { InterviewSchedule, PostInterviewSchedule } from '@/pages/user/Apply/type/apply';
 
-export const InterviewSchedule = ({ availableTime, date }: InterviewSchedule) => {
+export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSchedule) => {
   const startNum: number = parseTime(availableTime.start);
   const endNum: number = parseTime(availableTime.end);
   const isDragging = useRef<boolean>(false);
