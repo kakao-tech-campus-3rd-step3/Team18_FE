@@ -1,27 +1,40 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 
-interface ApplicantStarRatingProps {
+type ApplicantStarRatingProps = {
   rating: number;
   onRatingChange: (rating: number) => void;
-}
+};
 
 const STAR_INDICES = [1, 2, 3, 4, 5];
 
 export const ApplicantStarRating = ({ rating, onRatingChange }: ApplicantStarRatingProps) => {
   const [hover, setHover] = useState(0);
 
+  const handleStarClick = (index: number, e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const isLeftHalf = e.clientX - rect.left < rect.width / 2;
+    onRatingChange(isLeftHalf ? index - 0.5 : index);
+  };
+
+  const handleStarHover = (index: number, e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const isLeftHalf = e.clientX - rect.left < rect.width / 2;
+    setHover(isLeftHalf ? index - 0.5 : index);
+  };
+
   return (
-    <StarContainer
-      onMouseLeave={() => setHover(0)}
-    >
+    <StarContainer onMouseLeave={() => setHover(0)}>
       {STAR_INDICES.map((index) => {
-        const fillPercentage = index <= (hover || rating) ? 100 : 0;
+        const currentRating = hover || rating;
+        const fillPercentage =
+          index <= currentRating ? 100 : index - 0.5 === currentRating ? 50 : 0;
+
         return (
           <StarWrapper
             key={index}
-            onClick={() => onRatingChange(index)}
-            onMouseEnter={() => setHover(index)}
+            onClick={(e) => handleStarClick(index, e)}
+            onMouseMove={(e) => handleStarHover(index, e)}
           >
             <StarEmpty>★</StarEmpty>
             <StarFilled fillPercentage={fillPercentage}>★</StarFilled>
