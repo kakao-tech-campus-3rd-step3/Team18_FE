@@ -5,6 +5,7 @@ import {
   convertSelectionToTimeInterval,
   generateHours,
   getTimeIntervalArray,
+  mergeContinuousTimeInterval,
   parseTime,
 } from '@/pages/user/Apply/utils/time';
 import { Text } from '@/shared/components/Text';
@@ -27,7 +28,6 @@ export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSche
   const lastHoveredIndex = useRef<string | null>(null);
   const startIndex = useRef<string | undefined>('');
   const selectedIndex = useRef<string | undefined>('');
-  const mergedInterviewTime: string[] = [];
   const { setValue, getValues } = useFormContext();
 
   function handleIndexChange(newIndex: number) {
@@ -90,36 +90,10 @@ export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSche
 
     handleIndexChange(Number(selectedIndex.current));
 
-    //1. 선택된 slot->시간 배열
+    //1. 선택된 slot -> 시간 배열 변환
     const selectedInterviewTime = convertSelectionToTimeInterval(selectedTime, timeIntervalArray);
-    console.log(selectedInterviewTime);
-
-    const selectedTimeIntervalArray: string[] = [...selectedInterviewTime].sort();
-
-    selectedTimeIntervalArray.forEach((e, idx) => {
-      if (mergedInterviewTime.length < 1) {
-        mergedInterviewTime.push(e);
-        return;
-      }
-
-      if (mergedInterviewTime.length > 0) {
-        if (mergedInterviewTime.length > idx) {
-          return;
-        }
-      }
-
-      const prevVal = mergedInterviewTime[mergedInterviewTime.length - 1];
-
-      const [prevStart, prevEnd] = prevVal.split('-');
-      const [currStart, currEnd] = e.split('-');
-
-      if (prevEnd === currStart) {
-        mergedInterviewTime.pop();
-        mergedInterviewTime.push(prevStart + '-' + currEnd);
-      } else {
-        mergedInterviewTime.push(e);
-      }
-    });
+    //2. 시간 배열 -> 연속된 시간 병합(ex. 11:30~12:00,12:00~12:30 -> 11:30 ~ 12:30)
+    const mergedInterviewTime = mergeContinuousTimeInterval(selectedInterviewTime);
 
     const currentInterviewTime: PostInterviewSchedule = {
       date: date,
