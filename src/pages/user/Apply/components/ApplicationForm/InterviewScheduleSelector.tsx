@@ -1,7 +1,12 @@
 import { useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { getSign, type Sign } from '@/pages/user/Apply/utils/math';
-import { generateHours, getTimeIntervalArray, parseTime } from '@/pages/user/Apply/utils/time';
+import {
+  convertSelectionToTimeInterval,
+  generateHours,
+  getTimeIntervalArray,
+  parseTime,
+} from '@/pages/user/Apply/utils/time';
 import { Text } from '@/shared/components/Text';
 import { TimeSpan, Wrapper, DateText } from './index.styled';
 import type { InterviewSchedule, PostInterviewSchedule } from '@/pages/user/Apply/type/apply';
@@ -9,7 +14,9 @@ import type { InterviewSchedule, PostInterviewSchedule } from '@/pages/user/Appl
 export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSchedule) => {
   const startNum: number = parseTime(availableTime.start);
   const endNum: number = parseTime(availableTime.end);
-  const timeIntervalArray = getTimeIntervalArray(generateHours(startNum, endNum));
+  const timeIntervalArray: [string, string][] = getTimeIntervalArray(
+    generateHours(startNum, endNum),
+  );
   const [selectedTime, setSelectedTime] = useState<boolean[]>(() =>
     new Array(timeIntervalArray.length).fill(false),
   );
@@ -20,7 +27,6 @@ export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSche
   const lastHoveredIndex = useRef<string | null>(null);
   const startIndex = useRef<string | undefined>('');
   const selectedIndex = useRef<string | undefined>('');
-  const selectedInterviewTime = useRef<Set<string>>(new Set());
   const mergedInterviewTime: string[] = [];
   const { setValue, getValues } = useFormContext();
 
@@ -84,16 +90,11 @@ export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSche
 
     handleIndexChange(Number(selectedIndex.current));
 
-    selectedTime.forEach((curVal, index) => {
-      const [start, end] = timeIntervalArray[index];
-      if (curVal) {
-        selectedInterviewTime.current.add(`${start}-${end}`);
-      } else {
-        selectedInterviewTime.current.delete(`${start}-${end}`);
-      }
-    });
+    //1. 선택된 slot->시간 배열
+    const selectedInterviewTime = convertSelectionToTimeInterval(selectedTime, timeIntervalArray);
+    console.log(selectedInterviewTime);
 
-    const selectedTimeIntervalArray: string[] = [...selectedInterviewTime.current].sort();
+    const selectedTimeIntervalArray: string[] = [...selectedInterviewTime].sort();
 
     selectedTimeIntervalArray.forEach((e, idx) => {
       if (mergedInterviewTime.length < 1) {
