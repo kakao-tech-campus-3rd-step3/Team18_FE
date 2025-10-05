@@ -1,5 +1,3 @@
-import { useRef, useState } from 'react';
-import { getSign, type Sign } from '@/pages/user/Apply/utils/math';
 import {
   convertSelectionToTimeInterval,
   generateHours,
@@ -10,7 +8,8 @@ import {
 import { Text } from '@/shared/components/Text';
 import { TimeSpan, Wrapper, DateText } from './index.styled';
 import type { InterviewSchedule } from '@/pages/user/Apply/type/apply';
-import { useUpdateFormValue } from '../../hook/useUpdateFormData';
+import { useUpdateFormValue } from '@/pages/user/Apply/hook/useUpdateFormData';
+import { useDragSelection } from '@/pages/user/Apply/hook/useDragSelection';
 
 export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSchedule) => {
   const startNum: number = parseTime(availableTime.start);
@@ -18,77 +17,10 @@ export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSche
   const timeIntervalArray: [string, string][] = getTimeIntervalArray(
     generateHours(startNum, endNum),
   );
-  const [selectedTime, setSelectedTime] = useState<boolean[]>(() =>
-    new Array(timeIntervalArray.length).fill(false),
-  );
-  const [isDragging, setIsDragging] = useState<boolean>(false);
-  const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
-  const mode = useRef<boolean>(false);
-  const [prevDiffSign, setPrevDiffSign] = useState<Sign>(0);
-  const lastHoveredIndex = useRef<string | null>(null);
-  const startIndex = useRef<string | undefined>('');
-  const selectedIndex = useRef<string | undefined>('');
+
   const { updateScheduleData } = useUpdateFormValue();
-  function handleIndexChange(newIndex: number) {
-    const diff = newIndex - Number(lastHoveredIndex.current);
-    const currentSign = getSign(diff);
 
-    if (prevDiffSign !== 0 && currentSign !== 0 && currentSign !== prevDiffSign) {
-      mode.current = !mode.current;
-
-      if (currentSign < 0) {
-        startIndex.current = String(newIndex + 1);
-      } else if (currentSign > 0) {
-        startIndex.current = String(newIndex - 1);
-      }
-    }
-    setPrevDiffSign(currentSign);
-  }
-
-  const handleMouseDown = (e: React.MouseEvent<HTMLSpanElement>) => {
-    e.preventDefault();
-    setIsMouseDown(true);
-
-    startIndex.current = e.currentTarget.dataset.index;
-    if (startIndex.current) mode.current = !selectedTime[Number(startIndex.current)];
-
-    const newValue = [...selectedTime];
-    newValue[Number(startIndex.current)] = mode.current;
-
-    setSelectedTime(newValue);
-    lastHoveredIndex.current = String(startIndex.current);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLSpanElement>) => {
-    if (!isMouseDown) return;
-    setIsDragging(true);
-
-    selectedIndex.current = e.currentTarget.dataset.index;
-    if (!e.currentTarget.dataset.index || selectedIndex.current === lastHoveredIndex.current)
-      return;
-
-    handleIndexChange(Number(selectedIndex.current));
-
-    setSelectedTime((prev) => {
-      const newSelected = [...prev];
-      const start = Math.min(Number(startIndex.current), Number(selectedIndex.current));
-      const end = Math.max(Number(startIndex.current), Number(selectedIndex.current));
-
-      for (let i = start; i <= end; i++) {
-        newSelected[i] = mode.current;
-      }
-      return newSelected;
-    });
-    lastHoveredIndex.current = selectedIndex.current!;
-  };
-
-  const handleMouseUp = () => {
-    if (!isDragging) return;
-    setIsMouseDown(false);
-    setIsDragging(false);
-
-    handleIndexChange(Number(selectedIndex.current));
-
+  const handleDragEnd = () => {
     const selectedInterviewTime: Set<string> = convertSelectionToTimeInterval(
       selectedTime,
       timeIntervalArray,
@@ -96,6 +28,11 @@ export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSche
     const mergedInterviewTime: string[] = mergeContinuousTimeInterval(selectedInterviewTime);
     updateScheduleData(date, mergedInterviewTime);
   };
+
+  const { handleMouseDown, handleMouseMove, handleMouseUp, selectedTime } = useDragSelection(
+    handleDragEnd,
+    timeIntervalArray,
+  );
 
   return (
     <Wrapper>
