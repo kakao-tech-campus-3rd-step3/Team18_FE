@@ -1,3 +1,5 @@
+import type { AvailableTime } from '../type/apply';
+
 export function parseTime(time: string): number {
   return parseInt(time.split(':')[0], 10);
 }
@@ -90,4 +92,10 @@ export function mergeContinuousTimeInterval(selectedTime: Set<string>): string[]
   });
 
   return mergedInterviewTime;
+}
+
+export function generateTimeIntervalArray(availableTime: AvailableTime): [string, string][] {
+  const startNum: number = parseTime(availableTime.start);
+  const endNum: number = parseTime(availableTime.end);
+  return getTimeIntervalArray(generateHours(startNum, endNum));
 }
