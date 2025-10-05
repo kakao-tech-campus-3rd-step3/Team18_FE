@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { useFormContext } from 'react-hook-form';
 import { getSign, type Sign } from '@/pages/user/Apply/utils/math';
 import {
   convertSelectionToTimeInterval,
@@ -10,7 +9,8 @@ import {
 } from '@/pages/user/Apply/utils/time';
 import { Text } from '@/shared/components/Text';
 import { TimeSpan, Wrapper, DateText } from './index.styled';
-import type { InterviewSchedule, PostInterviewSchedule } from '@/pages/user/Apply/type/apply';
+import type { InterviewSchedule } from '@/pages/user/Apply/type/apply';
+import { useUpdateFormValue } from '../../hook/useUpdateFormData';
 
 export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSchedule) => {
   const startNum: number = parseTime(availableTime.start);
@@ -28,8 +28,7 @@ export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSche
   const lastHoveredIndex = useRef<string | null>(null);
   const startIndex = useRef<string | undefined>('');
   const selectedIndex = useRef<string | undefined>('');
-  const { setValue, getValues } = useFormContext();
-
+  const { updateScheduleData } = useUpdateFormValue();
   function handleIndexChange(newIndex: number) {
     const diff = newIndex - Number(lastHoveredIndex.current);
     const currentSign = getSign(diff);
@@ -90,32 +89,12 @@ export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSche
 
     handleIndexChange(Number(selectedIndex.current));
 
-    //1. 선택된 slot -> 시간 배열 변환
-    const selectedInterviewTime = convertSelectionToTimeInterval(selectedTime, timeIntervalArray);
-    //2. 시간 배열 -> 연속된 시간 병합(ex. 11:30~12:00,12:00~12:30 -> 11:30 ~ 12:30)
-    const mergedInterviewTime = mergeContinuousTimeInterval(selectedInterviewTime);
-
-    const currentInterviewTime: PostInterviewSchedule = {
-      date: date,
-      selectedTimes: mergedInterviewTime ?? [],
-    };
-
-    const currentInterviewSchedule = getValues('selectedInterviewSchedule') || [];
-
-    const sameDateIndex: number = currentInterviewSchedule.findIndex(
-      (schedule: PostInterviewSchedule) => schedule.date === date,
+    const selectedInterviewTime: Set<string> = convertSelectionToTimeInterval(
+      selectedTime,
+      timeIntervalArray,
     );
-
-    let updatedSchedule: PostInterviewSchedule[];
-
-    if (sameDateIndex !== -1) {
-      updatedSchedule = [...currentInterviewSchedule];
-      updatedSchedule[sameDateIndex] = currentInterviewTime;
-    } else {
-      updatedSchedule = [...currentInterviewSchedule, currentInterviewTime];
-    }
-
-    setValue('selectedInterviewSchedule', updatedSchedule);
+    const mergedInterviewTime: string[] = mergeContinuousTimeInterval(selectedInterviewTime);
+    updateScheduleData(date, mergedInterviewTime);
   };
 
   return (
