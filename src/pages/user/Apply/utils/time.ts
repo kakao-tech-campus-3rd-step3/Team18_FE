@@ -59,3 +59,35 @@ export function convertSelectionToTimeInterval(
 
   return selectedInterviewTime;
 }
+
+export function mergeContinuousTimeInterval(selectedTime: Set<string>): string[] {
+  const selectedTimeIntervalArray = [...selectedTime].sort();
+  const mergedInterviewTime: string[] = [];
+
+  selectedTimeIntervalArray.forEach((e, idx) => {
+    if (mergedInterviewTime.length < 1) {
+      mergedInterviewTime.push(e);
+      return;
+    }
+
+    if (mergedInterviewTime.length > 0) {
+      if (mergedInterviewTime.length > idx) {
+        return;
+      }
+    }
+
+    const prevVal = mergedInterviewTime[mergedInterviewTime.length - 1];
+
+    const [prevStart, prevEnd] = prevVal.split('-');
+    const [currStart, currEnd] = e.split('-');
+
+    if (prevEnd === currStart) {
+      mergedInterviewTime.pop();
+      mergedInterviewTime.push(prevStart + '-' + currEnd);
+    } else {
+      mergedInterviewTime.push(e);
+    }
+  });
+
+  return mergedInterviewTime;
+}
