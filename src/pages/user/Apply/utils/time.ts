@@ -45,7 +45,7 @@ export function generateHours(startHour: number, endHour: number): string[] {
 export function convertSelectionToTimeInterval(
   selected: boolean[],
   timeIntervalArray: [string, string][],
-) {
+): Set<string> {
   const selectedInterviewTime = new Set<string>();
 
   selected.forEach((curVal, index) => {
