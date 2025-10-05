@@ -1,9 +1,7 @@
 import {
   convertSelectionToTimeInterval,
-  generateHours,
-  getTimeIntervalArray,
+  generateTimeIntervalArray,
   mergeContinuousTimeInterval,
-  parseTime,
 } from '@/pages/user/Apply/utils/time';
 import { Text } from '@/shared/components/Text';
 import { TimeSpan, Wrapper, DateText } from './index.styled';
@@ -12,13 +10,8 @@ import { useUpdateFormValue } from '@/pages/user/Apply/hook/useUpdateFormData';
 import { useDragSelection } from '@/pages/user/Apply/hook/useDragSelection';
 
 export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSchedule) => {
-  const startNum: number = parseTime(availableTime.start);
-  const endNum: number = parseTime(availableTime.end);
-  const timeIntervalArray: [string, string][] = getTimeIntervalArray(
-    generateHours(startNum, endNum),
-  );
-
   const { updateScheduleData } = useUpdateFormValue();
+  const timeIntervalArray: [string, string][] = generateTimeIntervalArray(availableTime);
 
   const handleDragEnd = () => {
     const selectedInterviewTime: Set<string> = convertSelectionToTimeInterval(
