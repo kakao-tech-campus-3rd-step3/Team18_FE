@@ -5,6 +5,7 @@ import { useComments } from '@/pages/admin/ApplicationDetail/hooks/useComments';
 import { Button } from '@/shared/components/Button';
 import { UnderlineTextareaField } from '@/shared/components/Form/TextAreaField/UnderlineTextareaField';
 import { Text } from '@/shared/components/Text';
+import { ApplicantStarRating } from './ApplicantStarRating';
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 
 type Props = Pick<Comment, 'author' | 'content' | 'createdAt' | 'commentId' | 'rating'>;
@@ -15,6 +16,7 @@ export const CommentItem = ({ author, commentId, content, createdAt, rating }: P
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(content);
+  const [editedRating, setEditedRating] = useState(rating);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -26,17 +28,22 @@ export const CommentItem = ({ author, commentId, content, createdAt, rating }: P
       alert('댓글 내용을 입력해주세요');
       return;
     }
+    if (editedRating === 0) {
+      alert('별점을 선택해주세요.');
+      return;
+    }
 
     updateComment({
       commentId,
       content: editedContent,
-      rating,
+      rating: editedRating,
     });
     setIsEditing(false);
   };
 
   const handleCancel = () => {
     setEditedContent(content);
+    setEditedRating(rating);
     setIsEditing(false);
   };
 
@@ -69,6 +76,7 @@ export const CommentItem = ({ author, commentId, content, createdAt, rating }: P
 
       {isEditing ? (
         <EditMode>
+          <ApplicantStarRating rating={editedRating} onRatingChange={setEditedRating} />
           <UnderlineTextareaField
             value={editedContent}
             onChange={(e) => setEditedContent(e.target.value)}
