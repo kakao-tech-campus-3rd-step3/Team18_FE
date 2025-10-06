@@ -8,6 +8,7 @@ import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
 import { MainPage } from '@/pages/user/Main/Page.tsx';
 import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
 import { ClubApplicationPage } from './user/Apply/Page';
+import { LoginPage } from './admin/Login/Page';
 
 const { USER, ADMIN, COMMON } = ROUTE_PATH;
 
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: COMMON.CLUBDETAIL,
         element: <ClubDetailPage />,
+      },
+      {
+        path: COMMON.LOGIN,
+        element: <LoginPage />,
       },
       {
         path: USER.APPLICATION,
