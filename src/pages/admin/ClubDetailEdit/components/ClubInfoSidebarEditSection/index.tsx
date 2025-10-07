@@ -35,7 +35,12 @@ export const ClubInfoSidebarEditSection = () => {
       <S.InfoItem>
         <S.Label>연락처:</S.Label>
         <UnderlineInputField
-          {...register('presidentPhoneNumber', { required: '연락처를 입력해주세요.' })}
+          {...register('presidentPhoneNumber', {
+            pattern: {
+              value: /^\d{3}-\d{4}-\d{4}$/,
+              message: '전화번호 형식은 000-0000-0000입니다.',
+            },
+          })}
           invalid={!!errors.presidentPhoneNumber}
           message={errors.presidentPhoneNumber?.message}
         />
@@ -44,7 +49,10 @@ export const ClubInfoSidebarEditSection = () => {
       <S.InfoItem>
         <S.Label required>동방 위치:</S.Label>
         <UnderlineInputField
-          {...register('location', { required: '동방 위치를 입력해주세요.' })}
+          {...register('location', {
+            required: '동방 위치를 입력해주세요.',
+            maxLength: { value: 20, message: '20자 이하로 입력해주세요.' },
+          })}
           invalid={!!errors.location}
           message={errors.location?.message}
         />
@@ -90,20 +98,25 @@ export const ClubInfoSidebarEditSection = () => {
       <S.InfoItem>
         <S.Label required>정기 모임:</S.Label>
         <UnderlineInputField
-          {...register('regularMeetingInfo', { required: '정기 모임 정보를 입력해주세요.' })}
+          {...register('regularMeetingInfo', {
+            required: '정기 모임 정보를 입력해주세요.',
+            maxLength: { value: 50, message: '50자 이하로 입력해주세요.' },
+          })}
           invalid={!!errors.regularMeetingInfo}
           message={errors.regularMeetingInfo?.message}
         />
       </S.InfoItem>
 
       <S.InfoItem column>
-  <S.Label>지원 시 유의사항:</S.Label>
-  <OutlineTextareaField
-    {...register('applicationNotice', { required: '지원 시 유의사항을 입력해주세요.' })}
-    invalid={!!errors.applicationNotice}
-    message={errors.applicationNotice?.message}
-  />
-</S.InfoItem>
+        <S.Label>지원 시 유의사항:</S.Label>
+        <OutlineTextareaField
+          {...register('applicationNotice', {
+            maxLength: { value: 100, message: '100자 이하로 입력해주세요.' },
+          })}
+          invalid={!!errors.applicationNotice}
+          message={errors.applicationNotice?.message}
+        />
+      </S.InfoItem>
     </S.SidebarContainer>
   );
 };
