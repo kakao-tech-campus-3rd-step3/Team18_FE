@@ -1,12 +1,21 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { SectionTitle } from '@/shared/components/SectionTitle';
-import { mockClubDetail } from '../mock';
 
-export const ClubDescriptionEditSection = () => {
-  const [introduce, setIntroduce] = useState(mockClubDetail.introductionOverview);
-  const [activity, setActivity] = useState(mockClubDetail.introductionActivity);
-  const [ideal, setIdeal] = useState(mockClubDetail.introductionIdeal);
+interface ClubDescriptionEditSectionProps {
+  introductionOverview: string;
+  introductionActivity: string;
+  introductionIdeal: string;
+}
+
+export const ClubDescriptionEditSection = ({
+  introductionOverview,
+  introductionActivity,
+  introductionIdeal,
+}: ClubDescriptionEditSectionProps) => {
+  const [introduce, setIntroduce] = useState(introductionOverview);
+  const [activity, setActivity] = useState(introductionActivity);
+  const [ideal, setIdeal] = useState(introductionIdeal);
 
   return (
     <DescriptionContainer>
@@ -40,7 +49,6 @@ const InputArea = styled.textarea(({ theme }) => ({
   backgroundColor: theme.colors.bg,
   resize: 'vertical',
   minHeight: '100px',
-  transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
 
   '&:focus': {
     outline: 'none',
