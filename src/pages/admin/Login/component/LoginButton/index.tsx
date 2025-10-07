@@ -4,11 +4,11 @@ import { Button } from '@/shared/components/Button';
 export const LoginButton = () => {
   return (
     <Container>
-      <Button width='325px' type='submit'>
+      <Button width='100%' type='submit'>
         {'로그인'}
       </Button>
       <KakaoButtonWrapper>
-        <Button width='325px' type='submit'>
+        <Button width='100%' type='submit'>
           <ButtonContent>
             <Icon src='/assets/kakao-icon.png' width={24} height={24} />
             <span>카카오 로그인</span>
@@ -29,7 +29,9 @@ const Container = styled.div({
   gap: '10px 0',
 });
 const KakaoButtonWrapper = styled.div({
+  width: '100%',
   '& button': {
+    width: '100%',
     backgroundColor: '#FEE500',
     color: 'black',
     '&:hover': {

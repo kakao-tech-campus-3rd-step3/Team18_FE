@@ -19,4 +19,5 @@ const Container = styled.div({
   justifyContent: 'center',
   alignItems: 'center',
   height: '100vh',
+  gap: '30px',
 });
