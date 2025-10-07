@@ -31,7 +31,7 @@ const Container = styled.div({
 const KakaoButtonWrapper = styled.div({
   '& button': {
     backgroundColor: '#FEE500',
-    color: '#fff',
+    color: 'black',
     '&:hover': {
       backgroundColor: '#FFD600',
     },
