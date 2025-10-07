@@ -1,23 +1,29 @@
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import { mockClubDetail } from '../mock';
 import * as S from './index.styled';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export const ClubInfoSidebarEditSection = () => {
-  const {
-    presidentName: initialPresidentName,
-    presidentPhoneNumber: initialPresidentPhoneNumber,
-    location: initialLocation,
-    recruitStart: initialRecruitStart,
-    recruitEnd: initialRecruitEnd,
-    regularMeetingInfo: initialRegularMeetingInfo,
-    applicationNotice: initialApplicationNotice,
-  } = mockClubDetail;
+interface ClubInfoSidebarEditSectionProps {
+  presidentName: string;
+  presidentPhoneNumber: string;
+  location: string;
+  recruitStart: string;
+  recruitEnd: string;
+  regularMeetingInfo: string;
+  applicationNotice: string;
+}
 
+export const ClubInfoSidebarEditSection = ({
+  presidentName: initialPresidentName,
+  presidentPhoneNumber: initialPresidentPhoneNumber,
+  location: initialLocation,
+  recruitStart: initialRecruitStart,
+  recruitEnd: initialRecruitEnd,
+  regularMeetingInfo: initialRegularMeetingInfo,
+  applicationNotice: initialApplicationNotice,
+}: ClubInfoSidebarEditSectionProps) => {
   const [presidentName, setPresidentName] = useState(initialPresidentName);
   const [editingField, setEditingField] = useState<string | null>(null);
-
   const [recruitStart, setRecruitStart] = useState<Date | null>(
     initialRecruitStart ? new Date(initialRecruitStart) : null,
   );
@@ -32,7 +38,6 @@ export const ClubInfoSidebarEditSection = () => {
     onChange: (newValue: string) => void,
   ) => {
     const isEditing = editingField === fieldKey;
-
     return (
       <S.InfoItem>
         <span>{label}:</span>
@@ -99,12 +104,7 @@ export const ClubInfoSidebarEditSection = () => {
       </S.InfoItem>
 
       {renderEditableItem('정기 모임', initialRegularMeetingInfo, 'regularMeetingInfo', () => {})}
-      {renderEditableItem(
-        '지원 시 유의사항',
-        initialApplicationNotice,
-        'applicationNotice',
-        () => {},
-      )}
+      {renderEditableItem('지원 시 유의사항', initialApplicationNotice, 'applicationNotice', () => {})}
     </S.SidebarContainer>
   );
 };
