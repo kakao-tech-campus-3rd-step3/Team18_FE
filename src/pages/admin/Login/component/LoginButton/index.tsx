@@ -1,6 +1,5 @@
-import { Button } from '@/shared/components/Button';
 import styled from '@emotion/styled';
-import kakaoIcon from '/public/assets/kakao-icon.png';
+import { Button } from '@/shared/components/Button';
 
 export const LoginButton = () => {
   return (
@@ -11,7 +10,7 @@ export const LoginButton = () => {
       <KakaoButtonWrapper>
         <Button width='325px' type='submit'>
           <ButtonContent>
-            <Icon src={kakaoIcon} width={24} height={24} />
+            <Icon src='/assets/kakao-icon.png' width={24} height={24} />
             <span>카카오 로그인</span>
           </ButtonContent>
         </Button>
