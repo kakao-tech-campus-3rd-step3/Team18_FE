@@ -18,7 +18,14 @@ export const InfoItem = styled.div<{ column?: boolean }>(({ column }) => ({
   gap: '0.5rem',
 }));
 
-export const Label = styled.span(({ theme }) => ({
+export const Label = styled.span<{ required?: boolean }>(({ theme, required }) => ({
+  fontWeight: 500,
+  ...(required && {
+    '&::after': {
+      content: '" *"',
+      color: theme.colors.error,
+    },
+  }),
   width: '120px', 
   flexShrink: 0,
   textAlign: 'left',
