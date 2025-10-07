@@ -11,6 +11,7 @@ import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSect
 import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useForm, FormProvider } from 'react-hook-form';
 import type { ClubDetailEdit } from './types/clubDetailEdit';
 import { fetchClubDetailEdit } from './api/clubDetailEdit';
 
@@ -18,15 +19,28 @@ export const ClubDetailEditPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
   const [club, setClub] = useState<ClubDetailEdit | null>(null);
 
+  const methods = useForm<ClubDetailEdit>({
+    mode: 'onTouched',
+  });
+
+  const {
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+  } = methods;
+
   useEffect(() => {
     if (!clubId) return;
     fetchClubDetailEdit(clubId)
-      .then(setClub)
+      .then((data) => {
+        setClub(data);
+        reset(data);
+      })
       .catch(console.error);
-  }, [clubId]);
+  }, [clubId, reset]);
 
-  const handleSave = () => {
-    console.log('수정된 값 저장');
+  const onSubmit = (data: ClubDetailEdit) => {
+    console.log('수정된 값 저장', data);
   };
 
   const handleCancel = () => {
@@ -36,34 +50,49 @@ export const ClubDetailEditPage = () => {
   if (!club) return <div>Loading...</div>;
 
   return (
-    <Layout>
-      <ContentLeft>
-        <ClubHeaderSection clubName={club.clubName} category={club.category} />
-        <ClubActivityPhotosEditSection images={club.introductionImages} />
-        <ClubDescriptionEditSection
-          introductionOverview={club.introductionOverview}
-          introductionActivity={club.introductionActivity}
-          introductionIdeal={club.introductionIdeal}
-        />
-        <ButtonGroup>
-          <Button onClick={handleSave}>수정하기</Button>
-          <Button variant='light' onClick={handleCancel}>
-            취소
-          </Button>
-        </ButtonGroup>
-      </ContentLeft>
-      <ContentRight>
-        <ClubInfoSidebarEditSection
-          presidentName={club.presidentName}
-          presidentPhoneNumber={club.presidentPhoneNumber}
-          location={club.location}
-          recruitStart={club.recruitStart}
-          recruitEnd={club.recruitEnd}
-          regularMeetingInfo={club.regularMeetingInfo}
-          applicationNotice={club.applicationNotice}
-        />
-      </ContentRight>
-    </Layout>
+    <FormProvider {...methods}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Layout>
+          <ContentLeft>
+            <ClubHeaderSection clubName={club.clubName} category={club.category} />
+            <ClubActivityPhotosEditSection images={club.introductionImages} />
+            <ClubDescriptionEditSection
+              introductionOverview={club.introductionOverview}
+              introductionActivity={club.introductionActivity}
+              introductionIdeal={club.introductionIdeal}
+            />
+
+            {/* 에러 표시 예시 */}
+            {errors.presidentPhoneNumber && (
+              <ErrorMessage>{errors.presidentPhoneNumber.message}</ErrorMessage>
+            )}
+
+            <ButtonGroup>
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? '저장 중...' : '수정하기'}
+              </Button>
+              <Button variant="light" onClick={handleCancel}>
+                취소
+              </Button>
+            </ButtonGroup>
+
+            {isSubmitSuccessful && <SuccessMessage>저장 완료!</SuccessMessage>}
+          </ContentLeft>
+
+          <ContentRight>
+            <ClubInfoSidebarEditSection
+              presidentName={club.presidentName}
+              presidentPhoneNumber={club.presidentPhoneNumber}
+              location={club.location}
+              recruitStart={club.recruitStart}
+              recruitEnd={club.recruitEnd}
+              regularMeetingInfo={club.regularMeetingInfo}
+              applicationNotice={club.applicationNotice}
+            />
+          </ContentRight>
+        </Layout>
+      </form>
+    </FormProvider>
   );
 };
 
@@ -72,4 +101,16 @@ const ButtonGroup = styled.div({
   justifyContent: 'center',
   gap: '1rem',
   marginTop: '2rem',
+});
+
+const ErrorMessage = styled.span({
+  color: 'red',
+  marginTop: '0.5rem',
+  display: 'block',
+});
+
+const SuccessMessage = styled.span({
+  color: 'green',
+  marginTop: '1rem',
+  display: 'block',
 });
