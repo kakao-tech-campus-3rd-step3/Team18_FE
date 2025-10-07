@@ -1,5 +1,5 @@
-import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import styled from '@emotion/styled';
+import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 
 export const LoginInput = () => {
   return (
