@@ -10,10 +10,12 @@ export const SidebarContainer = styled.div(({ theme }) => ({
   borderRadius: theme.radius.md,
 }));
 
-export const InfoItem = styled.div(() => ({
+export const InfoItem = styled.div<{ column?: boolean }>(({ column }) => ({
   display: 'flex',
-  alignItems: 'center',
-  gap: '0.75rem', 
+  alignItems: column ? 'flex-start' : 'center',
+  flexDirection: column ? 'column' : 'row',
+  paddingTop: column ? '2rem' : '0',
+  gap: '0.5rem',
 }));
 
 export const Label = styled.span(({ theme }) => ({

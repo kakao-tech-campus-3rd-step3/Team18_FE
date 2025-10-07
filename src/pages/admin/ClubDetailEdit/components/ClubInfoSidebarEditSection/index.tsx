@@ -1,4 +1,5 @@
 import { UnderlineInputField } from '@/shared/components/Form/InputField/UnderlineInputField';
+import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import DatePicker from 'react-datepicker';
 import * as S from './index.styled';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -95,14 +96,14 @@ export const ClubInfoSidebarEditSection = () => {
         />
       </S.InfoItem>
 
-      <S.InfoItem>
-        <S.Label>지원 시 유의사항:</S.Label>
-        <UnderlineInputField
-          {...register('applicationNotice', { required: '지원 시 유의사항을 입력해주세요.' })}
-          invalid={!!errors.applicationNotice}
-          message={errors.applicationNotice?.message}
-        />
-      </S.InfoItem>
+      <S.InfoItem column>
+  <S.Label>지원 시 유의사항:</S.Label>
+  <OutlineTextareaField
+    {...register('applicationNotice', { required: '지원 시 유의사항을 입력해주세요.' })}
+    invalid={!!errors.applicationNotice}
+    message={errors.applicationNotice?.message}
+  />
+</S.InfoItem>
     </S.SidebarContainer>
   );
 };
