@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const Logo = () => {
   return (
     <LogoWrapper>
-      <LogoImage width={325} height={200} src='/public/assets/logo.png' />
+      <LogoImage width={325} height={200} src='/assets/logo.png' />
     </LogoWrapper>
   );
 };
