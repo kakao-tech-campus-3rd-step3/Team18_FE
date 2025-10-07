@@ -22,7 +22,6 @@ const Container = styled.div({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-
   width: 300,
   padding: '0 0 30px 0',
   gap: '40px 0',
@@ -31,8 +30,19 @@ const Container = styled.div({
 const InputWrapper = styled.div({
   position: 'relative',
   width: '100%',
-
+  boxSizing: 'border-box',
+  '& input': {
+    padding: '10px 0px 10px 5px ',
+  },
   '& input:focus + label': {
+    top: -8,
+    left: 8,
+    fontSize: 12,
+    background: 'white',
+    padding: '0 4px',
+    color: '#000',
+  },
+  '& input:not(:placeholder-shown) + label': {
     top: -8,
     left: 8,
     fontSize: 12,
