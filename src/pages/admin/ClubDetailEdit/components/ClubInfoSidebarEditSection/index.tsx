@@ -23,7 +23,7 @@ export const ClubInfoSidebarEditSection = () => {
   return (
     <S.SidebarContainer>
       <S.InfoItem>
-        <span>회장 이름:</span>
+        <S.Label>회장 이름:</S.Label>
         <UnderlineInputField
           {...register('presidentName', { required: '회장 이름을 입력해주세요.' })}
           invalid={!!errors.presidentName}
@@ -32,7 +32,7 @@ export const ClubInfoSidebarEditSection = () => {
       </S.InfoItem>
 
       <S.InfoItem>
-        <span>연락처:</span>
+        <S.Label>연락처:</S.Label>
         <UnderlineInputField
           {...register('presidentPhoneNumber', { required: '연락처를 입력해주세요.' })}
           invalid={!!errors.presidentPhoneNumber}
@@ -41,7 +41,7 @@ export const ClubInfoSidebarEditSection = () => {
       </S.InfoItem>
 
       <S.InfoItem>
-        <span>동방 위치:</span>
+        <S.Label>동방 위치:</S.Label>
         <UnderlineInputField
           {...register('location', { required: '동방 위치를 입력해주세요.' })}
           invalid={!!errors.location}
@@ -50,7 +50,7 @@ export const ClubInfoSidebarEditSection = () => {
       </S.InfoItem>
 
       <S.InfoItem>
-        <span>모집 시작일:</span>
+        <S.Label>모집 시작일:</S.Label>
         <Controller
           control={control}
           name="recruitStart"
@@ -68,7 +68,7 @@ export const ClubInfoSidebarEditSection = () => {
       </S.InfoItem>
 
       <S.InfoItem>
-        <span>모집 마감일:</span>
+        <S.Label>모집 마감일:</S.Label>
         <Controller
           control={control}
           name="recruitEnd"
@@ -87,7 +87,7 @@ export const ClubInfoSidebarEditSection = () => {
       </S.InfoItem>
 
       <S.InfoItem>
-        <span>정기 모임:</span>
+        <S.Label>정기 모임:</S.Label>
         <UnderlineInputField
           {...register('regularMeetingInfo', { required: '정기 모임 정보를 입력해주세요.' })}
           invalid={!!errors.regularMeetingInfo}
@@ -96,7 +96,7 @@ export const ClubInfoSidebarEditSection = () => {
       </S.InfoItem>
 
       <S.InfoItem>
-        <span>지원 시 유의사항:</span>
+        <S.Label>지원 시 유의사항:</S.Label>
         <UnderlineInputField
           {...register('applicationNotice', { required: '지원 시 유의사항을 입력해주세요.' })}
           invalid={!!errors.applicationNotice}
