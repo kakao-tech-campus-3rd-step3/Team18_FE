@@ -1,7 +1,12 @@
 import { useRef, useState } from 'react';
 import { getSign, type Sign } from '../utils/math';
+import { convertSelectionToTimeInterval, mergeContinuousTimeInterval } from '../utils/time';
 
-export function useDragSelection(onSelectEnd: () => void, timeIntervalArray: [string, string][]) {
+export function useDragSelection(
+  updateScheduleData: (data: string, mergedInterviewTime: string[]) => void,
+  date: string,
+  timeIntervalArray: [string, string][],
+) {
   const [prevDiffSign, setPrevDiffSign] = useState<Sign>(0);
   const startIndex = useRef<string | undefined>('');
   const lastHoveredIndex = useRef<string | null>(null);
@@ -71,7 +76,12 @@ export function useDragSelection(onSelectEnd: () => void, timeIntervalArray: [st
     setIsMouseDown(false);
     setIsDragging(false);
 
-    onSelectEnd();
+    const selectedInterviewTime: Set<string> = convertSelectionToTimeInterval(
+      selectedTime,
+      timeIntervalArray,
+    );
+    const mergedInterviewTime: string[] = mergeContinuousTimeInterval(selectedInterviewTime);
+    updateScheduleData(date, mergedInterviewTime);
 
     handleIndexChange(Number(selectedIndex.current));
   };
