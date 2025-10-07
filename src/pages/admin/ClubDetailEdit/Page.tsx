@@ -34,7 +34,7 @@ export const ClubDetailEditPage = () => {
     fetchClubDetailEdit(clubId)
       .then((data) => {
         setClub(data);
-        reset(data);
+        reset(data); 
       })
       .catch(console.error);
   }, [clubId, reset]);
@@ -56,13 +56,7 @@ export const ClubDetailEditPage = () => {
           <ContentLeft>
             <ClubHeaderSection clubName={club.clubName} category={club.category} />
             <ClubActivityPhotosEditSection images={club.introductionImages} />
-            <ClubDescriptionEditSection
-              introductionOverview={club.introductionOverview}
-              introductionActivity={club.introductionActivity}
-              introductionIdeal={club.introductionIdeal}
-            />
-
-            {/* 에러 표시 예시 */}
+            <ClubDescriptionEditSection />
             {errors.presidentPhoneNumber && (
               <ErrorMessage>{errors.presidentPhoneNumber.message}</ErrorMessage>
             )}
@@ -80,15 +74,7 @@ export const ClubDetailEditPage = () => {
           </ContentLeft>
 
           <ContentRight>
-            <ClubInfoSidebarEditSection
-              presidentName={club.presidentName}
-              presidentPhoneNumber={club.presidentPhoneNumber}
-              location={club.location}
-              recruitStart={club.recruitStart}
-              recruitEnd={club.recruitEnd}
-              regularMeetingInfo={club.regularMeetingInfo}
-              applicationNotice={club.applicationNotice}
-            />
+            <ClubInfoSidebarEditSection />
           </ContentRight>
         </Layout>
       </form>
