@@ -26,7 +26,10 @@ export const ClubInfoSidebarEditSection = () => {
       <S.InfoItem>
         <S.Label required>회장 이름:</S.Label>
         <UnderlineInputField
-          {...register('presidentName', { required: '회장 이름을 입력해주세요.' })}
+          {...register('presidentName', {
+            required: '회장 이름을 입력해주세요.',
+            maxLength: { value: 20, message: '20자 이하로 입력해주세요.' },
+          })}
           invalid={!!errors.presidentName}
           message={errors.presidentName?.message}
         />
@@ -40,6 +43,7 @@ export const ClubInfoSidebarEditSection = () => {
               value: /^\d{3}-\d{4}-\d{4}$/,
               message: '전화번호 형식은 000-0000-0000입니다.',
             },
+            validate: (value) => !value || /^\d{3}-\d{4}-\d{4}$/.test(value) || '전화번호 형식은 000-0000-0000입니다.',
           })}
           invalid={!!errors.presidentPhoneNumber}
           message={errors.presidentPhoneNumber?.message}
@@ -112,6 +116,7 @@ export const ClubInfoSidebarEditSection = () => {
         <OutlineTextareaField
           {...register('applicationNotice', {
             maxLength: { value: 100, message: '100자 이하로 입력해주세요.' },
+            validate: (value) => !value || value.length <= 100 || '100자 이하로 입력해주세요.',
           })}
           invalid={!!errors.applicationNotice}
           message={errors.applicationNotice?.message}
