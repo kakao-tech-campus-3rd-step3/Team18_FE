@@ -1,110 +1,108 @@
-import { useState } from 'react';
+import { UnderlineInputField } from '@/shared/components/Form/InputField/UnderlineInputField';
 import DatePicker from 'react-datepicker';
 import * as S from './index.styled';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useFormContext, Controller } from 'react-hook-form';
 
-interface ClubInfoSidebarEditSectionProps {
-  presidentName: string;
-  presidentPhoneNumber: string;
-  location: string;
-  recruitStart: string;
-  recruitEnd: string;
-  regularMeetingInfo: string;
-  applicationNotice: string;
-}
-
-export const ClubInfoSidebarEditSection = ({
-  presidentName: initialPresidentName,
-  presidentPhoneNumber: initialPresidentPhoneNumber,
-  location: initialLocation,
-  recruitStart: initialRecruitStart,
-  recruitEnd: initialRecruitEnd,
-  regularMeetingInfo: initialRegularMeetingInfo,
-  applicationNotice: initialApplicationNotice,
-}: ClubInfoSidebarEditSectionProps) => {
-  const [presidentName, setPresidentName] = useState(initialPresidentName);
-  const [editingField, setEditingField] = useState<string | null>(null);
-  const [recruitStart, setRecruitStart] = useState<Date | null>(
-    initialRecruitStart ? new Date(initialRecruitStart) : null,
-  );
-  const [recruitEnd, setRecruitEnd] = useState<Date | null>(
-    initialRecruitEnd ? new Date(initialRecruitEnd) : null,
-  );
-
-  const renderEditableItem = (
-    label: string,
-    value: string,
-    fieldKey: string,
-    onChange: (newValue: string) => void,
-  ) => {
-    const isEditing = editingField === fieldKey;
-    return (
-      <S.InfoItem>
-        <span>{label}:</span>
-        {isEditing ? (
-          <S.InlineInput
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            onBlur={() => setEditingField(null)}
-            autoFocus
-          />
-        ) : (
-          <span>{value}</span>
-        )}
-        {!isEditing && <S.EditIcon onClick={() => setEditingField(fieldKey)} />}
-      </S.InfoItem>
-    );
-  };
-
-  //   const getRecruitStartString = () =>
-  //     recruitStart
-  //       ? `${recruitStart.getFullYear()}-${String(
-  //           recruitStart.getMonth() + 1
-  //         ).padStart(2, "0")}-${String(recruitStart.getDate()).padStart(
-  //           2,
-  //           "0"
-  //         )}T00:00:00`
-  //       : null;
-
-  //   const getRecruitEndString = () =>
-  //     recruitEnd
-  //       ? `${recruitEnd.getFullYear()}-${String(
-  //           recruitEnd.getMonth() + 1
-  //         ).padStart(2, "0")}-${String(recruitEnd.getDate()).padStart(
-  //           2,
-  //           "0"
-  //         )}T23:59:59`
-  //       : null;
+export const ClubInfoSidebarEditSection = () => {
+  const {
+    register,
+    control,
+    getValues,
+    formState: { errors },
+  } = useFormContext<{
+    presidentName: string;
+    presidentPhoneNumber: string;
+    location: string;
+    recruitStart: Date | null;
+    recruitEnd: Date | null;
+    regularMeetingInfo: string;
+    applicationNotice: string;
+  }>();
 
   return (
     <S.SidebarContainer>
-      {renderEditableItem('회장 이름', presidentName, 'presidentName', setPresidentName)}
-      {renderEditableItem('연락처', initialPresidentPhoneNumber, 'presidentPhoneNumber', () => {})}
-      {renderEditableItem('동방 위치', initialLocation, 'location', () => {})}
+      <S.InfoItem>
+        <span>회장 이름:</span>
+        <UnderlineInputField
+          {...register('presidentName', { required: '회장 이름을 입력해주세요.' })}
+          invalid={!!errors.presidentName}
+          message={errors.presidentName?.message}
+        />
+      </S.InfoItem>
+
+      <S.InfoItem>
+        <span>연락처:</span>
+        <UnderlineInputField
+          {...register('presidentPhoneNumber', { required: '연락처를 입력해주세요.' })}
+          invalid={!!errors.presidentPhoneNumber}
+          message={errors.presidentPhoneNumber?.message}
+        />
+      </S.InfoItem>
+
+      <S.InfoItem>
+        <span>동방 위치:</span>
+        <UnderlineInputField
+          {...register('location', { required: '동방 위치를 입력해주세요.' })}
+          invalid={!!errors.location}
+          message={errors.location?.message}
+        />
+      </S.InfoItem>
 
       <S.InfoItem>
         <span>모집 시작일:</span>
-        <DatePicker
-          selected={recruitStart ?? undefined}
-          onChange={(date: Date | null) => setRecruitStart(date)}
-          dateFormat='yyyy/MM/dd'
-          customInput={<S.InlineInput />}
+        <Controller
+          control={control}
+          name="recruitStart"
+          rules={{ required: '모집 시작일을 선택해주세요.' }}
+          render={({ field, fieldState }) => (
+            <DatePicker
+              selected={field.value ?? undefined}
+              onChange={(date) => field.onChange(date)}
+              onBlur={field.onBlur}
+              dateFormat="yyyy/MM/dd"
+              customInput={<UnderlineInputField invalid={!!fieldState.error} message={fieldState.error?.message} />}
+            />
+          )}
         />
       </S.InfoItem>
 
       <S.InfoItem>
         <span>모집 마감일:</span>
-        <DatePicker
-          selected={recruitEnd ?? undefined}
-          onChange={(date: Date | null) => setRecruitEnd(date)}
-          minDate={recruitStart ?? undefined}
-          dateFormat='yyyy/MM/dd'
-          customInput={<S.InlineInput />}
+        <Controller
+          control={control}
+          name="recruitEnd"
+          rules={{ required: '모집 마감일을 선택해주세요.' }}
+          render={({ field, fieldState }) => (
+            <DatePicker
+              selected={field.value ?? undefined}
+              onChange={(date) => field.onChange(date)}
+              onBlur={field.onBlur}
+              minDate={getValues('recruitStart') ?? undefined}
+              dateFormat="yyyy/MM/dd"
+              customInput={<UnderlineInputField invalid={!!fieldState.error} message={fieldState.error?.message} />}
+            />
+          )}
         />
       </S.InfoItem>
 
-      {renderEditableItem('정기 모임', initialRegularMeetingInfo, 'regularMeetingInfo', () => {})}
-      {renderEditableItem('지원 시 유의사항', initialApplicationNotice, 'applicationNotice', () => {})}
+      <S.InfoItem>
+        <span>정기 모임:</span>
+        <UnderlineInputField
+          {...register('regularMeetingInfo', { required: '정기 모임 정보를 입력해주세요.' })}
+          invalid={!!errors.regularMeetingInfo}
+          message={errors.regularMeetingInfo?.message}
+        />
+      </S.InfoItem>
+
+      <S.InfoItem>
+        <span>지원 시 유의사항:</span>
+        <UnderlineInputField
+          {...register('applicationNotice', { required: '지원 시 유의사항을 입력해주세요.' })}
+          invalid={!!errors.applicationNotice}
+          message={errors.applicationNotice?.message}
+        />
+      </S.InfoItem>
     </S.SidebarContainer>
   );
 };
