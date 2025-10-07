@@ -24,7 +24,7 @@ export const ClubInfoSidebarEditSection = () => {
   return (
     <S.SidebarContainer>
       <S.InfoItem>
-        <S.Label>회장 이름:</S.Label>
+        <S.Label required>회장 이름:</S.Label>
         <UnderlineInputField
           {...register('presidentName', { required: '회장 이름을 입력해주세요.' })}
           invalid={!!errors.presidentName}
@@ -42,7 +42,7 @@ export const ClubInfoSidebarEditSection = () => {
       </S.InfoItem>
 
       <S.InfoItem>
-        <S.Label>동방 위치:</S.Label>
+        <S.Label required>동방 위치:</S.Label>
         <UnderlineInputField
           {...register('location', { required: '동방 위치를 입력해주세요.' })}
           invalid={!!errors.location}
@@ -88,7 +88,7 @@ export const ClubInfoSidebarEditSection = () => {
       </S.InfoItem>
 
       <S.InfoItem>
-        <S.Label>정기 모임:</S.Label>
+        <S.Label required>정기 모임:</S.Label>
         <UnderlineInputField
           {...register('regularMeetingInfo', { required: '정기 모임 정보를 입력해주세요.' })}
           invalid={!!errors.regularMeetingInfo}
