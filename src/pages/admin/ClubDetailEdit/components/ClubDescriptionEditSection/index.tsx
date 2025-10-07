@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import { SectionTitle } from '@/shared/components/SectionTitle';
-import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { useFormContext } from 'react-hook-form';
+import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
+import { SectionTitle } from '@/shared/components/SectionTitle';
 
 export const ClubDescriptionEditSection = () => {
   const {
@@ -25,7 +25,7 @@ export const ClubDescriptionEditSection = () => {
         })}
         invalid={!!errors.introductionOverview}
         message={errors.introductionOverview?.message}
-        placeholder="동아리 소개를 입력하세요."
+        placeholder='동아리 소개를 입력하세요.'
       />
 
       <SectionTitle required>활동 내용</SectionTitle>
@@ -36,7 +36,7 @@ export const ClubDescriptionEditSection = () => {
         })}
         invalid={!!errors.introductionActivity}
         message={errors.introductionActivity?.message}
-        placeholder="활동 내용을 입력하세요."
+        placeholder='활동 내용을 입력하세요.'
       />
 
       <SectionTitle required>모집하는 사람</SectionTitle>
@@ -47,7 +47,7 @@ export const ClubDescriptionEditSection = () => {
         })}
         invalid={!!errors.introductionIdeal}
         message={errors.introductionIdeal?.message}
-        placeholder="모집 대상을 입력하세요."
+        placeholder='모집 대상을 입력하세요.'
       />
     </DescriptionContainer>
   );

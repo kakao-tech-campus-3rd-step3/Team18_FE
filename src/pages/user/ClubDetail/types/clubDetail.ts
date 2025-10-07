@@ -11,7 +11,7 @@ export type ClubDetail = {
   introductionActivity: string;
   introductionIdeal: string;
   regularMeetingInfo: string;
-  recruitStatus: RecruitStatus; 
+  recruitStatus: RecruitStatus;
   presidentName: string;
   presidentPhoneNumber: string;
   recruitStart: string;

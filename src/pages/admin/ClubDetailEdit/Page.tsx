@@ -1,4 +1,7 @@
 import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import { Button } from '@/shared/components/Button';
 import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
 import {
@@ -6,14 +9,11 @@ import {
   ContentLeft,
   ContentRight,
 } from '@/shared/components/ClubDetailLayout/index.styled';
+import { fetchClubDetailEdit } from './api/clubDetailEdit';
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
 import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
 import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useForm, FormProvider } from 'react-hook-form';
 import type { ClubDetailEdit } from './types/clubDetailEdit';
-import { fetchClubDetailEdit } from './api/clubDetailEdit';
 
 export const ClubDetailEditPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
@@ -34,7 +34,7 @@ export const ClubDetailEditPage = () => {
     fetchClubDetailEdit(clubId)
       .then((data) => {
         setClub(data);
-        reset(data); 
+        reset(data);
       })
       .catch(console.error);
   }, [clubId, reset]);
@@ -62,10 +62,10 @@ export const ClubDetailEditPage = () => {
             )}
 
             <ButtonGroup>
-              <Button type="submit" disabled={isSubmitting}>
+              <Button type='submit' disabled={isSubmitting}>
                 {isSubmitting ? '저장 중...' : '수정하기'}
               </Button>
-              <Button variant="light" onClick={handleCancel}>
+              <Button variant='light' onClick={handleCancel}>
                 취소
               </Button>
             </ButtonGroup>
