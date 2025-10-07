@@ -1,0 +1,55 @@
+import { Button } from '@/shared/components/Button';
+import styled from '@emotion/styled';
+import kakaoIcon from '/public/assets/kakao-icon.png';
+
+export const LoginButton = () => {
+  return (
+    <Container>
+      <Button width='325px' type='submit'>
+        {'로그인'}
+      </Button>
+      <KakaoButtonWrapper>
+        <Button width='325px' type='submit'>
+          <ButtonContent>
+            <Icon src={kakaoIcon} width={24} height={24} />
+            <span>카카오 로그인</span>
+          </ButtonContent>
+        </Button>
+      </KakaoButtonWrapper>
+    </Container>
+  );
+};
+
+const Container = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: 300,
+  padding: '0 0 30px 0',
+  gap: '10px 0',
+});
+const KakaoButtonWrapper = styled.div({
+  '& button': {
+    backgroundColor: '#FEE500',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#FFD600',
+    },
+  },
+});
+
+const ButtonContent = styled.div({
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '8px',
+  width: '100%',
+  position: 'relative',
+});
+
+const Icon = styled.img({
+  position: 'absolute',
+  left: '16px',
+  width: 20,
+  height: 20,
+});
