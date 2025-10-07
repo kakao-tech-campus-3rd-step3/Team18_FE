@@ -4,7 +4,7 @@ import { FaPen } from 'react-icons/fa';
 export const SidebarContainer = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  gap: '0.5rem', 
+  gap: '0.5rem',
   padding: '1rem',
   backgroundColor: theme.colors.bg,
   borderRadius: theme.radius.md,
@@ -26,7 +26,7 @@ export const Label = styled.span<{ required?: boolean }>(({ theme, required }) =
       color: theme.colors.error,
     },
   }),
-  width: '120px', 
+  width: '120px',
   flexShrink: 0,
   textAlign: 'left',
   fontSize: theme.font.size.sm,

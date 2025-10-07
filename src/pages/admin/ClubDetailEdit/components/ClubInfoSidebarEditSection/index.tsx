@@ -1,9 +1,9 @@
-import { UnderlineInputField } from '@/shared/components/Form/InputField/UnderlineInputField';
-import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import DatePicker from 'react-datepicker';
-import * as S from './index.styled';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useFormContext, Controller } from 'react-hook-form';
+import { UnderlineInputField } from '@/shared/components/Form/InputField/UnderlineInputField';
+import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
+import * as S from './index.styled';
 
 export const ClubInfoSidebarEditSection = () => {
   const {
@@ -43,7 +43,8 @@ export const ClubInfoSidebarEditSection = () => {
               value: /^\d{3}-\d{4}-\d{4}$/,
               message: '전화번호 형식은 000-0000-0000입니다.',
             },
-            validate: (value) => !value || /^\d{3}-\d{4}-\d{4}$/.test(value) || '전화번호 형식은 000-0000-0000입니다.',
+            validate: (value) =>
+              !value || /^\d{3}-\d{4}-\d{4}$/.test(value) || '전화번호 형식은 000-0000-0000입니다.',
           })}
           invalid={!!errors.presidentPhoneNumber}
           message={errors.presidentPhoneNumber?.message}
@@ -66,15 +67,20 @@ export const ClubInfoSidebarEditSection = () => {
         <S.Label>모집 시작일:</S.Label>
         <Controller
           control={control}
-          name="recruitStart"
+          name='recruitStart'
           rules={{ required: '모집 시작일을 선택해주세요.' }}
           render={({ field, fieldState }) => (
             <DatePicker
               selected={field.value ?? undefined}
               onChange={(date) => field.onChange(date)}
               onBlur={field.onBlur}
-              dateFormat="yyyy/MM/dd"
-              customInput={<UnderlineInputField invalid={!!fieldState.error} message={fieldState.error?.message} />}
+              dateFormat='yyyy/MM/dd'
+              customInput={
+                <UnderlineInputField
+                  invalid={!!fieldState.error}
+                  message={fieldState.error?.message}
+                />
+              }
             />
           )}
         />
@@ -84,7 +90,7 @@ export const ClubInfoSidebarEditSection = () => {
         <S.Label>모집 마감일:</S.Label>
         <Controller
           control={control}
-          name="recruitEnd"
+          name='recruitEnd'
           rules={{ required: '모집 마감일을 선택해주세요.' }}
           render={({ field, fieldState }) => (
             <DatePicker
@@ -92,8 +98,13 @@ export const ClubInfoSidebarEditSection = () => {
               onChange={(date) => field.onChange(date)}
               onBlur={field.onBlur}
               minDate={getValues('recruitStart') ?? undefined}
-              dateFormat="yyyy/MM/dd"
-              customInput={<UnderlineInputField invalid={!!fieldState.error} message={fieldState.error?.message} />}
+              dateFormat='yyyy/MM/dd'
+              customInput={
+                <UnderlineInputField
+                  invalid={!!fieldState.error}
+                  message={fieldState.error?.message}
+                />
+              }
             />
           )}
         />
