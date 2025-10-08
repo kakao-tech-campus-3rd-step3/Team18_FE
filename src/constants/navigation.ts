@@ -16,5 +16,6 @@ export const NAV_CONFIG: Record<Role, NavItemData[]> = {
     { key: 'applicants', label: '지원자관리', to: '/admin/clubs/dashboard' },
     { key: 'club', label: '동아리페이지관리', to: '/club' },
     { key: 'form', label: '지원폼관리', to: '/form' },
+    { key: 'login', label: '관리자 로그인', to: '/login' },
   ],
 };
