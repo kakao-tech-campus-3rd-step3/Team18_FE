@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { Button } from '@/shared/components/Button';
@@ -9,15 +9,15 @@ import {
   ContentLeft,
   ContentRight,
 } from '@/shared/components/ClubDetailLayout/index.styled';
-import { fetchClubDetailEdit } from './api/clubDetailEdit';
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
 import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
 import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
+import { useClubDetailEdit } from './hook/useClubDetailEdit';
 import type { ClubDetailEdit } from './types/clubDetailEdit';
 
 export const ClubDetailEditPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
-  const [club, setClub] = useState<ClubDetailEdit | null>(null);
+  const { data: club, isLoading, error } = useClubDetailEdit(clubId ?? '');
 
   const methods = useForm<ClubDetailEdit>({
     mode: 'onTouched',
@@ -30,14 +30,8 @@ export const ClubDetailEditPage = () => {
   } = methods;
 
   useEffect(() => {
-    if (!clubId) return;
-    fetchClubDetailEdit(clubId)
-      .then((data) => {
-        setClub(data);
-        reset(data);
-      })
-      .catch(console.error);
-  }, [clubId, reset]);
+    if (club) reset(club);
+  }, [club, reset]);
 
   const onSubmit = (data: ClubDetailEdit) => {
     console.log('수정된 값 저장', data);
@@ -47,7 +41,9 @@ export const ClubDetailEditPage = () => {
     console.log('취소');
   };
 
-  if (!club) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
+  if (!club) return null;
 
   return (
     <FormProvider {...methods}>
@@ -89,14 +85,15 @@ const ButtonGroup = styled.div({
   marginTop: '2rem',
 });
 
-const ErrorMessage = styled.span({
-  color: 'red',
+const ErrorMessage = styled.span(({ theme }) => ({
+  color: theme.colors.error, 
   marginTop: '0.5rem',
   display: 'block',
-});
+}));
 
-const SuccessMessage = styled.span({
-  color: 'green',
+const SuccessMessage = styled.span(({ theme }) => ({
+  color: theme.colors.success, 
   marginTop: '1rem',
   display: 'block',
-});
+}));
+
