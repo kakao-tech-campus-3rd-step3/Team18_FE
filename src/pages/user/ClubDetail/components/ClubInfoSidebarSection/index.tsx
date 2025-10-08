@@ -1,18 +1,21 @@
 import styled from '@emotion/styled';
 import { Button } from '@/shared/components/Button';
 import { formatDate } from '@/utils/dateUtils';
+import type { ClubDetail } from '@/pages/user/ClubDetail/types/clubDetail';
 
-interface ClubInfoSidebarSectionProps {
-  presidentName: string;
-  presidentPhoneNumber: string;
-  location: string;
-  recruitStart: string;
-  recruitEnd: string;
-  regularMeetingInfo: string;
-  recruitStatus: string;
-  applicationNotice: string;
+type ClubInfoSidebarSectionProps = Pick<
+  ClubDetail,
+  | 'presidentName'
+  | 'presidentPhoneNumber'
+  | 'location'
+  | 'recruitStart'
+  | 'recruitEnd'
+  | 'regularMeetingInfo'
+  | 'recruitStatus'
+  | 'applicationNotice'
+> & {
   clubId: number | string;
-}
+};
 
 export const ClubInfoSidebarSection = ({
   presidentName,
