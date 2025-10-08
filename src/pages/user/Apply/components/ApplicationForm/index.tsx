@@ -1,5 +1,5 @@
 import { useForm, FormProvider } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { postApplicationForm } from '@/pages/user/Apply/api/apply';
 import { QuestionTypes } from '@/pages/user/Apply/constant/questionType';
 import { Button } from '@/shared/components/Button';
@@ -15,6 +15,7 @@ type Props = {
 };
 
 export const ApplicationForm = ({ questions }: Props) => {
+  const navigate = useNavigate();
   const methods = useForm<FormInputs>({
     mode: 'onTouched',
     defaultValues: {
@@ -34,11 +35,16 @@ export const ApplicationForm = ({ questions }: Props) => {
   const questionArray = questions.map((e) => e.question);
 
   const onSubmit = (data: FormInputs) => {
-    toast.promise(postApplicationForm(clubIdNumber, data, questionArray), {
-      loading: '제출중...',
-      success: '제출 성공!',
-      error: '제출 실패!',
-    });
+    postApplicationForm(clubIdNumber, data, questionArray)
+      .then(() => {
+        toast.success('제출 성공!', { duration: 1000 });
+        setTimeout(() => {
+          navigate(`/clubs/${clubIdNumber}`);
+        }, 1000);
+      })
+      .catch(() => {
+        toast.error('제출 실패!', { duration: 1000 });
+      });
   };
 
   const questionsWithIndex = questions.map((q, i) => ({ ...q, originalIndex: i }));
