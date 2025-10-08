@@ -37,10 +37,6 @@ export const ClubDetailEditPage = () => {
     console.log('수정된 값 저장', data);
   };
 
-  const handleCancel = () => {
-    console.log('취소');
-  };
-
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
   if (!club) return null;
@@ -61,7 +57,7 @@ export const ClubDetailEditPage = () => {
               <Button type='submit' disabled={isSubmitting}>
                 {isSubmitting ? '저장 중...' : '수정하기'}
               </Button>
-              <Button variant='light' onClick={handleCancel}>
+              <Button variant='light' to={`/admin/clubs/dashboard`}>
                 취소
               </Button>
             </ButtonGroup>
