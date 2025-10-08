@@ -8,6 +8,7 @@ import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/Out
 import * as S from './index.styled';
 import { InterviewScheduleSelector } from './InterviewScheduleSelector';
 import type { FormInputs, Question } from '@/pages/user/Apply/type/apply';
+import { toast } from 'sonner';
 
 type Props = {
   questions: Question[];
@@ -27,12 +28,17 @@ export const ApplicationForm = ({ questions }: Props) => {
   });
   const { errors, isSubmitting, isSubmitSuccessful } = methods.formState;
 
-  const { id } = useParams<{ id: string }>();
-  const clubId = Number(id);
+  const { clubId } = useParams<{ clubId: string }>();
+  const clubIdNumber = Number(clubId);
+
   const questionArray = questions.map((e) => e.question);
 
   const onSubmit = (data: FormInputs) => {
-    postApplicationForm(clubId, data, questionArray);
+    toast.promise(postApplicationForm(clubIdNumber, data, questionArray), {
+      loading: '제출중...',
+      success: '제출 성공!',
+      error: '제출 실패!',
+    });
   };
 
   const questionsWithIndex = questions.map((q, i) => ({ ...q, originalIndex: i }));
