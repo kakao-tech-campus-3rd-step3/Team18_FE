@@ -18,6 +18,12 @@ export const InfoItem = styled.div<{ column?: boolean }>(({ column }) => ({
   gap: '0.5rem',
 }));
 
+export const InputWrapper = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  flex: 1,
+});
+
 export const Label = styled.span<{ required?: boolean }>(({ theme, required }) => ({
   fontWeight: 500,
   ...(required && {
