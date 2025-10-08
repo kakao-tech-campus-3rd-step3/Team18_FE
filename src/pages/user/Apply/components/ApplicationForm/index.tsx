@@ -9,6 +9,7 @@ import * as S from './index.styled';
 import { InterviewScheduleSelector } from './InterviewScheduleSelector';
 import type { FormInputs, Question } from '@/pages/user/Apply/type/apply';
 import { toast } from 'sonner';
+import { theme } from '@/styles/theme';
 
 type Props = {
   questions: Question[];
@@ -27,7 +28,7 @@ export const ApplicationForm = ({ questions }: Props) => {
       answers: [],
     },
   });
-  const { errors, isSubmitting, isSubmitSuccessful } = methods.formState;
+  const { errors, isSubmitting } = methods.formState;
 
   const { clubId } = useParams<{ clubId: string }>();
   const clubIdNumber = Number(clubId);
@@ -37,13 +38,25 @@ export const ApplicationForm = ({ questions }: Props) => {
   const onSubmit = (data: FormInputs) => {
     postApplicationForm(clubIdNumber, data, questionArray)
       .then(() => {
-        toast.success('제출 성공!', { duration: 1000 });
+        toast.success('제출 성공!', {
+          style: {
+            backgroundColor: theme.colors.primary,
+            color: theme.colors.success,
+          },
+          duration: 1000,
+        });
         setTimeout(() => {
           navigate(`/clubs/${clubIdNumber}`);
         }, 1000);
       })
       .catch(() => {
-        toast.error('제출 실패!', { duration: 1000 });
+        toast.error('제출 실패!', {
+          duration: 1000,
+          style: {
+            backgroundColor: theme.colors.primary,
+            color: theme.colors.error,
+          },
+        });
       });
   };
 
@@ -185,8 +198,6 @@ export const ApplicationForm = ({ questions }: Props) => {
           )}
 
           <Button type='submit'>{isSubmitting ? '제출중...' : '제출하기'}</Button>
-          {/* 제출 완료 후 toast 알림 적용 부분*/}
-          {isSubmitSuccessful && <span>제출 성공!</span>}
         </S.FormContainer>
       </form>
     </FormProvider>
