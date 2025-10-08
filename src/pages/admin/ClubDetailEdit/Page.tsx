@@ -86,14 +86,13 @@ const ButtonGroup = styled.div({
 });
 
 const ErrorMessage = styled.span(({ theme }) => ({
-  color: theme.colors.error, 
+  color: theme.colors.error,
   marginTop: '0.5rem',
   display: 'block',
 }));
 
 const SuccessMessage = styled.span(({ theme }) => ({
-  color: theme.colors.success, 
+  color: theme.colors.success,
   marginTop: '1rem',
   display: 'block',
 }));
-

@@ -11,7 +11,6 @@ import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSectio
 import { ClubDescriptionSection } from './components/ClubDescriptionSection';
 import { ClubInfoSidebarSection } from './components/ClubInfoSidebarSection';
 import { ClubReviewsSection } from './components/ClubReviewsSection';
-// import { mockClubDetail } from './components/mock';
 import type { ClubDetail } from './types/clubDetail';
 
 export const ClubDetailPage = () => {
