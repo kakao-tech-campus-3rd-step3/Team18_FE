@@ -1,4 +1,7 @@
 import styled from '@emotion/styled';
+import { useEffect } from 'react';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import { Button } from '@/shared/components/Button';
 import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
 import {
@@ -9,34 +12,65 @@ import {
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
 import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
 import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
-import { mockClubDetail } from './components/mock';
+import { useClubDetailEdit } from './hook/useClubDetailEdit';
+import type { ClubDetailEdit } from './types/clubDetailEdit';
 
 export const ClubDetailEditPage = () => {
-  const handleSave = () => {
-    console.log('수정된 값 저장');
+  const { clubId } = useParams<{ clubId: string }>();
+  const { data: club, isLoading, error } = useClubDetailEdit(clubId ?? '');
+
+  const methods = useForm<ClubDetailEdit>({
+    mode: 'onTouched',
+  });
+
+  const {
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+  } = methods;
+
+  useEffect(() => {
+    if (club) reset(club);
+  }, [club, reset]);
+
+  const onSubmit = (data: ClubDetailEdit) => {
+    console.log('수정된 값 저장', data);
   };
 
-  const handleCancel = () => {
-    console.log('취소');
-  };
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
+  if (!club) return null;
 
   return (
-    <Layout>
-      <ContentLeft>
-        <ClubHeaderSection clubName={mockClubDetail.clubName} category={mockClubDetail.category} />
-        <ClubActivityPhotosEditSection />
-        <ClubDescriptionEditSection />
-        <ButtonGroup>
-          <Button onClick={handleSave}>수정하기</Button>
-          <Button variant='light' onClick={handleCancel}>
-            취소
-          </Button>
-        </ButtonGroup>
-      </ContentLeft>
-      <ContentRight>
-        <ClubInfoSidebarEditSection />
-      </ContentRight>
-    </Layout>
+    <FormProvider {...methods}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Layout>
+          <ContentLeft>
+            <ClubHeaderSection clubName={club.clubName} category={club.category} />
+            <ClubActivityPhotosEditSection images={club.introductionImages} />
+            <ClubDescriptionEditSection />
+            {errors.presidentPhoneNumber && (
+              <ErrorMessage>{errors.presidentPhoneNumber.message}</ErrorMessage>
+            )}
+
+            <ButtonGroup>
+              <Button type='submit' disabled={isSubmitting}>
+                {isSubmitting ? '저장 중...' : '수정하기'}
+              </Button>
+              <Button variant='light' to={`/admin/clubs/dashboard`}>
+                취소
+              </Button>
+            </ButtonGroup>
+
+            {isSubmitSuccessful && <SuccessMessage>저장 완료!</SuccessMessage>}
+          </ContentLeft>
+
+          <ContentRight>
+            <ClubInfoSidebarEditSection />
+          </ContentRight>
+        </Layout>
+      </form>
+    </FormProvider>
   );
 };
 
@@ -46,3 +80,15 @@ const ButtonGroup = styled.div({
   gap: '1rem',
   marginTop: '2rem',
 });
+
+const ErrorMessage = styled.span(({ theme }) => ({
+  color: theme.colors.error,
+  marginTop: '0.5rem',
+  display: 'block',
+}));
+
+const SuccessMessage = styled.span(({ theme }) => ({
+  color: theme.colors.success,
+  marginTop: '1rem',
+  display: 'block',
+}));

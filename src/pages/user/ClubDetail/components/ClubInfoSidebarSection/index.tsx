@@ -1,23 +1,33 @@
 import styled from '@emotion/styled';
-import { useParams } from 'react-router-dom';
 import { Button } from '@/shared/components/Button';
 import { formatDate } from '@/utils/dateUtils';
-import { mockClubDetail } from '../mock';
+import type { ClubDetail } from '@/pages/user/ClubDetail/types/clubDetail';
 
-export const ClubInfoSidebarSection = () => {
-  const {
-    presidentName,
-    presidentPhoneNumber,
-    location,
-    recruitStart,
-    recruitEnd,
-    regularMeetingInfo,
-    recruitStatus,
-    applicationNotice,
-  } = mockClubDetail;
+type ClubInfoSidebarSectionProps = Pick<
+  ClubDetail,
+  | 'presidentName'
+  | 'presidentPhoneNumber'
+  | 'location'
+  | 'recruitStart'
+  | 'recruitEnd'
+  | 'regularMeetingInfo'
+  | 'recruitStatus'
+  | 'applicationNotice'
+> & {
+  clubId: number | string;
+};
 
-  const { clubId } = useParams<{ clubId: string }>();
-
+export const ClubInfoSidebarSection = ({
+  presidentName,
+  presidentPhoneNumber,
+  location,
+  recruitStart,
+  recruitEnd,
+  regularMeetingInfo,
+  recruitStatus,
+  applicationNotice,
+  clubId,
+}: ClubInfoSidebarSectionProps) => {
   return (
     <SidebarContainer>
       <InfoItem>회장 이름: {presidentName}</InfoItem>

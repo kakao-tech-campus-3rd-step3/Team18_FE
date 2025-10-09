@@ -26,5 +26,5 @@ const StyledTitle = styled.h2(({ theme }) => ({
 }));
 
 const RequiredMark = styled.span(({ theme }) => ({
-  color: theme.colors.red300,
+  color: theme.colors.error,
 }));
