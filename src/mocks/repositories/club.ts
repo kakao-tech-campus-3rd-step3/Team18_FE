@@ -14,7 +14,7 @@ export const clubs: Club[] = [
     name: '소설창작회',
     category: 'LITERATURE',
     shortIntroduction: '단편 소설을 집필하고 합평회를 진행합니다.',
-    recruitStatus: '모집마감',
+    recruitStatus: '모집 마감',
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ export const clubs: Club[] = [
     name: '캘리그라피 모임',
     category: 'LITERATURE',
     shortIntroduction: '글씨체 예술을 배우고 작품을 제작합니다.',
-    recruitStatus: '모집마감',
+    recruitStatus: '모집 마감',
   },
 
   // 학술
@@ -58,7 +58,7 @@ export const clubs: Club[] = [
     name: '수학 문제 연구반',
     category: 'STUDY',
     shortIntroduction: '수학 올림피아드 스타일 문제를 함께 풉니다.',
-    recruitStatus: '모집마감',
+    recruitStatus: '모집 마감',
   },
   {
     id: 9,
@@ -72,7 +72,7 @@ export const clubs: Club[] = [
     name: '환경 과학 연구회',
     category: 'STUDY',
     shortIntroduction: '환경 문제와 해결 방안을 과학적으로 탐구합니다.',
-    recruitStatus: '모집마감',
+    recruitStatus: '모집 마감',
   },
   {
     id: 11,
@@ -88,7 +88,7 @@ export const clubs: Club[] = [
     name: '기독교 학생회',
     category: 'RELIGION',
     shortIntroduction: '성경 공부와 봉사활동을 함께하는 모임입니다.',
-    recruitStatus: '모집마감',
+    recruitStatus: '모집 마감',
   },
   {
     id: 13,
@@ -109,7 +109,7 @@ export const clubs: Club[] = [
     name: '종교 다문화 교류회',
     category: 'RELIGION',
     shortIntroduction: '여러 종교의 문화를 배우고 교류합니다.',
-    recruitStatus: '모집마감',
+    recruitStatus: '모집 마감',
   },
   {
     id: 16,
@@ -132,7 +132,7 @@ export const clubs: Club[] = [
     name: '배드민턴 동아리',
     category: 'SPORTS',
     shortIntroduction: '초보부터 고수까지 함께 치는 배드민턴 모임입니다.',
-    recruitStatus: '모집마감',
+    recruitStatus: '모집 마감',
   },
   {
     id: 19,
@@ -146,7 +146,7 @@ export const clubs: Club[] = [
     name: '탁구반',
     category: 'SPORTS',
     shortIntroduction: '점심시간에 탁구를 치며 즐기는 모임입니다.',
-    recruitStatus: '모집마감',
+    recruitStatus: '모집 마감',
   },
   {
     id: 21,
@@ -167,7 +167,7 @@ export const clubs: Club[] = [
     name: '요가 클래스',
     category: 'SPORTS',
     shortIntroduction: '몸과 마음의 균형을 위해 요가를 함께 합니다.',
-    recruitStatus: '모집마감',
+    recruitStatus: '모집 마감',
   },
 
   // 봉사
@@ -183,7 +183,7 @@ export const clubs: Club[] = [
     name: '해외 봉사단',
     category: 'VOLUNTEER',
     shortIntroduction: '방학 기간에 해외로 봉사활동을 나가는 모임입니다.',
-    recruitStatus: '모집마감',
+    recruitStatus: '모집 마감',
   },
   {
     id: 26,
@@ -204,7 +204,7 @@ export const clubs: Club[] = [
     name: '환경 봉사단',
     category: 'VOLUNTEER',
     shortIntroduction: '플로깅과 재활용 캠페인을 통해 환경을 지킵니다.',
-    recruitStatus: '모집마감',
+    recruitStatus: '모집 마감',
   },
   {
     id: 29,
@@ -225,7 +225,7 @@ export const clubs: Club[] = [
     name: '유기동물 보호 동아리',
     category: 'VOLUNTEER',
     shortIntroduction: '보호소에서 유기동물을 돌보고 입양을 돕습니다.',
-    recruitStatus: '모집마감',
+    recruitStatus: '모집 마감',
   },
   {
     id: 32,
