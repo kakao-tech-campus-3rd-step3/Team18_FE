@@ -3,8 +3,8 @@ import { createRoot } from 'react-dom/client';
 import 'reset-css/reset.css';
 import '@/index.css';
 import { RouterProvider } from 'react-router-dom';
-import { router } from '@/pages/Routes.tsx';
 import { Toaster } from 'sonner';
+import { router } from '@/pages/Routes.tsx';
 import { theme } from '@/styles/theme';
 
 async function enableMocking() {
