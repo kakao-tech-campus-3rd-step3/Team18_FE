@@ -15,7 +15,7 @@ export type Question =
       questionType: typeof QuestionTypes.TIME_SLOT;
       question: string;
       required: boolean;
-      timeSlotOption: InterviewSchedule[];
+      timeSlotOptions: InterviewSchedule[];
     }
   | {
       questionNum: number;
