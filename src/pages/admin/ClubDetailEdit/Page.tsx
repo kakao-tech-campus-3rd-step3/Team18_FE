@@ -12,6 +12,7 @@ import {
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
 import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
 import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
+import { ClubShortIntroductionEditSection } from './components/ClubShortIntroductionEditSection';
 import { useClubDetailEdit } from './hook/useClubDetailEdit';
 import type { ClubDetailEdit } from './types/clubDetailEdit';
 
@@ -47,6 +48,7 @@ export const ClubDetailEditPage = () => {
         <Layout>
           <ContentLeft>
             <ClubHeaderSection clubName={club.clubName} category={club.category} />
+            <ClubShortIntroductionEditSection />
             <ClubActivityPhotosEditSection images={club.introductionImages} />
             <ClubDescriptionEditSection />
             {errors.presidentPhoneNumber && (
