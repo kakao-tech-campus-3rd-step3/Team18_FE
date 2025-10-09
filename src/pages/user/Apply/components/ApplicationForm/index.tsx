@@ -160,13 +160,15 @@ export const ApplicationForm = ({ questions }: Props) => {
               {timeSlotQuestions.map((field) => (
                 <S.ChoiceFormFiled key={field.questionNum}>
                   <S.Label>{field.question}</S.Label>
-                  {field.timeSlotOption?.map((option, idx) => (
+                  {field.timeSlotOptions?.map(
+                    (interviewSchedule: InterviewSchedule, idx: number) => (
                     <InterviewScheduleSelector
                       key={idx}
-                      availableTime={option.availableTime}
-                      date={option.date}
+                      availableTime={interviewSchedule.availableTime}
+                      date={interviewSchedule.date}
                     />
-                  ))}
+                  ),
+)}
                 </S.ChoiceFormFiled>
               ))}
             </S.QuestionWrapper>
