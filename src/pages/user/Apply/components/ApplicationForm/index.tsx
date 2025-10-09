@@ -1,10 +1,12 @@
 import { useForm, FormProvider } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'sonner';
 import { postApplicationForm } from '@/pages/user/Apply/api/apply';
 import { QuestionTypes } from '@/pages/user/Apply/constant/questionType';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
+import { theme } from '@/styles/theme';
 import * as S from './index.styled';
 import { InterviewScheduleSelector } from './InterviewScheduleSelector';
 import type { FormInputs, Question } from '@/pages/user/Apply/type/apply';
@@ -14,6 +16,7 @@ type Props = {
 };
 
 export const ApplicationForm = ({ questions }: Props) => {
+  const navigate = useNavigate();
   const methods = useForm<FormInputs>({
     mode: 'onTouched',
     defaultValues: {
@@ -25,14 +28,36 @@ export const ApplicationForm = ({ questions }: Props) => {
       answers: [],
     },
   });
-  const { errors, isSubmitting, isSubmitSuccessful } = methods.formState;
+  const { errors, isSubmitting } = methods.formState;
 
-  const { id } = useParams<{ id: string }>();
-  const clubId = Number(id);
+  const { clubId } = useParams<{ clubId: string }>();
+  const clubIdNumber = Number(clubId);
+
   const questionArray = questions.map((e) => e.question);
 
   const onSubmit = (data: FormInputs) => {
-    postApplicationForm(clubId, data, questionArray);
+    postApplicationForm(clubIdNumber, data, questionArray)
+      .then(() => {
+        toast.success('제출 성공!', {
+          style: {
+            backgroundColor: theme.colors.primary,
+            color: 'white',
+          },
+          duration: 1000,
+        });
+        setTimeout(() => {
+          navigate(`/clubs/${clubIdNumber}`);
+        }, 1000);
+      })
+      .catch(() => {
+        toast.error('제출 실패!', {
+          duration: 1000,
+          style: {
+            backgroundColor: 'white',
+            color: theme.colors.error,
+          },
+        });
+      });
   };
 
   const questionsWithIndex = questions.map((q, i) => ({ ...q, originalIndex: i }));
@@ -173,8 +198,6 @@ export const ApplicationForm = ({ questions }: Props) => {
           )}
 
           <Button type='submit'>{isSubmitting ? '제출중...' : '제출하기'}</Button>
-          {/* 제출 완료 후 toast 알림 적용 부분*/}
-          {isSubmitSuccessful && <span>제출 성공!</span>}
         </S.FormContainer>
       </form>
     </FormProvider>
