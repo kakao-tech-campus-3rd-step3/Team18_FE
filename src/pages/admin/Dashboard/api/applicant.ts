@@ -8,7 +8,7 @@ export const fetchApplicants = async (
   status?: ApplicationFilterOption,
 ): Promise<ApplicantData[]> => {
   const url = new URL(
-    import.meta.env.VITE_API_BASE_URL + `/clubs/${clubId}/applicants`,
+    import.meta.env.VITE_API_BASE_URL + `/clubs/${clubId}/dashboard`,
     window.location.origin,
   );
   if (status && status !== 'ALL') {
