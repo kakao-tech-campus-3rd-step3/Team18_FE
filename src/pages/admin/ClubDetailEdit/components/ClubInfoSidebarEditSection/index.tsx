@@ -1,110 +1,152 @@
-import { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import { mockClubDetail } from '../mock';
-import * as S from './index.styled';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useFormContext, Controller } from 'react-hook-form';
+import { UnderlineInputField } from '@/shared/components/Form/InputField/UnderlineInputField';
+import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
+import * as S from './index.styled';
 
 export const ClubInfoSidebarEditSection = () => {
   const {
-    presidentName: initialPresidentName,
-    presidentPhoneNumber: initialPresidentPhoneNumber,
-    location: initialLocation,
-    recruitStart: initialRecruitStart,
-    recruitEnd: initialRecruitEnd,
-    regularMeetingInfo: initialRegularMeetingInfo,
-    applicationNotice: initialApplicationNotice,
-  } = mockClubDetail;
-
-  const [presidentName, setPresidentName] = useState(initialPresidentName);
-  const [editingField, setEditingField] = useState<string | null>(null);
-
-  const [recruitStart, setRecruitStart] = useState<Date | null>(
-    initialRecruitStart ? new Date(initialRecruitStart) : null,
-  );
-  const [recruitEnd, setRecruitEnd] = useState<Date | null>(
-    initialRecruitEnd ? new Date(initialRecruitEnd) : null,
-  );
-
-  const renderEditableItem = (
-    label: string,
-    value: string,
-    fieldKey: string,
-    onChange: (newValue: string) => void,
-  ) => {
-    const isEditing = editingField === fieldKey;
-
-    return (
-      <S.InfoItem>
-        <span>{label}:</span>
-        {isEditing ? (
-          <S.InlineInput
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            onBlur={() => setEditingField(null)}
-            autoFocus
-          />
-        ) : (
-          <span>{value}</span>
-        )}
-        {!isEditing && <S.EditIcon onClick={() => setEditingField(fieldKey)} />}
-      </S.InfoItem>
-    );
-  };
-
-  //   const getRecruitStartString = () =>
-  //     recruitStart
-  //       ? `${recruitStart.getFullYear()}-${String(
-  //           recruitStart.getMonth() + 1
-  //         ).padStart(2, "0")}-${String(recruitStart.getDate()).padStart(
-  //           2,
-  //           "0"
-  //         )}T00:00:00`
-  //       : null;
-
-  //   const getRecruitEndString = () =>
-  //     recruitEnd
-  //       ? `${recruitEnd.getFullYear()}-${String(
-  //           recruitEnd.getMonth() + 1
-  //         ).padStart(2, "0")}-${String(recruitEnd.getDate()).padStart(
-  //           2,
-  //           "0"
-  //         )}T23:59:59`
-  //       : null;
+    register,
+    control,
+    getValues,
+    formState: { errors },
+  } = useFormContext<{
+    presidentName: string;
+    presidentPhoneNumber: string;
+    location: string;
+    recruitStart: Date | null;
+    recruitEnd: Date | null;
+    regularMeetingInfo: string;
+    applicationNotice: string;
+  }>();
 
   return (
     <S.SidebarContainer>
-      {renderEditableItem('회장 이름', presidentName, 'presidentName', setPresidentName)}
-      {renderEditableItem('연락처', initialPresidentPhoneNumber, 'presidentPhoneNumber', () => {})}
-      {renderEditableItem('동방 위치', initialLocation, 'location', () => {})}
-
       <S.InfoItem>
-        <span>모집 시작일:</span>
-        <DatePicker
-          selected={recruitStart ?? undefined}
-          onChange={(date: Date | null) => setRecruitStart(date)}
-          dateFormat='yyyy/MM/dd'
-          customInput={<S.InlineInput />}
-        />
+        <S.Label required>회장 이름:</S.Label>
+        <S.InputWrapper>
+          <UnderlineInputField
+            {...register('presidentName', {
+              required: '회장 이름을 입력해주세요.',
+              maxLength: { value: 20, message: '20자 이하로 입력해주세요.' },
+            })}
+            invalid={!!errors.presidentName}
+            message={errors.presidentName?.message}
+          />
+        </S.InputWrapper>
       </S.InfoItem>
 
       <S.InfoItem>
-        <span>모집 마감일:</span>
-        <DatePicker
-          selected={recruitEnd ?? undefined}
-          onChange={(date: Date | null) => setRecruitEnd(date)}
-          minDate={recruitStart ?? undefined}
-          dateFormat='yyyy/MM/dd'
-          customInput={<S.InlineInput />}
-        />
+        <S.Label>연락처:</S.Label>
+        <S.InputWrapper>
+          <UnderlineInputField
+            {...register('presidentPhoneNumber', {
+              pattern: {
+                value: /^\d{3}-\d{4}-\d{4}$/,
+                message: '’ - ’를 포함한 형식으로 입력해주세요.',
+              },
+              validate: (value) =>
+                !value ||
+                /^\d{3}-\d{4}-\d{4}$/.test(value) ||
+                '전화번호 형식은 000-0000-0000입니다.',
+            })}
+            invalid={!!errors.presidentPhoneNumber}
+            message={errors.presidentPhoneNumber?.message}
+          />
+        </S.InputWrapper>
       </S.InfoItem>
 
-      {renderEditableItem('정기 모임', initialRegularMeetingInfo, 'regularMeetingInfo', () => {})}
-      {renderEditableItem(
-        '지원 시 유의사항',
-        initialApplicationNotice,
-        'applicationNotice',
-        () => {},
-      )}
+      <S.InfoItem>
+        <S.Label required>동방 위치:</S.Label>
+        <S.InputWrapper>
+          <UnderlineInputField
+            {...register('location', {
+              required: '동방 위치를 입력해주세요.',
+              maxLength: { value: 20, message: '20자 이하로 입력해주세요.' },
+            })}
+            invalid={!!errors.location}
+            message={errors.location?.message}
+          />
+        </S.InputWrapper>
+      </S.InfoItem>
+
+      <S.InfoItem>
+        <S.Label>모집 시작일:</S.Label>
+        <S.InputWrapper>
+          <Controller
+            control={control}
+            name='recruitStart'
+            rules={{ required: '모집 시작일을 선택해주세요.' }}
+            render={({ field, fieldState }) => (
+              <DatePicker
+                selected={field.value ?? undefined}
+                onChange={(date) => field.onChange(date)}
+                onBlur={field.onBlur}
+                dateFormat='yyyy/MM/dd'
+                customInput={
+                  <UnderlineInputField
+                    invalid={!!fieldState.error}
+                    message={fieldState.error?.message}
+                  />
+                }
+              />
+            )}
+          />
+        </S.InputWrapper>
+      </S.InfoItem>
+
+      <S.InfoItem>
+        <S.Label>모집 마감일:</S.Label>
+        <S.InputWrapper>
+          <Controller
+            control={control}
+            name='recruitEnd'
+            rules={{ required: '모집 마감일을 선택해주세요.' }}
+            render={({ field, fieldState }) => (
+              <DatePicker
+                selected={field.value ?? undefined}
+                onChange={(date) => field.onChange(date)}
+                onBlur={field.onBlur}
+                minDate={getValues('recruitStart') ?? undefined}
+                dateFormat='yyyy/MM/dd'
+                customInput={
+                  <UnderlineInputField
+                    invalid={!!fieldState.error}
+                    message={fieldState.error?.message}
+                  />
+                }
+              />
+            )}
+          />
+        </S.InputWrapper>
+      </S.InfoItem>
+
+      <S.InfoItem>
+        <S.Label required>정기 모임:</S.Label>
+        <S.InputWrapper>
+          <UnderlineInputField
+            {...register('regularMeetingInfo', {
+              required: '정기 모임 정보를 입력해주세요.',
+              maxLength: { value: 50, message: '50자 이하로 입력해주세요.' },
+            })}
+            invalid={!!errors.regularMeetingInfo}
+            message={errors.regularMeetingInfo?.message}
+          />
+        </S.InputWrapper>
+      </S.InfoItem>
+
+      <S.InfoItem column>
+        <S.Label>지원 시 유의사항:</S.Label>
+        <OutlineTextareaField
+          {...register('applicationNotice', {
+            maxLength: { value: 100, message: '100자 이하로 입력해주세요.' },
+            validate: (value) => !value || value.length <= 100 || '100자 이하로 입력해주세요.',
+          })}
+          invalid={!!errors.applicationNotice}
+          message={errors.applicationNotice?.message}
+        />
+      </S.InfoItem>
     </S.SidebarContainer>
   );
 };

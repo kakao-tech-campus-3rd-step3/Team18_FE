@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 type Variant = 'light' | 'outline';
 import type { Theme } from '@emotion/react';
 
@@ -23,9 +23,28 @@ export const Button = ({
   variant,
   width,
 }: Props) => {
+  const navigate = useNavigate();
+
   if (to) {
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (disabled) {
+        e.preventDefault();
+        return;
+      }
+      e.preventDefault();
+      navigate(to);
+      window.scrollTo(0, 0);
+      onClick?.();
+    };
+
     return (
-      <ButtonLink to={to} $disabled={disabled} $variant={variant} $width={width}>
+      <ButtonLink
+        to={to}
+        $disabled={disabled}
+        $variant={variant}
+        $width={width}
+        onClick={handleClick}
+      >
         {children}
       </ButtonLink>
     );

@@ -31,6 +31,17 @@ const postApplicationSubmitResolver = async ({ request }: { request: Request }) 
   });
 };
 
+const getClubDetailResolver = ({ params }: { params: PathParams }) => {
+  const { clubId } = params;
+  const club = clubRepository.getClubDetailById(Number(clubId));
+
+  if (!club) {
+    return new HttpResponse('Not Found', { status: 404 });
+  }
+
+  return HttpResponse.json(club, { status: 200 });
+};
+
 export const clubHandlers = [
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/search/category', getClubsResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:Id/apply', getClubApplicationResolver),
@@ -38,4 +49,5 @@ export const clubHandlers = [
     'https://nonprotuberant-florine-irreversibly.ngrok-free.dev/api/clubs/:clubId/apply-submit',
     postApplicationSubmitResolver,
   ),
+  http.get('/api/clubs/:clubId', getClubDetailResolver),
 ];
