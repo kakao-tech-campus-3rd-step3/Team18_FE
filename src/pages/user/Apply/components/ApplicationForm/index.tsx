@@ -53,7 +53,7 @@ export const ApplicationForm = ({ questions }: Props) => {
         toast.error('제출 실패!', {
           duration: 1000,
           style: {
-            backgroundColor: 'whitesmoke',
+            backgroundColor: 'white',
             color: theme.colors.error,
           },
         });
