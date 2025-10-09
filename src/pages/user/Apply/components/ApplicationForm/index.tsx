@@ -7,7 +7,7 @@ import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineIn
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import * as S from './index.styled';
 import { InterviewScheduleSelector } from './InterviewScheduleSelector';
-import type { FormInputs, Question } from '@/pages/user/Apply/type/apply';
+import type { FormInputs, InterviewSchedule, Question } from '@/pages/user/Apply/type/apply';
 
 type Props = {
   questions: Question[];
@@ -162,13 +162,13 @@ export const ApplicationForm = ({ questions }: Props) => {
                   <S.Label>{field.question}</S.Label>
                   {field.timeSlotOptions?.map(
                     (interviewSchedule: InterviewSchedule, idx: number) => (
-                    <InterviewScheduleSelector
-                      key={idx}
-                      availableTime={interviewSchedule.availableTime}
-                      date={interviewSchedule.date}
-                    />
-                  ),
-)}
+                      <InterviewScheduleSelector
+                        key={idx}
+                        availableTime={interviewSchedule.availableTime}
+                        date={interviewSchedule.date}
+                      />
+                    ),
+                  )}
                 </S.ChoiceFormFiled>
               ))}
             </S.QuestionWrapper>
