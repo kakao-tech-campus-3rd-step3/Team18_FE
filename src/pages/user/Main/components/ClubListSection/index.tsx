@@ -25,7 +25,7 @@ export const ClubListSection = ({ filter, searchText }: Props) => {
       <S.ClubListContainer>
         <S.NoSearchResultContainer>
           <S.SearchImage
-            src='/public/assets/noSearchResults.svg'
+            src='/assets/noSearchResults.svg'
             alt='이미지 없음'
             width={100}
             height={100}

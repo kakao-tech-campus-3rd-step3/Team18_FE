@@ -4,7 +4,7 @@ import { clubRepository } from '../repositories/club';
 
 const getClubsResolver = ({ request }: { request: Request }) => {
   const url = new URL(request.url);
-  const categoryName = url.searchParams.get('categoryName') ?? 'all';
+  const categoryName = url.searchParams.get('category') ?? 'all';
   const clubs = clubRepository.getClubsByCategory(categoryName);
   return HttpResponse.json({ clubs }, { status: 200 });
 };
