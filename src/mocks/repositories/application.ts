@@ -22,7 +22,7 @@ export const Application: ApplicationForm = {
       questionType: 'TIME_SLOT',
       question: '면접가능 날짜는?',
       required: true,
-      timeSlotOption: [
+      timeSlotOptions: [
         {
           date: '2025-09-24',
           availableTime: { start: '10:00', end: '12:00' },
