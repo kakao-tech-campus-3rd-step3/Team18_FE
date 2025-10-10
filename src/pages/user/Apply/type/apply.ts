@@ -65,5 +65,5 @@ export type FormInputs = {
   phoneNumber: string;
   email: string;
   answers: object[];
-  selectedInterviewSchedule: string[];
+  selectedInterviewSchedule: PostInterviewSchedule[];
 };
