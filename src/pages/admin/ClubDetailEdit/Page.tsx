@@ -1,7 +1,9 @@
+import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 import { Button } from '@/shared/components/Button';
 import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
 import {
@@ -35,14 +37,33 @@ export const ClubDetailEditPage = () => {
     if (club) reset(club);
   }, [club, reset]);
 
+  const navigate = useNavigate();
+  const theme = useTheme();
+
   const onSubmit = async (data: ClubDetailEdit) => {
-    try {
-      await updateClubDetailEdit(clubId ?? '', data);
-      alert('수정이 완료되었습니다!');
-    } catch (error) {
-      console.error(error);
-      alert('수정 중 오류가 발생했습니다.');
-    }
+    updateClubDetailEdit(clubId ?? '', data)
+      .then(() => {
+        toast.success('수정 성공!', {
+          style: {
+            backgroundColor: theme.colors.primary,
+            color: 'white',
+          },
+          duration: 1000,
+        });
+
+        setTimeout(() => {
+          navigate(`/admin/clubs/${clubId}`);
+        }, 1000);
+      })
+      .catch(() => {
+        toast.error('수정 실패!', {
+          duration: 1000,
+          style: {
+            backgroundColor: 'white',
+            color: theme.colors.error,
+          },
+        });
+      });
   };
 
   if (isLoading) return <div>Loading...</div>;
