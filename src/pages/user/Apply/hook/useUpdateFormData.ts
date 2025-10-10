@@ -1,8 +1,8 @@
 import { useFormContext } from 'react-hook-form';
-import type { PostInterviewSchedule } from '../type/apply';
+import { type FormInputs, type PostInterviewSchedule } from '../type/apply';
 
 export function useUpdateFormValue() {
-  const { setValue, getValues } = useFormContext();
+  const { setValue, getValues } = useFormContext<FormInputs>();
 
   function updateScheduleData(date: string, mergedInterviewTime: string[]) {
     const currentInterviewSchedule = getValues('selectedInterviewSchedule') || [];
