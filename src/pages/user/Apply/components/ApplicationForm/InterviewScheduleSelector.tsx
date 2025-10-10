@@ -6,20 +6,20 @@ import { TimeSpan, Wrapper, DateText } from './index.styled';
 import type { InterviewSchedule } from '@/pages/user/Apply/type/apply';
 
 export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSchedule) => {
-  const timeIntervalArray: [string, string][] = getTimeSlotsArray(availableTime);
+  const timeSlotsArray: [string, string][] = getTimeSlotsArray(availableTime);
 
   const { updateScheduleData } = useUpdateFormValue();
 
   const { handleMouseDown, handleMouseMove, handleMouseUp, selectedTime } = useDragSelection(
     updateScheduleData,
     date,
-    timeIntervalArray,
+    timeSlotsArray,
   );
 
   return (
     <Wrapper>
       <DateText>{date}</DateText>
-      {timeIntervalArray.map((e, idx) => {
+      {timeSlotsArray.map((e, idx) => {
         return (
           <TimeSpan
             key={idx}
