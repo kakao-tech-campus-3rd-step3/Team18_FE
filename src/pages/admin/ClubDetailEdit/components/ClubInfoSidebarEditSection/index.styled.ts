@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
-import { FaPen } from 'react-icons/fa';
 
 export const SidebarContainer = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  gap: '0.5rem',
+  gap: '1.5rem',
   padding: '1rem',
   backgroundColor: theme.colors.bg,
   borderRadius: theme.radius.md,
@@ -25,7 +24,7 @@ export const InputWrapper = styled.div({
 });
 
 export const Label = styled.span<{ required?: boolean }>(({ theme, required }) => ({
-  fontWeight: 500,
+  fontWeight: theme.font.weight.bold,
   ...(required && {
     '&::after': {
       content: '" *"',
@@ -39,9 +38,23 @@ export const Label = styled.span<{ required?: boolean }>(({ theme, required }) =
   color: theme.colors.textPrimary,
 }));
 
-export const EditIcon = styled(FaPen)(({ theme }) => ({
-  marginLeft: '0.5rem',
-  cursor: 'pointer',
-  color: theme.colors.gray400,
-  fontSize: '0.85rem',
+export const DisplayWrapper = styled.div(({}) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  textAlign: 'center',
+  width: '100%',
+  gap: '0.3rem',
+}));
+
+export const DisplayText = styled.span(({ theme }) => ({
+  fontSize: theme.font.size.base,
+  color: theme.colors.textPrimary,
+  fontWeight: theme.font.weight.medium,
+}));
+
+export const SubText = styled.span(({ theme }) => ({
+  fontSize: theme.font.size.sm,
+  color: theme.colors.textSecondary,
+  marginTop: '0.1rem',
 }));
