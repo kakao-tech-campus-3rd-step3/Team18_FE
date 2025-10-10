@@ -9,6 +9,7 @@ import {
   ContentLeft,
   ContentRight,
 } from '@/shared/components/ClubDetailLayout/index.styled';
+import { updateClubDetailEdit } from './api/clubDetailEdit';
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
 import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
 import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
@@ -34,8 +35,14 @@ export const ClubDetailEditPage = () => {
     if (club) reset(club);
   }, [club, reset]);
 
-  const onSubmit = (data: ClubDetailEdit) => {
-    console.log('수정된 값 저장', data);
+  const onSubmit = async (data: ClubDetailEdit) => {
+    try {
+      await updateClubDetailEdit(clubId ?? '', data);
+      alert('수정이 완료되었습니다!');
+    } catch (error) {
+      console.error(error);
+      alert('수정 중 오류가 발생했습니다.');
+    }
   };
 
   if (isLoading) return <div>Loading...</div>;
