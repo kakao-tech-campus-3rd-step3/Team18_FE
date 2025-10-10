@@ -18,7 +18,7 @@ export const formatHour = (hour: number): string => {
   return hour.toString().padStart(2, '0') + ':00';
 };
 
-export function getTimeSlotsArray(timeSlots: string[]) {
+export function generateTimeSlotsArray(timeSlots: string[]) {
   const thirtyMinuteArray: [string, string][] = [];
 
   for (let i = 0; i < timeSlots.length - 1; i++) {
@@ -49,10 +49,10 @@ export function generateTimeSlots(
   return timeSlots;
 }
 
-export function generateTimeIntervalArray(availableTime: AvailableTime): [string, string][] {
+export function getTimeSlotsArray(availableTime: AvailableTime): [string, string][] {
   const startNum: number = parseTime(availableTime.start);
   const endNum: number = parseTime(availableTime.end);
-  return getTimeSlotsArray(generateTimeSlots(startNum, endNum, 30));
+  return generateTimeSlotsArray(generateTimeSlots(startNum, endNum, 30));
 }
 
 export function convertSelectionToTimeInterval(
