@@ -7,7 +7,7 @@ export type ClubResponse = {
 
 export async function getClubsByCategory(filter: ClubCategoryEng): Promise<ClubResponse> {
   const response = await fetch(
-    import.meta.env.VITE_API_BASE_URL + `/clubs/search/category?categoryName=${filter}`,
+    import.meta.env.VITE_API_BASE_URL + `/clubs/search/category?category=${filter}`,
   );
   return await response.json();
 }

@@ -15,7 +15,7 @@ export type Question =
       questionType: typeof QuestionTypes.TIME_SLOT;
       question: string;
       required: boolean;
-      timeSlotOption: InterviewSchedule[];
+      timeSlotOptions: InterviewSchedule[];
     }
   | {
       questionNum: number;
@@ -65,5 +65,5 @@ export type FormInputs = {
   phoneNumber: string;
   email: string;
   answers: object[];
-  selectedInterviewSchedule: string[];
+  selectedInterviewSchedule: PostInterviewSchedule[];
 };
