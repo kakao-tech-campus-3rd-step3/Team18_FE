@@ -1,12 +1,13 @@
 import { useDragSelection } from '@/pages/user/Apply/hook/useDragSelection';
 import { useUpdateFormValue } from '@/pages/user/Apply/hook/useUpdateFormData';
-import { generateTimeIntervalArray } from '@/pages/user/Apply/utils/time';
+import { getTimeSlotsArray } from '@/pages/user/Apply/utils/time';
 import { Text } from '@/shared/components/Text';
 import { TimeSpan, Wrapper, DateText } from './index.styled';
 import type { InterviewSchedule } from '@/pages/user/Apply/type/apply';
 
 export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSchedule) => {
-  const timeIntervalArray: [string, string][] = generateTimeIntervalArray(availableTime);
+  const timeIntervalArray: [string, string][] = getTimeSlotsArray(availableTime);
+
   const { updateScheduleData } = useUpdateFormValue();
 
   const { handleMouseDown, handleMouseMove, handleMouseUp, selectedTime } = useDragSelection(
