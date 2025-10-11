@@ -17,6 +17,7 @@ export const ClubIntroduction = styled.div(({ theme }) => ({
   fontSize: theme?.font?.size?.xs,
   fontWeight: theme.font.weight.regular,
   color: theme?.colors?.textSecondary,
+  lineHeight: '1.5',
 }));
 
 type Props = {
