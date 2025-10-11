@@ -9,8 +9,6 @@ export type DashboardCard = {
 
 export type ApplicationFilterOption = 'ALL' | 'ACCEPTED' | 'REJECTED' | 'PENDING';
 
-export type ApplicantStatus = 'ACCEPTED' | 'REJECTED' | 'PENDING';
-
 export type ApplicantData = {
   id: number;
   name: string;
@@ -18,5 +16,5 @@ export type ApplicantData = {
   department: string;
   phoneNumber: string;
   email: string;
-  status: '합격' | '불합격' | '미정';
+  status: Omit<ApplicationFilterOption, 'All'>;
 };
