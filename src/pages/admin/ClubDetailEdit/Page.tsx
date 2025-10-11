@@ -1,4 +1,3 @@
-import { theme } from '@/styles/theme';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
@@ -11,6 +10,7 @@ import {
   ContentLeft,
   ContentRight,
 } from '@/shared/components/ClubDetailLayout/index.styled';
+import { theme } from '@/styles/theme';
 import { updateClubDetailEdit } from './api/clubDetailEdit';
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
 import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
