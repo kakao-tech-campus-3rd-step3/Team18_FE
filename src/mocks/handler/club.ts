@@ -4,7 +4,7 @@ import { clubRepository } from '../repositories/club';
 
 const getClubsResolver = ({ request }: { request: Request }) => {
   const url = new URL(request.url);
-  const categoryName = url.searchParams.get('categoryName') ?? 'all';
+  const categoryName = url.searchParams.get('category') ?? 'all';
   const clubs = clubRepository.getClubsByCategory(categoryName);
   return HttpResponse.json({ clubs }, { status: 200 });
 };
@@ -68,12 +68,9 @@ export const clubHandlers = [
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/search/category', getClubsResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:Id/apply', getClubApplicationResolver),
   http.post(
-    'https://nonprotuberant-florine-irreversibly.ngrok-free.dev/api/clubs/:clubId/apply-submit',
+    import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/apply-submit',
     postApplicationSubmitResolver,
   ),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', getClubDetailResolver),
-  http.post(
-    'https://nonprotuberant-florine-irreversibly.ngrok-free.dev/api/clubs/:clubId',
-    postClubDetailResolver,
-  ),
+  http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', postClubDetailResolver),
 ];
