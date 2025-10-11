@@ -1,4 +1,4 @@
-import { useTheme } from '@emotion/react';
+import { theme } from '@/styles/theme';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
@@ -38,7 +38,6 @@ export const ClubDetailEditPage = () => {
   }, [club, reset]);
 
   const navigate = useNavigate();
-  const theme = useTheme();
 
   const onSubmit = async (data: ClubDetailEdit) => {
     updateClubDetailEdit(clubId ?? '', data)
