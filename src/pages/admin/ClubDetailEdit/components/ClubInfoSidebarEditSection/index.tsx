@@ -1,44 +1,38 @@
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useFormContext, Controller } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { UnderlineInputField } from '@/shared/components/Form/InputField/UnderlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
+import { formatDate } from '@/utils/dateUtils';
 import * as S from './index.styled';
 
 export const ClubInfoSidebarEditSection = () => {
   const {
     register,
-    control,
-    getValues,
     formState: { errors },
+    getValues,
   } = useFormContext<{
     presidentName: string;
     presidentPhoneNumber: string;
     location: string;
-    recruitStart: Date | null;
-    recruitEnd: Date | null;
+    recruitStart: string | null;
+    recruitEnd: string | null;
     regularMeetingInfo: string;
     applicationNotice: string;
   }>();
 
+  const formValues = getValues();
+
   return (
     <S.SidebarContainer>
       <S.InfoItem>
-        <S.Label required>회장 이름:</S.Label>
-        <S.InputWrapper>
-          <UnderlineInputField
-            {...register('presidentName', {
-              required: '회장 이름을 입력해주세요.',
-              maxLength: { value: 20, message: '20자 이하로 입력해주세요.' },
-            })}
-            invalid={!!errors.presidentName}
-            message={errors.presidentName?.message}
-          />
-        </S.InputWrapper>
+        <S.Label>회장 이름</S.Label>
+        <S.DisplayWrapper>
+          <S.DisplayText>{formValues.presidentName || '-'}</S.DisplayText>
+        </S.DisplayWrapper>
       </S.InfoItem>
 
       <S.InfoItem>
-        <S.Label>연락처:</S.Label>
+        <S.Label>연락처</S.Label>
         <S.InputWrapper>
           <UnderlineInputField
             {...register('presidentPhoneNumber', {
@@ -58,7 +52,7 @@ export const ClubInfoSidebarEditSection = () => {
       </S.InfoItem>
 
       <S.InfoItem>
-        <S.Label required>동방 위치:</S.Label>
+        <S.Label required>동방 위치</S.Label>
         <S.InputWrapper>
           <UnderlineInputField
             {...register('location', {
@@ -72,58 +66,7 @@ export const ClubInfoSidebarEditSection = () => {
       </S.InfoItem>
 
       <S.InfoItem>
-        <S.Label>모집 시작일:</S.Label>
-        <S.InputWrapper>
-          <Controller
-            control={control}
-            name='recruitStart'
-            rules={{ required: '모집 시작일을 선택해주세요.' }}
-            render={({ field, fieldState }) => (
-              <DatePicker
-                selected={field.value ?? undefined}
-                onChange={(date) => field.onChange(date)}
-                onBlur={field.onBlur}
-                dateFormat='yyyy/MM/dd'
-                customInput={
-                  <UnderlineInputField
-                    invalid={!!fieldState.error}
-                    message={fieldState.error?.message}
-                  />
-                }
-              />
-            )}
-          />
-        </S.InputWrapper>
-      </S.InfoItem>
-
-      <S.InfoItem>
-        <S.Label>모집 마감일:</S.Label>
-        <S.InputWrapper>
-          <Controller
-            control={control}
-            name='recruitEnd'
-            rules={{ required: '모집 마감일을 선택해주세요.' }}
-            render={({ field, fieldState }) => (
-              <DatePicker
-                selected={field.value ?? undefined}
-                onChange={(date) => field.onChange(date)}
-                onBlur={field.onBlur}
-                minDate={getValues('recruitStart') ?? undefined}
-                dateFormat='yyyy/MM/dd'
-                customInput={
-                  <UnderlineInputField
-                    invalid={!!fieldState.error}
-                    message={fieldState.error?.message}
-                  />
-                }
-              />
-            )}
-          />
-        </S.InputWrapper>
-      </S.InfoItem>
-
-      <S.InfoItem>
-        <S.Label required>정기 모임:</S.Label>
+        <S.Label required>정기 모임</S.Label>
         <S.InputWrapper>
           <UnderlineInputField
             {...register('regularMeetingInfo', {
@@ -136,8 +79,19 @@ export const ClubInfoSidebarEditSection = () => {
         </S.InputWrapper>
       </S.InfoItem>
 
+      <S.InfoItem>
+        <S.Label>모집 기간</S.Label>
+        <S.DisplayWrapper>
+          <S.DisplayText>
+            {formValues.recruitStart && formValues.recruitEnd
+              ? `${formatDate(formValues.recruitStart)} ~ ${formatDate(formValues.recruitEnd)}`
+              : '-'}
+          </S.DisplayText>
+        </S.DisplayWrapper>
+      </S.InfoItem>
+
       <S.InfoItem column>
-        <S.Label>지원 시 유의사항:</S.Label>
+        <S.Label>지원 시 유의사항</S.Label>
         <OutlineTextareaField
           {...register('applicationNotice', {
             maxLength: { value: 100, message: '100자 이하로 입력해주세요.' },
@@ -147,6 +101,9 @@ export const ClubInfoSidebarEditSection = () => {
           message={errors.applicationNotice?.message}
         />
       </S.InfoItem>
+
+      <S.SubText>- 모집 일정은 지원폼 수정 페이지에서 수정할 수 있습니다.</S.SubText>
+      <S.SubText>- 회장 변경 시 개발팀에 문의하세요.</S.SubText>
     </S.SidebarContainer>
   );
 };
