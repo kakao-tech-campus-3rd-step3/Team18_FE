@@ -4,9 +4,9 @@ import { searchClubs } from '@/pages/user/Main/utils/searchClubs.ts';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
 import { Text } from '@/shared/components/Text';
 import * as S from './Club.styled.ts';
-import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
 import { engToKorCategory } from '../../utils/formatting.ts';
 import type { Club } from '../../types/club.ts';
+import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
 
 type Props = {
   filter: ClubCategoryEng;
