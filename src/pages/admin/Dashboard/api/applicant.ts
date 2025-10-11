@@ -1,20 +1,13 @@
-import type {
-  ApplicantData,
-  ApplicationFilterOption,
-} from '@/pages/admin/Dashboard/types/dashboard';
+import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
 
-export const fetchApplicants = async (
-  clubId: number,
-  status?: ApplicationFilterOption,
-): Promise<ApplicantData[]> => {
-  const url = new URL(
-    import.meta.env.VITE_API_BASE_URL + `/clubs/${clubId}/applicants`,
-    window.location.origin,
-  );
-  if (status && status !== 'ALL') {
-    url.searchParams.set('status', status);
+export const fetchApplicants = async (clubId: number): Promise<ApplicantData[]> => {
+  const url = `/api/clubs/${clubId}/dashboard`;
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`HTTP ${response.status}: ${errorText}`);
   }
 
-  const response = await fetch(url.toString());
   return await response.json();
 };
