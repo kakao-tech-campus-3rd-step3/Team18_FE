@@ -38,14 +38,14 @@ export const Label = styled.span<{ required?: boolean }>(({ theme, required }) =
   color: theme.colors.textPrimary,
 }));
 
-export const DisplayWrapper = styled.div(({
+export const DisplayWrapper = styled.div({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   textAlign: 'center',
   width: '100%',
   gap: '0.3rem',
-}));
+});
 
 export const DisplayText = styled.span(({ theme }) => ({
   fontSize: theme.font.size.base,
