@@ -26,6 +26,7 @@ export const ApplicationForm = ({ questions }: Props) => {
       phoneNumber: '',
       email: '',
       answers: [],
+      selectedInterviewSchedule: [],
     },
   });
   const { errors, isSubmitting } = methods.formState;

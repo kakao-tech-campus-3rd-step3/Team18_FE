@@ -18,30 +18,41 @@ export const formatHour = (hour: number): string => {
   return hour.toString().padStart(2, '0') + ':00';
 };
 
-export function getTimeIntervalArray(hourArray: string[]) {
+export function generateTimeSlotsArray(timeSlots: string[]) {
   const thirtyMinuteArray: [string, string][] = [];
 
-  for (let i = 0; i < hourArray.length - 1; i++) {
-    thirtyMinuteArray.push([hourArray[i], hourArray[i + 1]]);
+  for (let i = 0; i < timeSlots.length - 1; i++) {
+    thirtyMinuteArray.push([timeSlots[i], timeSlots[i + 1]]);
   }
 
   return thirtyMinuteArray;
 }
 
-export function generateHours(startHour: number, endHour: number): string[] {
-  const hours: string[] = [];
+export function generateTimeSlots(
+  startHour: number,
+  endHour: number,
+  intervalMinute: number,
+): string[] {
+  const timeSlots: string[] = [];
 
   for (let h = startHour; h <= endHour; h++) {
     const hourStr = formatHour(h);
 
-    hours.push(hourStr);
+    timeSlots.push(hourStr);
 
     if (h < endHour) {
-      const halfHourStr = h.toString().padStart(2, '0') + ':30';
-      hours.push(halfHourStr);
+      for (let m = intervalMinute; m < 60; m += intervalMinute) {
+        timeSlots.push(h.toString().padStart(2, '0') + ':' + m);
+      }
     }
   }
-  return hours;
+  return timeSlots;
+}
+
+export function getTimeSlotsArray(availableTime: AvailableTime): [string, string][] {
+  const startNum: number = parseTime(availableTime.start);
+  const endNum: number = parseTime(availableTime.end);
+  return generateTimeSlotsArray(generateTimeSlots(startNum, endNum, 30));
 }
 
 export function convertSelectionToTimeInterval(
@@ -92,10 +103,4 @@ export function mergeContinuousTimeInterval(selectedTime: Set<string>): string[]
   });
 
   return mergedInterviewTime;
-}
-
-export function generateTimeIntervalArray(availableTime: AvailableTime): [string, string][] {
-  const startNum: number = parseTime(availableTime.start);
-  const endNum: number = parseTime(availableTime.end);
-  return getTimeIntervalArray(generateHours(startNum, endNum));
 }

@@ -2,6 +2,7 @@ import type {
   ApplicationForm,
   ApplicationFormRequest,
   FormInputs,
+  PostInterviewSchedule,
 } from '@/pages/user/Apply/type/apply.ts';
 
 export const fetchApplicationForm = async (Id: number): Promise<ApplicationForm> => {
@@ -30,8 +31,8 @@ export const postApplicationForm = async (
 };
 
 export const applicationFormDto = (formData: FormInputs, questionArray: string[]) => {
-  const interviewDateAnswer = formData.selectedInterviewSchedule;
-  formData.answers.push({ interviewDateAnswer });
+  const interviewDateAnswer: PostInterviewSchedule[] = formData.selectedInterviewSchedule;
+  const newFormDataAnswers: object[] = [...formData.answers, { interviewDateAnswer }];
 
   return {
     email: formData.email,
@@ -40,7 +41,7 @@ export const applicationFormDto = (formData: FormInputs, questionArray: string[]
     phoneNumber: formData.phoneNumber,
     department: formData.department,
     answers: [
-      ...formData.answers.map((answer, index) => {
+      ...newFormDataAnswers.map((answer, index) => {
         return {
           questionNum: index,
           question: questionArray[index],
