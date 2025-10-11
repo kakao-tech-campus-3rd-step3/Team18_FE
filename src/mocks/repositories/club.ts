@@ -334,4 +334,16 @@ export const clubRepository = {
   getClubDetailById: (id: number) => {
     return mockClubDetail.find((club) => club.id === id);
   },
+
+  updateClubDetail: (id: number, updatedData: Partial<ClubDetail>) => {
+    const index = mockClubDetail.findIndex((club) => club.id === id);
+    if (index === -1) return;
+
+    mockClubDetail[index] = {
+      ...mockClubDetail[index],
+      ...updatedData,
+    };
+
+    return mockClubDetail[index];
+  },
 };

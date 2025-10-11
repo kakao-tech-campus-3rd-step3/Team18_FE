@@ -42,6 +42,28 @@ const getClubDetailResolver = ({ params }: { params: PathParams }) => {
   return HttpResponse.json(club, { status: 200 });
 };
 
+const postClubDetailResolver = async ({
+  params,
+  request,
+}: {
+  params: PathParams;
+  request: Request;
+}) => {
+  const { clubId } = params;
+  const body = await request.json();
+
+  const existingClub = clubRepository.getClubDetailById(Number(clubId));
+
+  if (!existingClub) {
+    return new HttpResponse('Not Found', { status: 404 });
+  }
+
+  const updatedClub = { ...existingClub, ...body };
+  clubRepository.updateClubDetail(Number(clubId), updatedClub);
+
+  return HttpResponse.json(updatedClub, { status: 200 });
+};
+
 export const clubHandlers = [
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/search/category', getClubsResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:Id/apply', getClubApplicationResolver),
@@ -49,5 +71,6 @@ export const clubHandlers = [
     import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/apply-submit',
     postApplicationSubmitResolver,
   ),
-  http.get('/api/clubs/:clubId', getClubDetailResolver),
+  http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', getClubDetailResolver),
+  http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', postClubDetailResolver),
 ];

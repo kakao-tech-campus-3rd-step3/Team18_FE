@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 import { Button } from '@/shared/components/Button';
 import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
 import {
@@ -9,9 +10,12 @@ import {
   ContentLeft,
   ContentRight,
 } from '@/shared/components/ClubDetailLayout/index.styled';
+import { theme } from '@/styles/theme';
+import { updateClubDetailEdit } from './api/clubDetailEdit';
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
 import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
 import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
+import { ClubShortIntroductionEditSection } from './components/ClubShortIntroductionEditSection';
 import { useClubDetailEdit } from './hook/useClubDetailEdit';
 import type { ClubDetailEdit } from './types/clubDetailEdit';
 
@@ -33,8 +37,32 @@ export const ClubDetailEditPage = () => {
     if (club) reset(club);
   }, [club, reset]);
 
-  const onSubmit = (data: ClubDetailEdit) => {
-    console.log('수정된 값 저장', data);
+  const navigate = useNavigate();
+
+  const onSubmit = async (data: ClubDetailEdit) => {
+    updateClubDetailEdit(clubId ?? '', data)
+      .then(() => {
+        toast.success('수정 성공!', {
+          style: {
+            backgroundColor: theme.colors.primary,
+            color: 'white',
+          },
+          duration: 1000,
+        });
+
+        setTimeout(() => {
+          navigate(`/admin/clubs/${clubId}`);
+        }, 1000);
+      })
+      .catch(() => {
+        toast.error('수정 실패!', {
+          duration: 1000,
+          style: {
+            backgroundColor: 'white',
+            color: theme.colors.error,
+          },
+        });
+      });
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -47,6 +75,7 @@ export const ClubDetailEditPage = () => {
         <Layout>
           <ContentLeft>
             <ClubHeaderSection clubName={club.clubName} category={club.category} />
+            <ClubShortIntroductionEditSection />
             <ClubActivityPhotosEditSection images={club.introductionImages} />
             <ClubDescriptionEditSection />
             {errors.presidentPhoneNumber && (
