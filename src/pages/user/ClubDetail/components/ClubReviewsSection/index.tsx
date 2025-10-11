@@ -10,6 +10,7 @@ export const ClubReviewsSection = () => {
 
   return (
     <S.ReviewsContainer>
+      <S.Divider />
       <SectionTitle>동아리 후기</SectionTitle>
 
       {reviews.map((review) => (

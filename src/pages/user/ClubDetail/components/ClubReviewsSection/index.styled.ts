@@ -1,5 +1,11 @@
 import styled from '@emotion/styled';
 
+export const Divider = styled.hr(({ theme }) => ({
+  border: 'none',
+  borderTop: `1px solid ${theme.colors.gray200}`,
+  width: '100%',
+}));
+
 export const ReviewsContainer = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
