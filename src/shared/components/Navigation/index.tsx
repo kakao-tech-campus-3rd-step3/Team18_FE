@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NAV_CONFIG } from '@/constants/navigation';
-import { replaceRouteParams } from '@/utils/replaceRouteParams'; // ✅ 추가
+import { replaceRouteParams } from '@/utils/replaceRouteParams';
 import { NavigationContainer } from './NavigationContainer';
 import { NavigationItem } from './NavigationItem';
 import type { Role } from '@/types/navigation';
