@@ -7,7 +7,7 @@ import { formatDate } from '@/utils/dateUtils';
 import { SummaryCard } from './SummaryCard';
 
 export const DashboardSummarySection = () => {
-  const clubId = '1';
+  const clubId = 1;
 
   const { data: summary, isLoading, error } = useDashboardSummary(clubId);
 
