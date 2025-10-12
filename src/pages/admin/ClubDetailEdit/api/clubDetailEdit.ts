@@ -1,7 +1,7 @@
 import type { ClubDetailEdit } from '../types/clubDetailEdit';
 
 export const fetchClubDetailEdit = async (clubId: string | number): Promise<ClubDetailEdit> => {
-  const url = `/api/clubs/${clubId}`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/clubs/${clubId}`;
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -9,11 +9,12 @@ export const fetchClubDetailEdit = async (clubId: string | number): Promise<Club
   }
   return response.json() as Promise<ClubDetailEdit>;
 };
+
 export const updateClubDetailEdit = async (
   clubId: string | number,
   updatedData: Partial<ClubDetailEdit>,
 ): Promise<ClubDetailEdit> => {
-  const url = `/api/clubs/${clubId}`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/clubs/${clubId}`;
   const response = await fetch(url, {
     method: 'POST',
     headers: {

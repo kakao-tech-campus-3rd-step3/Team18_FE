@@ -1,7 +1,7 @@
 import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
 
 export const fetchApplicants = async (clubId: number): Promise<ApplicantData[]> => {
-  const url = `/api/clubs/${clubId}/dashboard/applicants`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/clubs/${clubId}/dashboard/applicants`;
   const response = await fetch(url);
 
   if (!response.ok) {

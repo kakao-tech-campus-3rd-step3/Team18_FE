@@ -1,7 +1,7 @@
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 
 export const fetchComments = async (applicationId: number): Promise<Comment[]> => {
-  const url = `/api/applications/${applicationId}/comments`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/applications/${applicationId}/comments`;
   const response = await fetch(url);
 
   if (!response.ok) throw new Error('Failed to fetch comments');
@@ -13,7 +13,8 @@ export const createComment = async (
   content: string,
   rating: number,
 ): Promise<Comment> => {
-  const url = `/api/applications/${applicationId}/comments`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/applications/${applicationId}/comments`;
+
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -27,7 +28,7 @@ export const createComment = async (
 };
 
 export const deleteComment = async (applicationId: number, commentId: number): Promise<void> => {
-  const url = `/api/applications/${applicationId}/comments/${commentId}`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/applications/${applicationId}/comments/${commentId}`;
   const response = await fetch(url, {
     method: 'DELETE',
   });
@@ -41,7 +42,7 @@ export const updateComment = async (
   content: string,
   rating: number,
 ): Promise<Comment> => {
-  const url = `/api/applications/${applicationId}/comments/${commentId}`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/applications/${applicationId}/comments/${commentId}`;
   const response = await fetch(url, {
     method: 'PATCH',
     headers: {
