@@ -1,6 +1,6 @@
 import type { DashboardSummary } from '@/pages/admin/Dashboard/types/dashboard';
 
-export const fetchDashboardSummary = async (clubId: string): Promise<DashboardSummary> => {
+export const fetchDashboardSummary = async (clubId: number): Promise<DashboardSummary> => {
   const response = await fetch(`/api/clubs/${clubId}/dashboard`);
 
   if (!response.ok) {

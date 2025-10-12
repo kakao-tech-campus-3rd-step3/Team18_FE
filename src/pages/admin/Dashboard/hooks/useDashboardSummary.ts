@@ -3,7 +3,7 @@ import { fetchDashboardSummary } from '@/pages/admin/Dashboard/api/dashboard';
 import type { DashboardSummary } from '@/pages/admin/Dashboard/types/dashboard';
 import type { UseApiQueryResult } from '@/types/useApiQueryResult';
 
-export const useDashboardSummary = (clubId: string): UseApiQueryResult<DashboardSummary | null> => {
+export const useDashboardSummary = (clubId: number): UseApiQueryResult<DashboardSummary | null> => {
   const { data, isLoading, error } = useQuery<DashboardSummary | undefined>({
     queryKey: ['dashboardSummary', clubId],
     queryFn: () => fetchDashboardSummary(clubId),
