@@ -33,12 +33,18 @@ export const useApplicants = (
   const counts = useMemo(() => {
     if (!data) return { ALL: 0, PENDING: 0, APPROVED: 0, REJECTED: 0 };
 
-    return {
-      ALL: data.length,
-      PENDING: data.filter((a) => a.status === 'PENDING').length,
-      APPROVED: data.filter((a) => a.status === 'APPROVED').length,
-      REJECTED: data.filter((a) => a.status === 'REJECTED').length,
-    };
+    return data.reduce(
+      (acc, applicant) => {
+        acc[applicant.status] += 1;
+        return acc;
+      },
+      {
+        ALL: data.length,
+        PENDING: 0,
+        APPROVED: 0,
+        REJECTED: 0,
+      },
+    );
   }, [data]);
 
   return {
