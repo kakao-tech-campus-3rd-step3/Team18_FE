@@ -353,12 +353,6 @@ export const mockClubReviews: ClubReview[] = [
     content: '동아리 분위기가 너무 좋아요! 선배들이 친절하고 활동도 재밌어요 😊',
     createdAt: '2025-10-11T12:00:00Z',
   },
-  {
-    id: 2,
-    writer: '김아진',
-    content: '',
-    createdAt: '2025-10-12T08:30:00Z',
-  },
 ];
 
 export const clubRepository = {
