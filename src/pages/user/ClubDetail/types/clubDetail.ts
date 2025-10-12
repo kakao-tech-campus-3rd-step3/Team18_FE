@@ -1,7 +1,7 @@
 export type RecruitStatus = '모집중' | '모집 준비중' | '모집 종료';
 
 export type ClubDetail = {
-  id: number;
+  clubId: number;
   clubName: string;
   location: string;
   category: string;

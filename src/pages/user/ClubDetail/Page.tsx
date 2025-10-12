@@ -47,7 +47,7 @@ export const ClubDetailPage = () => {
           regularMeetingInfo={club.regularMeetingInfo}
           recruitStatus={club.recruitStatus}
           applicationNotice={club.applicationNotice}
-          clubId={club.id}
+          clubId={club.clubId}
         />
       </ContentRight>
     </Layout>

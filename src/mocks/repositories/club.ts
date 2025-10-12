@@ -239,7 +239,7 @@ export const clubs: Club[] = [
 
 export const mockClubDetail: ClubDetail[] = [
   {
-    id: 1,
+    clubId: 1,
     clubName: '인터엑스',
     location: '공7 201호',
     category: '사회연구',
@@ -268,7 +268,7 @@ export const mockClubDetail: ClubDetail[] = [
     applicationNotice: '현재 지원은 휴학생을 제외한 1~3학년만 받고 있습니다.',
   },
   {
-    id: 2,
+    clubId: 2,
     clubName: '코드마스터',
     location: '공5 102호',
     category: '프로그래밍',
@@ -296,7 +296,7 @@ export const mockClubDetail: ClubDetail[] = [
     applicationNotice: '1~4학년 모두 지원 가능합니다.',
   },
   {
-    id: 3,
+    clubId: 3,
     clubName: '아트픽',
     location: '예술관 301호',
     category: '예술',
@@ -332,11 +332,11 @@ export const clubRepository = {
   },
 
   getClubDetailById: (id: number) => {
-    return mockClubDetail.find((club) => club.id === id);
+    return mockClubDetail.find((club) => club.clubId === id);
   },
 
   updateClubDetail: (id: number, updatedData: Partial<ClubDetail>) => {
-    const index = mockClubDetail.findIndex((club) => club.id === id);
+    const index = mockClubDetail.findIndex((club) => club.clubId === id);
     if (index === -1) return;
 
     mockClubDetail[index] = {
