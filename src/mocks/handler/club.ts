@@ -65,7 +65,7 @@ const postClubDetailResolver = async ({
 };
 
 export const clubHandlers = [
-  http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/search/category', getClubsResolver),
+  http.get(import.meta.env.VITE_API_BASE_URL + '/clubs?category', getClubsResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:Id/apply', getClubApplicationResolver),
   http.post(
     import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/apply-submit',
