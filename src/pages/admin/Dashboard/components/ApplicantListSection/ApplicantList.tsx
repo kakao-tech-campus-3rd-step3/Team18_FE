@@ -31,23 +31,33 @@ export const ApplicantList = ({ filterOption }: Props) => {
         ))}
       </ApplicantInfoCategoryList>
       <ApplicantInfoDataList>
-        {applicants.map((applicant) => (
-          <ApplicantListItem
-            key={applicant.id}
-            id={applicant.id}
-            name={applicant.name}
-            studentId={applicant.studentId}
-            department={applicant.department}
-            phoneNumber={applicant.phoneNumber}
-            email={applicant.email}
-            status={applicant.status}
-            onClick={handleItemClick}
-          />
-        ))}
+        {applicants.length > 0 ? (
+          applicants.map((applicant) => (
+            <ApplicantListItem
+              key={applicant.id}
+              id={applicant.id}
+              name={applicant.name}
+              studentId={applicant.studentId}
+              department={applicant.department}
+              phoneNumber={applicant.phoneNumber}
+              email={applicant.email}
+              status={applicant.status}
+              onClick={handleItemClick}
+            />
+          ))
+        ) : (
+          <EmptyMessage>
+            {filterOption === 'ALL'
+              ? '아직 지원자가 없습니다.'
+              : `${filterOption === 'PENDING' ? '심사중' : filterOption === 'APPROVED' ? '합격' : '불합격'} 지원자가 없습니다.`}
+          </EmptyMessage>
+        )}
       </ApplicantInfoDataList>
-      <ButtonWrapper>
-        <Button width={'15rem'}>결과 전송하기</Button>
-      </ButtonWrapper>
+      {applicants.length > 0 && (
+        <ButtonWrapper>
+          <Button width={'15rem'}>결과 전송하기</Button>
+        </ButtonWrapper>
+      )}
     </Container>
   );
 };
@@ -81,6 +91,13 @@ const ButtonWrapper = styled.div({
   marginTop: '3rem',
   width: '100%',
 });
+
+const EmptyMessage = styled.div(({ theme }) => ({
+  padding: '4rem',
+  textAlign: 'center',
+  color: theme.colors.gray500,
+  fontSize: '1.4rem',
+}));
 
 type ApplicateInfoCategory = '이름' | '학번' | '학과' | '전화번호' | '이메일' | '결과';
 const INFO_CATEGORY: ApplicateInfoCategory[] = [
