@@ -4,7 +4,7 @@ export const fetchDetailApplication = async (
   clubId: number,
   applicantId: number,
 ): Promise<DetailApplication> => {
-  const url = `/api/clubs/${clubId}/applicants/${applicantId}/application`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/clubs/${clubId}/applicants/${applicantId}/application`;
   const response = await fetch(url);
 
   if (!response.ok) throw new Error('지원서 상세 정보를 가져오지 못했습니다');
@@ -15,7 +15,7 @@ export const updateApplicationStatus = async (
   applicationId: number,
   status: DetailApplication['status'],
 ): Promise<unknown> => {
-  const url = `/api/applications/${applicationId}`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/applications/${applicationId}`;
   const response = await fetch(url, {
     method: 'PATCH',
     headers: {

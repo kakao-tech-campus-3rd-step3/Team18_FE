@@ -20,7 +20,7 @@ export default ({ mode }: ConfigEnv) => {
     server: {
       proxy: {
         '/api': {
-          target: env.VITE_API_BASE_URL,
+          target: env.VITE_PROXY_TARGET,
           changeOrigin: true,
           secure: false,
         },
