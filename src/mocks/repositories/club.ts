@@ -1,4 +1,5 @@
 import type { ClubDetail } from '@/pages/user/ClubDetail/types/clubDetail';
+import type { ClubReview } from '@/pages/user/ClubDetail/types/review';
 import type { Club } from '@/pages/user/Main/types/club';
 
 export const clubs: Club[] = [
@@ -322,6 +323,41 @@ export const mockClubDetail: ClubDetail[] = [
     recruitStart: '2025-09-07T00:00:00',
     recruitEnd: '2025-09-30T23:59:00',
     applicationNotice: '모든 학년 지원 가능, 특별한 조건 없음.',
+  },
+];
+
+export const mockClubReviews: ClubReview[] = [
+  {
+    id: 1,
+    writer: '익명1',
+    content:
+      '솔직히 처음에는 "종교 동아리"라고 해서 조금 망설였습니다. 분위기가 너무 경건하거나 믿음을 강요하지는 않을까 걱정했거든요. 괜한 걱정이었어요~',
+    createdAt: '2025-10-01T10:00:00Z',
+  },
+  {
+    id: 2,
+    writer: '익명2',
+    content:
+      '그냥 시간표가 비어서 한번 가보자는 가벼운 마음으로 첫 모임에 나갔는데, 좋은 분들이 많아서 학기 중에 도움을 많이 받았습니다.',
+    createdAt: '2025-10-02T14:30:00Z',
+  },
+  {
+    id: 3,
+    writer: '익명2',
+    content: '사이비 종교와 관련없는 신앙심이 경건해지는 동아리!',
+    createdAt: '2025-10-03T09:20:00Z',
+  },
+  {
+    id: 4,
+    writer: '익명3',
+    content: '동아리 분위기가 너무 좋아요! 선배들이 친절하고 활동도 재밌어요 😊',
+    createdAt: '2025-10-11T12:00:00Z',
+  },
+  {
+    id: 2,
+    writer: '김아진',
+    content: '',
+    createdAt: '2025-10-12T08:30:00Z',
   },
 ];
 
