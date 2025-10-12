@@ -2,14 +2,14 @@ import styled from '@emotion/styled';
 import { Text } from '@/shared/components/Text';
 import { ApplicantStarRating } from './ApplicantStarRating';
 import { ApplicantStatusToggle } from './ApplicantStatusToggle';
-import type { ApplicantStatus } from '@/pages/admin/Dashboard/types/dashboard';
+import type { ApplicationStatus } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = {
   name?: string;
   department?: string;
-  status?: ApplicantStatus;
+  status?: ApplicationStatus;
   rating?: number;
-  updateStatus: (status: ApplicantStatus) => void;
+  updateStatus: (status: ApplicationStatus) => void;
 };
 
 export const ApplicantProfileSection = ({
