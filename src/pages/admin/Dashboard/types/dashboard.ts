@@ -7,7 +7,9 @@ export type DashboardCard = {
   image: ReactNode;
 };
 
-export type ApplicationFilterOption = 'ALL' | 'ACCEPTED' | 'REJECTED' | 'PENDING';
+export type StatusLabel = '합격' | '불합격' | '미정';
+export type ApplicationStatus = 'APPROVED' | 'REJECTED' | 'PENDING';
+export type ApplicationFilterOption = 'ALL' | ApplicationStatus;
 
 export type ApplicantData = {
   id: number;
@@ -16,7 +18,7 @@ export type ApplicantData = {
   department: string;
   phoneNumber: string;
   email: string;
-  status: Omit<ApplicationFilterOption, 'All'>;
+  status: ApplicationStatus;
 };
 
 export type DashboardSummary = {
@@ -24,4 +26,11 @@ export type DashboardSummary = {
   pendingApplicationCount: number;
   startDay: string;
   endDay: string;
+};
+
+export type ApplicantCounts = {
+  ALL: number;
+  PENDING: number;
+  APPROVED: number;
+  REJECTED: number;
 };

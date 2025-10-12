@@ -49,7 +49,7 @@ export const ApplicantList = ({ filterOption }: Props) => {
           <EmptyMessage>
             {filterOption === 'ALL'
               ? '아직 지원자가 없습니다.'
-              : `${filterOption === 'PENDING' ? '심사중' : filterOption === 'ACCEPTED' ? '합격' : '불합격'} 지원자가 없습니다.`}
+              : `${filterOption === 'PENDING' ? '심사중' : filterOption === 'APPROVED' ? '합격' : '불합격'} 지원자가 없습니다.`}
           </EmptyMessage>
         )}
       </ApplicantInfoDataList>
