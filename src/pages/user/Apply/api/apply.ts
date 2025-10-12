@@ -6,7 +6,7 @@ import type {
 } from '@/pages/user/Apply/type/apply.ts';
 
 export const fetchApplicationForm = async (Id: number): Promise<ApplicationForm> => {
-  const url = `/api/clubs/${Id}/apply`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/clubs/${Id}/apply`;
   const response = await fetch(url);
 
   if (!response.ok) throw new Error('지원서 양식을 가져오지 못했습니다');
@@ -20,7 +20,7 @@ export const postApplicationForm = async (
 ): Promise<ApplicationFormRequest> => {
   const applicationDto = applicationFormDto(formData, questionArray);
 
-  const url = `/api/clubs/${clubId}/apply-submit`;
+  const url = `${import.meta.env.VITE_API_BASE_URL}/clubs/${clubId}/apply-submit`;
   const response = await fetch(url, {
     method: 'POST',
     headers: {
