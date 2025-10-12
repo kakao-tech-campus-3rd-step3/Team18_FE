@@ -43,7 +43,7 @@ export const updateComment = async (
 ): Promise<Comment> => {
   const url = `/api/applications/${applicationId}/comments/${commentId}`;
   const response = await fetch(url, {
-    method: 'PUT',
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },
