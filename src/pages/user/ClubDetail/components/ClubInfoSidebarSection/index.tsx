@@ -5,6 +5,7 @@ import type { ClubDetail } from '@/pages/user/ClubDetail/types/clubDetail';
 
 type ClubInfoSidebarSectionProps = Pick<
   ClubDetail,
+  | 'clubId'
   | 'presidentName'
   | 'presidentPhoneNumber'
   | 'location'
@@ -13,11 +14,10 @@ type ClubInfoSidebarSectionProps = Pick<
   | 'regularMeetingInfo'
   | 'recruitStatus'
   | 'applicationNotice'
-> & {
-  clubId: number;
-};
+>;
 
 export const ClubInfoSidebarSection = ({
+  clubId,
   presidentName,
   presidentPhoneNumber,
   location,
@@ -26,7 +26,6 @@ export const ClubInfoSidebarSection = ({
   regularMeetingInfo,
   recruitStatus,
   applicationNotice,
-  clubId,
 }: ClubInfoSidebarSectionProps) => {
   return (
     <SidebarContainer>
