@@ -14,7 +14,7 @@ export const fetchDetailApplication = async (
 export const updateApplicationStatus = async (
   applicationId: number,
   status: DetailApplication['status'],
-): Promise<void> => {
+): Promise<unknown> => {
   const url = `/api/applications/${applicationId}`;
   const response = await fetch(url, {
     method: 'PATCH',
