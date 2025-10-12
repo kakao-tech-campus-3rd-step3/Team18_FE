@@ -1,11 +1,9 @@
 import type { ClubDetail } from '../types/clubDetail';
 
-export const fetchClubDetail = async (clubId: string | number): Promise<ClubDetail> => {
-  const url = `/api/clubs/${clubId}`;
-  const response = await fetch(url);
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-  if (!response.ok) {
-    throw new Error('동아리 상세 정보를 가져오는데 실패했습니다.');
-  }
-  return response.json() as Promise<ClubDetail>;
+export const fetchClubDetail = async (clubId: number): Promise<ClubDetail> => {
+  const res = await fetch(`${BASE_URL}/clubs/${clubId}`);
+  if (!res.ok) throw new Error('동아리 상세 정보를 가져오는데 실패했습니다.');
+  return res.json() as Promise<ClubDetail>;
 };
