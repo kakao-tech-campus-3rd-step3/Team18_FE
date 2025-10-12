@@ -1,17 +1,17 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { ApplicantStatusButton } from './ApplicantStatusButton';
-import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
+import type { ApplicationStatus } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = {
-  status?: ApplicationFilterOption;
-  updateStatus: (status: ApplicationFilterOption) => void;
+  status?: ApplicationStatus;
+  updateStatus: (status: ApplicationStatus) => void;
 };
 
 export const ApplicantStatusToggle = ({ status, updateStatus }: Props) => {
   const [statusOption, setStatusOption] = useState(status);
 
-  const handleClick = (newStatus: ApplicationFilterOption) => {
+  const handleClick = (newStatus: ApplicationStatus) => {
     setStatusOption(newStatus);
     updateStatus(newStatus);
   };
