@@ -14,7 +14,7 @@ type ClubInfoSidebarSectionProps = Pick<
   | 'recruitStatus'
   | 'applicationNotice'
 > & {
-  clubId: number | string;
+  clubId: number;
 };
 
 export const ClubInfoSidebarSection = ({
