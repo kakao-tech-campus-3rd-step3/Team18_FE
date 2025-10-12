@@ -96,9 +96,15 @@ export const TimeSpan = styled.span<TimeSpanProps>(({ theme, selected }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  border: '1px solid ',
+  color: selected ? 'white' : theme.colors.gray800,
+  border: `1px solid ${theme.colors.gray300}`,
+  borderRadius: '6px',
   width: '100px',
   height: '30px',
+  transition: 'background-color 0.2s, color 0.2s',
+  '&:hover': {
+    backgroundColor: selected ? theme.colors.primary300 : theme.colors.gray200,
+  },
 }));
 
 export const Wrapper = styled.div({
@@ -111,5 +117,5 @@ export const DateText = styled.span(({ theme }) => ({
   width: '100px',
   padding: '10px 0 20px 0',
   fontWeight: theme.font.weight.bold,
-  fontSize: theme.font.size.base,
+  fontSize: theme.font.size.sm,
 }));
