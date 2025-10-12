@@ -15,12 +15,13 @@ import type { ClubDetail } from './types/clubDetail';
 
 export const ClubDetailPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
+  const clubIdNumber = Number(clubId);
   const [club, setClub] = useState<ClubDetail | null>(null);
 
   useEffect(() => {
-    if (!clubId) return;
-    fetchClubDetail(clubId).then(setClub).catch(console.error);
-  }, [clubId]);
+    if (!clubIdNumber) return;
+    fetchClubDetail(clubIdNumber).then(setClub).catch(console.error);
+  }, [clubIdNumber]);
 
   if (!club) return <div>Loading...</div>;
 
@@ -46,7 +47,7 @@ export const ClubDetailPage = () => {
           regularMeetingInfo={club.regularMeetingInfo}
           recruitStatus={club.recruitStatus}
           applicationNotice={club.applicationNotice}
-          clubId={club.id}
+          clubId={club.clubId}
         />
       </ContentRight>
     </Layout>
