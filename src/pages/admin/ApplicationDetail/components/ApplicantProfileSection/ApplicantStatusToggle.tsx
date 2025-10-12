@@ -1,17 +1,17 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { ApplicantStatusButton } from './ApplicantStatusButton';
-import type { ApplicantStatus } from '@/pages/admin/Dashboard/types/dashboard';
+import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = {
-  status?: ApplicantStatus;
-  updateStatus: (status: ApplicantStatus) => void;
+  status?: ApplicationFilterOption;
+  updateStatus: (status: ApplicationFilterOption) => void;
 };
 
 export const ApplicantStatusToggle = ({ status, updateStatus }: Props) => {
   const [statusOption, setStatusOption] = useState(status);
 
-  const handleClick = (newStatus: ApplicantStatus) => {
+  const handleClick = (newStatus: ApplicationFilterOption) => {
     setStatusOption(newStatus);
     updateStatus(newStatus);
   };
@@ -20,8 +20,8 @@ export const ApplicantStatusToggle = ({ status, updateStatus }: Props) => {
     <Container>
       <ApplicantStatusButton
         label={'합격'}
-        value={'ACCEPTED'}
-        selected={statusOption === 'ACCEPTED'}
+        value={'APPROVED'}
+        selected={statusOption === 'APPROVED'}
         onClick={handleClick}
       />
       <ApplicantStatusButton

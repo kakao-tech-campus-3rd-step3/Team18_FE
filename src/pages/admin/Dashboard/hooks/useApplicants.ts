@@ -4,15 +4,9 @@ import { fetchApplicants } from '@/pages/admin/Dashboard/api/applicant';
 import type {
   ApplicantData,
   ApplicationFilterOption,
+  ApplicantCounts,
 } from '@/pages/admin/Dashboard/types/dashboard';
 import type { UseApiQueryResult } from '@/types/useApiQueryResult';
-
-export type ApplicantCounts = {
-  ALL: number;
-  PENDING: number;
-  ACCEPTED: number;
-  REJECTED: number;
-};
 
 export interface ExtendedUseApiQueryResult<T> extends UseApiQueryResult<T> {
   counts: ApplicantCounts;
@@ -37,12 +31,12 @@ export const useApplicants = (
   }, [data, status]);
 
   const counts = useMemo(() => {
-    if (!data) return { ALL: 0, PENDING: 0, ACCEPTED: 0, REJECTED: 0 };
+    if (!data) return { ALL: 0, PENDING: 0, APPROVED: 0, REJECTED: 0 };
 
     return {
       ALL: data.length,
       PENDING: data.filter((a) => a.status === 'PENDING').length,
-      ACCEPTED: data.filter((a) => a.status === 'ACCEPTED').length,
+      APPROVED: data.filter((a) => a.status === 'APPROVED').length,
       REJECTED: data.filter((a) => a.status === 'REJECTED').length,
     };
   }, [data]);

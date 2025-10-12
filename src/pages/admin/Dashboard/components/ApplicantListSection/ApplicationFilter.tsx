@@ -20,9 +20,9 @@ export const ApplicationStatusFilter = ({ option, onOptionChange }: Props) => {
         onClick={onOptionChange}
       />
       <ApplicantFilterButton
-        value={'ACCEPTED'}
-        label={`합격 (${counts.ACCEPTED})`}
-        selected={option === 'ACCEPTED'}
+        value={'APPROVED'}
+        label={`합격 (${counts.APPROVED})`}
+        selected={option === 'APPROVED'}
         onClick={onOptionChange}
       />
       <ApplicantFilterButton
