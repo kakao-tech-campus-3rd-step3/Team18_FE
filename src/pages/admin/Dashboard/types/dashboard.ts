@@ -18,3 +18,10 @@ export type ApplicantData = {
   email: string;
   status: Omit<ApplicationFilterOption, 'All'>;
 };
+
+export type DashboardSummary = {
+  totalApplicantCount: number;
+  pendingApplicationCount: number;
+  startDay: string;
+  endDay: string;
+};
