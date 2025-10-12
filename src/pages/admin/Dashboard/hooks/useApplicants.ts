@@ -12,7 +12,7 @@ export const useApplicants = (
 ): UseApiQueryResult<ApplicantData[]> => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['applicants', clubId, status],
-    queryFn: () => fetchApplicants(clubId, status),
+    queryFn: () => fetchApplicants(clubId),
     staleTime: 1000 * 60 * 2,
   });
 
