@@ -8,7 +8,7 @@ export type UpdatedDragState = {
 
 export const updateDragState = (
   state: DragState,
-  curtIdx: number,
+  currentIdx: number,
   idxDiffSign: number,
 ): UpdatedDragState => {
   let newStartIndex = state.startIndex;
@@ -19,11 +19,11 @@ export const updateDragState = (
       state.previousIndexDiffSign === null ? state.isSelectionMode : !state.isSelectionMode;
 
     if (idxDiffSign < 0) {
-      newStartIndex = curtIdx + 1;
+      newStartIndex = currentIdx + 1;
     } else if (idxDiffSign > 0) {
-      newStartIndex = curtIdx - 1;
+      newStartIndex = currentIdx - 1;
     } else {
-      newStartIndex = curtIdx;
+      newStartIndex = currentIdx;
     }
 
     newPreviousIndexDiffSign = idxDiffSign;
