@@ -101,7 +101,7 @@ export const TimeSpan = styled.span<TimeSpanProps>(({ theme, selected }) => ({
   borderRadius: '6px',
   width: '100px',
   height: '30px',
-  transition: 'background-color 0.2s, color 0.2s',
+  transition: 'background-color 0.15s, color 0.15s',
   '&:hover': {
     backgroundColor: selected ? theme.colors.primary300 : theme.colors.gray200,
   },
