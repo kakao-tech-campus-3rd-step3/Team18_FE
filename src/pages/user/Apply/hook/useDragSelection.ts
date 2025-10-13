@@ -1,11 +1,11 @@
 import { useReducer } from 'react';
-import { getIndexDiffSign } from '../utils/math';
 import { useInterviewScheduleUpdater } from './useFormDataUpdate';
-import type { DragAction, DragState } from '../type/apply';
 
 import { generateInitialDragState } from '../constant/initialDragState';
 import { updateDragState } from '../domain/drag';
 import { updateSelectedState } from '../utils/drag';
+import { getIndexDiffSign } from '../utils/math';
+import type { DragAction, DragState } from '../type/apply';
 
 function getSelectedIndex(e: React.MouseEvent<HTMLSpanElement>) {
   return Number(e.currentTarget.dataset.index);
