@@ -25,7 +25,7 @@ export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSche
             onMouseEnter={handleMouseMove}
             onMouseUp={handleMouseUp}
           >
-            <Text size='xs'>{e[0] + '~' + e[1]}</Text>
+            <Text size='xs'>{`${e[0]}~${e[1]}`}</Text>
           </TimeSpan>
         );
       })}
