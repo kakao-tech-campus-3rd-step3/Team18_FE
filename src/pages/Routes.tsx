@@ -10,6 +10,9 @@ import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
 import { LoginPage } from './admin/Login/Page';
 import { ClubApplicationPage } from './user/Apply/Page';
 
+import { SignupForm } from './admin/Signup/Page';
+import { KakaoCallback } from './admin/Login/KakaoCallback';
+
 const { USER, ADMIN, COMMON } = ROUTE_PATH;
 
 export const router = createBrowserRouter([
@@ -28,6 +31,14 @@ export const router = createBrowserRouter([
       {
         path: USER.APPLICATION,
         element: <ClubApplicationPage />,
+      },
+      {
+        path: COMMON.CALLBACK,
+        element: <KakaoCallback />,
+      },
+      {
+        path: COMMON.SINGUP,
+        element: <SignupForm />,
       },
       {
         path: '/admin',
