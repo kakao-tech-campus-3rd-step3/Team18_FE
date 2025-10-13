@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
-import type { FormInputs, PostInterviewSchedule } from '../type/apply';
-import { convertSelectionToTimeInterval, mergeContinuousTimeInterval } from '../utils/time';
 import { updateSchedule } from '../domain/schedule';
+import { convertSelectionToTimeInterval, mergeContinuousTimeInterval } from '../utils/time';
+import type { FormInputs, PostInterviewSchedule } from '../type/apply';
 
 export function useInterviewScheduleUpdater(date: string, timeSlotsArray: [string, string][]) {
   const { setValue, getValues } = useFormContext<FormInputs>();
