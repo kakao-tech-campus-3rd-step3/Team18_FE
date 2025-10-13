@@ -3,6 +3,7 @@ import { getIndexDiffSign } from '../utils/math';
 import { useInterviewScheduleUpdater } from './useFormDataUpdate';
 import type { DragAction, DragState } from '../type/apply';
 import { updateSelectedState } from '../utils/schedule';
+import { generateInitialDragState } from '../constant/InitialDragState';
 
 function getSelectedIndex(e: React.MouseEvent<HTMLSpanElement>) {
   return Number(e.currentTarget.dataset.index);
@@ -12,7 +13,6 @@ function dragReducer(state: DragState, action: DragAction) {
   switch (action.type) {
     case 'mouseDown': {
       const newSelectedStates: boolean[] = [...state.isSelectedStates];
-
       newSelectedStates[action.index] = action.isSelectionMode;
 
       return {
@@ -82,19 +82,10 @@ function dragReducer(state: DragState, action: DragAction) {
 export function useDragSelection(date: string, timeIntervalArray: [string, string][]) {
   const { updateInterviewSchedule } = useInterviewScheduleUpdater(date, timeIntervalArray);
 
-  // 분리 4.
-  const initialState: DragState = {
-    startIndex: -1,
-    lastHoveredIndex: -1,
-    currentSelectedIndex: -1,
-    isSelectionMode: false,
-    isSelectedStates: new Array(timeIntervalArray.length).fill(false),
-    isMouseDown: false,
-    isDragging: false,
-    previousIndexDiffSign: null,
-  };
-
-  const [states, dispatch] = useReducer(dragReducer, initialState);
+  const [states, dispatch] = useReducer(
+    dragReducer,
+    generateInitialDragState(timeIntervalArray.length),
+  );
 
   const handleMouseDown = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
@@ -113,13 +104,10 @@ export function useDragSelection(date: string, timeIntervalArray: [string, strin
     )
       return;
 
-    const currentIndex = getSelectedIndex(e);
-    const indexDiffSign = getIndexDiffSign(currentIndex, states.lastHoveredIndex);
-
     dispatch({
       type: 'mouseMove',
-      index: currentIndex,
-      indexDiffSign,
+      index: getSelectedIndex(e),
+      indexDiffSign: getIndexDiffSign(getSelectedIndex(e), states.lastHoveredIndex),
     });
   };
 
