@@ -82,5 +82,4 @@ export type DragState = {
 export type DragAction =
   | { type: 'mouseDown'; index: number; isSelectionMode: boolean }
   | { type: 'mouseMove'; index: number; indexDiffSign: number }
-  | { type: 'mouseUp' }
-  | { type: 'setInitialDragDirection'; indexDiffSign: number };
+  | { type: 'mouseUp' };
