@@ -2,8 +2,10 @@ import { useReducer } from 'react';
 import { getIndexDiffSign } from '../utils/math';
 import { useInterviewScheduleUpdater } from './useFormDataUpdate';
 import type { DragAction, DragState } from '../type/apply';
-import { updateSelectedState } from '../domain/schedule';
+
 import { generateInitialDragState } from '../constant/initialDragState';
+import { updateDragState } from '../domain/drag';
+import { updateSelectedState } from '../utils/drag';
 
 function getSelectedIndex(e: React.MouseEvent<HTMLSpanElement>) {
   return Number(e.currentTarget.dataset.index);
@@ -30,24 +32,11 @@ function dragReducer(state: DragState, action: DragAction) {
       const currentIndex = action.index;
       const indexDiffSign = action.indexDiffSign;
 
-      let newStartIndex = state.startIndex;
-      let newIsSelectionMode = state.isSelectionMode;
-      let newPreviousIndexDiffSign = state.previousIndexDiffSign;
-
-      if (state.previousIndexDiffSign === null || indexDiffSign !== state.previousIndexDiffSign) {
-        newIsSelectionMode =
-          state.previousIndexDiffSign === null ? state.isSelectionMode : !state.isSelectionMode;
-
-        if (indexDiffSign < 0) {
-          newStartIndex = currentIndex + 1;
-        } else if (indexDiffSign > 0) {
-          newStartIndex = currentIndex - 1;
-        } else {
-          newStartIndex = currentIndex;
-        }
-
-        newPreviousIndexDiffSign = indexDiffSign;
-      }
+      const { newStartIndex, newIsSelectionMode, newPreviousIndexDiffSign } = updateDragState(
+        state,
+        currentIndex,
+        indexDiffSign,
+      );
 
       const newSelectedStates = updateSelectedState(
         state.isSelectedStates,
