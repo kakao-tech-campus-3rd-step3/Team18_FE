@@ -23,6 +23,7 @@ function dragReducer(state: DragState, action: DragAction) {
         isSelectionMode: action.isSelectionMode,
         isSelectedStates: newSelectedStates,
         isMouseDown: true,
+        previousIndexDiffSign: null,
       };
     }
     case 'mouseMove': {
