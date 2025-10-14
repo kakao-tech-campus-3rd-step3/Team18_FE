@@ -33,7 +33,7 @@ export const SignupForm = () => {
       setTimeout(() => {
         navigate(`/login`);
       }, 1000);
-    } catch (error) {
+    } catch (errors) {
       toast.error('회원가입 실패!', {
         duration: 1000,
         style: {
