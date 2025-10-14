@@ -22,7 +22,7 @@ export const KakaoCallback = () => {
 
         // 1-1. accessToken, refreshToken 발급
         // localStorage.setItem('accessToken', res.data.accessToken);
-        // localStorage.setItem('refreshToken ', res.data.accessToken);
+        // localStorage.setItem('refreshToken ', res.data.refreshToken);
         // ------------------------------------------------------------
         // 2-2 main 페이지 이동
         // navigate('/'); // 로그인 후 홈으로 이동
