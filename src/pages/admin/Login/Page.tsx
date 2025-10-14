@@ -1,13 +1,12 @@
 import styled from '@emotion/styled';
 import { LoginButton } from './component/LoginButton';
-import { LoginInput } from './component/LoginInput';
 import { Logo } from './component/Logo';
 
 export const LoginPage = () => {
   return (
     <Container>
       <Logo />
-      <LoginInput />
+      {/* <LoginInput /> */}
       <LoginButton />
     </Container>
   );
