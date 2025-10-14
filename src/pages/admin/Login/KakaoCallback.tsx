@@ -13,7 +13,7 @@ export const KakaoCallback = () => {
     console.log(code);
     const fetchToken = async () => {
       try {
-        const res = await axios.post('http://localhost:8080/api/auth/kakao/login', {
+        const res = axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/kakao/login`, {
           authorizationCode: code,
         });
         console.log('응답res ', res);
