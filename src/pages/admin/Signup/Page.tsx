@@ -23,9 +23,6 @@ export const Layout = styled.main(({ theme }) => ({
   padding: '0 1.5rem',
   boxSizing: 'border-box',
 
-  [`@media (max-width: ${theme.breakpoints.web})`]: {
-    padding: '1.5rem',
-  },
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     padding: '1rem',
   },
