@@ -12,14 +12,14 @@ export const LoginButton = () => {
 
   return (
     <Container>
-      <Button width='100%' type='submit'>
+      <Button width='100%' type='button'>
         {'로그인'}
       </Button>
-      <Button to='/signup' width='100%' type='submit'>
+      <Button to='/signup' width='100%' type='button'>
         {'회원가입'}
       </Button>
       <KakaoButtonWrapper>
-        <Button width='100%' type='submit' onClick={handleKakaoLogin}>
+        <Button width='100%' type='button' onClick={handleKakaoLogin}>
           <ButtonContent>
             <Icon src='/assets/kakao-icon.png' width={24} height={24} />
             {'카카오 로그인'}
