@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
         element: <KakaoCallback />,
       },
       {
-        path: COMMON.SINGUP,
+        path: COMMON.SIGNUP,
         element: <AdminSignupPage />,
       },
       {
