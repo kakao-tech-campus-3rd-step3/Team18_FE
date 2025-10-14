@@ -6,7 +6,6 @@ export const LoginPage = () => {
   return (
     <Container>
       <Logo />
-      {/* <LoginInput /> */}
       <LoginButton />
     </Container>
   );
