@@ -14,6 +14,6 @@ export const ROUTE_PATH = {
     CLUBDETAIL: 'clubs/:clubId',
     LOGIN: 'login',
     CALLBACK: 'login/redirect',
-    SINGUP: 'signup',
+    SIGNUP: 'signup',
   },
 };
