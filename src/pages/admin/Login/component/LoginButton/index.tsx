@@ -12,9 +12,6 @@ export const LoginButton = () => {
 
   return (
     <Container>
-      <Button width='100%' type='button'>
-        {'로그인'}
-      </Button>
       <Button to='/signup' width='100%' type='button'>
         {'회원가입'}
       </Button>
