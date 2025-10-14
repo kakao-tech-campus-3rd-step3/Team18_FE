@@ -2,11 +2,10 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { postSignupForm } from '@/pages/admin/Signup/api/signup';
+import { theme } from '@/styles/theme';
 import * as S from '@/pages/admin/Signup/components/SignupForm/index.styled';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
-import { theme } from '@/styles/theme';
-
 import type { SignupFormInputs } from '@/pages/admin/Signup/type/signup';
 
 export const SignupForm = () => {
@@ -26,40 +25,22 @@ export const SignupForm = () => {
 
   const onSubmit = async (signupFormValue: SignupFormInputs) => {
     try {
-      console.log('회원가입 data:', signupFormValue);
-      postSignupForm(signupFormValue)
-        .then(() => {
-          toast.success('제출 성공!', {
-            style: {
-              backgroundColor: theme.colors.primary,
-              color: 'white',
-            },
-            duration: 1000,
-          });
-          setTimeout(() => {
-            navigate(`/`);
-          }, 1000);
-        })
-        .catch(() => {
-          toast.error('제출 실패!', {
-            duration: 1000,
-            style: {
-              backgroundColor: 'white',
-              color: theme.colors.error,
-            },
-          });
-        });
-
+      await postSignupForm(signupFormValue);
       toast.success('회원가입 완료!', {
         style: { backgroundColor: theme.colors.primary, color: 'white' },
         duration: 1000,
       });
-
       setTimeout(() => {
-        navigate('/login');
+        navigate(`/login`);
       }, 1000);
     } catch (error) {
-      toast.error('회원가입 실패', { duration: 1000 });
+      toast.error('회원가입 실패!', {
+        duration: 1000,
+        style: {
+          backgroundColor: 'white',
+          color: theme.colors.error,
+        },
+      });
     }
   };
 
