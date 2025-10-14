@@ -7,11 +7,10 @@ import { DashboardPage } from '@/pages/admin/Dashboard/Page';
 import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
 import { MainPage } from '@/pages/user/Main/Page.tsx';
 import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
-import { LoginPage } from './admin/Login/Page';
-import { ClubApplicationPage } from './user/Apply/Page';
-
 import { KakaoCallback } from './admin/Login/KakaoCallback';
+import { LoginPage } from './admin/Login/Page';
 import { AdminSignupPage } from './admin/Signup/Page';
+import { ClubApplicationPage } from './user/Apply/Page';
 
 const { USER, ADMIN, COMMON } = ROUTE_PATH;
 

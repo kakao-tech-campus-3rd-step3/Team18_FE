@@ -1,12 +1,12 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { postSignupForm } from '@/pages/admin/Signup/api/signup';
+import * as S from '@/pages/admin/Signup/components/SignupForm/index.styled';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
-import * as S from '@/pages/admin/Signup/components/SignupForm/index.styled';
 import { theme } from '@/styles/theme';
 
-import { postSignupForm } from '@/pages/admin/Signup/api/signup';
 import type { SignupFormInputs } from '@/pages/admin/Signup/type/signup';
 
 export const SignupForm = () => {
