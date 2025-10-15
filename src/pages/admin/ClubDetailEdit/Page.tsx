@@ -1,15 +1,15 @@
+import styled from '@emotion/styled';
+import { Button } from '@/shared/components/Button';
 import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
-// import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
-import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
-import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
 import {
   Layout,
   ContentLeft,
   ContentRight,
 } from '@/shared/components/ClubDetailLayout/index.styled';
+import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
+import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
+import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
 import { mockClubDetail } from './components/mock';
-import { Button } from '@/shared/components/Button';
-import styled from '@emotion/styled';
 
 export const ClubDetailEditPage = () => {
   const handleSave = () => {
@@ -24,7 +24,7 @@ export const ClubDetailEditPage = () => {
     <Layout>
       <ContentLeft>
         <ClubHeaderSection clubName={mockClubDetail.clubName} category={mockClubDetail.category} />
-        {/* <ClubActivityPhotosSection /> */}
+        <ClubActivityPhotosEditSection />
         <ClubDescriptionEditSection />
         <ButtonGroup>
           <Button onClick={handleSave}>수정하기</Button>

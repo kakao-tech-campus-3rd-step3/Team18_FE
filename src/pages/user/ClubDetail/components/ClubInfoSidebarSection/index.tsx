@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import { Button } from '@/shared/components/Button';
-import { mockClubDetail } from '../mock';
-import { formatDate } from '@/utils/dateUtils';
 import { useParams } from 'react-router-dom';
+import { Button } from '@/shared/components/Button';
+import { formatDate } from '@/utils/dateUtils';
+import { mockClubDetail } from '../mock';
 
 export const ClubInfoSidebarSection = () => {
   const {
@@ -13,9 +13,10 @@ export const ClubInfoSidebarSection = () => {
     recruitEnd,
     regularMeetingInfo,
     recruitStatus,
+    applicationNotice,
   } = mockClubDetail;
 
-  const clubId = useParams();
+  const { clubId } = useParams<{ clubId: string }>();
 
   return (
     <SidebarContainer>
@@ -27,19 +28,23 @@ export const ClubInfoSidebarSection = () => {
       </InfoItem>
       <InfoItem>정기 모임: {regularMeetingInfo}</InfoItem>
       <InfoItem>모집 상태: {recruitStatus}</InfoItem>
-      <Button to={`/club/${clubId.id}/apply`}>지원하기</Button>
-      <Notice>지원 시 유의사항이 여기에 들어갑니다.</Notice>
+      <Button to={`/clubs/${clubId}/apply`} width={'auto'}>
+        지원하기
+      </Button>
+      <Notice>{applicationNotice}</Notice>
     </SidebarContainer>
   );
 };
 
 const SidebarContainer = styled.div(({ theme }) => ({
+  marginTop: '1rem',
   backgroundColor: theme.colors.bg,
-  padding: '16px',
+  padding: '1.3rem',
   borderRadius: theme.radius.md,
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: '1rem',
+  border: '1px solid #E5E7ED',
 }));
 
 const InfoItem = styled.div(({ theme }) => ({

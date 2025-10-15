@@ -1,8 +1,16 @@
 export const ROUTE_PATH = {
-  DASHBOARD: 'club/dashboard',
-  APPLICATIONDETAIL: 'clubs/:clubId/applicants/:applicantId',
-  MAIN: '/',
-  CLUBDETAIL: 'club/:id',
-  CLUBEDIT: 'clubs/:clubId/edit',
-  CLUBAPPLICATION: 'club/:id/apply',
+  USER: {
+    APPLICATION: 'clubs/:clubId/apply',
+  },
+
+  ADMIN: {
+    DASHBOARD: 'clubs/dashboard',
+    APPLICATIONDETAIL: 'clubs/:clubId/applicants/:applicantId',
+    CLUBEDIT: 'clubs/:clubId/edit',
+  },
+
+  COMMON: {
+    MAIN: '/',
+    CLUBDETAIL: 'clubs/:clubId',
+  },
 };

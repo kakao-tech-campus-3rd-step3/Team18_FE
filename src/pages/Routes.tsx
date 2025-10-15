@@ -1,41 +1,42 @@
-import { DashboardPage } from '@/pages/admin/Dashboard/Page';
-import { MainPage } from '@/pages/user/Main/Page.tsx';
-import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
-import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
-import { ClubDetailEditPage } from '@/pages/admin/ClubDetailEdit/Page';
 import { createBrowserRouter } from 'react-router-dom';
 import { App } from '@/App.tsx';
 import { ROUTE_PATH } from '@/constants/routerPath.ts';
-import { ClubApplicatonPage } from '@/pages/user/Apply/Page.tsx';
+import { ClubDetailEditPage } from '@/pages/admin/ClubDetailEdit/Page';
+import { DashboardPage } from '@/pages/admin/Dashboard/Page';
 
-const { MAIN, CLUBDETAIL, CLUBEDIT, APPLICATIONDETAIL, DASHBOARD, CLUBAPPLICATION } = ROUTE_PATH;
+import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
+import { MainPage } from '@/pages/user/Main/Page.tsx';
+import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
+import { ClubApplicationPage } from './user/Apply/Page';
+
+const { USER, ADMIN, COMMON } = ROUTE_PATH;
 
 export const router = createBrowserRouter([
   {
     element: <App />,
     children: [
-      { path: MAIN, element: <MainPage /> },
+      { path: COMMON.MAIN, element: <MainPage /> },
       {
-        path: CLUBDETAIL,
+        path: COMMON.CLUBDETAIL,
         element: <ClubDetailPage />,
       },
       {
-        path: CLUBAPPLICATION,
-        element: <ClubApplicatonPage />,
+        path: USER.APPLICATION,
+        element: <ClubApplicationPage />,
       },
       {
         path: '/admin',
         children: [
           {
-            path: DASHBOARD,
+            path: ADMIN.DASHBOARD,
             element: <DashboardPage />,
           },
           {
-            path: APPLICATIONDETAIL,
+            path: ADMIN.APPLICATIONDETAIL,
             element: <ApplicationDetailPage />,
           },
           {
-            path: CLUBEDIT,
+            path: ADMIN.CLUBEDIT,
             element: <ClubDetailEditPage />,
           },
         ],

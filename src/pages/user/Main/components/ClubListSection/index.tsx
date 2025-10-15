@@ -1,9 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import { useClub } from '@/pages/user/Main/hook/useClub';
+import { searchClubs } from '@/pages/user/Main/utils/searchClubs.ts';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
+import { Text } from '@/shared/components/Text';
 import * as S from './Club.styled.ts';
 import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
-import { searchClubs } from '@/pages/user/Main/utils/searchClubs.ts';
-import { Text } from '@/shared/components/Text';
-import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
 
 type Props = {
   filter: ClubCategoryEng;
@@ -12,6 +13,7 @@ type Props = {
 
 export const ClubListSection = ({ filter, searchText }: Props) => {
   const { data: clubs, isLoading, error } = useClub(filter);
+  const navigate = useNavigate();
 
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;
@@ -47,7 +49,7 @@ export const ClubListSection = ({ filter, searchText }: Props) => {
     <S.ClubListContainer>
       <S.Grid>
         {searchedClubs.map((club) => (
-          <S.ClubItem key={club.id}>
+          <S.ClubItem onClick={() => navigate(`/clubs/${club.id}`)} key={club.id}>
             <S.ClubCategoryText>{club.category}</S.ClubCategoryText>
 
             <S.ClubNameText>{club.name}</S.ClubNameText>

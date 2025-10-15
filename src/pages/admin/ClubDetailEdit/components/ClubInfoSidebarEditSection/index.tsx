@@ -1,7 +1,7 @@
-import { mockClubDetail } from '../mock';
 import { useState } from 'react';
-import * as S from './index.styled';
 import DatePicker from 'react-datepicker';
+import { mockClubDetail } from '../mock';
+import * as S from './index.styled';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export const ClubInfoSidebarEditSection = () => {
@@ -12,7 +12,7 @@ export const ClubInfoSidebarEditSection = () => {
     recruitStart: initialRecruitStart,
     recruitEnd: initialRecruitEnd,
     regularMeetingInfo: initialRegularMeetingInfo,
-    recruitStatus: initialRecruitStatus,
+    applicationNotice: initialApplicationNotice,
   } = mockClubDetail;
 
   const [presidentName, setPresidentName] = useState(initialPresidentName);
@@ -99,8 +99,12 @@ export const ClubInfoSidebarEditSection = () => {
       </S.InfoItem>
 
       {renderEditableItem('정기 모임', initialRegularMeetingInfo, 'regularMeetingInfo', () => {})}
-      {renderEditableItem('모집 상태', initialRecruitStatus, 'recruitStatus', () => {})}
-      <S.Notice>지원 시 유의사항이 여기에 들어갑니다.</S.Notice>
+      {renderEditableItem(
+        '지원 시 유의사항',
+        initialApplicationNotice,
+        'applicationNotice',
+        () => {},
+      )}
     </S.SidebarContainer>
   );
 };

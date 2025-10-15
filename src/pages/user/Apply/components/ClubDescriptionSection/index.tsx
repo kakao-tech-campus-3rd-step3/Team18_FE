@@ -1,18 +1,18 @@
-import { Text } from '@/shared/components/Text';
 import styled from '@emotion/styled';
+import { Text } from '@/shared/components/Text';
 
 type props = {
   title: string;
   description: string | undefined;
 };
 
-export const ClubDescription = ({ title, description }: props) => {
+export const ClubDescription = ({ title }: props) => {
   return (
     <TextWrapper>
-      <Text size='xl' weight='bold'>
+      <Title>지원서 작성하기</Title>
+      <Text size='xl' weight='regular' color='#4E5968'>
         {title}
       </Text>
-      <Text>{description}</Text>
     </TextWrapper>
   );
 };
@@ -20,7 +20,11 @@ export const ClubDescription = ({ title, description }: props) => {
 const TextWrapper = styled.div({
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
-  gap: 35,
-  padding: 20,
+  gap: '2rem',
+  padding: '4rem 0',
 });
+
+const Title = styled.h1(({ theme }) => ({
+  fontSize: '2.5rem',
+  fontWeight: theme.font.weight.medium,
+}));

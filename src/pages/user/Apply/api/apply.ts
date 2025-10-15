@@ -30,18 +30,23 @@ export const postApplicationForm = async (
 };
 
 export const applicationFormDto = (formData: FormInputs, questionArray: string[]) => {
+  const interviewDateAnswer = formData.selectedInterviewSchedule;
+  formData.answers.push({ interviewDateAnswer });
+
   return {
     email: formData.email,
     name: formData.name,
     studentId: formData.studentId,
     phoneNumber: formData.phoneNumber,
     department: formData.department,
-    answers: formData.answers.map((answer, index) => {
-      return {
-        questionNum: index + 1,
-        question: questionArray[index],
-        answer: answer,
-      };
-    }),
+    answers: [
+      ...formData.answers.map((answer, index) => {
+        return {
+          questionNum: index,
+          question: questionArray[index],
+          answer: answer,
+        };
+      }),
+    ],
   };
 };
