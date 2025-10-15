@@ -67,3 +67,19 @@ export type FormInputs = {
   answers: object[];
   selectedInterviewSchedule: PostInterviewSchedule[];
 };
+
+export type DragState = {
+  startIndex: number;
+  lastHoveredIndex: number;
+  currentSelectedIndex: number;
+  isSelectionMode: boolean;
+  isSelectedStates: boolean[];
+  isMouseDown: boolean;
+  isDragging: boolean;
+  previousIndexDiffSign: null | number;
+};
+
+export type DragAction =
+  | { type: 'mouseDown'; index: number; isSelectionMode: boolean }
+  | { type: 'mouseMove'; index: number; indexDiffSign: number }
+  | { type: 'mouseUp' };

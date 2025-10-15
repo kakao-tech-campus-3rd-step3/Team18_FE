@@ -35,7 +35,11 @@ export const postApplicationForm = async (
 
 export const applicationFormDto = (formData: FormInputs, questionArray: string[]) => {
   const interviewDateAnswer: PostInterviewSchedule[] = formData.selectedInterviewSchedule;
-  const newFormDataAnswers: object[] = [...formData.answers, { interviewDateAnswer }];
+  let formDataAnswers = formData.answers;
+
+  if (interviewDateAnswer.length > 0) {
+    formDataAnswers = [...formData.answers, { interviewDateAnswer }];
+  }
 
   return {
     email: formData.email,
@@ -44,7 +48,7 @@ export const applicationFormDto = (formData: FormInputs, questionArray: string[]
     phoneNumber: formData.phoneNumber,
     department: formData.department,
     answers: [
-      ...newFormDataAnswers.map((answer, index) => {
+      ...formDataAnswers.map((answer, index) => {
         return {
           questionNum: index,
           question: questionArray[index],
