@@ -114,7 +114,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
     environment: dongarium
     steps:
       - name: Download build artifact
@@ -132,5 +132,5 @@ jobs:
 
       - name: Deploy to S3 and invalidate CloudFront
         run: |
-          aws s3 sync ./dist s3://${{ secrets.S3_BUCKET }} --delete --acl public-read
+          aws s3 sync ./dist s3://${{ secrets.S3_BUCKET }} --delete
           aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
