@@ -1,95 +1,118 @@
-import { useRef, useState } from 'react';
-import { getSign, type Sign } from '../utils/math';
-import { convertSelectionToTimeInterval, mergeContinuousTimeInterval } from '../utils/time';
+import { useReducer } from 'react';
+import { useInterviewScheduleUpdater } from './useFormDataUpdate';
 
-export function useDragSelection(
-  updateScheduleData: (data: string, mergedInterviewTime: string[]) => void,
-  date: string,
-  timeIntervalArray: [string, string][],
-) {
-  const [prevDiffSign, setPrevDiffSign] = useState<Sign>(0);
-  const startIndex = useRef<string | undefined>('');
-  const lastHoveredIndex = useRef<string | null>(null);
-  const mode = useRef<boolean>(false);
-  const [isDragging, setIsDragging] = useState<boolean>(false);
-  const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
-  const selectedIndex = useRef<string | undefined>('');
-  const [selectedTime, setSelectedTime] = useState<boolean[]>(() =>
-    new Array(timeIntervalArray.length).fill(false),
-  );
+import { generateInitialDragState } from '../constant/initialDragState';
+import { updateDragState } from '../domain/drag';
+import { updateSelectedState } from '../utils/drag';
+import { getIndexDiffSign } from '../utils/math';
+import type { DragAction, DragState } from '../type/apply';
 
-  function handleIndexChange(newIndex: number) {
-    const diff = newIndex - Number(lastHoveredIndex.current);
-    const currentSign = getSign(diff);
+function getSelectedIndex(e: React.MouseEvent<HTMLSpanElement>) {
+  return Number(e.currentTarget.dataset.index);
+}
 
-    if (prevDiffSign !== 0 && currentSign !== 0 && currentSign !== prevDiffSign) {
-      mode.current = !mode.current;
+function dragReducer(state: DragState, action: DragAction) {
+  switch (action.type) {
+    case 'mouseDown': {
+      const newSelectedStates: boolean[] = [...state.isSelectedStates];
+      newSelectedStates[action.index] = action.isSelectionMode;
 
-      if (currentSign < 0) {
-        startIndex.current = String(newIndex + 1);
-      } else if (currentSign > 0) {
-        startIndex.current = String(newIndex - 1);
-      }
+      return {
+        ...state,
+        startIndex: action.index,
+        currentSelectedIndex: action.index,
+        lastHoveredIndex: action.index,
+        isSelectionMode: action.isSelectionMode,
+        isSelectedStates: newSelectedStates,
+        isMouseDown: true,
+        previousIndexDiffSign: null,
+      };
     }
-    setPrevDiffSign(currentSign);
+    case 'mouseMove': {
+      const currentIndex = action.index;
+      const indexDiffSign = action.indexDiffSign;
+
+      const { newStartIndex, newIsSelectionMode, newPreviousIndexDiffSign } = updateDragState(
+        state,
+        currentIndex,
+        indexDiffSign,
+      );
+
+      const newSelectedStates = updateSelectedState(
+        state.isSelectedStates,
+        newStartIndex,
+        currentIndex,
+        newIsSelectionMode,
+      );
+
+      return {
+        ...state,
+        isDragging: true,
+        currentSelectedIndex: currentIndex,
+        lastHoveredIndex: currentIndex,
+        isSelectedStates: newSelectedStates,
+        isSelectionMode: newIsSelectionMode,
+        startIndex: newStartIndex,
+        previousIndexDiffSign: newPreviousIndexDiffSign,
+      };
+    }
+    case 'mouseUp': {
+      return {
+        ...state,
+        isMouseDown: false,
+        isDragging: false,
+      };
+    }
+    default:
+      return state;
   }
+}
+
+export function useDragSelection(date: string, timeIntervalArray: [string, string][]) {
+  const { updateInterviewSchedule } = useInterviewScheduleUpdater(date, timeIntervalArray);
+
+  const [states, dispatch] = useReducer(
+    dragReducer,
+    generateInitialDragState(timeIntervalArray.length),
+  );
 
   const handleMouseDown = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
-    setIsMouseDown(true);
-
-    startIndex.current = e.currentTarget.dataset.index;
-    if (startIndex.current) mode.current = !selectedTime[Number(startIndex.current)];
-
-    const newValue = [...selectedTime];
-    newValue[Number(startIndex.current)] = mode.current;
-
-    setSelectedTime(newValue);
-    lastHoveredIndex.current = String(startIndex.current);
+    dispatch({
+      type: 'mouseDown',
+      index: getSelectedIndex(e),
+      isSelectionMode: !states.isSelectedStates[getSelectedIndex(e)],
+    });
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLSpanElement>) => {
-    if (!isMouseDown) return;
-    setIsDragging(true);
-
-    selectedIndex.current = e.currentTarget.dataset.index;
-    if (!e.currentTarget.dataset.index || selectedIndex.current === lastHoveredIndex.current)
+    if (
+      !e.currentTarget.dataset.index ||
+      getSelectedIndex(e) === states.lastHoveredIndex ||
+      !states.isMouseDown
+    )
       return;
 
-    handleIndexChange(Number(selectedIndex.current));
-
-    setSelectedTime((prev) => {
-      const newSelected = [...prev];
-      const start = Math.min(Number(startIndex.current), Number(selectedIndex.current));
-      const end = Math.max(Number(startIndex.current), Number(selectedIndex.current));
-
-      for (let i = start; i <= end; i++) {
-        newSelected[i] = mode.current;
-      }
-      return newSelected;
+    dispatch({
+      type: 'mouseMove',
+      index: getSelectedIndex(e),
+      indexDiffSign: getIndexDiffSign(getSelectedIndex(e), states.lastHoveredIndex),
     });
-    lastHoveredIndex.current = selectedIndex.current!;
   };
 
   const handleMouseUp = () => {
-    if (!isDragging) return;
-    setIsMouseDown(false);
-    setIsDragging(false);
+    if (!states.isMouseDown) return;
+    dispatch({
+      type: 'mouseUp',
+    });
 
-    const selectedInterviewTime: Set<string> = convertSelectionToTimeInterval(
-      selectedTime,
-      timeIntervalArray,
-    );
-    const mergedInterviewTime: string[] = mergeContinuousTimeInterval(selectedInterviewTime);
-    updateScheduleData(date, mergedInterviewTime);
-
-    handleIndexChange(Number(selectedIndex.current));
+    updateInterviewSchedule(states.isSelectedStates);
   };
 
   return {
     handleMouseDown,
     handleMouseMove,
     handleMouseUp,
-    selectedTime,
+    states,
   };
 }
