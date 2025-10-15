@@ -51,7 +51,7 @@ export const ClubDetailEditPage = () => {
         });
 
         setTimeout(() => {
-          navigate(`/admin/clubs/${clubId}`);
+          navigate(`/clubs/${clubId}`);
         }, 1000);
       })
       .catch(() => {
