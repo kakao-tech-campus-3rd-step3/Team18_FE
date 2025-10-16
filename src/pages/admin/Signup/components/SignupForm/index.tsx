@@ -20,22 +20,27 @@ export const SignupForm = () => {
       phoneNumber: '',
     },
   });
-
   const { errors, isSubmitting } = methods.formState;
 
   const onSubmit = async (signupFormValue: SignupFormInputs) => {
+    const temporaryToken = localStorage.getItem('temporaryToken');
+
+    if (!temporaryToken) {
+      toast.error('회원가입을 위한 토큰이 존재하지 않습니다.');
+      return;
+    }
+
     try {
-      await postSignupForm(signupFormValue);
+      await postSignupForm(signupFormValue, temporaryToken);
       toast.success('회원가입 완료!', {
         style: { backgroundColor: theme.colors.primary, color: 'white' },
         duration: 1000,
       });
       setTimeout(() => {
-        navigate(`/login`);
+        navigate(`/`);
       }, 1000);
-    } catch (e) {
-      console.error(e);
-      toast.error('회원가입 실패!', {
+    } catch (e: any) {
+      toast.error(e.message, {
         duration: 1000,
         style: {
           backgroundColor: 'white',
