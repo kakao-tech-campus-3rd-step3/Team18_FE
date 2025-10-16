@@ -16,5 +16,5 @@ const initInstance = (config: CreateAxiosDefaults): AxiosInstance => {
 };
 
 export const apiInstance = initInstance({
-  baseURL: import.meta.env.VITE_API_BASE_URL_LOCAL,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 });
