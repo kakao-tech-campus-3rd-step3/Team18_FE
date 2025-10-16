@@ -1,5 +1,5 @@
-import type { AxiosInstance, CreateAxiosDefaults } from 'axios';
 import axios from 'axios';
+import type { AxiosInstance, CreateAxiosDefaults } from 'axios';
 
 const initInstance = (config: CreateAxiosDefaults): AxiosInstance => {
   const instance = axios.create({

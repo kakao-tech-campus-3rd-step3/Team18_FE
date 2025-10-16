@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { apiInstance } from './api/initInstance';
-import type { AxiosError, AxiosResponse } from 'axios';
 import type { ErrorResponse } from '../Signup/type/error';
+import type { AxiosError, AxiosResponse } from 'axios';
 
 interface LoginSuccessResponse {
   status: 'LOGIN_SUCCESS';
