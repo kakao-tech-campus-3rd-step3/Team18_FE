@@ -35,10 +35,8 @@ export const SignupForm = () => {
       toast.success('회원가입 완료!', {
         style: { backgroundColor: theme.colors.primary, color: 'white' },
         duration: 1000,
+        onAutoClose: () => navigate('/'),
       });
-      setTimeout(() => {
-        navigate(`/`);
-      }, 1000);
     } catch (e: any) {
       toast.error(e.message, {
         duration: 1000,
