@@ -37,14 +37,16 @@ export const SignupForm = () => {
         duration: 1000,
         onAutoClose: () => navigate('/'),
       });
-    } catch (e: any) {
-      toast.error(e.message, {
-        duration: 1000,
-        style: {
-          backgroundColor: 'white',
-          color: theme.colors.error,
-        },
-      });
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        toast.error(e.message, {
+          duration: 1000,
+          style: {
+            backgroundColor: 'white',
+            color: theme.colors.error,
+          },
+        });
+      }
     }
   };
 
