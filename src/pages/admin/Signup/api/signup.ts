@@ -1,7 +1,7 @@
 import axios, { AxiosError, type AxiosResponse } from 'axios';
 import { apiInstance } from '../../Login/api/initInstance';
-import type { SignupFormInputs } from '../type/signup';
 import type { ErrorResponse } from '../type/error';
+import type { SignupFormInputs } from '../type/signup';
 
 export interface RegisterSuccessResponse {
   status: 'REGISTER_SUCCESS';
