@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import type { ErrorResponse } from '../Signup/type/error';
-import type { AxiosError, AxiosResponse } from 'axios';
+import type { AxiosError } from 'axios';
 import { postAuthCode } from './api/postAuthCode';
+import { setAccessToken, setTemporaryToken } from '../Signup/utils/token';
 
 interface LoginSuccessResponse {
   status: 'LOGIN_SUCCESS';
@@ -35,11 +36,11 @@ export const KakaoCallback = () => {
 
         switch (response.status) {
           case 'LOGIN_SUCCESS':
-            localStorage.setItem('accessToken', response.accessToken);
+            setAccessToken(response.accessToken);
             navigate('/');
             break;
           case 'REGISTRATION_REQUIRED':
-            sessionStorage.setItem('temporaryToken', response.temporaryToken);
+            setTemporaryToken(response.temporaryToken);
             navigate('/signup');
             break;
         }
