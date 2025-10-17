@@ -1,5 +1,5 @@
-import type { AxiosResponse } from 'axios';
 import { apiInstance } from './initInstance';
+import type { AxiosResponse } from 'axios';
 
 interface LoginSuccessResponse {
   status: 'LOGIN_SUCCESS';

@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
-import type { ErrorResponse } from '../Signup/type/error';
-import type { AxiosError } from 'axios';
 import { postAuthCode } from './api/postAuthCode';
 import { setAccessToken, setTemporaryToken } from '../Signup/utils/token';
+import type { ErrorResponse } from '../Signup/type/error';
+import type { AxiosError } from 'axios';
 
 interface LoginSuccessResponse {
   status: 'LOGIN_SUCCESS';
