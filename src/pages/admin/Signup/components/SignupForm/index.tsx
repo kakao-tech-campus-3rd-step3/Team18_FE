@@ -23,7 +23,7 @@ export const SignupForm = () => {
   const { errors, isSubmitting } = methods.formState;
 
   const onSubmit = async (signupFormValue: SignupFormInputs) => {
-    const temporaryToken = localStorage.getItem('temporaryToken');
+    const temporaryToken = sessionStorage.getItem('temporaryToken');
 
     if (!temporaryToken) {
       toast.error('회원가입을 위한 토큰이 존재하지 않습니다.');

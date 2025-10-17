@@ -18,7 +18,7 @@ export const postSignupForm = async (formData: SignupFormInputs, tempToken: stri
         headers: { Authorization: `Bearer ${tempToken}` },
       },
     );
-    sessionStorage.setItem('accessToken', response.data.accessToken);
+    localStorage.setItem('accessToken', response.data.accessToken);
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {
       const error = e as AxiosError<ErrorResponse>;
