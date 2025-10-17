@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
-import { apiInstance } from './api/initInstance';
 import type { ErrorResponse } from '../Signup/type/error';
 import type { AxiosError, AxiosResponse } from 'axios';
+import { postAuthCode } from './api/postAuthCode';
 
 interface LoginSuccessResponse {
   status: 'LOGIN_SUCCESS';
@@ -31,17 +31,15 @@ export const KakaoCallback = () => {
 
     const fetchToken = async () => {
       try {
-        const res: AxiosResponse<LoginResponse> = await apiInstance.post('/auth/kakao/login', {
-          authorizationCode: code,
-        });
+        const response: LoginResponse = await postAuthCode(code);
 
-        switch (res.data.status) {
+        switch (response.status) {
           case 'LOGIN_SUCCESS':
-            localStorage.setItem('accessToken', res.data.accessToken);
+            localStorage.setItem('accessToken', response.accessToken);
             navigate('/');
             break;
           case 'REGISTRATION_REQUIRED':
-            sessionStorage.setItem('temporaryToken', res.data.temporaryToken);
+            sessionStorage.setItem('temporaryToken', response.temporaryToken);
             navigate('/signup');
             break;
         }
