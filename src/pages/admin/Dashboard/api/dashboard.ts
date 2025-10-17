@@ -1,4 +1,3 @@
-import { error } from 'console';
 import { isAxiosError } from 'axios';
 import { apiInstance } from '@/api/initInstance';
 import type { DashboardSummary } from '@/pages/admin/Dashboard/types/dashboard';
@@ -9,8 +8,9 @@ export const fetchDashboardSummary = async (clubId: number): Promise<DashboardSu
     return data;
   } catch (error: unknown) {
     if (isAxiosError(error)) {
-      throw new Error('대시보드 요약 정보를 불러오는 데 실패했습니다.');
+      const msg = error.response?.data?.message || error.message;
+      throw new Error(`대시보드 로딩 실패: ${msg}`);
     }
+    throw new Error('대시보드 로딩 실패: 알 수 없는 오류');
   }
-  throw error;
 };
