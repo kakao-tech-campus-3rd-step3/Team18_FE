@@ -41,7 +41,7 @@ export const KakaoCallback = () => {
             navigate('/');
             break;
           case 'REGISTRATION_REQUIRED':
-            localStorage.setItem('temporaryToken', res.data.temporaryToken);
+            sessionStorage.setItem('temporaryToken', res.data.temporaryToken);
             navigate('/signup');
             break;
         }
