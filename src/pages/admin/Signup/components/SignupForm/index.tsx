@@ -6,8 +6,8 @@ import * as S from '@/pages/admin/Signup/components/SignupForm/index.styled';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { theme } from '@/styles/theme';
-import type { SignupFormInputs } from '@/pages/admin/Signup/type/signup';
 import { getTemporaryToken, setAccessToken } from '../../utils/token';
+import type { SignupFormInputs } from '@/pages/admin/Signup/type/signup';
 
 export const SignupForm = () => {
   const navigate = useNavigate();
