@@ -9,7 +9,10 @@ export interface RegisterSuccessResponse {
   refreshToken: string;
 }
 
-export const postSignupForm = async (formData: SignupFormInputs, tempToken: string) => {
+export const postSignupForm = async (
+  formData: SignupFormInputs,
+  tempToken: string,
+): Promise<RegisterSuccessResponse> => {
   try {
     const response: AxiosResponse<RegisterSuccessResponse> = await apiInstance.post(
       '/auth/register',
@@ -18,7 +21,7 @@ export const postSignupForm = async (formData: SignupFormInputs, tempToken: stri
         headers: { Authorization: `Bearer ${tempToken}` },
       },
     );
-    localStorage.setItem('accessToken', response.data.accessToken);
+    return response.data;
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {
       const error = e as AxiosError<ErrorResponse>;
@@ -35,5 +38,6 @@ export const postSignupForm = async (formData: SignupFormInputs, tempToken: stri
           throw new Error(`알 수 없는 오류: ${e.message}`);
       }
     }
+    throw e;
   }
 };
