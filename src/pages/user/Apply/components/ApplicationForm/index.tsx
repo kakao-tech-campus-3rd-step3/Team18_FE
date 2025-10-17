@@ -45,10 +45,8 @@ export const ApplicationForm = ({ questions }: Props) => {
             color: 'white',
           },
           duration: 1000,
+          onAutoClose: () => navigate(`/clubs/${clubIdNumber}`),
         });
-        setTimeout(() => {
-          navigate(`/clubs/${clubIdNumber}`);
-        }, 1000);
       })
       .catch(() => {
         toast.error('제출 실패!', {

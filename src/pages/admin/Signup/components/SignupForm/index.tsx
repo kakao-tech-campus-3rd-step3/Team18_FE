@@ -1,11 +1,12 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import { postSignupForm } from '@/pages/admin/Signup/api/signup';
+import { postSignupForm, type RegisterSuccessResponse } from '@/pages/admin/Signup/api/signup';
 import * as S from '@/pages/admin/Signup/components/SignupForm/index.styled';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { theme } from '@/styles/theme';
+import { getTemporaryToken, setAccessToken } from '../../utils/token';
 import type { SignupFormInputs } from '@/pages/admin/Signup/type/signup';
 
 export const SignupForm = () => {
@@ -20,28 +21,38 @@ export const SignupForm = () => {
       phoneNumber: '',
     },
   });
-
   const { errors, isSubmitting } = methods.formState;
 
   const onSubmit = async (signupFormValue: SignupFormInputs) => {
+    const temporaryToken = getTemporaryToken();
+
+    if (!temporaryToken) {
+      toast.error('회원가입을 위한 토큰이 존재하지 않습니다.');
+      return;
+    }
+
     try {
-      await postSignupForm(signupFormValue);
+      const response: RegisterSuccessResponse = await postSignupForm(
+        signupFormValue,
+        temporaryToken,
+      );
+
+      setAccessToken(response.accessToken);
       toast.success('회원가입 완료!', {
         style: { backgroundColor: theme.colors.primary, color: 'white' },
         duration: 1000,
+        onAutoClose: () => navigate('/'),
       });
-      setTimeout(() => {
-        navigate(`/login`);
-      }, 1000);
-    } catch (e) {
-      console.error(e);
-      toast.error('회원가입 실패!', {
-        duration: 1000,
-        style: {
-          backgroundColor: 'white',
-          color: theme.colors.error,
-        },
-      });
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        toast.error(e.message, {
+          duration: 1000,
+          style: {
+            backgroundColor: 'white',
+            color: theme.colors.error,
+          },
+        });
+      }
     }
   };
 

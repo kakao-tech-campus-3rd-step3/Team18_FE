@@ -1,15 +1,43 @@
+import axios, { AxiosError, type AxiosResponse } from 'axios';
+import { apiInstance } from '../../Login/api/initInstance';
+import type { ErrorResponse } from '../type/error';
 import type { SignupFormInputs } from '../type/signup';
 
-export const postSignupForm = async (formData: SignupFormInputs): Promise<SignupFormInputs> => {
-  const url = `${import.meta.env.VITE_API_BASE_URL}/auth/register`;
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(formData),
-  });
+export interface RegisterSuccessResponse {
+  status: 'REGISTER_SUCCESS';
+  accessToken: string;
+  refreshToken: string;
+}
 
-  if (!response.ok) throw new Error('회원 가입 양식을 제출하지 못했습니다.');
-  return await response.json();
+export const postSignupForm = async (
+  formData: SignupFormInputs,
+  tempToken: string,
+): Promise<RegisterSuccessResponse> => {
+  try {
+    const response: AxiosResponse<RegisterSuccessResponse> = await apiInstance.post(
+      '/auth/register',
+      formData,
+      {
+        headers: { Authorization: `Bearer ${tempToken}` },
+      },
+    );
+    return response.data;
+  } catch (e: unknown) {
+    if (axios.isAxiosError(e)) {
+      const error = e as AxiosError<ErrorResponse>;
+      const status = error.response?.status;
+      const detailMsg = error.response?.data.detail;
+      switch (status) {
+        case 400:
+          throw new Error(`입력 오류: ${detailMsg}`);
+        case 401:
+          throw new Error(`권한 오류: ${detailMsg}`);
+        case 409:
+          throw new Error(`중복 오류: ${detailMsg}`);
+        default:
+          throw new Error(`알 수 없는 오류: ${e.message}`);
+      }
+    }
+    throw e;
+  }
 };
