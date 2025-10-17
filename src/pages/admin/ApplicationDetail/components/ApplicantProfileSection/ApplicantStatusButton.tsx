@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
-import type { ApplicantData, ApplicantStatus } from '@/pages/admin/Dashboard/types/dashboard';
+import type { StatusLabel, ApplicationStatus } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = {
-  label: ApplicantData['status'];
-  value: ApplicantStatus;
+  label: StatusLabel;
+  value: ApplicationStatus;
   selected: boolean;
-  onClick: (status: ApplicantStatus) => void;
+  onClick: (status: ApplicationStatus) => void;
 };
 
 export const ApplicantStatusButton = ({ label, value, selected, onClick }: Props) => {

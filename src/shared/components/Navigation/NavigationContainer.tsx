@@ -51,6 +51,9 @@ const NavContainer = styled.nav(({ theme }) => ({
   boxShadow: theme.shadow.sm,
   zIndex: theme.zIndex.header,
   position: 'relative',
+  '& a[href="/login"]': {
+    marginLeft: 'auto',
+  },
 }));
 
 const UnderlineIndicator = styled.div<{ visible: boolean }>(({ theme, visible }) => ({

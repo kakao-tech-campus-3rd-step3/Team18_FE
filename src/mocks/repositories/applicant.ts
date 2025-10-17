@@ -9,7 +9,7 @@ const applicants: ApplicantData[] = [
     department: '소프트웨어공학과',
     phoneNumber: '010-1010-1010',
     email: 'ddd@naver.com',
-    status: '미정',
+    status: 'PENDING',
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const applicants: ApplicantData[] = [
     department: '소프트웨어공학과',
     phoneNumber: '010-1010-1010',
     email: 'ddd@naver.com',
-    status: '합격',
+    status: 'APPROVED',
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const applicants: ApplicantData[] = [
     department: '소프트웨어공학과',
     phoneNumber: '010-1010-1010',
     email: 'ddd@naver.com',
-    status: '불합격',
+    status: 'REJECTED',
   },
   {
     id: 4,
@@ -36,7 +36,7 @@ const applicants: ApplicantData[] = [
     department: '소프트웨어공학과',
     phoneNumber: '010-1010-1010',
     email: 'ddd@naver.com',
-    status: '미정',
+    status: 'PENDING',
   },
 ];
 

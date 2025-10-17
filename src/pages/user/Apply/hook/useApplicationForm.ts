@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react';
 import { fetchApplicationForm } from '@/pages/user/Apply/api/apply.ts';
 import type { ApplicationForm } from '../type/apply';
 
-export const useApplicationForm = (Id: number) => {
+export const useApplicationForm = (clubId: number) => {
   const [clubApplicationForm, setClubApplicationForm] = useState<ApplicationForm | null>(null);
 
   useEffect(() => {
-    if (!Id) return;
+    if (!clubId) return;
     const setFormStateAfterFetch = async () => {
-      const applicationForm = await fetchApplicationForm(Id);
+      const applicationForm = await fetchApplicationForm(clubId);
       setClubApplicationForm(applicationForm);
     };
     setFormStateAfterFetch();
-  }, [Id]);
+  }, [clubId]);
 
   return clubApplicationForm;
 };

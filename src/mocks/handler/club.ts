@@ -4,7 +4,7 @@ import { clubRepository } from '../repositories/club';
 
 const getClubsResolver = ({ request }: { request: Request }) => {
   const url = new URL(request.url);
-  const categoryName = url.searchParams.get('categoryName') ?? 'all';
+  const categoryName = url.searchParams.get('category') ?? 'all';
   const clubs = clubRepository.getClubsByCategory(categoryName);
   return HttpResponse.json({ clubs }, { status: 200 });
 };
@@ -31,11 +31,46 @@ const postApplicationSubmitResolver = async ({ request }: { request: Request }) 
   });
 };
 
+const getClubDetailResolver = ({ params }: { params: PathParams }) => {
+  const { clubId } = params;
+  const club = clubRepository.getClubDetailById(Number(clubId));
+
+  if (!club) {
+    return new HttpResponse('Not Found', { status: 404 });
+  }
+
+  return HttpResponse.json(club, { status: 200 });
+};
+
+const postClubDetailResolver = async ({
+  params,
+  request,
+}: {
+  params: PathParams;
+  request: Request;
+}) => {
+  const { clubId } = params;
+  const body = await request.json();
+
+  const existingClub = clubRepository.getClubDetailById(Number(clubId));
+
+  if (!existingClub) {
+    return new HttpResponse('Not Found', { status: 404 });
+  }
+
+  const updatedClub = { ...existingClub, ...body };
+  clubRepository.updateClubDetail(Number(clubId), updatedClub);
+
+  return HttpResponse.json(updatedClub, { status: 200 });
+};
+
 export const clubHandlers = [
-  http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/search/category', getClubsResolver),
+  http.get(import.meta.env.VITE_API_BASE_URL + '/clubs?category', getClubsResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:Id/apply', getClubApplicationResolver),
   http.post(
-    'https://nonprotuberant-florine-irreversibly.ngrok-free.dev/api/clubs/:clubId/apply-submit',
+    import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/apply-submit',
     postApplicationSubmitResolver,
   ),
+  http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', getClubDetailResolver),
+  http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', postClubDetailResolver),
 ];

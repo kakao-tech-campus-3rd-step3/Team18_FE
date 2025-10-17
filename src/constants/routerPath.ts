@@ -12,5 +12,8 @@ export const ROUTE_PATH = {
   COMMON: {
     MAIN: '/',
     CLUBDETAIL: 'clubs/:clubId',
+    LOGIN: 'login',
+    CALLBACK: 'login/redirect',
+    SIGNUP: 'signup',
   },
 };

@@ -15,7 +15,7 @@ export type Question =
       questionType: typeof QuestionTypes.TIME_SLOT;
       question: string;
       required: boolean;
-      timeSlotOption: InterviewSchedule[];
+      timeSlotOptions: InterviewSchedule[];
     }
   | {
       questionNum: number;
@@ -65,5 +65,21 @@ export type FormInputs = {
   phoneNumber: string;
   email: string;
   answers: object[];
-  selectedInterviewSchedule: string[];
+  selectedInterviewSchedule: PostInterviewSchedule[];
 };
+
+export type DragState = {
+  startIndex: number;
+  lastHoveredIndex: number;
+  currentSelectedIndex: number;
+  isSelectionMode: boolean;
+  isSelectedStates: boolean[];
+  isMouseDown: boolean;
+  isDragging: boolean;
+  previousIndexDiffSign: null | number;
+};
+
+export type DragAction =
+  | { type: 'mouseDown'; index: number; isSelectionMode: boolean }
+  | { type: 'mouseMove'; index: number; indexDiffSign: number }
+  | { type: 'mouseUp' };

@@ -1,15 +1,18 @@
 import styled from '@emotion/styled';
 import type { DashboardCard } from '@/pages/admin/Dashboard/types/dashboard';
 
-type Props = Omit<DashboardCard, 'id'>;
+type Props = Omit<DashboardCard, 'id'> & {
+  isEmpty?: boolean;
+};
 
-export const SummaryCard = ({ label, value, image }: Props) => {
+export const SummaryCard = ({ label, value, image, isEmpty = false }: Props) => {
   return (
     <Wrapper>
-      <IconWrapper>{image}</IconWrapper>
+      <IconWrapper isEmpty={isEmpty}>{image}</IconWrapper>
       <TextWrapper>
         <Label>{label}</Label>
-        <Value>{value}</Value>
+        <Value isEmpty={isEmpty}>{value}</Value>
+        {isEmpty && <EmptyText>예정된 모집이 없습니다</EmptyText>}
       </TextWrapper>
     </Wrapper>
   );
@@ -26,8 +29,9 @@ const Wrapper = styled.div(({ theme }) => ({
   borderRadius: theme.radius.lg,
 }));
 
-const IconWrapper = styled.div(({ theme }) => ({
-  color: theme.colors.gray900,
+const IconWrapper = styled.div<{ isEmpty?: boolean }>(({ theme, isEmpty }) => ({
+  color: isEmpty ? theme.colors.gray400 : theme.colors.gray900,
+  transition: 'color 0.2s',
 }));
 
 const TextWrapper = styled.div({
@@ -41,8 +45,15 @@ const Label = styled.p(({ theme }) => ({
   color: theme.colors.gray900,
 }));
 
-const Value = styled.p(({ theme }) => ({
-  fontSize: '2.2rem',
+const Value = styled.p<{ isEmpty?: boolean }>(({ theme, isEmpty }) => ({
+  fontSize: '2rem',
   fontWeight: theme.font.weight.bold,
-  color: theme.colors.gray900,
+  color: isEmpty ? theme.colors.gray400 : theme.colors.gray900,
+  transition: 'color 0.2s',
+}));
+
+const EmptyText = styled.span(({ theme }) => ({
+  fontSize: '1.1rem',
+  color: theme.colors.gray500,
+  marginTop: '-0.3rem',
 }));

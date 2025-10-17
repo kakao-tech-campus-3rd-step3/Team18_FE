@@ -1,23 +1,54 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { SectionTitle } from '@/shared/components/SectionTitle';
-import { mockClubDetail } from '../mock';
 
 export const ClubDescriptionEditSection = () => {
-  const [introduce, setIntroduce] = useState(mockClubDetail.introductionOverview);
-  const [activity, setActivity] = useState(mockClubDetail.introductionActivity);
-  const [ideal, setIdeal] = useState(mockClubDetail.introductionIdeal);
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<{
+    introductionOverview: string;
+    introductionActivity: string;
+    introductionIdeal: string;
+  }>();
+
+  const maxLength = 1200;
 
   return (
     <DescriptionContainer>
       <SectionTitle required>동아리 소개</SectionTitle>
-      <InputArea value={introduce} onChange={(e) => setIntroduce(e.target.value)} />
+      <OutlineTextareaField
+        {...register('introductionOverview', {
+          required: '동아리 소개를 입력해주세요.',
+          maxLength: { value: maxLength, message: `${maxLength}자 이하로 입력해주세요.` },
+        })}
+        invalid={!!errors.introductionOverview}
+        message={errors.introductionOverview?.message}
+        placeholder='동아리 소개를 입력하세요.'
+      />
 
       <SectionTitle required>활동 내용</SectionTitle>
-      <InputArea value={activity} onChange={(e) => setActivity(e.target.value)} />
+      <OutlineTextareaField
+        {...register('introductionActivity', {
+          required: '활동 내용을 입력해주세요.',
+          maxLength: { value: maxLength, message: `${maxLength}자 이하로 입력해주세요.` },
+        })}
+        invalid={!!errors.introductionActivity}
+        message={errors.introductionActivity?.message}
+        placeholder='활동 내용을 입력하세요.'
+      />
 
       <SectionTitle required>모집하는 사람</SectionTitle>
-      <InputArea value={ideal} onChange={(e) => setIdeal(e.target.value)} />
+      <OutlineTextareaField
+        {...register('introductionIdeal', {
+          required: '모집 대상을 입력해주세요.',
+          maxLength: { value: maxLength, message: `${maxLength}자 이하로 입력해주세요.` },
+        })}
+        invalid={!!errors.introductionIdeal}
+        message={errors.introductionIdeal?.message}
+        placeholder='모집 대상을 입력하세요.'
+      />
     </DescriptionContainer>
   );
 };
@@ -29,26 +60,4 @@ const DescriptionContainer = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: '1rem',
-}));
-
-const InputArea = styled.textarea(({ theme }) => ({
-  fontSize: theme.font.size.sm,
-  lineHeight: 1.6,
-  padding: '0.75rem 1rem',
-  borderRadius: theme.radius.md,
-  border: `1px solid ${theme.colors.border}`,
-  backgroundColor: theme.colors.bg,
-  resize: 'vertical',
-  minHeight: '100px',
-  transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-
-  '&:focus': {
-    outline: 'none',
-    borderColor: theme.colors.primary,
-    boxShadow: `0 0 0 2px ${theme.colors.primary}33`,
-  },
-
-  '&::placeholder': {
-    color: theme.colors.textSecondary,
-  },
 }));

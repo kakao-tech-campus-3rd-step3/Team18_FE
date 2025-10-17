@@ -8,10 +8,13 @@ import {
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 import type { UseApiQueryResult } from '@/types/useApiQueryResult';
 
+type CreateCommentPayload = Pick<Comment, 'content' | 'rating'>;
+type UpdateCommentPayload = Pick<Comment, 'commentId' | 'content' | 'rating'>;
+
 type UseCommentsResult = UseApiQueryResult<Comment[]> & {
-  createComment: (comment: { content: string; rating: number }) => void;
+  createComment: (comment: CreateCommentPayload) => void;
   deleteComment: (commentId: number) => void;
-  updateComment: (comment: { commentId: number; content: string; rating: number }) => void;
+  updateComment: (comment: UpdateCommentPayload) => void;
 };
 
 export const useComments = (applicationId: number): UseCommentsResult => {
