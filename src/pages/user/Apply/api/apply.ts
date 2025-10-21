@@ -1,3 +1,5 @@
+import axios, { type AxiosResponse } from 'axios';
+import { apiInstance } from '@/api/initInstance';
 import type {
   ApplicationForm,
   ApplicationFormRequest,
@@ -5,12 +7,18 @@ import type {
   PostInterviewSchedule,
 } from '@/pages/user/Apply/type/apply.ts';
 
-export const fetchApplicationForm = async (Id: number): Promise<ApplicationForm> => {
-  const url = `${import.meta.env.VITE_API_BASE_URL}/clubs/${Id}/apply`;
-  const response = await fetch(url);
-
-  if (!response.ok) throw new Error('지원서 양식을 가져오지 못했습니다');
-  return await response.json();
+export const fetchApplicationForm = async (clubId: number): Promise<ApplicationForm> => {
+  try {
+    const response: AxiosResponse<ApplicationForm> = await apiInstance.get(
+      `/clubs/${clubId}/apply`,
+    );
+    return response.data;
+  } catch (e) {
+    if (axios.isAxiosError(e)) {
+      throw new Error(e.response?.data);
+    }
+    throw e;
+  }
 };
 
 export const postApplicationForm = async (
