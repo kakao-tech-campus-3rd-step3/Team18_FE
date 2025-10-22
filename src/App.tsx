@@ -11,7 +11,7 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <ToastProvider />
+        <ToastContainer />
         <Navigation role='president' />
         <Outlet />
       </ThemeProvider>
@@ -19,7 +19,7 @@ export function App() {
   );
 }
 
-const ToastProvider = () => (
+const ToastContainer = () => (
   <Toaster
     position='top-center'
     richColors
