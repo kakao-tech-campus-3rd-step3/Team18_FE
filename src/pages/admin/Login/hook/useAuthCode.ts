@@ -53,7 +53,7 @@ export const useAuthCode = (navigate: NavigateFunction) => {
       }
     };
     fetchToken();
-  }, []);
+  }, [navigate, setAccessToken, setTemporaryToken]);
 
   return { errorMessage, isLoading };
 };
