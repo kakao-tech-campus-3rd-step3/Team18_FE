@@ -1,3 +1,4 @@
+import type { NavigateFunction } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { setAccessToken, setTemporaryToken } from '@/pages/admin/Signup/utils/token';
 import { postAuthCode } from '../api/postAuthCode';
@@ -17,7 +18,7 @@ interface RegistrationRequiredResponse {
 
 type LoginResponse = LoginSuccessResponse | RegistrationRequiredResponse;
 
-export const useAuthCode = (navigate: (path: string) => void) => {
+export const useAuthCode = (navigate: NavigateFunction) => {
   const [errorMessage, setErrorMessage] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -52,7 +53,7 @@ export const useAuthCode = (navigate: (path: string) => void) => {
       }
     };
     fetchToken();
-  });
+  }, []);
 
   return { errorMessage, isLoading };
 };
