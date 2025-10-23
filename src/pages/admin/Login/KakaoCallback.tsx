@@ -6,7 +6,7 @@ import { useAuthCode } from './hook/useAuthCode';
 export const KakaoCallback = () => {
   const navigate = useNavigate();
 
-  const { errorMessage, isLoading } = useAuthCode((path) => navigate(path));
+  const { errorMessage, isLoading } = useAuthCode(navigate);
   if (isLoading) return <LoadingSpinner />;
   if (errorMessage) toast.error(errorMessage);
 
