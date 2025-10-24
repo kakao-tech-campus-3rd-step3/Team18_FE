@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { useComments } from '@/pages/admin/ApplicationDetail/hooks/useComments';
 import { Button } from '@/shared/components/Button';
@@ -9,49 +10,53 @@ import { ApplicantStarRating } from './ApplicantStarRating';
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 
 type Props = Pick<Comment, 'author' | 'content' | 'createdAt' | 'commentId' | 'rating'>;
+type CommentFormData = {
+  content: string;
+  rating: number;
+};
 
 export const CommentItem = ({ author, commentId, content, createdAt, rating }: Props) => {
   const { applicantId } = useParams();
   const { deleteComment, updateComment } = useComments(Number(applicantId));
-
   const [isEditing, setIsEditing] = useState(false);
-  const [editedContent, setEditedContent] = useState(content);
-  const [editedRating, setEditedRating] = useState(rating);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    control,
+    reset,
+  } = useForm<CommentFormData>({
+    defaultValues: {
+      content: content,
+      rating: rating,
+    },
+  });
+
+  const contentValue = watch('content');
 
   const handleEdit = () => {
     setIsEditing(true);
   };
 
-  const handleSave = () => {
-    // 추후 모달 및 토스트로 띄우기
-    if (!editedContent.trim()) {
-      alert('댓글 내용을 입력해주세요');
-      return;
-    }
-    if (editedRating === 0) {
-      alert('별점을 선택해주세요.');
-      return;
-    }
-
-    updateComment({
+  const handleSave = (data: CommentFormData) => {
+    const newComment = {
       commentId,
-      content: editedContent,
-      rating: editedRating,
-    });
+      content: data.content.trim(),
+      rating: data.rating,
+    };
+    updateComment(newComment);
     setIsEditing(false);
   };
 
   const handleCancel = () => {
-    setEditedContent(content);
-    setEditedRating(rating);
+    reset({ content, rating });
     setIsEditing(false);
   };
 
   const handleDelete = () => {
-    // 추후 모달 및 토스트로 띄우기
-    if (window.confirm('댓글을 삭제하시겠습니까?')) {
-      deleteComment(commentId);
-    }
+    deleteComment(commentId);
   };
 
   return (
@@ -75,14 +80,35 @@ export const CommentItem = ({ author, commentId, content, createdAt, rating }: P
       </Header>
 
       {isEditing ? (
-        <EditMode>
-          <ApplicantStarRating rating={editedRating} onRatingChange={setEditedRating} />
+        <EditMode onSubmit={handleSubmit(handleSave)}>
+          <Controller
+            name='rating'
+            control={control}
+            rules={{
+              required: '별점을 선택해주세요.',
+              min: { value: 1, message: '별점을 선택해주세요.' },
+            }}
+            render={({ field: { value, onChange }, fieldState: { error } }) => (
+              <>
+                <ApplicantStarRating rating={value} onRatingChange={onChange} />
+                {error && (
+                  <Text size='xs' color='#fa342c'>
+                    {error.message}
+                  </Text>
+                )}
+              </>
+            )}
+          />
           <UnderlineTextareaField
-            value={editedContent}
-            onChange={(e) => setEditedContent(e.target.value)}
+            {...register('content', {
+              required: '댓글을 입력해주세요.',
+              maxLength: { value: 500, message: '500자 이하로 입력해주세요.' },
+            })}
+            invalid={!!errors.content}
+            message={errors.content?.message}
           />
           <EditButtonContainer>
-            <Button onClick={handleSave}>저장</Button>
+            <Button type='submit'>저장</Button>
             <Button variant='outline' onClick={handleCancel}>
               취소
             </Button>
@@ -90,7 +116,7 @@ export const CommentItem = ({ author, commentId, content, createdAt, rating }: P
         </EditMode>
       ) : (
         <CommentContent>
-          <Text size={'sm'}>{content}</Text>
+          <Text size={'sm'}>{contentValue}</Text>
         </CommentContent>
       )}
     </Layout>
@@ -145,7 +171,7 @@ const CommentContent = styled.div({
   lineHeight: '1.6',
 });
 
-const EditMode = styled.div({
+const EditMode = styled.form({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.5rem',
