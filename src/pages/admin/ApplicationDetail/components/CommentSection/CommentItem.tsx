@@ -7,13 +7,9 @@ import { Button } from '@/shared/components/Button';
 import { UnderlineTextareaField } from '@/shared/components/Form/TextAreaField/UnderlineTextareaField';
 import { Text } from '@/shared/components/Text';
 import { ApplicantStarRating } from './ApplicantStarRating';
-import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
+import type { Comment, CommentFormData } from '@/pages/admin/ApplicationDetail/types/comments';
 
 type Props = Pick<Comment, 'author' | 'content' | 'createdAt' | 'commentId' | 'rating'>;
-type CommentFormData = {
-  content: string;
-  rating: number;
-};
 
 export const CommentItem = ({ author, commentId, content, createdAt, rating }: Props) => {
   const { applicantId } = useParams();
