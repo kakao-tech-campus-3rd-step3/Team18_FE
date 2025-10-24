@@ -6,7 +6,6 @@ import type { SignupFormInputs } from '../type/signup';
 export interface RegisterSuccessResponse {
   status: 'REGISTER_SUCCESS';
   accessToken: string;
-  refreshToken: string;
 }
 
 export const postSignupForm = async (
