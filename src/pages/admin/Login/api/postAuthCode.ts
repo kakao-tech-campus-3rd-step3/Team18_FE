@@ -4,7 +4,6 @@ import type { AxiosResponse } from 'axios';
 interface LoginSuccessResponse {
   status: 'LOGIN_SUCCESS';
   accessToken: string;
-  refreshToken: string;
 }
 
 interface RegistrationRequiredResponse {
