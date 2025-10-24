@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { Form } from 'react-router-dom';
 import { Button } from '@/shared/components/Button';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
@@ -10,69 +10,73 @@ import type { CreateCommentRequest } from '@/mocks/handler/applicant';
 type Props = {
   createComment: (comment: CreateCommentRequest) => void;
 };
+type CommentFormData = {
+  content: string;
+  rating: number;
+};
 
 export const CommentForm = ({ createComment }: Props) => {
-  const [rating, setRating] = useState(0);
-  const [content, setContent] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    watch,
+    control,
+  } = useForm<CommentFormData>({
+    defaultValues: {
+      content: '',
+      rating: 0,
+    },
+  });
 
-  const isContentInvalid = !content.trim();
-  const isRatingInvalid = rating === 0;
-  const isSubmitDisabled = isRatingInvalid || isContentInvalid;
-  const isContentTooLong = content.length > 500;
+  const contentValue = watch('content');
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(e.target.value);
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-
-    if (isSubmitDisabled || isContentTooLong) {
-      return;
-    }
-
+  const handleFormSubmit = (data: CommentFormData) => {
     const newComment = {
-      content: content.trim(),
-      rating: rating,
+      content: data.content.trim(),
+      rating: data.rating,
     };
 
     createComment(newComment);
-    setContent('');
-    setRating(0);
-    setIsSubmitted(false);
+    reset();
   };
-
-  let errorMessage = '';
-  if (isContentTooLong) {
-    errorMessage = '댓글은 500자 이하로 입력해주세요.';
-  } else if (isSubmitted && isSubmitDisabled) {
-    if (isRatingInvalid && isContentInvalid) {
-      errorMessage = '별점과 댓글을 모두 입력해주세요.';
-    } else if (isRatingInvalid) {
-      errorMessage = '별점을 선택해주세요.';
-    } else {
-      errorMessage = '댓글을 입력해주세요.';
-    }
-  }
 
   return (
     <Layout>
       <Wrapper>
         <Text weight={'medium'}>댓글</Text>
-        <ApplicantStarRating rating={rating} onRatingChange={setRating} />
+        <Controller
+          name='rating'
+          control={control}
+          rules={{
+            required: '별점을 선택해주세요.',
+            min: { value: 1, message: '별점을 선택해주세요.' },
+          }}
+          render={({ field: { value, onChange }, fieldState: { error } }) => (
+            <>
+              <ApplicantStarRating rating={value} onRatingChange={onChange} />
+              {error && (
+                <Text size='xs' color='#fa342c'>
+                  {error.message}
+                </Text>
+              )}
+            </>
+          )}
+        />
       </Wrapper>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit(handleFormSubmit)}>
         <OutlineTextareaField
-          value={content}
-          onChange={handleChange}
-          invalid={(isSubmitted && isSubmitDisabled) || isContentTooLong}
-          message={errorMessage}
+          {...register('content', {
+            required: '댓글을 입력해주세요.',
+            maxLength: { value: 500, message: '500자 이하로 입력헤주세요.' },
+          })}
+          invalid={!!errors.content}
+          message={errors.content?.message}
         />
         <ButtonWrapper>
-          <Text size={'sm'} color={isContentTooLong ? '#fa342c' : '#b0b3ba'}>
-            {content.length} / 500
+          <Text size={'sm'} color={errors.content ? '#fa342c' : '#b0b3ba'}>
+            {contentValue.length} / 500
           </Text>
           <Button variant='outline' type='submit' width='3.5rem'>
             등록
@@ -93,6 +97,7 @@ const Layout = styled.div({
 const Wrapper = styled.div({
   display: 'flex',
   gap: '16px',
+  alignItems: 'center',
 });
 
 const ButtonWrapper = styled.div({
