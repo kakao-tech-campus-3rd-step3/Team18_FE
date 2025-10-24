@@ -27,11 +27,10 @@ export const Button = ({
 
   if (to) {
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
       if (disabled) {
-        e.preventDefault();
         return;
       }
-      e.preventDefault();
       navigate(to);
       window.scrollTo(0, 0);
       onClick?.();
