@@ -4,11 +4,7 @@ import { UnderlineTextareaField } from '@/shared/components/Form/TextAreaField/U
 import { Text } from '@/shared/components/Text';
 import * as S from './CommentItem.styles';
 import { ApplicantStarRating } from '../ApplicantStarRating';
-
-export type CommentFormData = {
-  content: string;
-  rating: number;
-};
+import type { CommentFormData } from '@/pages/admin/ApplicationDetail/types/comments';
 
 type CommentEditFormProps = {
   content: string;
