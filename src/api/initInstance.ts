@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getAccessToken } from '@/pages/admin/Signup/utils/token';
 import type { AxiosInstance, CreateAxiosDefaults } from 'axios';
 
 const initInstance = (config: CreateAxiosDefaults): AxiosInstance => {
@@ -8,7 +9,6 @@ const initInstance = (config: CreateAxiosDefaults): AxiosInstance => {
       'Content-Type': 'application/json',
       ...config.headers,
     },
-    // TODO 0. interceptor 적용지점(동아리 운영자)
     ...config,
   });
 
@@ -17,4 +17,12 @@ const initInstance = (config: CreateAxiosDefaults): AxiosInstance => {
 
 export const apiInstance = initInstance({
   baseURL: import.meta.env.VITE_API_BASE_URL,
+});
+
+apiInstance.interceptors.request.use((config) => {
+  const token = getAccessToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
