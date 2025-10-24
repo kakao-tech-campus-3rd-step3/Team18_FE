@@ -66,11 +66,12 @@ export const CommentForm = ({ createComment }: Props) => {
         <OutlineTextareaField
           {...register('content', {
             required: '댓글을 입력해주세요.',
-            maxLength: { value: 500, message: '500자 이하로 입력헤주세요.' },
+            maxLength: { value: 500, message: '500자 이하로 입력해주세요.' },
           })}
           invalid={!!errors.content}
           message={errors.content?.message}
         />
+        ㄴ
         <ButtonWrapper>
           <Text size={'sm'} color={errors.content ? '#fa342c' : '#b0b3ba'}>
             {contentValue.length} / 500
