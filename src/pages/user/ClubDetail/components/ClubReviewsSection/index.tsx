@@ -45,10 +45,10 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
 
       <S.ReviewForm>
         <S.FormTitle>
-          후기 작성 <S.FormNote>*학번은 노출되지 않습니다!</S.FormNote>
+          후기 작성 <S.FormNote>*수정 및 삭제가 불가능하니, 신중히 작성해 주세요!</S.FormNote>
         </S.FormTitle>
         <OutlineInputField
-          placeholder='학번 입력'
+          placeholder='학번 입력 (후기는 익명으로 게시됩니다.)'
           value={studentId}
           onChange={(e) => setStudentId(e.target.value)}
         />
