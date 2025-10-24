@@ -14,9 +14,13 @@ interface RegistrationRequiredResponse {
 
 type LoginResponse = LoginSuccessResponse | RegistrationRequiredResponse;
 
-export const postAuthCode = async (code: string): Promise<LoginResponse> => {
-  const response: AxiosResponse<LoginResponse> = await apiInstance.post('/auth/kakao/login', {
-    authorizationCode: code,
-  });
+export const postAuthCode = async (code: string, signal: AbortSignal): Promise<LoginResponse> => {
+  const response: AxiosResponse<LoginResponse> = await apiInstance.post(
+    '/auth/kakao/login',
+    {
+      authorizationCode: code,
+    },
+    { signal },
+  );
   return response.data;
 };
