@@ -1,22 +1,9 @@
 import type { NavigateFunction } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { setAccessToken, setTemporaryToken } from '@/pages/admin/Signup/utils/token';
-import { postAuthCode } from '../api/postAuthCode';
+import { postAuthCode, type LoginResponse } from '../api/postAuthCode';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AxiosError } from 'axios';
-
-interface LoginSuccessResponse {
-  status: 'LOGIN_SUCCESS';
-  accessToken: string;
-  refreshToken: string;
-}
-
-interface RegistrationRequiredResponse {
-  status: 'REGISTRATION_REQUIRED';
-  temporaryToken: string;
-}
-
-type LoginResponse = LoginSuccessResponse | RegistrationRequiredResponse;
 
 export const useAuthCode = (navigate: NavigateFunction) => {
   const [errorMessage, setErrorMessage] = useState<string>();
