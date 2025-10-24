@@ -2,8 +2,8 @@ import { useReducer } from 'react';
 import { useInterviewScheduleUpdater } from './useFormDataUpdate';
 
 import { generateInitialDragState } from '../constant/initialDragState';
-import { updateDragState } from '../domain/drag';
-import { updateSelectedState } from '../utils/drag';
+
+import { updateDragState, updateSelectedState } from '../utils/drag';
 import { getIndexDiffSign } from '../utils/math';
 import type { DragAction, DragState } from '../type/apply';
 
