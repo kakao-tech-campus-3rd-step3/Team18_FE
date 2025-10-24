@@ -1,9 +1,9 @@
 import { useForm, Controller } from 'react-hook-form';
-import * as S from '@/pages/admin/ApplicationDetail/components/CommentSection/CommentItem.styles';
 import { Button } from '@/shared/components/Button';
 import { UnderlineTextareaField } from '@/shared/components/Form/TextAreaField/UnderlineTextareaField';
 import { Text } from '@/shared/components/Text';
-import { ApplicantStarRating } from './ApplicantStarRating';
+import * as S from './CommentItem.styles';
+import { ApplicantStarRating } from '../ApplicantStarRating';
 
 export type CommentFormData = {
   content: string;
