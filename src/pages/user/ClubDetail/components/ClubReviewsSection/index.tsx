@@ -1,12 +1,32 @@
+import { useEffect, useState } from 'react';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { SectionTitle } from '@/shared/components/SectionTitle';
 import * as S from './index.styled';
-import { clubReviewMockData } from './mock';
+import { fetchClubReviews, postClubReview } from '../../api/clubReviews';
+import type { ClubReview } from '@/pages/user/ClubDetail/types/review';
 
-export const ClubReviewsSection = () => {
-  const reviews = clubReviewMockData.reviews;
+export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
+  const [reviews, setReviews] = useState<ClubReview[]>([]);
+  const [studentId, setStudentId] = useState('');
+  const [content, setContent] = useState('');
+
+  useEffect(() => {
+    const loadReviews = async () => {
+      const data = await fetchClubReviews(clubId);
+      setReviews(data);
+    };
+    loadReviews();
+  }, [clubId]);
+
+  const handleSubmit = async () => {
+    if (!studentId.trim() || !content.trim()) return alert('학번과 내용을 입력해 주세요.');
+
+    const newReview = await postClubReview(clubId, { studentId, content });
+    setReviews((prev) => [newReview, ...prev]);
+    setContent('');
+  };
 
   return (
     <S.ReviewsContainer>
@@ -27,13 +47,19 @@ export const ClubReviewsSection = () => {
         <S.FormTitle>
           후기 작성 <S.FormNote>*학번은 노출되지 않습니다!</S.FormNote>
         </S.FormTitle>
-
-        <OutlineInputField placeholder='학번 입력' />
-
-        <OutlineTextareaField placeholder='후기를 입력하세요' rows={4} />
-
+        <OutlineInputField
+          placeholder='학번 입력'
+          value={studentId}
+          onChange={(e) => setStudentId(e.target.value)}
+        />
+        <OutlineTextareaField
+          placeholder='후기를 입력하세요'
+          rows={4}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
         <S.ButtonWrapper>
-          <Button variant='light' width='10rem'>
+          <Button variant='light' width='10rem' onClick={handleSubmit}>
             후기 등록
           </Button>
         </S.ButtonWrapper>
