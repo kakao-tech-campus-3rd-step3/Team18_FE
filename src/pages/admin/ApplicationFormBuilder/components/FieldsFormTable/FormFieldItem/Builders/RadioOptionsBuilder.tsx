@@ -7,15 +7,19 @@ import { Text } from '@/shared/components/Text';
 import { IoRadioButtonOffOutline } from 'react-icons/io5';
 
 export const RadioOptionsBuilder = () => {
-  const [radioInput, setRadioInput] = useState('옵션');
+  const [options, setOptions] = useState('옵션');
 
   return (
     <Layput>
-      <RadioOptionFieldWrapper>
+      <OptionFieldWrapper>
         <RadioIcon />
-        <OutlineInputField value={radioInput} placeholder='옵션' />
+        <OutlineInputField
+          value={options}
+          placeholder='옵션'
+          onChange={(e) => setOptions(e.target.value)}
+        />
         <AiOutlineCloseCircle size={'1.5rem'} color='#757575' />
-      </RadioOptionFieldWrapper>
+      </OptionFieldWrapper>
       <AddOptionButton>
         <FiPlus /> <Text size='sm'>옵션 추가</Text>
       </AddOptionButton>
@@ -29,7 +33,7 @@ const Layput = styled.div({
   gap: '1rem',
 });
 
-const RadioOptionFieldWrapper = styled.div({
+const OptionFieldWrapper = styled.div({
   display: 'flex',
   gap: '1rem',
   alignItems: 'center',
@@ -41,6 +45,7 @@ const RadioIcon = styled(IoRadioButtonOffOutline)`
 `;
 
 const AddOptionButton = styled.div(({ theme }) => ({
+  marginTop: '1rem',
   backgroundColor: theme.colors.gray100,
   padding: '0.4rem',
   width: '5.8rem',
