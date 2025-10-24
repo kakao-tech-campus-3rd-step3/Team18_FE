@@ -12,9 +12,6 @@ export const LoginButton = () => {
 
   return (
     <Container>
-      <Button to='/signup' width='100%' type='button'>
-        {'회원가입'}
-      </Button>
       <KakaoButtonWrapper>
         <Button width='100%' type='button' onClick={handleKakaoLogin}>
           <ButtonContent>
