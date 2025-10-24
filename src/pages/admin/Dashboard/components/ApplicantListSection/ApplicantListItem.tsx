@@ -5,6 +5,12 @@ type Props = ApplicantData & {
   onClick: (id: number) => void;
 };
 
+const STATUS_LABEL: Record<ApplicantData['status'], string> = {
+  PENDING: '미정',
+  REJECTED: '불합격',
+  APPROVED: '합격',
+};
+
 export const ApplicantListItem = ({
   id,
   name,
@@ -22,7 +28,7 @@ export const ApplicantListItem = ({
       <InfoText>{department || '-'}</InfoText>
       <InfoText>{phoneNumber || '-'}</InfoText>
       <InfoText>{email || '-'}</InfoText>
-      <StatusBadge status={status}>{status || '-'}</StatusBadge>
+      <StatusBadge status={status}>{STATUS_LABEL[status] || '-'}</StatusBadge>
     </ItemWrapper>
   );
 };
@@ -47,15 +53,15 @@ const InfoText = styled.p(({ theme }) => ({
 
 const StatusBadge = styled.p<Pick<ApplicantData, 'status'>>(({ theme, status }) => {
   const styles = {
-    합격: {
+    APPROVED: {
       backgroundColor: theme.colors.primary100,
       color: theme.colors.primary800,
     },
-    불합격: {
+    REJECTED: {
       backgroundColor: theme.colors.red100,
       color: theme.colors.red600,
     },
-    미정: {
+    PENDING: {
       backgroundColor: theme.colors.gray100,
       color: theme.colors.gray600,
     },

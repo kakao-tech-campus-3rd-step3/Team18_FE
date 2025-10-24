@@ -48,11 +48,8 @@ export const ClubDetailEditPage = () => {
             color: 'white',
           },
           duration: 1000,
+          onAutoClose: () => navigate(`/clubs/${clubId}`),
         });
-
-        setTimeout(() => {
-          navigate(`/admin/clubs/${clubId}`);
-        }, 1000);
       })
       .catch(() => {
         toast.error('수정 실패!', {

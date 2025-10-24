@@ -1,30 +1,30 @@
+import { isAxiosError } from 'axios';
+import { apiInstance } from '@/api/initInstance';
 import type { ClubDetailEdit } from '../types/clubDetailEdit';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
 export const fetchClubDetailEdit = async (clubId: string | number): Promise<ClubDetailEdit> => {
-  const res = await fetch(`${BASE_URL}/clubs/${clubId}`);
-  if (!res.ok) {
-    throw new Error('동아리 상세 수정 데이터를 가져오는데 실패했습니다.');
+  try {
+    const { data } = await apiInstance.get(`/clubs/${clubId}`);
+    return data;
+  } catch (e: unknown) {
+    if (isAxiosError(e)) {
+      throw new Error('동아리 상세 수정 데이터를 가져오는데 실패했습니다.');
+    }
+    throw e;
   }
-  return res.json() as Promise<ClubDetailEdit>;
 };
 
 export const updateClubDetailEdit = async (
   clubId: string | number,
   updatedData: Partial<ClubDetailEdit>,
 ): Promise<ClubDetailEdit> => {
-  const res = await fetch(`${BASE_URL}/clubs/${clubId}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(updatedData),
-  });
-
-  if (!res.ok) {
-    throw new Error('동아리 상세 정보를 수정하는데 실패했습니다.');
+  try {
+    const { data } = await apiInstance.post(`/clubs/${clubId}`, updatedData);
+    return data;
+  } catch (e: unknown) {
+    if (isAxiosError(e)) {
+      throw new Error('동아리 상세 정보를 수정하는데 실패했습니다.');
+    }
+    throw e;
   }
-
-  return res.json() as Promise<ClubDetailEdit>;
 };

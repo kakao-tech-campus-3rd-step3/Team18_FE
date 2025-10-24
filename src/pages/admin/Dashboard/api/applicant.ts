@@ -1,20 +1,15 @@
-import type {
-  ApplicantData,
-  ApplicationFilterOption,
-} from '@/pages/admin/Dashboard/types/dashboard';
+import { isAxiosError } from 'axios';
+import { apiInstance } from '@/api/initInstance';
+import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
 
-export const fetchApplicants = async (
-  clubId: number,
-  status?: ApplicationFilterOption,
-): Promise<ApplicantData[]> => {
-  const url = new URL(
-    import.meta.env.VITE_API_BASE_URL + `/clubs/${clubId}/applicants`,
-    window.location.origin,
-  );
-  if (status && status !== 'ALL') {
-    url.searchParams.set('status', status);
+export const fetchApplicants = async (clubId: number): Promise<ApplicantData[]> => {
+  try {
+    const { data } = await apiInstance.get(`/clubs/${clubId}/dashboard/applicants`);
+    return data;
+  } catch (error: unknown) {
+    if (isAxiosError(error)) {
+      throw new Error(error.message);
+    }
+    throw error;
   }
-
-  const response = await fetch(url.toString());
-  return await response.json();
 };

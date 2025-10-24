@@ -1,10 +1,9 @@
+import { apiInstance } from '@/api/initInstance';
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 
 export const fetchComments = async (applicationId: number): Promise<Comment[]> => {
-  const response = await fetch(
-    import.meta.env.VITE_API_BASE_URL + `/applications/${applicationId}/comments`,
-  );
-  return await response.json();
+  const { data } = await apiInstance.get(`/applications/${applicationId}/comments`);
+  return data;
 };
 
 export const createComment = async (
@@ -12,26 +11,19 @@ export const createComment = async (
   content: string,
   rating: number,
 ): Promise<Comment> => {
-  const response = await fetch(
-    import.meta.env.VITE_API_BASE_URL + `/applications/${applicationId}/comments`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ content, rating }),
-    },
-  );
-  return await response.json();
+  try {
+    const { data } = await apiInstance.post(`/applications/${applicationId}/comments`, {
+      content,
+      rating,
+    });
+    return data;
+  } catch {
+    throw new Error('Failed to fetch comments');
+  }
 };
 
 export const deleteComment = async (applicationId: number, commentId: number): Promise<void> => {
-  await fetch(
-    import.meta.env.VITE_API_BASE_URL + `/applications/${applicationId}/comments/${commentId}`,
-    {
-      method: 'DELETE',
-    },
-  );
+  await apiInstance.delete(`/applications/${applicationId}/comments/${commentId}`);
 };
 
 export const updateComment = async (
@@ -40,15 +32,16 @@ export const updateComment = async (
   content: string,
   rating: number,
 ): Promise<Comment> => {
-  const response = await fetch(
-    import.meta.env.VITE_API_BASE_URL + `/applications/${applicationId}/comments/${commentId}`,
-    {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
+  try {
+    const { data } = await apiInstance.patch(
+      `/applications/${applicationId}/comments/${commentId}`,
+      {
+        content,
+        rating,
       },
-      body: JSON.stringify({ content, rating }),
-    },
-  );
-  return await response.json();
+    );
+    return data;
+  } catch {
+    throw new Error('Failed to create comment');
+  }
 };
