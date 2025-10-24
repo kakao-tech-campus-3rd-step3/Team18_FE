@@ -17,6 +17,9 @@ export const ClubIntroduction = styled.div(({ theme }) => ({
   fontSize: theme?.font?.size?.xs,
   fontWeight: theme.font.weight.regular,
   color: theme?.colors?.textSecondary,
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
 }));
 
 type Props = {
@@ -32,7 +35,7 @@ export const RecruitStatusBox = styled.div<Props>(({ theme, status }) => ({
 
 export const RecruitStatusText = styled.div<Props>(({ theme, status }) => ({
   textAlign: `center`,
-  fontSize: theme.font.size.sm,
+  fontSize: theme.font.size.xs,
   fontWeight: theme.font.weight.bold,
   color: status === '모집중' ? theme.colors.primary700 : theme.colors.red700,
 }));

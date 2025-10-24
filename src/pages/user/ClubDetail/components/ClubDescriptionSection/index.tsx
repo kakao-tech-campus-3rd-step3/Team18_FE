@@ -1,18 +1,27 @@
 import styled from '@emotion/styled';
 import { SectionTitle } from '@/shared/components/SectionTitle';
-import { mockClubDetail } from '../mock';
 
-export const ClubDescriptionSection = () => {
+interface ClubDescriptionSectionProps {
+  introductionOverview: string;
+  introductionActivity: string;
+  introductionIdeal: string;
+}
+
+export const ClubDescriptionSection = ({
+  introductionOverview,
+  introductionActivity,
+  introductionIdeal,
+}: ClubDescriptionSectionProps) => {
   return (
     <DescriptionContainer>
       <SectionTitle>동아리 소개</SectionTitle>
-      <DescriptionText>{mockClubDetail.introductionOverview}</DescriptionText>
+      <DescriptionText>{introductionOverview}</DescriptionText>
 
       <SectionTitle>활동 내용</SectionTitle>
-      <DescriptionText>{mockClubDetail.introductionActivity}</DescriptionText>
+      <DescriptionText>{introductionActivity}</DescriptionText>
 
       <SectionTitle>모집하는 사람</SectionTitle>
-      <DescriptionText>{mockClubDetail.introductionIdeal}</DescriptionText>
+      <DescriptionText>{introductionIdeal}</DescriptionText>
     </DescriptionContainer>
   );
 };

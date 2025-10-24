@@ -4,6 +4,8 @@ import { searchClubs } from '@/pages/user/Main/utils/searchClubs.ts';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
 import { Text } from '@/shared/components/Text';
 import * as S from './Club.styled.ts';
+import { engToKorCategory } from '../../utils/formatting.ts';
+import type { Club } from '../../types/club.ts';
 import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
 
 type Props = {
@@ -25,7 +27,7 @@ export const ClubListSection = ({ filter, searchText }: Props) => {
       <S.ClubListContainer>
         <S.NoSearchResultContainer>
           <S.SearchImage
-            src='/public/assets/noSearchResults.svg'
+            src='/assets/noSearchResults.svg'
             alt='이미지 없음'
             width={100}
             height={100}
@@ -48,9 +50,9 @@ export const ClubListSection = ({ filter, searchText }: Props) => {
   return (
     <S.ClubListContainer>
       <S.Grid>
-        {searchedClubs.map((club) => (
+        {searchedClubs.map((club: Club) => (
           <S.ClubItem onClick={() => navigate(`/clubs/${club.id}`)} key={club.id}>
-            <S.ClubCategoryText>{club.category}</S.ClubCategoryText>
+            <S.ClubCategoryText>{engToKorCategory[club.category]}</S.ClubCategoryText>
 
             <S.ClubNameText>{club.name}</S.ClubNameText>
             <S.ClubIntroduction>{club.shortIntroduction}</S.ClubIntroduction>
