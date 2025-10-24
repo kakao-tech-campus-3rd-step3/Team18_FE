@@ -1,13 +1,15 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { Text } from '@/shared/components/Text';
+import type { QuestionType } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
 export type Props = {
+  value: QuestionType;
+  onClick: (newOption: QuestionType) => void;
   options: Array<'텍스트' | '라디오' | '체크박스' | '타임슬롯'>;
 };
 
-export const FieldTypeSelector = ({ options }: Props) => {
-  const [currentValue, setCurrentValue] = useState('텍스트');
+export const FieldTypeSelector = ({ value, onClick, options }: Props) => {
   const [isShowOptions, setIsShowOptions] = useState(false);
 
   return (
@@ -17,15 +19,11 @@ export const FieldTypeSelector = ({ options }: Props) => {
           setIsShowOptions(!isShowOptions);
         }}
       >
-        <Text color='#757575'>{currentValue}</Text>
+        <Text color='#757575'>{value}</Text>
         {isShowOptions && (
           <SelectOptions>
             {options.map((option, index) => (
-              <Option
-                key={index}
-                onClick={() => setCurrentValue(option)}
-                selected={currentValue === option}
-              >
+              <Option key={index} onClick={() => onClick(option)} selected={value === option}>
                 {option}
               </Option>
             ))}
