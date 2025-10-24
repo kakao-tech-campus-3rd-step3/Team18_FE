@@ -6,13 +6,10 @@ import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/Out
 import { Text } from '@/shared/components/Text';
 import { ApplicantStarRating } from './ApplicantStarRating';
 import type { CreateCommentRequest } from '@/mocks/handler/applicant';
+import type { CommentFormData } from '@/pages/admin/ApplicationDetail/types/comments';
 
 type Props = {
   createComment: (comment: CreateCommentRequest) => void;
-};
-type CommentFormData = {
-  content: string;
-  rating: number;
 };
 
 export const CommentForm = ({ createComment }: Props) => {
