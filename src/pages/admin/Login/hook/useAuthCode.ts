@@ -24,6 +24,7 @@ export const useAuthCode = (navigate: NavigateFunction) => {
 
   useEffect(() => {
     const code = new URL(window.location.href).searchParams.get('code');
+    const controller = new AbortController();
 
     if (!code) {
       navigate('/login');
@@ -33,7 +34,7 @@ export const useAuthCode = (navigate: NavigateFunction) => {
     const fetchToken = async () => {
       setIsLoading(true);
       try {
-        const response: LoginResponse = await postAuthCode(code);
+        const response: LoginResponse = await postAuthCode(code, controller.signal);
 
         switch (response.status) {
           case 'LOGIN_SUCCESS':
@@ -53,6 +54,8 @@ export const useAuthCode = (navigate: NavigateFunction) => {
       }
     };
     fetchToken();
+
+    return () => controller.abort();
   }, [navigate]);
 
   return { errorMessage, isLoading };
