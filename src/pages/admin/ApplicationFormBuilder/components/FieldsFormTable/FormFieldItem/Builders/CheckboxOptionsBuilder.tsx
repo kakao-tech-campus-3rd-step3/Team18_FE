@@ -44,7 +44,7 @@ const CheckboxIcon = styled(IoCheckboxOutline)`
   color: ${({ theme }) => theme.colors.gray400};
 `;
 
-const AddOptionButton = styled.div(({ theme }) => ({
+const AddOptionButton = styled.button.attrs({ type: 'button' })(({ theme }) => ({
   marginTop: '1rem',
   backgroundColor: theme.colors.gray100,
   padding: '0.4rem',
