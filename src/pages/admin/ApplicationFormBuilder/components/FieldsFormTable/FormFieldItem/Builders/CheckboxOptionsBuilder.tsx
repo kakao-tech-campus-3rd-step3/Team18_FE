@@ -10,7 +10,7 @@ export const CheckboxOptionsBuilder = () => {
   const [options, setOptions] = useState('옵션');
 
   return (
-    <Layput>
+    <Layout>
       <OptionFieldWrapper>
         <CheckboxIcon />
         <OutlineInputField
@@ -20,14 +20,14 @@ export const CheckboxOptionsBuilder = () => {
         />
         <AiOutlineCloseCircle size={'1.5rem'} color='#757575' />
       </OptionFieldWrapper>
-      <AddOptionButton>
+      <AddOptionButton type='button'>
         <FiPlus /> <Text size='sm'>옵션 추가</Text>
       </AddOptionButton>
-    </Layput>
+    </Layout>
   );
 };
 
-const Layput = styled.div({
+const Layout = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: '1rem',
@@ -44,7 +44,7 @@ const CheckboxIcon = styled(IoCheckboxOutline)`
   color: ${({ theme }) => theme.colors.gray400};
 `;
 
-const AddOptionButton = styled.button.attrs({ type: 'button' })(({ theme }) => ({
+const AddOptionButton = styled.button(({ theme }) => ({
   marginTop: '1rem',
   backgroundColor: theme.colors.gray100,
   padding: '0.4rem',
