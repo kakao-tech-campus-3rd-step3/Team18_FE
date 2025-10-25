@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { format } from 'date-fns';
+import { useState } from 'react';
 
 export const useTimeslotState = () => {
   const [startTime, setStartTime] = useState('12:00 AM');
