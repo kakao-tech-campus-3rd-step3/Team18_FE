@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { Navigation } from '@/shared/components/Navigation';
 import { theme } from '@/styles/theme';
+import { UserProvider } from './providers/auth';
 
 const queryClient = new QueryClient();
 
@@ -11,9 +12,11 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <ToastContainer />
-        <Navigation role='president' />
-        <Outlet />
+        <UserProvider>
+          <ToastContainer />
+          <Navigation role='president' />
+          <Outlet />
+        </UserProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );
