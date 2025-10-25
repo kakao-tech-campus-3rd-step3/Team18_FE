@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
             element: <ApplicationDetailPage />,
           },
           {
-            path: ADMIN.CLUBEDIT,
+            path: ADMIN.CLUB_EDIT,
             element: <ClubDetailEditPage />,
           },
           {
