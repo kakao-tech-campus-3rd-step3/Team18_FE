@@ -382,7 +382,7 @@ export const clubReviewRepository = {
   addReview: (clubId: number, data: PostClubReviewRequest): ClubReview => {
     const newReview: ClubReview = {
       id: (mockClubReviews[clubId]?.length ?? 0) + 1,
-      writer: data.studentId,
+      writer: '익명',
       content: data.content,
       createdAt: new Date().toISOString(),
     };
