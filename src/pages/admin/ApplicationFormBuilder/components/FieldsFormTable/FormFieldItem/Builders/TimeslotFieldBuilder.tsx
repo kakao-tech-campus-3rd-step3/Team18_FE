@@ -1,7 +1,7 @@
 import { Global } from '@emotion/react';
+import { ko } from 'date-fns/locale';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { ko } from 'date-fns/locale';
 import { useTimeslotState } from '@/pages/admin/ApplicationFormBuilder/hooks/useTimeslotState';
 import { generateTimes } from '@/pages/admin/ApplicationFormBuilder/utils/generateTimes';
 import { Dropdown } from '@/shared/components/Dropdown';
