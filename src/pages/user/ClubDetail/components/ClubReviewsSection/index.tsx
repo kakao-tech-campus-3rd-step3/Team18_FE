@@ -3,6 +3,7 @@ import { useClubReviews } from '@/pages/user/ClubDetail/hook/useClubReviews';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { SectionTitle } from '@/shared/components/SectionTitle';
 import * as S from './index.styled';
 
@@ -21,7 +22,7 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
       <S.Divider />
       <SectionTitle>동아리 후기</SectionTitle>
 
-      {loading && <div>로딩 중...</div>}
+      {loading && <LoadingSpinner />}
       {error && <div>{error}</div>}
 
       {reviews.map((review) => (
