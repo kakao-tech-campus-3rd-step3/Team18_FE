@@ -9,3 +9,8 @@ export type Comment = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type CommentFormData = {
+  content: string;
+  rating: number;
+};
