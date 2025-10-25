@@ -1,13 +1,23 @@
-import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
-import { ApplicantListItem } from './ApplicantListItem';
+import { ApplicantListItem } from '../ApplicantListItem';
 import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
+import * as S from './index.styled';
 
 type Props = {
   filterOption: ApplicationFilterOption;
 };
+
+type ApplicateInfoCategory = '이름' | '학번' | '학과' | '전화번호' | '이메일' | '결과';
+const INFO_CATEGORY: ApplicateInfoCategory[] = [
+  '이름',
+  '학번',
+  '학과',
+  '전화번호',
+  '이메일',
+  '결과',
+];
 
 export const ApplicantList = ({ filterOption }: Props) => {
   const navigate = useNavigate();
@@ -23,13 +33,13 @@ export const ApplicantList = ({ filterOption }: Props) => {
   };
 
   return (
-    <Container>
-      <ApplicantInfoCategoryList>
+    <S.Container>
+      <S.ApplicantInfoCategoryList>
         {INFO_CATEGORY.map((category) => (
-          <CategoryText key={category}>{category}</CategoryText>
+          <S.CategoryText key={category}>{category}</S.CategoryText>
         ))}
-      </ApplicantInfoCategoryList>
-      <ApplicantInfoDataList>
+      </S.ApplicantInfoCategoryList>
+      <S.ApplicantInfoDataList>
         {applicants.length > 0 ? (
           applicants.map((applicant) => (
             <ApplicantListItem
@@ -45,52 +55,13 @@ export const ApplicantList = ({ filterOption }: Props) => {
             />
           ))
         ) : (
-          <EmptyMessage>
+          <S.EmptyMessage>
             {filterOption === 'ALL'
               ? '아직 지원자가 없습니다.'
               : `${filterOption === 'PENDING' ? '심사중' : filterOption === 'APPROVED' ? '합격' : '불합격'} 지원자가 없습니다.`}
-          </EmptyMessage>
+          </S.EmptyMessage>
         )}
-      </ApplicantInfoDataList>
-    </Container>
+      </S.ApplicantInfoDataList>
+    </S.Container>
   );
 };
-
-const Container = styled.div({
-  width: '100%',
-});
-
-const ApplicantInfoCategoryList = styled.div(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: '1fr 1fr 1fr 2fr 2fr 1fr',
-  backgroundColor: '#F9FBFC',
-  borderBottom: `1.8px solid ${theme.colors.gray100}`,
-  padding: '1.7rem 0 1.5rem 0',
-}));
-
-const ApplicantInfoDataList = styled.div({
-  padding: '0.4rem 0.8rem 0 0.8rem',
-});
-
-const CategoryText = styled.div(({ theme }) => ({
-  fontSize: '1.2rem',
-  color: theme.colors.textSecondary,
-  textAlign: 'center',
-}));
-
-const EmptyMessage = styled.div(({ theme }) => ({
-  padding: '4rem',
-  textAlign: 'center',
-  color: theme.colors.gray500,
-  fontSize: '1.4rem',
-}));
-
-type ApplicateInfoCategory = '이름' | '학번' | '학과' | '전화번호' | '이메일' | '결과';
-const INFO_CATEGORY: ApplicateInfoCategory[] = [
-  '이름',
-  '학번',
-  '학과',
-  '전화번호',
-  '이메일',
-  '결과',
-];
