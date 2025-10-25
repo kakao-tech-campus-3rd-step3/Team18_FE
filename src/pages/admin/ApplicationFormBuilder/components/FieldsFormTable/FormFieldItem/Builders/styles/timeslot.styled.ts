@@ -2,8 +2,13 @@ import styled from '@emotion/styled';
 
 export const Layout = styled.div({
   display: 'flex',
-  maxWidth: '37rem',
+  maxWidth: '37.6rem',
   justifyContent: 'space-between',
+
+  '@media (max-width: 550px)': {
+    flexDirection: 'column',
+    gap: '1.5rem',
+  },
 });
 
 export const DatePickerWrapper = styled.div({
@@ -36,6 +41,10 @@ export const TimeSelectContainer = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: '1rem',
+
+  '@media (max-width: 550px)': {
+    width: '100%',
+  },
 });
 
 export const TimeSelectWrapper = styled.div({
