@@ -44,7 +44,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   const logout = () => {
     setUser(null);
-    removeAccessToken('accessToken');
+    removeAccessToken();
   };
 
   const value = { user, login, logout };
