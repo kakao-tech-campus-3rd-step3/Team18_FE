@@ -35,7 +35,7 @@ export const ClubDetailPage = () => {
           introductionActivity={club.introductionActivity}
           introductionIdeal={club.introductionIdeal}
         />
-        <ClubReviewsSection />
+        <ClubReviewsSection clubId={club.clubId} />
       </ContentLeft>
       <ContentRight>
         <ClubInfoSidebarSection

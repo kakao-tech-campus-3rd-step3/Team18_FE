@@ -1,4 +1,5 @@
 import type { ClubDetail } from '@/pages/user/ClubDetail/types/clubDetail';
+import type { ClubReview, PostClubReviewRequest } from '@/pages/user/ClubDetail/types/review';
 import type { Club } from '@/pages/user/Main/types/club';
 
 export const clubs: Club[] = [
@@ -325,6 +326,31 @@ export const mockClubDetail: ClubDetail[] = [
   },
 ];
 
+export const mockClubReviews: Record<number, ClubReview[]> = {
+  1: [
+    {
+      id: 1,
+      writer: '호주 멋쟁이 너구리',
+      content: '좋은 사람들과 재밌는 활동을 했어요!',
+      createdAt: '2025-10-01T10:00:00Z',
+    },
+    {
+      id: 2,
+      writer: '밝은 즐거운 코끼리',
+      content: '처음엔 망설였는데, 지금은 너무 좋아요.',
+      createdAt: '2025-10-02T14:30:00Z',
+    },
+  ],
+  2: [
+    {
+      id: 1,
+      writer: '동대문 멋쟁이 토끼',
+      content: '분위기가 진짜 좋아요 😊',
+      createdAt: '2025-10-11T12:00:00Z',
+    },
+  ],
+};
+
 export const clubRepository = {
   getClubsByCategory: (filter: string) => {
     if (filter === 'ALL') return clubs;
@@ -345,5 +371,24 @@ export const clubRepository = {
     };
 
     return mockClubDetail[index];
+  },
+};
+
+export const clubReviewRepository = {
+  getReviewsByClubId: (clubId: number): ClubReview[] => {
+    return mockClubReviews[clubId] ?? [];
+  },
+
+  addReview: (clubId: number, data: PostClubReviewRequest): ClubReview => {
+    const newReview: ClubReview = {
+      id: (mockClubReviews[clubId]?.length ?? 0) + 1,
+      writer: '익명',
+      content: data.content,
+      createdAt: new Date().toISOString(),
+    };
+
+    if (!mockClubReviews[clubId]) mockClubReviews[clubId] = [];
+    mockClubReviews[clubId].unshift(newReview);
+    return newReview;
   },
 };
