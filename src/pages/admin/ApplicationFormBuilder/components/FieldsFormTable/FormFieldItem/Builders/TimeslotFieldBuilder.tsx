@@ -2,10 +2,10 @@ import { Global } from '@emotion/react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/locale';
-import { Dropdown } from '@/shared/components/Dropdown';
-import { Text } from '@/shared/components/Text';
 import { useTimeslotState } from '@/pages/admin/ApplicationFormBuilder/hooks/useTimeslotState';
 import { generateTimes } from '@/pages/admin/ApplicationFormBuilder/utils/generateTimes';
+import { Dropdown } from '@/shared/components/Dropdown';
+import { Text } from '@/shared/components/Text';
 import { datePickerStyles } from './styles/datepicker.styled';
 import * as S from './styles/timeslot.styled';
 

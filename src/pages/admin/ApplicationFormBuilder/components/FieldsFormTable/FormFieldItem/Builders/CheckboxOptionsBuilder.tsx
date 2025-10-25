@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import styled from '@emotion/styled';
-import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
+import { useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { FiPlus } from 'react-icons/fi';
-import { Text } from '@/shared/components/Text';
 import { IoCheckboxOutline } from 'react-icons/io5';
+import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
+import { Text } from '@/shared/components/Text';
 
 export const CheckboxOptionsBuilder = () => {
   const [options, setOptions] = useState('옵션');
