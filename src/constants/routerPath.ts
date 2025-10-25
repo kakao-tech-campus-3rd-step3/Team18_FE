@@ -5,13 +5,14 @@ export const ROUTE_PATH = {
 
   ADMIN: {
     DASHBOARD: 'clubs/dashboard',
-    APPLICATIONDETAIL: 'clubs/:clubId/applicants/:applicantId',
-    CLUBEDIT: 'clubs/:clubId/edit',
+    APPLICATION_DETAIL: 'clubs/:clubId/applicants/:applicantId',
+    CLUB_EDIT: 'clubs/:clubId/edit',
+    APPLICATION_FORM_BUILDER: 'clubs/:clubId/application/form/create',
   },
 
   COMMON: {
     MAIN: '/',
-    CLUBDETAIL: 'clubs/:clubId',
+    CLUB_DETAIL: 'clubs/:clubId',
     LOGIN: 'login',
     CALLBACK: 'login/redirect',
     SIGNUP: 'signup',

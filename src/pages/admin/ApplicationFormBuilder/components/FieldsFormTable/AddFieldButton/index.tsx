@@ -1,0 +1,37 @@
+import styled from '@emotion/styled';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
+
+export const AddFieldButton = () => {
+  return (
+    <StyledButton type='button'>
+      <AiOutlinePlusCircle />
+      <span>항목 추가</span>
+    </StyledButton>
+  );
+};
+
+const StyledButton = styled.button(({ theme }) => ({
+  width: '100%',
+  padding: '1rem',
+  border: `1.5px dotted ${theme.colors.gray400}`,
+  borderRadius: theme.radius.sm,
+  backgroundColor: theme.colors.bg,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '0.5rem',
+  color: theme.colors.gray700,
+  fontSize: '0.95rem',
+  fontWeight: 500,
+  cursor: 'pointer',
+  transition: 'background-color 0.2s ease',
+
+  '&:hover': {
+    backgroundColor: theme.colors.gray100,
+  },
+  height: '2.8rem',
+
+  svg: {
+    fontSize: '1.25rem',
+  },
+}));
