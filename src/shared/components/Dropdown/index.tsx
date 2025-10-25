@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Text } from '@/shared/components/Text';
 import * as S from './index.styled';
 
@@ -16,9 +16,26 @@ export const Dropdown = <T extends string>({
   width = '12rem',
 }: Props<T>) => {
   const [isShowOptions, setIsShowOptions] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsShowOptions(false);
+      }
+    };
+
+    if (isShowOptions) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isShowOptions]);
 
   return (
-    <>
+    <div ref={dropdownRef}>
       <S.SelectBox
         width={width}
         onClick={() => {
@@ -29,13 +46,20 @@ export const Dropdown = <T extends string>({
         {isShowOptions && (
           <S.SelectOptions>
             {options.map((option, index) => (
-              <S.Option key={index} onClick={() => onSelect(option)} selected={value === option}>
+              <S.Option
+                key={index}
+                onClick={() => {
+                  onSelect(option);
+                  setIsShowOptions(false);
+                }}
+                selected={value === option}
+              >
                 {option}
               </S.Option>
             ))}
           </S.SelectOptions>
         )}
       </S.SelectBox>
-    </>
+    </div>
   );
 };
