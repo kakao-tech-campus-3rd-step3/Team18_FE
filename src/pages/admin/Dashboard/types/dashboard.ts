@@ -31,3 +31,5 @@ export type ApplicantCounts = {
   APPROVED: number;
   REJECTED: number;
 };
+
+export type ApplicationStage = '서류' | '면접';
