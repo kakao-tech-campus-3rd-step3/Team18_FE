@@ -69,19 +69,18 @@ const Container = styled.div({
 const ApplicantInfoCategoryList = styled.div(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: '1fr 1fr 1fr 2fr 2fr 1fr',
-  gap: '2rem',
-  paddingBottom: '2rem',
-  borderBottom: `1px solid ${theme.colors.gray300}`,
+  backgroundColor: '#F9FBFC',
+  borderBottom: `1.8px solid ${theme.colors.gray100}`,
+  padding: '1.7rem 0 1.5rem 0',
 }));
 
 const ApplicantInfoDataList = styled.div({
-  paddingTop: '0.7rem',
+  padding: '0.4rem 0.8rem 0 0.8rem',
 });
 
 const CategoryText = styled.div(({ theme }) => ({
-  fontSize: '1.4rem',
-  fontWeight: theme.font.weight.medium,
-  color: theme.colors.textPrimary,
+  fontSize: '1.2rem',
+  color: theme.colors.textSecondary,
   textAlign: 'center',
 }));
 

@@ -38,7 +38,7 @@ const ItemWrapper = styled.div({
   gridTemplateColumns: '1fr 1fr 1fr 2fr 2fr 1fr',
   gap: '2rem',
   alignItems: 'center',
-  padding: '2.1rem 0',
+  padding: '1.5rem 0',
 
   '&:hover': {
     cursor: 'pointer',
@@ -46,8 +46,8 @@ const ItemWrapper = styled.div({
 });
 
 const InfoText = styled.p(({ theme }) => ({
-  fontSize: '1.2rem',
-  color: theme.colors.textSecondary,
+  fontSize: '1.1rem',
+  color: '#434547',
   textAlign: 'center',
 }));
 
@@ -69,12 +69,12 @@ const StatusBadge = styled.p<Pick<ApplicantData, 'status'>>(({ theme, status }) 
 
   return {
     ...styles[status],
-    width: '3.3rem',
+    minWidth: '4rem',
     textAlign: 'center',
     margin: '0 auto',
-    padding: '0.6rem 1.2rem',
-    borderRadius: theme.radius.lg,
-    fontSize: theme.font.size.lg,
+    padding: '0.5rem 1.2rem',
+    borderRadius: theme.radius.md,
+    fontSize: theme.font.size.base,
     fontWeight: theme.font.weight.medium,
   };
 });

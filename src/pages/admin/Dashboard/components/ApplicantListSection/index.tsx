@@ -46,8 +46,8 @@ const ApplicantFilterTopBarWrapper = styled.div({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  marginTop: '4.5rem',
-  padding: '0 2rem',
+  margin: '4.5rem 0 1.5rem 0',
+  padding: '0 1rem',
 });
 
 const LeftSection = styled.div({
@@ -57,8 +57,7 @@ const LeftSection = styled.div({
 });
 
 const ListWrapper = styled.main(({ theme }) => ({
-  backgroundColor: theme.colors.bg,
   minHeight: 'auto',
-  padding: '2.6rem 3rem',
   borderRadius: theme.radius.lg,
+  border: `1.5px solid ${theme.colors.gray100}`,
 }));
