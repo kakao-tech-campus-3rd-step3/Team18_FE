@@ -10,7 +10,7 @@ export const RadioOptionsBuilder = () => {
   const [options, setOptions] = useState('옵션');
 
   return (
-    <Layput>
+    <Layout>
       <OptionFieldWrapper>
         <RadioIcon />
         <OutlineInputField
@@ -23,11 +23,11 @@ export const RadioOptionsBuilder = () => {
       <AddOptionButton>
         <FiPlus /> <Text size='sm'>옵션 추가</Text>
       </AddOptionButton>
-    </Layput>
+    </Layout>
   );
 };
 
-const Layput = styled.div({
+const Layout = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: '1rem',
