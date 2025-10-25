@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { format } from 'date-fns';
 
 export const useTimeslotState = () => {
   const [startTime, setStartTime] = useState('12:00 AM');
@@ -9,11 +10,11 @@ export const useTimeslotState = () => {
   const formatDateRange = () => {
     if (!startDate) return '';
     if (!endDate) {
-      return startDate.toLocaleDateString('ko-KR').replace(/\./g, '').replace(/ /g, '.');
+      return format(startDate, 'yyyy.MM.dd');
     }
 
-    const start = startDate.toLocaleDateString('ko-KR').replace(/\./g, '').replace(/ /g, '.');
-    const end = endDate.toLocaleDateString('ko-KR').replace(/\./g, '').replace(/ /g, '.');
+    const start = format(startDate, 'yyyy.MM.dd');
+    const end = format(endDate, 'yyyy.MM.dd');
     return `${start} ~ ${end}`;
   };
 
