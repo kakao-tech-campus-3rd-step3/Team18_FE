@@ -6,6 +6,8 @@ import { DashboardPage } from '@/pages/admin/Dashboard/Page';
 
 import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
 import { MainPage } from '@/pages/user/Main/Page.tsx';
+import { NoticeDetailPage } from '@/pages/user/Notice/components/NoticeDetail';
+import { NoticeListPage } from '@/pages/user/Notice/Page';
 import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
 import { KakaoCallback } from './admin/Login/KakaoCallback';
 import { LoginPage } from './admin/Login/Page';
@@ -39,6 +41,8 @@ export const router = createBrowserRouter([
         path: COMMON.SIGNUP,
         element: <AdminSignupPage />,
       },
+      { path: COMMON.NOTICE_LIST, element: <NoticeListPage /> },
+      { path: COMMON.NOTICE_DETAIL, element: <NoticeDetailPage /> },
       {
         path: '/admin',
         children: [
