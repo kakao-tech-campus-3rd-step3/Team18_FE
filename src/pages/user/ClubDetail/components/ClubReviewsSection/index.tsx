@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'sonner';
 import { useClubReviews } from '@/pages/user/ClubDetail/hook/useClubReviews';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
@@ -13,9 +14,18 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
   const [content, setContent] = useState('');
 
   const handleSubmit = async () => {
-    await addReview(studentId, content);
-    setContent('');
-    setStudentId('');
+    try {
+      await addReview(studentId, content);
+      setContent('');
+      setStudentId('');
+      toast.success('후기가 등록되었습니다!', {
+        duration: 2000,
+      });
+    } catch {
+      toast.error('후기 등록에 실패했습니다.', {
+        duration: 2000,
+      });
+    }
   };
 
   return (
@@ -41,7 +51,7 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
           후기 작성 <S.FormNote>*수정 및 삭제가 불가능하니, 신중히 작성해 주세요!</S.FormNote>
         </S.FormTitle>
         <OutlineInputField
-          placeholder='학번 입력 (후기는 익명으로 게시됩니다.)'
+          placeholder='학번 입력 (학번은 노출되지 않습니다.)'
           value={studentId}
           onChange={(e) => setStudentId(e.target.value)}
         />
