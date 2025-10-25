@@ -6,7 +6,7 @@ export const ROUTE_PATH = {
   ADMIN: {
     DASHBOARD: 'clubs/dashboard',
     APPLICATION_DETAIL: 'clubs/:clubId/applicants/:applicantId',
-    CLUBEDIT: 'clubs/:clubId/edit',
+    CLUB_EDIT: 'clubs/:clubId/edit',
     APPLICATION_FORM_BUILDER: 'clubs/:clubId/application/form/create',
   },
 
