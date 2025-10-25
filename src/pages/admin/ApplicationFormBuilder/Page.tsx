@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ApplicationInfoSection } from './components/ApplicationIntfoSection';
+import { ApplicationInfoSection } from './components/ApplicationInfoSection';
 import { ApplicationFieldsFormTable } from './components/FieldsFormTable';
 import { ApplicationFormBuilderHeader } from './components/Header';
 
