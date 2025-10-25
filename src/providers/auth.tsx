@@ -1,3 +1,4 @@
+import { isAxiosError } from 'axios';
 import { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postAuthCode, type LoginResponse } from '@/pages/admin/Login/api/postAuthCode';
@@ -8,7 +9,6 @@ import {
 } from '@/pages/admin/Signup/utils/token';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AuthContextType, User } from '@/types/auth';
-import type { AxiosError } from 'axios';
 
 export const AuthContext = createContext<AuthContextType>({
   user: null,
@@ -36,9 +36,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           break;
       }
     } catch (e) {
-      const error = e as AxiosError<ErrorResponse>;
-
-      throw new Error(error.response?.data.message);
+      if (isAxiosError<ErrorResponse>(e)) {
+        throw new Error(e.response?.data.message ?? '로그인 중 오류가 발생했습니다.');
+      }
+      throw e;
     }
   };
 
