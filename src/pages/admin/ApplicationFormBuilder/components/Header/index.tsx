@@ -6,9 +6,7 @@ export const ApplicationFormBuilderHeader = () => {
   return (
     <Container>
       <HeaderWrapper>
-        <Text size='xl' weight='medium'>
-          지원서 생성
-        </Text>
+        <Title>지원폼 생성</Title>
         <Button variant='outline' width='5rem'>
           수정하기
         </Button>
@@ -24,8 +22,8 @@ const Container = styled.div({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  gap: '1rem',
-  padding: '2rem 0',
+  gap: '1.2rem',
+  padding: '2.5rem 0 1rem 0',
   boxSizing: 'border-box',
 });
 
@@ -34,3 +32,8 @@ const HeaderWrapper = styled.div({
   justifyContent: 'space-between',
   alignItems: 'center',
 });
+
+const Title = styled.h1(({ theme }) => ({
+  fontSize: '2.5rem',
+  fontWeight: theme.font.weight.medium,
+}));
