@@ -1,4 +1,4 @@
-import { apiInstance } from './initInstance';
+import { apiInstance } from '@/api/initInstance';
 import type { AxiosResponse } from 'axios';
 
 interface LoginSuccessResponse {
