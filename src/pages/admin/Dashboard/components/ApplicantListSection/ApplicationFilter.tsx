@@ -43,5 +43,5 @@ export const ApplicationStatusFilter = ({ option, onOptionChange }: Props) => {
 
 const Wrapper = styled.nav({
   display: 'flex',
-  gap: '7rem',
+  gap: '4rem',
 });

@@ -25,7 +25,7 @@ const Container = styled.div(({ theme }) => ({
   display: 'flex',
   minWidth: '20rem',
   height: 'auto',
-  border: `1px solid ${theme.colors.gray300}`,
+  border: `1px solid ${theme.colors.gray200}`,
   borderRadius: theme.radius.lg,
   overflow: 'hidden',
   cursor: 'pointer',

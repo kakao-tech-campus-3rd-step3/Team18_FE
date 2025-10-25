@@ -19,9 +19,8 @@ export const ApplicantFilterButton = ({ label, value, selected, onClick }: Props
 const Wrapper = styled.button<Pick<Props, 'selected'>>(({ theme, selected }) => ({
   border: 'none',
   background: 'none',
-  padding: '1.2rem 1rem',
   cursor: 'pointer',
-  fontSize: '1.3rem',
+  fontSize: '1.2rem',
   fontWeight: selected ? theme.font.weight.bold : theme.font.weight.regular,
   color: selected ? theme.colors.primary : theme.colors.gray300,
   transition: 'all 200ms ease-in-out',
