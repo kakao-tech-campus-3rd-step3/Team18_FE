@@ -1,13 +1,13 @@
-import { useState } from 'react';
 import styled from '@emotion/styled';
-import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
-import { TextOptionsBuilder } from './Builders/TextOptionsBuilder';
-import { RadioOptionsBuilder } from './Builders/RadioOptionsBuilder';
-import { CheckboxOptionsBuilder } from './Builders/CheckboxOptionsBuilder';
-import { TimeslotFieldBuilder } from './Builders/TimeslotFieldBuilder';
-import { Dropdown } from '@/shared/components/Dropdown';
-import type { QuestionType } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
+import { useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
+import { Dropdown } from '@/shared/components/Dropdown';
+import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
+import { CheckboxOptionsBuilder } from './Builders/CheckboxOptionsBuilder';
+import { RadioOptionsBuilder } from './Builders/RadioOptionsBuilder';
+import { TextOptionsBuilder } from './Builders/TextOptionsBuilder';
+import { TimeslotFieldBuilder } from './Builders/TimeslotFieldBuilder';
+import type { QuestionType } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
 const fieldTypes: QuestionType[] = ['텍스트', '라디오', '체크박스', '타임슬롯'];
 
