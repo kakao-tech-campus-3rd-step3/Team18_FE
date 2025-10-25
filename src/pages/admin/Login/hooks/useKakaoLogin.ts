@@ -28,7 +28,7 @@ export function useKakaoLogin() {
           toast.error('로그인 중 오류가 발생했습니다.');
         }
       } finally {
-        setIsLoading(true);
+        setIsLoading(false);
       }
     };
 
