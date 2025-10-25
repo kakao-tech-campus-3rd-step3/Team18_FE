@@ -1,10 +1,10 @@
 import { useState } from 'react';
+import { useClubReviews } from '@/pages/user/ClubDetail/hook/useClubReviews';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { SectionTitle } from '@/shared/components/SectionTitle';
 import * as S from './index.styled';
-import { useClubReviews } from '../../hook/useClubReviews';
 
 export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
   const { reviews, loading, error, addReview } = useClubReviews(clubId);
