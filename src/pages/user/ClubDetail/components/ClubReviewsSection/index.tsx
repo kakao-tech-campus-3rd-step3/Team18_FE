@@ -15,6 +15,7 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
   const handleSubmit = async () => {
     await addReview(studentId, content);
     setContent('');
+    setStudentId('');
   };
 
   return (
