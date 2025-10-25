@@ -1,7 +1,11 @@
 import { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postAuthCode, type LoginResponse } from '@/pages/admin/Login/api/postAuthCode';
-import { setAccessToken, setTemporaryToken } from '@/pages/admin/Signup/utils/token';
+import {
+  removeAccessToken,
+  setAccessToken,
+  setTemporaryToken,
+} from '@/pages/admin/Signup/utils/token';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AuthContextType, User } from '@/types/auth';
 import type { AxiosError } from 'axios';
@@ -40,7 +44,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   const logout = () => {
     setUser(null);
-    // TODO : clearAccessToken
+    removeAccessToken('accessToken');
   };
 
   const value = { user, login, logout };
