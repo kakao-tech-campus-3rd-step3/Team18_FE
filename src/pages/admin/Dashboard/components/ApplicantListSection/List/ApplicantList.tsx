@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
-import { Button } from '@/shared/components/Button';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicantListItem } from './ApplicantListItem';
 import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
@@ -53,11 +52,6 @@ export const ApplicantList = ({ filterOption }: Props) => {
           </EmptyMessage>
         )}
       </ApplicantInfoDataList>
-      {applicants.length > 0 && (
-        <ButtonWrapper>
-          <Button width={'15rem'}>결과 전송하기</Button>
-        </ButtonWrapper>
-      )}
     </Container>
   );
 };
@@ -83,13 +77,6 @@ const CategoryText = styled.div(({ theme }) => ({
   color: theme.colors.textSecondary,
   textAlign: 'center',
 }));
-
-const ButtonWrapper = styled.div({
-  display: 'flex',
-  justifyContent: 'center',
-  marginTop: '3rem',
-  width: '100%',
-});
 
 const EmptyMessage = styled.div(({ theme }) => ({
   padding: '4rem',

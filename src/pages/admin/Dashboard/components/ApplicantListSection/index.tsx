@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ApplicantList } from './ApplicantList';
-import { ApplicationStatusFilter } from './ApplicationFilter';
+import { ApplicantList } from './List/ApplicantList';
+import { ApplicationStatusFilter } from './Filter/ApplicationFilter';
 import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
 import { Text } from '@/shared/components/Text';
 import { StageToggle } from './StageToggle';

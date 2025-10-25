@@ -1,7 +1,7 @@
 import { Button } from '@/shared/components/Button';
 import styled from '@emotion/styled';
 
-export const SendResultButton = () => {
+export const SendResultButtonSection = () => {
   return (
     <ButtonWrapper>
       <Button width={'15rem'}>결과 전송하기</Button>
