@@ -12,6 +12,7 @@ export const SelectBox = styled.div<{ width: string }>(({ theme, width }) => ({
   alignSelf: 'center',
   border: `1px solid ${theme.colors.gray200}`,
   cursor: 'pointer',
+  minWidth: '8rem',
 
   '&::before': {
     content: '"⌵"',

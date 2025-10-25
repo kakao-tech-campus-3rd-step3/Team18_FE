@@ -13,7 +13,7 @@ export const Dropdown = <T extends string>({
   value,
   options,
   onSelect,
-  width = '12rem',
+  width = 'auto',
 }: Props<T>) => {
   const [isShowOptions, setIsShowOptions] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
