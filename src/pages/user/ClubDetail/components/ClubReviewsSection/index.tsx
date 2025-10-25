@@ -1,30 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { SectionTitle } from '@/shared/components/SectionTitle';
 import * as S from './index.styled';
-import { fetchClubReviews, postClubReview } from '../../api/clubReviews';
-import type { ClubReview } from '@/pages/user/ClubDetail/types/review';
+import { useClubReviews } from '../../hook/useClubReviews';
 
 export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
-  const [reviews, setReviews] = useState<ClubReview[]>([]);
+  const { reviews, loading, error, addReview } = useClubReviews(clubId);
   const [studentId, setStudentId] = useState('');
   const [content, setContent] = useState('');
 
-  useEffect(() => {
-    const loadReviews = async () => {
-      const data = await fetchClubReviews(clubId);
-      setReviews(data);
-    };
-    loadReviews();
-  }, [clubId]);
-
   const handleSubmit = async () => {
-    if (!studentId.trim() || !content.trim()) return alert('학번과 내용을 입력해 주세요.');
-
-    const newReview = await postClubReview(clubId, { studentId, content });
-    setReviews((prev) => [newReview, ...prev]);
+    await addReview(studentId, content);
     setContent('');
   };
 
@@ -32,6 +20,9 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
     <S.ReviewsContainer>
       <S.Divider />
       <SectionTitle>동아리 후기</SectionTitle>
+
+      {loading && <div>로딩 중...</div>}
+      {error && <div>{error}</div>}
 
       {reviews.map((review) => (
         <S.ReviewItem key={review.id}>
