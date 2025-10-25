@@ -50,11 +50,11 @@ export const TimeslotFieldBuilder = () => {
         <S.TimeSelectContainer>
           <S.TimeSelectWrapper>
             <Text color='#6E6E6E'>시작시간</Text>
-            <Dropdown value={startTime} onSelect={setStartTime} options={times} width='8rem' />
+            <Dropdown value={startTime} onSelect={setStartTime} options={times} />
           </S.TimeSelectWrapper>
           <S.TimeSelectWrapper>
             <Text color='#6E6E6E'>마감시간</Text>
-            <Dropdown value={endTime} onSelect={setEndTime} options={times} width='8rem' />
+            <Dropdown value={endTime} onSelect={setEndTime} options={times} />
           </S.TimeSelectWrapper>
         </S.TimeSelectContainer>
       </S.Layout>

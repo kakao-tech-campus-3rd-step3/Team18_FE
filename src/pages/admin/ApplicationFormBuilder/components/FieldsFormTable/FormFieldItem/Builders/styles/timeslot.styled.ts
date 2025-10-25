@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 
 export const Layout = styled.div({
   display: 'flex',
+  maxWidth: '37rem',
+  justifyContent: 'space-between',
 });
 
 export const DatePickerWrapper = styled.div({
