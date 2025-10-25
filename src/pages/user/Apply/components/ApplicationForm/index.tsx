@@ -1,14 +1,12 @@
 import { useForm, FormProvider } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
-import { toast } from 'sonner';
-import { postApplicationForm } from '@/pages/user/Apply/api/apply';
+import { useParams } from 'react-router-dom';
 import { QuestionTypes } from '@/pages/user/Apply/constant/questionType';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
-import { theme } from '@/styles/theme';
 import * as S from './index.styled';
 import { InterviewScheduleSelector } from './InterviewScheduleSelector';
+import { useApplicationSubmit } from '../../hook/useApplicationSubmit';
 import type { FormInputs, InterviewSchedule, Question } from '@/pages/user/Apply/type/apply';
 
 type Props = {
@@ -16,7 +14,6 @@ type Props = {
 };
 
 export const ApplicationForm = ({ questions }: Props) => {
-  const navigate = useNavigate();
   const methods = useForm<FormInputs>({
     mode: 'onTouched',
     defaultValues: {
@@ -33,31 +30,8 @@ export const ApplicationForm = ({ questions }: Props) => {
 
   const { clubId } = useParams<{ clubId: string }>();
   const clubIdNumber = Number(clubId);
-
   const questionArray = questions.map((e) => e.question);
-
-  const onSubmit = (data: FormInputs) => {
-    postApplicationForm(clubIdNumber, data, questionArray)
-      .then(() => {
-        toast.success('제출 성공!', {
-          style: {
-            backgroundColor: theme.colors.primary,
-            color: 'white',
-          },
-          duration: 1000,
-          onAutoClose: () => navigate(`/clubs/${clubIdNumber}`),
-        });
-      })
-      .catch(() => {
-        toast.error('제출 실패!', {
-          duration: 1000,
-          style: {
-            backgroundColor: 'white',
-            color: theme.colors.error,
-          },
-        });
-      });
-  };
+  const { handleSubmit } = useApplicationSubmit(clubIdNumber, questionArray);
 
   const questionsWithIndex = questions.map((q, i) => ({ ...q, originalIndex: i }));
   const timeSlotQuestions = questionsWithIndex.filter(
@@ -69,7 +43,7 @@ export const ApplicationForm = ({ questions }: Props) => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <form onSubmit={methods.handleSubmit(handleSubmit)}>
         <S.FormContainer>
           <S.UserInfoWrapper>
             <S.FormField>
