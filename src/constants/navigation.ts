@@ -14,7 +14,7 @@ export const NAV_CONFIG: Record<Role, NavItemData[]> = {
     { key: 'logo', label: '동아리움', to: '/', isLogo: true },
     { key: 'applicants', label: '지원자관리', to: '/admin/clubs/dashboard' },
     { key: 'clubEdit', label: '동아리페이지관리', to: '/admin/clubs/:clubId/edit' },
-    { key: 'form', label: '지원폼관리', to: '/form' },
+    { key: 'form', label: '지원폼관리', to: '/admin/clubs/:clubId/application/form/create' },
     { key: 'login', label: '관리자 로그인', to: '/login' },
   ],
 };
