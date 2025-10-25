@@ -11,7 +11,12 @@ import * as S from './styles/timeslot.styled';
 
 const times = generateTimes();
 
-const CustomInput = ({ value, onClick }: any) => (
+type Props = {
+  value: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+};
+
+const CustomInput = ({ value, onClick }: Props) => (
   <S.CustomInputWrapper onClick={onClick}>
     <Text color='#757575'>{value || '날짜를 선택하세요'}</Text>
   </S.CustomInputWrapper>
