@@ -1,4 +1,4 @@
-import axios, { AxiosError, type AxiosResponse } from 'axios';
+import axios, { AxiosError, isAxiosError, type AxiosResponse } from 'axios';
 import { apiInstance } from '@/api/initInstance';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type {
@@ -51,9 +51,11 @@ export const overwriteApplicationForm = async (
       overwrite: true,
     });
     return overwriteResponse.data;
-  } catch (e: unknown) {
-    const error = e as AxiosError<ErrorResponse>;
-    throw new Error(error.response?.data.message);
+  } catch (error: unknown) {
+    if (isAxiosError(error)) {
+      throw new Error(error.response?.data.message || '지원서 제출이 실패하였습니다.');
+    }
+    throw error;
   }
 };
 
