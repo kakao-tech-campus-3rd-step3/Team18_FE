@@ -1,4 +1,4 @@
-import { CommentItem } from './CommentItem';
+import { CommentItem } from './CommentItem/CommentItem';
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 
 type Props = {
