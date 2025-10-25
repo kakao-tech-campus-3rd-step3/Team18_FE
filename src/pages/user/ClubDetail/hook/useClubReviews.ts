@@ -10,6 +10,7 @@ export const useClubReviews = (clubId: number) => {
   const loadReviews = useCallback(async () => {
     try {
       setLoading(true);
+      setError(null);
       const data = await fetchClubReviews(clubId);
       setReviews(data);
     } catch {
@@ -19,19 +20,23 @@ export const useClubReviews = (clubId: number) => {
     }
   }, [clubId]);
 
-  const addReview = async (studentId: string, content: string) => {
-    if (!studentId.trim() || !content.trim()) {
-      alert('학번과 내용을 입력해 주세요.');
-      return;
-    }
+  const addReview = useCallback(
+    async (studentId: string, content: string) => {
+      if (!studentId.trim() || !content.trim()) {
+        setError('학번과 내용을 입력해 주세요.');
+        return;
+      }
 
-    try {
-      const newReview = await postClubReview(clubId, { studentId, content });
-      setReviews((prev) => [newReview, ...prev]);
-    } catch {
-      alert('후기 등록에 실패했습니다.');
-    }
-  };
+      try {
+        setError(null);
+        const newReview = await postClubReview(clubId, { studentId, content });
+        setReviews((prev) => [newReview, ...prev]);
+      } catch {
+        setError('후기 등록에 실패했습니다.');
+      }
+    },
+    [clubId],
+  );
 
   useEffect(() => {
     loadReviews();
