@@ -8,6 +8,7 @@ export const NoticeCard = styled.div(({ theme }) => ({
   boxShadow: theme.shadow.sm,
   padding: '24px 40px',
   border: `1px solid ${theme.colors.border}`,
+  marginTop: '48px',
 }));
 
 export const NoticeRow = styled.div(({ theme }) => ({
