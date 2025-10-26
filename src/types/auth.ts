@@ -1,5 +1,8 @@
+import type { Role } from './navigation';
+
 export type User = {
-  role: string;
+  clubId?: number[];
+  role: Role;
 };
 
 export type AuthContextType = {
