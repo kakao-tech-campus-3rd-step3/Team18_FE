@@ -44,7 +44,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logout = () => {
-    setUser(null);
+    setUser({ role: 'guest' });
     removeAccessToken();
   };
 
