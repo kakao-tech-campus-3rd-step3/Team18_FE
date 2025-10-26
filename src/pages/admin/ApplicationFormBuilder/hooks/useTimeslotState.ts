@@ -1,7 +1,13 @@
 import { format } from 'date-fns';
 import { useState } from 'react';
+import type { UseFormSetValue } from 'react-hook-form';
+import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
-export const useTimeslotState = () => {
+type UseTimeslotStateProps = {
+  setValue?: UseFormSetValue<ApplicationForm>;
+};
+
+export const useTimeslotState = ({ setValue }: UseTimeslotStateProps = {}) => {
   const [startTime, setStartTime] = useState('12:00 AM');
   const [endTime, setEndTime] = useState('12:00 AM');
   const [startDate, setStartDate] = useState<Date | null>(new Date());
@@ -22,6 +28,11 @@ export const useTimeslotState = () => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
+
+    if (setValue && start && end) {
+      const dateRange = `${format(start, 'yyyy-MM-dd')} ~ ${format(end, 'yyyy-MM-dd')}`;
+      setValue('recruitDate', dateRange, { shouldValidate: true });
+    }
   };
 
   return {
