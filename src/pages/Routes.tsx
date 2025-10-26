@@ -41,8 +41,14 @@ export const router = createBrowserRouter([
         path: COMMON.SIGNUP,
         element: <AdminSignupPage />,
       },
-      { path: COMMON.NOTICE_LIST, element: <NoticeListPage /> },
-      { path: COMMON.NOTICE_DETAIL, element: <NoticeDetailPage /> },
+      {
+        path: COMMON.NOTICE_LIST,
+        element: <NoticeListPage />,
+      },
+      {
+        path: COMMON.NOTICE_DETAIL,
+        element: <NoticeDetailPage />,
+      },
       {
         path: '/admin',
         children: [
