@@ -27,7 +27,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       switch (response.status) {
         case 'LOGIN_SUCCESS':
           setAccessToken(response.accessToken);
-          setUser({ role: 'manager' });
+          // TODO : 서버 API 명세 수정 후 response의 role을 받아서 등록
+          setUser({ role: 'admin' });
           navigate('/');
           break;
         case 'REGISTRATION_REQUIRED':
