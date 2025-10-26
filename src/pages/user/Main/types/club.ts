@@ -1,7 +1,5 @@
 import type { ClubCategoryEng } from '../constant/clubCategory';
 
-export type RecruitStatus = '모집중' | '모집 마감';
-
 export type Club = {
   id: number;
   name: string;
@@ -9,3 +7,6 @@ export type Club = {
   shortIntroduction: string;
   recruitStatus: RecruitStatus;
 };
+export const RECRUIT_STATUS = ['모집중', '모집 마감'] as const;
+
+export type RecruitStatus = (typeof RECRUIT_STATUS)[number];
