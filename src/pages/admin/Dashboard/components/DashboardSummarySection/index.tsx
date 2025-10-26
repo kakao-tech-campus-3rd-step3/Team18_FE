@@ -35,9 +35,21 @@ export const DashboardSummarySection = () => {
   );
 };
 
-const Wrapper = styled.section({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  gap: '3rem',
-});
+const Wrapper = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+
+  @media (max-width: 800px) {
+    & > div:nth-of-type(3) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 560px) {
+    & > div:nth-of-type(2) {
+      display: none;
+    }
+  }
+`;
