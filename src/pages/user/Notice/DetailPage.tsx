@@ -4,8 +4,6 @@ import { mockNoticeDetail } from './mock';
 
 export const NoticeDetailPage = () => {
   const navigate = useNavigate();
-  // const { id } = useParams();
-
   const data = mockNoticeDetail;
 
   return (
@@ -13,20 +11,20 @@ export const NoticeDetailPage = () => {
       <Card>
         <Title>{data.title}</Title>
         <MetaWrapper>
-          <div>
+          <MetaItem>
             <Label>작성자</Label> {data.author}
-          </div>
-          <div>
+          </MetaItem>
+          <MetaItem>
             <Label>문의처</Label> {data.email}
-          </div>
+          </MetaItem>
         </MetaWrapper>
         <MetaWrapper>
-          <div>
+          <MetaItem>
             <Label>작성일</Label> {data.createdAt.slice(0, 10)}
-          </div>
-          <div>
+          </MetaItem>
+          <MetaItem>
             <Label>첨부파일</Label> {data.file}
-          </div>
+          </MetaItem>
         </MetaWrapper>
         <Content>{data.content}</Content>
         <Button onClick={() => navigate('/notices')}>목록</Button>
@@ -35,60 +33,71 @@ export const NoticeDetailPage = () => {
   );
 };
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 60px 0;
-`;
+const Wrapper = styled.div(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  padding: '60px 0',
+  backgroundColor: theme.colors.bg,
+}));
 
-const Card = styled.div`
-  width: 80%;
-  max-width: 780px;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
-  padding: 40px 60px;
-`;
+const Card = styled.div(({ theme }) => ({
+  width: '80%',
+  maxWidth: '780px',
+  backgroundColor: theme.colors.bg,
+  borderRadius: theme.radius.lg,
+  boxShadow: theme.shadow.sm,
+  padding: '40px 60px',
+  border: `1px solid ${theme.colors.border}`,
+}));
 
-const Title = styled.h2`
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 24px;
-`;
+const Title = styled.h2(({ theme }) => ({
+  fontSize: theme.font.size.lg,
+  fontWeight: theme.font.weight.bold,
+  color: theme.colors.textPrimary,
+  marginBottom: '32px',
+}));
 
-const MetaWrapper = styled.div`
-  display: flex;
-  gap: 80px;
-  margin-bottom: 8px;
-  font-size: 15px;
-`;
+const MetaWrapper = styled.div(({ theme }) => ({
+  display: 'flex',
+  gap: '80px',
+  marginBottom: '16px',
+  fontSize: theme.font.size.sm,
+  color: theme.colors.textSecondary,
+}));
 
-const Label = styled.span`
-  font-weight: 600;
-  margin-right: 6px;
-`;
+const MetaItem = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+});
 
-const Content = styled.pre`
-  margin-top: 30px;
-  font-size: 15px;
-  line-height: 1.6;
-  white-space: pre-wrap;
-`;
+const Label = styled.span(({ theme }) => ({
+  fontWeight: theme.font.weight.bold,
+  marginRight: '6px',
+  color: theme.colors.textPrimary,
+}));
 
-const Button = styled.button`
-  display: block;
-  margin-left: auto;
-  margin-top: 40px;
-  background: #dcd7f8;
-  color: #333;
-  border: none;
-  border-radius: 8px;
-  padding: 6px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.2s ease;
+const Content = styled.pre(({ theme }) => ({
+  marginTop: '56px',
+  fontSize: theme.font.size.sm,
+  lineHeight: 1.6,
+  color: theme.colors.textPrimary,
+  whiteSpace: 'pre-wrap',
+}));
 
-  &:hover {
-    background: #c7bdf3;
-  }
-`;
+const Button = styled.button(({ theme }) => ({
+  display: 'block',
+  marginLeft: 'auto',
+  marginTop: '40px',
+  backgroundColor: theme.colors.primary,
+  color: theme.colors.bg,
+  border: 'none',
+  borderRadius: theme.radius.sm,
+  padding: '6px 14px',
+  fontSize: theme.font.size.xs,
+  cursor: 'pointer',
+  transition: '0.2s ease',
+  '&:hover': {
+    backgroundColor: theme.colors.primary700,
+    transform: 'translateY(-1px)',
+  },
+}));
