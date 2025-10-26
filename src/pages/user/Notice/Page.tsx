@@ -18,7 +18,7 @@ export const NoticeListPage = () => {
           </NoticeRow>
         ))}
       </NoticeCard>
-      <Footer>개발진과 연락하기 : ppgs@admin.com</Footer>
+      <Footer>개발진과 연락하기 : jnupole004@gmail.com</Footer>
     </Wrapper>
   );
 };

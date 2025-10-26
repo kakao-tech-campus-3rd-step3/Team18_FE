@@ -17,7 +17,7 @@ export const NoticeDetailPage = () => {
             <Label>작성자</Label> {data.author}
           </div>
           <div>
-            <Label>문의처</Label> {data.phone}
+            <Label>문의처</Label> {data.email}
           </div>
         </MetaWrapper>
         <MetaWrapper>
