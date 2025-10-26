@@ -3,7 +3,6 @@ import type { Role, NavItemData } from '@/types/navigation';
 export const NAV_CONFIG: Record<Role, NavItemData[]> = {
   guest: [
     { key: 'logo', label: '동아리움', to: '/', isLogo: true },
-    { key: 'recruit', label: '모집일정', to: '/recruit' },
     { key: 'notice', label: '공지사항', to: '/notice' },
   ],
   manager: [

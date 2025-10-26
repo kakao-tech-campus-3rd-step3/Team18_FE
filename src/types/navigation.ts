@@ -9,7 +9,6 @@ export type NavItemData = {
 
 export type NavRoute = [
   '동아리움',
-  '모집일정',
   '공지사항',
   'FAQ',
   '지원자관리',
