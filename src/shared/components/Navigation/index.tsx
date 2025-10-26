@@ -9,10 +9,15 @@ export const Navigation = () => {
   const [currentRoute, setCurrentRoute] = useState('동아리움');
   const { user } = useContext(AuthContext);
   const items = NAV_CONFIG[user?.role ?? 'guest'];
+  const { logout } = useContext(AuthContext);
 
   const handleItemClick = (label: React.ReactNode) => {
     if (typeof label === 'string') {
       setCurrentRoute(label);
+    }
+    if (label === '로그아웃') {
+      logout();
+      return;
     }
   };
 
