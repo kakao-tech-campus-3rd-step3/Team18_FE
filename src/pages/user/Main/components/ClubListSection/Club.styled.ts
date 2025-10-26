@@ -42,7 +42,7 @@ export const RecruitStatusText = styled.div<Props>(({ theme, status }) => ({
 
 export const Grid = styled.div(() => ({
   display: 'grid',
-  gap: 15,
+  gap: 30,
   gridTemplateColumns: 'repeat(4, 1fr)',
   justifyItems: 'center',
 

@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import { useCallback, useState } from 'react';
 import { BannerSection } from '@/pages/user/Main/components/BannerSection';
 import { ClubListSection } from '@/pages/user/Main/components/ClubListSection';
@@ -12,9 +13,15 @@ export const MainPage = () => {
   }, []);
 
   return (
-    <>
+    <Container>
       <BannerSection onSelect={handleFilter} onChange={(s: string) => setSearchText(s)} />
       <ClubListSection filter={filter} searchText={searchText} />
-    </>
+    </Container>
   );
 };
+
+export const Container = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '60px',
+});

@@ -5,7 +5,7 @@ import { FiSearch } from 'react-icons/fi';
 const InputWrapper = styled.div(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  width: '30%',
+  width: '400px',
   border: `1px solid ${theme?.colors?.border}`,
   borderRadius: theme?.radius?.md,
   padding: '10px 10px',
