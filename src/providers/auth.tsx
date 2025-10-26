@@ -27,7 +27,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       switch (response.status) {
         case 'LOGIN_SUCCESS':
           setAccessToken(response.accessToken);
-          setUser({ role: 'manager' });
+          setUser({ role: 'admin' });
           navigate('/');
           break;
         case 'REGISTRATION_REQUIRED':
