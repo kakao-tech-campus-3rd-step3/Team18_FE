@@ -10,11 +10,11 @@ export const useTimeslotState = () => {
   const formatDateRange = () => {
     if (!startDate) return '';
     if (!endDate) {
-      return format(startDate, 'yyyy.MM.dd');
+      return format(startDate, 'yyyy-MM-dd');
     }
 
-    const start = format(startDate, 'yyyy.MM.dd');
-    const end = format(endDate, 'yyyy.MM.dd');
+    const start = format(startDate, 'yyyy-MM-dd');
+    const end = format(endDate, 'yyyy-MM-dd');
     return `${start} ~ ${end}`;
   };
 
