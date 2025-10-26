@@ -20,7 +20,7 @@ export const Navigation = () => {
     <NavigationContainer selectedItem={currentRoute}>
       {items.map((item) => {
         const path =
-          item.to?.includes(':clubId') && user?.clubId
+          item.to?.includes(':clubId') && user?.clubId?.length
             ? replaceRouteParams(item.to, { clubId: user.clubId[0] })
             : item.to;
 
