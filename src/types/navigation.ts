@@ -1,4 +1,4 @@
-export type Role = 'guest' | 'manager' | 'president';
+export type Role = 'guest' | 'executive' | 'admin';
 
 export type NavItemData = {
   key: string;
