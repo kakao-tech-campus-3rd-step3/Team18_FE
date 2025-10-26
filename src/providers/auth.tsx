@@ -11,7 +11,7 @@ import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AuthContextType, User } from '@/types/auth';
 
 export const AuthContext = createContext<AuthContextType>({
-  user: null,
+  user: { role: 'guest' },
   login: () => {},
   logout: () => {},
 });
