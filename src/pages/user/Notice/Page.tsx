@@ -1,10 +1,13 @@
 import styled from '@emotion/styled';
+import { Text } from '@/shared/components/Text';
 import { NoticeListCardSection } from './components/NoticeListCardSection';
 
 export const NoticeListPage = () => {
   return (
     <Wrapper>
-      <Title>공지사항</Title>
+      <Text size='xl' weight='bold' color='#000000'>
+        공지사항
+      </Text>
       <NoticeListCardSection />
       <Footer>개발진과 연락하기 : jnupole004@gmail.com</Footer>
     </Wrapper>
@@ -17,13 +20,6 @@ const Wrapper = styled.div(({ theme }) => ({
   alignItems: 'center',
   padding: '60px 0',
   backgroundColor: theme.colors.bg,
-}));
-
-const Title = styled.h1(({ theme }) => ({
-  fontSize: theme.font.size.xl,
-  fontWeight: theme.font.weight.bold,
-  color: theme.colors.textPrimary,
-  marginBottom: '40px',
 }));
 
 const Footer = styled.p(({ theme }) => ({
