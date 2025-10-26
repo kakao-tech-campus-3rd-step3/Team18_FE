@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 import { BannerSection } from '@/pages/user/Main/components/BannerSection';
-import { MemoizedClubCategorySection } from '@/pages/user/Main/components/ClubCategorySection';
 import { ClubListSection } from '@/pages/user/Main/components/ClubListSection';
 import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
 
@@ -14,8 +13,7 @@ export const MainPage = () => {
 
   return (
     <>
-      <BannerSection onChange={(s: string) => setSearchText(s)} />
-      <MemoizedClubCategorySection selected={filter} onSelect={handleFilter} />
+      <BannerSection onSelect={handleFilter} onChange={(s: string) => setSearchText(s)} />
       <ClubListSection filter={filter} searchText={searchText} />
     </>
   );
