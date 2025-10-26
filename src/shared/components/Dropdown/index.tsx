@@ -3,8 +3,9 @@ import { Text } from '@/shared/components/Text';
 import * as S from './index.styled';
 
 type Props<T extends string> = {
-  value: T;
+  value?: T;
   options: T[];
+  placeholder?: string;
   onSelect: (value: T) => void;
   width?: string;
 };
@@ -12,6 +13,7 @@ type Props<T extends string> = {
 export const Dropdown = <T extends string>({
   value,
   options,
+  placeholder,
   onSelect,
   width = 'auto',
 }: Props<T>) => {
@@ -42,7 +44,7 @@ export const Dropdown = <T extends string>({
           setIsShowOptions(!isShowOptions);
         }}
       >
-        <Text color='#757575'>{value}</Text>
+        <Text color='#757575'>{value || placeholder}</Text>
         {isShowOptions && (
           <S.SelectOptions>
             {options.map((option, index) => (
