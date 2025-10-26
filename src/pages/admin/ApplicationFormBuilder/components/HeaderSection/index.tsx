@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Button } from '@/shared/components/Button';
 import { Text } from '@/shared/components/Text';
 
-export const ApplicationFormBuilderHeader = () => {
+export const ApplicationFormBuilderHeaderSection = () => {
   return (
     <Container>
       <HeaderWrapper>

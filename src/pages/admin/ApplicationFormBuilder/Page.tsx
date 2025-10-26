@@ -1,15 +1,15 @@
 import styled from '@emotion/styled';
+import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection';
 import { ApplicationInfoSection } from './components/ApplicationInfoSection';
-import { ApplicationFieldsFormTable } from './components/FieldsFormTable';
-import { ApplicationFormBuilderHeader } from './components/Header';
+import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
 
 export const ApplicationFormBuilder = () => {
   return (
     <Layout>
       <ContentContainer>
-        <ApplicationFormBuilderHeader />
+        <ApplicationFormBuilderHeaderSection />
         <ApplicationInfoSection />
-        <ApplicationFieldsFormTable />
+        <ApplicationFieldsFormTableSection />
       </ContentContainer>
     </Layout>
   );
