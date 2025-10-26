@@ -27,7 +27,6 @@ const Input = styled.input<Pick<Props, 'invalid'>>(({ theme, invalid }) => ({
   flex: 1,
   textAlign: 'center',
   transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-  marginBottom: '0.3rem',
 
   '&:focus': {
     outline: 'none',
