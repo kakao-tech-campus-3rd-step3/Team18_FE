@@ -6,17 +6,13 @@ import { useTimeslotState } from '@/pages/admin/ApplicationFormBuilder/hooks/use
 import { generateTimes } from '@/pages/admin/ApplicationFormBuilder/utils/generateTimes';
 import { Dropdown } from '@/shared/components/Dropdown';
 import { Text } from '@/shared/components/Text';
-import { datePickerStyles } from './styles/datepicker.styled';
-import * as S from './styles/timeslot.styled';
+import { datePickerStyles } from '@/pages/admin/ApplicationFormBuilder/styles/datepicker.styled';
+import * as S from '@/pages/admin/ApplicationFormBuilder/styles/timeslot.styled';
+import type { CustomInputProps } from '@/pages/admin/ApplicationFormBuilder/types/clubInfo';
 
 const times = generateTimes();
 
-type Props = {
-  value: string;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-};
-
-const CustomInput = ({ value, onClick }: Props) => (
+const CustomInput = ({ value, onClick }: CustomInputProps) => (
   <S.CustomInputWrapper onClick={onClick}>
     <Text color='#757575'>{value || '날짜를 선택하세요'}</Text>
   </S.CustomInputWrapper>
