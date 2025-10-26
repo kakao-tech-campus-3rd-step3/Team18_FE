@@ -7,6 +7,12 @@ export type Club = {
   shortIntroduction: string;
   recruitStatus: RecruitStatus;
 };
-export const RECRUIT_STATUS = ['모집중', '모집 마감'] as const;
 
-export type RecruitStatus = (typeof RECRUIT_STATUS)[number];
+const RECRUIT_STATUS_MAP = {
+  OPEN: '모집중',
+  CLOSED: '모집 종료',
+} as const;
+
+export type RecruitStatus = (typeof RECRUIT_STATUS_MAP)[keyof typeof RECRUIT_STATUS_MAP];
+export type RecruitStatusEng = keyof typeof RECRUIT_STATUS_MAP;
+export const CLUB_RECRUIT_STATUS_KOR = Object.values(RECRUIT_STATUS_MAP);
