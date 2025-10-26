@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ClubSearchInput } from '@/pages/user/Main/components/BannerSection/ClubSearchInput.tsx';
 import {
@@ -7,28 +6,43 @@ import {
   type ClubCategory,
   type ClubCategoryEng,
 } from '@/pages/user/Main/constant/clubCategory.ts';
-import { RECRUIT_STATUS, type RecruitStatus } from '@/pages/user/Main/types/club.ts';
+import { CLUB_RECRUIT_STATUS_KOR, type RecruitStatus } from '@/pages/user/Main/types/club.ts';
+import {
+  engToKorCategory,
+  korToEngCategory,
+  korToEngRecruitStatus,
+} from '@/pages/user/Main/utils/formatting.ts';
 import { Dropdown } from '@/shared/components/Dropdown/index.tsx';
 import * as S from './Banner.styled.ts';
-import { engToKorCategory, korToEngCategory } from '../../utils/formatting.ts';
 
 type Props = {
-  onChange: (searchText: string) => void;
-  onSelect: (category: ClubCategoryEng) => void;
+  onChangeSearch: (searchText: string) => void;
+  onSelectCategory: (category: ClubCategoryEng) => void;
+  onSelectStatus: (recruitStatus: RecruitStatus) => void;
+  selectedCategory: ClubCategoryEng;
+  selectedRecruitStatus: RecruitStatus | undefined;
 };
 
-export const BannerSection = ({ onChange, onSelect }: Props) => {
-  const [category, setCategory] = useState<ClubCategoryEng>('ALL');
-  const [recruitState, setRecruitState] = useState<RecruitStatus>('모집중');
+export const BannerSection = ({
+  onChangeSearch,
+  onSelectCategory,
+  onSelectStatus,
+  selectedCategory,
+  selectedRecruitStatus,
+}: Props) => {
+  const [filterParams, setFilterParams] = useSearchParams();
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const handleClick = (newCategory: ClubCategory) => {
+  const handleCategoryClick = (newCategory: ClubCategory) => {
     const engCategory = korToEngCategory[newCategory];
-    onSelect(engCategory);
-    searchParams.set('category', engCategory);
-    setSearchParams(searchParams);
-    setCategory(engCategory);
+    onSelectCategory(engCategory);
+    filterParams.set('category', engCategory);
+    setFilterParams(filterParams);
+  };
+
+  const handleRecruitStatusClick = (status: RecruitStatus) => {
+    onSelectStatus(status);
+    filterParams.set('status', korToEngRecruitStatus[status]);
+    setFilterParams(filterParams);
   };
 
   return (
@@ -36,16 +50,18 @@ export const BannerSection = ({ onChange, onSelect }: Props) => {
       <S.BannerText>{` 동아리움 (Dongari-um): 동아리 + 공간(-um), 동아리들을 위한 공간.`}</S.BannerText>
 
       <SearchContainer>
-        <ClubSearchInput onChange={onChange} />
+        <ClubSearchInput onChangeSearch={onChangeSearch} />
         <Dropdown
-          value={engToKorCategory[category]}
+          placeholder='동아리 카테고리'
+          value={engToKorCategory[selectedCategory]}
           options={CLUB_CATEGORY}
-          onSelect={handleClick}
+          onSelect={handleCategoryClick}
         ></Dropdown>
         <Dropdown
-          value={recruitState}
-          options={[...RECRUIT_STATUS]}
-          onSelect={() => setRecruitState}
+          placeholder='모집 상태'
+          value={selectedRecruitStatus ? selectedRecruitStatus : undefined}
+          options={[...CLUB_RECRUIT_STATUS_KOR]}
+          onSelect={handleRecruitStatusClick}
         ></Dropdown>
       </SearchContainer>
     </S.BannerWrapper>
