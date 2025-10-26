@@ -25,11 +25,11 @@ const SearchIcon = styled(FiSearch)({
 });
 
 type Props = {
-  onChange: (s: string) => void;
+  onChangeSearch: (s: string) => void;
 };
 
-export function ClubSearchInput({ onChange }: Props) {
-  const handleSearchText = _.debounce((text) => onChange(text), 200);
+export function ClubSearchInput({ onChangeSearch }: Props) {
+  const handleSearchText = _.debounce((text) => onChangeSearch(text), 200);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleSearchText(e.target.value);
   };
