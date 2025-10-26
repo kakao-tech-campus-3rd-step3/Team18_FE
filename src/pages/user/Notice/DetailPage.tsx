@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
-import { mockNoticeDetail } from '../../mock';
+import { mockNoticeDetail } from './mock';
 
 export const NoticeDetailPage = () => {
   const navigate = useNavigate();
