@@ -2,14 +2,26 @@ import styled from '@emotion/styled';
 import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection';
 import { ApplicationInfoSection } from './components/ApplicationInfoSection';
 import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
+import { ApplicationFormEditButtonSection } from './components/EditButtonSection';
+import { useForm } from 'react-hook-form';
 
 export const ApplicationFormBuilder = () => {
+  const formHandler = useForm({
+    defaultValues: {
+      title: '',
+      description: '',
+      recruitDate: '',
+      formQuestions: [],
+    },
+  });
+
   return (
     <Layout>
       <ContentContainer>
         <ApplicationFormBuilderHeaderSection />
-        <ApplicationInfoSection />
-        <ApplicationFieldsFormTableSection />
+        <ApplicationInfoSection formHandler={formHandler} />
+        <ApplicationFieldsFormTableSection formHandler={formHandler} />
+        <ApplicationFormEditButtonSection />
       </ContentContainer>
     </Layout>
   );
