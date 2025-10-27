@@ -8,9 +8,9 @@ type TimeSlotOption = {
   };
 };
 
-type Question = {
+export type Question = {
   questionNum: number;
-  questionType: 'RADIO' | 'TEXT' | 'TIME_SLOT';
+  questionType: 'RADIO' | 'TEXT' | 'TIME_SLOT' | 'CHECKBOX';
   question: string;
   required: boolean;
   optionList?: string[];
