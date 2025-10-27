@@ -49,9 +49,12 @@ export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
   };
 
   const handleTypeSelect = (newOption: QuestionType) => {
-    setValue(`questions.${index}.questionType`, typeMapping[newOption]);
-    setValue(`questions.${index}.optionList`, []);
-    setValue(`questions.${index}.timeSlotOptions`, []);
+    const newType = typeMapping[newOption];
+    setValue(`questions.${index}.questionType`, newType);
+
+    if (newType === 'RADIO' || newType === 'CHECKBOX') {
+      setValue(`questions.${index}.optionList`, [{ option: '' }]);
+    }
   };
 
   return (
