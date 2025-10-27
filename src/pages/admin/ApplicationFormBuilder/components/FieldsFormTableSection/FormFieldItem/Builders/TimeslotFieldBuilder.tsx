@@ -28,16 +28,21 @@ const CustomInput = ({ value, onClick }: CustomInputProps) => (
 export const TimeslotFieldBuilder = ({ formHandler, questionIndex }: Props) => {
   const { register, setValue, watch } = formHandler;
 
-  const { startDate, endDate, formatDateRange, handleDateChange } = useTimeslotState();
+  const { startDate, endDate, formatDateRange, handleDateChange } = useTimeslotState({
+    setValue,
+    fieldName: `questions.${questionIndex}.timeSlotOptions.date`,
+  });
 
   const currentStartTime =
     watch(`questions.${questionIndex}.timeSlotOptions.availableTime.start`) || '9:00 AM';
-  const handleStarTimeSelect = (newTime: string) => {
-    setValue(`questions.${questionIndex}.timeSlotOptions.availableTime.start`, newTime);
-  };
 
   const currentEndTime =
     watch(`questions.${questionIndex}.timeSlotOptions.availableTime.end`) || '9:00 AM';
+
+  const handleStartTimeSelect = (newTime: string) => {
+    setValue(`questions.${questionIndex}.timeSlotOptions.availableTime.start`, newTime);
+  };
+
   const handleEndTimeSelect = (newTime: string) => {
     setValue(`questions.${questionIndex}.timeSlotOptions.availableTime.end`, newTime);
   };
@@ -69,7 +74,7 @@ export const TimeslotFieldBuilder = ({ formHandler, questionIndex }: Props) => {
         <S.TimeSelectContainer>
           <S.TimeSelectWrapper>
             <Text color='#6E6E6E'>시작시간</Text>
-            <Dropdown value={currentStartTime} onSelect={handleStarTimeSelect} options={times} />
+            <Dropdown value={currentStartTime} onSelect={handleStartTimeSelect} options={times} />
           </S.TimeSelectWrapper>
           <S.TimeSelectWrapper>
             <Text color='#6E6E6E'>마감시간</Text>

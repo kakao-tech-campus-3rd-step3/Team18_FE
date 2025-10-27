@@ -5,9 +5,13 @@ import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types
 
 type UseTimeslotStateProps = {
   setValue?: UseFormSetValue<ApplicationForm>;
+  fieldName?: string;
 };
 
-export const useTimeslotState = ({ setValue }: UseTimeslotStateProps = {}) => {
+export const useTimeslotState = ({
+  setValue,
+  fieldName = 'recruitDate',
+}: UseTimeslotStateProps = {}) => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(null);
 
@@ -27,9 +31,10 @@ export const useTimeslotState = ({ setValue }: UseTimeslotStateProps = {}) => {
     setStartDate(start);
     setEndDate(end);
 
+    // ✅ 동적 필드명으로 setValue 호출
     if (setValue && start && end) {
       const dateRange = `${format(start, 'yyyy-MM-dd')} ~ ${format(end, 'yyyy-MM-dd')}`;
-      setValue('recruitDate', dateRange, { shouldValidate: true });
+      setValue(fieldName as any, dateRange, { shouldValidate: true });
     }
   };
 
