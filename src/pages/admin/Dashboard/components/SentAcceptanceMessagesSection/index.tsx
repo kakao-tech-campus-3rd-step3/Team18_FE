@@ -1,6 +1,6 @@
+import styled from '@emotion/styled';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { Text } from '@/shared/components/Text';
-import styled from '@emotion/styled';
 
 export const SentAcceptanceMessagesSection = () => {
   return (

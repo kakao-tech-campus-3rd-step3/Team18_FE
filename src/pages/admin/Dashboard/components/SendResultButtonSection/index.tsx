@@ -1,5 +1,5 @@
-import { Button } from '@/shared/components/Button';
 import styled from '@emotion/styled';
+import { Button } from '@/shared/components/Button';
 
 export const SendResultButtonSection = () => {
   return (

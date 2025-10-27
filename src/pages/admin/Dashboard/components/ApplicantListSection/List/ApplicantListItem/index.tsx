@@ -1,5 +1,5 @@
-import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
 import * as S from './index.styled';
+import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = ApplicantData & {
   onClick: (id: number) => void;

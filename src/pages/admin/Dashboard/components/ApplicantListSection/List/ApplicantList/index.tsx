@@ -2,11 +2,11 @@ import { useNavigate } from 'react-router-dom';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicantListItem } from '../ApplicantListItem';
+import * as S from './index.styled';
 import type {
   ApplicationFilterOption,
   ApplicationStage,
 } from '@/pages/admin/Dashboard/types/dashboard';
-import * as S from './index.styled';
 
 type Props = {
   filterOption: ApplicationFilterOption;

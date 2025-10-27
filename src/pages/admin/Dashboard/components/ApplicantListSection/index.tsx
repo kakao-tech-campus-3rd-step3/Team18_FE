@@ -1,12 +1,14 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ApplicantList } from './List/ApplicantList';
-import { ApplicationStatusFilter } from './Filter/ApplicationFilter';
-import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
 import { Text } from '@/shared/components/Text';
+import { ApplicationStatusFilter } from './Filter/ApplicationFilter';
+import { ApplicantList } from './List/ApplicantList';
 import { StageToggle } from './StageToggle';
-import type { ApplicationStage } from '@/pages/admin/Dashboard/types/dashboard';
+import type {
+  ApplicationFilterOption,
+  ApplicationStage,
+} from '@/pages/admin/Dashboard/types/dashboard';
 
 export const ApplicantListSection = () => {
   const [searchParams, setSearchParams] = useSearchParams();

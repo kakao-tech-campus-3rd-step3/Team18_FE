@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import type { DashboardCard } from '@/pages/admin/Dashboard/types/dashboard';
 import { Text } from '@/shared/components/Text';
+import type { DashboardCard } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = Omit<DashboardCard, 'id'> & {
   isEmpty?: boolean;

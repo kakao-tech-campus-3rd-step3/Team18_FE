@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { ApplicantListSection } from './components/ApplicantListSection';
 import { DashboardSummarySection } from './components/DashboardSummarySection';
-import { SentAcceptanceMessagesSection } from './components/SentAcceptanceMessagesSection';
 import { SendResultButtonSection } from './components/SendResultButtonSection';
+import { SentAcceptanceMessagesSection } from './components/SentAcceptanceMessagesSection';
 
 export const DashboardPage = () => {
   return (
