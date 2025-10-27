@@ -38,9 +38,9 @@ export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
       case '텍스트':
         return <TextOptionsBuilder />;
       case '라디오':
-        return <RadioOptionsBuilder />;
+        return <RadioOptionsBuilder formHandler={formHandler} questionIndex={index} />;
       case '체크박스':
-        return <CheckboxOptionsBuilder />;
+        return <CheckboxOptionsBuilder formHandler={formHandler} questionIndex={index} />;
       case '타임슬롯':
         return <TimeslotFieldBuilder />;
       default:

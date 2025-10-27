@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-
 import { AddFieldButton } from './AddFieldButton';
 import { FormFieldItem } from './FormFieldItem';
 import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
@@ -24,7 +23,7 @@ export const ApplicationFieldsFormTableSection = ({ formHandler }: Props) => {
       questionType: 'TEXT',
       question: '',
       required: true,
-      optionList: [],
+      optionList: ['옵션 1'],
       timeSlotOptions: [],
     });
   };
