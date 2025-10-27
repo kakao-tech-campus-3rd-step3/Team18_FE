@@ -14,11 +14,12 @@ export interface ExtendedUseApiQueryResult<T> extends UseApiQueryResult<T> {
 
 export const useApplicants = (
   clubId: number,
+  stage: 'INTERVIEW' | 'FINAL',
   status?: ApplicationFilterOption,
 ): ExtendedUseApiQueryResult<ApplicantData[]> => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['applicants', clubId],
-    queryFn: () => fetchApplicants(clubId),
+    queryKey: ['applicants', clubId, stage],
+    queryFn: () => fetchApplicants(clubId, stage),
     staleTime: 1000 * 60 * 5,
     refetchInterval: 30000,
   });
