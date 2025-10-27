@@ -16,5 +16,7 @@ export const ROUTE_PATH = {
     LOGIN: 'login',
     CALLBACK: 'login/redirect',
     SIGNUP: 'signup',
+    NOTICE_LIST: 'notices',
+    NOTICE_DETAIL: 'notices/:noticeId',
   },
 };

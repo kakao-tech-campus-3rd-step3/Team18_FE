@@ -263,7 +263,7 @@ export const mockClubDetail: ClubDetail[] = [
     regularMeetingInfo: '매주 화요일 오후 6시',
     recruitStatus: '모집중',
     presidentName: '김춘식',
-    presidentPhoneNumber: '010-9619-7677',
+    presidentPhoneNumber: '010-1234-7777',
     recruitStart: '2025-09-03T00:00:00',
     recruitEnd: '2025-09-20T23:59:00',
     applicationNotice: '현재 지원은 휴학생을 제외한 1~3학년만 받고 있습니다.',
