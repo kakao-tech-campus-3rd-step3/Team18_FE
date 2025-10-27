@@ -4,6 +4,7 @@ import { ApplicationInfoSection } from './components/ApplicationInfoSection';
 import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
 import { ApplicationFormEditButtonSection } from './components/EditButtonSection';
 import { useForm } from 'react-hook-form';
+import type { Question } from './types/fieldType';
 
 export const ApplicationFormBuilder = () => {
   const formHandler = useForm({
@@ -11,7 +12,7 @@ export const ApplicationFormBuilder = () => {
       title: '',
       description: '',
       recruitDate: '',
-      formQuestions: [],
+      questions: [] as Question[],
     },
   });
 
@@ -51,7 +52,7 @@ const ContentContainer = styled.div`
   width: 48rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   box-sizing: border-box;
 
   @media (max-width: 48rem) {
