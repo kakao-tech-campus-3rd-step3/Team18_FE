@@ -36,12 +36,12 @@ export const RadioOptionsBuilder = ({ formHandler, questionIndex }: Props) => {
           <RadioIcon />
           <OutlineInputField
             placeholder='옵션을 입력해주세요.'
-            {...register(`questions.${questionIndex}.optionList.${optionIndex}`, {
+            {...register(`questions.${questionIndex}.optionList.${optionIndex}.option`, {
               required: '옵션을 입력해주세요',
               minLength: { value: 1, message: '옵션을 입력해주세요.' },
             })}
-            invalid={!!errors.questions?.[questionIndex]?.optionList?.[optionIndex]}
-            message={errors.questions?.[questionIndex]?.optionList?.[optionIndex]?.message}
+            invalid={!!errors.questions?.[questionIndex]?.optionList?.[optionIndex]?.option}
+            message={errors.questions?.[questionIndex]?.optionList?.[optionIndex]?.option?.message}
           />
           <AiOutlineCloseCircle
             size={'1.5rem'}
