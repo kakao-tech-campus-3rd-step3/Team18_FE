@@ -6,10 +6,9 @@ import type { NavItemData } from '@/types/navigation';
 type Props = {
   children: ReactNode;
   onClick: (children: React.ReactNode) => void;
-  selected: boolean;
 } & Pick<NavItemData, 'to' | 'isLogo'>;
 
-export const NavigationItem = ({ to, children, isLogo, onClick, selected }: Props) => {
+export const NavigationItem = ({ to, children, isLogo, onClick }: Props) => {
   if (isLogo)
     return (
       <LogoLink to={to || '#'} onClick={() => onClick(children)}>
@@ -18,12 +17,7 @@ export const NavigationItem = ({ to, children, isLogo, onClick, selected }: Prop
     );
 
   return (
-    <NavLink
-      to={to || '#'}
-      selected={selected}
-      onClick={() => onClick(children)}
-      data-selected={selected}
-    >
+    <NavLink to={to || '#'} onClick={() => onClick(children)}>
       {children}
     </NavLink>
   );
@@ -37,16 +31,16 @@ const LogoLink = styled(Link)(({ theme }) => ({
   cursor: 'pointer',
 }));
 
-const NavLink = styled(Link)<{ selected: boolean }>(({ theme, selected }) => ({
+const NavLink = styled(Link)(({ theme }) => ({
   fontSize: theme.font.size.base,
   textDecoration: 'none',
   transition: 'color 0.2s, font-weight 0.2s',
-  color: selected ? theme.colors.primary : theme.colors.textPrimary,
-  fontWeight: selected ? theme.font.weight.bold : theme.font.weight.medium,
+  color: theme.colors.textPrimary,
+  fontWeight: theme.font.weight.medium,
   padding: '8px 0',
   position: 'relative',
 
   '&:hover': {
-    fontWeight: selected ? theme.font.weight.medium : theme.font.weight.bold,
+    fontWeight: theme.font.weight.bold,
   },
 }));

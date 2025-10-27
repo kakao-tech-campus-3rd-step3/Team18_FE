@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { NAV_CONFIG } from '@/constants/navigation';
 import { AuthContext } from '@/providers/auth';
 import { replaceRouteParams } from '@/utils/replaceRouteParams';
@@ -6,15 +6,11 @@ import { NavigationContainer } from './NavigationContainer';
 import { NavigationItem } from './NavigationItem';
 
 export const Navigation = () => {
-  const [currentRoute, setCurrentRoute] = useState('동아리움');
   const { user } = useContext(AuthContext);
   const items = NAV_CONFIG[user?.role ?? 'guest'];
   const { logout } = useContext(AuthContext);
 
   const handleItemClick = (label: React.ReactNode) => {
-    if (typeof label === 'string') {
-      setCurrentRoute(label);
-    }
     if (label === '로그아웃') {
       logout();
       return;
@@ -22,7 +18,7 @@ export const Navigation = () => {
   };
 
   return (
-    <NavigationContainer selectedItem={currentRoute}>
+    <NavigationContainer>
       {items.map((item) => {
         const path =
           item.to?.includes(':clubId') && user?.clubId?.length
@@ -30,13 +26,7 @@ export const Navigation = () => {
             : item.to;
 
         return (
-          <NavigationItem
-            key={item.key}
-            to={path}
-            isLogo={item.isLogo}
-            selected={currentRoute === item.label}
-            onClick={handleItemClick}
-          >
+          <NavigationItem key={item.key} to={path} isLogo={item.isLogo} onClick={handleItemClick}>
             {item.label}
           </NavigationItem>
         );
