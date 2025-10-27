@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { fetchApplicants } from '@/pages/admin/Dashboard/api/applicant';
 import type {
   ApplicantData,
+  ApplicantsApiResponse,
   ApplicationFilterOption,
   ApplicantCounts,
 } from '@/pages/admin/Dashboard/types/dashboard';
@@ -17,36 +18,42 @@ export const useApplicants = (
   stage: 'INTERVIEW' | 'FINAL',
   status?: ApplicationFilterOption,
 ): ExtendedUseApiQueryResult<ApplicantData[]> => {
-  const { data, isLoading, error } = useQuery({
+  const {
+    data: responseData,
+    isLoading,
+    error,
+  } = useQuery<ApplicantsApiResponse>({
     queryKey: ['applicants', clubId, stage],
     queryFn: () => fetchApplicants(clubId, stage),
     staleTime: 1000 * 60 * 5,
     refetchInterval: 30000,
+    enabled: !!stage,
   });
 
-  const filteredData = useMemo(() => {
-    if (!data) return [];
-    if (!status || status === 'ALL') return data;
+  const applicants = responseData?.applicants || [];
 
-    return data.filter((applicant) => applicant.status === status);
-  }, [data, status]);
+  const filteredData = useMemo(() => {
+    if (!Array.isArray(applicants)) return [];
+    if (!status || status === 'ALL') return applicants;
+
+    return applicants.filter((applicant) => applicant.status === status);
+  }, [applicants, status]);
 
   const counts = useMemo(() => {
-    if (!data) return { ALL: 0, PENDING: 0, APPROVED: 0, REJECTED: 0 };
+    if (!Array.isArray(applicants)) return { ALL: 0, PENDING: 0, APPROVED: 0, REJECTED: 0 };
 
-    return data.reduce(
-      (acc, applicant) => {
-        acc[applicant.status] += 1;
-        return acc;
-      },
-      {
-        ALL: data.length,
-        PENDING: 0,
-        APPROVED: 0,
-        REJECTED: 0,
-      },
-    );
-  }, [data]);
+    const initialCounts = {
+      ALL: applicants.length,
+      PENDING: 0,
+      APPROVED: 0,
+      REJECTED: 0,
+    };
+
+    return applicants.reduce((acc, applicant) => {
+      acc[applicant.status] += 1;
+      return acc;
+    }, initialCounts);
+  }, [applicants]);
 
   return {
     data: filteredData,

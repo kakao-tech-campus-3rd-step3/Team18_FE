@@ -2,11 +2,15 @@ import { useNavigate } from 'react-router-dom';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicantListItem } from '../ApplicantListItem';
-import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
+import type {
+  ApplicationFilterOption,
+  ApplicationStage,
+} from '@/pages/admin/Dashboard/types/dashboard';
 import * as S from './index.styled';
 
 type Props = {
   filterOption: ApplicationFilterOption;
+  stage: ApplicationStage;
 };
 
 type ApplicateInfoCategory = '이름' | '학번' | '학과' | '전화번호' | '이메일' | '결과';
@@ -19,10 +23,12 @@ const INFO_CATEGORY: ApplicateInfoCategory[] = [
   '결과',
 ];
 
-export const ApplicantList = ({ filterOption }: Props) => {
+export const ApplicantList = ({ filterOption, stage }: Props) => {
   const navigate = useNavigate();
 
-  const { data: applicants, isLoading, error } = useApplicants(1, filterOption);
+  const apiStage = stage === '서류' ? 'INTERVIEW' : 'FINAL';
+
+  const { data: applicants, isLoading, error } = useApplicants(1, apiStage, filterOption);
 
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;

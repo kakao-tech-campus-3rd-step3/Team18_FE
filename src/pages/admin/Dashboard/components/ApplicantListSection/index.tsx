@@ -36,7 +36,7 @@ export const ApplicantListSection = () => {
         <ApplicationStatusFilter option={filterOption} onOptionChange={handleFilterOptionChange} />
       </ApplicantFilterTopBarWrapper>
       <ListWrapper>
-        <ApplicantList filterOption={filterOption} />
+        <ApplicantList filterOption={filterOption} stage={stage} />
       </ListWrapper>
     </>
   );

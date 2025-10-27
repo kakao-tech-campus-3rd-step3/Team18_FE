@@ -1,11 +1,11 @@
 import { isAxiosError } from 'axios';
 import { apiInstance } from '@/api/initInstance';
-import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
+import type { ApplicantsApiResponse } from '@/pages/admin/Dashboard/types/dashboard';
 
 export const fetchApplicants = async (
   clubId: number,
   stage: 'INTERVIEW' | 'FINAL'
-): Promise<ApplicantData[]> => {
+): Promise<ApplicantsApiResponse> => {
   try {
     const { data } = await apiInstance.get(`/clubs/${clubId}/dashboard/applicants?stage=${stage}`);
     return data;

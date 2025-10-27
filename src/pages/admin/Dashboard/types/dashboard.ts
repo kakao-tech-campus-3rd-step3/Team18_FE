@@ -33,3 +33,8 @@ export type ApplicantCounts = {
 };
 
 export type ApplicationStage = '서류' | '면접';
+
+export type ApplicantsApiResponse = {
+  applicants: ApplicantData[];
+  message: string | null;
+};
