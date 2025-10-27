@@ -24,7 +24,6 @@ const Input = styled.input<Pick<Props, 'invalid'>>(({ theme, invalid }) => ({
   border: 'none',
   borderBottom: `1px solid ${theme.colors.gray300}`,
   fontSize: theme.font.size.sm,
-  padding: '7.5px 12px',
   flex: 1,
   textAlign: 'center',
   transition: 'border-color 0.2s ease, box-shadow 0.2s ease',

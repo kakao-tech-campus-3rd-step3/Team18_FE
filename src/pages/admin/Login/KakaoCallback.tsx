@@ -1,17 +1,23 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
+import styled from '@emotion/styled';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
-import { useAuthCode } from './hook/useAuthCode';
+import { useKakaoLogin } from './hooks/useKakaoLogin';
 
 export const KakaoCallback = () => {
-  const navigate = useNavigate();
-
-  const { errorMessage, isLoading } = useAuthCode(navigate);
-  useEffect(() => {
-    if (errorMessage) toast.error(errorMessage);
-  }, [errorMessage]);
-  if (isLoading) return <LoadingSpinner />;
-
+  const { isLoading } = useKakaoLogin();
+  if (isLoading) return;
+  <LoadingSpinnerWrapper>
+    <LoadingSpinner />;
+  </LoadingSpinnerWrapper>;
   return null;
 };
+
+const LoadingSpinnerWrapper = styled.div({
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+});
