@@ -14,7 +14,7 @@ export type Question = {
   question: string;
   required: boolean;
   optionList?: { option: string }[];
-  timeSlotOptions?: TimeSlotOption[];
+  timeSlotOptions?: TimeSlotOption;
 };
 
 export type ApplicationForm = {

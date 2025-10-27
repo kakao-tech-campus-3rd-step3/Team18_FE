@@ -42,7 +42,7 @@ export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
       case '체크박스':
         return <CheckboxOptionsBuilder formHandler={formHandler} questionIndex={index} />;
       case '타임슬롯':
-        return <TimeslotFieldBuilder />;
+        return <TimeslotFieldBuilder formHandler={formHandler} questionIndex={index} />;
       default:
         return null;
     }
