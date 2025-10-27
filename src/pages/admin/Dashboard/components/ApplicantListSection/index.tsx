@@ -33,7 +33,11 @@ export const ApplicantListSection = () => {
           </Text>
           <StageToggle value={stage} onChange={setStage} />
         </LeftSection>
-        <ApplicationStatusFilter option={filterOption} onOptionChange={handleFilterOptionChange} />
+        <ApplicationStatusFilter
+          option={filterOption}
+          onOptionChange={handleFilterOptionChange}
+          stage={stage}
+        />
       </ApplicantFilterTopBarWrapper>
       <ListWrapper>
         <ApplicantList filterOption={filterOption} stage={stage} />

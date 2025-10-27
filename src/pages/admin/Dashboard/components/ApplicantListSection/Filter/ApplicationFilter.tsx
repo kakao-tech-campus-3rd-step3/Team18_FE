@@ -1,15 +1,20 @@
 import styled from '@emotion/styled';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
 import { ApplicantFilterButton } from './ApplicationFilterButton';
-import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
+import type {
+  ApplicationFilterOption,
+  ApplicationStage,
+} from '@/pages/admin/Dashboard/types/dashboard';
 
 export type Props = {
   option: ApplicationFilterOption;
   onOptionChange: (option: ApplicationFilterOption) => void;
+  stage: ApplicationStage;
 };
 
-export const ApplicationStatusFilter = ({ option, onOptionChange }: Props) => {
-  const { counts } = useApplicants(1);
+export const ApplicationStatusFilter = ({ option, onOptionChange, stage }: Props) => {
+  const apiStage = stage === '서류' ? 'INTERVIEW' : 'FINAL';
+  const { counts } = useApplicants(1, apiStage);
 
   return (
     <Wrapper>
