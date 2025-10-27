@@ -1,33 +1,33 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { NAV_CONFIG } from '@/constants/navigation';
+import { AuthContext } from '@/providers/auth';
 import { replaceRouteParams } from '@/utils/replaceRouteParams';
 import { NavigationContainer } from './NavigationContainer';
 import { NavigationItem } from './NavigationItem';
-import type { Role } from '@/types/navigation';
 
-interface NavbarProps {
-  role: Role;
-}
-
-export const Navigation = ({ role }: NavbarProps) => {
+export const Navigation = () => {
   const [currentRoute, setCurrentRoute] = useState('동아리움');
-  const items = NAV_CONFIG[role];
-
-  // TODO: 추후 context나 로그인 정보에서 가져오기
-  const clubId = '1'; // 임시 값
+  const { user } = useContext(AuthContext);
+  const items = NAV_CONFIG[user?.role ?? 'guest'];
+  const { logout } = useContext(AuthContext);
 
   const handleItemClick = (label: React.ReactNode) => {
     if (typeof label === 'string') {
       setCurrentRoute(label);
+    }
+    if (label === '로그아웃') {
+      logout();
+      return;
     }
   };
 
   return (
     <NavigationContainer selectedItem={currentRoute}>
       {items.map((item) => {
-        const path = item.to?.includes(':clubId')
-          ? replaceRouteParams(item.to, { clubId })
-          : item.to;
+        const path =
+          item.to?.includes(':clubId') && user?.clubId?.length
+            ? replaceRouteParams(item.to, { clubId: user.clubId[0] })
+            : item.to;
 
         return (
           <NavigationItem

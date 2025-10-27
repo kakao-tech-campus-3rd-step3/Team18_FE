@@ -1,8 +1,8 @@
-import axios, { type AxiosResponse } from 'axios';
+import axios, { AxiosError, isAxiosError, type AxiosResponse } from 'axios';
 import { apiInstance } from '@/api/initInstance';
+import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type {
   ApplicationForm,
-  ApplicationFormRequest,
   FormInputs,
   PostInterviewSchedule,
 } from '@/pages/user/Apply/type/apply.ts';
@@ -25,20 +25,38 @@ export const postApplicationForm = async (
   clubId: number,
   formData: FormInputs,
   questionArray: string[],
-): Promise<ApplicationFormRequest> => {
+) => {
   const applicationDto = applicationFormDto(formData, questionArray);
 
-  const url = `${import.meta.env.VITE_API_BASE_URL}/clubs/${clubId}/apply-submit`;
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(applicationDto),
-  });
+  try {
+    const response = await apiInstance.post(`/clubs/${clubId}/apply-submit`, applicationDto);
 
-  if (!response.ok) throw new Error('지원서 양식을 제출하지 못했습니다');
-  return await response.json();
+    return response.data;
+  } catch (e: unknown) {
+    const error = e as AxiosError<ErrorResponse>;
+    throw new Error(error.response?.data.message || '지원서 제출이 실패하였습니다.');
+  }
+};
+
+export const overwriteApplicationForm = async (
+  clubId: number,
+  formData: FormInputs,
+  questionArray: string[],
+) => {
+  const applicationDto = applicationFormDto(formData, questionArray);
+
+  try {
+    const overwriteResponse = await apiInstance.post(`/clubs/${clubId}/apply-submit`, {
+      ...applicationDto,
+      overwrite: true,
+    });
+    return overwriteResponse.data;
+  } catch (error: unknown) {
+    if (isAxiosError(error)) {
+      throw new Error(error.response?.data.message || '지원서 제출이 실패하였습니다.');
+    }
+    throw error;
+  }
 };
 
 export const applicationFormDto = (formData: FormInputs, questionArray: string[]) => {
