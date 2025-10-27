@@ -8,7 +8,7 @@ export const TextOptionsBuilder = () => {
   return (
     <Layout>
       <OutlineTextareaField
-        placeholder='300자 이내로 작성해주세요.'
+        placeholder='텍스트를 작성해주세요.'
         value={placeholder}
         onChange={(e) => setPlaceholder(e.target.value)}
       />
