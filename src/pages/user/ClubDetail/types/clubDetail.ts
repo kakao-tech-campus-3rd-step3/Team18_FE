@@ -1,4 +1,4 @@
-export type RecruitStatus = '모집중' | '모집 준비중' | '모집 종료';
+import type { RecruitStatus } from '@/pages/user/Main/types/club';
 
 export type ClubDetail = {
   clubId: number;
