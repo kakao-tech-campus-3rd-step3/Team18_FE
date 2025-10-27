@@ -9,7 +9,7 @@ export const NoticeDetailPage = () => {
 
   return (
     <Wrapper>
-      <NoticeDetailCardSection data={data} onBack={() => navigate('/notices')} />
+      <NoticeDetailCardSection data={data} onBack={() => navigate(-1)} />
     </Wrapper>
   );
 };
