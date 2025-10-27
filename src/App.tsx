@@ -14,7 +14,7 @@ export function App() {
       <ThemeProvider theme={theme}>
         <UserProvider>
           <ToastContainer />
-          <Navigation role='president' />
+          <Navigation />
           <Outlet />
         </UserProvider>
       </ThemeProvider>
