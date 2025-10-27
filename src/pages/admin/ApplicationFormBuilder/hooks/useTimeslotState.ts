@@ -8,8 +8,6 @@ type UseTimeslotStateProps = {
 };
 
 export const useTimeslotState = ({ setValue }: UseTimeslotStateProps = {}) => {
-  const [startTime, setStartTime] = useState('12:00 AM');
-  const [endTime, setEndTime] = useState('12:00 AM');
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(null);
 
@@ -36,10 +34,6 @@ export const useTimeslotState = ({ setValue }: UseTimeslotStateProps = {}) => {
   };
 
   return {
-    startTime,
-    setStartTime,
-    endTime,
-    setEndTime,
     startDate,
     endDate,
     formatDateRange,

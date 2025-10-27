@@ -9,6 +9,13 @@ import { Text } from '@/shared/components/Text';
 import { datePickerStyles } from '@/pages/admin/ApplicationFormBuilder/styles/datepicker.styled';
 import * as S from '@/pages/admin/ApplicationFormBuilder/styles/timeslot.styled';
 import type { CustomInputProps } from '@/pages/admin/ApplicationFormBuilder/types/clubInfo';
+import type { UseFormReturn } from 'react-hook-form';
+import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
+
+type Props = {
+  formHandler: UseFormReturn<ApplicationForm>;
+  questionIndex: number;
+};
 
 const times = generateTimes();
 
@@ -18,17 +25,22 @@ const CustomInput = ({ value, onClick }: CustomInputProps) => (
   </S.CustomInputWrapper>
 );
 
-export const TimeslotFieldBuilder = () => {
-  const {
-    startTime,
-    setStartTime,
-    endTime,
-    setEndTime,
-    startDate,
-    endDate,
-    formatDateRange,
-    handleDateChange,
-  } = useTimeslotState();
+export const TimeslotFieldBuilder = ({ formHandler, questionIndex }: Props) => {
+  const { register, setValue, watch } = formHandler;
+
+  const { startDate, endDate, formatDateRange, handleDateChange } = useTimeslotState();
+
+  const currentStartTime =
+    watch(`questions.${questionIndex}.timeSlotOptions.availableTime.start`) || '9:00 AM';
+  const handleStarTimeSelect = (newTime: string) => {
+    setValue(`questions.${questionIndex}.timeSlotOptions.availableTime.start`, newTime);
+  };
+
+  const currentEndTime =
+    watch(`questions.${questionIndex}.timeSlotOptions.availableTime.end`) || '9:00 AM';
+  const handleEndTimeSelect = (newTime: string) => {
+    setValue(`questions.${questionIndex}.timeSlotOptions.availableTime.end`, newTime);
+  };
 
   return (
     <>
@@ -46,16 +58,22 @@ export const TimeslotFieldBuilder = () => {
             customInput={<CustomInput value={formatDateRange()} />}
             popperPlacement='bottom'
           />
+          <input
+            type='hidden'
+            {...register(`questions.${questionIndex}.timeSlotOptions.date`, {
+              required: '모집 기간을 선택해주세요',
+            })}
+          />
         </S.DatePickerWrapper>
 
         <S.TimeSelectContainer>
           <S.TimeSelectWrapper>
             <Text color='#6E6E6E'>시작시간</Text>
-            <Dropdown value={startTime} onSelect={setStartTime} options={times} />
+            <Dropdown value={currentStartTime} onSelect={handleStarTimeSelect} options={times} />
           </S.TimeSelectWrapper>
           <S.TimeSelectWrapper>
             <Text color='#6E6E6E'>마감시간</Text>
-            <Dropdown value={endTime} onSelect={setEndTime} options={times} />
+            <Dropdown value={currentEndTime} onSelect={handleEndTimeSelect} options={times} />
           </S.TimeSelectWrapper>
         </S.TimeSelectContainer>
       </S.Layout>
