@@ -55,6 +55,7 @@ export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
     if (newType === 'RADIO' || newType === 'CHECKBOX') {
       setValue(`questions.${index}.optionList`, [{ option: '' }]);
     }
+    setValue(`questions.${index}.question`, '');
   };
 
   return (
