@@ -45,10 +45,10 @@ export const ItemWrapper = styled.div`
   }
 `;
 
-export const InfoText = styled.p(({ theme }) => ({
+export const InfoText = styled.p({
   fontSize: '1.1rem',
   color: '#434547',
-}));
+});
 
 export const StatusBadge = styled.p<Pick<ApplicantData, 'status'>>(({ theme, status }) => {
   const styles = {
