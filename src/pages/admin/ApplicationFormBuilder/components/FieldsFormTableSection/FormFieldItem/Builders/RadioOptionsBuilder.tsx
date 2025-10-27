@@ -22,11 +22,11 @@ export const RadioOptionsBuilder = ({ formHandler, questionIndex }: Props) => {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: `questions.${questionIndex}.optionList` as `questions.${number}.optionList`,
+    name: `questions.${questionIndex}.optionList`,
   });
 
   const handleAddOption = () => {
-    append('');
+    append({ option: '' });
   };
 
   return (
