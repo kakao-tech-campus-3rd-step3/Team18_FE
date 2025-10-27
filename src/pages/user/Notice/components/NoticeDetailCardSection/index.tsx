@@ -8,7 +8,7 @@ type NoticeDetailCardSectionProps = {
 
 export const NoticeDetailCardSection = ({ data, onBack }: NoticeDetailCardSectionProps) => {
   return (
-    <S.Card>
+    <S.Container>
       <S.Title>{data.title}</S.Title>
 
       <S.MetaWrapper>
@@ -31,6 +31,6 @@ export const NoticeDetailCardSection = ({ data, onBack }: NoticeDetailCardSectio
 
       <S.Content>{data.content}</S.Content>
       <S.Button onClick={onBack}>목록</S.Button>
-    </S.Card>
+    </S.Container>
   );
 };

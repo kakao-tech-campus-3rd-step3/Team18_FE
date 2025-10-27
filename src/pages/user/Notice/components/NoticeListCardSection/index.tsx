@@ -7,7 +7,7 @@ export const NoticeListCardSection = () => {
   const navigate = useNavigate();
 
   return (
-    <S.NoticeCard>
+    <S.Container>
       {mockNotices.notices.map((notice) => (
         <S.NoticeRow
           key={notice.id}
@@ -22,6 +22,6 @@ export const NoticeListCardSection = () => {
           </S.NoticeRight>
         </S.NoticeRow>
       ))}
-    </S.NoticeCard>
+    </S.Container>
   );
 };

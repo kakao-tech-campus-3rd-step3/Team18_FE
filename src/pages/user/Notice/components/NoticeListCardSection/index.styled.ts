@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const NoticeCard = styled.div(({ theme }) => ({
+export const Container = styled.div(({ theme }) => ({
   width: '80%',
   maxWidth: '780px',
   backgroundColor: theme.colors.bg,
