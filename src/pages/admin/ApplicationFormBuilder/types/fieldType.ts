@@ -13,7 +13,7 @@ export type Question = {
   questionType: 'RADIO' | 'TEXT' | 'TIME_SLOT' | 'CHECKBOX';
   question: string;
   required: boolean;
-  optionList?: string[];
+  optionList?: { option: string }[];
   timeSlotOptions?: TimeSlotOption[];
 };
 
