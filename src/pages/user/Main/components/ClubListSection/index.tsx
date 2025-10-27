@@ -1,28 +1,32 @@
 import { useNavigate } from 'react-router-dom';
-import { useClub } from '@/pages/user/Main/hook/useClub';
-import { searchClubs } from '@/pages/user/Main/utils/searchClubs.ts';
+import { useClubFiltering } from '@/pages/user/Main/hook/useClubFiltering.ts';
+
+import { engToKorCategory } from '@/pages/user/Main/utils/formatting.ts';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
 import { Text } from '@/shared/components/Text';
 import * as S from './Club.styled.ts';
-import { engToKorCategory } from '../../utils/formatting.ts';
-import type { Club } from '../../types/club.ts';
 import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
+import type { Club, RecruitStatus } from '@/pages/user/Main/types/club.ts';
 
 type Props = {
-  filter: ClubCategoryEng;
+  categoryFilter: ClubCategoryEng;
   searchText: string;
+  recruitStatus: RecruitStatus | undefined;
 };
 
-export const ClubListSection = ({ filter, searchText }: Props) => {
-  const { data: clubs, isLoading, error } = useClub(filter);
+export const ClubListSection = ({ categoryFilter, searchText, recruitStatus }: Props) => {
   const navigate = useNavigate();
+
+  const {
+    data: filteredClubs,
+    isLoading,
+    error,
+  } = useClubFiltering(categoryFilter, searchText, recruitStatus);
 
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;
 
-  const searchedClubs = searchClubs(clubs, searchText.replace(/\s+/g, ''));
-
-  if (searchedClubs.length === 0)
+  if (filteredClubs.length === 0)
     return (
       <S.ClubListContainer>
         <S.NoSearchResultContainer>
@@ -31,7 +35,7 @@ export const ClubListSection = ({ filter, searchText }: Props) => {
             alt='이미지 없음'
             width={100}
             height={100}
-          ></S.SearchImage>
+          />
           <S.TextWrapper>
             <Text
               color={'#757575'}
@@ -50,7 +54,7 @@ export const ClubListSection = ({ filter, searchText }: Props) => {
   return (
     <S.ClubListContainer>
       <S.Grid>
-        {searchedClubs.map((club: Club) => (
+        {filteredClubs.map((club: Club) => (
           <S.ClubItem onClick={() => navigate(`/clubs/${club.id}`)} key={club.id}>
             <S.ClubCategoryText>{engToKorCategory[club.category]}</S.ClubCategoryText>
 

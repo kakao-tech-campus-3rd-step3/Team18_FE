@@ -16,3 +16,13 @@ export const BannerWrapper = styled.div(({ theme }) => ({
   gap: 30,
   backgroundColor: theme.colors.primary100,
 }));
+
+export const SearchContainer = styled.div(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
+  maxWidth: `100%`,
+  gap: 30,
+  backgroundColor: theme.colors.primary100,
+}));

@@ -28,21 +28,21 @@ type Props = {
 
 export const RecruitStatusBox = styled.div<Props>(({ theme, status }) => ({
   padding: '6px 10px',
-  borderRadius: theme.radius.lg,
+  borderRadius: theme.radius.md,
   width: 50,
-  backgroundColor: status === '모집중' ? theme.colors.primary100 : theme.colors.red100,
+  backgroundColor: status === '모집중' ? theme.colors.primary : theme.colors.gray200,
 }));
 
-export const RecruitStatusText = styled.div<Props>(({ theme, status }) => ({
+export const RecruitStatusText = styled.div<Props>(({ theme }) => ({
   textAlign: `center`,
   fontSize: theme.font.size.xs,
-  fontWeight: theme.font.weight.bold,
-  color: status === '모집중' ? theme.colors.primary700 : theme.colors.red700,
+  fontWeight: theme.font.weight.medium,
+  color: 'white',
 }));
 
 export const Grid = styled.div(() => ({
   display: 'grid',
-  gap: 15,
+  gap: 30,
   gridTemplateColumns: 'repeat(4, 1fr)',
   justifyItems: 'center',
 
