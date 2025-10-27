@@ -23,7 +23,7 @@ export const ApplicationFieldsFormTableSection = ({ formHandler }: Props) => {
       questionType: 'TEXT',
       question: '',
       required: true,
-      optionList: ['옵션 1'],
+      optionList: [],
       timeSlotOptions: [],
     });
   };
