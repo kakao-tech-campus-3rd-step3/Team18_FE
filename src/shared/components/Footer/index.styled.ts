@@ -8,8 +8,23 @@ export const FooterContainer = styled.div(({ theme }) => ({
 }));
 
 export const Copyright = styled.div(({ theme }) => ({
-  marginTop: 24,
+  marginTop: 8,
   textAlign: 'center',
   fontSize: theme.font.size.sm,
   color: theme.colors.gray400,
+}));
+
+export const Email = styled.a(({ theme }) => ({
+  display: 'block',
+  textAlign: 'center',
+  fontSize: theme.font.size.xs,
+  color: theme.colors.gray500,
+  marginBottom: 8,
+  textDecoration: 'none',
+  cursor: 'pointer',
+
+  ':hover': {
+    textDecoration: 'underline',
+    color: theme.colors.gray700,
+  },
 }));
