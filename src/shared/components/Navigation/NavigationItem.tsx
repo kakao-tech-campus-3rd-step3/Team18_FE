@@ -5,17 +5,12 @@ import type { NavItemData } from '@/types/navigation';
 
 type Props = {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   selected: boolean;
 } & Pick<NavItemData, 'to' | 'isLogo'>;
 
-export const NavigationItem = ({ to, children, isLogo, onClick, selected }: Props) => {
-  if (isLogo)
-    return (
-      <LogoLink to={to || '#'} onClick={() => onClick()}>
-        {children}
-      </LogoLink>
-    );
+export const NavigationItem = ({ to, children, isLogo, onClick = () => {}, selected }: Props) => {
+  if (isLogo) return <LogoLink to={to || '#'}>{children}</LogoLink>;
 
   return (
     <NavLink to={to || '#'} selected={selected} onClick={() => onClick()} data-selected={selected}>
