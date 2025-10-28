@@ -1,12 +1,26 @@
+import { useEffect, useState } from 'react';
+import { fetchNoticeDetail } from '@/pages/user/Notice/api/notices';
 import * as S from './index.styled';
 import type { NoticeDetail } from '@/pages/user/Notice/types/notice';
 
 type NoticeDetailCardSectionProps = {
-  data: NoticeDetail;
+  noticeId: number;
   onBack: () => void;
 };
 
-export const NoticeDetailCardSection = ({ data, onBack }: NoticeDetailCardSectionProps) => {
+export const NoticeDetailCardSection = ({ noticeId, onBack }: NoticeDetailCardSectionProps) => {
+  const [data, setData] = useState<NoticeDetail | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetchNoticeDetail(noticeId);
+      setData(res);
+    };
+    fetchData();
+  }, [noticeId]);
+
+  if (!data) return <div>로딩중...</div>;
+
   return (
     <S.Container>
       <S.Title>{data.title}</S.Title>
@@ -22,7 +36,7 @@ export const NoticeDetailCardSection = ({ data, onBack }: NoticeDetailCardSectio
 
       <S.MetaWrapper>
         <S.MetaItem>
-          <S.Label>작성일</S.Label> {data.createdAt.slice(0, 10)}
+          <S.Label>작성일</S.Label> {data.createdAt?.slice(0, 10) ?? '-'}
         </S.MetaItem>
         <S.MetaItem>
           <S.Label>첨부파일</S.Label> {data.file}
