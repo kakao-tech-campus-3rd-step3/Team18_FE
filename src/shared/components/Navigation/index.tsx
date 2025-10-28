@@ -48,9 +48,6 @@ export const Navigation = () => {
               to={path}
               isLogo={item.isLogo}
               selected={currentRoute.startsWith(getCurrentRoute(item))}
-              onClick={() => {
-                handleItemClick(item.key);
-              }}
             >
               {item.label}
             </NavigationItem>
@@ -65,9 +62,7 @@ export const Navigation = () => {
             to={rightItem.to}
             isLogo={rightItem.isLogo}
             selected={location.pathname === rightItem.to}
-            onClick={() => {
-              if (rightItem.key === 'logout') logout();
-            }}
+            onClick={() => handleItemClick(rightItem.key)}
           >
             {rightItem.label}
           </NavigationItem>
