@@ -1,46 +1,83 @@
-import { useContext, useState } from 'react';
+import styled from '@emotion/styled';
+import { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import { NAV_CONFIG } from '@/constants/navigation';
 import { AuthContext } from '@/providers/auth';
 import { replaceRouteParams } from '@/utils/replaceRouteParams';
 import { NavigationContainer } from './NavigationContainer';
 import { NavigationItem } from './NavigationItem';
+import type { NavItemData } from '@/types/navigation';
 
 export const Navigation = () => {
-  const [currentRoute, setCurrentRoute] = useState('동아리움');
+  const location = useLocation();
+  const currentRoute = location.pathname;
+
   const { user } = useContext(AuthContext);
-  const items = NAV_CONFIG[user?.role ?? 'guest'];
   const { logout } = useContext(AuthContext);
 
-  const handleItemClick = (label: React.ReactNode) => {
-    if (typeof label === 'string') {
-      setCurrentRoute(label);
+  const items: NavItemData[] = NAV_CONFIG[user?.role ?? 'guest'];
+
+  const leftItems = items.filter((item) => !['login', 'logout'].includes(item.key));
+  const rightItem = items.find((item) => ['login', 'logout'].includes(item.key));
+
+  const getCurrentRoute = (item: NavItemData) => {
+    if (item.to?.includes(':clubId') && user?.clubId?.length) {
+      return replaceRouteParams(item.to, { clubId: user.clubId[0] });
     }
-    if (label === '로그아웃') {
+    return item.to || '#';
+  };
+
+  const handleItemClick = (key: string) => {
+    if (key == 'logout') {
       logout();
-      return;
     }
   };
 
   return (
     <NavigationContainer selectedItem={currentRoute}>
-      {items.map((item) => {
-        const path =
-          item.to?.includes(':clubId') && user?.clubId?.length
-            ? replaceRouteParams(item.to, { clubId: user.clubId[0] })
-            : item.to;
+      <LeftMenu>
+        {leftItems.map((item) => {
+          const path =
+            item.to?.includes(':clubId') && user?.clubId?.length
+              ? replaceRouteParams(item.to, { clubId: user.clubId[0] })
+              : item.to;
 
-        return (
+          return (
+            <NavigationItem
+              key={item.key}
+              to={path}
+              isLogo={item.isLogo}
+              selected={currentRoute.startsWith(getCurrentRoute(item))}
+            >
+              {item.label}
+            </NavigationItem>
+          );
+        })}
+      </LeftMenu>
+
+      <RightMenu>
+        {rightItem && (
           <NavigationItem
-            key={item.key}
-            to={path}
-            isLogo={item.isLogo}
-            selected={currentRoute === item.label}
-            onClick={handleItemClick}
+            key={rightItem.key}
+            to={rightItem.to}
+            isLogo={rightItem.isLogo}
+            selected={location.pathname === rightItem.to}
+            onClick={() => handleItemClick(rightItem.key)}
           >
-            {item.label}
+            {rightItem.label}
           </NavigationItem>
-        );
-      })}
+        )}
+      </RightMenu>
     </NavigationContainer>
   );
 };
+
+const LeftMenu = styled.div({
+  display: 'flex',
+  gap: '4rem',
+});
+
+const RightMenu = styled.div({
+  marginLeft: 'auto',
+  display: 'flex',
+});

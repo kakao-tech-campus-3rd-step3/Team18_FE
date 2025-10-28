@@ -17,7 +17,7 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User>({ role: 'admin' });
   const navigate = useNavigate();
 
   const login = async (code: string, signal: AbortSignal) => {
@@ -46,6 +46,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const logout = () => {
     setUser({ role: 'guest' });
     removeAccessToken();
+    navigate('/');
   };
 
   const value = { user, login, logout };
