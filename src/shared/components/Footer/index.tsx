@@ -3,7 +3,7 @@ import { Copyright, Email, FooterContainer } from './index.styled';
 const Footer = () => {
   return (
     <FooterContainer>
-      <Email href='mailto:jnupole004@gmail.com'>contact : jnupole004@gmail.com</Email>
+      <Email href='mailto:jnupole004@gmail.com'>Contact : jnupole004@gmail.com</Email>
       <Copyright>© {new Date().getFullYear()} Dongarium. All rights reserved.</Copyright>
     </FooterContainer>
   );
