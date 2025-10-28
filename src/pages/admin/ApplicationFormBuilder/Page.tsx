@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection';
 import { ApplicationInfoSection } from './components/ApplicationInfoSection';
 import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
-import { ApplicationFormEditButtonSection } from './components/EditButtonSection';
 import { useForm } from 'react-hook-form';
 import type { Question } from './types/fieldType';
 
@@ -22,7 +21,6 @@ export const ApplicationFormBuilder = () => {
         <ApplicationFormBuilderHeaderSection />
         <ApplicationInfoSection formHandler={formHandler} />
         <ApplicationFieldsFormTableSection formHandler={formHandler} />
-        <ApplicationFormEditButtonSection />
       </ContentContainer>
     </Layout>
   );
