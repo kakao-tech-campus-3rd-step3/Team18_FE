@@ -7,14 +7,14 @@ type Props = {
   width?: string;
   children?: React.ReactNode;
 };
-const ApplyButton = ({ recruitStatus }: Props) => {
+const ApplyButton = ({ recruitStatus, to, width }: Props) => {
   const isRecruiting = recruitStatus === '모집중';
   const applyButtonProps = {
     children: isRecruiting ? '지원하기' : '모집 종료',
     disabled: !isRecruiting,
   };
 
-  return <Button {...applyButtonProps} />;
+  return <Button {...applyButtonProps} to={to} width={width} />;
 };
 
 export default ApplyButton;
