@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { Button } from '@/shared/components/Button';
 import { formatDate } from '@/utils/dateUtils';
+import ApplyButton from './ApplyButton';
 import type { ClubDetail } from '@/pages/user/ClubDetail/types/clubDetail';
 
 type ClubInfoSidebarSectionProps = Pick<
@@ -37,9 +37,9 @@ export const ClubInfoSidebarSection = ({
       </InfoItem>
       <InfoItem>정기 모임: {regularMeetingInfo}</InfoItem>
       <InfoItem>모집 상태: {recruitStatus}</InfoItem>
-      <Button to={`/clubs/${clubId}/apply`} width={'auto'}>
+      <ApplyButton recruitStatus={recruitStatus} to={`/clubs/${clubId}/apply`} width={'auto'}>
         지원하기
-      </Button>
+      </ApplyButton>
       <Notice>{applicationNotice}</Notice>
     </SidebarContainer>
   );
