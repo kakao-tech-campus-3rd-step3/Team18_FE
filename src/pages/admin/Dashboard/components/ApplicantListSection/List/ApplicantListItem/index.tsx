@@ -12,7 +12,7 @@ const STATUS_LABEL: Record<ApplicantData['status'], string> = {
 };
 
 export const ApplicantListItem = ({
-  id,
+  applicantId,
   name,
   studentId,
   department,
@@ -22,7 +22,7 @@ export const ApplicantListItem = ({
   onClick,
 }: Props) => {
   return (
-    <S.ItemWrapper onClick={() => onClick(id)}>
+    <S.ItemWrapper onClick={() => onClick(applicantId)}>
       <S.InfoText>{name || '-'}</S.InfoText>
       <S.InfoText>{studentId || '-'}</S.InfoText>
       <S.InfoText>{department || '-'}</S.InfoText>
