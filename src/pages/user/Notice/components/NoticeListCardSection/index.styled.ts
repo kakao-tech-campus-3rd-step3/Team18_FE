@@ -55,3 +55,22 @@ export const NoticeAuthor = styled.span(({ theme }) => ({
   width: '60px',
   textAlign: 'right',
 }));
+
+export const PaginationWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 8px;
+`;
+
+export const PageButton = styled.button<{ $active?: boolean }>`
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background: ${({ $active }) => ($active ? '#000' : '#eee')};
+  color: ${({ $active }) => ($active ? '#fff' : '#000')};
+  cursor: pointer;
+  &:hover {
+    background: #ddd;
+  }
+`;
