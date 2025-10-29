@@ -9,7 +9,7 @@ export type ApplicationStatus = 'APPROVED' | 'REJECTED' | 'PENDING';
 export type ApplicationFilterOption = 'ALL' | ApplicationStatus;
 
 export type ApplicantData = {
-  id: number;
+  applicantId: number;
   name: string;
   studentId: string;
   department: string;

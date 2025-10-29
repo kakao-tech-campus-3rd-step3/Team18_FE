@@ -3,7 +3,7 @@ import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
 
 const applicants: ApplicantData[] = [
   {
-    id: 1,
+    applicantId: 1,
     name: '김동글',
     studentId: '234567',
     department: '소프트웨어공학과',
@@ -12,7 +12,7 @@ const applicants: ApplicantData[] = [
     status: 'PENDING',
   },
   {
-    id: 2,
+    applicantId: 2,
     name: '김동글',
     studentId: '234567',
     department: '소프트웨어공학과',
@@ -21,7 +21,7 @@ const applicants: ApplicantData[] = [
     status: 'APPROVED',
   },
   {
-    id: 3,
+    applicantId: 3,
     name: '김동글',
     studentId: '234567',
     department: '소프트웨어공학과',
@@ -30,7 +30,7 @@ const applicants: ApplicantData[] = [
     status: 'REJECTED',
   },
   {
-    id: 4,
+    applicantId: 4,
     name: '김동글',
     studentId: '234567',
     department: '소프트웨어공학과',

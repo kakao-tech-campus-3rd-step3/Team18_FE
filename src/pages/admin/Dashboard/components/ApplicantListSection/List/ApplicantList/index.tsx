@@ -49,8 +49,8 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
         {applicants.length > 0 ? (
           applicants.map((applicant) => (
             <ApplicantListItem
-              key={applicant.id}
-              id={applicant.id}
+              key={applicant.applicantId}
+              applicantId={applicant.applicantId}
               name={applicant.name}
               studentId={applicant.studentId}
               department={applicant.department}
