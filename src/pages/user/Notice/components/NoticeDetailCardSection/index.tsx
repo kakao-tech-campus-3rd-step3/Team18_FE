@@ -10,14 +10,32 @@ type NoticeDetailCardSectionProps = {
 
 export const NoticeDetailCardSection = ({ noticeId, onBack }: NoticeDetailCardSectionProps) => {
   const [data, setData] = useState<NoticeDetail | null>(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetchNoticeDetail(noticeId);
-      setData(res);
+      try {
+        const res = await fetchNoticeDetail(noticeId);
+        setData(res);
+      } catch (err) {
+        console.error('Failed to fetch notice detail:', err);
+        setError(true);
+      }
     };
     fetchData();
   }, [noticeId]);
+
+  if (error)
+    return (
+      <S.Container>
+        <S.ErrorBox>
+          공지사항 정보를 불러올 수 없습니다.
+          <br />
+          잠시 후 다시 시도해주세요.
+        </S.ErrorBox>
+        <S.Button onClick={onBack}>목록</S.Button>
+      </S.Container>
+    );
 
   if (!data) return <div>로딩중...</div>;
 

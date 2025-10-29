@@ -61,3 +61,11 @@ export const Button = styled.button(({ theme }) => ({
     transform: 'translateY(-1px)',
   },
 }));
+
+export const ErrorBox = styled.div`
+  padding: 120px 0;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.gray600};
+  font-size: ${({ theme }) => theme.font.size.lg};
+  line-height: 160%;
+`;
