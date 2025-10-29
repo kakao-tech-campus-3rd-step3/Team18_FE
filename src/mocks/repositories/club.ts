@@ -372,6 +372,26 @@ export const clubRepository = {
 
     return mockClubDetail[index];
   },
+
+  uploadClubImages: (
+    id: number,
+    newFiles: File[],
+    remainingUrls: string[],
+  ): string[] | undefined => {
+    const club = mockClubDetail.find((c) => c.clubId === id);
+    if (!club) return;
+
+    const currentUrls = remainingUrls;
+
+    const newUrls = newFiles.map((file) => {
+      const randomSuffix = Math.floor(Math.random() * 10000);
+      return `https://placehold.co/300x200?text=${encodeURIComponent(file.name)}+${randomSuffix}`;
+    });
+
+    club.introductionImages = [...currentUrls, ...newUrls];
+
+    return club.introductionImages;
+  },
 };
 
 export const clubReviewRepository = {

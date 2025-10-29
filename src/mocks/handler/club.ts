@@ -83,6 +83,36 @@ const postClubReviewResolver = async ({
   return HttpResponse.json(newReview, { status: 201 });
 };
 
+const putClubImagesResolver = async ({
+  params,
+  request,
+}: {
+  params: PathParams;
+  request: Request;
+}) => {
+  const { clubId } = params;
+  const formData = await request.formData();
+
+  const files: File[] = [];
+  const remainingUrls: string[] = [];
+
+  formData.forEach((value) => {
+    if (value instanceof File) {
+      files.push(value);
+    } else if (typeof value === 'string') {
+      remainingUrls.push(value);
+    }
+  });
+
+  const updatedImages = clubRepository.uploadClubImages(Number(clubId), files, remainingUrls);
+
+  if (!updatedImages) {
+    return new HttpResponse('Not Found', { status: 404 });
+  }
+
+  return HttpResponse.json(updatedImages, { status: 200 });
+};
+
 export const clubHandlers = [
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs?category', getClubsResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:Id/apply', getClubApplicationResolver),
@@ -94,4 +124,5 @@ export const clubHandlers = [
   http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', postClubDetailResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/reviews', getClubReviewsResolver),
   http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/reviews', postClubReviewResolver),
+  http.put(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/images', putClubImagesResolver),
 ];
