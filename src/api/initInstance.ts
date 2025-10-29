@@ -36,7 +36,7 @@ apiInstance.interceptors.response.use(
   async function onRejected(e: AxiosError) {
     const error = e as AxiosError<ErrorResponse>;
     const config = error.config;
-    if (error.response?.data.status === 401 && config) {
+    if (error.response?.status === 401 && config) {
       try {
         const tokenResponse = await reissueAccessToken();
         setAccessToken(tokenResponse.accessToken);
