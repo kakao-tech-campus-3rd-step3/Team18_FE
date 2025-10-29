@@ -55,3 +55,25 @@ export const NoticeAuthor = styled.span(({ theme }) => ({
   width: '60px',
   textAlign: 'right',
 }));
+
+export const PaginationWrapper = styled.div({
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '20px',
+  gap: '8px',
+});
+
+export const PageButton = styled.button<{ $active?: boolean }>(({ theme, $active }) => ({
+  padding: '6px 12px',
+  border: 'none',
+  borderRadius: theme.radius.sm,
+  backgroundColor: $active ? theme.colors.primary : theme.colors.bg,
+  color: $active ? theme.colors.bg : theme.colors.textPrimary,
+  cursor: 'pointer',
+  fontSize: theme.font.size.sm,
+  fontWeight: theme.font.weight.medium,
+  transition: 'background-color 0.2s ease, color 0.2s ease',
+  '&:hover': {
+    backgroundColor: $active ? theme.colors.primary700 : theme.colors.bgGreen,
+  },
+}));
