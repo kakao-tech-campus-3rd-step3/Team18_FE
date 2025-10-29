@@ -5,6 +5,7 @@ import { Toaster } from 'sonner';
 import { Navigation } from '@/shared/components/Navigation';
 import { theme } from '@/styles/theme';
 import { UserProvider } from './providers/auth';
+import Footer from './shared/components/Footer';
 
 const queryClient = new QueryClient();
 
@@ -16,6 +17,7 @@ export function App() {
           <ToastContainer />
           <Navigation />
           <Outlet />
+          <Footer />
         </UserProvider>
       </ThemeProvider>
     </QueryClientProvider>
