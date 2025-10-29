@@ -25,11 +25,20 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       const response: LoginResponse = await postAuthCode(code, signal);
 
       switch (response.status) {
-        case 'LOGIN_SUCCESS':
-          setAccessToken(response.accessToken);
-          setUser({ role: 'admin' });
-          navigate('/');
+        case 'LOGIN_SUCCESS': {
+          const defaultClub = response.clubIdAndRoleList[0];
+          if (defaultClub) {
+            const { role, clubId } = defaultClub;
+            setAccessToken(response.accessToken);
+            setUser({ role, clubId });
+            navigate('/');
+          } else {
+            setAccessToken(response.accessToken);
+            setUser({ role: 'guest' });
+            navigate('/');
+          }
           break;
+        }
         case 'REGISTRATION_REQUIRED':
           setTemporaryToken(response.temporaryToken);
           navigate('/signup');
