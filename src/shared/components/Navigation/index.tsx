@@ -21,8 +21,8 @@ export const Navigation = () => {
   const rightItem = items.find((item) => ['login', 'logout'].includes(item.key));
 
   const getCurrentRoute = (item: NavItemData) => {
-    if (item.to?.includes(':clubId') && user?.clubId?.length) {
-      return replaceRouteParams(item.to, { clubId: user.clubId[0] });
+    if (item.to?.includes(':clubId') && user?.clubId) {
+      return replaceRouteParams(item.to, { clubId: user?.clubId });
     }
     return item.to || '#';
   };
@@ -38,8 +38,8 @@ export const Navigation = () => {
       <LeftMenu>
         {leftItems.map((item) => {
           const path =
-            item.to?.includes(':clubId') && user?.clubId?.length
-              ? replaceRouteParams(item.to, { clubId: user.clubId[0] })
+            item.to?.includes(':clubId') && user?.clubId
+              ? replaceRouteParams(item.to, { clubId: user.clubId })
               : item.to;
 
           return (
