@@ -14,6 +14,7 @@ import {
 } from '@/pages/user/Main/utils/formatting.ts';
 import { Dropdown } from '@/shared/components/Dropdown/index.tsx';
 import * as S from './Banner.styled.ts';
+import * as B from './BannerText.tsx';
 
 type Props = {
   onChangeSearch: (searchText: string) => void;
@@ -47,7 +48,10 @@ export const BannerSection = ({
 
   return (
     <S.BannerWrapper>
-      <S.BannerText>{` 동아리움 (Dongari-um): 동아리 + 공간(-um), 동아리들을 위한 공간.`}</S.BannerText>
+      <B.BannerTextWrapper>
+        <B.HeaderText>함께할 사람이 있는 곳, 동아리움.</B.HeaderText>
+        <B.SubText>관심 있는 전남대학교 동아리를 찾고, 참여해보세요.</B.SubText>
+      </B.BannerTextWrapper>
 
       <SearchContainer>
         <ClubSearchInput onChangeSearch={onChangeSearch} />
