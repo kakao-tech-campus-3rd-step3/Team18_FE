@@ -10,6 +10,9 @@ import {
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AuthContextType, User } from '@/types/auth';
 
+const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
+const LOGOUT_REDIRECT_URI = import.meta.env.VITE_LOGOUT_REDIRECT_URI;
+
 export const AuthContext = createContext<AuthContextType>({
   user: { role: 'guest' },
   login: () => {},
@@ -48,7 +51,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       await logoutUser();
       setUser({ role: 'guest' });
       removeAccessToken();
-      navigate('/');
+      const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${REST_API_KEY}&logout_redirect_uri=${LOGOUT_REDIRECT_URI}`;
+      window.location.href = kakaoLogoutUrl;
     } catch (e) {
       if (isAxiosError<ErrorResponse>(e)) {
         throw new Error(e.response?.data.message ?? '로그아웃 중 오류가 발생했습니다.');
