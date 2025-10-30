@@ -17,7 +17,7 @@ export const Navigation = () => {
               key={item.key}
               to={path}
               isLogo={item.isLogo}
-              selected={currentRoute.startsWith(getCurrentRoute(item))}
+              selected={currentRoute.startsWith(path)}
             >
               {item.isLogo ? <Logo /> : item.label}
             </NavigationItem>
