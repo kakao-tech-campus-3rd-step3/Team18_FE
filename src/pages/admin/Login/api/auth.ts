@@ -1,14 +1,22 @@
 import { apiInstance } from '@/api/initInstance';
+import type { Role } from '@/types/navigation';
 import type { AxiosResponse } from 'axios';
 
 interface LoginSuccessResponse {
   status: 'LOGIN_SUCCESS';
   accessToken: string;
+  clubIdAndRoleList: ClubMemberInfo[];
 }
 
 interface RegistrationRequiredResponse {
   status: 'REGISTRATION_REQUIRED';
   temporaryToken: string;
+  clubIdAndRoleList: ClubMemberInfo[];
+}
+
+interface ClubMemberInfo {
+  clubId: number;
+  role: Role;
 }
 
 export type LoginResponse = LoginSuccessResponse | RegistrationRequiredResponse;

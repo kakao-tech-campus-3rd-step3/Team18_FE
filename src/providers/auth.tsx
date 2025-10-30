@@ -20,7 +20,7 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User>({ role: 'admin' });
+  const [user, setUser] = useState<User>({ role: 'guest' });
   const navigate = useNavigate();
 
   const login = async (code: string, signal: AbortSignal) => {
@@ -28,11 +28,18 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       const response: LoginResponse = await postAuthCode(code, signal);
 
       switch (response.status) {
-        case 'LOGIN_SUCCESS':
+        case 'LOGIN_SUCCESS': {
           setAccessToken(response.accessToken);
-          setUser({ role: 'admin' });
+          const defaultClub = response.clubIdAndRoleList[0];
+          if (defaultClub) {
+            const { role, clubId } = defaultClub;
+            setUser({ role, clubId });
+          } else {
+            setUser({ role: 'guest' });
+          }
           navigate('/');
           break;
+        }
         case 'REGISTRATION_REQUIRED':
           setTemporaryToken(response.temporaryToken);
           navigate('/signup');
