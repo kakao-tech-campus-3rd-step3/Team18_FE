@@ -5,13 +5,8 @@ import { NavigationContainer } from './NavigationContainer';
 import { NavigationItem } from './NavigationItem';
 
 export const Navigation = () => {
-  const { user, logout, leftItems, rightItem, getCurrentRoute, currentRoute } = useNavigation();
-
-  const handleItemClick = (key: string) => {
-    if (key == 'logout') {
-      logout();
-    }
-  };
+  const { user, leftItems, rightItem, getCurrentRoute, currentRoute, handleItemClick } =
+    useNavigation();
 
   return (
     <NavigationContainer selectedItem={currentRoute}>
