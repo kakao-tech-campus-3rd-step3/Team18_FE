@@ -1,47 +1,16 @@
 import styled from '@emotion/styled';
-import { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
-import { NAV_CONFIG } from '@/constants/navigation';
-import { AuthContext } from '@/providers/auth';
-import { replaceRouteParams } from '@/utils/replaceRouteParams';
+import { useNavigation } from './hooks/useNavigation';
 import { NavigationContainer } from './NavigationContainer';
 import { NavigationItem } from './NavigationItem';
-import type { NavItemData } from '@/types/navigation';
 
 export const Navigation = () => {
-  const location = useLocation();
-  const currentRoute = location.pathname;
-
-  const { user } = useContext(AuthContext);
-  const { logout } = useContext(AuthContext);
-
-  const items: NavItemData[] = NAV_CONFIG[user?.role ?? 'guest'];
-
-  const leftItems = items.filter((item) => !['login', 'logout'].includes(item.key));
-  const rightItem = items.find((item) => ['login', 'logout'].includes(item.key));
-
-  const getCurrentRoute = (item: NavItemData) => {
-    if (item.to?.includes(':clubId') && user?.clubId?.length) {
-      return replaceRouteParams(item.to, { clubId: user.clubId[0] });
-    }
-    return item.to || '#';
-  };
-
-  const handleItemClick = (key: string) => {
-    if (key == 'logout') {
-      logout();
-    }
-  };
+  const { leftItems, rightItem, getCurrentRoute, currentRoute, handleItemClick } = useNavigation();
 
   return (
     <NavigationContainer selectedItem={currentRoute}>
       <LeftMenu>
         {leftItems.map((item) => {
-          const path =
-            item.to?.includes(':clubId') && user?.clubId?.length
-              ? replaceRouteParams(item.to, { clubId: user.clubId[0] })
-              : item.to;
-
+          const path = getCurrentRoute(item);
           return (
             <NavigationItem
               key={item.key}
@@ -61,7 +30,7 @@ export const Navigation = () => {
             key={rightItem.key}
             to={rightItem.to}
             isLogo={rightItem.isLogo}
-            selected={location.pathname === rightItem.to}
+            selected={currentRoute === rightItem.to}
             onClick={() => handleItemClick(rightItem.key)}
           >
             {rightItem.label}
