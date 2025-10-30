@@ -1,22 +1,16 @@
 import styled from '@emotion/styled';
-import { replaceRouteParams } from '@/utils/replaceRouteParams';
 import { useNavigation } from './hooks/useNavigation';
 import { NavigationContainer } from './NavigationContainer';
 import { NavigationItem } from './NavigationItem';
 
 export const Navigation = () => {
-  const { user, leftItems, rightItem, getCurrentRoute, currentRoute, handleItemClick } =
-    useNavigation();
+  const { leftItems, rightItem, getCurrentRoute, currentRoute, handleItemClick } = useNavigation();
 
   return (
     <NavigationContainer selectedItem={currentRoute}>
       <LeftMenu>
         {leftItems.map((item) => {
-          const path =
-            item.to?.includes(':clubId') && user?.clubId?.length
-              ? replaceRouteParams(item.to, { clubId: user.clubId[0] })
-              : item.to;
-
+          const path = getCurrentRoute(item);
           return (
             <NavigationItem
               key={item.key}
