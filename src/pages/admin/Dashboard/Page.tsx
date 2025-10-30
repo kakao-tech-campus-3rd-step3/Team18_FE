@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { ApplicantListSection } from './components/ApplicantListSection';
 import { DashboardSummarySection } from './components/DashboardSummarySection';
-import { SendResultButtonSection } from './components/SendResultButtonSection';
 import { SentAcceptanceMessagesSection } from './components/SentAcceptanceMessagesSection';
 
 export const DashboardPage = () => {
@@ -11,7 +10,6 @@ export const DashboardPage = () => {
         <DashboardSummarySection />
         <ApplicantListSection />
         <SentAcceptanceMessagesSection />
-        <SendResultButtonSection />
       </Container>
     </Layout>
   );
