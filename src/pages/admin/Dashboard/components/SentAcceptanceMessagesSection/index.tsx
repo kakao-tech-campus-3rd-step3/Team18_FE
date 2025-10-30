@@ -5,8 +5,13 @@ import { Text } from '@/shared/components/Text';
 import { Button } from '@/shared/components/Button';
 import { useForm } from 'react-hook-form';
 import { useSentMessage } from '@/pages/admin/Dashboard/hooks/useSentMessage';
+import type { ApplicationStage } from '@/pages/admin/Dashboard/types/dashboard';
 
-export const SentAcceptanceMessagesSection = () => {
+interface SentAcceptanceMessagesSectionProps {
+  stage: ApplicationStage;
+}
+
+export const SentAcceptanceMessagesSection = ({ stage }: SentAcceptanceMessagesSectionProps) => {
   const { clubId } = useParams();
 
   const {
@@ -17,7 +22,7 @@ export const SentAcceptanceMessagesSection = () => {
     defaultValues: { acceptanceMessage: '' },
   });
 
-  const { mutate: sendMessage } = useSentMessage(Number(clubId));
+  const { mutate: sendMessage } = useSentMessage(Number(clubId), stage);
 
   const handleSubmitMessage = (data: { acceptanceMessage: string }) => {
     sendMessage(data.acceptanceMessage);
