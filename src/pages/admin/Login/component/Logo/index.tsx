@@ -21,5 +21,4 @@ export const LogoImage = styled.img`
   height: auto;
   width: auto;
   object-fit: contain;
-  vertical-align: middle;
 `;
