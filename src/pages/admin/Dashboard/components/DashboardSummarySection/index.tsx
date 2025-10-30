@@ -3,11 +3,12 @@ import { useDashboardSummary } from '@/pages/admin/Dashboard/hooks/useDashboardS
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { formatDateWithoutYear } from '@/utils/dateUtils';
 import { SummaryCard } from './SummaryCard';
+import { useParams } from 'react-router-dom';
 
 export const DashboardSummarySection = () => {
-  const clubId = 1;
+  const { clubId } = useParams();
 
-  const { data: summary, isLoading, error } = useDashboardSummary(clubId);
+  const { data: summary, isLoading, error } = useDashboardSummary(Number(clubId));
 
   if (isLoading) return <LoadingSpinner />;
   if (error) {
