@@ -20,16 +20,24 @@ export const StageToggle = ({ value, onChange }: Props) => {
   );
 };
 
-const Container = styled.div(({ theme }) => ({
-  position: 'relative',
-  display: 'flex',
-  minWidth: '20rem',
-  height: 'auto',
-  border: `1px solid ${theme.colors.gray200}`,
-  borderRadius: theme.radius.lg,
-  overflow: 'hidden',
-  cursor: 'pointer',
-}));
+const Container = styled.div`
+  position: relative;
+  display: flex;
+  min-width: 20rem;
+  height: auto;
+  border: 1px solid ${({ theme }) => theme.colors.gray200};
+  border-radius: ${({ theme }) => theme.radius.lg};
+  overflow: hidden;
+  cursor: pointer;
+
+  @media (max-width: 940px) {
+    min-width: 15rem;
+  }
+
+  @media (max-width: 670px) {
+    min-width: 10rem;
+  }
+`;
 
 const Slider = styled.div<{ isInterview: boolean }>(({ isInterview, theme }) => ({
   position: 'absolute',

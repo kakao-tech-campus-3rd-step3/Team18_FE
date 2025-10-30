@@ -48,19 +48,30 @@ export const ApplicantListSection = () => {
   );
 };
 
-const ApplicantFilterTopBarWrapper = styled.div({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  margin: '4.5rem 0 1.5rem 0',
-  padding: '0 1rem',
-});
+const ApplicantFilterTopBarWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4.5rem 0 1.5rem 0;
+  padding: 0 1rem;
 
-const LeftSection = styled.div({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '3rem',
-});
+  @media (max-width: 940px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+`;
+
+const LeftSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+
+  @media (max-width: 500px) {
+    width: 100%;
+    justify-content: space-between;
+  }
+`;
 
 const ListWrapper = styled.main(({ theme }) => ({
   minHeight: 'auto',
