@@ -4,7 +4,6 @@ import { NavigationContainer } from './NavigationContainer';
 import { NavigationItem } from './NavigationItem';
 
 export const Navigation = () => {
-
   const { leftItems, rightItem, getCurrentRoute, currentRoute, handleItemClick } = useNavigation();
 
   return (
