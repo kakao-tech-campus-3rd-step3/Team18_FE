@@ -10,12 +10,16 @@ import type {
   ApplicationStage,
 } from '@/pages/admin/Dashboard/types/dashboard';
 
-export const ApplicantListSection = () => {
+interface ApplicantListSectionProps {
+  stage: ApplicationStage;
+  setStage: React.Dispatch<React.SetStateAction<ApplicationStage>>;
+}
+
+export const ApplicantListSection = ({ stage, setStage }: ApplicantListSectionProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const optionType = 'ALL' as ApplicationFilterOption;
 
   const [filterOption, setFilterOption] = useState<ApplicationFilterOption>(optionType);
-  const [stage, setStage] = useState<ApplicationStage>('서류');
 
   const handleFilterOptionChange = (option: ApplicationFilterOption) => {
     setFilterOption(option);
