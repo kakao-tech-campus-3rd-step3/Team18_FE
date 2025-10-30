@@ -24,15 +24,17 @@ export const useClubReviews = (clubId: number) => {
     async (studentId: string, content: string) => {
       if (!studentId.trim() || !content.trim()) {
         setError('학번과 내용을 입력해 주세요.');
-        return;
+        return false;
       }
 
       try {
         setError(null);
         const newReview = await postClubReview(clubId, { studentId, content });
         setReviews((prev) => [newReview, ...prev]);
+        return true;
       } catch {
-        setError('후기 등록에 실패했습니다.');
+        setError('학번이 일치하지 않습니다.');
+        return false;
       }
     },
     [clubId],

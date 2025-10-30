@@ -8,6 +8,7 @@ import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
 import { MainPage } from '@/pages/user/Main/Page.tsx';
 import { NoticeDetailPage } from '@/pages/user/Notice/DetailPage';
 import { NoticeListPage } from '@/pages/user/Notice/Page';
+import { ClubGuard } from '@/providers/guards/ClubGuard';
 import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
 import { ApplicationFormBuilder } from './admin/ApplicationFormBuilder/Page';
 import { KakaoCallback } from './admin/Login/KakaoCallback';
@@ -52,6 +53,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/admin',
+        element: <ClubGuard />,
         children: [
           {
             path: ADMIN.DASHBOARD,

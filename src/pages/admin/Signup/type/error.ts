@@ -1,5 +1,5 @@
 export interface ErrorResponse {
-  status: number;
+  error_code: string;
   message: string;
   detail: string;
 }
