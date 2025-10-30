@@ -2,7 +2,7 @@ import type { NavigateFunction } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { setAccessToken, setTemporaryToken } from '@/pages/admin/Signup/utils/token';
-import { postAuthCode, type LoginResponse } from '../api/postAuthCode';
+import { postAuthCode, type LoginResponse } from '../api/auth';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AxiosError } from 'axios';
 

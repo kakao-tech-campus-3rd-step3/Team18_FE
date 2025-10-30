@@ -29,5 +29,11 @@ export const postAuthCode = async (code: string, signal: AbortSignal): Promise<L
     },
     { signal },
   );
+
   return response.data;
+};
+
+export const logoutUser = async () => {
+  const response = await apiInstance.post('/auth/logout', {});
+  return response;
 };
