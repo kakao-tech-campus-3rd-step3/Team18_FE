@@ -55,6 +55,5 @@ const Container = styled.div({
 const ButtonWrapper = styled.div({
   display: 'flex',
   justifyContent: 'center',
-  marginTop: '3rem',
   width: '100%',
 });
