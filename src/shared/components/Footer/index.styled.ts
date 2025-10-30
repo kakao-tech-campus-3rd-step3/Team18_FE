@@ -5,6 +5,7 @@ export const FooterContainer = styled.div(({ theme }) => ({
   backgroundColor: theme.colors.gray100,
   padding: 32,
   borderTop: `1px solid ${theme.colors.primary00}`,
+  boxSizing: 'border-box',
 }));
 
 export const Copyright = styled.div(({ theme }) => ({

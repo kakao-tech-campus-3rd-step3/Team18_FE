@@ -12,7 +12,7 @@ export const reissueAccessToken = async (): Promise<TokenResponse> => {
     return data;
   } catch (e: unknown) {
     const error = e as AxiosError<ErrorResponse>;
-    if (error.response?.data.status === 401) {
+    if (error.response?.data.error_code === 'EXPIRED_JWT_TOKEN') {
       throw new Error('Refresh token 만료');
     }
     throw new Error(error.message);

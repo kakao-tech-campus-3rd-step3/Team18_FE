@@ -1,22 +1,30 @@
 import styled from '@emotion/styled';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { NoticeDetailCardSection } from './components/NoticeDetailCardSection';
-import { mockNoticeDetail } from './mock';
 
 export const NoticeDetailPage = () => {
   const navigate = useNavigate();
-  const data = mockNoticeDetail;
+  const { noticeId: noticeIdParam } = useParams<{ noticeId: string }>();
+  const noticeId = noticeIdParam ? Number(noticeIdParam) : null;
+
+  if (!noticeId) {
+    return (
+      <Wrapper>
+        <p>잘못된 접근입니다.</p>
+        <button onClick={() => navigate(-1)}>뒤로가기</button>
+      </Wrapper>
+    );
+  }
 
   return (
     <Wrapper>
-      <NoticeDetailCardSection data={data} onBack={() => navigate(-1)} />
+      <NoticeDetailCardSection noticeId={noticeId} onBack={() => navigate(-1)} />
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'center',
-  padding: '60px 0',
-  backgroundColor: theme.colors.bg,
-}));
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+`;
