@@ -36,7 +36,7 @@ export const Navigation = () => {
             key={rightItem.key}
             to={rightItem.to}
             isLogo={rightItem.isLogo}
-            selected={location.pathname === rightItem.to}
+            selected={currentRoute === rightItem.to}
             onClick={() => handleItemClick(rightItem.key)}
           >
             {rightItem.label}
