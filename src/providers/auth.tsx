@@ -1,7 +1,7 @@
 import { isAxiosError } from 'axios';
 import { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postAuthCode, type LoginResponse } from '@/pages/admin/Login/api/postAuthCode';
+import { logoutUser, postAuthCode, type LoginResponse } from '@/pages/admin/Login/api/auth';
 import {
   removeAccessToken,
   setAccessToken,
@@ -43,10 +43,18 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const logout = () => {
-    setUser({ role: 'guest' });
-    removeAccessToken();
-    navigate('/');
+  const logout = async () => {
+    try {
+      await logoutUser();
+      setUser({ role: 'guest' });
+      removeAccessToken();
+      navigate('/');
+    } catch (e) {
+      if (isAxiosError<ErrorResponse>(e)) {
+        throw new Error(e.response?.data.message ?? '로그아웃 중 오류가 발생했습니다.');
+      }
+      throw e;
+    }
   };
 
   const value = { user, login, logout };
