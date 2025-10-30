@@ -15,8 +15,8 @@ export const useNavigation = () => {
   const rightItem = items.find((item) => ['login', 'logout'].includes(item.key));
 
   const getCurrentRoute = (item: NavItemData) => {
-    if (item.to?.includes(':clubId') && user?.clubId?.length) {
-      return replaceRouteParams(item.to, { clubId: user.clubId[0] });
+    if (item.to?.includes(':clubId') && user?.clubId) {
+      return replaceRouteParams(item.to, { clubId: user.clubId });
     }
     return item.to || '#';
   };
