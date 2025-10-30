@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { Text } from '@/shared/components/Text';
@@ -6,6 +7,8 @@ import { useForm } from 'react-hook-form';
 import { useSentMessage } from '@/pages/admin/Dashboard/hooks/useSentMessage';
 
 export const SentAcceptanceMessagesSection = () => {
+  const { clubId } = useParams();
+
   const {
     register,
     handleSubmit,
@@ -14,7 +17,7 @@ export const SentAcceptanceMessagesSection = () => {
     defaultValues: { acceptanceMessage: '' },
   });
 
-  const { mutate: sendMessage } = useSentMessage(2);
+  const { mutate: sendMessage } = useSentMessage(Number(clubId));
 
   const handleSubmitMessage = (data: { acceptanceMessage: string }) => {
     sendMessage(data.acceptanceMessage);
