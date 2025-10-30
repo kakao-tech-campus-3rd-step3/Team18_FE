@@ -1,19 +1,19 @@
 import { FiTrash2, FiPlus } from 'react-icons/fi';
+import { useClubActivityPhotos } from '@/pages/admin/ClubDetailEdit/hook/useClubActivityPhotos';
 import { SectionTitle } from '@/shared/components/SectionTitle';
 import * as S from './index.styled';
 
 interface ClubActivityPhotosEditSectionProps {
+  clubId: string | number;
   images: string[];
+  onUpload: (files: File[]) => void;
 }
 
-export const ClubActivityPhotosEditSection = ({ images }: ClubActivityPhotosEditSectionProps) => {
-  const handleDelete = (idx: number) => {
-    console.log(`${idx}번째 사진 삭제`);
-  };
-
-  const handleAdd = () => {
-    console.log('사진 추가');
-  };
+export const ClubActivityPhotosEditSection = ({
+  clubId,
+  images: initialImages,
+}: ClubActivityPhotosEditSectionProps) => {
+  const { images, handleAdd, handleDelete } = useClubActivityPhotos(clubId, initialImages);
 
   return (
     <>
