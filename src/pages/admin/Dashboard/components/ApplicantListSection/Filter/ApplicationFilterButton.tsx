@@ -16,12 +16,37 @@ export const ApplicantFilterButton = ({ label, value, selected, onClick }: Props
   );
 };
 
-const Wrapper = styled.button<Pick<Props, 'selected'>>(({ theme, selected }) => ({
-  border: 'none',
-  background: 'none',
-  cursor: 'pointer',
-  fontSize: '1.2rem',
-  fontWeight: selected ? theme.font.weight.bold : theme.font.weight.regular,
-  color: selected ? theme.colors.primary : theme.colors.gray300,
-  transition: 'all 200ms ease-in-out',
-}));
+const Wrapper = styled.button<Pick<Props, 'selected'>>`
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: ${({ theme, selected }) =>
+    selected ? theme.font.weight.bold : theme.font.weight.regular};
+  color: ${({ theme, selected }) => (selected ? theme.colors.primary : theme.colors.gray300)};
+  transition: all 200ms ease-in-out;
+
+  &.filter-pending {
+    @media (max-width: 940px) {
+      display: none;
+    }
+  }
+
+  &.filter-rejected {
+    @media (max-width: 850px) {
+      display: none;
+    }
+  }
+
+  &.filter-approved {
+    @media (max-width: 760px) {
+      display: none;
+    }
+  }
+
+  &.filter-all {
+    @media (max-width: 670px) {
+      display: none;
+    }
+  }
+`;
