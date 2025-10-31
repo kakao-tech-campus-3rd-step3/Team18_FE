@@ -5,7 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { Button } from '@/shared/components/Button';
 import { PageHeader } from '@/shared/components/PageHeader';
-import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
+import { TwoColumnLayout } from '@/shared/components/Layout/TwoC/TwoColumnLayout';
 import { theme } from '@/shared/styles/theme';
 import { updateClubDetailEdit } from './api/clubDetailEdit';
 import { updateClubImages } from './api/clubImagesEdit';

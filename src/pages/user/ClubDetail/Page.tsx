@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { PageHeader } from '@/shared/components/PageHeader';
-import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
+import { TwoColumnLayout } from '@/shared/components/Layout/TwoC/TwoColumnLayout';
 import { fetchClubDetail } from './api/clubDetail';
 import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
 import { ClubDescriptionSection } from './components/ClubDescriptionSection';
