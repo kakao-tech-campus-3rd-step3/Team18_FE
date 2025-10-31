@@ -6,6 +6,7 @@ type Props = {
   label: string;
   selected: boolean;
   onClick: (value: ApplicationFilterOption) => void;
+  className?: string;
 };
 
 export const ApplicantFilterButton = ({ label, value, selected, onClick }: Props) => {
