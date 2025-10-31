@@ -1,4 +1,4 @@
-import { SectionTitle } from '@/shared/components/SectionTitle';
+import { SectionHeading } from '@/shared/components/SectionHeading';
 import * as S from './index.styled';
 
 interface ClubActivityPhotosSectionProps {
@@ -9,7 +9,7 @@ export const ClubActivityPhotosSection = ({ images }: ClubActivityPhotosSectionP
   return (
     <>
       <S.TitleWrapper>
-        <SectionTitle>활동 사진</SectionTitle>
+        <SectionHeading>활동 사진</SectionHeading>
       </S.TitleWrapper>
       <S.PhotosWrapper>
         <S.PhotosContainer>

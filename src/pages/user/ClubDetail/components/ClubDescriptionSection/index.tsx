@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { SectionTitle } from '@/shared/components/SectionTitle';
+import { SectionHeading } from '@/shared/components/SectionHeading';
 
 interface ClubDescriptionSectionProps {
   introductionOverview: string;
@@ -14,13 +14,13 @@ export const ClubDescriptionSection = ({
 }: ClubDescriptionSectionProps) => {
   return (
     <DescriptionContainer>
-      <SectionTitle>동아리 소개</SectionTitle>
+      <SectionHeading>동아리 소개</SectionHeading>
       <DescriptionText>{introductionOverview}</DescriptionText>
 
-      <SectionTitle>활동 내용</SectionTitle>
+      <SectionHeading>활동 내용</SectionHeading>
       <DescriptionText>{introductionActivity}</DescriptionText>
 
-      <SectionTitle>모집하는 사람</SectionTitle>
+      <SectionHeading>모집하는 사람</SectionHeading>
       <DescriptionText>{introductionIdeal}</DescriptionText>
     </DescriptionContainer>
   );

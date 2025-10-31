@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { useFormContext } from 'react-hook-form';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
-import { SectionTitle } from '@/shared/components/SectionTitle';
+import { SectionHeading } from '@/shared/components/SectionHeading';
 import { Text } from '@/shared/components/Text';
 
 export const ClubShortIntroductionEditSection = () => {
@@ -14,7 +14,7 @@ export const ClubShortIntroductionEditSection = () => {
 
   return (
     <ShortIntroContainer>
-      <SectionTitle required>동아리 한줄 소개</SectionTitle>
+      <SectionHeading required>동아리 한줄 소개</SectionHeading>
       <OutlineInputField
         {...register('shortIntroduction', {
           required: '한줄 소개를 입력해주세요.',
