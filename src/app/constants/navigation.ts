@@ -1,4 +1,4 @@
-import type { Role, NavItemData } from '@/types/navigation';
+import type { Role, NavItemData } from '@/shared/types/navigation';
 
 export const NAV_CONFIG: Record<Role, NavItemData[]> = {
   guest: [
