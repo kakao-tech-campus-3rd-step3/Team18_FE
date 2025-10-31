@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Text } from '@/shared/components/Text/index';
-import { theme } from '@/styles/theme';
+import { theme } from '@/shared/styles/theme';
 
 export const BannerTextWrapper = styled.div({
   textAlign: 'center',

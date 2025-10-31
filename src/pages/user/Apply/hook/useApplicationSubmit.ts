@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import { theme } from '@/styles/theme';
+import { theme } from '@/shared/styles/theme';
 import { overwriteApplicationForm, postApplicationForm } from '../api/apply';
 import type { FormInputs } from '../type/apply';
 

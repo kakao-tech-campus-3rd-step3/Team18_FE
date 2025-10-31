@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { theme } from '@/styles/theme';
+import { theme } from '@/shared/styles/theme';
 
 interface TextProps {
   size?: FontSizeKey;
