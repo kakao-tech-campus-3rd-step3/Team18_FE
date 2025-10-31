@@ -4,12 +4,8 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { Button } from '@/shared/components/Button';
-import { PageHeader } from '@/shared/components/ClubDetailLayout/PageHeader';
-import {
-  Layout,
-  ContentLeft,
-  ContentRight,
-} from '@/shared/components/ClubDetailLayout/index.styled';
+import { PageHeader } from '@/shared/components/PageHeader';
+import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
 import { theme } from '@/styles/theme';
 import { updateClubDetailEdit } from './api/clubDetailEdit';
 import { updateClubImages } from './api/clubImagesEdit';
@@ -19,6 +15,7 @@ import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSect
 import { ClubShortIntroductionEditSection } from './components/ClubShortIntroductionEditSection';
 import { useClubDetailEdit } from './hook/useClubDetailEdit';
 import type { ClubDetailUpdatePayload } from './types/clubDetailEdit';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 
 export const ClubDetailEditPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
@@ -59,47 +56,48 @@ export const ClubDetailEditPage = () => {
       });
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <div>에러발생 : {error.message}</div>;
   if (!club) return null;
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Layout>
-          <ContentLeft>
-            <PageHeader clubName={club.clubName} category={club.category} />
-            <ClubShortIntroductionEditSection />
+        <TwoColumnLayout
+          left={
+            <>
+              <PageHeader clubName={club.clubName} category={club.category} />
+              <ClubShortIntroductionEditSection />
+              <ClubActivityPhotosEditSection
+                clubId={club.clubId}
+                images={club.introductionImages}
+                onUpload={(files: File[]) =>
+                  updateClubImages(club.clubId, files, club.introductionImages)
+                }
+              />
+              <ClubDescriptionEditSection />
+              {errors.presidentPhoneNumber && (
+                <ErrorMessage>{errors.presidentPhoneNumber.message}</ErrorMessage>
+              )}
 
-            <ClubActivityPhotosEditSection
-              clubId={club.clubId}
-              images={club.introductionImages}
-              onUpload={(files: File[]) =>
-                updateClubImages(club.clubId, files, club.introductionImages)
-              }
-            />
+              <ButtonGroup>
+                <Button type='submit' disabled={isSubmitting}>
+                  {isSubmitting ? '저장 중...' : '수정하기'}
+                </Button>
+                <Button variant='light' to={`/admin/clubs/dashboard`}>
+                  취소
+                </Button>
+              </ButtonGroup>
 
-            <ClubDescriptionEditSection />
-            {errors.presidentPhoneNumber && (
-              <ErrorMessage>{errors.presidentPhoneNumber.message}</ErrorMessage>
-            )}
-
-            <ButtonGroup>
-              <Button type='submit' disabled={isSubmitting}>
-                {isSubmitting ? '저장 중...' : '수정하기'}
-              </Button>
-              <Button variant='light' to={`/admin/clubs/dashboard`}>
-                취소
-              </Button>
-            </ButtonGroup>
-
-            {isSubmitSuccessful && <SuccessMessage>저장 완료!</SuccessMessage>}
-          </ContentLeft>
-
-          <ContentRight>
-            <ClubInfoSidebarEditSection />
-          </ContentRight>
-        </Layout>
+              {isSubmitSuccessful && <SuccessMessage>저장 완료!</SuccessMessage>}
+            </>
+          }
+          right={
+            <>
+              <ClubInfoSidebarEditSection />
+            </>
+          }
+        />
       </form>
     </FormProvider>
   );
