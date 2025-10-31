@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useClubFiltering } from '@/pages/user/Main/hook/useClubFiltering.ts';
+import { useClubFiltering } from '@/pages/user/Main/hooks/useClubFiltering.ts';
 
 import { engToKorCategory } from '@/pages/user/Main/utils/formatting.ts';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
