@@ -16,7 +16,7 @@ import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEd
 import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
 import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
 import { ClubShortIntroductionEditSection } from './components/ClubShortIntroductionEditSection';
-import { useClubDetailEdit } from './hook/useClubDetailEdit';
+import { useClubDetailEdit } from './hooks/useClubDetailEdit';
 import type { ClubDetailEdit } from './types/clubDetailEdit';
 
 export const ClubDetailEditPage = () => {
