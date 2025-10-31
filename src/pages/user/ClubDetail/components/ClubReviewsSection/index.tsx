@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { useClubReviews } from '@/pages/user/ClubDetail/hook/useClubReviews';
+import { useClubReviews } from '@/pages/user/ClubDetail/hooks/useClubReviews';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
