@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchNoticeDetail } from '@/pages/user/Notice/api/notices';
 import * as S from './index.styled';
 import type { NoticeDetail } from '@/pages/user/Notice/types/notice';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 
 type NoticeDetailCardSectionProps = {
   noticeId: number;
@@ -37,7 +38,7 @@ export const NoticeDetailCardSection = ({ noticeId, onBack }: NoticeDetailCardSe
       </S.Container>
     );
 
-  if (!data) return <div>로딩중...</div>;
+  if (!data) return <LoadingSpinner />;
 
   return (
     <S.Container>

@@ -5,6 +5,7 @@ import { ApplicantQuestionSection } from './components/ApplicationQuestionSectio
 import { CommentSection } from './components/CommentSection';
 import { useDetailApplications } from './hooks/useDetailApplication';
 import * as S from './index.styled';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 
 export const ApplicationDetailPage = () => {
   const { clubId, applicantId } = useParams();
@@ -16,7 +17,7 @@ export const ApplicationDetailPage = () => {
     updateStatus,
   } = useDetailApplications(Number(clubId), Number(applicantId));
 
-  if (isLoading) return <div> 로딩중</div>;
+  if (isLoading) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;
 
   return (
