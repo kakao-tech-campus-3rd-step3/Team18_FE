@@ -1,10 +1,10 @@
-import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
+import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
+import { useSentMessage } from '@/pages/admin/Dashboard/hooks/useSentMessage';
+import { Button } from '@/shared/components/Button';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { Text } from '@/shared/components/Text';
-import { Button } from '@/shared/components/Button';
-import { useForm } from 'react-hook-form';
-import { useSentMessage } from '@/pages/admin/Dashboard/hooks/useSentMessage';
 import type { ApplicationStage } from '@/pages/admin/Dashboard/types/dashboard';
 
 interface SentAcceptanceMessagesSectionProps {

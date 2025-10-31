@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { sentMessage } from '@/pages/admin/Dashboard/api/sentMessage';
 import { toast } from 'sonner';
+import { sentMessage } from '@/pages/admin/Dashboard/api/sentMessage';
 import type { ApplicationStage } from '@/pages/admin/Dashboard/types/dashboard';
 
 export const useSentMessage = (clubId: number, stage: ApplicationStage) => {
