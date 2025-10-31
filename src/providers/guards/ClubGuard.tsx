@@ -1,9 +1,8 @@
-import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
-import { AuthContext } from '@/providers/auth';
 import { EmptyState } from '@/shared/components/EmptyState';
+import { useAuth } from '../auth';
 export const ClubGuard = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   if (!user?.clubId) {
     return <EmptyState />;
   }
