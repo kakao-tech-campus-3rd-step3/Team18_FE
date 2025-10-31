@@ -22,7 +22,7 @@ export const SentAcceptanceMessagesSection = ({ stage }: SentAcceptanceMessagesS
     defaultValues: { acceptanceMessage: '' },
   });
 
-  const { mutate: sendMessage } = useSentMessage(Number(clubId), stage);
+  const { mutate: sendMessage, isLoading } = useSentMessage(Number(clubId), stage);
 
   const handleSubmitMessage = (data: { acceptanceMessage: string }) => {
     sendMessage(data.acceptanceMessage);
@@ -39,9 +39,10 @@ export const SentAcceptanceMessagesSection = ({ stage }: SentAcceptanceMessagesS
         })}
         invalid={!!errors.acceptanceMessage}
         message={errors.acceptanceMessage?.message}
+        disabled={isLoading}
       />
       <ButtonWrapper>
-        <Button width={'15rem'} onClick={handleSubmit(handleSubmitMessage)}>
+        <Button width={'15rem'} onClick={handleSubmit(handleSubmitMessage)} disabled={isLoading}>
           결과 전송하기
         </Button>
       </ButtonWrapper>

@@ -17,5 +17,5 @@ export const useSentMessage = (clubId: number, stage: ApplicationStage) => {
     },
   });
 
-  return mutation;
+  return { ...mutation, isLoading: mutation.isPending };
 };

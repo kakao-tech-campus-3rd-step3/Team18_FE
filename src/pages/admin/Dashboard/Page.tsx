@@ -12,7 +12,10 @@ export const DashboardPage = () => {
     <Layout>
       <Container>
         <DashboardSummarySection />
-        <ApplicantListSection stage={stage} setStage={setStage} />
+        <ApplicantListSection
+          stage={stage}
+          setStage={setStage}
+        />
         <SentAcceptanceMessagesSection stage={stage} />
       </Container>
     </Layout>
