@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { useDashboardSummary } from '@/pages/admin/Dashboard/hooks/useDashboardSummary';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
-import { formatDateWithoutYear } from '@/utils/dateUtils';
+import { formatDateWithoutYear } from '@/shared/utils/dateUtils';
 import { SummaryCard } from './SummaryCard';
 
 export const DashboardSummarySection = () => {

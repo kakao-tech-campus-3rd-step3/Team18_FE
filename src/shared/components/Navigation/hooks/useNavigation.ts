@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { NAV_CONFIG } from '@/constants/navigation';
 import { AuthContext } from '@/providers/auth';
-import { replaceRouteParams } from '@/utils/replaceRouteParams';
-import type { NavItemData } from '@/types/navigation';
+import { replaceRouteParams } from '@/shared/utils/replaceRouteParams';
+import type { NavItemData } from '@/shared/types/navigation';
 
 export const useNavigation = () => {
   const { user, logout } = useContext(AuthContext);

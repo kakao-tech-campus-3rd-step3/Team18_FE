@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { formatDate } from '@/utils/dateUtils';
+import { formatDate } from '@/shared/utils/dateUtils';
 import ApplyButton from './ApplyButton';
 import type { ClubDetail } from '@/pages/user/ClubDetail/types/clubDetail';
 

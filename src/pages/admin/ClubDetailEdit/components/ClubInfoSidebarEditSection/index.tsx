@@ -2,7 +2,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useFormContext } from 'react-hook-form';
 import { UnderlineInputField } from '@/shared/components/Form/InputField/UnderlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
-import { formatDate } from '@/utils/dateUtils';
+import { formatDate } from '@/shared/utils/dateUtils';
 import * as S from './index.styled';
 
 export const ClubInfoSidebarEditSection = () => {
