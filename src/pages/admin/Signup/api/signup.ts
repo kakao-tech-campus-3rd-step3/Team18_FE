@@ -1,5 +1,5 @@
 import axios, { AxiosError, type AxiosResponse } from 'axios';
-import { apiInstance } from '@/api/initInstance';
+import { apiInstance } from '@/app/api/initInstance';
 import type { ErrorResponse } from '../type/error';
 import type { SignupFormInputs } from '../type/signup';
 

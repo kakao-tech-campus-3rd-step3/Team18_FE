@@ -1,4 +1,4 @@
-import { apiInstance } from '@/api/initInstance';
+import { apiInstance } from '@/app/api/initInstance';
 import type { DetailApplication } from '@/pages/admin/ApplicationDetail/types/detailApplication';
 
 export const fetchDetailApplication = async (

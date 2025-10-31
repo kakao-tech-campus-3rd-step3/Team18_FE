@@ -1,5 +1,5 @@
 import { isAxiosError } from 'axios';
-import { apiInstance } from '@/api/initInstance';
+import { apiInstance } from '@/app/api/initInstance';
 import type { ApplicantsApiResponse } from '@/pages/admin/Dashboard/types/dashboard';
 
 export const fetchApplicants = async (

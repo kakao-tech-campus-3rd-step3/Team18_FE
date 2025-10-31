@@ -1,4 +1,4 @@
-import { apiInstance } from '@/api/initInstance';
+import { apiInstance } from '@/app/api/initInstance';
 import type { Role } from '@/types/navigation';
 import type { AxiosResponse } from 'axios';
 

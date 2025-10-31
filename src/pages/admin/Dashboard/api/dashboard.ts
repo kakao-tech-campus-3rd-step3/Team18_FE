@@ -1,5 +1,5 @@
 import { isAxiosError } from 'axios';
-import { apiInstance } from '@/api/initInstance';
+import { apiInstance } from '@/app/api/initInstance';
 import type { DashboardSummary } from '@/pages/admin/Dashboard/types/dashboard';
 
 export const fetchDashboardSummary = async (clubId: number): Promise<DashboardSummary> => {
