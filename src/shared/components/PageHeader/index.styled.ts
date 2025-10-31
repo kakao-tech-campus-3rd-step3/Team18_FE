@@ -1,64 +1,25 @@
 import styled from '@emotion/styled';
 
-export const Layout = styled.main(({ theme }) => ({
-  minHeight: '100vh',
-  display: 'flex',
-  gap: '1.5rem',
-  flexWrap: 'wrap',
-  justifyContent: 'center',
-  maxWidth: '1200px',
-  width: '100%',
-  margin: '0 auto',
-  padding: '0 1.5rem',
-  boxSizing: 'border-box',
-
-  [`@media (max-width: ${theme.breakpoints.web})`]: {
-    padding: '1.5rem',
-  },
-  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    display: 'block',
-    padding: '1rem',
-  },
-}));
-
-export const ContentLeft = styled.div(({ theme }) => ({
-  flex: '1 1 0',
-  backgroundColor: theme.colors.bg,
+export const Container = styled.div({
   display: 'flex',
   flexDirection: 'column',
-  gap: '1.5rem',
-  padding: '1.5rem',
-  boxSizing: 'border-box',
-  minWidth: '25rem',
-  borderRadius: theme.radius.lg,
-  minHeight: '20rem',
+  gap: '0.5rem',
+});
 
-  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    minWidth: '100%',
-    padding: '1rem',
-  },
-}));
-
-export const ContentRight = styled.div(({ theme }) => ({
-  flex: '0 0 25rem',
-  backgroundColor: theme.colors.bg,
-  padding: '1.5rem',
-  boxSizing: 'border-box',
+export const TextWrapper = styled.div({
   display: 'flex',
   flexDirection: 'column',
-  gap: '1rem',
-  borderRadius: theme.radius.lg,
-  height: 'auto',
-  alignSelf: 'flex-start',
+  gap: '0.25rem',
+});
 
-  [`@media (max-width: ${theme.breakpoints.web})`]: {
-    flex: '1 1 100%',
-    margin: '1.5rem auto 0 auto',
-  },
-  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    flex: 'initial',
-    maxWidth: '100%',
-    margin: '1rem 0 0 0',
-    padding: '1rem',
-  },
+export const Title = styled.h1(({ theme }) => ({
+  fontSize: '2.5rem',
+  fontWeight: theme.font.weight.medium,
+  margin: '1rem 0 0 0.5rem',
+}));
+
+export const Category = styled.span(({ theme }) => ({
+  fontSize: theme.font.size.base,
+  color: theme.colors.textSecondary,
+  margin: '0.5rem 0 0 0.5rem',
 }));

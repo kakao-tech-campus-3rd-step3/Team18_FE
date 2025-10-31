@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const FooterContainer = styled.div(({ theme }) => ({
+export const Container = styled.div(({ theme }) => ({
   width: '100%',
   backgroundColor: theme.colors.gray100,
   padding: 32,
