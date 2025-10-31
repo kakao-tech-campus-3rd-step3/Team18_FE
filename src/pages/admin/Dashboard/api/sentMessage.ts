@@ -9,10 +9,9 @@ export const sentMessage = async (
   const apiStage = stage === '서류' ? 'INTERVIEW' : 'FINAL';
 
   try {
-    await apiInstance.patch(
-      `/clubs/${clubId}/club-apply-form/result?stage=${apiStage}`,
-      { message },
-    );
+    await apiInstance.patch(`/clubs/${clubId}/club-apply-form/result?stage=${apiStage}`, {
+      message,
+    });
   } catch (error) {
     console.error('메시지 전송에 실패하였습니다:', error);
     throw error;
