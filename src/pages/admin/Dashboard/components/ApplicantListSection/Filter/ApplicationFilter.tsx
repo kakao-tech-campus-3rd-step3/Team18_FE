@@ -23,28 +23,28 @@ export const ApplicationStatusFilter = ({ option, onOptionChange, stage }: Props
         label={`전체 (${counts.ALL})`}
         selected={option === 'ALL'}
         onClick={onOptionChange}
-        className="filter-all"
+        className='filter-all'
       />
       <ApplicantFilterButton
         value={'APPROVED'}
         label={`합격 (${counts.APPROVED})`}
         selected={option === 'APPROVED'}
         onClick={onOptionChange}
-        className="filter-approved"
+        className='filter-approved'
       />
       <ApplicantFilterButton
         value={'REJECTED'}
         label={`불합격 (${counts.REJECTED})`}
         selected={option === 'REJECTED'}
         onClick={onOptionChange}
-        className="filter-rejected"
+        className='filter-rejected'
       />
       <ApplicantFilterButton
         value={'PENDING'}
         label={`심사중 (${counts.PENDING})`}
         selected={option === 'PENDING'}
         onClick={onOptionChange}
-        className="filter-pending"
+        className='filter-pending'
       />
     </Wrapper>
   );
@@ -63,4 +63,3 @@ const Wrapper = styled.nav`
     justify-content: space-between;
   }
 `;
-

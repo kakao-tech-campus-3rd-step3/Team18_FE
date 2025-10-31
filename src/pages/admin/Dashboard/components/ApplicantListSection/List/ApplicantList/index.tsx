@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicantListItem } from '../ApplicantListItem';
@@ -7,7 +7,6 @@ import type {
   ApplicationFilterOption,
   ApplicationStage,
 } from '@/pages/admin/Dashboard/types/dashboard';
-import { useParams } from 'react-router-dom';
 
 type Props = {
   filterOption: ApplicationFilterOption;
