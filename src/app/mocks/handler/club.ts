@@ -1,5 +1,5 @@
 import { http, HttpResponse, type PathParams } from 'msw';
-import { ApplicationRepository } from '@/mocks/repositories/application.ts';
+import { ApplicationRepository } from '@/app/mocks/repositories/application.ts';
 import { clubRepository, clubReviewRepository } from '../repositories/club';
 
 const getClubsResolver = ({ request }: { request: Request }) => {

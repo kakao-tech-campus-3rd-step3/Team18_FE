@@ -7,7 +7,7 @@ import { router } from '@/pages/Routes.tsx';
 
 async function enableMocking() {
   if (import.meta.env.VITE_ENABLE_MSW === 'true') {
-    const { client } = await import('@/mocks/client');
+    const { client } = await import('@/app/mocks/client');
     return client.start({});
   }
 }
