@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { PageHeader } from '@/shared/components/PageHeader';
 import { TwoColumnLayout } from '@/shared/components/Layout/TwoC/TwoColumnLayout';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
+import { PageHeader } from '@/shared/components/PageHeader';
 import { fetchClubDetail } from './api/clubDetail';
 import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
 import { ClubDescriptionSection } from './components/ClubDescriptionSection';
 import { ClubInfoSidebarSection } from './components/ClubInfoSidebarSection';
 import { ClubReviewsSection } from './components/ClubReviewsSection';
 import type { ClubDetail } from './types/clubDetail';
-import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 
 export const ClubDetailPage = () => {
   const { clubId } = useParams<{ clubId: string }>();

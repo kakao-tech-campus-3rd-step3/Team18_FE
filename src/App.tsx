@@ -2,9 +2,9 @@ import { ThemeProvider } from '@emotion/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Outlet } from 'react-router-dom';
 import { Toaster } from 'sonner';
-import { Navigation } from '@/shared/components/Navigation';
-import { theme } from '@/app/styles/theme';
 import { UserProvider } from '@/app/providers/auth';
+import { theme } from '@/app/styles/theme';
+import { Navigation } from '@/shared/components/Navigation';
 import Footer from './shared/components/Footer';
 
 const queryClient = new QueryClient();

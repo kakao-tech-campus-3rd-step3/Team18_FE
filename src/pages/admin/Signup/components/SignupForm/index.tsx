@@ -1,11 +1,11 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { theme } from '@/app/styles/theme';
 import { postSignupForm, type RegisterSuccessResponse } from '@/pages/admin/Signup/api/signup';
 import * as S from '@/pages/admin/Signup/components/SignupForm/index.styled';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
-import { theme } from '@/app/styles/theme';
 import { getTemporaryToken, removeTemporaryToken, setAccessToken } from '../../utils/token';
 import type { SignupFormInputs } from '@/pages/admin/Signup/type/signup';
 

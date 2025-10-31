@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { App } from '@/App.tsx';
 import { ROUTE_PATH } from '@/app/constants/routerPath.ts';
+import { ClubGuard } from '@/app/providers/guards/ClubGuard';
+import { App } from '@/App.tsx';
 import { ClubDetailEditPage } from '@/pages/admin/ClubDetailEdit/Page';
 import { DashboardPage } from '@/pages/admin/Dashboard/Page';
 
@@ -8,7 +9,6 @@ import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
 import { MainPage } from '@/pages/user/Main/Page.tsx';
 import { NoticeDetailPage } from '@/pages/user/Notice/DetailPage';
 import { NoticeListPage } from '@/pages/user/Notice/Page';
-import { ClubGuard } from '@/app/providers/guards/ClubGuard';
 import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
 import { ApplicationFormBuilder } from './admin/ApplicationFormBuilder/Page';
 import { KakaoCallback } from './admin/Login/KakaoCallback';
