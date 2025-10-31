@@ -8,14 +8,14 @@ export const sentMessage = async (
 ): Promise<void> => {
   const apiStage = stage === '서류' ? 'INTERVIEW' : 'FINAL';
   try {
-    const { data } = await apiInstance.patch(
+    await apiInstance.patch(
       `/clubs/${clubId}/club-apply-form/result?stage=${apiStage}`,
       {
         message,
       },
     );
-    return data;
-  } catch {
-    throw new Error('메시지 전송에 실패하였습니다.');
+  } catch (error) {
+    console.error('메시지 전송에 실패하였습니다:', error);
+    throw error;
   }
 };
