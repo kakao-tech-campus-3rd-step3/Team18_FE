@@ -5,7 +5,7 @@ import { postSignupForm, type RegisterSuccessResponse } from '@/pages/admin/Sign
 import * as S from '@/pages/admin/Signup/components/SignupForm/index.styled';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
-import { theme } from '@/shared/styles/theme';
+import { theme } from '@/app/styles/theme';
 import { getTemporaryToken, removeTemporaryToken, setAccessToken } from '../../utils/token';
 import type { SignupFormInputs } from '@/pages/admin/Signup/type/signup';
 

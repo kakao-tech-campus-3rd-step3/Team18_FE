@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { Button } from '@/shared/components/Button';
 import { PageHeader } from '@/shared/components/PageHeader';
 import { TwoColumnLayout } from '@/shared/components/Layout/TwoC/TwoColumnLayout';
-import { theme } from '@/shared/styles/theme';
+import { theme } from '@/app/styles/theme';
 import { updateClubDetailEdit } from './api/clubDetailEdit';
 import { updateClubImages } from './api/clubImagesEdit';
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';

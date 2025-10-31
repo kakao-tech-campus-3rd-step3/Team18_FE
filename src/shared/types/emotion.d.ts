@@ -1,5 +1,5 @@
 import '@emotion/react';
-import { theme } from '@/shared/styles/theme';
+import { theme } from '@/app/styles/theme';
 
 type ThemeType = typeof theme;
 /* eslint-disable @typescript-eslint/no-empty-object-type */
