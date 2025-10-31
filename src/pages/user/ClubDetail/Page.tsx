@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
+import { PageHeader } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
 import {
   Layout,
   ContentLeft,
@@ -28,7 +28,7 @@ export const ClubDetailPage = () => {
   return (
     <Layout>
       <ContentLeft>
-        <ClubHeaderSection clubName={club.clubName} category={club.category} />
+        <PageHeader clubName={club.clubName} category={club.category} />
         <ClubActivityPhotosSection images={club.introductionImages} />
         <ClubDescriptionSection
           introductionOverview={club.introductionOverview}

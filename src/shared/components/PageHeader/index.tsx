@@ -2,10 +2,10 @@ import styled from '@emotion/styled';
 
 interface ClubHeaderSectionProps {
   clubName: string;
-  category: string;
+  category?: string;
 }
 
-export const ClubHeaderSection = ({ clubName, category }: ClubHeaderSectionProps) => {
+export const PageHeader = ({ clubName, category }: ClubHeaderSectionProps) => {
   return (
     <HeaderContainer>
       <TextContainer>

@@ -4,7 +4,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { Button } from '@/shared/components/Button';
-import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
+import { PageHeader } from '@/shared/components/ClubDetailLayout/PageHeader';
 import {
   Layout,
   ContentLeft,
@@ -68,7 +68,7 @@ export const ClubDetailEditPage = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Layout>
           <ContentLeft>
-            <ClubHeaderSection clubName={club.clubName} category={club.category} />
+            <PageHeader clubName={club.clubName} category={club.category} />
             <ClubShortIntroductionEditSection />
 
             <ClubActivityPhotosEditSection
