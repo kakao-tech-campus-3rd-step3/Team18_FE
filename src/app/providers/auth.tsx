@@ -8,7 +8,7 @@ import {
   setTemporaryToken,
 } from '@/pages/admin/Signup/utils/token';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
-import type { AuthContextType, User } from '@/types/auth';
+import type { AuthContextType, User } from '@/shared/types/auth';
 
 const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
 const LOGOUT_REDIRECT_URI = import.meta.env.VITE_LOGOUT_REDIRECT_URI;

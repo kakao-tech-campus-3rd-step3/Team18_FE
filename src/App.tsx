@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { Navigation } from '@/shared/components/Navigation';
 import { theme } from '@/shared/styles/theme';
-import { UserProvider } from './providers/auth';
+import { UserProvider } from '@/app/providers/auth';
 import Footer from './shared/components/Footer';
 
 const queryClient = new QueryClient();

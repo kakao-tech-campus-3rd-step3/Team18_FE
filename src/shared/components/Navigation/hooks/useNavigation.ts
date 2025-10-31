@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { NAV_CONFIG } from '@/app/constants/navigation';
-import { AuthContext } from '@/providers/auth';
+import { AuthContext } from '@/app/providers/auth';
 import { replaceRouteParams } from '@/shared/utils/replaceRouteParams';
 import type { NavItemData } from '@/shared/types/navigation';
 

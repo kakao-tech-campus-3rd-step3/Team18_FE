@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import { AuthContext } from '@/providers/auth';
+import { AuthContext } from '@/app/providers/auth';
 
 export function useKakaoLogin() {
   const { login } = useContext(AuthContext);
