@@ -6,7 +6,7 @@ import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineIn
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import * as S from './index.styled';
 import { InterviewScheduleSelector } from './InterviewScheduleSelector';
-import { useApplicationSubmit } from '../../hook/useApplicationSubmit';
+import { useApplicationSubmit } from '../../hooks/useApplicationSubmit';
 import type { FormInputs, InterviewSchedule, Question } from '@/pages/user/Apply/type/apply';
 
 type Props = {
