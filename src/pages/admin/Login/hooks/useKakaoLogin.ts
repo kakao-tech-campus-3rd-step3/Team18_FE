@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import { AuthContext } from '@/providers/auth';
+import { useAuth } from '@/providers/auth';
 
 export function useKakaoLogin() {
-  const { login } = useContext(AuthContext);
+  const { login } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
