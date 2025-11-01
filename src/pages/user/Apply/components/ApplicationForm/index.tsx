@@ -26,7 +26,11 @@ export const ApplicationForm = ({ questions }: Props) => {
       selectedInterviewSchedule: [],
     },
   });
-  const { errors, isSubmitting } = methods.formState;
+  const {
+    formState: { errors, isSubmitting },
+    watch,
+    reset,
+  } = methods;
 
   const { clubId } = useParams<{ clubId: string }>();
   const clubIdNumber = Number(clubId);
