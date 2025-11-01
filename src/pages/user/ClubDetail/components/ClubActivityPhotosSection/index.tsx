@@ -2,7 +2,7 @@ import { SectionTitle } from '@/shared/components/SectionTitle';
 import * as S from './index.styled';
 
 interface ClubActivityPhotosSectionProps {
-  images: string[];
+  images: { id: number; url: string }[];
 }
 
 export const ClubActivityPhotosSection = ({ images }: ClubActivityPhotosSectionProps) => {
@@ -13,8 +13,8 @@ export const ClubActivityPhotosSection = ({ images }: ClubActivityPhotosSectionP
       </S.TitleWrapper>
       <S.PhotosWrapper>
         <S.PhotosContainer>
-          {images.map((src, idx) => (
-            <S.Photo key={idx} src={src} alt={`활동 사진 ${idx + 1}`} />
+          {images.map((image) => (
+            <S.Photo key={image.id} src={image.url} alt={`활동 사진 ${image.id}`} />
           ))}
         </S.PhotosContainer>
       </S.PhotosWrapper>
