@@ -27,9 +27,16 @@ export const ApplicationInfoSection = ({ formHandler }: Props) => {
   const {
     register,
     setValue,
+    watch,
     formState: { errors },
   } = formHandler;
-  const { startDate, endDate, formatDateRange, handleDateChange } = useTimeslotState({ setValue });
+
+  const recruitDate = watch('recruitDate');
+
+  const { startDate, endDate, formatDateRange, handleDateChange } = useTimeslotState({
+    setValue,
+    initialDateRange: recruitDate,
+  });
 
   return (
     <>
