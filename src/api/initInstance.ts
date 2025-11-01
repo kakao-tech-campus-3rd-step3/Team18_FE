@@ -47,7 +47,7 @@ apiInstance.interceptors.response.use(
         const tokenResponse = await reissueAccessToken();
         setAccessToken(tokenResponse.accessToken);
         config.headers.Authorization = `Bearer ${tokenResponse.accessToken}`;
-        return axios(config);
+        return apiInstance(config);
       } catch (e: unknown) {
         if (axios.isAxiosError(e)) {
           const error = e as AxiosError<ErrorResponse>;
