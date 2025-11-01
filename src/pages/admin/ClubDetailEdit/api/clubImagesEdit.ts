@@ -3,22 +3,24 @@ import { apiInstance } from '@/api/initInstance';
 
 export const updateClubImages = async (
   clubId: number | string,
-  files: File[] = [],
-  existingUrls: string[] = [],
+  newFiles: File[],
+  existingImages: { id: number; url: string }[],
 ) => {
   const formData = new FormData();
 
-  existingUrls.forEach((url) => formData.append('images', url));
-  files.forEach((file) => formData.append('images', file));
+  formData.append('keepImages', JSON.stringify(existingImages));
+
+  newFiles.forEach((file) => formData.append('newImages', file, file.name));
 
   try {
-    const { data } = await apiInstance.put(`/clubs/${clubId}/images`, formData, {
+    const { data } = await apiInstance.patch(`/clubs/${clubId}/images`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
 
-    return data.images ?? data;
+    return data;
   } catch (e: unknown) {
     if (isAxiosError(e)) {
+      console.error('이미지 업데이트 실패:', e.response?.data || e.message);
       throw new Error('이미지 업데이트에 실패했습니다.');
     }
     throw e;
