@@ -27,4 +27,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   padding: 24px;
+  margin-top: 30px;
+  min-height: calc(100vh - 250px);
+  align-items: flex-start;
 `;
