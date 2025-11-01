@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { QuestionTypes } from '@/pages/user/Apply/constants/questionType';
@@ -7,18 +7,19 @@ import { useApplicationSubmit } from '@/pages/user/Apply/hooks/useApplicationSub
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
+import { debounce } from '@/utils/debounce';
 import * as S from './index.styled';
 import { InterviewScheduleSelector } from './InterviewScheduleSelector';
 import type { FormInputs, InterviewSchedule, Question } from '@/pages/user/Apply/type/apply';
-import { useCallback, useEffect } from 'react';
-import { debounce } from '@/utils/debounce';
 
 type Props = {
   questions: Question[];
 };
 
 export const ApplicationForm = ({ questions }: Props) => {
+  const [isSaving, setIsSaving] = useState(false);
   const [formKey, setFormKey] = useState(0);
+
   const { clubId } = useParams<{ clubId: string }>();
   const clubIdNumber = Number(clubId);
 
@@ -70,9 +71,25 @@ export const ApplicationForm = ({ questions }: Props) => {
   const debouncedSave = useCallback(
     debounce((data: FormInputs) => {
       localStorage.setItem(`application-form-${clubIdNumber}`, JSON.stringify(data));
+      setIsSaving(false);
     }, 3000),
     [clubIdNumber],
   );
+
+  useEffect(() => {
+    const savedData = localStorage.getItem(`application-form-${clubIdNumber}`);
+    if (savedData) {
+      reset(JSON.parse(savedData));
+    }
+  }, [clubIdNumber, reset]);
+
+  useEffect(() => {
+    const subscription = watch((value) => {
+      setIsSaving(true);
+      debouncedSave(value as FormInputs);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch, debouncedSave]);
 
   return (
     <FormProvider {...methods}>
