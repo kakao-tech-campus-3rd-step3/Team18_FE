@@ -28,23 +28,26 @@ const CustomInput = ({ value, onClick }: CustomInputProps) => (
 export const TimeslotFieldBuilder = ({ formHandler, questionIndex }: Props) => {
   const { register, setValue, watch } = formHandler;
 
+  const timeSlotDate = watch(`formQuestions.${questionIndex}.timeSlotOptions.date`);
+
   const { startDate, endDate, formatDateRange, handleDateChange } = useTimeslotState({
     setValue,
     fieldName: `questions.${questionIndex}.timeSlotOptions.date`,
+    initialDateRange: timeSlotDate,
   });
 
   const currentStartTime =
-    watch(`questions.${questionIndex}.timeSlotOptions.availableTime.start`) || '9:00 AM';
+    watch(`formQuestions.${questionIndex}.timeSlotOptions.availableTime.start`) || '9:00 AM';
 
   const currentEndTime =
-    watch(`questions.${questionIndex}.timeSlotOptions.availableTime.end`) || '9:00 AM';
+    watch(`formQuestions.${questionIndex}.timeSlotOptions.availableTime.end`) || '9:00 AM';
 
   const handleStartTimeSelect = (newTime: string) => {
-    setValue(`questions.${questionIndex}.timeSlotOptions.availableTime.start`, newTime);
+    setValue(`formQuestions.${questionIndex}.timeSlotOptions.availableTime.start`, newTime);
   };
 
   const handleEndTimeSelect = (newTime: string) => {
-    setValue(`questions.${questionIndex}.timeSlotOptions.availableTime.end`, newTime);
+    setValue(`formQuestions.${questionIndex}.timeSlotOptions.availableTime.end`, newTime);
   };
 
   return (
@@ -65,7 +68,7 @@ export const TimeslotFieldBuilder = ({ formHandler, questionIndex }: Props) => {
           />
           <input
             type='hidden'
-            {...register(`questions.${questionIndex}.timeSlotOptions.date`, {
+            {...register(`formQuestions.${questionIndex}.timeSlotOptions.date`, {
               required: '모집 기간을 선택해주세요',
             })}
           />
