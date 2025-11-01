@@ -1,19 +1,37 @@
 import { format } from 'date-fns';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { UseFormSetValue } from 'react-hook-form';
 import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
 type UseTimeslotStateProps = {
   setValue?: UseFormSetValue<ApplicationForm>;
   fieldName?: string;
+  initialDateRange?: string;
+};
+
+const parseDateRange = (dateRangeString?: string): [Date | null, Date | null] => {
+  if (!dateRangeString) {
+    return [null, null];
+  }
+  const parts = dateRangeString.split(' ~ ');
+  const start = parts[0] ? new Date(parts[0]) : null;
+  const end = parts[1] ? new Date(parts[1]) : null;
+  return [start, end];
 };
 
 export const useTimeslotState = ({
   setValue,
   fieldName = 'recruitDate',
+  initialDateRange,
 }: UseTimeslotStateProps = {}) => {
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
+
+  useEffect(() => {
+    const [start, end] = parseDateRange(initialDateRange);
+    setStartDate(start);
+    setEndDate(end);
+  }, [initialDateRange]);
 
   const formatDateRange = () => {
     if (!startDate) return '';
@@ -31,7 +49,6 @@ export const useTimeslotState = ({
     setStartDate(start);
     setEndDate(end);
 
-    // ✅ 동적 필드명으로 setValue 호출
     if (setValue && start && end) {
       const dateRange = `${format(start, 'yyyy-MM-dd')} ~ ${format(end, 'yyyy-MM-dd')}`;
       setValue(fieldName as any, dateRange, { shouldValidate: true });
