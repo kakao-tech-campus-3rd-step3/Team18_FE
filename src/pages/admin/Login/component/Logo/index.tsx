@@ -13,7 +13,6 @@ export const LogoWrapper = styled.div({
   justifyContent: 'center',
   alignItems: 'center',
   cursor: 'pointer',
-  height: '100%',
 });
 
 export const LogoImage = styled.img`
