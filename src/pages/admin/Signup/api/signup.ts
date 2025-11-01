@@ -8,6 +8,10 @@ export interface RegisterSuccessResponse {
   accessToken: string;
 }
 
+const INVALID_INPUT_VALUE: string = 'INVALID_INPUT_VALUE';
+const UNAUTHENTICATED_USER: string = 'UNAUTHENTICATED_USER';
+const DUPLICATE_KAKAO_ID: string = 'DUPLICATE_KAKAO_ID';
+
 export const postSignupForm = async (
   formData: SignupFormInputs,
   tempToken: string,
@@ -24,14 +28,13 @@ export const postSignupForm = async (
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {
       const error = e as AxiosError<ErrorResponse>;
-      const status = error.response?.status;
       const detailMsg = error.response?.data.detail;
-      switch (status) {
-        case 400:
+      switch (error.response?.data.error_code) {
+        case INVALID_INPUT_VALUE:
           throw new Error(`입력 오류: ${detailMsg}`);
-        case 401:
+        case UNAUTHENTICATED_USER:
           throw new Error(`권한 오류: ${detailMsg}`);
-        case 409:
+        case DUPLICATE_KAKAO_ID:
           throw new Error(`중복 오류: ${detailMsg}`);
         default:
           throw new Error(`알 수 없는 오류: ${e.message}`);
