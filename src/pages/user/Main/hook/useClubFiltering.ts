@@ -3,7 +3,7 @@ import { type ClubResponse, getClubsByCategory } from '@/pages/user/Main/api/clu
 import { searchClubs } from '../utils/searchClubs';
 import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
 import type { Club, RecruitStatus } from '@/pages/user/Main/types/club';
-import type { UseApiQueryResult } from '@/types/useApiQueryResult';
+import type { UseApiQueryResult } from '@/shared/types/useApiQueryResult';
 
 export const useClubFiltering = (
   filter: ClubCategoryEng,

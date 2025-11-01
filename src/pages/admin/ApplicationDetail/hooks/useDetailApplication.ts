@@ -4,7 +4,7 @@ import {
   updateApplicationStatus,
 } from '@/pages/admin/ApplicationDetail/api/detailApplication';
 import type { DetailApplication } from '@/pages/admin/ApplicationDetail/types/detailApplication';
-import type { UseApiQueryResult } from '@/types/useApiQueryResult';
+import type { UseApiQueryResult } from '@/shared/types/useApiQueryResult';
 
 type UseDetailApplicationResult = UseApiQueryResult<DetailApplication | null> & {
   updateStatus: (status: DetailApplication['status']) => void;
