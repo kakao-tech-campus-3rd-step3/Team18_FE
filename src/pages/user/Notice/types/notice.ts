@@ -5,10 +5,17 @@ export type Notice = {
   author: string;
 };
 
+export type NoticeFile = {
+  id: number;
+  name: string;
+  presignedUrl: string;
+  objectUrl: string;
+};
+
 export type NoticeDetail = Notice & {
   content: string;
   email: string;
-  file: string;
+  file: NoticeFile[];
 };
 
 export type NoticePageInfo = {
