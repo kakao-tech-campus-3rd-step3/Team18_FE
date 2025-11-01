@@ -1,5 +1,4 @@
 import { apiInstance } from '@/api/initInstance';
-import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { Role } from '@/types/navigation';
 import type { AxiosResponse } from 'axios';
 
@@ -20,7 +19,7 @@ interface ClubMemberInfo {
   role: Role;
 }
 
-export type LoginResponse = LoginSuccessResponse | RegistrationRequiredResponse | ErrorResponse;
+export type LoginResponse = LoginSuccessResponse | RegistrationRequiredResponse;
 
 export const postAuthCode = async (code: string, signal: AbortSignal): Promise<LoginResponse> => {
   const response: AxiosResponse<LoginResponse> = await apiInstance.post(
