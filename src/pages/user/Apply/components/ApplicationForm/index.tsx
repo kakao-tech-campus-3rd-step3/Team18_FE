@@ -54,6 +54,20 @@ export const ApplicationForm = ({ questions }: Props) => {
     [clubIdNumber],
   );
 
+  useEffect(() => {
+    const savedData = localStorage.getItem(`application-form-${clubIdNumber}`);
+    if (savedData) {
+      reset(JSON.parse(savedData));
+    }
+  }, [clubIdNumber, reset]);
+
+  useEffect(() => {
+    const subscription = watch((value) => {
+      debouncedSave(value as FormInputs);
+    });
+    return () => subscription.unsubscribe();
+  }, [watch, debouncedSave]);
+
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(handleSubmit)}>
