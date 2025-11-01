@@ -1,16 +1,16 @@
 import * as S from './index.styled';
 
-interface ClubHeaderSectionProps {
+type Props = {
   clubName: string;
   category?: string;
-}
+};
 
-export const PageHeader = ({ clubName, category }: ClubHeaderSectionProps) => {
+export const PageHeader = ({ clubName, category }: Props) => {
   return (
     <S.Container>
       <S.TextWrapper>
         <S.Title>{clubName}</S.Title>
-        <S.Category>{category}</S.Category>
+        {category && <S.Category>{category}</S.Category>}
       </S.TextWrapper>
     </S.Container>
   );
