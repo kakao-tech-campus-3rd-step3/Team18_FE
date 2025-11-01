@@ -58,7 +58,7 @@ apiInstance.interceptors.response.use(
 
     if (error.response?.status === 401 && config) {
       if (config?.headers?.retry) {
-        handleLogout(error.message);
+        handleLogout(error.response.data.message ?? error.message);
       }
       try {
         const tokenResponse = await reissueAccessToken();
@@ -68,7 +68,8 @@ apiInstance.interceptors.response.use(
         return apiInstance(config);
       } catch (e: unknown) {
         if (axios.isAxiosError(e)) {
-          const errorMessage = error.response?.data.message;
+          const reissueError = e as AxiosError<ErrorResponse>;
+          const errorMessage = reissueError.response?.data.message;
           switch (error.response?.data.error_code) {
             case INVALID_INPUT_VALUE:
               throw new Error(errorMessage ?? '입력값이 올바르지 않습니다.');
@@ -76,7 +77,7 @@ apiInstance.interceptors.response.use(
             case UNSUPPORTED_JWT:
             case INVALID_JWT_SIGNATURE:
             case EXPIRED_REFRESH_TOKEN:
-              handleLogout(errorMessage);
+              handleLogout(errorMessage ?? '토큰 갱신 실패로 로그아웃 처리됩니다.');
               break;
             default:
               throw new Error(errorMessage ?? `알 수 없는 오류`);
