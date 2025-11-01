@@ -37,5 +37,9 @@ const Input = styled.input<Pick<Props, 'invalid'>>(({ theme, invalid }) => ({
     color: theme.colors.gray400,
   },
 
+  '&:disabled': {
+    backgroundColor: 'transparent',
+  },
+
   borderColor: invalid ? theme.colors.error : theme.colors.gray200,
 }));

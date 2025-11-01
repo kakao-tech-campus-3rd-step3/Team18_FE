@@ -11,9 +11,10 @@ import { useFieldArray } from 'react-hook-form';
 type Props = {
   formHandler: UseFormReturn<ApplicationForm>;
   questionIndex: number;
+  isEditMode: boolean;
 };
 
-export const RadioOptionsBuilder = ({ formHandler, questionIndex }: Props) => {
+export const RadioOptionsBuilder = ({ formHandler, questionIndex, isEditMode }: Props) => {
   const {
     register,
     control,
@@ -44,18 +45,21 @@ export const RadioOptionsBuilder = ({ formHandler, questionIndex }: Props) => {
             message={
               errors.formQuestions?.[questionIndex]?.optionList?.[optionIndex]?.value?.message
             }
+            disabled={!isEditMode}
           />
           <AiOutlineCloseCircle
             size={'1.5rem'}
             color='#757575'
-            onClick={() => remove(optionIndex)}
+            onClick={isEditMode ? () => remove(optionIndex) : undefined}
           />
         </OptionFieldWrapper>
       ))}
 
-      <AddOptionButton onClick={handleAddOption}>
-        <FiPlus /> <Text size='sm'>옵션 추가</Text>
-      </AddOptionButton>
+      {isEditMode && (
+        <AddOptionButton onClick={handleAddOption}>
+          <FiPlus /> <Text size='sm'>옵션 추가</Text>
+        </AddOptionButton>
+      )}
     </Layout>
   );
 };

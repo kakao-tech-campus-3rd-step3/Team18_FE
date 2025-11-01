@@ -8,6 +8,7 @@ type Props<T extends string> = {
   placeholder?: string;
   onSelect: (value: T) => void;
   width?: string;
+  disabled?: boolean;
 };
 
 export const Dropdown = <T extends string>({
@@ -16,6 +17,7 @@ export const Dropdown = <T extends string>({
   placeholder,
   onSelect,
   width = 'auto',
+  disabled = false,
 }: Props<T>) => {
   const [isShowOptions, setIsShowOptions] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -36,24 +38,27 @@ export const Dropdown = <T extends string>({
     };
   }, [isShowOptions]);
 
+  const handleToggleOptions = () => {
+    if (!disabled) {
+      setIsShowOptions(!isShowOptions);
+    }
+  };
+
+  const handleSelectOption = (option: T) => {
+    onSelect(option);
+    setIsShowOptions(false);
+  };
+
   return (
     <div ref={dropdownRef}>
-      <S.SelectBox
-        width={width}
-        onClick={() => {
-          setIsShowOptions(!isShowOptions);
-        }}
-      >
+      <S.SelectBox width={width} onClick={handleToggleOptions} disabled={disabled}>
         <Text color='#757575'>{value || placeholder}</Text>
         {isShowOptions && (
           <S.SelectOptions>
             {options.map((option, index) => (
               <S.Option
                 key={index}
-                onClick={() => {
-                  onSelect(option);
-                  setIsShowOptions(false);
-                }}
+                onClick={() => handleSelectOption(option)}
                 selected={value === option}
               >
                 {option}
