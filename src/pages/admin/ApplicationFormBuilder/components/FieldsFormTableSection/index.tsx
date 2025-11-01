@@ -14,17 +14,17 @@ export const ApplicationFieldsFormTableSection = ({ formHandler }: Props) => {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'questions',
+    name: 'formQuestions',
   });
 
   const handleAddFormField = () => {
     append({
       questionNum: fields.length + 1,
-      questionType: 'TEXT',
+      fieldType: 'TEXT',
       question: '',
-      required: true,
+      isRequired: true,
       optionList: [],
-      timeSlotOptions: [],
+      timeSlotOptions: { date: '', availableTime: { start: '', end: '' } },
     });
   };
 
