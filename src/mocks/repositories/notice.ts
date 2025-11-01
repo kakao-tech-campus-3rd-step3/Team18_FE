@@ -32,15 +32,27 @@ const mockNotices = {
   },
 };
 
-const mockNoticeDetail = {
+const mockNoticeDetail: NoticeDetail = {
   id: 1,
-  title: '동아리 평가 기준 안내',
-  content:
-    '개편된 동아리 평가 기준 안내드립니다.\n동아리 평가 기준은 24-2학기부터 적용되니 참고 부탁드립니다.\n감사합니다.',
-  createdAt: '2024-05-23T00:00:00',
-  author: '김라이언',
-  email: 'jnupole004@gmail.com',
-  file: 'test.pdf',
+  title: '학기 초 공지',
+  content: '2025학년도 1학기 공지사항입니다. 반드시 확인하세요.',
+  createdAt: null,
+  author: '홍길동05',
+  email: 'user05@example.com',
+  file: [
+    {
+      id: 1,
+      name: '81층짜리 집.png',
+      presignedUrl: 'https://file-bucket-test-004.s3.ap-northeast-2.amazonaws.com/example1.png',
+      objectUrl: 'https://file-bucket-test-004.s3.ap-northeast-2.amazonaws.com/example1.png',
+    },
+    {
+      id: 2,
+      name: '[양식] 소중마일리지 신청서 양식.hwp',
+      presignedUrl: 'https://file-bucket-test-004.s3.ap-northeast-2.amazonaws.com/example2.hwp',
+      objectUrl: 'https://file-bucket-test-004.s3.ap-northeast-2.amazonaws.com/example2.hwp',
+    },
+  ],
 };
 
 export const noticeRepository = {
