@@ -37,19 +37,17 @@ export const ClubDetailPage = () => {
         </>
       }
       right={
-        <>
-          <ClubInfoSidebarSection
-            presidentName={club.presidentName}
-            presidentPhoneNumber={club.presidentPhoneNumber}
-            location={club.location}
-            recruitStart={club.recruitStart}
-            recruitEnd={club.recruitEnd}
-            regularMeetingInfo={club.regularMeetingInfo}
-            recruitStatus={club.recruitStatus}
-            applicationNotice={club.applicationNotice}
-            clubId={club.clubId}
-          />
-        </>
+        <ClubInfoSidebarSection
+          presidentName={club.presidentName}
+          presidentPhoneNumber={club.presidentPhoneNumber}
+          location={club.location}
+          recruitStart={club.recruitStart}
+          recruitEnd={club.recruitEnd}
+          regularMeetingInfo={club.regularMeetingInfo}
+          recruitStatus={club.recruitStatus}
+          applicationNotice={club.applicationNotice}
+          clubId={club.clubId}
+        />
       }
     />
   );

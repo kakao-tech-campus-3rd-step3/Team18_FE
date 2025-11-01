@@ -92,11 +92,7 @@ export const ClubDetailEditPage = () => {
               {isSubmitSuccessful && <SuccessMessage>저장 완료!</SuccessMessage>}
             </>
           }
-          right={
-            <>
-              <ClubInfoSidebarEditSection />
-            </>
-          }
+          right={<ClubInfoSidebarEditSection />}
         />
       </form>
     </FormProvider>
