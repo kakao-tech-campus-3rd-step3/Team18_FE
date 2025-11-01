@@ -4,7 +4,6 @@ import { reissueAccessToken } from './auth';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AxiosError, AxiosInstance, CreateAxiosDefaults } from 'axios';
 
-const EXPIRED_ACCESS_TOKEN: string = 'EXPIRED_ACCESS_TOKEN';
 const INVALID_INPUT_VALUE: string = 'INVALID_INPUT_VALUE';
 const UNSUPPORTED_JWT: string = 'UNSUPPORTED_JWT';
 const UNAUTHENTICATED_USER: string = 'UNAUTHENTICATED_USER';
@@ -43,7 +42,7 @@ apiInstance.interceptors.response.use(
   async function onRejected(e: AxiosError) {
     const error = e as AxiosError<ErrorResponse>;
     const config = error.config;
-    if (error.response?.data.error_code === EXPIRED_ACCESS_TOKEN && config) {
+    if (error.response?.status === 401 && config) {
       try {
         const tokenResponse = await reissueAccessToken();
         setAccessToken(tokenResponse.accessToken);
