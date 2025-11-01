@@ -8,6 +8,8 @@ import * as S from './index.styled';
 import { InterviewScheduleSelector } from './InterviewScheduleSelector';
 import { useApplicationSubmit } from '../../hook/useApplicationSubmit';
 import type { FormInputs, InterviewSchedule, Question } from '@/pages/user/Apply/type/apply';
+import { useCallback, useEffect } from 'react';
+import { debounce } from '@/utils/debounce';
 
 type Props = {
   questions: Question[];
@@ -43,6 +45,13 @@ export const ApplicationForm = ({ questions }: Props) => {
   );
   const otherQuestions = questionsWithIndex.filter(
     (q) => q.questionType !== QuestionTypes.TIME_SLOT,
+  );
+
+  const debouncedSave = useCallback(
+    debounce((data: FormInputs) => {
+      localStorage.setItem(`application-form-${clubIdNumber}`, JSON.stringify(data));
+    }, 3000),
+    [clubIdNumber],
   );
 
   return (
