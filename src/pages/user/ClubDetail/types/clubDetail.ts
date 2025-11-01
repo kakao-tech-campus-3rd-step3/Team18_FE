@@ -6,7 +6,10 @@ export type ClubDetail = {
   location: string;
   category: string;
   shortIntroduction: string;
-  introductionImages: string[];
+  introductionImages: {
+    id: number;
+    url: string;
+  }[];
   introductionOverview: string;
   introductionActivity: string;
   introductionIdeal: string;

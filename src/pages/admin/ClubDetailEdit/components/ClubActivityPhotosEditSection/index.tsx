@@ -1,19 +1,19 @@
 import { FiTrash2, FiPlus } from 'react-icons/fi';
+import { useClubActivityPhotos } from '@/pages/admin/ClubDetailEdit/hook/useClubActivityPhotos';
 import { SectionTitle } from '@/shared/components/SectionTitle';
 import * as S from './index.styled';
 
 interface ClubActivityPhotosEditSectionProps {
-  images: string[];
+  clubId: number;
+  images: { id: number; url: string }[];
+  onUpload: (files: File[]) => void;
 }
 
-export const ClubActivityPhotosEditSection = ({ images }: ClubActivityPhotosEditSectionProps) => {
-  const handleDelete = (idx: number) => {
-    console.log(`${idx}번째 사진 삭제`);
-  };
-
-  const handleAdd = () => {
-    console.log('사진 추가');
-  };
+export const ClubActivityPhotosEditSection = ({
+  clubId,
+  images: initialImages,
+}: ClubActivityPhotosEditSectionProps) => {
+  const { images, handleAdd, handleDelete } = useClubActivityPhotos(clubId, initialImages);
 
   return (
     <>
@@ -28,10 +28,10 @@ export const ClubActivityPhotosEditSection = ({ images }: ClubActivityPhotosEdit
 
       <S.PhotosWrapper>
         <S.PhotosContainer>
-          {images.map((src, idx) => (
-            <S.PhotoWrapper key={idx}>
-              <S.Photo src={src} alt={`활동 사진 ${idx + 1}`} />
-              <S.Overlay className='overlay' onClick={() => handleDelete(idx)}>
+          {images.map((img) => (
+            <S.PhotoWrapper key={img.id}>
+              <S.Photo src={img.url} alt={`활동 사진 ${img.id}`} />
+              <S.Overlay className='overlay' onClick={() => handleDelete(img.id)}>
                 <S.Circle />
                 <FiTrash2 size={28} />
               </S.Overlay>

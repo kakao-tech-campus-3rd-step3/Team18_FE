@@ -21,7 +21,7 @@ export const useNavigation = () => {
   };
 
   const handleItemClick = (key: string) => {
-    if (key == 'logout') {
+    if (key === 'logout') {
       logout();
     }
   };
