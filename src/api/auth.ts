@@ -8,7 +8,7 @@ export interface TokenResponse {
 
 export const reissueAccessToken = async (): Promise<TokenResponse> => {
   try {
-    const { data } = await apiInstance.post(`/api/auth/reissue`, {}, { withCredentials: true });
+    const { data } = await apiInstance.post(`/auth/reissue`, {}, { withCredentials: true });
     return data;
   } catch (e: unknown) {
     const error = e as AxiosError<ErrorResponse>;
