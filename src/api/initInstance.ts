@@ -4,6 +4,8 @@ import { reissueAccessToken } from './auth';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AxiosError, AxiosInstance, CreateAxiosDefaults } from 'axios';
 
+const EXPIRED_ACCESS_TOKEN: string = 'EXPIRED_ACCESS_TOKEN';
+
 const initInstance = (config: CreateAxiosDefaults): AxiosInstance => {
   const instance = axios.create({
     timeout: 10000,
@@ -36,7 +38,7 @@ apiInstance.interceptors.response.use(
   async function onRejected(e: AxiosError) {
     const error = e as AxiosError<ErrorResponse>;
     const config = error.config;
-    if (error.response?.data.error_code === 'EXPIRED_REFRESH_TOKEN' && config) {
+    if (error.response?.data.error_code === EXPIRED_ACCESS_TOKEN && config) {
       try {
         const tokenResponse = await reissueAccessToken();
         setAccessToken(tokenResponse.accessToken);
