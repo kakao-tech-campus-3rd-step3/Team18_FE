@@ -29,7 +29,7 @@ export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
     formState: { errors },
   } = formHandler;
 
-  const questionType = watch(`questions.${index}.questionType`);
+  const questionType = watch(`formQuestions.${index}.fieldType`);
 
   const currentDisplayType = reverseTypeMapping[questionType] || '텍스트';
 
@@ -50,12 +50,12 @@ export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
 
   const handleTypeSelect = (newOption: QuestionType) => {
     const newType = typeMapping[newOption];
-    setValue(`questions.${index}.questionType`, newType);
+    setValue(`formQuestions.${index}.fieldType`, newType);
 
     if (newType === 'RADIO' || newType === 'CHECKBOX') {
-      setValue(`questions.${index}.optionList`, [{ option: '' }]);
+      setValue(`formQuestions.${index}.optionList`, []);
     }
-    setValue(`questions.${index}.question`, '');
+    setValue(`formQuestions.${index}.question`, '');
   };
 
   return (
@@ -67,12 +67,12 @@ export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
         <Wrapper>
           <OutlineInputField
             placeholder='질문 내용을 입력하세요.'
-            {...register(`questions.${index}.question`, {
+            {...register(`formQuestions.${index}.question`, {
               required: '질문 내용을 입력해주세요.',
               minLength: { value: 1, message: '질문 내용은 최소 한 글자 이상 입력해야 합니다.' },
             })}
-            invalid={!!errors.questions?.[index]?.question}
-            message={errors.questions?.[index]?.question?.message}
+            invalid={!!errors.formQuestions?.[index]?.question}
+            message={errors.formQuestions?.[index]?.question?.message}
           />
           <Dropdown value={currentDisplayType} onSelect={handleTypeSelect} options={fieldTypes} />
         </Wrapper>
