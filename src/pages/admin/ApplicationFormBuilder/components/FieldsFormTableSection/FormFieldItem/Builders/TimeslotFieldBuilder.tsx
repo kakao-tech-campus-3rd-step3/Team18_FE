@@ -15,6 +15,7 @@ import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types
 type Props = {
   formHandler: UseFormReturn<ApplicationForm>;
   questionIndex: number;
+  isEditMode: boolean;
 };
 
 const times = generateTimes();
@@ -25,22 +26,22 @@ const CustomInput = ({ value, onClick }: CustomInputProps) => (
   </S.CustomInputWrapper>
 );
 
-export const TimeslotFieldBuilder = ({ formHandler, questionIndex }: Props) => {
+export const TimeslotFieldBuilder = ({ formHandler, questionIndex, isEditMode }: Props) => {
   const { register, setValue, watch } = formHandler;
 
   const timeSlotDate = watch(`formQuestions.${questionIndex}.timeSlotOptions.date`);
 
   const { startDate, endDate, formatDateRange, handleDateChange } = useTimeslotState({
     setValue,
-    fieldName: `questions.${questionIndex}.timeSlotOptions.date`,
+    fieldName: `formQuestions.${questionIndex}.timeSlotOptions.date`,
     initialDateRange: timeSlotDate,
   });
 
   const currentStartTime =
-    watch(`formQuestions.${questionIndex}.timeSlotOptions.availableTime.start`) || '9:00 AM';
+    watch(`formQuestions.${questionIndex}.timeSlotOptions.availableTime.start`) || '7:00';
 
   const currentEndTime =
-    watch(`formQuestions.${questionIndex}.timeSlotOptions.availableTime.end`) || '9:00 AM';
+    watch(`formQuestions.${questionIndex}.timeSlotOptions.availableTime.end`) || '7:00';
 
   const handleStartTimeSelect = (newTime: string) => {
     setValue(`formQuestions.${questionIndex}.timeSlotOptions.availableTime.start`, newTime);
@@ -65,6 +66,7 @@ export const TimeslotFieldBuilder = ({ formHandler, questionIndex }: Props) => {
             selectsRange
             customInput={<CustomInput value={formatDateRange()} />}
             popperPlacement='bottom'
+            disabled={!isEditMode}
           />
           <input
             type='hidden'
@@ -77,11 +79,21 @@ export const TimeslotFieldBuilder = ({ formHandler, questionIndex }: Props) => {
         <S.TimeSelectContainer>
           <S.TimeSelectWrapper>
             <Text color='#6E6E6E'>시작시간</Text>
-            <Dropdown value={currentStartTime} onSelect={handleStartTimeSelect} options={times} />
+            <Dropdown
+              value={currentStartTime}
+              onSelect={handleStartTimeSelect}
+              options={times}
+              disabled={!isEditMode}
+            />
           </S.TimeSelectWrapper>
           <S.TimeSelectWrapper>
             <Text color='#6E6E6E'>마감시간</Text>
-            <Dropdown value={currentEndTime} onSelect={handleEndTimeSelect} options={times} />
+            <Dropdown
+              value={currentEndTime}
+              onSelect={handleEndTimeSelect}
+              options={times}
+              disabled={!isEditMode}
+            />
           </S.TimeSelectWrapper>
         </S.TimeSelectContainer>
       </S.Layout>

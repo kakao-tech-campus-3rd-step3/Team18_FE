@@ -11,9 +11,10 @@ import { useFieldArray } from 'react-hook-form';
 type Props = {
   formHandler: UseFormReturn<ApplicationForm>;
   questionIndex: number;
+  isEditMode: boolean;
 };
 
-export const CheckboxOptionsBuilder = ({ formHandler, questionIndex }: Props) => {
+export const CheckboxOptionsBuilder = ({ formHandler, questionIndex, isEditMode }: Props) => {
   const {
     register,
     control,
@@ -42,18 +43,22 @@ export const CheckboxOptionsBuilder = ({ formHandler, questionIndex }: Props) =>
             })}
             invalid={!!errors.formQuestions?.[questionIndex]?.optionList?.[optionIndex]?.value}
             message={errors.formQuestions?.[questionIndex]?.optionList?.[optionIndex]?.value?.message}
+            disabled={!isEditMode}
           />
           <AiOutlineCloseCircle
             size={'1.5rem'}
             color='#757575'
-            onClick={() => remove(optionIndex)}
+            onClick={isEditMode ? () => remove(optionIndex) : undefined}
+            style={{ cursor: isEditMode ? 'pointer' : 'not-allowed' }}
           />
         </OptionFieldWrapper>
       ))}
 
-      <AddOptionButton onClick={handleAddOption}>
-        <FiPlus /> <Text size='sm'>옵션 추가</Text>
-      </AddOptionButton>
+      {isEditMode && (
+        <AddOptionButton onClick={handleAddOption}>
+          <FiPlus /> <Text size='sm'>옵션 추가</Text>
+        </AddOptionButton>
+      )}
     </Layout>
   );
 };

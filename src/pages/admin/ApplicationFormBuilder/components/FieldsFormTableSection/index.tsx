@@ -7,9 +7,10 @@ import { useFieldArray } from 'react-hook-form';
 
 type Props = {
   formHandler: UseFormReturn<ApplicationForm>;
+  isEditMode: boolean;
 };
 
-export const ApplicationFieldsFormTableSection = ({ formHandler }: Props) => {
+export const ApplicationFieldsFormTableSection = ({ formHandler, isEditMode }: Props) => {
   const { control } = formHandler;
 
   const { fields, append, remove } = useFieldArray({
@@ -33,10 +34,15 @@ export const ApplicationFieldsFormTableSection = ({ formHandler }: Props) => {
       {fields.map((data, index) => (
         <div key={data.id}>
           {index !== 0 && <Divider />}
-          <FormFieldItem index={index} formHandler={formHandler} onRemove={() => remove(index)} />
+          <FormFieldItem
+            index={index}
+            formHandler={formHandler}
+            onRemove={() => remove(index)}
+            isEditMode={isEditMode}
+          />
         </div>
       ))}
-      <AddFieldButton onClick={handleAddFormField} />
+      {isEditMode && <AddFieldButton onClick={handleAddFormField} />}
     </>
   );
 };

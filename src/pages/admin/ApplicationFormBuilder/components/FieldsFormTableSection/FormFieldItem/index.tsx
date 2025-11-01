@@ -18,10 +18,11 @@ type Props = {
   formHandler: UseFormReturn<ApplicationForm>;
   index: number;
   onRemove?: () => void;
+  isEditMode: boolean;
 };
 const fieldTypes: QuestionType[] = ['텍스트', '라디오', '체크박스', '타임슬롯'];
 
-export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
+export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Props) => {
   const {
     watch,
     setValue,
@@ -38,11 +39,29 @@ export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
       case '텍스트':
         return <TextOptionsBuilder />;
       case '라디오':
-        return <RadioOptionsBuilder formHandler={formHandler} questionIndex={index} />;
+        return (
+          <RadioOptionsBuilder
+            formHandler={formHandler}
+            questionIndex={index}
+            isEditMode={isEditMode}
+          />
+        );
       case '체크박스':
-        return <CheckboxOptionsBuilder formHandler={formHandler} questionIndex={index} />;
+        return (
+          <CheckboxOptionsBuilder
+            formHandler={formHandler}
+            questionIndex={index}
+            isEditMode={isEditMode}
+          />
+        );
       case '타임슬롯':
-        return <TimeslotFieldBuilder formHandler={formHandler} questionIndex={index} />;
+        return (
+          <TimeslotFieldBuilder
+            formHandler={formHandler}
+            questionIndex={index}
+            isEditMode={isEditMode}
+          />
+        );
       default:
         return null;
     }
@@ -62,7 +81,14 @@ export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
     <Layout>
       <CommonHeader>
         <Wrapper>
-          <IoCloseOutline size={'2rem'} color='#757575' onClick={onRemove} />
+          {isEditMode && (
+            <IoCloseOutline
+              size={'2rem'}
+              color='#757575'
+              onClick={onRemove}
+              style={{ cursor: 'pointer' }}
+            />
+          )}
         </Wrapper>
         <Wrapper>
           <OutlineInputField
@@ -73,8 +99,14 @@ export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
             })}
             invalid={!!errors.formQuestions?.[index]?.question}
             message={errors.formQuestions?.[index]?.question?.message}
+            disabled={!isEditMode}
           />
-          <Dropdown value={currentDisplayType} onSelect={handleTypeSelect} options={fieldTypes} />
+          <Dropdown
+            value={currentDisplayType}
+            onSelect={handleTypeSelect}
+            options={fieldTypes}
+            disabled={!isEditMode}
+          />
         </Wrapper>
       </CommonHeader>
 
