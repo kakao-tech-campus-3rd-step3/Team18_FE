@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Logo } from '@/pages/admin/Login/component/Logo';
 import { useNavigation } from './hooks/useNavigation';
 import { NavigationContainer } from './NavigationContainer';
 import { NavigationItem } from './NavigationItem';
@@ -16,9 +17,9 @@ export const Navigation = () => {
               key={item.key}
               to={path}
               isLogo={item.isLogo}
-              selected={currentRoute.startsWith(getCurrentRoute(item))}
+              selected={currentRoute.startsWith(path)}
             >
-              {item.label}
+              {item.isLogo ? <Logo /> : item.label}
             </NavigationItem>
           );
         })}
