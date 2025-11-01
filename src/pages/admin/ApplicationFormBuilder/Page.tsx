@@ -3,17 +3,32 @@ import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection'
 import { ApplicationInfoSection } from './components/ApplicationInfoSection';
 import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
 import { useForm } from 'react-hook-form';
-import type { Question } from './types/fieldType';
+import type { ApplicationForm } from './types/fieldType';
+import { useApplicationForm } from '@/pages/admin/ApplicationFormBuilder/hooks/useApplicationForm';
+import { useEffect } from 'react';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 
 export const ApplicationFormBuilder = () => {
-  const formHandler = useForm({
+  const clubId = 1;
+
+  const { data, isLoading, error } = useApplicationForm(Number(clubId));
+  const formHandler = useForm<ApplicationForm>({
     defaultValues: {
       title: '',
       description: '',
       recruitDate: '',
-      questions: [] as Question[],
+      formQuestions: [],
     },
   });
+
+  useEffect(() => {
+    if (data) {
+      formHandler.reset(data);
+    }
+  }, [data, formHandler]);
+
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <div>에러발생 : {error.message}</div>;
 
   return (
     <Layout>
