@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { getAccessToken, setAccessToken } from '@/pages/admin/Signup/utils/token';
+import {
+  getAccessToken,
+  removeAccessToken,
+  setAccessToken,
+} from '@/pages/admin/Signup/utils/token';
 import { reissueAccessToken } from './auth';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AxiosError, AxiosInstance, CreateAxiosDefaults } from 'axios';
@@ -9,6 +13,8 @@ const UNSUPPORTED_JWT: string = 'UNSUPPORTED_JWT';
 const UNAUTHENTICATED_USER: string = 'UNAUTHENTICATED_USER';
 const INVALID_JWT_SIGNATURE: string = 'INVALID_JWT_SIGNATURE';
 const EXPIRED_REFRESH_TOKEN: string = 'EXPIRED_REFRESH_TOKEN';
+
+const LOGOUT_REDIRECT_URI = import.meta.env.VITE_LOGOUT_REDIRECT_URI;
 
 const initInstance = (config: CreateAxiosDefaults): AxiosInstance => {
   const instance = axios.create({
@@ -35,14 +41,25 @@ apiInstance.interceptors.request.use((config) => {
   return config;
 });
 
+const handleLogout = (errorMessage: string) => {
+  removeAccessToken();
+  window.location.href = LOGOUT_REDIRECT_URI;
+  throw new Error(errorMessage);
+};
+
 apiInstance.interceptors.response.use(
   function onFulfilled(response) {
     return response;
   },
   async function onRejected(e: AxiosError) {
+    if (!axios.isAxiosError(e)) throw e;
     const error = e as AxiosError<ErrorResponse>;
     const config = error.config;
-    if (error.response?.status === 401 && config && !config.headers.retry) {
+
+    if (error.response?.status === 401 && config) {
+      if (config?.headers?.retry) {
+        handleLogout(error.message);
+      }
       try {
         const tokenResponse = await reissueAccessToken();
         setAccessToken(tokenResponse.accessToken);
@@ -51,26 +68,23 @@ apiInstance.interceptors.response.use(
         return apiInstance(config);
       } catch (e: unknown) {
         if (axios.isAxiosError(e)) {
-          const error = e as AxiosError<ErrorResponse>;
           const errorMessage = error.response?.data.message;
           switch (error.response?.data.error_code) {
             case INVALID_INPUT_VALUE:
-              throw new Error(`${errorMessage}`);
+              throw new Error(errorMessage ?? '입력값이 올바르지 않습니다.');
             case UNAUTHENTICATED_USER:
-              throw new Error(`${errorMessage}`);
             case UNSUPPORTED_JWT:
-              throw new Error(`${errorMessage}`);
             case INVALID_JWT_SIGNATURE:
-              throw new Error(` ${errorMessage}`);
             case EXPIRED_REFRESH_TOKEN:
-              throw new Error(`${errorMessage}`);
+              handleLogout(errorMessage);
+              break;
             default:
-              throw new Error(`알 수 없는 오류: ${e.message}`);
+              throw new Error(errorMessage ?? `알 수 없는 오류`);
           }
         }
         throw e;
       }
     }
-    return Promise.reject(error);
+    throw error;
   },
 );
