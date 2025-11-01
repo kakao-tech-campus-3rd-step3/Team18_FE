@@ -1,7 +1,7 @@
 import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
 const applyForms: Record<string, ApplicationForm> = {
-  1: {
+  '1': {
     title: '카태켐 12기 지원서',
     description: '카카오테크 캠퍼스 12기 모집을 위한 지원서입니다.',
     recruitDate: '2025-03-01 ~ 2025-03-31',
@@ -17,18 +17,18 @@ const applyForms: Record<string, ApplicationForm> = {
         question: '프로그래밍을 할 수 있나요?',
         fieldType: 'RADIO',
         isRequired: true,
-        optionList: ['예', '아니오'],
+        optionList: [{ value: '예' }, { value: '아니오' }],
       },
       {
         questionNum: 3,
         question: '가장 자신 있는 프로그래밍 언어는 무엇인가요?',
         fieldType: 'CHECKBOX',
         isRequired: true,
-        optionList: ['JAVA', 'C', 'C++'],
+        optionList: [{ value: 'JAVA' }, { value: 'C' }, { value: 'C++' }],
       },
       {
         questionNum: 3,
-        question: '가장 자신 있는 프로그래밍 언어는 무엇인가요?',
+        question: '면접 시간을 설정해주세요.',
         fieldType: 'TIME_SLOT',
         isRequired: true,
         timeSlotOptions: {

@@ -10,10 +10,10 @@ type TimeSlotOption = {
 
 export type Question = {
   questionNum: number;
-  questionType: 'RADIO' | 'TEXT' | 'TIME_SLOT' | 'CHECKBOX';
+  fieldType: 'RADIO' | 'TEXT' | 'TIME_SLOT' | 'CHECKBOX';
   question: string;
-  required: boolean;
-  optionList?: { option: string }[];
+  isRequired: boolean;
+  optionList?: { value: string }[];
   timeSlotOptions?: TimeSlotOption;
 };
 
@@ -21,5 +21,5 @@ export type ApplicationForm = {
   title: string;
   description: string;
   recruitDate: string;
-  questions: Question[];
+  formQuestions: Question[];
 };
