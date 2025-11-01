@@ -4,14 +4,20 @@ import { ApplicationInfoSection } from './components/ApplicationInfoSection';
 import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
 import { useForm } from 'react-hook-form';
 import type { ApplicationForm } from './types/fieldType';
-import { useApplicationForm } from '@/pages/admin/ApplicationFormBuilder/hooks/useApplicationForm';
-import { useEffect } from 'react';
+import {
+  useApplicationForm,
+  usePatchApplicationForm,
+} from '@/pages/admin/ApplicationFormBuilder/hooks/useApplicationForm';
+import { useEffect, useState } from 'react';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 
 export const ApplicationFormBuilder = () => {
   const clubId = 1;
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const { data, isLoading, error } = useApplicationForm(Number(clubId));
+  const { patchForm } = usePatchApplicationForm(Number(clubId));
+
   const formHandler = useForm<ApplicationForm>({
     defaultValues: {
       title: '',
@@ -27,15 +33,36 @@ export const ApplicationFormBuilder = () => {
     }
   }, [data, formHandler]);
 
+  const handleEdit = () => setIsEditMode(true);
+  const handleCancel = () => {
+    setIsEditMode(false);
+    if (data) {
+      formHandler.reset(data);
+    }
+  };
+
+  const handleSave = formHandler.handleSubmit((formData) => {
+    patchForm(formData, {
+      onSuccess: () => {
+        setIsEditMode(false);
+      },
+    });
+  });
+
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;
 
   return (
     <Layout>
       <ContentContainer>
-        <ApplicationFormBuilderHeaderSection />
-        <ApplicationInfoSection formHandler={formHandler} />
-        <ApplicationFieldsFormTableSection formHandler={formHandler} />
+        <ApplicationFormBuilderHeaderSection
+          isEditMode={isEditMode}
+          onEdit={handleEdit}
+          onSave={handleSave}
+          onCancel={handleCancel}
+        />
+        <ApplicationInfoSection formHandler={formHandler} isEditMode={isEditMode} />
+        <ApplicationFieldsFormTableSection formHandler={formHandler} isEditMode={isEditMode} />
       </ContentContainer>
     </Layout>
   );
