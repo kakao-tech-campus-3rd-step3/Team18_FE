@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { TwoColumnLayout } from '@/shared/components/Layout/TwoC/TwoColumnLayout';
+import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout/TwoColumnLayout';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { PageHeader } from '@/shared/components/PageHeader';
 import { fetchClubDetail } from './api/clubDetail';

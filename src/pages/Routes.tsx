@@ -1,10 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { ROUTE_PATH } from '@/app/constants/routerPath.ts';
 import { ClubGuard } from '@/app/providers/guards/ClubGuard';
+
 import { App } from '@/App.tsx';
+
 import { ClubDetailEditPage } from '@/pages/admin/ClubDetailEdit/Page';
 import { DashboardPage } from '@/pages/admin/Dashboard/Page';
-
 import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
 import { MainPage } from '@/pages/user/Main/Page.tsx';
 import { NoticeDetailPage } from '@/pages/user/Notice/DetailPage';
@@ -15,7 +16,6 @@ import { KakaoCallback } from './admin/Login/KakaoCallback';
 import { LoginPage } from './admin/Login/Page';
 import { AdminSignupPage } from './admin/Signup/Page';
 import { ClubApplicationPage } from './user/Apply/Page';
-
 const { USER, ADMIN, COMMON } = ROUTE_PATH;
 
 export const router = createBrowserRouter([
