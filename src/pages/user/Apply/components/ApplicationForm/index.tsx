@@ -36,8 +36,21 @@ export const ApplicationForm = ({ questions }: Props) => {
 
   const { clubId } = useParams<{ clubId: string }>();
   const clubIdNumber = Number(clubId);
+  const clearFormAndStorage = useCallback(() => {
+    localStorage.removeItem(`application-form-${clubIdNumber}`);
+    reset({
+      name: '',
+      studentId: '',
+      department: '',
+      phoneNumber: '',
+      email: '',
+      answers: [],
+      selectedInterviewSchedule: [],
+    });
+  }, [clubIdNumber, reset]);
+
   const questionArray = questions.map((e) => e.question);
-  const { handleSubmit } = useApplicationSubmit(clubIdNumber, questionArray);
+  const { handleSubmit } = useApplicationSubmit(clubIdNumber, questionArray, clearFormAndStorage);
 
   const questionsWithIndex = questions.map((q, i) => ({ ...q, originalIndex: i }));
   const timeSlotQuestions = questionsWithIndex.filter(
