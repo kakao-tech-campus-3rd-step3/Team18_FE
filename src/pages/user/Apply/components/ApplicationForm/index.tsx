@@ -1,21 +1,23 @@
+import { useCallback, useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { QuestionTypes } from '@/pages/user/Apply/constant/questionType';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
+import { debounce } from '@/utils/debounce';
 import * as S from './index.styled';
 import { InterviewScheduleSelector } from './InterviewScheduleSelector';
 import { useApplicationSubmit } from '../../hook/useApplicationSubmit';
 import type { FormInputs, InterviewSchedule, Question } from '@/pages/user/Apply/type/apply';
-import { useCallback, useEffect } from 'react';
-import { debounce } from '@/utils/debounce';
 
 type Props = {
   questions: Question[];
 };
 
 export const ApplicationForm = ({ questions }: Props) => {
+  const [isSaving, setIsSaving] = useState(false);
+
   const methods = useForm<FormInputs>({
     mode: 'onTouched',
     defaultValues: {
@@ -63,6 +65,7 @@ export const ApplicationForm = ({ questions }: Props) => {
   const debouncedSave = useCallback(
     debounce((data: FormInputs) => {
       localStorage.setItem(`application-form-${clubIdNumber}`, JSON.stringify(data));
+      setIsSaving(false);
     }, 3000),
     [clubIdNumber],
   );
@@ -76,6 +79,7 @@ export const ApplicationForm = ({ questions }: Props) => {
 
   useEffect(() => {
     const subscription = watch((value) => {
+      setIsSaving(true);
       debouncedSave(value as FormInputs);
     });
     return () => subscription.unsubscribe();
@@ -84,6 +88,17 @@ export const ApplicationForm = ({ questions }: Props) => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(handleSubmit)}>
+        <S.AutoSaveIndicator>
+          {isSaving ? (
+            <span>편집중..</span>
+          ) : (
+            <>
+              <span style={{ color: '#22c55e', fontWeight: '600' }}>✓</span>
+              <span>임시저장되었습니다.</span>
+            </>
+          )}
+        </S.AutoSaveIndicator>
+
         <S.FormContainer>
           <S.UserInfoWrapper>
             <S.FormField>
