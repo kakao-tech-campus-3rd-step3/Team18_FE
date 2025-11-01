@@ -4,8 +4,8 @@ import { SectionTitle } from '@/shared/components/SectionTitle';
 import * as S from './index.styled';
 
 interface ClubActivityPhotosEditSectionProps {
-  clubId: string | number;
-  images: string[];
+  clubId: number;
+  images: { id: number; url: string }[];
   onUpload: (files: File[]) => void;
 }
 
@@ -28,10 +28,10 @@ export const ClubActivityPhotosEditSection = ({
 
       <S.PhotosWrapper>
         <S.PhotosContainer>
-          {images.map((src, idx) => (
-            <S.PhotoWrapper key={idx}>
-              <S.Photo src={src} alt={`활동 사진 ${idx + 1}`} />
-              <S.Overlay className='overlay' onClick={() => handleDelete(idx)}>
+          {images.map((img) => (
+            <S.PhotoWrapper key={img.id}>
+              <S.Photo src={img.url} alt={`활동 사진 ${img.id}`} />
+              <S.Overlay className='overlay' onClick={() => handleDelete(img.id)}>
                 <S.Circle />
                 <FiTrash2 size={28} />
               </S.Overlay>
