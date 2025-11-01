@@ -22,11 +22,11 @@ export const CheckboxOptionsBuilder = ({ formHandler, questionIndex }: Props) =>
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: `questions.${questionIndex}.optionList`,
+    name: `formQuestions.${questionIndex}.optionList`,
   });
 
   const handleAddOption = () => {
-    append({ option: '' });
+    append({ value: '' });
   };
 
   return (
@@ -36,12 +36,12 @@ export const CheckboxOptionsBuilder = ({ formHandler, questionIndex }: Props) =>
           <CheckboxIcon />
           <OutlineInputField
             placeholder='옵션을 입력해주세요.'
-            {...register(`questions.${questionIndex}.optionList.${optionIndex}.option`, {
+            {...register(`formQuestions.${questionIndex}.optionList.${optionIndex}.value`, {
               required: '옵션을 입력해주세요',
               minLength: { value: 1, message: '옵션을 입력해주세요.' },
             })}
-            invalid={!!errors.questions?.[questionIndex]?.optionList?.[optionIndex]?.option}
-            message={errors.questions?.[questionIndex]?.optionList?.[optionIndex]?.option?.message}
+            invalid={!!errors.formQuestions?.[questionIndex]?.optionList?.[optionIndex]?.value}
+            message={errors.formQuestions?.[questionIndex]?.optionList?.[optionIndex]?.value?.message}
           />
           <AiOutlineCloseCircle
             size={'1.5rem'}
