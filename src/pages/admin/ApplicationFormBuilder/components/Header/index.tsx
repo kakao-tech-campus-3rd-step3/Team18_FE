@@ -1,12 +1,13 @@
 import styled from '@emotion/styled';
 import { Button } from '@/shared/components/Button';
 import { Text } from '@/shared/components/Text';
+import { PageHeader } from '@/shared/components/PageHeader';
 
 export const ApplicationFormBuilderHeader = () => {
   return (
     <Container>
       <HeaderWrapper>
-        <Title>지원폼 생성</Title>
+        <PageHeader clubName='지원폼 생성' />
         <Button variant='outline' width='5rem'>
           수정하기
         </Button>
@@ -32,8 +33,3 @@ const HeaderWrapper = styled.div({
   justifyContent: 'space-between',
   alignItems: 'center',
 });
-
-const Title = styled.h1(({ theme }) => ({
-  fontSize: '2.5rem',
-  fontWeight: theme.font.weight.medium,
-}));
