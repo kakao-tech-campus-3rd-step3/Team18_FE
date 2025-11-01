@@ -13,6 +13,7 @@ import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types
 
 type Props = {
   formHandler: UseFormReturn<ApplicationForm>;
+  isEditMode: boolean;
 };
 
 const CustomInput = ({ value, onClick }: CustomInputProps) => (
@@ -23,7 +24,7 @@ const CustomInput = ({ value, onClick }: CustomInputProps) => (
   </S.CustomInputWrapper>
 );
 
-export const ApplicationInfoSection = ({ formHandler }: Props) => {
+export const ApplicationInfoSection = ({ formHandler, isEditMode }: Props) => {
   const {
     register,
     setValue,
@@ -54,6 +55,7 @@ export const ApplicationInfoSection = ({ formHandler }: Props) => {
             })}
             invalid={!!errors.title}
             message={errors.title?.message}
+            disabled={!isEditMode}
           />
           <S.DatePickerWrapper>
             <DatePicker
@@ -66,6 +68,7 @@ export const ApplicationInfoSection = ({ formHandler }: Props) => {
               selectsRange
               customInput={<CustomInput value={formatDateRange()} />}
               popperPlacement='bottom'
+              disabled={!isEditMode}
             />
             <input
               type='hidden'
@@ -83,6 +86,7 @@ export const ApplicationInfoSection = ({ formHandler }: Props) => {
           })}
           invalid={!!errors.description}
           message={errors.description?.message}
+          disabled={!isEditMode}
         />
       </Layout>
     </>
