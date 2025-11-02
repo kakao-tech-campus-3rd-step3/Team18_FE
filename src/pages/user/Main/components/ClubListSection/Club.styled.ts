@@ -53,6 +53,7 @@ export const Grid = styled.div(({ theme }) => ({
   },
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     gridTemplateColumns: '1fr',
+    padding: '20px 12px',
   },
 }));
 
@@ -66,7 +67,6 @@ export const ClubListContainer = styled.div({
 
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     maxWidth: '100%',
-    padding: '0 12px',
   },
 });
 
@@ -81,6 +81,11 @@ export const ClubItem = styled.div(({ theme }) => ({
   boxShadow: theme.shadow.md,
   padding: 16,
   gap: 16,
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    width: 'calc(100vw - 32px)',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+  },
 }));
 
 export const NoSearchResultContainer = styled.div({
