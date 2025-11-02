@@ -17,6 +17,7 @@ type Props = {
 
 export const ApplicationForm = ({ questions }: Props) => {
   const [isSaving, setIsSaving] = useState(false);
+  const [formKey, setFormKey] = useState(0);
 
   const methods = useForm<FormInputs>({
     mode: 'onTouched',
@@ -49,6 +50,7 @@ export const ApplicationForm = ({ questions }: Props) => {
       answers: [],
       selectedInterviewSchedule: [],
     });
+    setFormKey((prevKey) => prevKey + 1);
   }, [clubIdNumber, reset]);
 
   const questionArray = questions.map((e) => e.question);
@@ -87,7 +89,7 @@ export const ApplicationForm = ({ questions }: Props) => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(handleSubmit)}>
+      <form key={formKey} onSubmit={methods.handleSubmit(handleSubmit)}>
         <S.AutoSaveIndicator>
           {isSaving ? (
             <span>편집중..</span>
