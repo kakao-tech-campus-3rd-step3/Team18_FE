@@ -80,4 +80,18 @@ export const SearchContainer = styled.div(({ theme }) => ({
   maxWidth: `100%`,
   gap: 30,
   backgroundColor: theme.colors.primary100,
+
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    gap: 20,
+  },
+
+  [`@media(max-width: ${theme.breakpoints.mobile})`]: {
+    flexDirection: 'column',
+    gap: 12,
+    alignItems: 'stretch',
+    '& > *': {
+      width: '100%',
+      boxSizing: 'border-box',
+    },
+  },
 }));
