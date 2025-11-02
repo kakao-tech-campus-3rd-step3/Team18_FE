@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
 import type { UseFormReset, UseFormWatch } from 'react-hook-form';
+import { useCallback, useEffect, useState } from 'react';
 import { debounce } from '@/utils/debounce';
 import type { FormInputs } from '../type/apply';
 
@@ -9,11 +9,7 @@ interface UseApplicationAutoSaveProps {
   reset: UseFormReset<FormInputs>;
 }
 
-export const useApplicationAutoSave = ({
-  clubId,
-  watch,
-  reset,
-}: UseApplicationAutoSaveProps) => {
+export const useApplicationAutoSave = ({ clubId, watch, reset }: UseApplicationAutoSaveProps) => {
   const [isSaving, setIsSaving] = useState(false);
 
   const debouncedSave = useCallback(
