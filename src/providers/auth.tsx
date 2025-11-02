@@ -14,7 +14,7 @@ const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
 const LOGOUT_REDIRECT_URI = import.meta.env.VITE_LOGOUT_REDIRECT_URI;
 
 export const AuthContext = createContext<AuthContextType>({
-  user: { role: 'guest' },
+  user: { role: null },
   login: async () => {
     return Promise.resolve();
   },
@@ -24,7 +24,7 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User>({ role: 'guest' });
+  const [user, setUser] = useState<User>({ role: null });
   const navigate = useNavigate();
 
   const login = async (code: string, signal: AbortSignal) => {
@@ -39,7 +39,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
             const { role, clubId } = defaultClub;
             setUser({ role, clubId });
           } else {
-            setUser({ role: 'guest' });
+            setUser({ role: null });
           }
           navigate('/');
           break;
@@ -60,7 +60,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const logout = async () => {
     try {
       await logoutUser();
-      setUser({ role: 'guest' });
+      setUser({ role: null });
       removeAccessToken();
       const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${REST_API_KEY}&logout_redirect_uri=${LOGOUT_REDIRECT_URI}`;
       window.location.href = kakaoLogoutUrl;
