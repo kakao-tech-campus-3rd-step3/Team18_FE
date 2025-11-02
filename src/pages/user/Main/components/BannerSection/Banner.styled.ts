@@ -7,13 +7,15 @@ export const BannerText = styled.div(({ theme }) => ({
 }));
 
 export const BannerWrapper = styled.div(({ theme }) => ({
+  textAlign: 'center',
+  marginBottom: '24px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   maxWidth: `100%`,
   height: 300,
-  gap: 30,
+  gap: '16px',
   backgroundColor: theme.colors.primary100,
   [`@media (max-width: ${theme.breakpoints.web})`]: {
     height: 250,
@@ -46,5 +48,10 @@ export const SearchContainer = styled.div(({ theme }) => ({
     flexDirection: 'column',
     gap: 12,
     width: '100%',
+    alignItems: 'stretch',
+    '& > *': {
+      width: '100%',
+      boxSizing: 'border-box',
+    },
   },
 }));
