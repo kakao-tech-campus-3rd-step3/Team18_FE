@@ -19,7 +19,9 @@ export const Title = styled.h2(({ theme }) => ({
 
 export const MetaWrapper = styled.div(({ theme }) => ({
   display: 'flex',
-  gap: '80px',
+  flexWrap: 'wrap',
+  alignItems: 'flex-start',
+  gap: '40px',
   marginBottom: '16px',
   fontSize: theme.font.size.sm,
   color: theme.colors.textSecondary,
@@ -27,13 +29,40 @@ export const MetaWrapper = styled.div(({ theme }) => ({
 
 export const MetaItem = styled.div({
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'flex-start',
+  minWidth: '250px',
+  flex: '1 1 auto',
 });
 
 export const Label = styled.span(({ theme }) => ({
   fontWeight: theme.font.weight.bold,
   marginRight: '6px',
   color: theme.colors.textPrimary,
+}));
+
+export const FileList = styled.ul({
+  listStyle: 'none',
+  margin: 0,
+  padding: 0,
+  lineHeight: 1.0,
+});
+
+export const FileItem = styled.li(({ theme }) => ({
+  marginBottom: '4px',
+  a: {
+    display: 'inline-block',
+    maxWidth: '220px',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    color: theme.colors.primary,
+    textDecoration: 'underline',
+    textUnderlineOffset: '2px',
+    transition: 'color 0.2s ease',
+    '&:hover': {
+      color: theme.colors.primary700,
+    },
+  },
 }));
 
 export const Content = styled.pre(({ theme }) => ({

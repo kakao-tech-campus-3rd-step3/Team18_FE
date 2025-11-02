@@ -57,7 +57,25 @@ export const NoticeDetailCardSection = ({ noticeId, onBack }: NoticeDetailCardSe
           <S.Label>작성일</S.Label> {data.createdAt?.slice(0, 10) ?? '-'}
         </S.MetaItem>
         <S.MetaItem>
-          <S.Label>첨부파일</S.Label> {data.file}
+          <S.Label>첨부파일</S.Label>
+          {data.file && data.file.length > 0 ? (
+            <S.FileList>
+              {data.file.map((f) => (
+                <S.FileItem key={f.id}>
+                  <a
+                    href={f.presignedUrl}
+                    download={f.name}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    {f.name}
+                  </a>
+                </S.FileItem>
+              ))}
+            </S.FileList>
+          ) : (
+            '없음'
+          )}
         </S.MetaItem>
       </S.MetaWrapper>
 
