@@ -13,9 +13,12 @@ export const BannerWrapper = styled.div(({ theme }) => ({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  maxWidth: `100%`,
+  width: '100%',
+  maxWidth: '100vw',
   height: 300,
   gap: '16px',
+  boxSizing: 'border-box',
+
   backgroundColor: theme.colors.primary100,
   [`@media (max-width: ${theme.breakpoints.web})`]: {
     height: 250,
@@ -29,6 +32,7 @@ export const BannerWrapper = styled.div(({ theme }) => ({
     height: 'auto',
     padding: '16px',
     gap: 12,
+    marginBottom: 0,
   },
 }));
 

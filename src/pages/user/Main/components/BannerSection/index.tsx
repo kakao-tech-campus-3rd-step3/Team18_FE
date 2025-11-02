@@ -77,18 +77,23 @@ export const SearchContainer = styled.div(({ theme }) => ({
   flexDirection: 'row',
   justifyContent: 'center',
   alignItems: 'center',
-  maxWidth: `100%`,
+  width: '100%',
+  maxWidth: '1200px',
   gap: 30,
+  padding: '0 20px',
+  boxSizing: 'border-box',
   backgroundColor: theme.colors.primary100,
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
     gap: 20,
+    padding: '0 16px',
   },
 
   [`@media(max-width: ${theme.breakpoints.mobile})`]: {
     flexDirection: 'column',
     gap: 12,
-    alignItems: 'stretch',
+    width: '100%',
+    padding: 0,
     '& > *': {
       width: '100%',
       boxSizing: 'border-box',
