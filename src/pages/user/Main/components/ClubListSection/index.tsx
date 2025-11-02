@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { useClubFiltering } from '@/pages/user/Main/hook/useClubFiltering.ts';
+import { useClubFiltering } from '@/pages/user/Main/hooks/useClubFiltering.ts';
 
 import { engToKorCategory } from '@/pages/user/Main/utils/formatting.ts';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
 import { Text } from '@/shared/components/Text';
 import * as S from './Club.styled.ts';
-import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
+import type { ClubCategoryEng } from '@/pages/user/Main/constants/clubCategory.ts';
 import type { Club, RecruitStatus } from '@/pages/user/Main/types/club.ts';
 
 type Props = {

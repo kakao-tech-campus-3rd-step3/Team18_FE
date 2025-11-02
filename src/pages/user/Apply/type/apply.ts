@@ -1,4 +1,4 @@
-import type { QuestionTypes } from '../constant/questionType';
+import type { QuestionTypes } from '../constants/questionType';
 
 export type QuestionType = (typeof QuestionTypes)[keyof typeof QuestionTypes];
 

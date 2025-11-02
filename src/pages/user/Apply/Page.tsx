@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { ClubDescription } from '@/pages/user/Apply/components/ClubDescriptionSection';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicationForm } from './components/ApplicationForm';
-import { useApplicationForm } from './hook/useApplicationForm';
+import { useApplicationForm } from './hooks/useApplicationForm';
 
 export const ClubApplicationPage = () => {
   const { clubId } = useParams();

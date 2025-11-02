@@ -1,4 +1,4 @@
-import type { ClubCategoryEng } from '../constant/clubCategory';
+import type { ClubCategoryEng } from '../constants/clubCategory';
 
 export type Club = {
   id: number;

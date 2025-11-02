@@ -1,5 +1,5 @@
 import { isAxiosError } from 'axios';
-import { createContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser, postAuthCode, type LoginResponse } from '@/pages/admin/Login/api/auth';
 import {
@@ -72,3 +72,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) throw new Error('useAuth는 UserProvider 범위 내에서만 유효합니다.');
+  return context;
+};

@@ -1,4 +1,4 @@
-import type { ClubCategory, ClubCategoryEng } from '../constant/clubCategory';
+import type { ClubCategory, ClubCategoryEng } from '../constants/clubCategory';
 import type { RecruitStatus, RecruitStatusEng } from '../types/club';
 
 export const korToEngCategory: Record<ClubCategory, ClubCategoryEng> = {

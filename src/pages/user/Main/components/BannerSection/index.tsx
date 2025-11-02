@@ -5,7 +5,7 @@ import {
   CLUB_CATEGORY,
   type ClubCategory,
   type ClubCategoryEng,
-} from '@/pages/user/Main/constant/clubCategory.ts';
+} from '@/pages/user/Main/constants/clubCategory.ts';
 import { CLUB_RECRUIT_STATUS_KOR, type RecruitStatus } from '@/pages/user/Main/types/club.ts';
 import {
   engToKorCategory,

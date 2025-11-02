@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 import { useInterviewScheduleUpdater } from './useFormDataUpdate';
 
-import { generateInitialDragState } from '../constant/initialDragState';
+import { generateInitialDragState } from '../constants/initialDragState';
 
 import { updateDragState, updateSelectedState } from '../utils/drag';
 import { getIndexDiffSign } from '../utils/math';
