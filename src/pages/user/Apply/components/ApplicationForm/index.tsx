@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { QuestionTypes } from '@/pages/user/Apply/constants/questionType';
-import { useApplicationAutoSave } from '@/pages/user/Apply/hook/useApplicationAutoSave';
+import { useApplicationAutoSave } from '@/pages/user/Apply/hooks/useApplicationAutoSave';
 import { useApplicationSubmit } from '@/pages/user/Apply/hooks/useApplicationSubmit';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
