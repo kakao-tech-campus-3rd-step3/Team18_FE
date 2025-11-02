@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
+import { stageMap } from '@/pages/admin/Dashboard/utils/stageMap';
 import { ApplicantFilterButton } from './ApplicationFilterButton';
+
 import type {
   ApplicationFilterOption,
   ApplicationStage,
@@ -13,7 +15,7 @@ export type Props = {
 };
 
 export const ApplicationStatusFilter = ({ option, onOptionChange, stage }: Props) => {
-  const apiStage = stage === '서류' ? 'INTERVIEW' : 'FINAL';
+  const apiStage = stageMap[stage];
   const { counts } = useApplicants(1, apiStage);
 
   return (
