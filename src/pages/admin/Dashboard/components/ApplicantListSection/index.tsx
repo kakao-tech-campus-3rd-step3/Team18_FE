@@ -10,12 +10,16 @@ import type {
   ApplicationStage,
 } from '@/pages/admin/Dashboard/types/dashboard';
 
-export const ApplicantListSection = () => {
+interface ApplicantListSectionProps {
+  stage: ApplicationStage;
+  setStage: React.Dispatch<React.SetStateAction<ApplicationStage>>;
+}
+
+export const ApplicantListSection = ({ stage, setStage }: ApplicantListSectionProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const optionType = 'ALL' as ApplicationFilterOption;
 
   const [filterOption, setFilterOption] = useState<ApplicationFilterOption>(optionType);
-  const [stage, setStage] = useState<ApplicationStage>('서류');
 
   const handleFilterOptionChange = (option: ApplicationFilterOption) => {
     setFilterOption(option);
@@ -48,19 +52,30 @@ export const ApplicantListSection = () => {
   );
 };
 
-const ApplicantFilterTopBarWrapper = styled.div({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  margin: '4.5rem 0 1.5rem 0',
-  padding: '0 1rem',
-});
+const ApplicantFilterTopBarWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4.5rem 0 1.5rem 0;
+  padding: 0 1rem;
 
-const LeftSection = styled.div({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '3rem',
-});
+  @media (max-width: 940px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+`;
+
+const LeftSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+
+  @media (max-width: 500px) {
+    width: 100%;
+    justify-content: space-between;
+  }
+`;
 
 const ListWrapper = styled.main(({ theme }) => ({
   minHeight: 'auto',

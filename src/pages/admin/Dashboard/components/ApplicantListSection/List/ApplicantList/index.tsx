@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicantListItem } from '../ApplicantListItem';
@@ -24,17 +24,22 @@ const INFO_CATEGORY: ApplicateInfoCategory[] = [
 ];
 
 export const ApplicantList = ({ filterOption, stage }: Props) => {
+  const { clubId } = useParams();
+
   const navigate = useNavigate();
 
   const apiStage = stage === '서류' ? 'INTERVIEW' : 'FINAL';
 
-  const { data: applicants, isLoading, error } = useApplicants(1, apiStage, filterOption);
+  const {
+    data: applicants,
+    isLoading,
+    error,
+  } = useApplicants(Number(clubId), apiStage, filterOption);
 
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;
 
   const handleItemClick = (applicantId: number) => {
-    const clubId = 1;
     navigate(`/admin/clubs/${clubId}/applicants/${applicantId}`);
   };
 
