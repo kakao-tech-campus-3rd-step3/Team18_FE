@@ -10,6 +10,17 @@ const InputWrapper = styled.div(({ theme }) => ({
   borderRadius: theme?.radius?.md,
   padding: '10px 10px',
   backgroundColor: '#fff',
+  boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    width: 300,
+  },
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    gap: 12,
+    width: '100%',
+    padding: '8px 12px',
+  },
 }));
 
 const Input = styled.input(({ theme }) => ({
