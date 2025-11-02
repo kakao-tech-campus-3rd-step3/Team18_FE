@@ -9,6 +9,15 @@ export const BannerTextWrapper = styled.div({
   flexDirection: 'column',
   alignItems: 'center',
   gap: '16px',
+  '@media(max-width: 768px)': {
+    gap: '12px',
+    marginBottom: '16px',
+  },
+
+  '@media(max-width: 480px)': {
+    gap: '8px',
+    marginBottom: '12px',
+  },
 });
 
 export const HeaderText = ({ children }: { children: React.ReactNode }) => (
