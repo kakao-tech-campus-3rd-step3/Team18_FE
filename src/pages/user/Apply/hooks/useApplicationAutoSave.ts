@@ -1,5 +1,5 @@
-import type { UseFormReset, UseFormWatch } from 'react-hook-form';
 import { useCallback, useEffect, useState } from 'react';
+import type { UseFormReset, UseFormWatch } from 'react-hook-form';
 import { debounce } from '@/utils/debounce';
 import type { FormInputs } from '../type/apply';
 
