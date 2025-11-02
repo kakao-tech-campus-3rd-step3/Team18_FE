@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { CONTACT_EMAIL } from '../constants/email';
 
 export const EmptyState = () => {
   return (
@@ -6,7 +7,7 @@ export const EmptyState = () => {
       <Logo src='/assets/logo.png' alt='Dongari-um 로고' />
       <Message>선택된 동아리가 없어요.</Message>
       <SubText>동아리를 등록하려면 아래 메일로 문의해주세요.</SubText>
-      <MailLink href='mailto:jnupole004@gmail.com'>jnupole004@gmail.com</MailLink>
+      <MailLink href='mailto:jnupole004@gmail.com'>{CONTACT_EMAIL}</MailLink>
     </Container>
   );
 };
