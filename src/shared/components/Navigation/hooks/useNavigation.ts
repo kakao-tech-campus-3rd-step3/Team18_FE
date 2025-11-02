@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { NAV_CONFIG } from '@/constants/navigation';
+import { getNavItems } from '@/constants/navigation';
 import { useAuth } from '@/providers/auth';
 import { replaceRouteParams } from '@/utils/replaceRouteParams';
 import type { NavItemData } from '@/types/navigation';
@@ -9,7 +9,7 @@ export const useNavigation = () => {
   const location = useLocation();
   const currentRoute = location.pathname;
 
-  const items: NavItemData[] = NAV_CONFIG[user?.role ?? 'guest'];
+  const items: NavItemData[] = getNavItems(user?.role ?? null);
   const leftItems = items.filter((item) => !['login', 'logout'].includes(item.key));
   const rightItem = items.find((item) => ['login', 'logout'].includes(item.key));
 
