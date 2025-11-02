@@ -15,6 +15,19 @@ export const BannerWrapper = styled.div(({ theme }) => ({
   height: 300,
   gap: 30,
   backgroundColor: theme.colors.primary100,
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    height: 250,
+    gap: 24,
+  },
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    position: 'sticky',
+    top: 0,
+    zIndex: 1000,
+    height: 'auto',
+    padding: '16px',
+    gap: 12,
+  },
 }));
 
 export const SearchContainer = styled.div(({ theme }) => ({
@@ -25,4 +38,13 @@ export const SearchContainer = styled.div(({ theme }) => ({
   maxWidth: `100%`,
   gap: 30,
   backgroundColor: theme.colors.primary100,
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    gap: 20,
+  },
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    flexDirection: 'column',
+    gap: 12,
+    width: '100%',
+  },
 }));
