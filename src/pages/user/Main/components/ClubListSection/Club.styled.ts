@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { theme } from '@/styles/theme';
 import type { RecruitStatus } from '@/pages/user/Main/types/club';
 
 export const ClubCategoryText = styled.div(({ theme }) => ({
@@ -40,17 +41,17 @@ export const RecruitStatusText = styled.div<Props>(({ theme }) => ({
   color: 'white',
 }));
 
-export const Grid = styled.div(() => ({
+export const Grid = styled.div(({ theme }) => ({
   display: 'grid',
   gap: 30,
   padding: 30,
   gridTemplateColumns: 'repeat(4, 1fr)',
   justifyItems: 'center',
 
-  '@media (max-width: 1024px)': {
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
     gridTemplateColumns: 'repeat(2, 1fr)',
   },
-  '@media (max-width: 600px)': {
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     gridTemplateColumns: '1fr',
   },
 }));
@@ -59,11 +60,11 @@ export const ClubListContainer = styled.div({
   maxWidth: '1200px',
   margin: '0 auto',
 
-  '@media (max-width: 1024px)': {
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
     maxWidth: '90%',
   },
 
-  '@media (max-width: 600px)': {
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     maxWidth: '100%',
     padding: '0 12px',
   },
