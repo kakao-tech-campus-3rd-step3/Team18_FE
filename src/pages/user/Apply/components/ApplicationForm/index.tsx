@@ -1,14 +1,14 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { QuestionTypes } from '@/pages/user/Apply/constant/questionType';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
-import { debounce } from '@/utils/debounce';
 import * as S from './index.styled';
 import { InterviewScheduleSelector } from './InterviewScheduleSelector';
-import { useApplicationSubmit } from '../../hook/useApplicationSubmit';
+import { useApplicationAutoSave } from '@/pages/user/Apply/hook/useApplicationAutoSave';
+import { useApplicationSubmit } from '@/pages/user/Apply/hook/useApplicationSubmit';
 import type { FormInputs, InterviewSchedule, Question } from '@/pages/user/Apply/type/apply';
 
 type Props = {
@@ -16,8 +16,9 @@ type Props = {
 };
 
 export const ApplicationForm = ({ questions }: Props) => {
-  const [isSaving, setIsSaving] = useState(false);
   const [formKey, setFormKey] = useState(0);
+  const { clubId } = useParams<{ clubId: string }>();
+  const clubIdNumber = Number(clubId);
 
   const methods = useForm<FormInputs>({
     mode: 'onTouched',
@@ -37,8 +38,8 @@ export const ApplicationForm = ({ questions }: Props) => {
     reset,
   } = methods;
 
-  const { clubId } = useParams<{ clubId: string }>();
-  const clubIdNumber = Number(clubId);
+  const { isSaving } = useApplicationAutoSave({ clubId: clubIdNumber, watch, reset });
+
   const clearFormAndStorage = useCallback(() => {
     localStorage.removeItem(`application-form-${clubIdNumber}`);
     reset({
@@ -63,29 +64,6 @@ export const ApplicationForm = ({ questions }: Props) => {
   const otherQuestions = questionsWithIndex.filter(
     (q) => q.questionType !== QuestionTypes.TIME_SLOT,
   );
-
-  const debouncedSave = useCallback(
-    debounce((data: FormInputs) => {
-      localStorage.setItem(`application-form-${clubIdNumber}`, JSON.stringify(data));
-      setIsSaving(false);
-    }, 3000),
-    [clubIdNumber],
-  );
-
-  useEffect(() => {
-    const savedData = localStorage.getItem(`application-form-${clubIdNumber}`);
-    if (savedData) {
-      reset(JSON.parse(savedData));
-    }
-  }, [clubIdNumber, reset]);
-
-  useEffect(() => {
-    const subscription = watch((value) => {
-      setIsSaving(true);
-      debouncedSave(value as FormInputs);
-    });
-    return () => subscription.unsubscribe();
-  }, [watch, debouncedSave]);
 
   return (
     <FormProvider {...methods}>
