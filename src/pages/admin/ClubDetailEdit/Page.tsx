@@ -18,8 +18,7 @@ import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSect
 import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
 import { ClubShortIntroductionEditSection } from './components/ClubShortIntroductionEditSection';
 import { useClubDetailEdit } from './hooks/useClubDetailEdit';
-import type { ClubDetailEdit } from './types/clubDetailEdit';
-
+import type { ClubDetailUpdatePayload } from './types/clubDetailEdit';
 
 export const ClubDetailEditPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
