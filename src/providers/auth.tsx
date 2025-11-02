@@ -15,8 +15,12 @@ const LOGOUT_REDIRECT_URI = import.meta.env.VITE_LOGOUT_REDIRECT_URI;
 
 export const AuthContext = createContext<AuthContextType>({
   user: { role: 'guest' },
-  login: () => {},
-  logout: () => {},
+  login: async () => {
+    return Promise.resolve();
+  },
+  logout: async () => {
+    return Promise.resolve();
+  },
 });
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
