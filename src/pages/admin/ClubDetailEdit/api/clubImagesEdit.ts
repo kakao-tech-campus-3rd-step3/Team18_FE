@@ -1,5 +1,5 @@
 import { isAxiosError } from 'axios';
-import { apiInstance } from '@/api/initInstance';
+import { apiInstance } from '@/app/api/initInstance';
 
 export const updateClubImages = async (
   clubId: number | string,
