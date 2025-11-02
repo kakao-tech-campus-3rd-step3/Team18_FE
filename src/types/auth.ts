@@ -8,6 +8,6 @@ export type User = {
 
 export type AuthContextType = {
   user: User | null;
-  login: (code: string, signal: AbortSignal) => void;
-  logout: () => void;
+  login: (code: string, signal: AbortSignal) => Promise<void>;
+  logout: () => Promise<void>;
 };
