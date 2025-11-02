@@ -226,8 +226,12 @@ export const ApplicationForm = ({ questions }: Props) => {
               ))}
             </S.QuestionWrapper>
           )}
-
-          <Button type='submit'>{isSubmitting ? '제출중...' : '제출하기'}</Button>
+          <S.ActionButtonWrapper>
+            <Button type='button' onClick={clearFormAndStorage} variant='outline'>
+              초기화
+            </Button>
+            <Button type='submit'>{isSubmitting ? '제출중...' : '제출하기'}</Button>
+          </S.ActionButtonWrapper>
         </S.FormContainer>
       </form>
     </FormProvider>

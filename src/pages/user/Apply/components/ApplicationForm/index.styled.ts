@@ -136,3 +136,8 @@ export const AutoSaveIndicator = styled.span(({ theme }) => ({
   padding: '0.375rem 0.75rem',
   borderRadius: '0.25rem',
 }));
+
+export const ActionButtonWrapper = styled.div`
+  display: flex;
+  gap: 2rem;
+`;
