@@ -21,6 +21,12 @@ export const ClubIntroduction = styled.div(({ theme }) => ({
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
+  minWidth: 0,
+  flex: '1 1 auto',
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    width: '100%',
+    textAlign: 'left',
+  },
 }));
 
 type Props = {
@@ -74,7 +80,8 @@ export const ClubItem = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   width: 240,
-  height: 130,
+  minHeight: '130px',
+  height: 'auto',
   marginBottom: 10,
   border: `1px solid ${theme.colors.border}`,
   borderRadius: theme.radius.lg,
