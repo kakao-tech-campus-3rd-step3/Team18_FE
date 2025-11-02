@@ -13,7 +13,7 @@ export const NavigationItem = ({ to, children, isLogo, onClick = () => {}, selec
   if (isLogo) return <LogoLink to={to || '#'}>{children}</LogoLink>;
 
   return (
-    <NavLink to={to || '#'} selected={selected} onClick={() => onClick()} data-selected={selected}>
+    <NavLink to={to || '#'} selected={selected} onClick={onClick} data-selected={selected}>
       {children}
     </NavLink>
   );
