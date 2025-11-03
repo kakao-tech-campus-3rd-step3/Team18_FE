@@ -11,6 +11,7 @@ import {
   ContentRight,
 } from '@/shared/components/ClubDetailLayout/index.styled';
 import { theme } from '@/styles/theme';
+import { engToKorCategory } from '@/utils/formatting';
 import { updateClubDetailEdit } from './api/clubDetailEdit';
 import { updateClubImages } from './api/clubImagesEdit';
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
@@ -19,6 +20,7 @@ import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSect
 import { ClubShortIntroductionEditSection } from './components/ClubShortIntroductionEditSection';
 import { useClubDetailEdit } from './hooks/useClubDetailEdit';
 import type { ClubDetailUpdatePayload } from './types/clubDetailEdit';
+import type { ClubCategoryEng } from '@/types/club';
 
 export const ClubDetailEditPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
@@ -68,7 +70,12 @@ export const ClubDetailEditPage = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Layout>
           <ContentLeft>
-            <ClubHeaderSection clubName={club.clubName} category={club.category} />
+            <ClubHeaderSection
+              clubName={club.clubName}
+              category={
+                club.category in engToKorCategory ? (club.category as ClubCategoryEng) : 'ALL'
+              }
+            />
             <ClubShortIntroductionEditSection />
 
             <ClubActivityPhotosEditSection

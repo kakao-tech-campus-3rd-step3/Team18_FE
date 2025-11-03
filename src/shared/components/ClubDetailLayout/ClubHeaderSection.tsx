@@ -1,16 +1,20 @@
 import styled from '@emotion/styled';
+import { engToKorCategory } from '@/utils/formatting';
+import type { ClubCategoryEng } from '@/types/club';
 
 interface ClubHeaderSectionProps {
   clubName: string;
-  category: string;
+  category: ClubCategoryEng;
 }
 
 export const ClubHeaderSection = ({ clubName, category }: ClubHeaderSectionProps) => {
+  const korCategory = engToKorCategory[category];
+
   return (
     <HeaderContainer>
       <TextContainer>
         <Title>{clubName}</Title>
-        <Category>{category}</Category>
+        <Category>{korCategory}</Category>
       </TextContainer>
     </HeaderContainer>
   );
