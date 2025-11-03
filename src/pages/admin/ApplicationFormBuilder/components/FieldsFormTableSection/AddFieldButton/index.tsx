@@ -26,7 +26,6 @@ const StyledButton = styled.button(({ theme }) => ({
   justifyContent: 'center',
   gap: '0.5rem',
   color: theme.colors.textPrimary,
-  weight: 'bold',
   fontSize: '0.95rem',
   fontWeight: 500,
   cursor: 'pointer',
