@@ -4,10 +4,13 @@ import { useKakaoLogin } from './hooks/useKakaoLogin';
 
 export const KakaoCallback = () => {
   const { isLoading } = useKakaoLogin();
-  if (isLoading) return;
-  <LoadingSpinnerWrapper>
-    <LoadingSpinner />;
-  </LoadingSpinnerWrapper>;
+  if (isLoading) {
+    return (
+      <LoadingSpinnerWrapper>
+        <LoadingSpinner />
+      </LoadingSpinnerWrapper>
+    );
+  }
   return null;
 };
 
