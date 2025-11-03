@@ -42,14 +42,15 @@ export const CheckboxOptionsBuilder = ({ formHandler, questionIndex, isEditMode 
               minLength: { value: 1, message: '옵션을 입력해주세요.' },
             })}
             invalid={!!errors.formQuestions?.[questionIndex]?.optionList?.[optionIndex]?.value}
-            message={errors.formQuestions?.[questionIndex]?.optionList?.[optionIndex]?.value?.message}
+            message={
+              errors.formQuestions?.[questionIndex]?.optionList?.[optionIndex]?.value?.message
+            }
             disabled={!isEditMode}
           />
           <AiOutlineCloseCircle
             size={'1.5rem'}
             color='#757575'
             onClick={isEditMode ? () => remove(optionIndex) : undefined}
-            style={{ cursor: isEditMode ? 'pointer' : 'not-allowed' }}
           />
         </OptionFieldWrapper>
       ))}
