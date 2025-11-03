@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
@@ -39,9 +40,12 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;
 
-  const handleItemClick = (applicantId: number) => {
-    navigate(`/admin/clubs/${clubId}/applicants/${applicantId}`);
-  };
+  const handleItemClick = useCallback(
+    (applicantId: number) => {
+      navigate(`/admin/clubs/${clubId}/applicants/${applicantId}`);
+    },
+    [clubId, navigate],
+  );
 
   return (
     <S.Container>
