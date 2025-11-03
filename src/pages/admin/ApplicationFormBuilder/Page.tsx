@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import {
   useAdaptedApplicationForm,
   useAdaptedPatchApplicationForm,
@@ -12,7 +13,7 @@ import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection'
 import type { ApplicationFormData } from './types/fieldType';
 
 export const ApplicationFormBuilder = () => {
-  const clubId = 1;
+  const { clubId } = useParams();
   const [isEditMode, setIsEditMode] = useState(false);
 
   const { data, isLoading, error } = useAdaptedApplicationForm(Number(clubId));
