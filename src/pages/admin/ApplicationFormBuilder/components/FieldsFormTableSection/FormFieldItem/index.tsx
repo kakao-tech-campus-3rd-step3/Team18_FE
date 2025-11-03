@@ -89,7 +89,7 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
 
   return (
     <Layout>
-      <input type="hidden" {...register(`formQuestions.${index}.displayOrder`)} />
+      <input type='hidden' {...register(`formQuestions.${index}.displayOrder`)} />
       <CommonHeader>
         <Wrapper>
           {isEditMode && (
