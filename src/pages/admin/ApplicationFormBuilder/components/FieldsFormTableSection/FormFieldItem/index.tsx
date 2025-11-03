@@ -8,14 +8,14 @@ import { TextOptionsBuilder } from './Builders/TextOptionsBuilder';
 import { TimeslotFieldBuilder } from './Builders/TimeslotFieldBuilder';
 import type { QuestionType } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 import type { UseFormReturn } from 'react-hook-form';
-import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
+import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 import {
   reverseTypeMapping,
   typeMapping,
 } from '@/pages/admin/ApplicationFormBuilder/utils/typeMapping';
 
 type Props = {
-  formHandler: UseFormReturn<ApplicationForm>;
+  formHandler: UseFormReturn<ApplicationFormData>;
   index: number;
   onRemove?: () => void;
   isEditMode: boolean;
@@ -73,6 +73,11 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
 
     if (newType === 'RADIO' || newType === 'CHECKBOX') {
       setValue(`formQuestions.${index}.optionList`, []);
+    } else if (newType === 'TIME_SLOT') {
+      setValue(`formQuestions.${index}.timeSlotOptions`, {
+        date: '',
+        availableTime: { start: '', end: '' },
+      });
     }
     setValue(`formQuestions.${index}.question`, '');
   };

@@ -8,11 +8,11 @@ import DatePicker from 'react-datepicker';
 import { Text } from '@/shared/components/Text';
 import { Global } from '@emotion/react';
 import type { CustomInputProps } from '@/pages/admin/ApplicationFormBuilder/types/clubInfo';
+import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 import type { UseFormReturn } from 'react-hook-form';
-import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
 type Props = {
-  formHandler: UseFormReturn<ApplicationForm>;
+  formHandler: UseFormReturn<ApplicationFormData>;
   isEditMode: boolean;
 };
 
@@ -27,7 +27,6 @@ const CustomInput = ({ value, onClick }: CustomInputProps) => (
 export const ApplicationInfoSection = ({ formHandler, isEditMode }: Props) => {
   const {
     register,
-    setValue,
     watch,
     formState: { errors },
   } = formHandler;
@@ -35,7 +34,6 @@ export const ApplicationInfoSection = ({ formHandler, isEditMode }: Props) => {
   const recruitDate = watch('recruitDate');
 
   const { startDate, endDate, formatDateRange, handleDateChange } = useTimeslotState({
-    setValue,
     initialDateRange: recruitDate,
   });
 

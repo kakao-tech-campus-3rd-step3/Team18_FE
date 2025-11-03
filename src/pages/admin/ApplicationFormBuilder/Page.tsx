@@ -3,7 +3,7 @@ import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection'
 import { ApplicationInfoSection } from './components/ApplicationInfoSection';
 import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
 import { useForm } from 'react-hook-form';
-import type { ApplicationForm } from './types/fieldType';
+import type { ApplicationForm, ApplicationFormData } from './types/fieldType';
 import {
   useApplicationForm,
   usePatchApplicationForm,
@@ -18,7 +18,7 @@ export const ApplicationFormBuilder = () => {
   const { data, isLoading, error } = useApplicationForm(Number(clubId));
   const { patchForm } = usePatchApplicationForm(Number(clubId));
 
-  const formHandler = useForm<ApplicationForm>({
+  const formHandler = useForm<ApplicationFormData>({
     defaultValues: {
       title: '',
       description: '',
@@ -27,9 +27,32 @@ export const ApplicationFormBuilder = () => {
     },
   });
 
+  const transformDataForForm = (apiData: ApplicationForm) => {
+    return {
+      ...apiData,
+      formQuestions: apiData.formQuestions.map((question) => {
+        const rawTimeSlot = question.timeSlotOptions;
+        const correctedTimeSlot = Array.isArray(rawTimeSlot) ? rawTimeSlot[0] : rawTimeSlot;
+
+        return {
+          ...question,
+          optionList:
+            question.optionList?.map((option) =>
+              typeof option === 'string' ? { value: option } : option,
+            ) || [],
+          timeSlotOptions: correctedTimeSlot || {
+            date: '',
+            availableTime: { start: '', end: '' },
+          },
+        };
+      }),
+    };
+  };
+
   useEffect(() => {
     if (data) {
-      formHandler.reset(data);
+      const transformedData = transformDataForForm(data);
+      formHandler.reset(transformedData);
     }
   }, [data, formHandler]);
 
@@ -37,12 +60,22 @@ export const ApplicationFormBuilder = () => {
   const handleCancel = () => {
     setIsEditMode(false);
     if (data) {
-      formHandler.reset(data);
+      const transformedData = transformDataForForm(data);
+      formHandler.reset(transformedData);
     }
   };
 
   const handleSave = formHandler.handleSubmit((formData) => {
-    patchForm(formData, {
+    const submissionData = {
+      ...formData,
+      formQuestions: formData.formQuestions.map((question) => ({
+        ...question,
+        optionList: question.optionList?.map((option) => option.value) || [],
+        timeSlotOptions: question.timeSlotOptions ? [question.timeSlotOptions] : [],
+      })),
+    };
+
+    patchForm(submissionData, {
       onSuccess: () => {
         setIsEditMode(false);
       },

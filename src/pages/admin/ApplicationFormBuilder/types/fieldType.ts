@@ -8,13 +8,31 @@ type TimeSlotOption = {
   };
 };
 
-export type Question = {
+export type QuestionFormData = {
   questionNum: number;
   fieldType: 'RADIO' | 'TEXT' | 'TIME_SLOT' | 'CHECKBOX';
   question: string;
   isRequired: boolean;
   optionList?: { value: string }[];
   timeSlotOptions?: TimeSlotOption;
+  displayOrder: number;
+};
+
+export type ApplicationFormData = {
+  title: string;
+  description: string;
+  recruitDate: string;
+  formQuestions: QuestionFormData[];
+};
+
+export type Question = {
+  questionNum: number;
+  fieldType: 'RADIO' | 'TEXT' | 'TIME_SLOT' | 'CHECKBOX';
+  question: string;
+  isRequired: boolean;
+  optionList?: string[];
+  timeSlotOptions?: TimeSlotOption[];
+  displayOrder: number;
 };
 
 export type ApplicationForm = {

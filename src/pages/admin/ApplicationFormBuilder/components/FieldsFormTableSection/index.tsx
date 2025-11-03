@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import { AddFieldButton } from './AddFieldButton';
 import { FormFieldItem } from './FormFieldItem';
-import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
+import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 import type { UseFormReturn } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
 
 type Props = {
-  formHandler: UseFormReturn<ApplicationForm>;
+  formHandler: UseFormReturn<ApplicationFormData>;
   isEditMode: boolean;
 };
 
@@ -22,6 +22,7 @@ export const ApplicationFieldsFormTableSection = ({ formHandler, isEditMode }: P
     append({
       questionNum: fields.length + 1,
       fieldType: 'TEXT',
+      displayOrder: fields.length + 1,
       question: '',
       isRequired: true,
       optionList: [],

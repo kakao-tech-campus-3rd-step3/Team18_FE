@@ -10,10 +10,10 @@ import { datePickerStyles } from '@/pages/admin/ApplicationFormBuilder/styles/da
 import * as S from '@/pages/admin/ApplicationFormBuilder/styles/timeslot.styled';
 import type { CustomInputProps } from '@/pages/admin/ApplicationFormBuilder/types/clubInfo';
 import type { UseFormReturn } from 'react-hook-form';
-import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
+import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
 type Props = {
-  formHandler: UseFormReturn<ApplicationForm>;
+  formHandler: UseFormReturn<ApplicationFormData>;
   questionIndex: number;
   isEditMode: boolean;
 };
