@@ -1,18 +1,9 @@
 import axios from 'axios';
-import {
-  getAccessToken,
-  removeAccessToken,
-  setAccessToken,
-} from '@/pages/admin/Signup/utils/token';
+import { getAccessToken, removeAccessToken, setAccessToken } from '@/shared/auth/token';
+import { AUTH_ERRORS } from '@/shared/constants/auth';
 import { reissueAccessToken } from './auth';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AxiosError, AxiosInstance, CreateAxiosDefaults } from 'axios';
-
-const INVALID_INPUT_VALUE: string = 'INVALID_INPUT_VALUE';
-const UNSUPPORTED_JWT: string = 'UNSUPPORTED_JWT';
-const UNAUTHENTICATED_USER: string = 'UNAUTHENTICATED_USER';
-const INVALID_JWT_SIGNATURE: string = 'INVALID_JWT_SIGNATURE';
-const EXPIRED_REFRESH_TOKEN: string = 'EXPIRED_REFRESH_TOKEN';
 
 const LOGOUT_REDIRECT_URI = import.meta.env.VITE_LOGOUT_REDIRECT_URI;
 
@@ -71,12 +62,12 @@ apiInstance.interceptors.response.use(
             const reissueError = e as AxiosError<ErrorResponse>;
             const errorMessage = reissueError.response?.data.message;
             switch (error.response?.data.error_code) {
-              case INVALID_INPUT_VALUE:
+              case AUTH_ERRORS.INVALID_INPUT:
                 throw new Error(errorMessage ?? '입력값이 올바르지 않습니다.');
-              case UNAUTHENTICATED_USER:
-              case UNSUPPORTED_JWT:
-              case INVALID_JWT_SIGNATURE:
-              case EXPIRED_REFRESH_TOKEN:
+              case AUTH_ERRORS.UNAUTHENTICATED_USER:
+              case AUTH_ERRORS.UNSUPPORTED_JWT:
+              case AUTH_ERRORS.INVALID_JWT_SIGNATURE:
+              case AUTH_ERRORS.EXPIRED_REFRESH_TOKEN:
                 handleLogout(errorMessage ?? '토큰 갱신 실패로 로그아웃 처리됩니다.');
                 break;
               default:
