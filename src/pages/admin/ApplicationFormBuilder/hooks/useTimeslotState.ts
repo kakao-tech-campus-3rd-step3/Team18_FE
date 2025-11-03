@@ -1,11 +1,11 @@
-import type { UseFormSetValue } from 'react-hook-form';
+import type { UseFormSetValue, FieldPath } from 'react-hook-form';
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
 type UseTimeslotStateProps = {
   setValue?: UseFormSetValue<ApplicationFormData>;
-  fieldName?: string;
+  fieldName?: FieldPath<ApplicationFormData>;
   initialDateRange?: string;
 };
 
@@ -49,9 +49,9 @@ export const useTimeslotState = ({
     setStartDate(start);
     setEndDate(end);
 
-    if (setValue && start && end) {
+    if (setValue && start && end && fieldName) {
       const dateRange = `${format(start, 'yyyy-MM-dd')} ~ ${format(end, 'yyyy-MM-dd')}`;
-      setValue(fieldName as any, dateRange, { shouldValidate: true });
+      setValue(fieldName, dateRange as never, { shouldValidate: true });
     }
   };
 
