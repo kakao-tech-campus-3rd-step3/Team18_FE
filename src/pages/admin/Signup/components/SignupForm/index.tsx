@@ -3,11 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { postSignupForm, type RegisterSuccessResponse } from '@/pages/admin/Signup/api/signup';
 import * as S from '@/pages/admin/Signup/components/SignupForm/index.styled';
-import {
-  getTemporaryToken,
-  removeTemporaryToken,
-  setAccessToken,
-} from '@/pages/admin/Signup/utils/token';
+import { getTemporaryToken, removeTemporaryToken, setAccessToken } from '@/shared/auth/token';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { theme } from '@/styles/theme';

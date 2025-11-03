@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Text } from '@/shared/components/Text';
+import { CONTACT_EMAIL } from '@/shared/constants/email';
 import { NoticeListCardSection } from './components/NoticeListCardSection';
 
 export const NoticeListPage = () => {
@@ -9,7 +10,7 @@ export const NoticeListPage = () => {
         공지사항
       </Text>
       <NoticeListCardSection />
-      <ContactInfo>개발진과 연락하기 : jnupole004@gmail.com</ContactInfo>
+      <ContactInfo>개발진과 연락하기 : {CONTACT_EMAIL}</ContactInfo>
     </Wrapper>
   );
 };

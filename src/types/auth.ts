@@ -1,4 +1,5 @@
 import type { Role } from './navigation';
+import type { LoginResponse } from '@/pages/admin/Login/api/auth';
 
 export type User = {
   clubId?: number;
@@ -8,6 +9,6 @@ export type User = {
 
 export type AuthContextType = {
   user: User | null;
-  login: (code: string, signal: AbortSignal) => void;
-  logout: () => void;
+  login: (code: string, signal: AbortSignal) => Promise<LoginResponse>;
+  logout: () => Promise<void>;
 };
