@@ -58,6 +58,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
             storeUserData(userData);
           } else {
             setUser({ role: 'admin' });
+            storeUserData({ role: 'admin' });
           }
           break;
         }
