@@ -17,6 +17,7 @@ export function useKakaoLogin() {
     const code = new URL(window.location.href).searchParams.get('code');
 
     if (!code) {
+      setIsLoading(false);
       navigate('/login');
       return;
     }
@@ -27,6 +28,9 @@ export function useKakaoLogin() {
         if (response.status === 'LOGIN_SUCCESS') navigate('/');
         else navigate('/signup');
       } catch (e: unknown) {
+        if (e instanceof Error && e.name === 'CanceledError') {
+          return;
+        }
         if (isAxiosError<ErrorResponse>(e)) {
           toast.error(e.response?.data.message);
         } else {
