@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Text } from '@/shared/components/Text';
+import { CONTACT_EMAIL } from '@/shared/constants/email';
 import { NoticeListCardSection } from './components/NoticeListCardSection';
 
 export const NoticeListPage = () => {
@@ -9,7 +10,7 @@ export const NoticeListPage = () => {
         공지사항
       </Text>
       <NoticeListCardSection />
-      <Footer>개발진과 연락하기 : jnupole004@gmail.com</Footer>
+      <ContactInfo>개발진과 연락하기 : {CONTACT_EMAIL}</ContactInfo>
     </Wrapper>
   );
 };
@@ -20,9 +21,10 @@ const Wrapper = styled.div(({ theme }) => ({
   alignItems: 'center',
   padding: '60px 0',
   backgroundColor: theme.colors.bg,
+  minHeight: 'calc(100vh - 291px)',
 }));
 
-const Footer = styled.p(({ theme }) => ({
+const ContactInfo = styled.p(({ theme }) => ({
   marginTop: '30px',
   fontSize: theme.font.size.xs,
   color: theme.colors.textSecondary,

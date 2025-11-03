@@ -12,18 +12,19 @@ import {
 } from '@/shared/components/ClubDetailLayout/index.styled';
 import { theme } from '@/styles/theme';
 import { updateClubDetailEdit } from './api/clubDetailEdit';
+import { updateClubImages } from './api/clubImagesEdit';
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
 import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
 import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
 import { ClubShortIntroductionEditSection } from './components/ClubShortIntroductionEditSection';
-import { useClubDetailEdit } from './hook/useClubDetailEdit';
-import type { ClubDetailEdit } from './types/clubDetailEdit';
+import { useClubDetailEdit } from './hooks/useClubDetailEdit';
+import type { ClubDetailUpdatePayload } from './types/clubDetailEdit';
 
 export const ClubDetailEditPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
   const { data: club, isLoading, error } = useClubDetailEdit(clubId ?? '');
 
-  const methods = useForm<ClubDetailEdit>({
+  const methods = useForm<ClubDetailUpdatePayload>({
     mode: 'onTouched',
   });
 
@@ -39,14 +40,13 @@ export const ClubDetailEditPage = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit = async (data: ClubDetailEdit) => {
-    updateClubDetailEdit(clubId ?? '', data)
+  const onSubmit = async (data: ClubDetailUpdatePayload) => {
+    const payload = { ...data };
+
+    updateClubDetailEdit(clubId ?? '', payload)
       .then(() => {
         toast.success('수정 성공!', {
-          style: {
-            backgroundColor: theme.colors.primary,
-            color: 'white',
-          },
+          style: { backgroundColor: theme.colors.primary, color: 'white' },
           duration: 1000,
           onAutoClose: () => navigate(`/clubs/${clubId}`),
         });
@@ -54,10 +54,7 @@ export const ClubDetailEditPage = () => {
       .catch(() => {
         toast.error('수정 실패!', {
           duration: 1000,
-          style: {
-            backgroundColor: 'white',
-            color: theme.colors.error,
-          },
+          style: { backgroundColor: 'white', color: theme.colors.error },
         });
       });
   };
@@ -73,7 +70,15 @@ export const ClubDetailEditPage = () => {
           <ContentLeft>
             <ClubHeaderSection clubName={club.clubName} category={club.category} />
             <ClubShortIntroductionEditSection />
-            <ClubActivityPhotosEditSection images={club.introductionImages} />
+
+            <ClubActivityPhotosEditSection
+              clubId={club.clubId}
+              images={club.introductionImages}
+              onUpload={(files: File[]) =>
+                updateClubImages(club.clubId, files, club.introductionImages)
+              }
+            />
+
             <ClubDescriptionEditSection />
             {errors.presidentPhoneNumber && (
               <ErrorMessage>{errors.presidentPhoneNumber.message}</ErrorMessage>

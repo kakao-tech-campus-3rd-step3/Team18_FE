@@ -1,4 +1,4 @@
-import { useDragSelection } from '@/pages/user/Apply/hook/useDragSelection';
+import { useDragSelection } from '@/pages/user/Apply/hooks/useDragSelection';
 import { getTimeSlotsArray } from '@/pages/user/Apply/utils/time';
 import { Text } from '@/shared/components/Text';
 import { TimeSpan, Wrapper, DateText } from './index.styled';

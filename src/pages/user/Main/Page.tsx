@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { BannerSection } from '@/pages/user/Main/components/BannerSection';
 import { ClubListSection } from '@/pages/user/Main/components/ClubListSection';
 import type { RecruitStatus } from './types/club';
-import type { ClubCategoryEng } from '@/pages/user/Main/constant/clubCategory.ts';
+import type { ClubCategoryEng } from '@/pages/user/Main/constants/clubCategory';
 
 export const MainPage = () => {
   const [categoryFilter, setCategoryFilter] = useState<ClubCategoryEng>('ALL');

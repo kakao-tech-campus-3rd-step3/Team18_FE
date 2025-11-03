@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { postSignupForm, type RegisterSuccessResponse } from '@/pages/admin/Signup/api/signup';
 import * as S from '@/pages/admin/Signup/components/SignupForm/index.styled';
+import { getTemporaryToken, removeTemporaryToken, setAccessToken } from '@/shared/auth/token';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { theme } from '@/styles/theme';
-import { getTemporaryToken, setAccessToken } from '../../utils/token';
 import type { SignupFormInputs } from '@/pages/admin/Signup/type/signup';
 
 export const SignupForm = () => {
@@ -43,6 +43,7 @@ export const SignupForm = () => {
         duration: 1000,
         onAutoClose: () => navigate('/'),
       });
+      removeTemporaryToken();
     } catch (e: unknown) {
       if (e instanceof Error) {
         toast.error(e.message, {

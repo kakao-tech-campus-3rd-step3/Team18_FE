@@ -1,8 +1,11 @@
 import axios from 'axios';
-import { getAccessToken, setAccessToken } from '@/pages/admin/Signup/utils/token';
+import { getAccessToken, removeAccessToken, setAccessToken } from '@/shared/auth/token';
+import { AUTH_ERRORS } from '@/shared/constants/auth';
 import { reissueAccessToken } from './auth';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AxiosError, AxiosInstance, CreateAxiosDefaults } from 'axios';
+
+const LOGOUT_REDIRECT_URI = import.meta.env.VITE_LOGOUT_REDIRECT_URI;
 
 const initInstance = (config: CreateAxiosDefaults): AxiosInstance => {
   const instance = axios.create({
@@ -29,23 +32,51 @@ apiInstance.interceptors.request.use((config) => {
   return config;
 });
 
+const handleLogout = (errorMessage: string) => {
+  removeAccessToken();
+  window.location.href = LOGOUT_REDIRECT_URI;
+  throw new Error(errorMessage);
+};
+
 apiInstance.interceptors.response.use(
   function onFulfilled(response) {
     return response;
   },
   async function onRejected(e: AxiosError) {
-    const error = e as AxiosError<ErrorResponse>;
-    const config = error.config;
-    if (error.response?.status === 401 && config) {
-      try {
-        const tokenResponse = await reissueAccessToken();
-        setAccessToken(tokenResponse.accessToken);
-        config.headers.Authorization = `Bearer ${tokenResponse.accessToken}`;
-        return axios(config);
-      } catch {
-        window.location.href = '/login';
+    if (axios.isAxiosError<ErrorResponse>(e)) {
+      const error = e as AxiosError<ErrorResponse>;
+      const config = error.config;
+
+      if (error.response?.status === 401 && config) {
+        if (config?.headers?.retry) {
+          handleLogout(error.response.data.message ?? error.message);
+        }
+        try {
+          const tokenResponse = await reissueAccessToken();
+          setAccessToken(tokenResponse.accessToken);
+          config.headers.Authorization = `Bearer ${tokenResponse.accessToken}`;
+          config.headers.retry = true;
+          return apiInstance(config);
+        } catch (e: unknown) {
+          if (axios.isAxiosError(e)) {
+            const reissueError = e as AxiosError<ErrorResponse>;
+            const errorMessage = reissueError.response?.data.message;
+            switch (error.response?.data.error_code) {
+              case AUTH_ERRORS.INVALID_INPUT:
+                throw new Error(errorMessage ?? '입력값이 올바르지 않습니다.');
+              case AUTH_ERRORS.UNAUTHENTICATED_USER:
+              case AUTH_ERRORS.UNSUPPORTED_JWT:
+              case AUTH_ERRORS.INVALID_JWT_SIGNATURE:
+              case AUTH_ERRORS.EXPIRED_REFRESH_TOKEN:
+                handleLogout(errorMessage ?? '토큰 갱신 실패로 로그아웃 처리됩니다.');
+                break;
+              default:
+                throw new Error(errorMessage ?? `알 수 없는 오류`);
+            }
+          }
+        }
       }
     }
-    return Promise.reject(error);
+    throw e;
   },
 );

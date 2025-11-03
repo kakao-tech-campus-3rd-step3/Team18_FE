@@ -71,7 +71,7 @@ export const CommentForm = ({ createComment }: Props) => {
           invalid={!!errors.content}
           message={errors.content?.message}
         />
-        ㄴ
+
         <ButtonWrapper>
           <Text size={'sm'} color={errors.content ? '#fa342c' : '#b0b3ba'}>
             {contentValue.length} / 500

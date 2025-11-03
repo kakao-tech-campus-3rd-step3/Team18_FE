@@ -1,17 +1,19 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
 import { ApplicantListSection } from './components/ApplicantListSection';
 import { DashboardSummarySection } from './components/DashboardSummarySection';
-import { SendResultButtonSection } from './components/SendResultButtonSection';
 import { SentAcceptanceMessagesSection } from './components/SentAcceptanceMessagesSection';
+import type { ApplicationStage } from '@/pages/admin/Dashboard/types/dashboard';
 
 export const DashboardPage = () => {
+  const [stage, setStage] = useState<ApplicationStage>('서류');
+
   return (
     <Layout>
       <Container>
         <DashboardSummarySection />
-        <ApplicantListSection />
-        <SentAcceptanceMessagesSection />
-        <SendResultButtonSection />
+        <ApplicantListSection stage={stage} setStage={setStage} />
+        <SentAcceptanceMessagesSection stage={stage} />
       </Container>
     </Layout>
   );

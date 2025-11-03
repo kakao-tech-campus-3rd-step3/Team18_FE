@@ -1,12 +1,14 @@
 import type { Role } from './navigation';
+import type { LoginResponse } from '@/pages/admin/Login/api/auth';
 
 export type User = {
-  clubId?: number[];
+  clubId?: number;
+  clubName?: string;
   role: Role;
 };
 
 export type AuthContextType = {
   user: User | null;
-  login: (code: string, signal: AbortSignal) => void;
-  logout: () => void;
+  login: (code: string, signal: AbortSignal) => Promise<LoginResponse>;
+  logout: () => Promise<void>;
 };
