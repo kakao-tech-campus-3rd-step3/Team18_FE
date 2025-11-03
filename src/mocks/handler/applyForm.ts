@@ -2,6 +2,7 @@ import { http, HttpResponse, type PathParams } from 'msw';
 import { applyFormRepository } from '../repositories/applyForm';
 import type {
   ApplicationForm,
+  ApplicationFormData,
   Question,
 } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
@@ -49,7 +50,7 @@ const postApplyFormResolver = async ({
 
   const createdForm = applyFormRepository.createApplyForm(
     clubId,
-    transformedForm as ApplicationForm,
+    transformedForm as ApplicationFormData,
   );
 
   if (!createdForm) {
@@ -77,7 +78,7 @@ const patchApplyFormResolver = async ({
 
   const updatedForm = applyFormRepository.updateApplyForm(
     clubId,
-    updatedFormInfo as Partial<ApplicationForm>,
+    updatedFormInfo as Partial<ApplicationFormData>,
   );
 
   if (!updatedForm) {
