@@ -55,8 +55,11 @@ export const ClubListSection = ({ categoryFilter, searchText, recruitStatus }: P
       <S.Grid>
         {filteredClubs.map((club: Club) => (
           <S.ClubItem onClick={() => navigate(`/clubs/${club.id}`)} key={club.id}>
-            <S.ClubCategoryText>{engToKorCategory[club.category]}</S.ClubCategoryText>
-
+            <S.ClubCategoryText>
+              {club.category in engToKorCategory
+                ? engToKorCategory[club.category as ClubCategoryEng]
+                : '전체'}
+            </S.ClubCategoryText>
             <S.ClubNameText>{club.name}</S.ClubNameText>
             <S.ClubIntroduction>{club.shortIntroduction}</S.ClubIntroduction>
             <S.RecruitStatusBox status={club.recruitStatus}>
