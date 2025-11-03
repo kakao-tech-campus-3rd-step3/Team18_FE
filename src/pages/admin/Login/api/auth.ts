@@ -15,9 +15,9 @@ interface RegistrationRequiredResponse {
 }
 
 interface ClubMemberInfo {
-  clubId: number;
-  clubName: string;
-  role: Role;
+  clubId?: number;
+  clubName?: string;
+  role?: Role;
 }
 
 export type LoginResponse = LoginSuccessResponse | RegistrationRequiredResponse;
