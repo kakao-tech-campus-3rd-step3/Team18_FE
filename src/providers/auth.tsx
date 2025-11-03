@@ -56,6 +56,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
             setUser({ role, clubId, clubName });
           } else {
             setUser({ role: 'admin' });
+            storeUserData({ role: 'admin' });
           }
           break;
         }
