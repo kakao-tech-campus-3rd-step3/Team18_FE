@@ -28,6 +28,7 @@ export const ApplicationInfoSection = ({ formHandler, isEditMode }: Props) => {
   const {
     register,
     watch,
+    setValue,
     formState: { errors },
   } = formHandler;
 
@@ -35,6 +36,7 @@ export const ApplicationInfoSection = ({ formHandler, isEditMode }: Props) => {
 
   const { startDate, endDate, formatDateRange, handleDateChange } = useTimeslotState({
     initialDateRange: recruitDate,
+    setValue,
   });
 
   return (
