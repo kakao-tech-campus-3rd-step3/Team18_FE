@@ -3,6 +3,7 @@ import type { LoginResponse } from '@/pages/admin/Login/api/auth';
 
 export type User = {
   clubId?: number;
+  clubName?: string;
   role: Role;
 };
 

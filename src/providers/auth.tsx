@@ -49,11 +49,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       switch (response.status) {
         case 'LOGIN_SUCCESS': {
           setAccessToken(response.accessToken);
-          const defaultClub = response.clubIdAndRoleList[0];
+          const defaultClub = response.clubListInfo[0];
           if (defaultClub) {
-            const { role, clubId } = defaultClub;
-            setUser({ role, clubId });
-            const userData = { role, clubId };
+            const { role, clubId, clubName } = defaultClub;
+            setUser({ role, clubId, clubName });
+            const userData = { role, clubId, clubName };
             storeUserData(userData);
           } else {
             setUser({ role: 'admin' });
