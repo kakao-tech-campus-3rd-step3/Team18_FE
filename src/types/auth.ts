@@ -2,9 +2,9 @@ import type { Role } from './navigation';
 import type { LoginResponse } from '@/pages/admin/Login/api/auth';
 
 export type User = {
+  role: Role;
   clubId?: number;
   clubName?: string;
-  role: Role;
 };
 
 export type AuthContextType = {
