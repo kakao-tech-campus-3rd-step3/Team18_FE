@@ -1,10 +1,10 @@
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import type { UseFormSetValue } from 'react-hook-form';
-import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
+import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
 type UseTimeslotStateProps = {
-  setValue?: UseFormSetValue<ApplicationForm>;
+  setValue?: UseFormSetValue<ApplicationFormData>;
   fieldName?: string;
   initialDateRange?: string;
 };
