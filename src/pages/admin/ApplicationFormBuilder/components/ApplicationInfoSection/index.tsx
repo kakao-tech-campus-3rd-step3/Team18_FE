@@ -1,15 +1,15 @@
+import type { UseFormReturn } from 'react-hook-form';
+import { Global } from '@emotion/react';
 import styled from '@emotion/styled';
-import { UnderlineInputField } from '@/shared/components/Form/InputField/UnderlineInputField';
-import { useTimeslotState } from '@/pages/admin/ApplicationFormBuilder/hooks/useTimeslotState';
 import { ko } from 'date-fns/locale';
+import DatePicker from 'react-datepicker';
+import { useTimeslotState } from '@/pages/admin/ApplicationFormBuilder/hooks/useTimeslotState';
 import { datePickerStyles } from '@/pages/admin/ApplicationFormBuilder/styles/datepicker.styled';
 import * as S from '@/pages/admin/ApplicationFormBuilder/styles/timeslot.styled';
-import DatePicker from 'react-datepicker';
+import { UnderlineInputField } from '@/shared/components/Form/InputField/UnderlineInputField';
 import { Text } from '@/shared/components/Text';
-import { Global } from '@emotion/react';
 import type { CustomInputProps } from '@/pages/admin/ApplicationFormBuilder/types/clubInfo';
 import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
-import type { UseFormReturn } from 'react-hook-form';
 
 type Props = {
   formHandler: UseFormReturn<ApplicationFormData>;

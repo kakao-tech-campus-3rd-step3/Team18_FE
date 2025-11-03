@@ -1,12 +1,12 @@
+import type { UseFormReturn } from 'react-hook-form';
 import styled from '@emotion/styled';
+import { useFieldArray } from 'react-hook-form';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { FiPlus } from 'react-icons/fi';
 import { IoCheckboxOutline } from 'react-icons/io5';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { Text } from '@/shared/components/Text';
-import type { UseFormReturn } from 'react-hook-form';
 import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
-import { useFieldArray } from 'react-hook-form';
 
 type Props = {
   formHandler: UseFormReturn<ApplicationFormData>;

@@ -1,15 +1,15 @@
 import styled from '@emotion/styled';
-import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection';
-import { ApplicationInfoSection } from './components/ApplicationInfoSection';
-import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import type { ApplicationFormData } from './types/fieldType';
 import {
   useAdaptedApplicationForm,
   useAdaptedPatchApplicationForm,
 } from '@/pages/admin/ApplicationFormBuilder/hooks/useApplicationFormAdapter';
-import { useEffect, useState } from 'react';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
+import { ApplicationInfoSection } from './components/ApplicationInfoSection';
+import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
+import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection';
+import type { ApplicationFormData } from './types/fieldType';
 
 export const ApplicationFormBuilder = () => {
   const clubId = 1;
