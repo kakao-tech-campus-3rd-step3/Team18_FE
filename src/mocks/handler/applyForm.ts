@@ -2,7 +2,7 @@ import { http, HttpResponse, type PathParams } from 'msw';
 import { applyFormRepository } from '../repositories/applyForm';
 import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
-const transformOptionsToObjects = (questions: any[]) => {
+const transformOptionsToObjects = (questions: { optionList?: (string | { value: string })[] }[]) => {
   return questions.map((question) => {
     if (question.optionList && question.optionList.every((opt: any) => typeof opt === 'string')) {
       return {
