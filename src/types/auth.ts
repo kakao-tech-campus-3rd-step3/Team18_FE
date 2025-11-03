@@ -2,6 +2,7 @@ import type { Role } from './navigation';
 
 export type User = {
   clubId?: number;
+  clubName?: string;
   role: Role;
 };
 
