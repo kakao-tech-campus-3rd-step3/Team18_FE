@@ -12,4 +12,3 @@ export const client = setupWorker(
   ...applyFormHandlers,
   ...authHandlers,
 );
-

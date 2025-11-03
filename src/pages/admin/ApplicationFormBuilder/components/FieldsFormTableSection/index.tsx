@@ -1,9 +1,9 @@
+import type { UseFormReturn } from 'react-hook-form';
 import styled from '@emotion/styled';
+import { useFieldArray } from 'react-hook-form';
 import { AddFieldButton } from './AddFieldButton';
 import { FormFieldItem } from './FormFieldItem';
 import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
-import type { UseFormReturn } from 'react-hook-form';
-import { useFieldArray } from 'react-hook-form';
 
 type Props = {
   formHandler: UseFormReturn<ApplicationFormData>;

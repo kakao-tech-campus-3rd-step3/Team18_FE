@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
-import type { ApplicationForm, ApplicationFormData } from '../types/fieldType';
 import {
   useApplicationForm,
   usePatchApplicationForm,
   usePostApplicationForm,
 } from './useApplicationForm';
+import type { ApplicationForm, ApplicationFormData } from '../types/fieldType';
 
 export const useAdaptedApplicationForm = (clubId: number) => {
   const { data: apiData, isLoading, error } = useApplicationForm(clubId);

@@ -1,19 +1,21 @@
+import type { UseFormReturn } from 'react-hook-form';
 import styled from '@emotion/styled';
+import { useEffect } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
+import {
+  reverseTypeMapping,
+  typeMapping,
+} from '@/pages/admin/ApplicationFormBuilder/utils/typeMapping';
 import { Dropdown } from '@/shared/components/Dropdown';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { CheckboxOptionsBuilder } from './Builders/CheckboxOptionsBuilder';
 import { RadioOptionsBuilder } from './Builders/RadioOptionsBuilder';
 import { TextOptionsBuilder } from './Builders/TextOptionsBuilder';
 import { TimeslotFieldBuilder } from './Builders/TimeslotFieldBuilder';
-import type { QuestionType } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
-import type { UseFormReturn } from 'react-hook-form';
-import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
-import {
-  reverseTypeMapping,
-  typeMapping,
-} from '@/pages/admin/ApplicationFormBuilder/utils/typeMapping';
-import { useEffect } from 'react';
+import type {
+  QuestionType,
+  ApplicationFormData,
+} from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
 type Props = {
   formHandler: UseFormReturn<ApplicationFormData>;
