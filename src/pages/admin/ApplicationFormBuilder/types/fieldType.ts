@@ -30,7 +30,7 @@ export type Question = {
   fieldType: 'RADIO' | 'TEXT' | 'TIME_SLOT' | 'CHECKBOX';
   question: string;
   isRequired: boolean;
-  optionList?: string[];
+  optionList?: (string | { value: string })[];
   timeSlotOptions?: TimeSlotOption[];
   displayOrder: number;
 };

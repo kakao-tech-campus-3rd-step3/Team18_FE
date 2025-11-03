@@ -1,13 +1,13 @@
 import { http, HttpResponse, type PathParams } from 'msw';
 import { applyFormRepository } from '../repositories/applyForm';
-import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
+import type { ApplicationForm, Question } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
-const transformOptionsToObjects = (questions: { optionList?: (string | { value: string })[] }[]) => {
+const transformOptionsToObjects = (questions: Question[]): Question[] => {
   return questions.map((question) => {
-    if (question.optionList && question.optionList.every((opt: any) => typeof opt === 'string')) {
+    if (question.optionList && question.optionList.every((opt) => typeof opt === 'string')) {
       return {
         ...question,
-        optionList: question.optionList.map((option: string) => ({ value: option })),
+        optionList: (question.optionList as string[]).map((option) => ({ value: option })),
       };
     }
     return question;
