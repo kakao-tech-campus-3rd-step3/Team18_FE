@@ -37,15 +37,15 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
     error,
   } = useApplicants(Number(clubId), apiStage, filterOption);
 
-  if (isLoading) return <LoadingSpinner />;
-  if (error) return <div>에러발생 : {error.message}</div>;
-
   const handleItemClick = useCallback(
     (applicantId: number) => {
       navigate(`/admin/clubs/${clubId}/applicants/${applicantId}`);
     },
     [clubId, navigate],
   );
+
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <div>에러발생 : {error.message}</div>;
 
   return (
     <S.Container>
