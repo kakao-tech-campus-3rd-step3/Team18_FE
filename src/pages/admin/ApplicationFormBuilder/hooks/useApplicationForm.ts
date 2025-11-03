@@ -41,3 +41,4 @@ export const usePatchApplicationForm = (clubId: number) => {
 
   return { patchForm, isSuccess };
 };
+

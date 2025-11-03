@@ -5,9 +5,9 @@ import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableS
 import { useForm } from 'react-hook-form';
 import type { ApplicationForm, ApplicationFormData } from './types/fieldType';
 import {
-  useApplicationForm,
-  usePatchApplicationForm,
-} from '@/pages/admin/ApplicationFormBuilder/hooks/useApplicationForm';
+  useAdaptedApplicationForm,
+  useAdaptedPatchApplicationForm,
+} from '@/pages/admin/ApplicationFormBuilder/hooks/useApplicationFormAdapter';
 import { useEffect, useState } from 'react';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 
@@ -15,8 +15,8 @@ export const ApplicationFormBuilder = () => {
   const clubId = 1;
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const { data, isLoading, error } = useApplicationForm(Number(clubId));
-  const { patchForm } = usePatchApplicationForm(Number(clubId));
+  const { data, isLoading, error } = useAdaptedApplicationForm(Number(clubId));
+  const { adaptedPatchForm } = useAdaptedPatchApplicationForm(Number(clubId));
 
   const formHandler = useForm<ApplicationFormData>({
     defaultValues: {
@@ -27,32 +27,9 @@ export const ApplicationFormBuilder = () => {
     },
   });
 
-  const transformDataForForm = (apiData: ApplicationForm) => {
-    return {
-      ...apiData,
-      formQuestions: apiData.formQuestions.map((question) => {
-        const rawTimeSlot = question.timeSlotOptions;
-        const correctedTimeSlot = Array.isArray(rawTimeSlot) ? rawTimeSlot[0] : rawTimeSlot;
-
-        return {
-          ...question,
-          optionList:
-            question.optionList?.map((option) =>
-              typeof option === 'string' ? { value: option } : option,
-            ) || [],
-          timeSlotOptions: correctedTimeSlot || {
-            date: '',
-            availableTime: { start: '', end: '' },
-          },
-        };
-      }),
-    };
-  };
-
   useEffect(() => {
     if (data) {
-      const transformedData = transformDataForForm(data);
-      formHandler.reset(transformedData);
+      formHandler.reset(data);
     }
   }, [data, formHandler]);
 
@@ -60,22 +37,12 @@ export const ApplicationFormBuilder = () => {
   const handleCancel = () => {
     setIsEditMode(false);
     if (data) {
-      const transformedData = transformDataForForm(data);
-      formHandler.reset(transformedData);
+      formHandler.reset(data);
     }
   };
 
   const handleSave = formHandler.handleSubmit((formData) => {
-    const submissionData = {
-      ...formData,
-      formQuestions: formData.formQuestions.map((question) => ({
-        ...question,
-        optionList: question.optionList?.map((option) => option.value) || [],
-        timeSlotOptions: question.timeSlotOptions ? [question.timeSlotOptions] : [],
-      })),
-    };
-
-    patchForm(submissionData, {
+    adaptedPatchForm(formData, {
       onSuccess: () => {
         setIsEditMode(false);
       },
