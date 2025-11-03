@@ -1,6 +1,5 @@
+import { USER_DATA_KEY } from '../constants/auth';
 import type { User } from '@/types/auth';
-
-const USER_DATA_KEY = 'user_data';
 
 export const setAccessToken = (token: string) => localStorage.setItem('accessToken', token);
 export const getAccessToken = () => localStorage.getItem('accessToken');
@@ -34,4 +33,23 @@ export const removeStoredUserData = (): void => {
 export const clearAuthData = (): void => {
   removeAccessToken();
   removeStoredUserData();
+};
+
+export const getStoredUserData = (): User | null => {
+  try {
+    const data = localStorage.getItem(USER_DATA_KEY);
+    if (!data) return null;
+
+    const parsedUserData = JSON.parse(data) as User;
+
+    if (!parsedUserData) {
+      removeStoredUserData();
+      return null;
+    }
+
+    return parsedUserData;
+  } catch (error) {
+    removeStoredUserData();
+    throw error;
+  }
 };
