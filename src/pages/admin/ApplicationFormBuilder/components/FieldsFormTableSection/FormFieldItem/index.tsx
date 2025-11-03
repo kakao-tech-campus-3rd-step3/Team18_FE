@@ -87,7 +87,6 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
         availableTime: { start: '', end: '' },
       });
     }
-    setValue(`formQuestions.${index}.question`, '');
   };
 
   return (
