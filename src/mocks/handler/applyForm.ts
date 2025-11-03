@@ -1,6 +1,9 @@
 import { http, HttpResponse, type PathParams } from 'msw';
 import { applyFormRepository } from '../repositories/applyForm';
-import type { ApplicationForm, Question } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
+import type {
+  ApplicationForm,
+  Question,
+} from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
 const transformOptionsToObjects = (questions: Question[]): Question[] => {
   return questions.map((question) => {

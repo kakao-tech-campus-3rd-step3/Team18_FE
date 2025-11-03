@@ -6,11 +6,11 @@ import type { UseFormReturn } from 'react-hook-form';
 import { useTimeslotState } from '@/pages/admin/ApplicationFormBuilder/hooks/useTimeslotState';
 import { datePickerStyles } from '@/pages/admin/ApplicationFormBuilder/styles/datepicker.styled';
 import * as S from '@/pages/admin/ApplicationFormBuilder/styles/timeslot.styled';
-import type { CustomInputProps } from '@/pages/admin/ApplicationFormBuilder/types/clubInfo';
-import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 import { generateTimes } from '@/pages/admin/ApplicationFormBuilder/utils/generateTimes';
 import { Dropdown } from '@/shared/components/Dropdown';
 import { Text } from '@/shared/components/Text';
+import type { CustomInputProps } from '@/pages/admin/ApplicationFormBuilder/types/clubInfo';
+import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
 type Props = {
   formHandler: UseFormReturn<ApplicationFormData>;
