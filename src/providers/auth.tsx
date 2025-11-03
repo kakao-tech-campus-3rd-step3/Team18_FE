@@ -1,12 +1,14 @@
 import { isAxiosError } from 'axios';
-import { createContext, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { logoutUser, postAuthCode, type LoginResponse } from '@/pages/admin/Login/api/auth';
 import {
-  removeAccessToken,
+  clearAuthData,
+  getAccessToken,
+  getStoredUserData,
   setAccessToken,
   setTemporaryToken,
-} from '@/pages/admin/Signup/utils/token';
+  storeUserData,
+} from '@/shared/auth/token';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AuthContextType, User } from '@/types/auth';
 
@@ -14,19 +16,36 @@ const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
 const LOGOUT_REDIRECT_URI = import.meta.env.VITE_LOGOUT_REDIRECT_URI;
 
 export const AuthContext = createContext<AuthContextType>({
-  user: { role: 'guest' },
-  login: () => {},
-  logout: () => {},
+  user: { role: null },
+  login: async () => {
+    return Promise.reject();
+  },
+  logout: async () => {
+    return Promise.reject();
+  },
 });
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User>({ role: 'guest' });
-  const navigate = useNavigate();
+  const [user, setUser] = useState<User>({ role: null });
 
-  const login = async (code: string, signal: AbortSignal) => {
+  useEffect(() => {
+    const initAuth = async () => {
+      const token = getAccessToken();
+      if (token) {
+        try {
+          const userData = getStoredUserData();
+          if (userData) setUser(userData);
+        } catch {
+          clearAuthData();
+        }
+      }
+    };
+    initAuth();
+  }, []);
+
+  const login = useCallback(async (code: string, signal: AbortSignal) => {
     try {
       const response: LoginResponse = await postAuthCode(code, signal);
-
       switch (response.status) {
         case 'LOGIN_SUCCESS': {
           setAccessToken(response.accessToken);
@@ -34,30 +53,35 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           if (defaultClub) {
             const { role, clubId } = defaultClub;
             setUser({ role, clubId });
+            const userData = { role, clubId };
+            storeUserData(userData);
           } else {
-            setUser({ role: 'guest' });
+            setUser({ role: 'admin' });
+            storeUserData({ role: 'admin' });
           }
-          navigate('/');
           break;
         }
         case 'REGISTRATION_REQUIRED':
           setTemporaryToken(response.temporaryToken);
-          navigate('/signup');
           break;
       }
+      return response;
     } catch (e) {
+      if (e instanceof Error && e.name === 'CanceledError') {
+        throw e;
+      }
       if (isAxiosError<ErrorResponse>(e)) {
         throw new Error(e.response?.data.message ?? '로그인 중 오류가 발생했습니다.');
       }
       throw e;
     }
-  };
+  }, []);
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     try {
       await logoutUser();
-      setUser({ role: 'guest' });
-      removeAccessToken();
+      setUser({ role: null });
+      clearAuthData();
       const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${REST_API_KEY}&logout_redirect_uri=${LOGOUT_REDIRECT_URI}`;
       window.location.href = kakaoLogoutUrl;
     } catch (e) {
@@ -66,7 +90,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       }
       throw e;
     }
-  };
+  }, []);
 
   const value = { user, login, logout };
 
