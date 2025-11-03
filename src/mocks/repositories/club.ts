@@ -243,7 +243,7 @@ export const mockClubDetail: ClubDetail[] = [
     clubId: 1,
     clubName: '인터엑스',
     location: '공7 201호',
-    category: '사회연구',
+    category: 'STUDY',
     shortIntroduction: '사회문제에 관심 있는 사람들을 위한 동아리',
     introductionImages: [
       {
@@ -284,7 +284,7 @@ export const mockClubDetail: ClubDetail[] = [
     clubId: 2,
     clubName: '코드마스터',
     location: '공5 102호',
-    category: '프로그래밍',
+    category: 'STUDY',
     shortIntroduction: '프로그래밍과 최신 기술을 탐구하는 동아리',
     introductionImages: [
       {
@@ -324,7 +324,7 @@ export const mockClubDetail: ClubDetail[] = [
     clubId: 3,
     clubName: '아트픽',
     location: '예술관 301호',
-    category: '예술',
+    category: 'LITERATURE',
     shortIntroduction: '창작 활동과 전시를 즐기는 예술 동아리',
     introductionImages: [
       {
