@@ -49,16 +49,19 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       switch (response.status) {
         case 'LOGIN_SUCCESS': {
           setAccessToken(response.accessToken);
-          const defaultClub = response.clubListInfo[0];
-          if (defaultClub) {
-            const { role, clubId, clubName } = defaultClub;
-            setUser({ role, clubId, clubName });
-            const userData = { role, clubId, clubName };
+          const defaultClub = response.clubListInfo?.[0];
+
+          if (!defaultClub || !defaultClub.role) {
+            const userData: User = { role: 'admin' };
+            setUser(userData);
             storeUserData(userData);
-          } else {
-            setUser({ role: 'admin' });
-            storeUserData({ role: 'admin' });
+            break;
           }
+
+          const { role, clubId, clubName } = defaultClub;
+          const userData: User = { role, clubId, clubName };
+          setUser(userData);
+          storeUserData(userData);
           break;
         }
         case 'REGISTRATION_REQUIRED':
