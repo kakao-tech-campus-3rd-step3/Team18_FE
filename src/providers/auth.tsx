@@ -5,7 +5,6 @@ import {
   clearAuthData,
   getAccessToken,
   getStoredUserData,
-  removeAccessToken,
   setAccessToken,
   setTemporaryToken,
   storeUserData,
@@ -37,7 +36,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           const userData = getStoredUserData();
           if (userData) setUser(userData);
         } catch {
-          removeAccessToken();
+          clearAuthData();
         }
       }
     };
