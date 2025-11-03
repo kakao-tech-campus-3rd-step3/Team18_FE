@@ -1,6 +1,6 @@
-import type { ApplicationForm } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
+import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
-const applyForms: Record<string, ApplicationForm> = {
+const applyForms: Record<string, ApplicationFormData> = {
   '1': {
     title: '카태켐 12기 지원서',
     description: '카카오테크 캠퍼스 12기 모집을 위한 지원서입니다.',
@@ -11,6 +11,7 @@ const applyForms: Record<string, ApplicationForm> = {
         question: '가장 자신 있는 프로그래밍 언어는 무엇인가요?',
         fieldType: 'TEXT',
         isRequired: true,
+        displayOrder: 1,
       },
       {
         questionNum: 2,
@@ -18,6 +19,7 @@ const applyForms: Record<string, ApplicationForm> = {
         fieldType: 'RADIO',
         isRequired: true,
         optionList: [{ value: '예' }, { value: '아니오' }],
+        displayOrder: 2,
       },
       {
         questionNum: 3,
@@ -25,12 +27,14 @@ const applyForms: Record<string, ApplicationForm> = {
         fieldType: 'CHECKBOX',
         isRequired: true,
         optionList: [{ value: 'JAVA' }, { value: 'C' }, { value: 'C++' }],
+        displayOrder: 3,
       },
       {
-        questionNum: 3,
+        questionNum: 4,
         question: '면접 시간을 설정해주세요.',
         fieldType: 'TIME_SLOT',
         isRequired: true,
+        displayOrder: 4,
         timeSlotOptions: {
           date: '2025-09-24 ~ 2025-09-25',
           availableTime: {
@@ -48,7 +52,7 @@ export const applyFormRepository = {
     return applyForms[clubId];
   },
 
-  createApplyForm: (clubId: string, form: ApplicationForm) => {
+  createApplyForm: (clubId: string, form: ApplicationFormData) => {
     if (applyForms[clubId]) {
       return null;
     }
@@ -56,7 +60,7 @@ export const applyFormRepository = {
     return form;
   },
 
-  updateApplyForm: (clubId: string, form: Partial<ApplicationForm>) => {
+  updateApplyForm: (clubId: string, form: Partial<ApplicationFormData>) => {
     if (!applyForms[clubId]) {
       return null;
     }
