@@ -1,6 +1,6 @@
 import { apiInstance } from '@/api/initInstance';
-import type { ClubCategoryEng } from '@/pages/user/Main/constants/clubCategory';
 import type { Club } from '@/pages/user/Main/types/club';
+import type { ClubCategoryEng } from '@/types/club';
 import type { AxiosResponse } from 'axios';
 
 export type ClubResponse = {
