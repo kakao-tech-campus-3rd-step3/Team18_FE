@@ -33,6 +33,7 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
 
   useEffect(() => {
     setValue(`formQuestions.${index}.displayOrder`, index + 1);
+    setValue(`formQuestions.${index}.questionNum`, index + 1);
   }, [index, setValue]);
 
   const questionType = watch(`formQuestions.${index}.fieldType`);
