@@ -3,7 +3,7 @@ import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection'
 import { ApplicationInfoSection } from './components/ApplicationInfoSection';
 import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
 import { useForm } from 'react-hook-form';
-import type { ApplicationForm, ApplicationFormData } from './types/fieldType';
+import type { ApplicationFormData } from './types/fieldType';
 import {
   useAdaptedApplicationForm,
   useAdaptedPatchApplicationForm,

@@ -1,6 +1,10 @@
 import { useMemo } from 'react';
 import type { ApplicationForm, ApplicationFormData } from '../types/fieldType';
-import { useApplicationForm, usePatchApplicationForm } from './useApplicationForm';
+import {
+  useApplicationForm,
+  usePatchApplicationForm,
+  usePostApplicationForm,
+} from './useApplicationForm';
 
 export const useAdaptedApplicationForm = (clubId: number) => {
   const { data: apiData, isLoading, error } = useApplicationForm(clubId);
@@ -18,7 +22,7 @@ export const useAdaptedApplicationForm = (clubId: number) => {
           ...question,
           optionList:
             question.optionList?.map((option) =>
-              typeof option === 'string' ? { value: option } : option
+              typeof option === 'string' ? { value: option } : option,
             ) || [],
           timeSlotOptions: correctedTimeSlot || {
             date: '',
@@ -37,7 +41,7 @@ export const useAdaptedPatchApplicationForm = (clubId: number) => {
 
   const adaptedPatchForm = (
     formData: ApplicationFormData,
-    options?: { onSuccess?: () => void; onError?: (error: Error) => void }
+    options?: { onSuccess?: () => void; onError?: (error: Error) => void },
   ) => {
     const submissionData: Partial<ApplicationForm> = {
       ...formData,
@@ -52,4 +56,28 @@ export const useAdaptedPatchApplicationForm = (clubId: number) => {
   };
 
   return { adaptedPatchForm, isSuccess };
+};
+
+export const useAdaptedPostApplicationForm = (clubId: number) => {
+  const { postForm, isSuccess } = usePostApplicationForm(clubId);
+
+  const adaptedPostForm = (
+    formData: ApplicationFormData,
+    options?: { onSuccess?: () => void; onError?: (error: Error) => void },
+  ) => {
+    const submissionData: ApplicationForm = {
+      ...formData,
+      formQuestions: formData.formQuestions.map((question) => {
+        return {
+          ...question,
+          optionList: question.optionList?.map((option) => option.value) || [],
+          timeSlotOptions: question.timeSlotOptions ? [question.timeSlotOptions] : [],
+        };
+      }),
+    };
+
+    postForm(submissionData, options);
+  };
+
+  return { adaptedPostForm, isSuccess };
 };

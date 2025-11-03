@@ -13,6 +13,7 @@ import {
   reverseTypeMapping,
   typeMapping,
 } from '@/pages/admin/ApplicationFormBuilder/utils/typeMapping';
+import { useEffect } from 'react';
 
 type Props = {
   formHandler: UseFormReturn<ApplicationFormData>;
@@ -29,6 +30,10 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
     register,
     formState: { errors },
   } = formHandler;
+
+  useEffect(() => {
+    setValue(`formQuestions.${index}.displayOrder`, index + 1);
+  }, [index, setValue]);
 
   const questionType = watch(`formQuestions.${index}.fieldType`);
 
@@ -84,6 +89,7 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
 
   return (
     <Layout>
+      <input type="hidden" {...register(`formQuestions.${index}.displayOrder`)} />
       <CommonHeader>
         <Wrapper>
           {isEditMode && (
