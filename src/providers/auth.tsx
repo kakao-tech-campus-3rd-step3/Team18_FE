@@ -32,8 +32,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           setAccessToken(response.accessToken);
           const defaultClub = response.clubListInfo[0];
           if (defaultClub) {
-            const { role, clubId } = defaultClub;
-            setUser({ role, clubId });
+            const { role, clubId, clubName } = defaultClub;
+            setUser({ role, clubId, clubName });
           } else {
             setUser({ role: 'guest' });
           }
