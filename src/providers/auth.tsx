@@ -18,10 +18,13 @@ const LOGOUT_REDIRECT_URI = import.meta.env.VITE_LOGOUT_REDIRECT_URI;
 export const AuthContext = createContext<AuthContextType>({
   user: { role: null },
   login: async () => {
-    return Promise.reject();
+    throw new Error('login은 UserProvider 내부에서 실행되어야 합니다.');
   },
   logout: async () => {
-    return Promise.reject();
+    throw new Error('logout은 UserProvider 내부에서 실행되어야 합니다.');
+  },
+  completeSignup: () => {
+    throw new Error('completeSignup은 UserProvider 내부에서 실행되어야 합니다.');
   },
 });
 
