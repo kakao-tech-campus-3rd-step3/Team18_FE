@@ -28,6 +28,9 @@ export function useKakaoLogin() {
         if (response.status === 'LOGIN_SUCCESS') navigate('/');
         else navigate('/signup');
       } catch (e: unknown) {
+        if (isAxiosError(e) && e.code === 'ERR_CANCELED') {
+          return;
+        }
         if (isAxiosError<ErrorResponse>(e)) {
           toast.error(e.response?.data.message);
         } else {
