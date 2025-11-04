@@ -1,5 +1,5 @@
-import { isAxiosError } from 'axios';
 import { apiInstance } from '@/api/initInstance';
+import { handleAxiosError } from '@/utils/handleAxiosError';
 
 export const updateClubImages = async (
   clubId: number | string,
@@ -19,10 +19,7 @@ export const updateClubImages = async (
 
     return data;
   } catch (e: unknown) {
-    if (isAxiosError(e)) {
-      console.error('이미지 업데이트 실패:', e.response?.data || e.message);
-      throw new Error('이미지 업데이트에 실패했습니다.');
-    }
+    handleAxiosError(e, '이미지 업데이트 실패');
     throw e;
   }
 };

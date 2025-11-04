@@ -1,5 +1,6 @@
-import axios, { AxiosError, isAxiosError, type AxiosResponse } from 'axios';
+import { AxiosError, type AxiosResponse } from 'axios';
 import { apiInstance } from '@/api/initInstance';
+import { handleAxiosError } from '@/utils/handleAxiosError';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type {
   ApplicationForm,
@@ -14,9 +15,7 @@ export const fetchApplicationForm = async (clubId: number): Promise<ApplicationF
     );
     return response.data;
   } catch (e) {
-    if (axios.isAxiosError(e)) {
-      throw new Error(e.response?.data);
-    }
+    handleAxiosError(e);
     throw e;
   }
 };
@@ -52,9 +51,7 @@ export const overwriteApplicationForm = async (
     });
     return overwriteResponse.data;
   } catch (error: unknown) {
-    if (isAxiosError(error)) {
-      throw new Error(error.response?.data.message || '지원서 제출이 실패하였습니다.');
-    }
+    handleAxiosError(error, '지원서 제출이 실패하였습니다.');
     throw error;
   }
 };
