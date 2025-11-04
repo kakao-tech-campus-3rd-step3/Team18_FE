@@ -1,4 +1,4 @@
-import type { Role, NavItemData } from '@/types/navigation';
+import { type Role, type NavItemData, ROLE } from '@/types/navigation';
 
 export const getNavItems = (role: Role): NavItemData[] => {
   const commonItems: NavItemData[] = [
@@ -6,7 +6,7 @@ export const getNavItems = (role: Role): NavItemData[] => {
     { key: 'notices', label: '공지 사항', to: '/notices' },
   ];
 
-  if (role === 'admin') {
+  if (role === ROLE.CLUB_ADMIN || ROLE.CLUB_EXECUTIVE) {
     return [
       ...commonItems,
       { key: 'applicants', label: '지원자관리', to: '/admin/clubs/:clubId/dashboard' },
