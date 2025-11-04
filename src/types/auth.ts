@@ -11,4 +11,5 @@ export type AuthContextType = {
   user: User | null;
   login: (code: string, signal: AbortSignal) => Promise<LoginResponse>;
   logout: () => Promise<void>;
+  completeSignup: (accessToken: string) => void;
 };
