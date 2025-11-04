@@ -9,6 +9,7 @@ import {
   setTemporaryToken,
   storeUserData,
 } from '@/shared/auth/token';
+import { ROLE } from '@/types/navigation';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AuthContextType, User } from '@/types/auth';
 
@@ -55,7 +56,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           const defaultClub = response.clubListInfo?.[0];
 
           if (!defaultClub || !defaultClub.role) {
-            const userData: User = { role: 'admin' };
+            const userData: User = { role: ROLE.APPLICANT };
             setUser(userData);
             storeUserData(userData);
             break;
@@ -100,7 +101,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   const completeSignup = useCallback((accessToken: string) => {
     setAccessToken(accessToken);
-    const userData: User = { role: 'admin' };
+    const userData: User = { role: ROLE.CLUB_MEMBER };
     setUser(userData);
     storeUserData(userData);
   }, []);
