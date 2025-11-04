@@ -1,15 +1,69 @@
 import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
+import {
+  useAdaptedApplicationForm,
+  useAdaptedPatchApplicationForm,
+} from '@/pages/admin/ApplicationFormBuilder/hooks/useApplicationFormAdapter';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicationInfoSection } from './components/ApplicationInfoSection';
-import { ApplicationFieldsFormTable } from './components/FieldsFormTable';
-import { ApplicationFormBuilderHeader } from './components/Header';
+import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
+import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection';
+import type { ApplicationFormData } from './types/fieldType';
 
 export const ApplicationFormBuilder = () => {
+  const { clubId } = useParams();
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  const { data, isLoading, error } = useAdaptedApplicationForm(Number(clubId));
+  const { adaptedPatchForm } = useAdaptedPatchApplicationForm(Number(clubId));
+
+  const formHandler = useForm<ApplicationFormData>({
+    defaultValues: {
+      title: '',
+      description: '',
+      recruitDate: '',
+      formQuestions: [],
+    },
+  });
+
+  useEffect(() => {
+    if (data) {
+      formHandler.reset(data);
+    }
+  }, [data, formHandler]);
+
+  const handleEdit = () => setIsEditMode(true);
+  const handleCancel = () => {
+    setIsEditMode(false);
+    if (data) {
+      formHandler.reset(data);
+    }
+  };
+
+  const handleSave = formHandler.handleSubmit((formData) => {
+    adaptedPatchForm(formData, {
+      onSuccess: () => {
+        setIsEditMode(false);
+      },
+    });
+  });
+
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <div>에러발생 : {error.message}</div>;
+
   return (
     <Layout>
       <ContentContainer>
-        <ApplicationFormBuilderHeader />
-        <ApplicationInfoSection />
-        <ApplicationFieldsFormTable />
+        <ApplicationFormBuilderHeaderSection
+          isEditMode={isEditMode}
+          onEdit={handleEdit}
+          onSave={handleSave}
+          onCancel={handleCancel}
+        />
+        <ApplicationInfoSection formHandler={formHandler} isEditMode={isEditMode} />
+        <ApplicationFieldsFormTableSection formHandler={formHandler} isEditMode={isEditMode} />
       </ContentContainer>
     </Layout>
   );
@@ -39,7 +93,7 @@ const ContentContainer = styled.div`
   width: 48rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   box-sizing: border-box;
 
   @media (max-width: 48rem) {

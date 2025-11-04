@@ -27,7 +27,6 @@ const Input = styled.input<Pick<Props, 'invalid'>>(({ theme, invalid }) => ({
   flex: 1,
   textAlign: 'center',
   transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-  marginBottom: '0.3rem',
 
   '&:focus': {
     outline: 'none',
@@ -36,6 +35,10 @@ const Input = styled.input<Pick<Props, 'invalid'>>(({ theme, invalid }) => ({
 
   '&::placeholder': {
     color: theme.colors.gray400,
+  },
+
+  '&:disabled': {
+    backgroundColor: 'transparent',
   },
 
   borderColor: invalid ? theme.colors.error : theme.colors.gray200,

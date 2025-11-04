@@ -37,7 +37,7 @@ export type InterviewSchedule = {
 export type ApplicationForm = {
   title: string;
   description: string;
-  questions: Question[];
+  formQuestions: Question[];
 };
 
 export type ApplicationFormRequest = {

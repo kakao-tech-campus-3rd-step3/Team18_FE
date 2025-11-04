@@ -1,9 +1,13 @@
 import styled from '@emotion/styled';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
-export const AddFieldButton = () => {
+type Props = {
+  onClick: () => void;
+};
+
+export const AddFieldButton = ({ onClick }: Props) => {
   return (
-    <StyledButton type='button'>
+    <StyledButton type='button' onClick={() => onClick()}>
       <AiOutlinePlusCircle />
       <span>항목 추가</span>
     </StyledButton>
@@ -12,6 +16,7 @@ export const AddFieldButton = () => {
 
 const StyledButton = styled.button(({ theme }) => ({
   width: '100%',
+  marginTop: '2rem',
   padding: '1rem',
   border: `1.5px dotted ${theme.colors.gray400}`,
   borderRadius: theme.radius.sm,
@@ -20,7 +25,7 @@ const StyledButton = styled.button(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'center',
   gap: '0.5rem',
-  color: theme.colors.gray700,
+  color: theme.colors.textPrimary,
   fontSize: '0.95rem',
   fontWeight: 500,
   cursor: 'pointer',

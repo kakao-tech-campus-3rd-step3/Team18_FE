@@ -1,20 +1,46 @@
+import type { UseFormSetValue, FieldPath } from 'react-hook-form';
 import { format } from 'date-fns';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
-export const useTimeslotState = () => {
-  const [startTime, setStartTime] = useState('12:00 AM');
-  const [endTime, setEndTime] = useState('12:00 AM');
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
+type UseTimeslotStateProps = {
+  setValue?: UseFormSetValue<ApplicationFormData>;
+  fieldName?: FieldPath<ApplicationFormData>;
+  initialDateRange?: string;
+};
+
+const parseDateRange = (dateRangeString?: string): [Date | null, Date | null] => {
+  if (!dateRangeString) {
+    return [null, null];
+  }
+  const parts = dateRangeString.split(' ~ ');
+  const start = parts[0] ? new Date(parts[0]) : null;
+  const end = parts[1] ? new Date(parts[1]) : null;
+  return [start, end];
+};
+
+export const useTimeslotState = ({
+  setValue,
+  fieldName = 'recruitDate',
+  initialDateRange,
+}: UseTimeslotStateProps = {}) => {
+  const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
+
+  useEffect(() => {
+    const [start, end] = parseDateRange(initialDateRange);
+    setStartDate(start);
+    setEndDate(end);
+  }, [initialDateRange]);
 
   const formatDateRange = () => {
     if (!startDate) return '';
     if (!endDate) {
-      return format(startDate, 'yyyy.MM.dd');
+      return format(startDate, 'yyyy-MM-dd');
     }
 
-    const start = format(startDate, 'yyyy.MM.dd');
-    const end = format(endDate, 'yyyy.MM.dd');
+    const start = format(startDate, 'yyyy-MM-dd');
+    const end = format(endDate, 'yyyy-MM-dd');
     return `${start} ~ ${end}`;
   };
 
@@ -22,13 +48,14 @@ export const useTimeslotState = () => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
+
+    if (setValue && start && end && fieldName) {
+      const dateRange = `${format(start, 'yyyy-MM-dd')} ~ ${format(end, 'yyyy-MM-dd')}`;
+      setValue(fieldName, dateRange as never, { shouldValidate: true });
+    }
   };
 
   return {
-    startTime,
-    setStartTime,
-    endTime,
-    setEndTime,
     startDate,
     endDate,
     formatDateRange,
