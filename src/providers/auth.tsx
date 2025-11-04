@@ -1,4 +1,3 @@
-import { isAxiosError } from 'axios';
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { logoutUser, postAuthCode, type LoginResponse } from '@/pages/admin/Login/api/auth';
 import {
@@ -9,7 +8,7 @@ import {
   setTemporaryToken,
   storeUserData,
 } from '@/shared/auth/token';
-import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
+import { handleAxiosError } from '@/utils/handleAxiosError';
 import type { AuthContextType, User } from '@/types/auth';
 
 const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
@@ -76,9 +75,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       if (e instanceof Error && e.name === 'CanceledError') {
         throw e;
       }
-      if (isAxiosError<ErrorResponse>(e)) {
-        throw new Error(e.response?.data.message ?? '로그인 중 오류가 발생했습니다.');
-      }
+      handleAxiosError(e, '로그인 중 오류가 발생했습니다.');
+
       throw e;
     }
   }, []);
@@ -91,9 +89,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${REST_API_KEY}&logout_redirect_uri=${LOGOUT_REDIRECT_URI}`;
       window.location.href = kakaoLogoutUrl;
     } catch (e) {
-      if (isAxiosError<ErrorResponse>(e)) {
-        throw new Error(e.response?.data.message ?? '로그아웃 중 오류가 발생했습니다.');
-      }
+      handleAxiosError(e);
       throw e;
     }
   }, []);

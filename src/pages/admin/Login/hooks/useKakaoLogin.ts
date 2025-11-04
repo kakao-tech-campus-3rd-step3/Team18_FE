@@ -1,10 +1,9 @@
 import { isAxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
 import { useAuth } from '@/providers/auth';
+import { handleAxiosError } from '@/utils/handleAxiosError';
 import type { LoginResponse } from '../api/auth';
-import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 
 export function useKakaoLogin() {
   const { login } = useAuth();
@@ -31,11 +30,7 @@ export function useKakaoLogin() {
         if (isAxiosError(e) && e.code === 'ERR_CANCELED') {
           return;
         }
-        if (isAxiosError<ErrorResponse>(e)) {
-          toast.error(e.response?.data.message);
-        } else {
-          toast.error('로그인 중 오류가 발생했습니다.');
-        }
+        handleAxiosError(e, '로그인 요청이 실패하였습니다.');
       } finally {
         setIsLoading(false);
       }
