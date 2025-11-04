@@ -1,6 +1,8 @@
 export const ROLE = {
   CLUB_EXECUTIVE: 'CLUB_EXECUTIVE',
   CLUB_ADMIN: 'CLUB_ADMIN',
+  CLUB_MEMBER: 'CLUB_MEMBER',
+  APPLICANT: 'APPLICANT',
   NONE: null,
 } as const;
 
