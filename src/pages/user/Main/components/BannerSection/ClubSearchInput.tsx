@@ -6,10 +6,24 @@ const InputWrapper = styled.div(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   width: '400px',
+  maxWidth: '100%',
   border: `1px solid ${theme?.colors?.border}`,
   borderRadius: theme?.radius?.md,
   padding: '10px 10px',
   backgroundColor: '#fff',
+  boxSizing: 'border-box',
+  boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    width: 300,
+    maxWidth: '100%',
+  },
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    gap: 12,
+    width: '100%',
+    padding: '8px 12px',
+  },
 }));
 
 const Input = styled.input(({ theme }) => ({

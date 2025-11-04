@@ -7,14 +7,33 @@ export const BannerText = styled.div(({ theme }) => ({
 }));
 
 export const BannerWrapper = styled.div(({ theme }) => ({
+  textAlign: 'center',
+  marginBottom: '24px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  maxWidth: `100%`,
+  width: '100%',
+  maxWidth: '100vw',
   height: 300,
-  gap: 30,
+  gap: '16px',
+  boxSizing: 'border-box',
+
   backgroundColor: theme.colors.primary100,
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    height: 250,
+    gap: 24,
+  },
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    position: 'sticky',
+    top: 0,
+    zIndex: 1000,
+    height: 'auto',
+    padding: '16px',
+    gap: 12,
+    marginBottom: 0,
+  },
 }));
 
 export const SearchContainer = styled.div(({ theme }) => ({
@@ -25,4 +44,18 @@ export const SearchContainer = styled.div(({ theme }) => ({
   maxWidth: `100%`,
   gap: 30,
   backgroundColor: theme.colors.primary100,
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    gap: 20,
+  },
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    flexDirection: 'column',
+    gap: 12,
+    width: '100%',
+    alignItems: 'stretch',
+    '& > *': {
+      width: '100%',
+      boxSizing: 'border-box',
+    },
+  },
 }));
