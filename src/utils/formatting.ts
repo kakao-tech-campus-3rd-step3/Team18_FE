@@ -1,5 +1,5 @@
-import type { ClubCategory, ClubCategoryEng } from '../constants/clubCategory';
-import type { RecruitStatus, RecruitStatusEng } from '../types/club';
+import type { RecruitStatus, RecruitStatusEng } from '@/pages/user/Main/types/club';
+import type { ClubCategory, ClubCategoryEng } from '@/types/club';
 
 export const korToEngCategory: Record<ClubCategory, ClubCategoryEng> = {
   전체: 'ALL',
