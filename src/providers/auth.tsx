@@ -96,7 +96,14 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const value = { user, login, logout };
+  const completeSignup = useCallback((accessToken: string) => {
+    setAccessToken(accessToken);
+    const userData: User = { role: 'admin' };
+    setUser(userData);
+    storeUserData(userData);
+  }, []);
+
+  const value = { user, login, logout, completeSignup };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
