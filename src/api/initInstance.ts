@@ -43,7 +43,7 @@ apiInstance.interceptors.response.use(
     return response;
   },
   async function onRejected(e: AxiosError) {
-    if (axios.isAxiosError<ErrorResponse>(e)) {
+    if (axios.isAxiosError(e)) {
       const error = e as AxiosError<ErrorResponse>;
       const config = error.config;
 
@@ -60,8 +60,14 @@ apiInstance.interceptors.response.use(
         } catch (e: unknown) {
           if (axios.isAxiosError(e)) {
             const reissueError = e as AxiosError<ErrorResponse>;
+            const errorType = reissueError?.response?.data.error_code;
+
+            if (!errorType) {
+              throw new Error(reissueError.response?.data.message ?? '알 수 없는 오류');
+            }
+
             const errorMessage = reissueError.response?.data.message;
-            switch (error.response?.data.error_code) {
+            switch (errorType) {
               case AUTH_ERRORS.INVALID_INPUT:
                 throw new Error(errorMessage ?? '입력값이 올바르지 않습니다.');
               case AUTH_ERRORS.UNAUTHENTICATED_USER:
