@@ -3,7 +3,7 @@ import type { ApplicationForm } from '@/pages/user/Apply/type/apply.ts';
 export const Application: ApplicationForm = {
   title: '인터엑스 지원서',
   description: '인터엑스 동아리 설명',
-  questions: [
+  formQuestions: [
     {
       questionNum: 1,
       questionType: 'RADIO',
