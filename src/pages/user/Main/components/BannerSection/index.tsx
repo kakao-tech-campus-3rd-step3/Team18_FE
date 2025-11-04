@@ -55,18 +55,20 @@ export const BannerSection = ({
 
       <SearchContainer>
         <ClubSearchInput onChangeSearch={onChangeSearch} />
-        <Dropdown
-          placeholder='동아리 카테고리'
-          value={engToKorCategory[selectedCategory]}
-          options={CLUB_CATEGORY}
-          onSelect={handleCategoryClick}
-        ></Dropdown>
-        <Dropdown
-          placeholder='모집 상태'
-          value={selectedRecruitStatus ? selectedRecruitStatus : undefined}
-          options={[...CLUB_RECRUIT_STATUS_KOR]}
-          onSelect={handleRecruitStatusClick}
-        ></Dropdown>
+        <DropdownWrapper>
+          <Dropdown
+            placeholder='동아리 카테고리'
+            value={engToKorCategory[selectedCategory]}
+            options={CLUB_CATEGORY}
+            onSelect={handleCategoryClick}
+          />
+          <Dropdown
+            placeholder='모집 상태'
+            value={selectedRecruitStatus ? selectedRecruitStatus : undefined}
+            options={[...CLUB_RECRUIT_STATUS_KOR]}
+            onSelect={handleRecruitStatusClick}
+          />
+        </DropdownWrapper>
       </SearchContainer>
     </S.BannerWrapper>
   );
@@ -97,6 +99,20 @@ export const SearchContainer = styled.div(({ theme }) => ({
     '& > *': {
       width: '100%',
       boxSizing: 'border-box',
+    },
+  },
+}));
+
+export const DropdownWrapper = styled.div(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  gap: 30,
+
+  [`@media(max-width: ${theme.breakpoints.mobile})`]: {
+    width: '100%',
+    gap: 12,
+    '& > *': {
+      flex: 1,
     },
   },
 }));
