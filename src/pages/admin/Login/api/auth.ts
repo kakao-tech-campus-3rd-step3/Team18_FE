@@ -5,13 +5,13 @@ import type { AxiosResponse } from 'axios';
 interface LoginSuccessResponse {
   status: 'LOGIN_SUCCESS';
   accessToken: string;
-  clubListInfo: ClubMemberInfo[];
+  clubAndRoleList: ClubMemberInfo[];
 }
 
 interface RegistrationRequiredResponse {
   status: 'REGISTRATION_REQUIRED';
   temporaryToken: string;
-  clubListInfo: ClubMemberInfo[];
+  clubAndRoleList: ClubMemberInfo[];
 }
 
 interface ClubMemberInfo {

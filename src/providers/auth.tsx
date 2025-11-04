@@ -52,7 +52,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       switch (response.status) {
         case 'LOGIN_SUCCESS': {
           setAccessToken(response.accessToken);
-          const defaultClub = response.clubListInfo?.[0];
+          const defaultClub = response.clubAndRoleList?.[0];
 
           if (!defaultClub || !defaultClub.role) {
             const userData: User = { role: 'admin' };
