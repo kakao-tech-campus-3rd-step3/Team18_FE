@@ -1,29 +1,30 @@
 import styled from '@emotion/styled';
 
-export const SelectBox = styled.div<{ width: string }>(({ theme, width }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  position: 'relative',
-  width: width,
-  height: '1.4rem',
-  padding: '10px',
-  borderRadius: theme.radius.md,
-  backgroundColor: theme.colors.bg,
-  alignSelf: 'center',
-  border: `1px solid ${theme.colors.gray200}`,
-  cursor: 'pointer',
-  minWidth: '8rem',
+export const SelectBox = styled.div<{ width: string; disabled: boolean }>(
+  ({ theme, width, disabled }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    position: 'relative',
+    width: width,
+    height: '1.4rem',
+    padding: '10px',
+    borderRadius: theme.radius.md,
+    backgroundColor: disabled ? theme.colors.gray00 : theme.colors.bg,
+    alignSelf: 'center',
+    border: `1px solid ${theme.colors.gray200}`,
+    minWidth: '8rem',
 
-  '&::before': {
-    content: '"⌵"',
-    position: 'absolute',
-    top: '6px',
-    right: '13px',
-    color: theme.colors.textSecondary,
-    fontSize: '22px',
-    fontWeight: 'bold',
-  },
-}));
+    '&::before': {
+      content: '"⌵"',
+      position: 'absolute',
+      top: '6px',
+      right: '13px',
+      color: theme.colors.textSecondary,
+      fontSize: '22px',
+      fontWeight: 'bold',
+    },
+  }),
+);
 
 export const SelectOptions = styled.ul(({ theme }) => ({
   padding: '0.5rem',
