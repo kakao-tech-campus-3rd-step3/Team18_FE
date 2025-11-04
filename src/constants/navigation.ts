@@ -3,7 +3,7 @@ import type { Role, NavItemData } from '@/types/navigation';
 export const getNavItems = (role: Role): NavItemData[] => {
   const commonItems: NavItemData[] = [
     { key: 'logo', label: '동아리움', to: '/', isLogo: true },
-    { key: 'notices', label: '공지사항', to: '/notices' },
+    { key: 'notices', label: '공지 사항', to: '/notices' },
   ];
 
   if (role === 'admin') {

@@ -18,10 +18,13 @@ const LOGOUT_REDIRECT_URI = import.meta.env.VITE_LOGOUT_REDIRECT_URI;
 export const AuthContext = createContext<AuthContextType>({
   user: { role: null },
   login: async () => {
-    return Promise.reject();
+    throw new Error('login은 UserProvider 내부에서 실행되어야 합니다.');
   },
   logout: async () => {
-    return Promise.reject();
+    throw new Error('logout은 UserProvider 내부에서 실행되어야 합니다.');
+  },
+  completeSignup: () => {
+    throw new Error('completeSignup은 UserProvider 내부에서 실행되어야 합니다.');
   },
 });
 
@@ -49,16 +52,19 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       switch (response.status) {
         case 'LOGIN_SUCCESS': {
           setAccessToken(response.accessToken);
-          const defaultClub = response.clubListInfo[0];
-          if (defaultClub) {
-            const { role, clubId, clubName } = defaultClub;
-            setUser({ role, clubId, clubName });
-            const userData = { role, clubId, clubName };
+          const defaultClub = response.clubListInfo?.[0];
+
+          if (!defaultClub || !defaultClub.role) {
+            const userData: User = { role: 'admin' };
+            setUser(userData);
             storeUserData(userData);
-          } else {
-            setUser({ role: 'admin' });
-            storeUserData({ role: 'admin' });
+            break;
           }
+
+          const { role, clubId, clubName } = defaultClub;
+          const userData: User = { role, clubId, clubName };
+          setUser(userData);
+          storeUserData(userData);
           break;
         }
         case 'REGISTRATION_REQUIRED':
@@ -92,7 +98,14 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const value = { user, login, logout };
+  const completeSignup = useCallback((accessToken: string) => {
+    setAccessToken(accessToken);
+    const userData: User = { role: 'admin' };
+    setUser(userData);
+    storeUserData(userData);
+  }, []);
+
+  const value = { user, login, logout, completeSignup };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
