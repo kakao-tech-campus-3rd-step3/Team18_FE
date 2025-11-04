@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
 import { stageMap } from '@/pages/admin/Dashboard/utils/stageMap';
@@ -37,12 +38,15 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
     error,
   } = useApplicants(Number(clubId), apiStage, filterOption);
 
+  const handleItemClick = useCallback(
+    (applicantId: number) => {
+      navigate(`/admin/clubs/${clubId}/applicants/${applicantId}`);
+    },
+    [clubId, navigate],
+  );
+
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;
-
-  const handleItemClick = (applicantId: number) => {
-    navigate(`/admin/clubs/${clubId}/applicants/${applicantId}`);
-  };
 
   return (
     <S.Container>

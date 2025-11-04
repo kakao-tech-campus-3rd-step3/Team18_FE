@@ -1,3 +1,4 @@
+import React from 'react';
 import * as S from './index.styled';
 import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
 
@@ -11,7 +12,7 @@ const STATUS_LABEL: Record<ApplicantData['status'], string> = {
   APPROVED: '합격',
 };
 
-export const ApplicantListItem = ({
+export const ApplicantListItem = React.memo(function ApplicantListItem({
   applicantId,
   name,
   studentId,
@@ -20,7 +21,7 @@ export const ApplicantListItem = ({
   email,
   status,
   onClick,
-}: Props) => {
+}: Props) {
   return (
     <S.ItemWrapper onClick={() => onClick(applicantId)}>
       <S.InfoText>{name || '-'}</S.InfoText>
@@ -31,4 +32,4 @@ export const ApplicantListItem = ({
       <S.StatusBadge status={status}>{STATUS_LABEL[status] || '-'}</S.StatusBadge>
     </S.ItemWrapper>
   );
-};
+});
