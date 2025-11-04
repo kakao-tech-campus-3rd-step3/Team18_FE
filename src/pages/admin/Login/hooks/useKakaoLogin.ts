@@ -2,6 +2,7 @@ import { isAxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { ROUTE_PATH } from '@/constants/routerPath';
 import { useAuth } from '@/providers/auth';
 import type { LoginResponse } from '../api/auth';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
@@ -18,15 +19,15 @@ export function useKakaoLogin() {
 
     if (!code) {
       setIsLoading(false);
-      navigate('/login');
+      navigate(ROUTE_PATH.COMMON.LOGIN);
       return;
     }
 
     const processLogin = async () => {
       try {
         const response: LoginResponse = await login(code, controller.signal);
-        if (response.status === 'LOGIN_SUCCESS') navigate('/');
-        else navigate('/signup');
+        if (response.status === 'LOGIN_SUCCESS') navigate(ROUTE_PATH.COMMON.MAIN);
+        else navigate(ROUTE_PATH.COMMON.SIGNUP);
       } catch (e: unknown) {
         if (isAxiosError(e) && e.code === 'ERR_CANCELED') {
           return;
