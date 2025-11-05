@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react';
-import { defineConfig, loadEnv, type ConfigEnv } from 'vite';
+import { loadEnv, type ConfigEnv } from 'vite';
+import { defineConfig } from 'vitest/config';
 
 // https://vite.dev/config/
 export default ({ mode }: ConfigEnv) => {
@@ -12,6 +13,11 @@ export default ({ mode }: ConfigEnv) => {
         },
       }),
     ],
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      setupFiles: './src/setupTests.ts',
+    },
     resolve: {
       alias: {
         '@': '/src',
