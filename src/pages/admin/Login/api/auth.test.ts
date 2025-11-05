@@ -30,4 +30,22 @@ describe('auth API 테스트', () => {
       expect.any(Object),
     );
   });
+
+  it('postAuthCode - 회원가입이 필요한 경우(temporaryToken 응답)', async () => {
+    const mockResponse: LoginResponse = {
+      status: 'REGISTRATION_REQUIRED',
+      temporaryToken: 'mockTempToken',
+      clubAndRoleList: [],
+    };
+
+    mockedPost.mockResolvedValueOnce({ data: mockResponse });
+
+    const result = await postAuthCode('tempAuthCode', new AbortController().signal);
+
+    expect(result).toEqual(mockResponse);
+    expect(result.status).toBe('REGISTRATION_REQUIRED');
+    if (result.status === 'REGISTRATION_REQUIRED') {
+      expect(result.temporaryToken).toBeDefined();
+    }
+  });
 });
