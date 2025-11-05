@@ -12,11 +12,12 @@ export type Props = {
   option: ApplicationFilterOption;
   onOptionChange: (option: ApplicationFilterOption) => void;
   stage: ApplicationStage;
+  clubId: number;
 };
 
-export const ApplicationStatusFilter = ({ option, onOptionChange, stage }: Props) => {
+export const ApplicationStatusFilter = ({ option, onOptionChange, stage, clubId }: Props) => {
   const apiStage = stageMap[stage];
-  const { counts } = useApplicants(1, apiStage);
+  const { counts } = useApplicants(clubId, apiStage);
 
   return (
     <Wrapper>

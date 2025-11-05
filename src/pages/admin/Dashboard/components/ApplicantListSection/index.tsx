@@ -13,9 +13,10 @@ import type {
 interface ApplicantListSectionProps {
   stage: ApplicationStage;
   setStage: React.Dispatch<React.SetStateAction<ApplicationStage>>;
+  clubId: number;
 }
 
-export const ApplicantListSection = ({ stage, setStage }: ApplicantListSectionProps) => {
+export const ApplicantListSection = ({ stage, setStage, clubId }: ApplicantListSectionProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const optionType = 'ALL' as ApplicationFilterOption;
 
@@ -43,6 +44,7 @@ export const ApplicantListSection = ({ stage, setStage }: ApplicantListSectionPr
           option={filterOption}
           onOptionChange={handleFilterOptionChange}
           stage={stage}
+          clubId={clubId}
         />
       </ApplicantFilterTopBarWrapper>
       <ListWrapper>
