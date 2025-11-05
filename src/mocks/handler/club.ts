@@ -123,5 +123,5 @@ export const clubHandlers = [
   http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', postClubDetailResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/reviews', getClubReviewsResolver),
   http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/reviews', postClubReviewResolver),
-  http.patch(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/images', patchClubImagesResolver),
+  http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/images', patchClubImagesResolver),
 ];
