@@ -8,6 +8,7 @@ import {
   setTemporaryToken,
   storeUserData,
 } from '@/shared/auth/token';
+import { ROLE } from '@/types/navigation';
 import { handleAxiosError } from '@/utils/handleAxiosError';
 import type { AuthContextType, User } from '@/types/auth';
 
