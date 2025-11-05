@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Logo } from '@/pages/admin/Login/component/Logo';
+import { ClubSelector } from './ClubSelector';
 import { useNavigation } from './hooks/useNavigation';
 import { NavigationContainer } from './NavigationContainer';
 import { NavigationItem } from './NavigationItem';
@@ -24,7 +25,8 @@ export const Navigation = () => {
           );
         })}
       </LeftMenu>
-
+      {/* 임시 위치 */}
+      <ClubSelector />
       <RightMenu>
         {rightItem && (
           <NavigationItem
