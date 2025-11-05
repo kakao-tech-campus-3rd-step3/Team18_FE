@@ -1,7 +1,6 @@
 import { isAxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
 import { ROUTE_PATH } from '@/constants/routerPath';
 import { useAuth } from '@/providers/auth';
 import { handleAxiosError } from '@/utils/handleAxiosError';
