@@ -27,7 +27,7 @@ export function useKakaoLogin() {
       try {
         const response: LoginResponse = await login(code, controller.signal);
         if (response.status === 'LOGIN_SUCCESS') navigate(ROUTE_PATH.COMMON.MAIN);
-        else navigate(ROUTE_PATH.COMMON.SIGNUP);
+        else navigate(`/${ROUTE_PATH.COMMON.SIGNUP}`);
       } catch (e: unknown) {
         if (isAxiosError(e) && e.code === 'ERR_CANCELED') {
           return;
