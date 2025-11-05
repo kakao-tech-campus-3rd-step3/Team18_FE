@@ -13,7 +13,7 @@ export const updateClubImages = async (
   newFiles.forEach((file) => formData.append('newImages', file, file.name));
 
   try {
-    const { data } = await apiInstance.post(`/clubs/${clubId}/images`, formData, {
+    const { data } = await apiInstance.put(`/clubs/${clubId}/images`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
 

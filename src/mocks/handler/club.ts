@@ -83,7 +83,7 @@ const postClubReviewResolver = async ({
   return HttpResponse.json(newReview, { status: 201 });
 };
 
-const patchClubImagesResolver = async ({
+const putClubImagesResolver = async ({
   params,
   request,
 }: {
@@ -103,7 +103,7 @@ const patchClubImagesResolver = async ({
     }
   });
 
-  const updatedImages = clubRepository.patchClubImages(Number(clubId), keepImageIds, newImages);
+  const updatedImages = clubRepository.putClubImages(Number(clubId), keepImageIds, newImages);
 
   if (!updatedImages) {
     return new HttpResponse('Not Found', { status: 404 });
@@ -123,5 +123,5 @@ export const clubHandlers = [
   http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', postClubDetailResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/reviews', getClubReviewsResolver),
   http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/reviews', postClubReviewResolver),
-  http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/images', patchClubImagesResolver),
+  http.put(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/images', putClubImagesResolver),
 ];
