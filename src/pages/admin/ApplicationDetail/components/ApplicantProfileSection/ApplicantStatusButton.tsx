@@ -27,8 +27,8 @@ const Wrapper = styled.button<Pick<Props, 'selected' | 'label'>>(({ theme, selec
       color: theme.colors.red600,
     },
     미정: {
-      backgroundColor: theme.colors.gray100,
-      color: theme.colors.gray600,
+      backgroundColor: theme.colors.gray200,
+      color: theme.colors.gray700,
     },
   };
 
