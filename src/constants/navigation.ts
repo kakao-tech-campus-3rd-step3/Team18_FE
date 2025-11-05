@@ -6,7 +6,6 @@ export const getNavItems = (role: Role): NavItemData[] => {
     { key: 'notices', label: '공지 사항', to: '/notices' },
   ];
 
-
   if (role === ROLE.CLUB_MEMBER || role === ROLE.APPLICANT) {
     return [...commonItems, { key: 'logout', label: '로그아웃', to: '#' }];
   }
