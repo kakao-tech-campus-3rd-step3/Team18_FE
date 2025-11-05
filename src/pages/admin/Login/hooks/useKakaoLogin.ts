@@ -19,7 +19,7 @@ export function useKakaoLogin() {
 
     if (!code) {
       setIsLoading(false);
-      navigate(ROUTE_PATH.COMMON.LOGIN);
+      navigate(`/${ROUTE_PATH.COMMON.LOGIN}`);
       return;
     }
 
