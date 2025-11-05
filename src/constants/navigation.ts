@@ -10,7 +10,7 @@ export const getNavItems = (role: Role): NavItemData[] => {
     return [...commonItems, { key: 'logout', label: '로그아웃', to: '#' }];
   }
 
-  if (role === ROLE.CLUB_ADMIN || ROLE.CLUB_EXECUTIVE) {
+  if (role === ROLE.CLUB_ADMIN || role === ROLE.CLUB_EXECUTIVE) {
     return [
       ...commonItems,
       { key: 'applicants', label: '지원자관리', to: '/admin/clubs/:clubId/dashboard' },
@@ -19,5 +19,6 @@ export const getNavItems = (role: Role): NavItemData[] => {
       { key: 'logout', label: '로그아웃', to: '#' },
     ];
   }
+
   return [...commonItems, { key: 'login', label: '관리자 로그인', to: '/login' }];
 };
