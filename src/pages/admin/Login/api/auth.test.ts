@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { apiInstance } from '@/api/initInstance';
-import { postAuthCode } from './auth';
+import { postAuthCode, logoutUser } from './auth';
 import type { LoginResponse } from './auth';
 
 vi.mock('@/api/initInstance');
@@ -47,5 +47,15 @@ describe('auth API 테스트', () => {
     if (result.status === 'REGISTRATION_REQUIRED') {
       expect(result.temporaryToken).toBeDefined();
     }
+  });
+
+  it('logoutUser - 로그아웃 요청', async () => {
+    const mockLogoutResponse = { data: { success: true } };
+    mockedPost.mockResolvedValueOnce(mockLogoutResponse);
+
+    const result = await logoutUser();
+
+    expect(result).toEqual(mockLogoutResponse);
+    expect(mockedPost).toHaveBeenCalledWith('/auth/logout', {});
   });
 });
