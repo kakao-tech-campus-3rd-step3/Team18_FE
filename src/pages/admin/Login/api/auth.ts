@@ -5,12 +5,14 @@ import type { AxiosResponse } from 'axios';
 interface LoginSuccessResponse {
   status: 'LOGIN_SUCCESS';
   accessToken: string;
+
   clubAndRoleList: ClubMemberInfo[];
 }
 
 interface RegistrationRequiredResponse {
   status: 'REGISTRATION_REQUIRED';
   temporaryToken: string;
+
   clubAndRoleList: ClubMemberInfo[];
 }
 

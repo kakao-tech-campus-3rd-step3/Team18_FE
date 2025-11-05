@@ -4,7 +4,11 @@ import { theme } from '@/styles/theme';
 import { overwriteApplicationForm, postApplicationForm } from '../api/apply';
 import type { FormInputs } from '../type/apply';
 
-export const useApplicationSubmit = (clubId: number, questionArray: string[]) => {
+export const useApplicationSubmit = (
+  clubId: number,
+  questionArray: string[],
+  onSuccess?: () => void,
+) => {
   const navigate = useNavigate();
   const handleOverwriteConfirm = async (data: FormInputs) => {
     try {
@@ -15,7 +19,10 @@ export const useApplicationSubmit = (clubId: number, questionArray: string[]) =>
           color: 'white',
         },
         duration: 1000,
-        onAutoClose: () => navigate(`/clubs/${clubId}`),
+        onAutoClose: () => {
+          navigate(`/clubs/${clubId}`);
+          onSuccess?.();
+        },
       });
     } catch {
       toast.error('제출 실패!', {
@@ -51,7 +58,10 @@ export const useApplicationSubmit = (clubId: number, questionArray: string[]) =>
           color: 'white',
         },
         duration: 1000,
-        onAutoClose: () => navigate(`/clubs/${clubId}`),
+        onAutoClose: () => {
+          navigate(`/clubs/${clubId}`);
+          onSuccess?.();
+        },
       });
     } catch {
       toast.error('제출 실패!', {

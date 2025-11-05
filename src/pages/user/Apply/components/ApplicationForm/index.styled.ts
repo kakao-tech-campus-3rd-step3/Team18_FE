@@ -119,3 +119,25 @@ export const DateText = styled.span(({ theme }) => ({
   fontWeight: theme.font.weight.bold,
   fontSize: theme.font.size.sm,
 }));
+
+export const AutoSaveIndicator = styled.span(({ theme }) => ({
+  position: 'fixed',
+  top: '1.25rem',
+  right: '1.875rem',
+  fontSize: '0.8125rem',
+  color: theme.colors.textSecondary,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '0.375rem',
+  zIndex: 1000,
+  backgroundColor: 'white',
+  width: '10rem',
+  padding: '0.375rem 0.75rem',
+  borderRadius: '0.25rem',
+}));
+
+export const ActionButtonWrapper = styled.div`
+  display: flex;
+  gap: 2rem;
+`;

@@ -1,5 +1,5 @@
 import { FiTrash2, FiPlus } from 'react-icons/fi';
-import { useClubActivityPhotos } from '@/pages/admin/ClubDetailEdit/hook/useClubActivityPhotos';
+import { useClubActivityPhotos } from '@/pages/admin/ClubDetailEdit/hooks/useClubActivityPhotos';
 import { SectionTitle } from '@/shared/components/SectionTitle';
 import * as S from './index.styled';
 
