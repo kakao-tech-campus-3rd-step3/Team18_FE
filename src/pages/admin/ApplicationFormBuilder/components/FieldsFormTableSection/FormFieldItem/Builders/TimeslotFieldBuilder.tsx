@@ -38,10 +38,10 @@ export const TimeslotFieldBuilder = ({ formHandler, questionIndex, isEditMode }:
   });
 
   const currentStartTime =
-    watch(`formQuestions.${questionIndex}.timeSlotOptions.availableTime.start`) || '7:00';
+    watch(`formQuestions.${questionIndex}.timeSlotOptions.availableTime.start`) || '07:00:00';
 
   const currentEndTime =
-    watch(`formQuestions.${questionIndex}.timeSlotOptions.availableTime.end`) || '7:00';
+    watch(`formQuestions.${questionIndex}.timeSlotOptions.availableTime.end`) || '07:00:00';
 
   const handleStartTimeSelect = (newTime: string) => {
     setValue(`formQuestions.${questionIndex}.timeSlotOptions.availableTime.start`, newTime);
