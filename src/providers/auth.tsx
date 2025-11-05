@@ -28,7 +28,7 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User>({ role: null });
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const initAuth = async () => {
@@ -51,10 +51,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       switch (response.status) {
         case 'LOGIN_SUCCESS': {
           setAccessToken(response.accessToken);
-          const defaultClub = response.clubListInfo?.[0];
+          const defaultClub = response.clubAndRoleList?.[0];
 
           if (!defaultClub || !defaultClub.role) {
-            const userData: User = { role: 'admin' };
+            const userData: User = { role: ROLE.APPLICANT };
             setUser(userData);
             storeUserData(userData);
             break;
@@ -84,7 +84,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const logout = useCallback(async () => {
     try {
       await logoutUser();
-      setUser({ role: null });
       clearAuthData();
       const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${REST_API_KEY}&logout_redirect_uri=${LOGOUT_REDIRECT_URI}`;
       window.location.href = kakaoLogoutUrl;
@@ -96,7 +95,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   const completeSignup = useCallback((accessToken: string) => {
     setAccessToken(accessToken);
-    const userData: User = { role: 'admin' };
+    const userData: User = { role: ROLE.CLUB_MEMBER };
     setUser(userData);
     storeUserData(userData);
   }, []);

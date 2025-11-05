@@ -1,12 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useClubFiltering } from '@/pages/user/Main/hooks/useClubFiltering.ts';
-
-import { engToKorCategory } from '@/pages/user/Main/utils/formatting.ts';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
 import { Text } from '@/shared/components/Text';
+import { engToKorCategory } from '@/utils/formatting.ts';
 import * as S from './Club.styled.ts';
-import type { ClubCategoryEng } from '@/pages/user/Main/constants/clubCategory.ts';
 import type { Club, RecruitStatus } from '@/pages/user/Main/types/club.ts';
+import type { ClubCategoryEng } from '@/types/club';
 
 type Props = {
   categoryFilter: ClubCategoryEng;
@@ -56,8 +55,11 @@ export const ClubListSection = ({ categoryFilter, searchText, recruitStatus }: P
       <S.Grid>
         {filteredClubs.map((club: Club) => (
           <S.ClubItem onClick={() => navigate(`/clubs/${club.id}`)} key={club.id}>
-            <S.ClubCategoryText>{engToKorCategory[club.category]}</S.ClubCategoryText>
-
+            <S.ClubCategoryText>
+              {club.category in engToKorCategory
+                ? engToKorCategory[club.category as ClubCategoryEng]
+                : '전체'}
+            </S.ClubCategoryText>
             <S.ClubNameText>{club.name}</S.ClubNameText>
             <S.ClubIntroduction>{club.shortIntroduction}</S.ClubIntroduction>
             <S.RecruitStatusBox status={club.recruitStatus}>

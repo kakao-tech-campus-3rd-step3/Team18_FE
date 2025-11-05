@@ -1,4 +1,4 @@
-import type { ClubCategoryEng } from '../constants/clubCategory';
+import type { ClubCategoryEng } from '@/types/club';
 
 export type Club = {
   id: number;

@@ -1,20 +1,13 @@
 import styled from '@emotion/styled';
 import { useSearchParams } from 'react-router-dom';
+import { CLUB_CATEGORY } from '@/constants/clubCategory';
 import { ClubSearchInput } from '@/pages/user/Main/components/BannerSection/ClubSearchInput.tsx';
-import {
-  CLUB_CATEGORY,
-  type ClubCategory,
-  type ClubCategoryEng,
-} from '@/pages/user/Main/constants/clubCategory.ts';
 import { CLUB_RECRUIT_STATUS_KOR, type RecruitStatus } from '@/pages/user/Main/types/club.ts';
-import {
-  engToKorCategory,
-  korToEngCategory,
-  korToEngRecruitStatus,
-} from '@/pages/user/Main/utils/formatting.ts';
 import { Dropdown } from '@/shared/components/Dropdown/index.tsx';
+import { engToKorCategory, korToEngCategory, korToEngRecruitStatus } from '@/utils/formatting.ts';
 import * as S from './Banner.styled.ts';
 import * as B from './BannerText.tsx';
+import type { ClubCategory, ClubCategoryEng } from '@/types/club';
 
 type Props = {
   onChangeSearch: (searchText: string) => void;

@@ -12,7 +12,8 @@ export const authHandlers = [
       const response: LoginResponse = {
         status: 'LOGIN_SUCCESS',
         accessToken: 'mock-access-token',
-        clubListInfo: [],
+
+        clubAndRoleList: [],
       };
       return HttpResponse.json(response, { status: 200 });
     }
@@ -21,7 +22,8 @@ export const authHandlers = [
       const response: LoginResponse = {
         status: 'REGISTRATION_REQUIRED',
         temporaryToken: 'mock-temporary-token',
-        clubListInfo: [],
+
+        clubAndRoleList: [],
       };
       return HttpResponse.json(response, { status: 200 });
     }

@@ -1,6 +1,8 @@
+import { useCallback, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { QuestionTypes } from '@/pages/user/Apply/constants/questionType';
+import { useApplicationAutoSave } from '@/pages/user/Apply/hooks/useApplicationAutoSave';
 import { useApplicationSubmit } from '@/pages/user/Apply/hooks/useApplicationSubmit';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
@@ -14,6 +16,11 @@ type Props = {
 };
 
 export const ApplicationForm = ({ questions }: Props) => {
+  const [formKey, setFormKey] = useState(0);
+
+  const { clubId } = useParams<{ clubId: string }>();
+  const clubIdNumber = Number(clubId);
+
   const methods = useForm<FormInputs>({
     mode: 'onTouched',
     defaultValues: {
@@ -26,12 +33,30 @@ export const ApplicationForm = ({ questions }: Props) => {
       selectedInterviewSchedule: [],
     },
   });
-  const { errors, isSubmitting } = methods.formState;
+  const {
+    formState: { errors, isSubmitting },
+    watch,
+    reset,
+  } = methods;
 
-  const { clubId } = useParams<{ clubId: string }>();
-  const clubIdNumber = Number(clubId);
+  const { isSaving } = useApplicationAutoSave({ clubId: clubIdNumber, watch, reset });
+
+  const clearFormAndStorage = useCallback(() => {
+    localStorage.removeItem(`application-form-${clubIdNumber}`);
+    reset({
+      name: '',
+      studentId: '',
+      department: '',
+      phoneNumber: '',
+      email: '',
+      answers: [],
+      selectedInterviewSchedule: [],
+    });
+    setFormKey((prevKey) => prevKey + 1);
+  }, [clubIdNumber, reset]);
+
   const questionArray = questions.map((e) => e.question);
-  const { handleSubmit } = useApplicationSubmit(clubIdNumber, questionArray);
+  const { handleSubmit } = useApplicationSubmit(clubIdNumber, questionArray, clearFormAndStorage);
 
   const questionsWithIndex = questions.map((q, i) => ({ ...q, originalIndex: i }));
   const timeSlotQuestions = questionsWithIndex.filter(
@@ -43,7 +68,18 @@ export const ApplicationForm = ({ questions }: Props) => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(handleSubmit)}>
+      <form key={formKey} onSubmit={methods.handleSubmit(handleSubmit)}>
+        <S.AutoSaveIndicator>
+          {isSaving ? (
+            <span>편집중..</span>
+          ) : (
+            <>
+              <span style={{ color: '#22c55e', fontWeight: '600' }}>✓</span>
+              <span>임시저장되었습니다.</span>
+            </>
+          )}
+        </S.AutoSaveIndicator>
+
         <S.FormContainer>
           <S.UserInfoWrapper>
             <S.FormField>
@@ -171,8 +207,12 @@ export const ApplicationForm = ({ questions }: Props) => {
               ))}
             </S.QuestionWrapper>
           )}
-
-          <Button type='submit'>{isSubmitting ? '제출중...' : '제출하기'}</Button>
+          <S.ActionButtonWrapper>
+            <Button type='button' onClick={clearFormAndStorage} variant='outline'>
+              초기화
+            </Button>
+            <Button type='submit'>{isSubmitting ? '제출중...' : '제출하기'}</Button>
+          </S.ActionButtonWrapper>
         </S.FormContainer>
       </form>
     </FormProvider>

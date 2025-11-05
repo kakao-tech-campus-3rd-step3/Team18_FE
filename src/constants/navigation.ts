@@ -1,4 +1,4 @@
-import type { Role, NavItemData } from '@/types/navigation';
+import { type Role, type NavItemData, ROLE } from '@/types/navigation';
 
 export const getNavItems = (role: Role): NavItemData[] => {
   const commonItems: NavItemData[] = [
@@ -6,7 +6,11 @@ export const getNavItems = (role: Role): NavItemData[] => {
     { key: 'notices', label: '공지 사항', to: '/notices' },
   ];
 
-  if (role === 'admin') {
+  if (role === ROLE.CLUB_MEMBER || role === ROLE.APPLICANT) {
+    return [...commonItems, { key: 'logout', label: '로그아웃', to: '#' }];
+  }
+
+  if (role === ROLE.CLUB_ADMIN || role === ROLE.CLUB_EXECUTIVE) {
     return [
       ...commonItems,
       { key: 'applicants', label: '지원자관리', to: '/admin/clubs/:clubId/dashboard' },
@@ -15,5 +19,6 @@ export const getNavItems = (role: Role): NavItemData[] => {
       { key: 'logout', label: '로그아웃', to: '#' },
     ];
   }
+
   return [...commonItems, { key: 'login', label: '관리자 로그인', to: '/login' }];
 };

@@ -1,18 +1,11 @@
 import { useForm, FormProvider } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
-import { postSignupForm, type RegisterSuccessResponse } from '@/pages/admin/Signup/api/signup';
 import * as S from '@/pages/admin/Signup/components/SignupForm/index.styled';
-import { useAuth } from '@/providers/auth';
-import { getTemporaryToken, removeTemporaryToken } from '@/shared/auth/token';
+import { useSignup } from '@/pages/admin/Signup/hooks/useSignup';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
-import { theme } from '@/styles/theme';
 import type { SignupFormInputs } from '@/pages/admin/Signup/type/signup';
 
 export const SignupForm = () => {
-  const navigate = useNavigate();
-  const { completeSignup } = useAuth();
   const methods = useForm<SignupFormInputs>({
     mode: 'onTouched',
     defaultValues: {
@@ -24,40 +17,7 @@ export const SignupForm = () => {
     },
   });
   const { errors, isSubmitting } = methods.formState;
-
-  const onSubmit = async (signupFormValue: SignupFormInputs) => {
-    const temporaryToken = getTemporaryToken();
-
-    if (!temporaryToken) {
-      toast.error('회원가입을 위한 토큰이 존재하지 않습니다.');
-      return;
-    }
-
-    try {
-      const response: RegisterSuccessResponse = await postSignupForm(
-        signupFormValue,
-        temporaryToken,
-      );
-
-      completeSignup(response.accessToken);
-      toast.success('회원가입 완료!', {
-        style: { backgroundColor: theme.colors.primary, color: 'white' },
-        duration: 1000,
-        onAutoClose: () => navigate('/'),
-      });
-      removeTemporaryToken();
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        toast.error(e.message, {
-          duration: 1000,
-          style: {
-            backgroundColor: 'white',
-            color: theme.colors.error,
-          },
-        });
-      }
-    }
-  };
+  const { onSubmit } = useSignup();
 
   return (
     <FormProvider {...methods}>

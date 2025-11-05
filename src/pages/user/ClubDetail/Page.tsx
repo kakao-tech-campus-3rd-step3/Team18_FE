@@ -6,12 +6,14 @@ import {
   ContentLeft,
   ContentRight,
 } from '@/shared/components/ClubDetailLayout/index.styled';
+import { engToKorCategory } from '@/utils/formatting';
 import { fetchClubDetail } from './api/clubDetail';
 import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
 import { ClubDescriptionSection } from './components/ClubDescriptionSection';
 import { ClubInfoSidebarSection } from './components/ClubInfoSidebarSection';
 import { ClubReviewsSection } from './components/ClubReviewsSection';
 import type { ClubDetail } from './types/clubDetail';
+import type { ClubCategoryEng } from '@/types/club';
 
 export const ClubDetailPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
@@ -28,7 +30,10 @@ export const ClubDetailPage = () => {
   return (
     <Layout>
       <ContentLeft>
-        <ClubHeaderSection clubName={club.clubName} category={club.category} />
+        <ClubHeaderSection
+          clubName={club.clubName}
+          category={club.category in engToKorCategory ? (club.category as ClubCategoryEng) : 'ALL'}
+        />
         <ClubActivityPhotosSection images={club.introductionImages} />
         <ClubDescriptionSection
           introductionOverview={club.introductionOverview}
