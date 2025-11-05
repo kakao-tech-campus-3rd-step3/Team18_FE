@@ -1,13 +1,18 @@
-import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
+import { isAxiosError } from 'axios';
+import { apiInstance } from '@/api/initInstance';
+import type { ApplicantsApiResponse } from '@/pages/admin/Dashboard/types/dashboard';
 
-export const fetchApplicants = async (clubId: number): Promise<ApplicantData[]> => {
-  const url = `${import.meta.env.VITE_API_BASE_URL}/clubs/${clubId}/dashboard/applicants`;
-  const response = await fetch(url);
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`HTTP ${response.status}: ${errorText}`);
+export const fetchApplicants = async (
+  clubId: number,
+  stage: 'INTERVIEW' | 'FINAL',
+): Promise<ApplicantsApiResponse> => {
+  try {
+    const { data } = await apiInstance.get(`/clubs/${clubId}/dashboard/applicants?stage=${stage}`);
+    return data;
+  } catch (error: unknown) {
+    if (isAxiosError(error)) {
+      throw new Error(error.message);
+    }
+    throw error;
   }
-
-  return await response.json();
 };

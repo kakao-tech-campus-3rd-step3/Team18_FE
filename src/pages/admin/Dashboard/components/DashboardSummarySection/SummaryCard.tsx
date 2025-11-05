@@ -1,16 +1,18 @@
 import styled from '@emotion/styled';
+import { Text } from '@/shared/components/Text';
 import type { DashboardCard } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = Omit<DashboardCard, 'id'> & {
   isEmpty?: boolean;
 };
 
-export const SummaryCard = ({ label, value, image, isEmpty = false }: Props) => {
+export const SummaryCard = ({ label, value, isEmpty = false }: Props) => {
   return (
     <Wrapper>
-      <IconWrapper isEmpty={isEmpty}>{image}</IconWrapper>
       <TextWrapper>
-        <Label>{label}</Label>
+        <Text color='#7C7D8C' weight='medium' size='lg'>
+          {label}
+        </Text>
         <Value isEmpty={isEmpty}>{value}</Value>
         {isEmpty && <EmptyText>예정된 모집이 없습니다</EmptyText>}
       </TextWrapper>
@@ -19,19 +21,13 @@ export const SummaryCard = ({ label, value, image, isEmpty = false }: Props) => 
 };
 
 const Wrapper = styled.div(({ theme }) => ({
-  width: 'auto',
-  height: '7.9rem',
+  width: '15rem',
   display: 'flex',
   alignItems: 'center',
-  gap: '3.6rem',
-  padding: '0 3.4rem',
-  background: theme.colors.bg,
-  borderRadius: theme.radius.lg,
-}));
-
-const IconWrapper = styled.div<{ isEmpty?: boolean }>(({ theme, isEmpty }) => ({
-  color: isEmpty ? theme.colors.gray400 : theme.colors.gray900,
-  transition: 'color 0.2s',
+  padding: '1.2rem 2rem',
+  background: '#FDFDFF',
+  borderRadius: theme.radius.md,
+  border: `1px solid ${theme.colors.gray100}`,
 }));
 
 const TextWrapper = styled.div({
@@ -40,15 +36,10 @@ const TextWrapper = styled.div({
   gap: '0.85rem',
 });
 
-const Label = styled.p(({ theme }) => ({
-  fontSize: '1.35rem',
-  color: theme.colors.gray900,
-}));
-
 const Value = styled.p<{ isEmpty?: boolean }>(({ theme, isEmpty }) => ({
   fontSize: '2rem',
-  fontWeight: theme.font.weight.bold,
-  color: isEmpty ? theme.colors.gray400 : theme.colors.gray900,
+  fontWeight: theme.font.weight.medium,
+  color: isEmpty ? theme.colors.gray400 : theme.colors.textPrimary,
   transition: 'color 0.2s',
 }));
 

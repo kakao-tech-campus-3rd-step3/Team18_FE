@@ -6,7 +6,11 @@ import { DashboardPage } from '@/pages/admin/Dashboard/Page';
 
 import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
 import { MainPage } from '@/pages/user/Main/Page.tsx';
+import { NoticeDetailPage } from '@/pages/user/Notice/DetailPage';
+import { NoticeListPage } from '@/pages/user/Notice/Page';
+import { ClubGuard } from '@/providers/guards/ClubGuard';
 import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
+import { ApplicationFormBuilder } from './admin/ApplicationFormBuilder/Page';
 import { KakaoCallback } from './admin/Login/KakaoCallback';
 import { LoginPage } from './admin/Login/Page';
 import { AdminSignupPage } from './admin/Signup/Page';
@@ -20,7 +24,7 @@ export const router = createBrowserRouter([
     children: [
       { path: COMMON.MAIN, element: <MainPage /> },
       {
-        path: COMMON.CLUBDETAIL,
+        path: COMMON.CLUB_DETAIL,
         element: <ClubDetailPage />,
       },
       {
@@ -40,19 +44,32 @@ export const router = createBrowserRouter([
         element: <AdminSignupPage />,
       },
       {
+        path: COMMON.NOTICE_LIST,
+        element: <NoticeListPage />,
+      },
+      {
+        path: COMMON.NOTICE_DETAIL,
+        element: <NoticeDetailPage />,
+      },
+      {
         path: '/admin',
+        element: <ClubGuard />,
         children: [
           {
             path: ADMIN.DASHBOARD,
             element: <DashboardPage />,
           },
           {
-            path: ADMIN.APPLICATIONDETAIL,
+            path: ADMIN.APPLICATION_DETAIL,
             element: <ApplicationDetailPage />,
           },
           {
-            path: ADMIN.CLUBEDIT,
+            path: ADMIN.CLUB_EDIT,
             element: <ClubDetailEditPage />,
+          },
+          {
+            path: ADMIN.APPLICATION_FORM_BUILDER,
+            element: <ApplicationFormBuilder />,
           },
         ],
       },

@@ -1,29 +1,28 @@
+import { apiInstance } from '@/api/initInstance';
 import type { DetailApplication } from '@/pages/admin/ApplicationDetail/types/detailApplication';
 
 export const fetchDetailApplication = async (
   clubId: number,
   applicantId: number,
 ): Promise<DetailApplication> => {
-  const url = `${import.meta.env.VITE_API_BASE_URL}/clubs/${clubId}/applicants/${applicantId}/application`;
-  const response = await fetch(url);
-
-  if (!response.ok) throw new Error('지원서 상세 정보를 가져오지 못했습니다');
-  return await response.json();
+  try {
+    const { data } = await apiInstance.get(
+      `/clubs/${clubId}/applicants/${applicantId}/application`,
+    );
+    return data;
+  } catch {
+    throw new Error('지원서 상세 정보를 가져오지 못했습니다');
+  }
 };
 
 export const updateApplicationStatus = async (
   applicationId: number,
   status: DetailApplication['status'],
 ): Promise<unknown> => {
-  const url = `${import.meta.env.VITE_API_BASE_URL}/applications/${applicationId}`;
-  const response = await fetch(url, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ status }),
-  });
-
-  if (!response.ok) throw new Error('지원서 상태를 업데이트하지 못했습니다');
-  return await response.json();
+  try {
+    const { data } = await apiInstance.patch(`/applications/${applicationId}`, { status });
+    return data;
+  } catch {
+    throw new Error('지원서 상태를 업데이트하지 못했습니다');
+  }
 };

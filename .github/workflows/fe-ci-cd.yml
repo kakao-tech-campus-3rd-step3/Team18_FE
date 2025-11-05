@@ -100,9 +100,21 @@ jobs:
         if: steps.restore-node-modules.outputs.cache-hit != 'true'
         run: npm install
 
+      - name: Debug environment
+        run: |
+          echo "VITE_API_BASE_URL=$VITE_API_BASE_URL"
+          echo "VITE_KAKAO_REDIRECT_URI=$VITE_KAKAO_REDIRECT_URI"
+          echo "VITE_KAKAO_REST_API_KEY=$VITE_KAKAO_REST_API_KEY"
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+          VITE_KAKAO_REDIRECT_URI: ${{ secrets.VITE_KAKAO_REDIRECT_URI }}
+          VITE_KAKAO_REST_API_KEY: ${{ secrets.VITE_KAKAO_REST_API_KEY }}
+
       - name: Run Build
         env:
           VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+          VITE_KAKAO_REDIRECT_URI: ${{ secrets.VITE_KAKAO_REDIRECT_URI }}
+          VITE_KAKAO_REST_API_KEY: ${{ secrets.VITE_KAKAO_REST_API_KEY }}
         run: npm run build
 
       - name: Upload dist as artifact

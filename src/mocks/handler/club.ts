@@ -1,6 +1,6 @@
 import { http, HttpResponse, type PathParams } from 'msw';
 import { ApplicationRepository } from '@/mocks/repositories/application.ts';
-import { clubRepository } from '../repositories/club';
+import { clubRepository, clubReviewRepository } from '../repositories/club';
 
 const getClubsResolver = ({ request }: { request: Request }) => {
   const url = new URL(request.url);
@@ -64,6 +64,25 @@ const postClubDetailResolver = async ({
   return HttpResponse.json(updatedClub, { status: 200 });
 };
 
+const getClubReviewsResolver = ({ params }: { params: PathParams }) => {
+  const { clubId } = params;
+  const reviews = clubReviewRepository.getReviewsByClubId(Number(clubId));
+  return HttpResponse.json({ reviews }, { status: 200 });
+};
+
+const postClubReviewResolver = async ({
+  params,
+  request,
+}: {
+  params: PathParams;
+  request: Request;
+}) => {
+  const { clubId } = params;
+  const body = await request.json();
+  const newReview = clubReviewRepository.addReview(Number(clubId), body);
+  return HttpResponse.json(newReview, { status: 201 });
+};
+
 export const clubHandlers = [
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs?category', getClubsResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:Id/apply', getClubApplicationResolver),
@@ -73,4 +92,6 @@ export const clubHandlers = [
   ),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', getClubDetailResolver),
   http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', postClubDetailResolver),
+  http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/reviews', getClubReviewsResolver),
+  http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/reviews', postClubReviewResolver),
 ];

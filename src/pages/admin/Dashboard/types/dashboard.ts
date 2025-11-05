@@ -1,10 +1,7 @@
-import type { ReactNode } from 'react';
-
 export type DashboardCard = {
   id: number;
   label: string;
   value: string | number;
-  image: ReactNode;
 };
 
 export type StatusLabel = '합격' | '불합격' | '미정';
@@ -12,7 +9,7 @@ export type ApplicationStatus = 'APPROVED' | 'REJECTED' | 'PENDING';
 export type ApplicationFilterOption = 'ALL' | ApplicationStatus;
 
 export type ApplicantData = {
-  id: number;
+  applicantId: number;
   name: string;
   studentId: string;
   department: string;
@@ -33,4 +30,11 @@ export type ApplicantCounts = {
   PENDING: number;
   APPROVED: number;
   REJECTED: number;
+};
+
+export type ApplicationStage = '서류' | '면접';
+
+export type ApplicantsApiResponse = {
+  applicants: ApplicantData[];
+  message: string | null;
 };

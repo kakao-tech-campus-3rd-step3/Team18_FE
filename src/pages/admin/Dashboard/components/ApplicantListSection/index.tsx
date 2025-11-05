@@ -1,15 +1,21 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ApplicantList } from './ApplicantList';
-import { ApplicationStatusFilter } from './ApplicationFilter';
-import type { ApplicationFilterOption } from '@/pages/admin/Dashboard/types/dashboard';
+import { Text } from '@/shared/components/Text';
+import { ApplicationStatusFilter } from './Filter/ApplicationFilter';
+import { ApplicantList } from './List/ApplicantList';
+import { StageToggle } from './StageToggle';
+import type {
+  ApplicationFilterOption,
+  ApplicationStage,
+} from '@/pages/admin/Dashboard/types/dashboard';
 
 export const ApplicantListSection = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const optionType = 'ALL' as ApplicationFilterOption;
 
   const [filterOption, setFilterOption] = useState<ApplicationFilterOption>(optionType);
+  const [stage, setStage] = useState<ApplicationStage>('서류');
 
   const handleFilterOptionChange = (option: ApplicationFilterOption) => {
     setFilterOption(option);
@@ -23,11 +29,20 @@ export const ApplicantListSection = () => {
   return (
     <>
       <ApplicantFilterTopBarWrapper>
-        <PageTitle>지원자 관리</PageTitle>
-        <ApplicationStatusFilter option={filterOption} onOptionChange={handleFilterOptionChange} />
+        <LeftSection>
+          <Text size='xl' weight='medium'>
+            지원자 목록
+          </Text>
+          <StageToggle value={stage} onChange={setStage} />
+        </LeftSection>
+        <ApplicationStatusFilter
+          option={filterOption}
+          onOptionChange={handleFilterOptionChange}
+          stage={stage}
+        />
       </ApplicantFilterTopBarWrapper>
       <ListWrapper>
-        <ApplicantList filterOption={filterOption} />
+        <ApplicantList filterOption={filterOption} stage={stage} />
       </ListWrapper>
     </>
   );
@@ -37,19 +52,18 @@ const ApplicantFilterTopBarWrapper = styled.div({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  marginTop: '4.5rem',
-  padding: '0 2rem',
+  margin: '4.5rem 0 1.5rem 0',
+  padding: '0 1rem',
 });
 
-const PageTitle = styled.h1(({ theme }) => ({
-  fontSize: theme.font.size.xl,
-  fontWeight: theme.font.weight.bold,
-  color: theme.colors.textPrimary,
-}));
+const LeftSection = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '3rem',
+});
 
 const ListWrapper = styled.main(({ theme }) => ({
-  backgroundColor: theme.colors.bg,
   minHeight: 'auto',
-  padding: '2.6rem 3rem',
   borderRadius: theme.radius.lg,
+  border: `1.5px solid ${theme.colors.gray100}`,
 }));
