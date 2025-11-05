@@ -5,7 +5,7 @@ import { reissueAccessToken } from './auth';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AxiosError, AxiosInstance, CreateAxiosDefaults } from 'axios';
 
-const LOGOUT_REDIRECT_URI = import.meta.env.VITE_LOGOUT_REDIRECT_URI;
+const LOGOUT_REDIRECT_URI_REISSUE = import.meta.env.VITE_LOGOUT_REDIRECT_URI_REISSUE;
 
 const initInstance = (config: CreateAxiosDefaults): AxiosInstance => {
   const instance = axios.create({
@@ -34,7 +34,7 @@ apiInstance.interceptors.request.use((config) => {
 
 const handleLogout = (errorMessage: string) => {
   removeAccessToken();
-  window.location.href = LOGOUT_REDIRECT_URI;
+  window.location.href = LOGOUT_REDIRECT_URI_REISSUE;
   throw new Error(errorMessage);
 };
 
@@ -42,47 +42,46 @@ apiInstance.interceptors.response.use(
   function onFulfilled(response) {
     return response;
   },
-  async function onRejected(e: AxiosError) {
-    if (axios.isAxiosError(e)) {
-      const error = e as AxiosError<ErrorResponse>;
-      const config = error.config;
 
-      if (error.response?.status === 401 && config) {
-        if (config?.headers?.retry) {
-          handleLogout(error.response.data.message ?? error.message);
-        }
-        try {
-          const tokenResponse = await reissueAccessToken();
-          setAccessToken(tokenResponse.accessToken);
-          config.headers.Authorization = `Bearer ${tokenResponse.accessToken}`;
-          config.headers.retry = true;
-          return apiInstance(config);
-        } catch (e: unknown) {
-          if (axios.isAxiosError(e)) {
-            const reissueError = e as AxiosError<ErrorResponse>;
-            const errorType = reissueError?.response?.data.error_code;
+  async (error: AxiosError<ErrorResponse>) => {
+    if (!axios.isAxiosError(error)) throw error;
 
-            if (!errorType) {
-              throw new Error(reissueError.response?.data.message ?? '알 수 없는 오류');
-            }
+    const config = error.config;
 
-            const errorMessage = reissueError.response?.data.message;
-            switch (errorType) {
-              case AUTH_ERRORS.INVALID_INPUT:
-                throw new Error(errorMessage ?? '입력값이 올바르지 않습니다.');
-              case AUTH_ERRORS.UNAUTHENTICATED_USER:
-              case AUTH_ERRORS.UNSUPPORTED_JWT:
-              case AUTH_ERRORS.INVALID_JWT_SIGNATURE:
-              case AUTH_ERRORS.EXPIRED_REFRESH_TOKEN:
-                handleLogout(errorMessage ?? '토큰 갱신 실패로 로그아웃 처리됩니다.');
-                break;
-              default:
-                throw new Error(errorMessage ?? `알 수 없는 오류`);
-            }
+    const errorCode = error.response?.data.error_code;
+    const errorMessage = error.response?.data.message;
+
+    if (errorCode === 'EXPIRED_ACCESS_TOKEN' && config) {
+      if (config?.headers?.retry) {
+        handleLogout(errorMessage ?? error.message);
+      }
+      try {
+        const tokenResponse = await reissueAccessToken();
+        setAccessToken(tokenResponse.accessToken);
+        config.headers.Authorization = `Bearer ${tokenResponse.accessToken}`;
+        config.headers.retry = true;
+        return apiInstance(config);
+      } catch (e: unknown) {
+        if (axios.isAxiosError(e)) {
+          const reissueError = e as AxiosError<ErrorResponse>;
+          const reissueMessage = reissueError.response?.data.message;
+          switch (reissueError.response?.data.error_code) {
+            case AUTH_ERRORS.LOGGED_OUT_USER:
+            case AUTH_ERRORS.REQUIRED_COOKIE_NOT_FOUND:
+            case AUTH_ERRORS.UNSUPPORTED_JWT:
+            case AUTH_ERRORS.INVALID_JWT_SIGNATURE:
+            case AUTH_ERRORS.EXPIRED_REFRESH_TOKEN:
+              handleLogout(reissueMessage ?? '토큰 갱신 실패로 로그아웃 처리됩니다.');
+              break;
+            default:
+              throw new Error(reissueMessage ?? `알 수 없는 오류`);
           }
+        } else {
+          throw e;
         }
       }
     }
-    throw e;
+
+    throw error;
   },
 );
