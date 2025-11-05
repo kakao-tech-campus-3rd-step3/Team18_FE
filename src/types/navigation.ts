@@ -3,10 +3,9 @@ export const ROLE = {
   CLUB_ADMIN: 'CLUB_ADMIN',
   CLUB_MEMBER: 'CLUB_MEMBER',
   APPLICANT: 'APPLICANT',
-  NONE: null,
 } as const;
 
-export type Role = (typeof ROLE)[keyof typeof ROLE];
+export type Role = (typeof ROLE)[keyof typeof ROLE] | null;
 
 export type NavItemData = {
   key: string;

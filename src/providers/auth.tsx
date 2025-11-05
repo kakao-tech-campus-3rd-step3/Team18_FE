@@ -30,7 +30,7 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User>({ role: null });
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const initAuth = async () => {
@@ -87,7 +87,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const logout = useCallback(async () => {
     try {
       await logoutUser();
-      setUser({ role: null });
+
       clearAuthData();
       const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${REST_API_KEY}&logout_redirect_uri=${LOGOUT_REDIRECT_URI}`;
       window.location.href = kakaoLogoutUrl;
