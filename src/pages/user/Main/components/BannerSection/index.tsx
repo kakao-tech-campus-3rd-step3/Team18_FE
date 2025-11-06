@@ -41,6 +41,7 @@ export const BannerSection = ({
 
   return (
     <S.BannerWrapper>
+      <S.BannerImage src='public/assets/banner01.jpg' alt='배너 배경' />
       <B.BannerTextWrapper>
         <B.HeaderText>함께할 사람이 있는 곳, 동아리움.</B.HeaderText>
         <B.SubText>관심 있는 전남대학교 동아리를 찾고, 참여해보세요.</B.SubText>
@@ -68,6 +69,8 @@ export const BannerSection = ({
 };
 
 export const SearchContainer = styled.div(({ theme }) => ({
+  position: 'relative',
+  zIndex: 3,
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'center',
@@ -77,7 +80,7 @@ export const SearchContainer = styled.div(({ theme }) => ({
   gap: 30,
   padding: '0 20px',
   boxSizing: 'border-box',
-  backgroundColor: theme.colors.primary100,
+  opacity: 1,
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
     gap: 20,
@@ -100,6 +103,7 @@ export const DropdownWrapper = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
   gap: 30,
+  zIndex: 3,
 
   [`@media(max-width: ${theme.breakpoints.mobile})`]: {
     width: '100%',
