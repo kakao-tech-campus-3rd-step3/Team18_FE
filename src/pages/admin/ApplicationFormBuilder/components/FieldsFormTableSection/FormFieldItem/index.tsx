@@ -84,7 +84,7 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
     } else if (newType === 'TIME_SLOT') {
       setValue(`formQuestions.${index}.timeSlotOptions`, {
         date: '',
-        availableTime: { start: '', end: '' },
+        availableTime: { start: '07:00:00', end: '07:00:00' },
       });
     }
   };
