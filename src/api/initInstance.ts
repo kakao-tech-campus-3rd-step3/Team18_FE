@@ -71,6 +71,7 @@ apiInstance.interceptors.response.use(
             case AUTH_ERRORS.UNSUPPORTED_JWT:
             case AUTH_ERRORS.INVALID_JWT_SIGNATURE:
             case AUTH_ERRORS.EXPIRED_REFRESH_TOKEN:
+            case AUTH_ERRORS.INVALID_REFRESH_TOKEN:
               handleLogout(reissueMessage ?? '토큰 갱신 실패로 로그아웃 처리됩니다.');
               break;
             default:
