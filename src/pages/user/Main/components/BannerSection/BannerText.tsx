@@ -26,6 +26,12 @@ export const HeaderText = styled.h2(({ theme }) => ({
   textShadow: '0 3px 6px rgba(0, 0, 0, 0.4)',
   margin: 0,
   lineHeight: 1.3,
+  [`@media(max-width: ${theme.breakpoints.web})`]: {
+    fontSize: '28px',
+  },
+  [`@media(max-width: ${theme.breakpoints.mobile})`]: {
+    fontSize: '22px',
+  },
 }));
 
 export const SubText = styled.p(({ theme }) => ({
