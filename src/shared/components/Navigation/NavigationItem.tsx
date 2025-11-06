@@ -25,6 +25,10 @@ const LogoLink = styled(Link)(({ theme }) => ({
   color: theme.colors.primary,
   textDecoration: 'none',
   cursor: 'pointer',
+
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    marginBottom: '1rem',
+  },
 }));
 
 const NavLink = styled(Link)<{ selected: boolean }>(({ theme, selected }) => ({
@@ -38,5 +42,11 @@ const NavLink = styled(Link)<{ selected: boolean }>(({ theme, selected }) => ({
 
   '&:hover': {
     fontWeight: selected ? theme.font.weight.medium : theme.font.weight.bold,
+  },
+
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    padding: '12px 0',
+    fontSize: theme.font.size.lg,
+    width: '100%',
   },
 }));
