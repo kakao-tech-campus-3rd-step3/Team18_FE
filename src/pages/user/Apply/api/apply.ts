@@ -1,11 +1,8 @@
 import axios, { AxiosError, isAxiosError, type AxiosResponse } from 'axios';
 import { apiInstance } from '@/api/initInstance';
+import { toApplyRequest } from './mappers/apply';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
-import type {
-  ApplicationForm,
-  FormInputs,
-  PostInterviewSchedule,
-} from '@/pages/user/Apply/type/apply.ts';
+import type { ApplicationForm, FormInputs } from '@/pages/user/Apply/type/apply.ts';
 
 export const fetchApplicationForm = async (clubId: number): Promise<ApplicationForm> => {
   try {
@@ -26,7 +23,7 @@ export const postApplicationForm = async (
   formData: FormInputs,
   questionArray: string[],
 ) => {
-  const applicationDto = applicationFormDto(formData, questionArray);
+  const applicationDto = toApplyRequest(formData, questionArray);
 
   try {
     const response = await apiInstance.post(`/clubs/${clubId}/apply-submit`, applicationDto);
@@ -43,7 +40,7 @@ export const overwriteApplicationForm = async (
   formData: FormInputs,
   questionArray: string[],
 ) => {
-  const applicationDto = applicationFormDto(formData, questionArray);
+  const applicationDto = toApplyRequest(formData, questionArray);
 
   try {
     const overwriteResponse = await apiInstance.post(`/clubs/${clubId}/apply-submit`, {
@@ -57,30 +54,4 @@ export const overwriteApplicationForm = async (
     }
     throw error;
   }
-};
-
-export const applicationFormDto = (formData: FormInputs, questionArray: string[]) => {
-  const interviewDateAnswer: PostInterviewSchedule[] = formData.selectedInterviewSchedule;
-  let formDataAnswers = formData.answers;
-
-  if (interviewDateAnswer.length > 0) {
-    formDataAnswers = [...formData.answers, { interviewDateAnswer }];
-  }
-
-  return {
-    email: formData.email,
-    name: formData.name,
-    studentId: formData.studentId,
-    phoneNumber: formData.phoneNumber,
-    department: formData.department,
-    answers: [
-      ...formDataAnswers.map((answer, index) => {
-        return {
-          questionNum: index,
-          question: questionArray[index],
-          answer: answer,
-        };
-      }),
-    ],
-  };
 };
