@@ -73,25 +73,25 @@ export const SearchContainer = styled.div(({ theme }) => ({
   zIndex: 3,
   display: 'flex',
   flexDirection: 'row',
-  justifyContent: 'center',
+  justifyContent: 'flex-start',
   alignItems: 'center',
   width: '100%',
   maxWidth: '1200px',
-  gap: 30,
-  padding: '0 20px',
+  gap: 16,
+  padding: '0 20px 0 80px',
   boxSizing: 'border-box',
   opacity: 1,
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
-    gap: 20,
-    padding: '0 16px',
+    gap: 16,
+    padding: '0 16px 0 40px',
   },
 
   [`@media(max-width: ${theme.breakpoints.mobile})`]: {
     flexDirection: 'column',
     gap: 12,
     width: '100%',
-    padding: 0,
+    padding: '0 16px',
     '& > *': {
       width: '100%',
       boxSizing: 'border-box',
@@ -102,7 +102,7 @@ export const SearchContainer = styled.div(({ theme }) => ({
 export const DropdownWrapper = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
-  gap: 30,
+  gap: 16,
   zIndex: 3,
 
   [`@media(max-width: ${theme.breakpoints.mobile})`]: {
