@@ -71,8 +71,13 @@ export type FormInputs = {
   department: string;
   phoneNumber: string;
   email: string;
-  answers: object[];
   selectedInterviewSchedule: PostInterviewSchedule[];
+  answers: Answer[];
+};
+
+export type Answer = {
+  value: string | SelectedInterviewValue | null;
+  questionType: (typeof QuestionTypes)[keyof typeof QuestionTypes];
 };
 
 export type DragState = {
