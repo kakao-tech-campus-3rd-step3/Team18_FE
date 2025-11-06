@@ -3,11 +3,12 @@ import styled from '@emotion/styled';
 export const BannerTextWrapper = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'flex-start',
-  gap: '12px',
-  marginLeft: '80px',
-  position: 'relative',
-  zIndex: 2,
+  alignItems: 'center',
+  gap: '16px',
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    gap: '12px',
+    marginBottom: '16px',
+  },
 
   [`@media(max-width: ${theme.breakpoints.web})`]: {
     marginLeft: '40px',

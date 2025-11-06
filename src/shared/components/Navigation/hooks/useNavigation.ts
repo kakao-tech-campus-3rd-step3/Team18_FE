@@ -20,11 +20,11 @@ export const useNavigation = () => {
     return item.to || '#';
   };
 
-  const handleItemClick = (key: string) => {
+  const handleLogoutClick = (key: string) => {
     if (key === 'logout') {
       logout();
     }
   };
 
-  return { user, logout, leftItems, rightItem, getCurrentRoute, currentRoute, handleItemClick };
+  return { user, logout, leftItems, rightItem, getCurrentRoute, currentRoute, handleLogoutClick };
 };

@@ -1,19 +1,20 @@
 import type { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import type { NavItemData } from '@/types/navigation';
 
 type Props = {
   children: ReactNode;
   onClick?: () => void;
   selected: boolean;
-} & Pick<NavItemData, 'to' | 'isLogo'>;
+  to: string;
+  isLogo?: boolean;
+};
 
 export const NavigationItem = ({ to, children, isLogo, onClick = () => {}, selected }: Props) => {
-  if (isLogo) return <LogoLink to={to || '#'}>{children}</LogoLink>;
+  if (isLogo) return <LogoLink to={to}>{children}</LogoLink>;
 
   return (
-    <NavLink to={to || '#'} selected={selected} onClick={onClick} data-selected={selected}>
+    <NavLink to={to} selected={selected} onClick={onClick} data-selected={selected}>
       {children}
     </NavLink>
   );
@@ -25,6 +26,10 @@ const LogoLink = styled(Link)(({ theme }) => ({
   color: theme.colors.primary,
   textDecoration: 'none',
   cursor: 'pointer',
+
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    marginBottom: '1rem',
+  },
 }));
 
 const NavLink = styled(Link)<{ selected: boolean }>(({ theme, selected }) => ({
@@ -38,5 +43,11 @@ const NavLink = styled(Link)<{ selected: boolean }>(({ theme, selected }) => ({
 
   '&:hover': {
     fontWeight: selected ? theme.font.weight.medium : theme.font.weight.bold,
+  },
+
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    padding: '12px 0',
+    fontSize: theme.font.size.lg,
+    width: '100%',
   },
 }));
