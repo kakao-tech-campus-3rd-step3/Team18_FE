@@ -7,7 +7,7 @@ import type { ClubCategoryEng } from '@/types/club';
 
 export const MainPage = () => {
   const [categoryFilter, setCategoryFilter] = useState<ClubCategoryEng>('ALL');
-  const [recruitStatus, setRecruitStatus] = useState<RecruitStatus | undefined>();
+  const [recruitStatus, setRecruitStatus] = useState<RecruitStatus>('전체');
   const [searchText, setSearchText] = useState('');
 
   const handleCategoryFilter = useCallback((category: ClubCategoryEng) => {
