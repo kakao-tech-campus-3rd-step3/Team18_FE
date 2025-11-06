@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { CLUB_CATEGORY } from '@/constants/clubCategory';
 import { ClubSearchInput } from '@/pages/user/Main/components/BannerSection/ClubSearchInput.tsx';
@@ -41,7 +42,7 @@ export const BannerSection = ({
 
   return (
     <S.BannerWrapper>
-      <S.BannerImage src='public/assets/banner01.jpg' alt='배너 배경' />
+      <BannerSlideshow />
       <B.BannerTextWrapper>
         <B.HeaderText>함께할 사람이 있는 곳, 동아리움.</B.HeaderText>
         <B.SubText>관심 있는 전남대학교 동아리를 찾고, 참여해보세요.</B.SubText>
@@ -67,6 +68,50 @@ export const BannerSection = ({
     </S.BannerWrapper>
   );
 };
+
+/* ✅ 배너 이미지 자동 전환 컴포넌트 */
+const BannerSlideshow = () => {
+  const images = [
+    '/public/assets/banner01.jpg',
+    '/public/assets/banner02.jpg',
+    '/public/assets/banner03.jpg',
+  ];
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => setIndex((prev) => (prev + 1) % images.length), 5000); // 5초마다 전환
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <SlideWrapper>
+      {images.map((src, i) => (
+        <SlideImage key={src} src={src} active={i === index} />
+      ))}
+    </SlideWrapper>
+  );
+};
+
+/* ✅ 스타일 */
+const SlideWrapper = styled.div({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  overflow: 'hidden',
+  zIndex: 0,
+});
+
+const SlideImage = styled.img<{ active: boolean }>(({ active }) => ({
+  position: 'absolute',
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  objectPosition: 'center bottom',
+  transition: 'opacity 1.5s ease-in-out',
+  opacity: active ? 1 : 0,
+}));
 
 export const SearchContainer = styled.div(({ theme }) => ({
   position: 'relative',
