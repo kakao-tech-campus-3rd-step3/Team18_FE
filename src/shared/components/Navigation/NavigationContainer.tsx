@@ -3,14 +3,12 @@ import styled from '@emotion/styled';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { theme } from '@/styles/theme';
-import { Link } from 'react-router-dom';
 
 type NavigationContainerProps = {
   children: ReactNode;
   selectedItem: ReactNode;
   isMobileMenuOpen: boolean;
   onToggleMobileMenu: () => void;
-  logo?: ReactNode;
   logo?: ReactNode;
 };
 
@@ -19,7 +17,6 @@ export const NavigationContainer = ({
   selectedItem,
   isMobileMenuOpen,
   onToggleMobileMenu,
-  logo,
   logo,
 }: NavigationContainerProps) => {
   const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
@@ -48,7 +45,6 @@ export const NavigationContainer = ({
   return (
     <>
       <NavContainer ref={navRef}>
-        {logo && <MobileLogoLink to='/'>{logo}</MobileLogoLink>}
         {logo && <MobileLogoLink to='/'>{logo}</MobileLogoLink>}
         <HamburgerButton onClick={onToggleMobileMenu}>
           <HamburgerLine />
@@ -211,15 +207,5 @@ const UnderlineIndicator = styled.div<{ visible: boolean }>(({ theme, visible })
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
     display: 'none',
-  },
-}));
-
-const MobileLogoLink = styled(Link)(({ theme }) => ({
-  display: 'none',
-
-  [`@media (max-width: ${theme.breakpoints.web})`]: {
-    display: 'block',
-    flex: '0 0 auto',
-    marginRight: 'auto',
   },
 }));
