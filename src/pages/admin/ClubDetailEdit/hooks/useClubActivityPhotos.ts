@@ -35,10 +35,7 @@ export const useClubActivityPhotos = (
     files.forEach((file) => formData.append('images', file, file.name));
 
     try {
-      const { data } = await apiInstance.put(`/clubs/${clubId}/images`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-
+      const { data } = await apiInstance.put(`/clubs/${clubId}/images`, formData);
       if (Array.isArray(data)) setImages(data);
     } catch (err) {
       console.error('이미지 업로드 실패:', err);
@@ -66,11 +63,7 @@ export const useClubActivityPhotos = (
     setImages(updatedImages);
 
     try {
-      await apiInstance.put(
-        `/clubs/${clubId}/images`,
-        { images: updatedImages },
-        { headers: { 'Content-Type': 'application/json' } },
-      );
+      await apiInstance.put(`/clubs/${clubId}/images`, { images: updatedImages });
     } catch (err) {
       console.error('이미지 삭제 반영 실패:', err);
     }

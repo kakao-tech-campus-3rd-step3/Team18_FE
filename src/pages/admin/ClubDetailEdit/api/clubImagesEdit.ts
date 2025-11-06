@@ -8,15 +8,13 @@ export const updateClubImages = async (
 ) => {
   const formData = new FormData();
 
-  formData.append('keepImages', JSON.stringify(existingImages));
+  const keepImageIds = existingImages.map((img) => img.id);
+  formData.append('keepImageIds', JSON.stringify(keepImageIds));
 
   newFiles.forEach((file) => formData.append('newImages', file, file.name));
 
   try {
-    const { data } = await apiInstance.put(`/clubs/${clubId}/images`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
-
+    const { data } = await apiInstance.put(`/clubs/${clubId}/images`, formData);
     return data;
   } catch (e: unknown) {
     if (isAxiosError(e)) {
