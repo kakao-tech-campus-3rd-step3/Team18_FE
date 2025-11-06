@@ -56,5 +56,5 @@ const RightMenu = styled.div({
   marginLeft: 'auto',
   display: 'flex',
   alignItems: 'center',
-  gap: '1.5rem',
+  gap: '2.5rem',
 });

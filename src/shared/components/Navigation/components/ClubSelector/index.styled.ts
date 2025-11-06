@@ -12,8 +12,8 @@ export const Selected = styled.div(({ theme }) => ({
   alignItems: 'center',
   gap: 6,
   fontWeight: theme.font.weight.medium,
-  fontSize: theme.font.size.sm,
-  color: theme.colors.textPrimary,
+  fontSize: theme.font.size.lg,
+  color: theme.colors.gray400,
   cursor: 'pointer',
   transition: 'color 0.2s ease-in-out',
   '&:hover': {

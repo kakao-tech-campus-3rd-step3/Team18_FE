@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { apiInstance } from '@/api/initInstance';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/providers/auth';
 import type { ClubMemberInfo } from '@/pages/admin/Login/api/auth';
 
@@ -11,20 +10,12 @@ export const useClubList = () => {
   useEffect(() => {
     if (!user) return;
 
-    const fetchClubs = async () => {
-      try {
-        const res = await apiInstance.get('/clubs/my');
-        const userData = res.data;
-        const userClubs = userData?.clubs || [];
+    const userClubs: ClubMemberInfo[] = user.clubId
+      ? [{ clubId: user.clubId, clubName: user.clubName, role: user.role }]
+      : [];
 
-        setClubs(userClubs);
-        if (userClubs.length > 0) setSelectedClub(userClubs[0]);
-      } catch (err) {
-        console.error('Failed to fetch clubs:', err);
-      }
-    };
-
-    fetchClubs();
+    setClubs(userClubs);
+    if (userClubs.length > 0) setSelectedClub(userClubs[0]);
   }, [user]);
 
   const handleSelectClub = (club: ClubMemberInfo) => {
