@@ -16,11 +16,13 @@ type Props = {
 export const ClubListSection = ({ categoryFilter, searchText, recruitStatus }: Props) => {
   const navigate = useNavigate();
 
+  const filterStatus = recruitStatus === '전체' ? undefined : recruitStatus;
+
   const {
     data: filteredClubs,
     isLoading,
     error,
-  } = useClubFiltering(categoryFilter, searchText, recruitStatus);
+  } = useClubFiltering(categoryFilter, searchText, filterStatus);
 
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;

@@ -10,13 +10,13 @@ export const BannerWrapper = styled.div(({ theme }) => ({
   width: '100%',
   maxWidth: '100vw',
   height: 400,
+  paddingBottom: '200px',
   gap: '16px',
   boxSizing: 'border-box',
-  overflow: 'hidden',
   backgroundColor: theme.colors.primary100,
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
-    height: 300,
+    minHeight: 300,
     gap: 24,
     zIndex: 1000,
   },
@@ -30,6 +30,7 @@ export const BannerWrapper = styled.div(({ theme }) => ({
     gap: 12,
     marginBottom: 0,
     alignItems: 'center',
+    overflowX: 'hidden',
   },
 }));
 
