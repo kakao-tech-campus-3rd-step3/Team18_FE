@@ -27,18 +27,40 @@ export const useClubActivityPhotos = (
     return true;
   };
 
+  const handleDelete = async (id: number) => {
+    const updated = images.filter((img) => img.id !== id);
+    setImages(updated);
+
+    const keepImageIds = updated.map((img) => img.id);
+    const formData = new FormData();
+    formData.append('keepImageIds', JSON.stringify(keepImageIds));
+
+    try {
+      await apiInstance.put(`/clubs/${clubId}/images`, formData);
+    } catch (err) {
+      console.error('이미지 삭제 반영 실패:', err);
+      alert('삭제 반영에 실패했습니다. 새로고침 후 다시 시도해 주세요.');
+      // 실패 시 UI 롤백이 필요하다면 아래처럼 복구 고려
+      // setImages((prev) => [...prev, images.find((img) => img.id === id)!]);
+    }
+  };
+
   const uploadFiles = async (files: File[]) => {
     if (files.length === 0) return;
     if (!validateFiles(files)) return;
 
+    const keepImageIds = images.map((img) => img.id);
+
     const formData = new FormData();
-    files.forEach((file) => formData.append('images', file, file.name));
+    formData.append('keepImageIds', JSON.stringify(keepImageIds));
+    files.forEach((file) => formData.append('newImages', file, file.name));
 
     try {
       const { data } = await apiInstance.put(`/clubs/${clubId}/images`, formData);
       if (Array.isArray(data)) setImages(data);
     } catch (err) {
       console.error('이미지 업로드 실패:', err);
+      alert('이미지 업로드에 실패했습니다. 잠시 후 다시 시도해 주세요.');
     }
   };
 
@@ -56,17 +78,6 @@ export const useClubActivityPhotos = (
     };
 
     input.click();
-  };
-
-  const handleDelete = async (id: number) => {
-    const updatedImages = images.filter((img) => img.id !== id);
-    setImages(updatedImages);
-
-    try {
-      await apiInstance.put(`/clubs/${clubId}/images`, { images: updatedImages });
-    } catch (err) {
-      console.error('이미지 삭제 반영 실패:', err);
-    }
   };
 
   return {
