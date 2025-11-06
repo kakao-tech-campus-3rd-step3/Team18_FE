@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/auth';
 import type { ClubMemberInfo } from '@/pages/admin/Login/api/auth';
 
 export const useClubList = () => {
   const { user, setUser } = useAuth();
   const [clubs, setClubs] = useState<ClubMemberInfo[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) return;
@@ -31,6 +33,8 @@ export const useClubList = () => {
 
     setUser(updatedUser);
     localStorage.setItem('user_data', JSON.stringify(updatedUser));
+
+    navigate('/');
   };
 
   const selectedClub = clubs.find((club) => club.clubId === user?.clubId) ?? clubs[0] ?? null;
