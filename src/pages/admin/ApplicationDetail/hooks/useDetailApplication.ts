@@ -27,7 +27,7 @@ export const useDetailApplications = (
       if (!data?.applicationId) {
         throw new Error('신청서 ID를 찾을 수 없습니다.');
       }
-      return updateApplicationStatus(data.applicationId, status);
+      return updateApplicationStatus(data.applicationId, clubId, status);
     },
     onSuccess: (_, newStatus) => {
       queryClient.setQueryData(
