@@ -34,9 +34,14 @@ type Props = {
 };
 
 export const RecruitStatusBox = styled.div<Props>(({ theme, status }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  textAlign: 'center',
   padding: '6px 10px',
   borderRadius: theme.radius.md,
-  width: 50,
+  width: 60,
+  minHeight: 20,
   backgroundColor: status === '모집중' ? theme.colors.primary : theme.colors.gray200,
 }));
 
@@ -45,6 +50,7 @@ export const RecruitStatusText = styled.div<Props>(({ theme }) => ({
   fontSize: theme.font.size.xs,
   fontWeight: theme.font.weight.medium,
   color: 'white',
+  lineHeight: 1.2,
 }));
 
 export const Grid = styled.div(({ theme }) => ({
