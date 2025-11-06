@@ -4,3 +4,5 @@ export const QuestionTypes = {
   TEXT: 'TEXT',
   TIME_SLOT: 'TIME_SLOT',
 } as const;
+
+export type QuestionType = keyof typeof QuestionTypes;

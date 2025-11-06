@@ -32,6 +32,13 @@ export type AvailableTime = {
 export type InterviewSchedule = {
   date: string;
   availableTime: AvailableTime;
+  value?: SelectedInterviewValue | null;
+  onChange?: (value: SelectedInterviewValue) => void;
+};
+
+export type SelectedInterviewValue = {
+  date: string;
+  selectedTimes: string[];
 };
 
 export type ApplicationForm = {
@@ -64,8 +71,13 @@ export type FormInputs = {
   department: string;
   phoneNumber: string;
   email: string;
-  answers: object[];
   selectedInterviewSchedule: PostInterviewSchedule[];
+  answers: Answer[];
+};
+
+export type Answer = {
+  value: string | SelectedInterviewValue | null;
+  questionType: (typeof QuestionTypes)[keyof typeof QuestionTypes];
 };
 
 export type DragState = {

@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
+import { useForm, FormProvider, Controller } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { QuestionTypes } from '@/pages/user/Apply/constants/questionType';
 import { useApplicationAutoSave } from '@/pages/user/Apply/hooks/useApplicationAutoSave';
@@ -9,7 +9,12 @@ import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineIn
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import * as S from './index.styled';
 import { InterviewScheduleSelector } from './InterviewScheduleSelector';
-import type { FormInputs, InterviewSchedule, Question } from '@/pages/user/Apply/type/apply';
+import type {
+  FormInputs,
+  InterviewSchedule,
+  Question,
+  SelectedInterviewValue,
+} from '@/pages/user/Apply/type/apply';
 
 type Props = {
   questions: Question[];
@@ -149,7 +154,6 @@ export const ApplicationForm = ({ questions }: Props) => {
               />
             </S.FormField>
           </S.UserInfoWrapper>
-
           <S.QuestionWrapper>
             {otherQuestions.map((field) => (
               <S.ChoiceFormFiled key={field.questionNum}>
@@ -194,19 +198,35 @@ export const ApplicationForm = ({ questions }: Props) => {
               {timeSlotQuestions.map((field) => (
                 <S.ChoiceFormFiled key={field.questionNum}>
                   <S.Label>{field.question}</S.Label>
-                  {field.timeSlotOptions?.map(
-                    (interviewSchedule: InterviewSchedule, idx: number) => (
-                      <InterviewScheduleSelector
-                        key={idx}
-                        availableTime={interviewSchedule.availableTime}
-                        date={interviewSchedule.date}
-                      />
-                    ),
-                  )}
+                  <Controller
+                    name={`answers.${field.originalIndex}`}
+                    control={methods.control}
+                    render={({ field: controllerField }) => (
+                      <>
+                        {field.timeSlotOptions?.map(
+                          (interviewSchedule: InterviewSchedule, idx: number) => (
+                            <InterviewScheduleSelector
+                              key={idx}
+                              availableTime={interviewSchedule.availableTime}
+                              date={interviewSchedule.date}
+                              value={controllerField.value?.value as SelectedInterviewValue}
+                              onChange={(selectedInterviewSchedule) =>
+                                controllerField.onChange({
+                                  value: selectedInterviewSchedule,
+                                  questionType: QuestionTypes.TIME_SLOT,
+                                })
+                              }
+                            />
+                          ),
+                        )}
+                      </>
+                    )}
+                  />
                 </S.ChoiceFormFiled>
               ))}
             </S.QuestionWrapper>
           )}
+
           <S.ActionButtonWrapper>
             <Button type='button' onClick={clearFormAndStorage} variant='outline'>
               초기화
