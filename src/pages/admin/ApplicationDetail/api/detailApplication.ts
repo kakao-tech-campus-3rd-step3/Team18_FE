@@ -17,10 +17,14 @@ export const fetchDetailApplication = async (
 
 export const updateApplicationStatus = async (
   applicationId: number,
+  clubId: number,
   status: DetailApplication['status'],
 ): Promise<unknown> => {
   try {
-    const { data } = await apiInstance.patch(`/applications/${applicationId}`, { status });
+    const { data } = await apiInstance.patch(
+      `/clubs/${clubId}/applications/${applicationId}/status`,
+      { status },
+    );
     return data;
   } catch {
     throw new Error('지원서 상태를 업데이트하지 못했습니다');
