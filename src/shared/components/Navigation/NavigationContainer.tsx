@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { theme } from '@/styles/theme';
 import { Link } from 'react-router-dom';
 
@@ -10,6 +11,7 @@ type NavigationContainerProps = {
   isMobileMenuOpen: boolean;
   onToggleMobileMenu: () => void;
   logo?: ReactNode;
+  logo?: ReactNode;
 };
 
 export const NavigationContainer = ({
@@ -17,6 +19,7 @@ export const NavigationContainer = ({
   selectedItem,
   isMobileMenuOpen,
   onToggleMobileMenu,
+  logo,
   logo,
 }: NavigationContainerProps) => {
   const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
@@ -45,6 +48,7 @@ export const NavigationContainer = ({
   return (
     <>
       <NavContainer ref={navRef}>
+        {logo && <MobileLogoLink to='/'>{logo}</MobileLogoLink>}
         {logo && <MobileLogoLink to='/'>{logo}</MobileLogoLink>}
         <HamburgerButton onClick={onToggleMobileMenu}>
           <HamburgerLine />
@@ -88,6 +92,15 @@ const NavContainer = styled.nav(({ theme }) => ({
     zIndex: 1001,
     padding: '15px 5vw',
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+  },
+}));
+
+const MobileLogoLink = styled(Link)(({ theme }) => ({
+  display: 'none',
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    display: 'block',
+    flex: '0 0 auto',
+    marginRight: 'auto',
   },
 }));
 
@@ -136,11 +149,11 @@ const MobileMenuOverlay = styled.div<{ isOpen: boolean }>(({ isOpen }) => ({
     position: 'fixed',
     top: 0,
     left: 0,
-    width: '100%',
-    height: '100%',
+    width: '100vw',
+    height: '100vh',
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     transition: 'opacity 0.3s ease',
-    zIndex: 1000,
+    zIndex: 999,
   },
 }));
 
@@ -154,7 +167,7 @@ const MobileMenuDrawer = styled.div<{ isOpen: boolean }>(({ theme, isOpen }) => 
     top: 0,
     right: 0,
     width: '100%',
-    maxWidth: '86%',
+    maxWidth: '88%',
     height: '100%',
     backgroundColor: theme.colors.bg,
     boxShadow: theme.shadow.md,
