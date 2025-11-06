@@ -20,7 +20,7 @@ export const useClubList = () => {
         setClubs(userClubs);
         if (userClubs.length > 0) setSelectedClub(userClubs[0]);
       } catch (err) {
-        console.error('❌ Failed to fetch clubs:', err);
+        console.error('Failed to fetch clubs:', err);
       }
     };
 
