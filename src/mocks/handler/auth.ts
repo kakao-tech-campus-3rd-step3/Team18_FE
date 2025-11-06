@@ -1,30 +1,22 @@
 import { http, HttpResponse } from 'msw';
+import { authRepository } from '@/mocks/repositories/auth';
 import type { LoginResponse } from '@/pages/admin/Login/api/auth';
 
 interface AuthRequest {
   authorizationCode: string;
 }
+
 export const authHandlers = [
   http.post('/api/auth/kakao/login', async ({ request }) => {
     const { authorizationCode } = (await request.json()) as AuthRequest;
 
     if (authorizationCode === 'VALID_CODE') {
-      const response: LoginResponse = {
-        status: 'LOGIN_SUCCESS',
-        accessToken: 'mock-access-token',
-
-        clubAndRoleList: [],
-      };
+      const response: LoginResponse = authRepository.getLoginSuccessResponse();
       return HttpResponse.json(response, { status: 200 });
     }
 
     if (authorizationCode === 'REGISTRATION_REQUIRED') {
-      const response: LoginResponse = {
-        status: 'REGISTRATION_REQUIRED',
-        temporaryToken: 'mock-temporary-token',
-
-        clubAndRoleList: [],
-      };
+      const response: LoginResponse = authRepository.getRegistrationRequiredResponse();
       return HttpResponse.json(response, { status: 200 });
     }
 
