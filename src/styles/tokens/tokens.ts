@@ -42,5 +42,6 @@ export const zIndex = {
 
 export const breakpoints = {
   mobile: '480px',
+  tablet: '768px',
   web: '1024px',
 };
