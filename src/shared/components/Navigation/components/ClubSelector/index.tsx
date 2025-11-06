@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useAuth } from '@/providers/auth';
 import { useClubList } from '@/shared/components/Navigation/hooks/useClubList';
 import { Text } from '@/shared/components/Text';
 import * as S from './index.styled';
 
 export const ClubSelector = () => {
   const { clubs, selectedClub, handleSelectClub } = useClubList();
+  const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   if (!clubs || clubs.length === 0) {
@@ -18,11 +20,12 @@ export const ClubSelector = () => {
   }
 
   const hasMultiple = clubs.length > 1;
+  const displayName = user?.clubName ?? selectedClub?.clubName ?? '동아리 선택';
 
   return (
     <S.Wrapper>
       <S.Selected onClick={() => hasMultiple && setIsOpen((prev) => !prev)}>
-        <span>{selectedClub?.clubName}</span>
+        <span>{displayName}</span>
         {hasMultiple && <S.ChevronDownIcon size={24} />}
       </S.Selected>
 

@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '@/providers/auth';
 import type { ClubMemberInfo } from '@/pages/admin/Login/api/auth';
 
 export const useClubList = () => {
   const { user, setUser } = useAuth();
   const [clubs, setClubs] = useState<ClubMemberInfo[]>([]);
-  const [selectedClub, setSelectedClub] = useState<ClubMemberInfo | null>(null);
 
   useEffect(() => {
     if (!user) return;
@@ -18,23 +17,23 @@ export const useClubList = () => {
           : [];
 
     setClubs(userClubs);
-    if (userClubs.length > 0) setSelectedClub(userClubs[0]);
   }, [user]);
 
   const handleSelectClub = (club: ClubMemberInfo) => {
-    setSelectedClub(club);
+    if (!user) return;
 
-    if (user && setUser) {
-      const updatedUser = {
-        ...user,
-        clubId: club.clubId ?? undefined,
-        clubName: club.clubName ?? '',
-        role: club.role ?? null,
-      };
-      setUser(updatedUser);
-      localStorage.setItem('user_data', JSON.stringify(updatedUser));
-    }
+    const updatedUser = {
+      ...user,
+      clubId: club.clubId ?? undefined,
+      clubName: club.clubName ?? '',
+      role: club.role ?? null,
+    };
+
+    setUser(updatedUser);
+    localStorage.setItem('user_data', JSON.stringify(updatedUser));
   };
+
+  const selectedClub = clubs.find((club) => club.clubId === user?.clubId) ?? clubs[0] ?? null;
 
   return { clubs, selectedClub, handleSelectClub };
 };
