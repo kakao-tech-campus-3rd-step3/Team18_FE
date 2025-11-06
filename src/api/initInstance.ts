@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { getAccessToken, removeAccessToken, setAccessToken } from '@/shared/auth/token';
 import { AUTH_ERRORS } from '@/shared/constants/auth';
+import { handleAxiosError } from '@/utils/handleAxiosError';
 import { reissueAccessToken } from './auth';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AxiosError, AxiosInstance, CreateAxiosDefaults } from 'axios';
@@ -40,7 +41,7 @@ apiInstance.interceptors.response.use(
   },
 
   async (error: AxiosError<ErrorResponse>) => {
-    if (!axios.isAxiosError(error)) throw error;
+    handleAxiosError(error);
 
     const config = error.config;
 
