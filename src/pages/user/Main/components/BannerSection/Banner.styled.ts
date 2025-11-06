@@ -28,7 +28,7 @@ export const BannerWrapper = styled.div(({ theme }) => ({
 
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     position: 'sticky',
-    top: '50px',
+    top: '60px',
     zIndex: 1000,
     height: 'auto',
     padding: '16px',
