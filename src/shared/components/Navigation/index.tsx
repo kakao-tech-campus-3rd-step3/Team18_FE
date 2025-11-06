@@ -1,12 +1,14 @@
 import styled from '@emotion/styled';
 import { Logo } from '@/pages/admin/Login/component/Logo';
-import { ClubSelector } from './ClubSelector';
+import { useAuth } from '@/providers/auth';
+import { ClubSelector } from './components/ClubSelector';
 import { useNavigation } from './hooks/useNavigation';
 import { NavigationContainer } from './NavigationContainer';
 import { NavigationItem } from './NavigationItem';
 
 export const Navigation = () => {
   const { leftItems, rightItem, getCurrentRoute, currentRoute, handleItemClick } = useNavigation();
+  const { user } = useAuth();
 
   return (
     <NavigationContainer selectedItem={currentRoute}>
@@ -25,9 +27,10 @@ export const Navigation = () => {
           );
         })}
       </LeftMenu>
-      {/* 임시 위치 */}
-      <ClubSelector />
+
       <RightMenu>
+        {user && <ClubSelector />}
+
         {rightItem && (
           <NavigationItem
             key={rightItem.key}
@@ -52,4 +55,6 @@ const LeftMenu = styled.div({
 const RightMenu = styled.div({
   marginLeft: 'auto',
   display: 'flex',
+  alignItems: 'center',
+  gap: '1.5rem',
 });
