@@ -1,27 +1,22 @@
 import styled from '@emotion/styled';
 
-export const BannerText = styled.div(({ theme }) => ({
-  fontSize: 20,
-  fontWeight: theme.font.weight.bold,
-  color: theme.colors.textPrimary,
-}));
-
 export const BannerWrapper = styled.div(({ theme }) => ({
-  textAlign: 'center',
+  position: 'relative',
   marginBottom: '24px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   width: '100%',
   maxWidth: '100vw',
-  height: 300,
+  height: 400,
   gap: '16px',
   boxSizing: 'border-box',
-
+  overflow: 'hidden',
   backgroundColor: theme.colors.primary100,
+
   [`@media (max-width: ${theme.breakpoints.web})`]: {
-    height: 250,
+    height: 300,
     gap: 24,
     zIndex: 1000,
   },
@@ -34,29 +29,18 @@ export const BannerWrapper = styled.div(({ theme }) => ({
     padding: '16px',
     gap: 12,
     marginBottom: 0,
+    alignItems: 'center',
   },
 }));
 
-export const SearchContainer = styled.div(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'center',
-  alignItems: 'center',
-  maxWidth: `100%`,
-  gap: 30,
-  backgroundColor: theme.colors.primary100,
-  [`@media (max-width: ${theme.breakpoints.web})`]: {
-    gap: 20,
-  },
-
-  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    flexDirection: 'column',
-    gap: 12,
-    width: '100%',
-    alignItems: 'stretch',
-    '& > *': {
-      width: '100%',
-      boxSizing: 'border-box',
-    },
-  },
-}));
+export const BannerImage = styled.img({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  objectPosition: 'center bottom',
+  pointerEvents: 'none',
+  zIndex: 0,
+});
