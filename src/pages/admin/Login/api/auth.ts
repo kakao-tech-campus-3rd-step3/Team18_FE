@@ -16,7 +16,7 @@ interface RegistrationRequiredResponse {
   clubAndRoleList: ClubMemberInfo[];
 }
 
-interface ClubMemberInfo {
+export interface ClubMemberInfo {
   clubId?: number;
   clubName?: string;
   role?: Role;

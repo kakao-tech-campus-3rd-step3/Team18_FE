@@ -1,5 +1,10 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { logoutUser, postAuthCode, type LoginResponse } from '@/pages/admin/Login/api/auth';
+import {
+  logoutUser,
+  postAuthCode,
+  type LoginResponse,
+  type ClubMemberInfo,
+} from '@/pages/admin/Login/api/auth';
 import {
   clearAuthData,
   getAccessToken,
@@ -9,14 +14,32 @@ import {
   storeUserData,
 } from '@/shared/auth/token';
 import { ROLE } from '@/types/navigation';
+
 import { handleAxiosError } from '@/utils/handleAxiosError';
 import type { AuthContextType, User } from '@/types/auth';
+import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
+
+export type User = {
+  role: (typeof ROLE)[keyof typeof ROLE] | null;
+  clubId?: number;
+  clubName?: string;
+  clubAndRoleList?: ClubMemberInfo[];
+};
+
+export type AuthContextType = {
+  user: User | null;
+  setUser: (user: User) => void;
+  login: (code: string, signal: AbortSignal) => Promise<LoginResponse>;
+  logout: () => Promise<void>;
+  completeSignup: (accessToken: string) => void;
+};
 
 const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
 const LOGOUT_REDIRECT_URI = import.meta.env.VITE_LOGOUT_REDIRECT_URI;
 
 export const AuthContext = createContext<AuthContextType>({
   user: { role: null },
+  setUser: () => {},
   login: async () => {
     throw new Error('login은 UserProvider 내부에서 실행되어야 합니다.');
   },
@@ -29,7 +52,12 @@ export const AuthContext = createContext<AuthContextType>({
 });
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUserState] = useState<User | null>(null);
+
+  const setUser = useCallback((newUser: User) => {
+    setUserState(newUser);
+    storeUserData(newUser);
+  }, []);
 
   useEffect(() => {
     const initAuth = async () => {
@@ -37,7 +65,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       if (token) {
         try {
           const userData = getStoredUserData();
-          if (userData) setUser(userData);
+          if (userData) setUserState(userData);
         } catch {
           clearAuthData();
         }
@@ -46,41 +74,54 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     initAuth();
   }, []);
 
-  const login = useCallback(async (code: string, signal: AbortSignal) => {
-    try {
-      const response: LoginResponse = await postAuthCode(code, signal);
-      switch (response.status) {
-        case 'LOGIN_SUCCESS': {
-          setAccessToken(response.accessToken);
-          const defaultClub = response.clubAndRoleList?.[0];
+  const login = useCallback(
+    async (code: string, signal: AbortSignal) => {
+      try {
+        const response: LoginResponse = await postAuthCode(code, signal);
+        switch (response.status) {
+          case 'LOGIN_SUCCESS': {
+            setAccessToken(response.accessToken);
 
-          if (!defaultClub || !defaultClub.role) {
-            const userData: User = { role: ROLE.APPLICANT };
+            const defaultClub = response.clubAndRoleList?.[0];
+            if (!defaultClub || !defaultClub.role) {
+              const userData: User = {
+                role: ROLE.APPLICANT,
+                clubAndRoleList: response.clubAndRoleList,
+              };
+              setUser(userData);
+              break;
+            }
+
+            const { role, clubId, clubName } = defaultClub;
+            const userData: User = {
+              role,
+              clubId,
+              clubName,
+              clubAndRoleList: response.clubAndRoleList,
+            };
             setUser(userData);
-            storeUserData(userData);
             break;
           }
-
-          const { role, clubId, clubName } = defaultClub;
-          const userData: User = { role, clubId, clubName };
-          setUser(userData);
-          storeUserData(userData);
-          break;
+          case 'REGISTRATION_REQUIRED':
+            setTemporaryToken(response.temporaryToken);
+            break;
         }
-        case 'REGISTRATION_REQUIRED':
-          setTemporaryToken(response.temporaryToken);
-          break;
-      }
-      return response;
-    } catch (e) {
-      if (e instanceof Error && e.name === 'CanceledError') {
+        return response;
+      } catch (e) {
+        if (e instanceof Error && e.name === 'CanceledError') throw e;
+        if (isAxiosError<ErrorResponse>(e))
+          throw new Error(e.response?.data.message ?? '로그인 중 오류가 발생했습니다.');
         throw e;
       }
+      
       handleAxiosError(e, '로그인 중 오류가 발생했습니다.');
 
       throw e;
     }
   }, []);
+    },
+    [setUser],
+  );
 
   const logout = useCallback(async () => {
     try {
@@ -90,18 +131,19 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       window.location.href = kakaoLogoutUrl;
     } catch (e) {
       handleAxiosError(e);
-      throw e;
     }
   }, []);
 
-  const completeSignup = useCallback((accessToken: string) => {
-    setAccessToken(accessToken);
-    const userData: User = { role: ROLE.CLUB_MEMBER };
-    setUser(userData);
-    storeUserData(userData);
-  }, []);
+  const completeSignup = useCallback(
+    (accessToken: string) => {
+      setAccessToken(accessToken);
+      const userData: User = { role: ROLE.CLUB_MEMBER };
+      setUser(userData);
+    },
+    [setUser],
+  );
 
-  const value = { user, login, logout, completeSignup };
+  const value = { user, setUser, login, logout, completeSignup };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

@@ -83,7 +83,7 @@ const postClubReviewResolver = async ({
   return HttpResponse.json(newReview, { status: 201 });
 };
 
-const patchClubImagesResolver = async ({
+const putClubImagesResolver = async ({
   params,
   request,
 }: {
@@ -93,8 +93,15 @@ const patchClubImagesResolver = async ({
   const { clubId } = params;
   const formData = await request.formData();
 
+  let keepImageIds: number[] = [];
   const keepImageIdsRaw = formData.get('keepImageIds');
-  const keepImageIds: number[] = keepImageIdsRaw ? JSON.parse(keepImageIdsRaw as string) : [];
+  if (typeof keepImageIdsRaw === 'string') {
+    try {
+      keepImageIds = JSON.parse(keepImageIdsRaw);
+    } catch {
+      keepImageIds = [];
+    }
+  }
 
   const newImages: File[] = [];
   formData.forEach((value, key) => {
@@ -123,5 +130,5 @@ export const clubHandlers = [
   http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', postClubDetailResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/reviews', getClubReviewsResolver),
   http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/reviews', postClubReviewResolver),
-  http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/images', patchClubImagesResolver),
+  http.put(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/images', putClubImagesResolver),
 ];

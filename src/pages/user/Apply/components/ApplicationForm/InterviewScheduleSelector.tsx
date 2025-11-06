@@ -1,16 +1,30 @@
+import { useEffect } from 'react';
 import { useDragSelection } from '@/pages/user/Apply/hooks/useDragSelection';
 import { getTimeSlotsArray } from '@/pages/user/Apply/utils/time';
 import { Text } from '@/shared/components/Text';
 import { TimeSpan, Wrapper, DateText } from './index.styled';
 import type { InterviewSchedule } from '@/pages/user/Apply/type/apply';
 
-export const InterviewScheduleSelector = ({ availableTime, date }: InterviewSchedule) => {
+export const InterviewScheduleSelector = ({ availableTime, date, onChange }: InterviewSchedule) => {
   const timeSlotsArray: [string, string][] = getTimeSlotsArray(availableTime);
 
   const { handleMouseDown, handleMouseMove, handleMouseUp, states } = useDragSelection(
     date,
     timeSlotsArray,
   );
+
+  useEffect(() => {
+    if (!onChange) return;
+
+    const selectedTimes = timeSlotsArray
+      .filter((_, idx) => states.isSelectedStates[idx])
+      .map(([start, end]) => `${start}-${end}`);
+
+    onChange({
+      date,
+      selectedTimes,
+    });
+  }, [states.isSelectedStates]);
 
   return (
     <Wrapper>

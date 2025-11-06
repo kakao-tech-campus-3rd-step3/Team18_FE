@@ -26,7 +26,7 @@ export const ApplicationFieldsFormTableSection = ({ formHandler, isEditMode }: P
       question: '',
       isRequired: true,
       optionList: [],
-      timeSlotOptions: { date: '', availableTime: { start: '', end: '' } },
+      timeSlotOptions: { date: '', availableTime: { start: '07:00:00', end: '07:00:00' } },
     });
   };
 
