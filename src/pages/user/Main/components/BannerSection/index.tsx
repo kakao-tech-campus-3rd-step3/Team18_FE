@@ -69,17 +69,12 @@ export const BannerSection = ({
   );
 };
 
-/* ✅ 배너 이미지 자동 전환 컴포넌트 */
 const BannerSlideshow = () => {
-  const images = [
-    '/public/assets/banner01.jpg',
-    '/public/assets/banner02.jpg',
-    '/public/assets/banner03.jpg',
-  ];
+  const images = ['/assets/banner01.jpg', '/assets/banner02.jpg', '/assets/banner03.jpg'];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => setIndex((prev) => (prev + 1) % images.length), 5000); // 5초마다 전환
+    const interval = setInterval(() => setIndex((prev) => (prev + 1) % images.length), 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -92,7 +87,6 @@ const BannerSlideshow = () => {
   );
 };
 
-/* ✅ 스타일 */
 const SlideWrapper = styled.div({
   position: 'absolute',
   top: 0,
