@@ -17,6 +17,7 @@ export const Navigation = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+  const logoItem = leftItems.find((item) => item.isLogo);
 
   const handleMobileItemClick = (key: string) => {
     handleLogoutClick(key);
@@ -28,10 +29,11 @@ export const Navigation = () => {
       selectedItem={currentRoute}
       isMobileMenuOpen={isMobileMenuOpen}
       onToggleMobileMenu={toggleMobileMenu}
+      logo={logoItem ? <Logo /> : undefined}
     >
       <LeftMenu>
         {leftItems.map((item) => {
-          const path = getCurrentRoute(item);
+          const path = getCurrentRoute(item) || '/';
           return (
             <NavigationItem
               key={item.key}
@@ -52,12 +54,12 @@ export const Navigation = () => {
         {rightItem && (
           <NavigationItem
             key={rightItem.key}
-            to={rightItem.to}
+            to={rightItem.to || '/'}
             isLogo={rightItem.isLogo}
             selected={currentRoute === rightItem.to}
             onClick={() => {
-              handleMobileItemClick(rightItem.key);
               handleLogoutClick(rightItem.key);
+              setIsMobileMenuOpen(false);
             }}
           >
             {rightItem.label}
@@ -78,6 +80,7 @@ const LeftMenu = styled.div({
     width: '100%',
   },
 });
+
 const RightMenu = styled.div({
   marginLeft: 'auto',
   display: 'flex',
