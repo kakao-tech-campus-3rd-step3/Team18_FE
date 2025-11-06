@@ -30,7 +30,7 @@ export const ItemWrapper = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     grid-template-columns: 1fr 1fr 1fr;
     & > p:nth-of-type(3) {
       display: none;
