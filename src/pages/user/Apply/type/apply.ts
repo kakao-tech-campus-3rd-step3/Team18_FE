@@ -32,6 +32,13 @@ export type AvailableTime = {
 export type InterviewSchedule = {
   date: string;
   availableTime: AvailableTime;
+  value?: SelectedInterviewValue | null;
+  onChange?: (value: SelectedInterviewValue) => void;
+};
+
+export type SelectedInterviewValue = {
+  date: string;
+  selectedTimes: string[];
 };
 
 export type ApplicationForm = {
