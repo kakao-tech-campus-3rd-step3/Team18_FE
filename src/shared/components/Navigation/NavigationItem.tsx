@@ -1,19 +1,20 @@
 import type { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import type { NavItemData } from '@/types/navigation';
 
 type Props = {
   children: ReactNode;
   onClick?: () => void;
   selected: boolean;
-} & Pick<NavItemData, 'to' | 'isLogo'>;
+  to: string;
+  isLogo?: boolean;
+};
 
 export const NavigationItem = ({ to, children, isLogo, onClick = () => {}, selected }: Props) => {
-  if (isLogo) return <LogoLink to={to || '#'}>{children}</LogoLink>;
+  if (isLogo) return <LogoLink to={to}>{children}</LogoLink>;
 
   return (
-    <NavLink to={to || '#'} selected={selected} onClick={onClick} data-selected={selected}>
+    <NavLink to={to} selected={selected} onClick={onClick} data-selected={selected}>
       {children}
     </NavLink>
   );
