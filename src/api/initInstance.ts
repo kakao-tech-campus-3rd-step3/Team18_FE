@@ -10,10 +10,6 @@ const LOGOUT_REDIRECT_URI_REISSUE = import.meta.env.VITE_LOGOUT_REDIRECT_URI_REI
 const initInstance = (config: CreateAxiosDefaults): AxiosInstance => {
   const instance = axios.create({
     timeout: 10000,
-    headers: {
-      'Content-Type': 'application/json',
-      ...config.headers,
-    },
     ...config,
   });
 
