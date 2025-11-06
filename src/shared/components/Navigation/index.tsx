@@ -9,7 +9,8 @@ import { NavigationContainer } from './NavigationContainer';
 import { NavigationItem } from './NavigationItem';
 
 export const Navigation = () => {
-  const { leftItems, rightItem, getCurrentRoute, currentRoute, handleItemClick } = useNavigation();
+  const { leftItems, rightItem, getCurrentRoute, currentRoute, handleLogoutClick } =
+    useNavigation();
   const { user } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -18,7 +19,7 @@ export const Navigation = () => {
   };
 
   const handleMobileItemClick = (key: string) => {
-    handleItemClick(key);
+    handleLogoutClick(key);
     setIsMobileMenuOpen(false);
   };
 
@@ -54,7 +55,10 @@ export const Navigation = () => {
             to={rightItem.to}
             isLogo={rightItem.isLogo}
             selected={currentRoute === rightItem.to}
-            onClick={() => handleItemClick(rightItem.key)}
+            onClick={() => {
+              handleMobileItemClick(rightItem.key);
+              handleLogoutClick(rightItem.key);
+            }}
           >
             {rightItem.label}
           </NavigationItem>
