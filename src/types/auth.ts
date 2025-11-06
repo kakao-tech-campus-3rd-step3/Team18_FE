@@ -9,6 +9,7 @@ export type User = {
 
 export type AuthContextType = {
   user: User | null;
+  setUser: (user: User) => void;
   login: (code: string, signal: AbortSignal) => Promise<LoginResponse>;
   logout: () => Promise<void>;
   completeSignup: (accessToken: string) => void;
