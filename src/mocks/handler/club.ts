@@ -93,8 +93,15 @@ const putClubImagesResolver = async ({
   const { clubId } = params;
   const formData = await request.formData();
 
+  let keepImageIds: number[] = [];
   const keepImageIdsRaw = formData.get('keepImageIds');
-  const keepImageIds: number[] = keepImageIdsRaw ? JSON.parse(keepImageIdsRaw as string) : [];
+  if (typeof keepImageIdsRaw === 'string') {
+    try {
+      keepImageIds = JSON.parse(keepImageIdsRaw);
+    } catch {
+      keepImageIds = [];
+    }
+  }
 
   const newImages: File[] = [];
   formData.forEach((value, key) => {
@@ -103,7 +110,7 @@ const putClubImagesResolver = async ({
     }
   });
 
-  const updatedImages = clubRepository.putClubImages(Number(clubId), keepImageIds, newImages);
+  const updatedImages = clubRepository.patchClubImages(Number(clubId), keepImageIds, newImages);
 
   if (!updatedImages) {
     return new HttpResponse('Not Found', { status: 404 });

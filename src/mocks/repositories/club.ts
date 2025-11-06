@@ -409,7 +409,7 @@ export const clubRepository = {
     return mockClubDetail[index];
   },
 
-  putClubImages: (
+  patchClubImages: (
     id: number,
     keepImageIds: number[],
     newFiles: File[] = [],
