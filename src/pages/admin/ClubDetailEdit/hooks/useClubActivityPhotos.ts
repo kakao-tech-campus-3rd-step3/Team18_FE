@@ -35,7 +35,7 @@ export const useClubActivityPhotos = (
     files.forEach((file) => formData.append('images', file, file.name));
 
     try {
-      const { data } = await apiInstance.put(`/clubs/${clubId}/images`, formData, {
+      const { data } = await apiInstance.post(`/clubs/${clubId}/images`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
@@ -66,7 +66,7 @@ export const useClubActivityPhotos = (
     setImages(updatedImages);
 
     try {
-      await apiInstance.put(
+      await apiInstance.post(
         `/clubs/${clubId}/images`,
         { images: updatedImages },
         { headers: { 'Content-Type': 'application/json' } },

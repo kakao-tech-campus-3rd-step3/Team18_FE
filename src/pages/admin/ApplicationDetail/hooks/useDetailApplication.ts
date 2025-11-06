@@ -40,6 +40,7 @@ export const useDetailApplications = (
         },
       );
       queryClient.invalidateQueries({ queryKey: ['applicants', clubId] });
+      queryClient.invalidateQueries({ queryKey: ['dashboardSummary', clubId] });
     },
   });
 
