@@ -10,7 +10,6 @@ export const BannerWrapper = styled.div(({ theme }) => ({
   width: '100%',
   maxWidth: '100vw',
   height: 400,
-  paddingBottom: '200px',
   gap: '16px',
   boxSizing: 'border-box',
   backgroundColor: theme.colors.primary100,
