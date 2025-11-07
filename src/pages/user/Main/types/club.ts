@@ -13,8 +13,11 @@ const RECRUIT_STATUS_MAP = {
   CLOSED: '모집 종료',
   PREPARING: '모집 준비중',
   NOT_SCHEDULED: '모집 일정 미정',
+  ALL: '전체',
 } as const;
 
 export type RecruitStatus = (typeof RECRUIT_STATUS_MAP)[keyof typeof RECRUIT_STATUS_MAP];
 export type RecruitStatusEng = keyof typeof RECRUIT_STATUS_MAP;
-export const CLUB_RECRUIT_STATUS_KOR = Object.values(RECRUIT_STATUS_MAP);
+export const CLUB_RECRUIT_STATUS_KOR = Object.values(RECRUIT_STATUS_MAP).filter(
+  (status) => status !== '전체',
+);

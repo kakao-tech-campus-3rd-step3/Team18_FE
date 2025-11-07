@@ -20,6 +20,7 @@ export const engToKorCategory: Record<ClubCategoryEng, ClubCategory> = {
 };
 
 export const korToEngRecruitStatus: Record<RecruitStatus, RecruitStatusEng> = {
+  전체: 'ALL',
   모집중: 'RECRUITING',
   '모집 종료': 'CLOSED',
   '모집 일정 미정': 'NOT_SCHEDULED',

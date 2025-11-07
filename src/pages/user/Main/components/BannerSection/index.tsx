@@ -9,11 +9,11 @@ import { engToKorCategory, korToEngCategory, korToEngRecruitStatus } from '@/uti
 import * as S from './Banner.styled.ts';
 import * as B from './BannerText.tsx';
 import type { ClubCategory, ClubCategoryEng } from '@/types/club';
-
+type FilterRecruitStatus = RecruitStatus | '전체';
 type Props = {
   onChangeSearch: (searchText: string) => void;
   onSelectCategory: (category: ClubCategoryEng) => void;
-  onSelectStatus: (recruitStatus: RecruitStatus) => void;
+  onSelectStatus: (recruitStatus: FilterRecruitStatus) => void;
   selectedCategory: ClubCategoryEng;
   selectedRecruitStatus: RecruitStatus | undefined;
 };
@@ -36,7 +36,13 @@ export const BannerSection = ({
 
   const handleRecruitStatusClick = (status: RecruitStatus) => {
     onSelectStatus(status);
-    filterParams.set('status', korToEngRecruitStatus[status]);
+
+    if (status === '전체') {
+      filterParams.delete('status');
+    } else {
+      filterParams.set('status', korToEngRecruitStatus[status]);
+    }
+
     setFilterParams(filterParams);
   };
 
@@ -59,8 +65,8 @@ export const BannerSection = ({
           />
           <Dropdown
             placeholder='모집 상태'
-            value={selectedRecruitStatus ? selectedRecruitStatus : undefined}
-            options={[...CLUB_RECRUIT_STATUS_KOR]}
+            value={selectedRecruitStatus === '전체' ? undefined : selectedRecruitStatus}
+            options={['전체', ...CLUB_RECRUIT_STATUS_KOR] as RecruitStatus[]}
             onSelect={handleRecruitStatusClick}
           />
         </DropdownWrapper>
@@ -109,7 +115,7 @@ const SlideImage = styled.img<{ active: boolean }>(({ active }) => ({
 
 export const SearchContainer = styled.div(({ theme }) => ({
   position: 'relative',
-  zIndex: 3,
+  zIndex: 10,
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'flex-start',
