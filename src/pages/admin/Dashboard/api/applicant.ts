@@ -1,5 +1,5 @@
-import { isAxiosError } from 'axios';
 import { apiInstance } from '@/api/initInstance';
+import { handleAxiosError } from '@/utils/handleAxiosError';
 import type { ApplicantsApiResponse } from '@/pages/admin/Dashboard/types/dashboard';
 
 export const fetchApplicants = async (
@@ -10,9 +10,7 @@ export const fetchApplicants = async (
     const { data } = await apiInstance.get(`/clubs/${clubId}/dashboard/applicants?stage=${stage}`);
     return data;
   } catch (error: unknown) {
-    if (isAxiosError(error)) {
-      throw new Error(error.message);
-    }
+    handleAxiosError(error);
     throw error;
   }
 };
