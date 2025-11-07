@@ -26,7 +26,7 @@ export const postApplicationForm = async (
   try {
     const response = await apiInstance.post(`/clubs/${clubId}/apply-submit`, applicationDto);
 
-    return response.data;
+    return response;
   } catch (e: unknown) {
     const error = e as AxiosError<ErrorResponse>;
     throw new Error(error.response?.data.message || '지원서 제출이 실패하였습니다.');
