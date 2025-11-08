@@ -7,6 +7,7 @@ import { useApplicationSubmit } from '@/pages/user/Apply/hooks/useApplicationSub
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
+import { Text } from '@/shared/components/Text';
 import * as S from './index.styled';
 import { InterviewScheduleSelector } from './InterviewScheduleSelector';
 import type {
@@ -210,6 +211,11 @@ export const ApplicationForm = ({ questions }: Props) => {
                       maxLength: { value: 1000, message: '최대 1000자까지 입력 가능합니다.' },
                     })}
                   />
+                )}
+                {errors.answers?.[field.originalIndex] && (
+                  <Text size='xs' color='#fa342c'>
+                    {errors.answers[field.originalIndex]?.message}
+                  </Text>
                 )}
               </S.ChoiceFormFiled>
             ))}
