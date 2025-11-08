@@ -1,5 +1,6 @@
-import axios, { type AxiosResponse } from 'axios';
+import { type AxiosResponse } from 'axios';
 import { apiInstance } from '@/api/initInstance';
+import { handleAxiosError } from '@/utils/handleAxiosError';
 import type { ApplicationForm } from '../types/fieldType';
 
 export const fetchApplicationForm = async (clubId: number): Promise<ApplicationForm> => {
@@ -9,10 +10,7 @@ export const fetchApplicationForm = async (clubId: number): Promise<ApplicationF
     );
     return response.data;
   } catch (e) {
-    if (axios.isAxiosError(e)) {
-      throw new Error(e.response?.data);
-    }
-    throw e;
+    return handleAxiosError(e);
   }
 };
 

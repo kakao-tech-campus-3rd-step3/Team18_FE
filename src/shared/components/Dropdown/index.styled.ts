@@ -31,13 +31,13 @@ export const SelectOptions = styled.ul(({ theme }) => ({
   position: 'absolute',
   top: '50px',
   left: '0',
-  width: '90%',
   maxHeight: '12.5rem',
   overflowY: 'auto',
+  zIndex: 100,
+  width: '90%',
   border: `1px solid ${theme.colors.gray200}`,
   borderRadius: theme.radius.md,
   backgroundColor: `${theme.colors.bg}`,
-  zIndex: 1,
 }));
 
 export const Option = styled.li<{ selected: boolean }>(({ theme, selected }) => ({
