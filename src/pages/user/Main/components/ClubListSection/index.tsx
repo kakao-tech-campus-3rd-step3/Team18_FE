@@ -1,19 +1,23 @@
 import { useNavigate } from 'react-router-dom';
 import { useClubFiltering } from '@/pages/user/Main/hooks/useClubFiltering.ts';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
-import { Text } from '@/shared/components/Text';
 import { engToKorCategory } from '@/utils/formatting.ts';
 import * as S from './Club.styled.ts';
+import NoSearchResult from './NoSearchResult.tsx';
 import type { Club, RecruitStatus } from '@/pages/user/Main/types/club.ts';
 import type { ClubCategoryEng } from '@/types/club';
 
-type Props = {
+type ClubFilteringProps = {
   categoryFilter: ClubCategoryEng;
   searchText: string;
-  recruitStatus: RecruitStatus | undefined;
+  recruitStatus?: RecruitStatus;
 };
 
-export const ClubListSection = ({ categoryFilter, searchText, recruitStatus }: Props) => {
+export const ClubListSection = ({
+  categoryFilter,
+  searchText,
+  recruitStatus,
+}: ClubFilteringProps) => {
   const navigate = useNavigate();
 
   const filterStatus = recruitStatus === '전체' ? undefined : recruitStatus;
@@ -28,29 +32,7 @@ export const ClubListSection = ({ categoryFilter, searchText, recruitStatus }: P
   if (error) return <div>에러발생 : {error.message}</div>;
 
   if (filteredClubs.length === 0)
-    return (
-      <S.ClubListContainer>
-        <S.NoSearchResultContainer>
-          <S.SearchImage
-            src='/assets/noSearchResults.svg'
-            alt='이미지 없음'
-            width={100}
-            height={100}
-          />
-          <S.TextWrapper>
-            <Text
-              color={'#757575'}
-              size={'xl'}
-              weight={'regular'}
-            >{`\`${searchText}\`검색 결과가 없습니다`}</Text>
-            <Text
-              color={'#7E8691'}
-              size={'sm'}
-            >{`동아리명, 카테고리, 동아리 소개로 검색해 보세요.`}</Text>
-          </S.TextWrapper>
-        </S.NoSearchResultContainer>
-      </S.ClubListContainer>
-    );
+    return NoSearchResult(filteredClubs, searchText, categoryFilter, filterStatus);
 
   return (
     <S.ClubListContainer>
