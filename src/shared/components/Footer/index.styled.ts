@@ -1,10 +1,6 @@
 import styled from '@emotion/styled';
 
 export const FooterContainer = styled.div(({ theme }) => ({
-  position: 'fixed',
-  bottom: 0,
-  left: 0,
-  width: '100%',
   backgroundColor: theme.colors.gray100,
   padding: 32,
   borderTop: `1px solid ${theme.colors.primary00}`,
