@@ -29,7 +29,7 @@ export const ClubListSection = ({
   } = useClubFiltering(categoryFilter, searchText, filterStatus);
 
   if (isLoading) return <LoadingSpinner />;
-  if (error) return <div>에러발생 : {error.message}</div>;
+  if (error) return <div>{error.message}</div>;
 
   if (filteredClubs.length === 0)
     return NoSearchResult(filteredClubs, searchText, categoryFilter, filterStatus);
