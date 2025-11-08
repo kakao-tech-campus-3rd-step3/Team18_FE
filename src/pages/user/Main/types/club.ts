@@ -8,7 +8,7 @@ export type Club = {
   recruitStatus: RecruitStatus;
 };
 
-const RECRUIT_STATUS_MAP = {
+export const RECRUIT_STATUS_MAP = {
   RECRUITING: '모집중',
   CLOSED: '모집 종료',
   PREPARING: '모집 준비중',
