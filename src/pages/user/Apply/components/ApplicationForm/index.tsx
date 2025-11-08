@@ -175,7 +175,14 @@ export const ApplicationForm = ({ questions }: Props) => {
                       <S.OptionInput
                         type='checkbox'
                         value={option}
-                        {...methods.register(`answers.${field.originalIndex}`)}
+                        {...methods.register(`answers.${field.originalIndex}`, {
+                          validate: (value) => {
+                            if (Array.isArray(value) && value.length > 0) {
+                              return true;
+                            }
+                            return '하나 이상 선택해야 합니다.';
+                          },
+                        })}
                       />
                       {option}
                     </S.Label>
@@ -187,7 +194,9 @@ export const ApplicationForm = ({ questions }: Props) => {
                       <S.OptionInput
                         type='radio'
                         value={option}
-                        {...methods.register(`answers.${field.originalIndex}`)}
+                        {...methods.register(`answers.${field.originalIndex}`, {
+                          required: '하나를 선택해야 합니다.',
+                        })}
                       />
                       {option}
                     </S.Label>
@@ -196,7 +205,10 @@ export const ApplicationForm = ({ questions }: Props) => {
                 {field.questionType === QuestionTypes.TEXT && (
                   <OutlineTextareaField
                     placeholder='1000자 미만으로 입력하세요.'
-                    {...methods.register(`answers.${field.originalIndex}`)}
+                    {...methods.register(`answers.${field.originalIndex}`, {
+                      required: '내용을 입력하세요.',
+                      maxLength: { value: 1000, message: '최대 1000자까지 입력 가능합니다.' },
+                    })}
                   />
                 )}
               </S.ChoiceFormFiled>
@@ -211,6 +223,7 @@ export const ApplicationForm = ({ questions }: Props) => {
                   <Controller
                     name={`answers.${field.originalIndex}`}
                     control={methods.control}
+                    rules={{ required: '면접 시간을 선택하세요.' }}
                     render={({ field: controllerField }) => (
                       <>
                         {field.timeSlotOptions?.map(
