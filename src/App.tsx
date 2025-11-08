@@ -6,6 +6,7 @@ import { Navigation } from '@/shared/components/Navigation';
 import { theme } from '@/styles/theme';
 import { UserProvider } from './providers/auth';
 import Footer from './shared/components/Footer';
+import { AppContainer, MainContent } from './styles/Layout/App.styled';
 
 const queryClient = new QueryClient();
 
@@ -16,8 +17,12 @@ export function App() {
         <UserProvider>
           <ToastContainer />
           <Navigation />
-          <Outlet />
-          <Footer />
+          <AppContainer>
+            <MainContent>
+              <Outlet />
+            </MainContent>
+            <Footer />
+          </AppContainer>
         </UserProvider>
       </ThemeProvider>
     </QueryClientProvider>
