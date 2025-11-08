@@ -43,31 +43,55 @@ export const BannerSection = ({
   return (
     <S.BannerWrapper>
       <BannerSlideshow />
-      <B.BannerTextWrapper>
-        <B.HeaderText>함께할 사람이 있는 곳, 동아리움.</B.HeaderText>
-        <B.SubText>관심 있는 전남대학교 동아리를 찾고, 참여해보세요.</B.SubText>
-      </B.BannerTextWrapper>
+      <ContentContainer>
+        <B.BannerTextWrapper>
+          <B.HeaderText>함께할 사람이 있는 곳, 동아리움.</B.HeaderText>
+          <B.SubText>관심 있는 전남대학교 동아리를 찾고, 참여해보세요.</B.SubText>
+        </B.BannerTextWrapper>
 
-      <SearchContainer>
-        <ClubSearchInput onChangeSearch={onChangeSearch} />
-        <DropdownWrapper>
-          <Dropdown
-            placeholder='동아리 카테고리'
-            value={engToKorCategory[selectedCategory]}
-            options={CLUB_CATEGORY}
-            onSelect={handleCategoryClick}
-          />
-          <Dropdown
-            placeholder='모집 상태'
-            value={selectedRecruitStatus ? selectedRecruitStatus : undefined}
-            options={[...CLUB_RECRUIT_STATUS_KOR]}
-            onSelect={handleRecruitStatusClick}
-          />
-        </DropdownWrapper>
-      </SearchContainer>
+        <SearchContainer>
+          <ClubSearchInput onChangeSearch={onChangeSearch} />
+          <DropdownWrapper>
+            <Dropdown
+              placeholder='동아리 카테고리'
+              value={engToKorCategory[selectedCategory]}
+              options={CLUB_CATEGORY}
+              onSelect={handleCategoryClick}
+            />
+            <Dropdown
+              placeholder='모집 상태'
+              value={selectedRecruitStatus ? selectedRecruitStatus : undefined}
+              options={[...CLUB_RECRUIT_STATUS_KOR]}
+              onSelect={handleRecruitStatusClick}
+            />
+          </DropdownWrapper>
+        </SearchContainer>
+      </ContentContainer>
     </S.BannerWrapper>
   );
 };
+
+const ContentContainer = styled.div(({ theme }) => ({
+  position: 'relative',
+  zIndex: 2,
+  width: '100%',
+  maxWidth: '1200px',
+  margin: '0 auto',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '16px',
+  padding: '0 80px',
+  boxSizing: 'border-box',
+
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    padding: '0 40px',
+  },
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    padding: '0 16px',
+    gap: '12px',
+  },
+}));
 
 const BannerSlideshow = () => {
   const images = ['/assets/banner01.jpg', '/assets/banner02.jpg', '/assets/banner03.jpg'];
