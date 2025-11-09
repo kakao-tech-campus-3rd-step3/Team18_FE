@@ -95,7 +95,7 @@ export const ClubDetailEditPage = () => {
               <Button type='submit' disabled={isSubmitting}>
                 {isSubmitting ? '저장 중...' : '수정하기'}
               </Button>
-              <Button variant='light' to={`/admin/clubs/dashboard`}>
+              <Button variant='light' onClick={() => navigate(-1)}>
                 취소
               </Button>
             </ButtonGroup>
