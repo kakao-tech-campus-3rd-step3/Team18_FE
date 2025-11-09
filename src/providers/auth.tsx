@@ -20,7 +20,7 @@ export type User = {
   role: (typeof ROLE)[keyof typeof ROLE] | null;
   clubId?: number;
   clubName?: string;
-  userId?: string;
+  userId?: number;
   clubAndRoleList?: ClubMemberInfo[];
 };
 
