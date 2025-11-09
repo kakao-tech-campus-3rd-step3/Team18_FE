@@ -21,6 +21,7 @@ export const CustomInputWrapper = styled.div(({ theme }) => ({
   justifyContent: 'center',
   width: '15rem',
   cursor: 'pointer',
+  position: 'relative',
   borderBottom: `1px solid ${theme.colors.gray200}`,
   paddingBottom: '0.5rem',
   boxSizing: 'border-box',
