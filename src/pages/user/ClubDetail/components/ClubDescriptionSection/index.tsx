@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { SectionTitle } from '@/shared/components/SectionTitle';
+import { formatTextWithNewlines } from '@/utils/textFormatting';
 
 interface ClubDescriptionSectionProps {
   introductionOverview: string;
@@ -15,13 +16,13 @@ export const ClubDescriptionSection = ({
   return (
     <DescriptionContainer>
       <SectionTitle>동아리 소개</SectionTitle>
-      <DescriptionText>{introductionOverview}</DescriptionText>
+      <DescriptionText>{formatTextWithNewlines(introductionOverview)}</DescriptionText>
 
       <SectionTitle>활동 내용</SectionTitle>
-      <DescriptionText>{introductionActivity}</DescriptionText>
+      <DescriptionText>{formatTextWithNewlines(introductionActivity)}</DescriptionText>
 
       <SectionTitle>모집하는 사람</SectionTitle>
-      <DescriptionText>{introductionIdeal}</DescriptionText>
+      <DescriptionText>{formatTextWithNewlines(introductionIdeal)}</DescriptionText>
     </DescriptionContainer>
   );
 };
