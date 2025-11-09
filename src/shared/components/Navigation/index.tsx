@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import { Logo } from '@/pages/admin/Login/component/Logo';
 import { useAuth } from '@/providers/auth';
-import { theme } from '@/styles/theme';
 import { ClubSelector } from './components/ClubSelector';
 import { useNavigation } from './hooks/useNavigation';
 import { NavigationContainer } from './NavigationContainer';
@@ -70,22 +69,44 @@ export const Navigation = () => {
   );
 };
 
-const LeftMenu = styled.div({
+const LeftMenu = styled.div(({ theme }) => ({
   display: 'flex',
-  gap: '4rem',
+  gap: '2rem',
+  alignItems: 'center',
+  minWidth: 0,
+  flex: '0 1 auto',
+
+  '@media (max-width: 1300px)': {
+    gap: '1.5rem',
+  },
+
+  '@media (max-width: 1100px)': {
+    gap: '1rem',
+  },
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
     flexDirection: 'column',
     gap: '1.5rem',
     width: '100%',
+    alignItems: 'flex-start',
   },
-});
+}));
 
-const RightMenu = styled.div({
+const RightMenu = styled.div(({ theme }) => ({
   marginLeft: 'auto',
   display: 'flex',
   alignItems: 'center',
-  gap: '2.5rem',
+  gap: '1.5rem',
+  flex: '0 0 auto',
+  minWidth: 0,
+
+  '@media (max-width: 1300px)': {
+    gap: '1rem',
+  },
+
+  '@media (max-width: 1100px)': {
+    gap: '0.8rem',
+  },
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
     marginLeft: 0,
@@ -93,5 +114,7 @@ const RightMenu = styled.div({
     marginTop: '1rem',
     paddingTop: '1rem',
     borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
   },
-});
+}));

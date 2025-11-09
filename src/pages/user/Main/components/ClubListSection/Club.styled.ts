@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { theme } from '@/styles/theme';
 import type { RecruitStatus } from '@/pages/user/Main/types/club';
 
 export const ClubCategoryText = styled.div(({ theme }) => ({
@@ -57,35 +56,28 @@ export const Grid = styled.div(({ theme }) => ({
   display: 'grid',
   gap: 30,
   padding: '30px 0',
-  gridTemplateColumns: 'repeat(4, 1fr)',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
   justifyItems: 'center',
 
-  [`@media (max-width: ${theme.breakpoints.web})`]: {
-    gridTemplateColumns: 'repeat(2, 1fr)',
-  },
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    gridTemplateColumns: '1fr',
+    gap: 15,
     padding: '20px 12px',
   },
 }));
 
 export const ClubListContainer = styled.div({
+  width: '100%',
   maxWidth: '1200px',
   margin: '0 auto',
-
-  [`@media (max-width: ${theme.breakpoints.web})`]: {
-    maxWidth: '90%',
-  },
-
-  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    maxWidth: '100%',
-  },
+  padding: '0 1.5rem',
+  boxSizing: 'border-box',
 });
 
 export const ClubItem = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  width: 240,
+  width: '100%',
+  boxSizing: 'border-box',
   minHeight: '130px',
   height: 'auto',
   marginBottom: 10,
@@ -94,11 +86,6 @@ export const ClubItem = styled.div(({ theme }) => ({
   boxShadow: theme.shadow.md,
   padding: 16,
   gap: 16,
-  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    width: 'calc(100vw - 32px)',
-    maxWidth: '100%',
-    boxSizing: 'border-box',
-  },
 }));
 
 export const NoSearchResultContainer = styled.div({
