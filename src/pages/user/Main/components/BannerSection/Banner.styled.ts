@@ -12,7 +12,7 @@ export const BannerWrapper = styled.div(({ theme }) => ({
   height: 400,
   gap: '16px',
   boxSizing: 'border-box',
-  backgroundColor: theme.colors.primary100,
+  backgroundColor: theme.colors.bg,
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
     minHeight: 300,
