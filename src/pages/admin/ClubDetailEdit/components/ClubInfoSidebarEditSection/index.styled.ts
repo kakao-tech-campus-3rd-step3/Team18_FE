@@ -56,5 +56,5 @@ export const DisplayText = styled.span(({ theme }) => ({
 export const SubText = styled.span(({ theme }) => ({
   fontSize: theme.font.size.sm,
   color: theme.colors.textSecondary,
-  marginTop: '0.1rem',
+  lineHeight: 0.1,
 }));

@@ -52,6 +52,10 @@ export const ReviewForm = styled.div(({ theme }) => ({
   gap: '0.75rem',
   paddingTop: '1rem',
   borderTop: `1px solid ${theme.colors.border}`,
+
+  maxWidth: '38rem',
+
+  width: '100%',
 }));
 
 export const FormTitle = styled.p(({ theme }) => ({
