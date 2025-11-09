@@ -15,6 +15,7 @@ describe('auth API 테스트', () => {
   it('postAuthCode - 로그인 성공 응답 반환', async () => {
     const mockResponse: LoginResponse = {
       status: 'LOGIN_SUCCESS',
+      userId: 100,
       accessToken: 'mockAccessToken',
       clubAndRoleList: [],
     };
