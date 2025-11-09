@@ -14,22 +14,22 @@ export const Layout = styled.div({
 export const DatePickerWrapper = styled.div({
   position: 'relative',
 });
-
 export const CustomInputWrapper = styled.div(({ theme }) => ({
+  height: '29px',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
   width: '15rem',
-  padding: '0.75rem 1rem',
-  borderBottom: `1px solid ${theme.colors.gray200}`,
-  backgroundColor: theme.colors.bg,
   cursor: 'pointer',
   position: 'relative',
+  borderBottom: `1px solid ${theme.colors.gray200}`,
+  paddingBottom: '0.5rem',
+  boxSizing: 'border-box',
 
   '&::after': {
     content: '"⌵"',
     position: 'absolute',
-    top: '6px',
+    top: '-5px',
     right: '13px',
     color: theme.colors.textSecondary,
     fontSize: '22px',
