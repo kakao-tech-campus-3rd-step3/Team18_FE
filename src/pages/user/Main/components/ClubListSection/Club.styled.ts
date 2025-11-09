@@ -38,9 +38,8 @@ export const RecruitStatusBox = styled.div<Props>(({ theme, status }) => ({
   justifyContent: 'center',
   textAlign: 'center',
   padding: '6px 10px',
-  borderRadius: theme.radius.md,
+  borderRadius: '10rem',
   width: 60,
-  minHeight: 20,
   backgroundColor: status === '모집중' ? theme.colors.primary : theme.colors.gray200,
 }));
 
@@ -81,9 +80,8 @@ export const ClubItem = styled.div(({ theme }) => ({
   minHeight: '130px',
   height: 'auto',
   marginBottom: 10,
-  border: `1px solid ${theme.colors.border}`,
-  borderRadius: theme.radius.lg,
-  boxShadow: theme.shadow.md,
+  border: `1px solid #E6E8EB`,
+  borderRadius: theme.radius.md,
   padding: 16,
   gap: 16,
 }));
