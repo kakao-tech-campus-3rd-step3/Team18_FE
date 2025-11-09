@@ -2,10 +2,13 @@ import axios, { AxiosError, type AxiosResponse } from 'axios';
 import { apiInstance } from '@/api/initInstance';
 import type { ErrorResponse } from '../type/error';
 import type { SignupFormInputs } from '../type/signup';
+import type { ClubMemberInfo } from '@/pages/admin/Login/api/auth';
 
 export interface RegisterSuccessResponse {
   status: 'REGISTER_SUCCESS';
   accessToken: string;
+  userId: number;
+  clubAndRoleList: ClubMemberInfo[];
 }
 
 const INVALID_INPUT_VALUE: string = 'INVALID_INPUT_VALUE';
