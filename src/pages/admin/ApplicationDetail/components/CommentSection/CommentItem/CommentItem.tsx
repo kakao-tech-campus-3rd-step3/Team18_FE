@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useComments } from '@/pages/admin/ApplicationDetail/hooks/useComments';
+import { useAuth } from '@/providers/auth';
 import { Text } from '@/shared/components/Text';
 import { CommentEditForm } from './CommentEditForm';
 import * as S from './CommentItem.styles';
@@ -10,6 +11,7 @@ type Props = Pick<Comment, 'author' | 'content' | 'createdAt' | 'commentId' | 'r
 
 export const CommentItem = ({ author, commentId, content, createdAt, rating }: Props) => {
   const { applicantId } = useParams();
+  const { user } = useAuth();
   const { deleteComment, updateComment } = useComments(Number(applicantId));
   const [isEditing, setIsEditing] = useState(false);
 
@@ -46,7 +48,7 @@ export const CommentItem = ({ author, commentId, content, createdAt, rating }: P
             {createdAt}
           </Text>
         </S.AuthorInfo>
-        {!isEditing && (
+        {!isEditing && user?.userId === author.id && (
           <S.ButtonContainer>
             <S.ActionButton onClick={handleEdit}>수정</S.ActionButton>
             <S.Divider>|</S.Divider>

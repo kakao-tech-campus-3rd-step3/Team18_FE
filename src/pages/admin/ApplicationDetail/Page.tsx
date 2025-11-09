@@ -1,4 +1,6 @@
 import { useParams } from 'react-router-dom';
+import { useAuth } from '@/providers/auth';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicantInfoSection } from './components/ApplicantInfoSection';
 import { ApplicantProfileSection } from './components/ApplicantProfileSection/index';
 import { ApplicantQuestionSection } from './components/ApplicationQuestionSection';
@@ -8,6 +10,7 @@ import * as S from './index.styled';
 
 export const ApplicationDetailPage = () => {
   const { clubId, applicantId } = useParams();
+  const { user } = useAuth();
 
   const {
     data: detailApplicants,
@@ -16,8 +19,12 @@ export const ApplicationDetailPage = () => {
     updateStatus,
   } = useDetailApplications(Number(clubId), Number(applicantId));
 
-  if (isLoading) return <div> 로딩중</div>;
+  if (isLoading || !user) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;
+
+  if (user.clubId !== Number(clubId)) {
+    return <div>권한이 없습니다.</div>;
+  }
 
   return (
     <S.PageLayout>
