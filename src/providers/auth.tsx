@@ -5,6 +5,7 @@ import {
   type LoginResponse,
   type ClubMemberInfo,
 } from '@/pages/admin/Login/api/auth';
+import { postSignupForm, type RegisterSuccessResponse } from '@/pages/admin/Signup/api/signup';
 import {
   clearAuthData,
   getAccessToken,
@@ -15,6 +16,7 @@ import {
 } from '@/shared/auth/token';
 import { ROLE } from '@/types/navigation';
 import { handleAxiosError } from '@/utils/handleAxiosError';
+import type { SignupFormInputs } from '@/pages/admin/Signup/type/signup';
 
 export type User = {
   role: (typeof ROLE)[keyof typeof ROLE] | null;
@@ -29,7 +31,7 @@ export type AuthContextType = {
   setUser: (user: User) => void;
   login: (code: string, signal: AbortSignal) => Promise<LoginResponse>;
   logout: () => Promise<void>;
-  completeSignup: (accessToken: string) => void;
+  completeSignup: (signupFormValue: SignupFormInputs, temporaryToken: string) => void;
 };
 
 const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
@@ -127,10 +129,19 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const completeSignup = useCallback(
-    (accessToken: string) => {
-      setAccessToken(accessToken);
-      const userData: User = { role: ROLE.CLUB_MEMBER };
+    async (signupFormValue: SignupFormInputs, temporaryToken: string) => {
+      const response: RegisterSuccessResponse = await postSignupForm(
+        signupFormValue,
+        temporaryToken,
+      );
+
+      const userData: User = {
+        role: ROLE.APPLICANT,
+        clubAndRoleList: response.clubAndRoleList,
+      };
+      setAccessToken(response.accessToken);
       setUser(userData);
+      // const userData: User = { role: ROLE.CLUB_MEMBER };
     },
     [setUser],
   );

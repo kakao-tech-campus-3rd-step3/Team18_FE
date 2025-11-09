@@ -4,7 +4,6 @@ import { ROUTE_PATH } from '@/constants/routerPath';
 import { useAuth } from '@/providers/auth';
 import { getTemporaryToken, removeTemporaryToken } from '@/shared/auth/token';
 import { theme } from '@/styles/theme';
-import { postSignupForm, type RegisterSuccessResponse } from '../api/signup';
 import type { SignupFormInputs } from '../type/signup';
 
 export const useSignup = () => {
@@ -20,12 +19,8 @@ export const useSignup = () => {
     }
 
     try {
-      const response: RegisterSuccessResponse = await postSignupForm(
-        signupFormValue,
-        temporaryToken,
-      );
+      completeSignup(signupFormValue, temporaryToken);
 
-      completeSignup(response.accessToken);
       toast.success('회원가입 완료!', {
         style: { backgroundColor: theme.colors.primary, color: 'white' },
         duration: 1000,
