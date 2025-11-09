@@ -23,6 +23,7 @@ export const authRepository = {
   getLoginSuccessResponse: (): LoginResponse => ({
     status: 'LOGIN_SUCCESS',
     accessToken: 'mock-access-token',
+    userId: 100,
     clubAndRoleList: mockClubListInfo,
   }),
 
