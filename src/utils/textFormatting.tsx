@@ -1,3 +1,12 @@
+import { Fragment } from 'react';
+
 export const formatTextWithNewlines = (text: string) => {
-  return <span dangerouslySetInnerHTML={{ __html: text.replace(/\n/g, '<br/>') }} />;
+  return (text || '')
+    .split('\n')
+    .map((line, index, arr) => (
+      <Fragment key={index}>
+        {line}
+        {index < arr.length - 1 && <br />}
+      </Fragment>
+    ));
 };
