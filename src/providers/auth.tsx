@@ -20,6 +20,7 @@ export type User = {
   role: (typeof ROLE)[keyof typeof ROLE] | null;
   clubId?: number;
   clubName?: string;
+  userId?: string;
   clubAndRoleList?: ClubMemberInfo[];
 };
 
@@ -79,8 +80,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
           case 'LOGIN_SUCCESS': {
             setAccessToken(response.accessToken);
 
-            const defaultClub = response.clubAndRoleList?.[0];
-            if (!defaultClub || !defaultClub.role) {
+            const defaultUserInfo = response.clubAndRoleList?.[0];
+            if (!defaultUserInfo || !defaultUserInfo.role) {
               const userData: User = {
                 role: ROLE.APPLICANT,
                 clubAndRoleList: response.clubAndRoleList,
@@ -89,11 +90,13 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
               break;
             }
 
-            const { role, clubId, clubName } = defaultClub;
+            const userId = response.userId;
+            const { role, clubId, clubName } = defaultUserInfo;
             const userData: User = {
               role,
               clubId,
               clubName,
+              userId,
               clubAndRoleList: response.clubAndRoleList,
             };
             setUser(userData);
