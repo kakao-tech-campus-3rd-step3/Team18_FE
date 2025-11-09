@@ -39,7 +39,7 @@ export const MainPage = () => {
 export const Container = styled.div({
   display: 'flex',
   flexDirection: 'column',
-  gap: '60px',
+  gap: '10px',
   width: '100%',
   maxWidth: '100vw',
   boxSizing: 'border-box',
