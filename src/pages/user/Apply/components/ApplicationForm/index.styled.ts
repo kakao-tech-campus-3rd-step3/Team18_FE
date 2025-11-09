@@ -123,22 +123,29 @@ export const DateText = styled.span(({ theme }) => ({
 
 export const AutoSaveIndicator = styled.span(({ theme }) => ({
   position: 'fixed',
-  top: '1.25rem',
-  right: '1.875rem',
-  fontSize: '0.8125rem',
-  color: theme.colors.textSecondary,
+  top: '80px',
+  right: '2rem',
+  zIndex: 999,
+
+  backgroundColor: theme.colors.bg,
+  paddingTop: '0.5rem',
+  width: 'auto',
+
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
-  gap: '0.375rem',
-  zIndex: 1000,
-  backgroundColor: 'white',
-  width: '10rem',
-  padding: '0.375rem 0.75rem',
-  borderRadius: '0.25rem',
+  justifyContent: 'flex-end',
+  gap: '0.5rem',
+  fontSize: theme.font.size.sm,
+  color: theme.colors.textPrimary,
 }));
 
 export const ActionButtonWrapper = styled.div`
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
+  width: 100%;
+
+  & > * {
+    width: auto;
+    flex: 1 1 0;
+  }
 `;

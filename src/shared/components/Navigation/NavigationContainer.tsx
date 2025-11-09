@@ -44,21 +44,23 @@ export const NavigationContainer = ({
 
   return (
     <>
-      <NavContainer ref={navRef}>
-        {logo && <MobileLogoLink to='/'>{logo}</MobileLogoLink>}
-        <HamburgerButton onClick={onToggleMobileMenu}>
-          <HamburgerLine />
-          <HamburgerLine />
-          <HamburgerLine />
-        </HamburgerButton>
+      <NavWrapper>
+        <NavContainer ref={navRef}>
+          {logo && <MobileLogoLink to='/'>{logo}</MobileLogoLink>}
+          <HamburgerButton onClick={onToggleMobileMenu}>
+            <HamburgerLine />
+            <HamburgerLine />
+            <HamburgerLine />
+          </HamburgerButton>
 
-        <DesktopNav>{children}</DesktopNav>
+          <DesktopNav>{children}</DesktopNav>
 
-        <UnderlineIndicator
-          style={underlineStyle}
-          visible={!!selectedItem && selectedItem !== ''}
-        />
-      </NavContainer>
+          <UnderlineIndicator
+            style={underlineStyle}
+            visible={!!selectedItem && selectedItem !== ''}
+          />
+        </NavContainer>
+      </NavWrapper>
 
       <MobileMenuOverlay isOpen={isMobileMenuOpen} onClick={onToggleMobileMenu} />
 
@@ -70,24 +72,43 @@ export const NavigationContainer = ({
   );
 };
 
-const NavContainer = styled.nav(({ theme }) => ({
+const NavWrapper = styled.div(({ theme }) => ({
   width: '100%',
-  padding: '20px 5vw',
-  display: 'flex',
-  flexWrap: 'wrap',
-  alignItems: 'center',
-  gap: '4rem',
-  boxSizing: 'border-box',
   backgroundColor: theme.colors.bg,
   boxShadow: theme.shadow.sm,
-  zIndex: theme.zIndex.header,
   position: 'sticky',
   top: 0,
+  zIndex: theme.zIndex.header,
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
     zIndex: 1001,
-    padding: '15px 5vw',
     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+  },
+}));
+
+const NavContainer = styled.nav(({ theme }) => ({
+  width: '100%',
+  maxWidth: '1400px',
+  margin: '0 auto',
+  padding: '20px 7vw',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '4rem',
+  boxSizing: 'border-box',
+  position: 'relative',
+
+  '@media (max-width: 1300px)': {
+    gap: '2rem',
+    padding: '20px 4vw',
+  },
+
+  '@media (max-width: 1100px)': {
+    gap: '1rem',
+    padding: '20px 3vw',
+  },
+
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    padding: '15px 5vw',
   },
 }));
 
@@ -131,6 +152,15 @@ const DesktopNav = styled.div({
   alignItems: 'center',
   gap: '4rem',
   flex: 1,
+  minWidth: 0,
+
+  '@media (max-width: 1300px)': {
+    gap: '2rem',
+  },
+
+  '@media (max-width: 1100px)': {
+    gap: '1rem',
+  },
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
     display: 'none',
