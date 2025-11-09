@@ -7,10 +7,10 @@ const InputWrapper = styled.div(({ theme }) => ({
   alignItems: 'center',
   width: '400px',
   maxWidth: '100%',
-  border: `1px solid ${theme?.colors?.border}`,
-  borderRadius: theme?.radius?.md,
+  border: `1px solid ${theme.colors.border}`,
+  borderRadius: theme.radius.md,
   padding: '10px 10px',
-  backgroundColor: '#fff',
+  backgroundColor: theme.colors.bg,
   boxSizing: 'border-box',
   boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
 
@@ -30,7 +30,7 @@ const Input = styled.input(({ theme }) => ({
   flex: 1,
   border: 'none',
   outline: 'none',
-  fontSize: theme?.font?.size?.base,
+  fontSize: theme.font.size.base,
 }));
 
 const SearchIcon = styled(FiSearch)({
