@@ -1,12 +1,6 @@
 import styled from '@emotion/styled';
 import type { RecruitStatus } from '@/pages/user/Main/types/club';
 
-export const ClubCategoryText = styled.div(({ theme }) => ({
-  fontSize: theme?.font?.size?.xs,
-  fontWeight: theme.font.weight.regular,
-  color: theme?.colors.textSecondary,
-}));
-
 export const ClubNameText = styled.div(({ theme }) => ({
   fontSize: theme?.font?.size?.lg,
   fontWeight: theme.font.weight.bold,
@@ -32,23 +26,46 @@ type Props = {
   status: RecruitStatus;
 };
 
+export const StatusContainer = styled.div({
+  display: 'flex',
+  gap: '8px',
+  alignItems: 'center',
+});
+
 export const RecruitStatusBox = styled.div<Props>(({ theme, status }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   textAlign: 'center',
   padding: '6px 10px',
-  borderRadius: theme.radius.md,
+  borderRadius: '10rem',
   width: 60,
-  minHeight: 20,
   backgroundColor: status === '모집중' ? theme.colors.primary : theme.colors.gray200,
 }));
 
-export const RecruitStatusText = styled.div<Props>(({ theme }) => ({
+export const RecruitStatusText = styled.div<Props>(({ theme, status }) => ({
   textAlign: `center`,
   fontSize: theme.font.size.xs,
   fontWeight: theme.font.weight.medium,
-  color: 'white',
+  color: status === '모집중' ? theme.colors.primary00 : theme.colors.textPrimary,
+  lineHeight: 1.2,
+}));
+
+export const CategoryStatusBox = styled.div(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  textAlign: 'center',
+  padding: '6px 10px',
+  borderRadius: '10rem',
+  backgroundColor: theme.colors.gray200,
+}));
+
+export const CategoryStatusText = styled.div(({ theme }) => ({
+  textAlign: `center`,
+  fontSize: theme.font.size.xs,
+  fontWeight: theme.font.weight.medium,
+  color: theme.colors.textPrimary,
   lineHeight: 1.2,
 }));
 
@@ -81,11 +98,15 @@ export const ClubItem = styled.div(({ theme }) => ({
   minHeight: '130px',
   height: 'auto',
   marginBottom: 10,
-  border: `1px solid ${theme.colors.border}`,
-  borderRadius: theme.radius.lg,
-  boxShadow: theme.shadow.md,
-  padding: 16,
+  border: `1px solid #E6E8EB`,
+  borderRadius: theme.radius.md,
+  padding: '1.7rem 1.5rem',
   gap: 16,
+  transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+  '&:hover': {
+    transform: 'scale(1.02)',
+    boxShadow: `0 0 10px ${theme.colors.blue200}50`,
+  },
 }));
 
 export const NoSearchResultContainer = styled.div({
