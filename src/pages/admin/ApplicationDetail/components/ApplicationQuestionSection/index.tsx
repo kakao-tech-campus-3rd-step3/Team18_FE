@@ -9,7 +9,6 @@ type Props = {
 };
 
 export const ApplicantQuestionSection = ({ questionsAndAnswers }: Props) => {
-  console.log(questionsAndAnswers);
   return (
     <Wrapper>
       {questionsAndAnswers.map((item, index) => {
