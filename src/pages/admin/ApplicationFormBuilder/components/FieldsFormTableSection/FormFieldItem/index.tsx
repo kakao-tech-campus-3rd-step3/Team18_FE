@@ -80,7 +80,7 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
     setValue(`formQuestions.${index}.fieldType`, newType);
 
     if (newType === 'RADIO' || newType === 'CHECKBOX') {
-      setValue(`formQuestions.${index}.optionList`, []);
+      setValue(`formQuestions.${index}.optionList`, [{ value: '' }]);
     } else if (newType === 'TIME_SLOT') {
       setValue(`formQuestions.${index}.timeSlotOptions`, {
         date: '',
