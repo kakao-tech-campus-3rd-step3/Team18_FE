@@ -58,7 +58,7 @@ export const CategoryStatusBox = styled.div(({ theme }) => ({
   textAlign: 'center',
   padding: '6px 10px',
   borderRadius: '10rem',
-  backgroundColor: theme.colors.gray200,
+  border: `1px solid ${theme.colors.gray200}`,
 }));
 
 export const CategoryStatusText = styled.div(({ theme }) => ({
