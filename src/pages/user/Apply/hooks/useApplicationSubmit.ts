@@ -1,8 +1,10 @@
+import { isAxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { theme } from '@/styles/theme';
 import { overwriteApplicationForm, postApplicationForm } from '../api/apply';
 import type { FormInputs } from '../type/apply';
+import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 
 export const useApplicationSubmit = (
   clubId: number,
@@ -63,14 +65,24 @@ export const useApplicationSubmit = (
           onSuccess?.();
         },
       });
-    } catch {
-      toast.error('제출 실패!', {
-        duration: 1000,
-        style: {
-          backgroundColor: 'white',
-          color: theme.colors.error,
-        },
-      });
+    } catch (e: unknown) {
+      if (isAxiosError<ErrorResponse>(e)) {
+        toast.error(e.response?.data.message, {
+          duration: 1000,
+          style: {
+            backgroundColor: 'white',
+            color: theme.colors.error,
+          },
+        });
+      } else {
+        toast.error('알 수 없는 오류가 발생했습니다.', {
+          duration: 1000,
+          style: {
+            backgroundColor: 'white',
+            color: theme.colors.error,
+          },
+        });
+      }
     }
   };
   return { handleSubmit };
