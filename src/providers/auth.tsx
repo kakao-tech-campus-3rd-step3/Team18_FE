@@ -1,10 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import {
-  logoutUser,
-  postAuthCode,
-  type LoginResponse,
-  type ClubMemberInfo,
-} from '@/pages/admin/Login/api/auth';
+import { logoutUser, postAuthCode, type LoginResponse } from '@/pages/admin/Login/api/auth';
 import { postSignupForm, type RegisterSuccessResponse } from '@/pages/admin/Signup/api/signup';
 import {
   clearAuthData,
@@ -17,22 +12,7 @@ import {
 import { ROLE } from '@/types/navigation';
 import { handleAxiosError } from '@/utils/handleAxiosError';
 import type { SignupFormInputs } from '@/pages/admin/Signup/type/signup';
-
-export type User = {
-  role: (typeof ROLE)[keyof typeof ROLE] | null;
-  clubId?: number;
-  clubName?: string;
-  userId?: number;
-  clubAndRoleList?: ClubMemberInfo[];
-};
-
-export type AuthContextType = {
-  user: User | null;
-  setUser: (user: User) => void;
-  login: (code: string, signal: AbortSignal) => Promise<LoginResponse>;
-  logout: () => Promise<void>;
-  completeSignup: (signupFormValue: SignupFormInputs, temporaryToken: string) => void;
-};
+import type { User, AuthContextType } from '@/types/auth';
 
 const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
 const LOGOUT_REDIRECT_URI = import.meta.env.VITE_LOGOUT_REDIRECT_URI;
@@ -141,7 +121,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       };
       setAccessToken(response.accessToken);
       setUser(userData);
-      // const userData: User = { role: ROLE.CLUB_MEMBER };
     },
     [setUser],
   );
