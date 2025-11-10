@@ -39,5 +39,19 @@ export const useClubList = () => {
 
   const selectedClub = clubs.find((club) => club.clubId === user?.clubId) ?? clubs[0] ?? null;
 
+  useEffect(() => {
+    if (user && selectedClub && user.role !== selectedClub.role) {
+      const updatedUser = {
+        ...user,
+        clubId: selectedClub.clubId ?? undefined,
+        clubName: selectedClub.clubName ?? '',
+        role: selectedClub.role ?? null,
+      };
+
+      setUser(updatedUser);
+      localStorage.setItem('user_data', JSON.stringify(updatedUser));
+    }
+  }, [user, selectedClub, setUser, clubs]);
+
   return { clubs, selectedClub, handleSelectClub };
 };
