@@ -1,8 +1,7 @@
-import { AxiosError, type AxiosResponse } from 'axios';
+import { type AxiosResponse } from 'axios';
 import { apiInstance } from '@/api/initInstance';
 import { handleAxiosError } from '@/utils/handleAxiosError';
 import { toApplyRequest } from './mappers/apply';
-import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { ApplicationForm, FormInputs } from '@/pages/user/Apply/type/apply.ts';
 
 export const fetchApplicationForm = async (clubId: number): Promise<ApplicationForm> => {
@@ -23,14 +22,9 @@ export const postApplicationForm = async (
 ) => {
   const applicationDto = toApplyRequest(formData, questionArray);
 
-  try {
-    const response = await apiInstance.post(`/clubs/${clubId}/apply-submit`, applicationDto);
+  const response = await apiInstance.post(`/clubs/${clubId}/apply-submit`, applicationDto);
 
-    return response;
-  } catch (e: unknown) {
-    const error = e as AxiosError<ErrorResponse>;
-    throw new Error(error.response?.data.message || '지원서 제출이 실패하였습니다.');
-  }
+  return response;
 };
 
 export const overwriteApplicationForm = async (
