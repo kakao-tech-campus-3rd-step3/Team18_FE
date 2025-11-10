@@ -1,57 +1,34 @@
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Button } from '@/shared/components/Button';
 import { UnderlineTextareaField } from '@/shared/components/Form/TextAreaField/UnderlineTextareaField';
-import { Text } from '@/shared/components/Text';
 import * as S from './CommentItem.styles';
-import { ApplicantStarRating } from '../ApplicantStarRating';
 import type { CommentFormData } from '@/pages/admin/ApplicationDetail/types/comments';
 
 type CommentEditFormProps = {
   content: string;
-  rating: number;
-  onSave: (data: CommentFormData) => void;
+  onSave: (data: Pick<CommentFormData, 'content'>) => void;
   onCancel: () => void;
 };
 
-export const CommentEditForm = ({ content, rating, onSave, onCancel }: CommentEditFormProps) => {
+export const CommentEditForm = ({ content, onSave, onCancel }: CommentEditFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    control,
     reset,
-  } = useForm<CommentFormData>({
+  } = useForm<Pick<CommentFormData, 'content'>>({
     defaultValues: {
       content,
-      rating,
     },
   });
 
   const handleCancel = () => {
-    reset({ content, rating });
+    reset({ content });
     onCancel();
   };
 
   return (
     <S.EditMode onSubmit={handleSubmit(onSave)}>
-      <Controller
-        name='rating'
-        control={control}
-        rules={{
-          required: '별점을 선택해주세요.',
-          min: { value: 1, message: '별점을 선택해주세요.' },
-        }}
-        render={({ field: { value, onChange }, fieldState: { error } }) => (
-          <>
-            <ApplicantStarRating rating={value} onRatingChange={onChange} />
-            {error && (
-              <Text size='xs' color='#fa342c'>
-                {error.message}
-              </Text>
-            )}
-          </>
-        )}
-      />
       <UnderlineTextareaField
         {...register('content', {
           required: '댓글을 입력해주세요.',

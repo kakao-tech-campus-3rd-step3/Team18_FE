@@ -36,6 +36,7 @@ const Wrapper = styled.div(({ theme }) => ({
 
 const QuestionWrapper = styled.div(() => ({
   marginBottom: '40px',
+
   '&:last-child': {
     marginBottom: 0,
   },
@@ -50,4 +51,5 @@ const AnswerText = styled.div(({ theme }) => ({
   paddingLeft: '24px',
   lineHeight: '1.8',
   color: theme.colors.gray700,
+  wordBreak: 'break-word',
 }));
