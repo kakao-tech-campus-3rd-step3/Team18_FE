@@ -1,5 +1,7 @@
+import styled from '@emotion/styled';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ApplicantStarRating } from '@/pages/admin/ApplicationDetail/components/CommentSection/ApplicantStarRating'; // Import ApplicantStarRating
 import { useComments } from '@/pages/admin/ApplicationDetail/hooks/useComments';
 import { useAuth } from '@/providers/auth';
 import { Text } from '@/shared/components/Text';
@@ -44,6 +46,11 @@ export const CommentItem = ({ author, commentId, content, createdAt, rating }: P
           <Text size={'base'} weight={'medium'}>
             {author.name}
           </Text>
+          {rating !== undefined && (
+            <RatingWrapper>
+              <ApplicantStarRating rating={rating} readOnly={true} />
+            </RatingWrapper>
+          )}
           <Text size={'xs'} weight={'medium'} color={'#616677'}>
             {createdAt}
           </Text>
@@ -72,3 +79,8 @@ export const CommentItem = ({ author, commentId, content, createdAt, rating }: P
     </S.Layout>
   );
 };
+
+const RatingWrapper = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+});
