@@ -15,8 +15,16 @@ export const Header = styled.div({
 
 export const AuthorInfo = styled.div({
   display: 'flex',
+  justifyContent: 'space-between',
   alignItems: 'center',
-  gap: '0.75rem',
+  flex: 1,
+  marginRight: '1rem',
+});
+
+export const NameRatingGroup = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
 });
 
 export const ButtonContainer = styled.div({

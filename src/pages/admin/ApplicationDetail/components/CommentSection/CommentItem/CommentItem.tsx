@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ApplicantStarRating } from '@/pages/admin/ApplicationDetail/components/CommentSection/ApplicantStarRating'; // Import ApplicantStarRating
+import { ApplicantStarRating } from '@/pages/admin/ApplicationDetail/components/CommentSection/ApplicantStarRating';
 import { useComments } from '@/pages/admin/ApplicationDetail/hooks/useComments';
 import { useAuth } from '@/providers/auth';
 import { Text } from '@/shared/components/Text';
@@ -43,14 +43,16 @@ export const CommentItem = ({ author, commentId, content, createdAt, rating }: P
     <S.Layout>
       <S.Header>
         <S.AuthorInfo>
-          <Text size={'base'} weight={'medium'}>
-            {author.name}
-          </Text>
-          {rating !== undefined && (
-            <RatingWrapper>
-              <ApplicantStarRating rating={rating} readOnly={true} />
-            </RatingWrapper>
-          )}
+          <S.NameRatingGroup>
+            <Text size={'base'} weight={'medium'}>
+              {author.name}
+            </Text>
+            {rating !== undefined && (
+              <RatingWrapper>
+                <ApplicantStarRating rating={rating} readOnly={true} />
+              </RatingWrapper>
+            )}
+          </S.NameRatingGroup>
           <Text size={'xs'} weight={'medium'} color={'#616677'}>
             {createdAt}
           </Text>
