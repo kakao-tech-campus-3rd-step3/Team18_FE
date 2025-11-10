@@ -115,7 +115,7 @@ export const Wrapper = styled.div({
 export const DateText = styled.span(({ theme }) => ({
   textAlign: 'left',
   minWidth: '150px',
-  padding: '10px 0 20px 0',
+  padding: '10px 0 10px 8px',
   fontWeight: theme.font.weight.bold,
   fontSize: theme.font.size.sm,
   whiteSpace: 'nowrap',
