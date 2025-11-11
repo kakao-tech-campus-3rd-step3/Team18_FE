@@ -31,21 +31,28 @@
 # 📌 Feature List
 
 ## 메인 UI
-
+<img width="1425" height="947" alt="image" src="https://github.com/user-attachments/assets/1080f9fe-cf0b-4828-b34b-f8649b34faf9" />
 - 동아리 목록 / 배너, 메인 UI
 - 분류 기능 및 검색 기능
-- 동아리별 모집 일정 캘린더 표시
 
 ## 공지사항
 
 - 공지사항 목록
+<img width="864" height="649" alt="image" src="https://github.com/user-attachments/assets/14026815-031e-4ff6-bd80-47ab7d765ff6" />
 - 공지사항 세부 페이지
+<img width="483" height="261" alt="image" src="https://github.com/user-attachments/assets/17021e90-5258-4b9a-9529-ef004d0478a3" />
 
 ## 동아리 페이지
-
 - 동아리 상세 페이지 (후기 제외)
-- 동아리 지원 페이지
+<img width="620" height="795" alt="image" src="https://github.com/user-attachments/assets/7133f5fd-caa6-40d6-b611-3c530bf14eed" />
+
 - 활동 후기 작성 / 열람
+<img width="354" height="401" alt="image" src="https://github.com/user-attachments/assets/3753254d-e0ed-42f0-b2da-f613a35b685c" />
+
+- 동아리 지원 페이지
+<img width="459" height="886" alt="image" src="https://github.com/user-attachments/assets/9a87fddc-aa09-4021-98c9-5d02e0e21c78" />
+
+
 
 ## 동아리 회장 기능
 
