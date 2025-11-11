@@ -30,63 +30,113 @@
 
 # 📌 Feature List
 
-## 메인 UI
-<img width="1425" height="947" alt="image" src="https://github.com/user-attachments/assets/1080f9fe-cf0b-4828-b34b-f8649b34faf9" />
-- 동아리 목록 / 배너, 메인 UI
-- 분류 기능 및 검색 기능
-
-## 공지사항
-
-- 공지사항 목록
-<img width="864" height="649" alt="image" src="https://github.com/user-attachments/assets/14026815-031e-4ff6-bd80-47ab7d765ff6" />
-- 공지사항 세부 페이지
-<img width="483" height="261" alt="image" src="https://github.com/user-attachments/assets/17021e90-5258-4b9a-9529-ef004d0478a3" />
-
-## 동아리 페이지
-- 동아리 상세 페이지 (후기 제외)
-<img width="620" height="795" alt="image" src="https://github.com/user-attachments/assets/7133f5fd-caa6-40d6-b611-3c530bf14eed" />
-
-- 활동 후기 작성 / 열람
-<img width="354" height="401" alt="image" src="https://github.com/user-attachments/assets/3753254d-e0ed-42f0-b2da-f613a35b685c" />
-
-- 동아리 지원 페이지
-<img width="459" height="886" alt="image" src="https://github.com/user-attachments/assets/9a87fddc-aa09-4021-98c9-5d02e0e21c78" />
+### 메인 UI
+- 동아리 목록 확인 가능
+- 배너 표시
+- 분류 및 검색 기능 지원
+#### 웹 메인
+<img width="600" height="550" alt="웹 메인" src="https://github.com/user-attachments/assets/3b14fb2c-2b70-4744-870c-8cb2f0ebae67" />
 
 
 
-## 동아리 회장 기능
 
-- 로그인 / 로그아웃 (계정 정보, 로그아웃 버튼)
-- 대시보드 (지원자 관리, 합불 결과 체크 / 필터링)
-- 지원자 지원서 열람
-- 합불 결과 전송 기능
-- 지원 폼 수정 기능 (모듈 추가 / 조합)
-- 동아리 상세 페이지 수정 (사진, 텍스트, 필수 정보)
+### 공지사항
 
-## 공통 UI 컴포넌트
+#### 공지사항 목록
+<img width="600" height="451" alt="image" src="https://github.com/user-attachments/assets/14026815-031e-4ff6-bd80-47ab7d765ff6" />
 
-- 활성/비활성 버튼
-- 제목 텍스트
-- 레이아웃
-- 상단 네비게이션 바
+#### 공지사항 세부 페이지
+<img width="600" height="325" alt="image" src="https://github.com/user-attachments/assets/17021e90-5258-4b9a-9529-ef004d0478a3" />
 
-## 디자인 / 개발 환경
+### 동아리 페이지
+
+#### 동아리 상세 페이지 (후기 제외)
+<img width="600" height="767" alt="image" src="https://github.com/user-attachments/assets/7133f5fd-caa6-40d6-b611-3c530bf14eed" />
+
+#### 활동 후기 작성 / 열람
+<img width="600" height="681" alt="image" src="https://github.com/user-attachments/assets/3753254d-e0ed-42f0-b2da-f613a35b685c" />
+
+#### 동아리 지원 페이지
+<img width="600" height="1158" alt="image" src="https://github.com/user-attachments/assets/9a87fddc-aa09-4021-98c9-5d02e0e21c78" />
+
+
+
+# 동아리 회장 기능
+
+#### 로그인 / 로그아웃 (카카오 OAuth 기반 인증)
+
+#### 대시보드 (지원자 관리, 합불 결과 체크 / 필터링)
+#### 합불 결과 전송 기능
+<img width="600" height="419" alt="image" src="https://github.com/user-attachments/assets/45ae673c-7376-4b01-98b2-265afe1d93d4" />
+
+#### 지원자 지원서 열람
+<img width="600" height="353" alt="image" src="https://github.com/user-attachments/assets/c94133db-7fe0-459f-bb36-3b42b8cf4e99" />
+
+
+
+#### 지원 폼 수정 기능 (모듈 추가 / 조합)
+<img width="600" height="1160" alt="image" src="https://github.com/user-attachments/assets/7b10529c-4c8d-48cb-b693-09ee1f85f3ab" />
+
+  
+#### 동아리 상세 페이지 수정 (사진, 텍스트, 필수 정보)
+<img width="600" height="300" alt="image" src="https://github.com/user-attachments/assets/cdc3e30a-ad6b-43a5-a8d4-b5d3bea9679e" />
+<img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/9cd3465b-a263-491e-9f62-ae488d0d512d" />
+
+# 공통 UI 컴포넌트
+
+**Button** : 활성/비활성 버튼
+
+- 클릭 상태, 비활성 상태, 다양한 사이즈 및 스타일 지원
+
+**Dropdown** : 드롭다운 메뉴
+
+- 선택 리스트, 클릭/호버 동작, 커스텀 스타일 지원
+
+**Footer** : 하단 Footer 컴포넌트
+
+사이트 정보, 연락받을 이메일 표시
+
+**Form** : 폼 관련 컴포넌트 모음
+
+- InputField, TextAreaField 등 폼 필드 UI 제공
+
+**Navigation**: 상단 네비게이션 바
+
+- 메뉴, 로고, 로그인/로그아웃 포함
+
+**SectionTitle** : 제목 텍스트
+
+- 섹션 헤더, 스타일 일관성 유지
+
+**Text** : 일반 텍스트 컴포넌트
+
+- 폰트, 색상, 강조 스타일 지원
+
+**EmptyState.tsx** : 빈 상태 표시
+
+- 데이터가 없을 때 UI 안내용 컴포넌트
+
+**LoadingSpinner.tsx** : 로딩 표시
+
+- API 호출 시 로딩 스피너 표시용 컴포넌트
+
+# 디자인 / 개발 환경
 
 - 디자인 토큰 (색상, 폰트 크기)
 - MSW(Mock Service Worker)
-- Suspense / ErrorBoundary 적용
+- Suspense / ErrorBoundary 적용 예정
 - API 연동 구조
 - 테스트 환경 구축
 
 ---
 
-# 우리 팀 개발 협업 규칙
+# 개발 규칙
 
 이 문서는 원활한 협업을 위해 우리 팀이 함께 지키는 개발 규칙을 정의합니다.
 
 ## 1. Git & 버전 관리
 
-코드 충돌을 방지하고 작업 내역을 명확하게 관리합니다.
+코드 충돌을 방지하고 작업 내역을 명확하게 관리
 
 ### **Branch 전략**
 
