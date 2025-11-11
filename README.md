@@ -31,54 +31,59 @@
 # 📌 Feature List
 
 ### 메인 UI
+
 - 동아리 목록 확인 가능
 - 배너 표시
 - 분류 및 검색 기능 지원
+
 #### 웹 메인
+
 <img width="600" height="550" alt="웹 메인" src="https://github.com/user-attachments/assets/3b14fb2c-2b70-4744-870c-8cb2f0ebae67" />
-
-
-
 
 ### 공지사항
 
 #### 공지사항 목록
+
 <img width="600" height="451" alt="image" src="https://github.com/user-attachments/assets/14026815-031e-4ff6-bd80-47ab7d765ff6" />
 
 #### 공지사항 세부 페이지
+
 <img width="600" height="325" alt="image" src="https://github.com/user-attachments/assets/17021e90-5258-4b9a-9529-ef004d0478a3" />
 
 ### 동아리 페이지
 
 #### 동아리 상세 페이지 (후기 제외)
+
 <img width="600" height="767" alt="image" src="https://github.com/user-attachments/assets/7133f5fd-caa6-40d6-b611-3c530bf14eed" />
 
 #### 활동 후기 작성 / 열람
+
 <img width="600" height="681" alt="image" src="https://github.com/user-attachments/assets/3753254d-e0ed-42f0-b2da-f613a35b685c" />
 
 #### 동아리 지원 페이지
+
 <img width="600" height="1158" alt="image" src="https://github.com/user-attachments/assets/9a87fddc-aa09-4021-98c9-5d02e0e21c78" />
-
-
 
 # 동아리 회장 기능
 
 #### 로그인 / 로그아웃 (카카오 OAuth 기반 인증)
 
 #### 대시보드 (지원자 관리, 합불 결과 체크 / 필터링)
+
 #### 합불 결과 전송 기능
+
 <img width="600" height="419" alt="image" src="https://github.com/user-attachments/assets/45ae673c-7376-4b01-98b2-265afe1d93d4" />
 
 #### 지원자 지원서 열람
+
 <img width="600" height="353" alt="image" src="https://github.com/user-attachments/assets/c94133db-7fe0-459f-bb36-3b42b8cf4e99" />
 
-
-
 #### 지원 폼 수정 기능 (모듈 추가 / 조합)
+
 <img width="600" height="1160" alt="image" src="https://github.com/user-attachments/assets/7b10529c-4c8d-48cb-b693-09ee1f85f3ab" />
 
-  
 #### 동아리 상세 페이지 수정 (사진, 텍스트, 필수 정보)
+
 <img width="600" height="300" alt="image" src="https://github.com/user-attachments/assets/cdc3e30a-ad6b-43a5-a8d4-b5d3bea9679e" />
 <img width="600" height="600" alt="image" src="https://github.com/user-attachments/assets/9cd3465b-a263-491e-9f62-ae488d0d512d" />
 
@@ -239,8 +244,8 @@ src
 
 - **단일 책임 원칙**: 컴포넌트 하나는 하나의 기능만 책임지도록 작게 분리합니다.
 - **관심사 분리**:
-  - **`pages`**: 비즈니스 로직, 상태 관리 등 '생각'하는 역할.
-  - **`components`**: props를 받아 UI를 그리는 '보여주는' 역할에 집중.
+  - **`pages`**: 화면 단위 컴포넌트와 라우트 연결만 담당. 비즈니스/도메인 로직이나 UI 세부 구현은 포함하지 않음.
+  - **`components`**: 반복되는 로직, 상태 관리, API 연동 등 재사용 가능한 로직 분리
   - **`hooks`**: 반복되는 로직은 커스텀 훅으로 분리.
 
 ---
