@@ -128,7 +128,30 @@
 
 ### **폴더 구조 (페이지 기반)**
 
-<img width="862" height="432" alt="image" src="https://github.com/user-attachments/assets/9fd4bc08-83ea-4c82-94cd-1986be3bdc26" />
+```
+src
+├── api                → 서버 통신 모듈(Axios 기반), 인증/초기화 로직 포함
+├── App.tsx            → 루트 컴포넌트, 라우터 연결
+├── constants          → 프로젝트 전역 상수 정의 (카테고리, 라우터 경로 등)
+├── index.css           → 글로벌 스타일 (reset-css 등)
+├── main.tsx           → 앱 진입점, React DOM 렌더링
+├── mocks              → Mock API 및 테스트용 데이터
+│   ├── client.ts
+│   ├── handler        → API별 핸들러
+│   └── repositories   → 데이터 리포지토리
+├── pages              → 화면 단위 컴포넌트 (라우팅 기준)
+│   ├── admin          → 관리자 페이지
+│   └── user           → 일반 사용자 페이지
+├── providers          → Context/Provider 및 Guard 컴포넌트
+├── shared             → 재사용 컴포넌트, 상수, auth 토큰 등
+│   ├── components
+│   └── constants
+├── styles             → Emotion 기반 스타일, 테마, 디자인 토큰
+├── types              → TypeScript 타입 정의
+├── utils              → 유틸리티 함수 모음
+├── setupTests.ts      → 테스트 환경 설정
+└── vite-env.d.ts      → Vite 환경 타입 정의
+```
 
 ### **컴포넌트 설계 원칙**
 
