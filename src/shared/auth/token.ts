@@ -1,5 +1,15 @@
-import { USER_DATA_KEY } from '../constants/auth';
 import type { User } from '@/types/auth';
+
+export const USER_DATA_KEY = 'user_data';
+
+export const AUTH_ERRORS = {
+  REQUIRED_COOKIE_NOT_FOUND: 'REQUIRED_COOKIE_NOT_FOUND',
+  UNSUPPORTED_JWT: 'UNSUPPORTED_JWT',
+  LOGGED_OUT_USER: 'LOGGED_OUT_USER',
+  INVALID_JWT_SIGNATURE: 'INVALID_JWT_SIGNATURE',
+  EXPIRED_REFRESH_TOKEN: 'EXPIRED_REFRESH_TOKEN',
+  INVALID_REFRESH_TOKEN: 'INVALID_REFRESH_TOKEN',
+} as const;
 
 export const setAccessToken = (token: string) => localStorage.setItem('accessToken', token);
 export const getAccessToken = () => localStorage.getItem('accessToken');

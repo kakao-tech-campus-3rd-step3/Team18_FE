@@ -1,6 +1,10 @@
 import axios from 'axios';
-import { getAccessToken, removeAccessToken, setAccessToken } from '@/shared/auth/token';
-import { AUTH_ERRORS } from '@/shared/constants/auth';
+import {
+  AUTH_ERRORS,
+  getAccessToken,
+  removeAccessToken,
+  setAccessToken,
+} from '@/shared/auth/token';
 import { reissueAccessToken } from './auth';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 import type { AxiosError, AxiosInstance, CreateAxiosDefaults } from 'axios';
