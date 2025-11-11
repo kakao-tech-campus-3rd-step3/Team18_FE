@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
+import { CONTACT_EMAIL } from '@/constants/email';
 import { Text } from '@/shared/components/Text';
-import { CONTACT_EMAIL } from '@/shared/constants/email';
 import { NoticeListCardSection } from './components/NoticeListCardSection';
 
 export const NoticeListPage = () => {

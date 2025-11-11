@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL } from '@/shared/constants/email';
+import { CONTACT_EMAIL } from '@/constants/email';
 import { Copyright, Email, FooterContainer } from './index.styled';
 
 const Footer = () => {
