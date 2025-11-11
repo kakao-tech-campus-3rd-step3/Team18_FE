@@ -144,14 +144,39 @@ src
 │   └── user           → 일반 사용자 페이지
 ├── providers          → Context/Provider 및 Guard 컴포넌트
 ├── shared             → 재사용 컴포넌트, 상수, auth 토큰 등
-│   ├── components
-│   └── constants
+│   └── components
 ├── styles             → Emotion 기반 스타일, 테마, 디자인 토큰
 ├── types              → TypeScript 타입 정의
 ├── utils              → 유틸리티 함수 모음
 ├── setupTests.ts      → 테스트 환경 설정
 └── vite-env.d.ts      → Vite 환경 타입 정의
 ```
+
+## 3-1. 라우트 경로
+
+각 페이지별 라우트 경로를 정리합니다.
+
+### 관리자(Admin)
+
+| 이름                     | 경로                                  | 설명               |
+| ------------------------ | ------------------------------------- | ------------------ |
+| DASHBOARD                | clubs/:clubId/dashboard               | 관리자 대시보드    |
+| APPLICATION_DETAIL       | clubs/:clubId/applicants/:applicantId | 지원서 상세        |
+| CLUB_EDIT                | clubs/:clubId/edit                    | 동아리 수정 페이지 |
+| APPLICATION_FORM_BUILDER | clubs/:clubId/application/form/create | 신청 폼 생성       |
+
+### 공통(Common)
+
+| 이름          | 경로                | 설명                    |
+| ------------- | ------------------- | ----------------------- |
+| MAIN          | /                   | 메인 페이지             |
+| APPLICATION   | clubs/:clubId/apply | 특정 동아리 신청 페이지 |
+| CLUB_DETAIL   | clubs/:clubId       | 동아리 상세 페이지      |
+| LOGIN         | login               | 로그인 페이지           |
+| CALLBACK      | login/redirect      | 로그인 콜백             |
+| SIGNUP        | signup              | 회원가입 페이지         |
+| NOTICE_LIST   | notices             | 공지사항 목록           |
+| NOTICE_DETAIL | notices/:noticeId   | 공지사항 상세           |
 
 ### **컴포넌트 설계 원칙**
 
