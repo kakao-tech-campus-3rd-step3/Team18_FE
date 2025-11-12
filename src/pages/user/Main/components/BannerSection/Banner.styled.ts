@@ -44,3 +44,23 @@ export const BannerImage = styled.img({
   pointerEvents: 'none',
   zIndex: 0,
 });
+
+export const SlideWrapper = styled.div({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  overflow: 'hidden',
+  zIndex: 0,
+});
+
+export const SlideImage = styled.img<{ active: boolean }>(({ active }) => ({
+  position: 'absolute',
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  objectPosition: 'center bottom',
+  transition: 'opacity 1.5s ease-in-out',
+  opacity: active ? 1 : 0,
+}));

@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { CLUB_CATEGORY } from '@/constants/clubCategory';
 import { ClubSearchInput } from '@/pages/user/Main/components/BannerSection/ClubSearchInput.tsx';
@@ -7,8 +6,10 @@ import { CLUB_RECRUIT_STATUS_KOR, type RecruitStatus } from '@/pages/user/Main/t
 import { Dropdown } from '@/shared/components/Dropdown/index.tsx';
 import { engToKorCategory, korToEngCategory, korToEngRecruitStatus } from '@/utils/formatting.ts';
 import * as S from './Banner.styled.ts';
-import * as B from './BannerText.tsx';
+import { BannerSlideshow } from './BannerSlideshow';
+import * as B from './BannerText.styled.ts';
 import type { ClubCategory, ClubCategoryEng } from '@/types/club';
+
 type FilterRecruitStatus = RecruitStatus | '전체';
 type Props = {
   onChangeSearch: (searchText: string) => void;
@@ -36,19 +37,18 @@ export const BannerSection = ({
 
   const handleRecruitStatusClick = (status: RecruitStatus) => {
     onSelectStatus(status);
-
     if (status === '전체') {
       filterParams.delete('status');
     } else {
       filterParams.set('status', korToEngRecruitStatus[status]);
     }
-
     setFilterParams(filterParams);
   };
 
   return (
     <S.BannerWrapper>
       <BannerSlideshow />
+
       <ContentContainer>
         <B.BannerTextWrapper>
           <B.HeaderText>함께할 사람이 있는 곳, 동아리움.</B.HeaderText>
@@ -77,24 +77,6 @@ export const BannerSection = ({
   );
 };
 
-const BannerSlideshow = () => {
-  const images = ['/assets/banner01.jpg', '/assets/banner02.jpg', '/assets/banner03.jpg'];
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => setIndex((prev) => (prev + 1) % images.length), 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <SlideWrapper>
-      {images.map((src, i) => (
-        <SlideImage key={src} src={src} active={i === index} />
-      ))}
-    </SlideWrapper>
-  );
-};
-
 const ContentContainer = styled.div(({ theme }) => ({
   position: 'relative',
   zIndex: 2,
@@ -115,26 +97,6 @@ const ContentContainer = styled.div(({ theme }) => ({
     padding: '0 16px',
     gap: '12px',
   },
-}));
-
-const SlideWrapper = styled.div({
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  overflow: 'hidden',
-  zIndex: 0,
-});
-
-const SlideImage = styled.img<{ active: boolean }>(({ active }) => ({
-  position: 'absolute',
-  width: '100%',
-  height: '100%',
-  objectFit: 'cover',
-  objectPosition: 'center bottom',
-  transition: 'opacity 1.5s ease-in-out',
-  opacity: active ? 1 : 0,
 }));
 
 export const SearchContainer = styled.div(({ theme }) => ({
