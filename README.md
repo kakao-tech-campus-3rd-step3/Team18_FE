@@ -18,15 +18,21 @@
 
 ## 기술 스택
 
-- **React 19**, **TypeScript 5**, **Vite 7**
-- **Emotion**: CSS-in-JS 스타일링
-- **React Query**: 서버 상태 관리
-- **React Hook Form**: 폼 상태 관리
-- **Axios**: HTTP 통신
-- **reset-css**: 스타일 초기화
-- **ESLint**, **Prettier**, **TypeScript**: 코드 품질 및 빌드 도구
-- **jest/vitest** : (테스트)
-- **husky/lint-staged** : (커밋 훅)
+#### 기술 스택 (Tech Stack)
+
+<p align="left"> <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" /> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" /> <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" /> </p>
+
+#### 스타일링 (Styling)
+
+<p align="left"> <img src="https://img.shields.io/badge/Emotion-DB7093?style=for-the-badge&logo=emotion&logoColor=white" alt="Emotion" /> <img src="https://img.shields.io/badge/reset--css-000000?style=for-the-badge&logo=csswizardry&logoColor=white" alt="reset-css" /> </p>
+
+#### 상태 관리 및 데이터 통신 (State & Data Fetching)
+
+<p align="left"> <img src="https://img.shields.io/badge/React%20Query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white" alt="React Query" /> <img src="https://img.shields.io/badge/React%20Hook%20Form-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white" alt="React Hook Form" /> <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white" alt="Axios" /> </p>
+
+#### 코드 품질 및 워크플로우 (Code Quality & Workflow)
+
+<p align="left"> <img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" alt="ESLint" /> <img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=black" alt="Prettier" /> <img src="https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white" alt="Vitest" /> <img src="https://img.shields.io/badge/Husky-E34F26?style=for-the-badge&logo=husky&logoColor=white" alt="Husky" /> </p>
 
 # 📌 Feature List
 
