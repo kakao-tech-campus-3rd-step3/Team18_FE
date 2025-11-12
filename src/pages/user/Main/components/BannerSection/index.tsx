@@ -89,7 +89,13 @@ const BannerSlideshow = () => {
   return (
     <SlideWrapper>
       {images.map((src, i) => (
-        <SlideImage key={src} src={src} active={i === index} />
+        <SlideImage
+          key={src}
+          src={src}
+          active={i === index}
+          loading={i === 0 ? 'eager' : 'lazy'}
+          fetchPriority={i === 0 ? 'high' : 'auto'}
+        />
       ))}
     </SlideWrapper>
   );
