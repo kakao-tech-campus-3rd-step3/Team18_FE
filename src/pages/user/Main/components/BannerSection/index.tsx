@@ -76,9 +76,22 @@ export const BannerSection = ({
     </S.BannerWrapper>
   );
 };
-
 const BannerSlideshow = () => {
-  const images = ['/assets/banner01.webp', '/assets/banner02.webp', '/assets/banner03.webp'];
+  const images = [
+    {
+      alt: '동아리움 배너 이미지 1',
+      baseName: '/assets/banners/banner01',
+    },
+    {
+      alt: '동아리움 배너 이미지 2',
+      baseName: '/assets/banners/banner02',
+    },
+    {
+      alt: '동아리움 배너 이미지 3',
+      baseName: '/assets/banners/banner03',
+    },
+  ];
+
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -88,11 +101,14 @@ const BannerSlideshow = () => {
 
   return (
     <SlideWrapper>
-      {images.map((src, i) => (
+      {images.map((img, i) => (
         <SlideImage
-          key={src}
-          src={src}
+          key={img.baseName}
           active={i === index}
+          src={`${img.baseName}-large.webp`}
+          srcSet={`${img.baseName}-small.webp 800w, ${img.baseName}-medium.webp 1280w, ${img.baseName}-large.webp 1920w`}
+          sizes='(max-width: 768px) 100vw, 1920px'
+          alt={img.alt}
           loading={i === 0 ? 'eager' : 'lazy'}
           fetchPriority={i === 0 ? 'high' : 'auto'}
         />
