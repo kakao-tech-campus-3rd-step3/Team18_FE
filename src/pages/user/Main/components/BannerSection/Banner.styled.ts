@@ -29,7 +29,7 @@ export const BannerWrapper = styled.div(({ theme }) => ({
     gap: 12,
     marginBottom: 0,
     alignItems: 'center',
-    overflowX: 'hidden',
+    overflow: 'visible',
   },
 }));
 
