@@ -78,7 +78,7 @@ export const BannerSection = ({
 };
 
 const BannerSlideshow = () => {
-  const images = ['/assets/banner01.png', '/assets/banner02.png', '/assets/banner03.png'];
+  const images = ['/assets/banner01.webp', '/assets/banner02.webp', '/assets/banner03.webp'];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
