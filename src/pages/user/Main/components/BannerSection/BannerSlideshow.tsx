@@ -28,7 +28,7 @@ export const BannerSlideshow = () => {
             active={i === index}
             src={`${img.baseName}-large.webp`}
             srcSet={`${img.baseName}-small.webp 800w, ${img.baseName}-medium.webp 1280w, ${img.baseName}-large.webp 1920w`}
-            sizes='(max-width: 768px) 100vw, 1920px'
+            sizes='100vw'
             alt={img.alt}
             loading={i === 0 ? 'eager' : 'lazy'}
             fetchPriority={i === 0 ? 'high' : 'auto'}
