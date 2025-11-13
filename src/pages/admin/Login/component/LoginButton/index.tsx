@@ -15,7 +15,7 @@ export const LoginButton = () => {
       <KakaoButtonWrapper>
         <Button width='100%' type='button' onClick={handleKakaoLogin}>
           <ButtonContent>
-            <Icon src='/assets/kakao-icon.png' width={24} height={24} />
+            <Icon src='/assets/icons/kakao-icon.png' width={24} height={24} />
             {'카카오 로그인'}
           </ButtonContent>
         </Button>
