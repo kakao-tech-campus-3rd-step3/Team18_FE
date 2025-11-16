@@ -5,7 +5,7 @@ import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
-import { SectionTitle } from '@/shared/components/SectionTitle';
+import { SectionHeading } from '@/shared/components/SectionHeading';
 import { Text } from '@/shared/components/Text';
 import * as S from './index.styled';
 
@@ -29,7 +29,7 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
   return (
     <S.ReviewsContainer>
       <S.Divider />
-      <SectionTitle>동아리 후기</SectionTitle>
+      <SectionHeading>동아리 후기</SectionHeading>
 
       {loading && <LoadingSpinner />}
 

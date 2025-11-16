@@ -1,6 +1,6 @@
 import { FiTrash2, FiPlus } from 'react-icons/fi';
 import { useClubActivityPhotos } from '@/pages/admin/ClubDetailEdit/hooks/useClubActivityPhotos';
-import { SectionTitle } from '@/shared/components/SectionTitle';
+import { SectionHeading } from '@/shared/components/SectionHeading';
 import * as S from './index.styled';
 
 interface ClubActivityPhotosEditSectionProps {
@@ -18,12 +18,12 @@ export const ClubActivityPhotosEditSection = ({
   return (
     <>
       <S.TitleWrapper>
-        <SectionTitle required>
+        <SectionHeading required>
           활동 사진
           <S.AddButton onClick={handleAdd}>
             <FiPlus />
           </S.AddButton>
-        </SectionTitle>
+        </SectionHeading>
       </S.TitleWrapper>
 
       <S.PhotosWrapper>
