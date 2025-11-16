@@ -1,6 +1,6 @@
 import type { UseFormReset, UseFormWatch } from 'react-hook-form';
 import { useCallback, useEffect, useState } from 'react';
-import { debounce } from '@/utils/debounce';
+import { debounce } from '@/shared/utils/debounce';
 import type { FormInputs } from '../type/apply';
 
 interface UseApplicationAutoSaveProps {

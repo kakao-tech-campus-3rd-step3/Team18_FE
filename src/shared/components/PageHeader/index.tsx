@@ -1,11 +1,11 @@
-import { engToKorCategory } from '@/utils/formatting';
+import { engToKorCategory } from '@/shared/utils/formatting';
 import * as S from './index.styled';
 import type { ClubCategoryEng } from '@/shared/types/club';
 
-interface ClubHeaderSectionProps {
+type ClubHeaderSectionProps = {
   clubName: string;
   category?: ClubCategoryEng;
-}
+};
 
 export const PageHeader = ({ clubName, category }: ClubHeaderSectionProps) => {
   const korCategory = category && engToKorCategory[category];

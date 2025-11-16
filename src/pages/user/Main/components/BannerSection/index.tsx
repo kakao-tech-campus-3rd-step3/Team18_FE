@@ -4,7 +4,11 @@ import { CLUB_CATEGORY } from '@/constants/clubCategory';
 import { ClubSearchInput } from '@/pages/user/Main/components/BannerSection/ClubSearchInput.tsx';
 import { CLUB_RECRUIT_STATUS_KOR, type RecruitStatus } from '@/pages/user/Main/types/club.ts';
 import { Dropdown } from '@/shared/components/Dropdown/index.tsx';
-import { engToKorCategory, korToEngCategory, korToEngRecruitStatus } from '@/utils/formatting.ts';
+import {
+  engToKorCategory,
+  korToEngCategory,
+  korToEngRecruitStatus,
+} from '@/shared/utils/formatting.ts';
 import * as S from './Banner.styled.ts';
 import { BannerSlideshow } from './BannerSlideshow';
 import * as B from './BannerText.styled.ts';

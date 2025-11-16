@@ -10,7 +10,7 @@ import {
   storeUserData,
 } from '@/shared/auth/token';
 import { ROLE } from '@/shared/types/navigation';
-import { handleAxiosError } from '@/utils/handleAxiosError';
+import { handleAxiosError } from '@/shared/utils/handleAxiosError';
 import type { SignupFormInputs } from '@/pages/admin/Signup/type/signup';
 import type { User, AuthContextType } from '@/shared/types/auth';
 

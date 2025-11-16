@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { SectionTitle } from '@/shared/components/SectionTitle';
-import { formatTextWithNewlines } from '@/utils/textFormatting';
+import { formatTextWithNewlines } from '@/shared/utils/textFormatting';
 
 interface ClubDescriptionSectionProps {
   introductionOverview: string;

@@ -1,6 +1,6 @@
 import { type AxiosResponse } from 'axios';
 import { apiInstance } from '@/api/initInstance';
-import { handleAxiosError } from '@/utils/handleAxiosError';
+import { handleAxiosError } from '@/shared/utils/handleAxiosError';
 import type { ApplicationForm } from '../types/fieldType';
 
 export const fetchApplicationForm = async (clubId: number): Promise<ApplicationForm> => {

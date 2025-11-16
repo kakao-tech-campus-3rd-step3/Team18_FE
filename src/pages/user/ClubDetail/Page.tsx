@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { PageHeader } from '@/shared/components/PageHeader';
-import { engToKorCategory } from '@/utils/formatting';
+import { engToKorCategory } from '@/shared/utils/formatting';
 import { fetchClubDetail } from './api/clubDetail';
 import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
 import { ClubDescriptionSection } from './components/ClubDescriptionSection';

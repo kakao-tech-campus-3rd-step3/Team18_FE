@@ -1,5 +1,5 @@
 import { CLUB_CATEGORY_MAP } from '@/constants/clubCategory.ts';
-import { engToKorCategory } from '@/utils/formatting.ts';
+import { engToKorCategory } from '@/shared/utils/formatting.ts';
 import { RECRUIT_STATUS_MAP, type Club, type RecruitStatus } from '../types/club.ts';
 import type { ClubCategoryEng } from '@/shared/types/club.ts';
 

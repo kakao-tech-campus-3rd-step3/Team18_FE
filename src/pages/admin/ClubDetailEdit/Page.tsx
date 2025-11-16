@@ -8,7 +8,7 @@ import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { PageHeader } from '@/shared/components/PageHeader';
 import { theme } from '@/shared/styles/theme';
-import { engToKorCategory } from '@/utils/formatting';
+import { engToKorCategory } from '@/shared/utils/formatting';
 import { updateClubDetailEdit } from './api/clubDetailEdit';
 import { updateClubImages } from './api/clubImagesEdit';
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';

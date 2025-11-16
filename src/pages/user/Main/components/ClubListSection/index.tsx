@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useClubFiltering } from '@/pages/user/Main/hooks/useClubFiltering.ts';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
-import { engToKorCategory } from '@/utils/formatting.ts';
+import { engToKorCategory } from '@/shared/utils/formatting.ts';
 import * as S from './Club.styled.ts';
 import NoSearchResult from './NoSearchResult.tsx';
 import type { Club, RecruitStatus } from '@/pages/user/Main/types/club.ts';
