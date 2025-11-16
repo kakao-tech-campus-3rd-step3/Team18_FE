@@ -6,7 +6,7 @@ import {
   updateComment,
 } from '@/pages/admin/ApplicationDetail/api/comments';
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
-import type { UseApiQueryResult } from '@/types/useApiQueryResult';
+import type { UseApiQueryResult } from '@/shared/types/useApiQueryResult';
 
 type CreateCommentPayload = Pick<Comment, 'content' | 'rating'>;
 type UpdateCommentPayload = Pick<Comment, 'commentId' | 'content' | 'rating'>;

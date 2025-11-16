@@ -1,4 +1,4 @@
-import type { User } from '@/types/auth';
+import type { User } from '@/shared/types/auth';
 
 export const USER_DATA_KEY = 'user_data';
 

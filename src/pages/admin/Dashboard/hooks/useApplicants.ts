@@ -7,7 +7,7 @@ import type {
   ApplicationFilterOption,
   ApplicantCounts,
 } from '@/pages/admin/Dashboard/types/dashboard';
-import type { UseApiQueryResult } from '@/types/useApiQueryResult';
+import type { UseApiQueryResult } from '@/shared/types/useApiQueryResult';
 
 export interface ExtendedUseApiQueryResult<T> extends UseApiQueryResult<T> {
   counts: ApplicantCounts;
