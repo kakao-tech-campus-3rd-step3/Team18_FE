@@ -1,12 +1,12 @@
 import { CONTACT_EMAIL } from '@/constants/email';
-import { Copyright, Email, FooterContainer } from './index.styled';
+import * as S from './index.styled';
 
 const Footer = () => {
   return (
-    <FooterContainer>
-      <Email href='mailto:jnupole004@gmail.com'>Contact : {CONTACT_EMAIL}</Email>
-      <Copyright>© {new Date().getFullYear()} Dongarium. All rights reserved.</Copyright>
-    </FooterContainer>
+    <S.Container>
+      <S.Email href='mailto:jnupole004@gmail.com'>Contact : {CONTACT_EMAIL}</S.Email>
+      <S.Copyright>© {new Date().getFullYear()} Dongarium. All rights reserved.</S.Copyright>
+    </S.Container>
   );
 };
 
