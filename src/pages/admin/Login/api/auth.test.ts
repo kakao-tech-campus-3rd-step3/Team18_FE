@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { apiInstance } from '@/api/initInstance';
+import { apiInstance } from '@/app/api/initInstance';
 import { postAuthCode, logoutUser } from './auth';
 import type { LoginResponse } from './auth';
 
