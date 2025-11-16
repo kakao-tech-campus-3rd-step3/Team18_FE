@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { PageHeader } from '@/shared/components/PageHeader';
-import { Layout, ContentLeft, ContentRight } from '@/shared/components/PageHeader/index.styled';
 import { engToKorCategory } from '@/utils/formatting';
 import { fetchClubDetail } from './api/clubDetail';
 import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
 import { ClubDescriptionSection } from './components/ClubDescriptionSection';
 import { ClubInfoSidebarSection } from './components/ClubInfoSidebarSection';
 import { ClubReviewsSection } from './components/ClubReviewsSection';
+
 import type { ClubDetail } from './types/clubDetail';
 import type { ClubCategoryEng } from '@/types/club';
 
@@ -21,24 +23,28 @@ export const ClubDetailPage = () => {
     fetchClubDetail(clubIdNumber).then(setClub).catch(console.error);
   }, [clubIdNumber]);
 
-  if (!club) return <div>Loading...</div>;
+  if (!club) return <LoadingSpinner />;
 
   return (
-    <Layout>
-      <ContentLeft>
-        <PageHeader
-          clubName={club.clubName}
-          category={club.category in engToKorCategory ? (club.category as ClubCategoryEng) : 'ALL'}
-        />
-        <ClubActivityPhotosSection images={club.introductionImages} />
-        <ClubDescriptionSection
-          introductionOverview={club.introductionOverview}
-          introductionActivity={club.introductionActivity}
-          introductionIdeal={club.introductionIdeal}
-        />
-        <ClubReviewsSection clubId={club.clubId} />
-      </ContentLeft>
-      <ContentRight>
+    <TwoColumnLayout
+      left={
+        <>
+          <PageHeader
+            clubName={club.clubName}
+            category={
+              club.category in engToKorCategory ? (club.category as ClubCategoryEng) : 'ALL'
+            }
+          />
+          <ClubActivityPhotosSection images={club.introductionImages} />
+          <ClubDescriptionSection
+            introductionOverview={club.introductionOverview}
+            introductionActivity={club.introductionActivity}
+            introductionIdeal={club.introductionIdeal}
+          />
+          <ClubReviewsSection clubId={club.clubId} />
+        </>
+      }
+      right={
         <ClubInfoSidebarSection
           presidentName={club.presidentName}
           presidentPhoneNumber={club.presidentPhoneNumber}
@@ -50,7 +56,7 @@ export const ClubDetailPage = () => {
           applicationNotice={club.applicationNotice}
           clubId={club.clubId}
         />
-      </ContentRight>
-    </Layout>
+      }
+    />
   );
 };
