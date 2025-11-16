@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
-import {
-  Layout,
-  ContentLeft,
-  ContentRight,
-} from '@/shared/components/ClubDetailLayout/index.styled';
+import { PageHeader } from '@/shared/components/PageHeader';
+import { Layout, ContentLeft, ContentRight } from '@/shared/components/PageHeader/index.styled';
 import { engToKorCategory } from '@/utils/formatting';
 import { fetchClubDetail } from './api/clubDetail';
 import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
@@ -30,7 +26,7 @@ export const ClubDetailPage = () => {
   return (
     <Layout>
       <ContentLeft>
-        <ClubHeaderSection
+        <PageHeader
           clubName={club.clubName}
           category={club.category in engToKorCategory ? (club.category as ClubCategoryEng) : 'ALL'}
         />

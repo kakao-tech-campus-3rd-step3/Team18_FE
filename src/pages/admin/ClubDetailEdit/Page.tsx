@@ -4,12 +4,8 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { Button } from '@/shared/components/Button';
-import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
-import {
-  Layout,
-  ContentLeft,
-  ContentRight,
-} from '@/shared/components/ClubDetailLayout/index.styled';
+import { PageHeader } from '@/shared/components/PageHeader';
+import { Layout, ContentLeft, ContentRight } from '@/shared/components/PageHeader/index.styled';
 import { theme } from '@/styles/theme';
 import { engToKorCategory } from '@/utils/formatting';
 import { updateClubDetailEdit } from './api/clubDetailEdit';
@@ -70,7 +66,7 @@ export const ClubDetailEditPage = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Layout>
           <ContentLeft>
-            <ClubHeaderSection
+            <PageHeader
               clubName={club.clubName}
               category={
                 club.category in engToKorCategory ? (club.category as ClubCategoryEng) : 'ALL'

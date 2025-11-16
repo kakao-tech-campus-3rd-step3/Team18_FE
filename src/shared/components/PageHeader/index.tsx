@@ -4,11 +4,11 @@ import type { ClubCategoryEng } from '@/types/club';
 
 interface ClubHeaderSectionProps {
   clubName: string;
-  category: ClubCategoryEng;
+  category?: ClubCategoryEng;
 }
 
-export const ClubHeaderSection = ({ clubName, category }: ClubHeaderSectionProps) => {
-  const korCategory = engToKorCategory[category];
+export const PageHeader = ({ clubName, category }: ClubHeaderSectionProps) => {
+  const korCategory = category && engToKorCategory[category];
 
   return (
     <HeaderContainer>
