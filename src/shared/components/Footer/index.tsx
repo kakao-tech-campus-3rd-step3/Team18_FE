@@ -4,7 +4,7 @@ import * as S from './index.styled';
 const Footer = () => {
   return (
     <S.Container>
-      <S.Email href='mailto:jnupole004@gmail.com'>Contact : {CONTACT_EMAIL}</S.Email>
+      <S.Email href={`mailto:${CONTACT_EMAIL}`}>Contact : {CONTACT_EMAIL}</S.Email>
       <S.Copyright>© {new Date().getFullYear()} Dongarium. All rights reserved.</S.Copyright>
     </S.Container>
   );
