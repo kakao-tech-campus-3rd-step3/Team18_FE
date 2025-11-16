@@ -1,4 +1,4 @@
-import { apiInstance } from '@/api/initInstance';
+import { apiInstance } from '@/app/api/initInstance';
 import { stageMap } from '../utils/stageMap';
 import type { ApplicationStage } from '@/pages/admin/Dashboard/types/dashboard';
 

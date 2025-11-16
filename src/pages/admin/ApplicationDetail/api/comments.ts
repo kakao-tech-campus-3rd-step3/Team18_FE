@@ -1,4 +1,4 @@
-import { apiInstance } from '@/api/initInstance';
+import { apiInstance } from '@/app/api/initInstance';
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 
 export const fetchComments = async (applicationId: number): Promise<Comment[]> => {

@@ -1,5 +1,5 @@
-import { apiInstance } from '@/api/initInstance';
-import type { Role } from '@/types/navigation';
+import { apiInstance } from '@/app/api/initInstance';
+import type { Role } from '@/shared/types/navigation';
 import type { AxiosResponse } from 'axios';
 
 interface LoginSuccessResponse {

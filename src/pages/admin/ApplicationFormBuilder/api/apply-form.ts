@@ -1,5 +1,5 @@
 import { type AxiosResponse } from 'axios';
-import { apiInstance } from '@/api/initInstance';
+import { apiInstance } from '@/app/api/initInstance';
 import { handleAxiosError } from '@/shared/utils/handleAxiosError';
 import type { ApplicationForm } from '../types/fieldType';
 
