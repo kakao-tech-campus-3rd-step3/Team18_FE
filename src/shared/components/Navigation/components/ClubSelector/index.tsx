@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '@/providers/auth';
+import { useAuth } from '@/app/providers/auth';
 import { useClubList } from '@/shared/components/Navigation/hooks/useClubList';
 import { Text } from '@/shared/components/Text';
 import * as S from './index.styled';

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import { useAuth } from '@/app/providers/auth';
 import { Logo } from '@/pages/admin/Login/component/Logo';
-import { useAuth } from '@/providers/auth';
 import { ClubSelector } from './components/ClubSelector';
 import { useNavigation } from './hooks/useNavigation';
 import { NavigationContainer } from './NavigationContainer';

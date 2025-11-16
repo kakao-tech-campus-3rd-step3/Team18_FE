@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/providers/auth';
+import { useAuth } from '@/app/providers/auth';
 import type { ClubMemberInfo } from '@/pages/admin/Login/api/auth';
 
 export const useClubList = () => {
