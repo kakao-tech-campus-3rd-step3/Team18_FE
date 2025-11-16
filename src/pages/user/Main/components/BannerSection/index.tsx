@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useSearchParams } from 'react-router-dom';
-import { CLUB_CATEGORY } from '@/constants/clubCategory';
+import { CLUB_CATEGORY } from '@/app/constants/clubCategory';
 import { ClubSearchInput } from '@/pages/user/Main/components/BannerSection/ClubSearchInput.tsx';
 import { CLUB_RECRUIT_STATUS_KOR, type RecruitStatus } from '@/pages/user/Main/types/club.ts';
 import { Dropdown } from '@/shared/components/Dropdown/index.tsx';

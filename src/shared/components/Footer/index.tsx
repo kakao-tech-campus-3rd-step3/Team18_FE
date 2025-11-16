@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL } from '@/constants/email';
+import { CONTACT_EMAIL } from '@/app/constants/email';
 import * as S from './index.styled';
 
 const Footer = () => {

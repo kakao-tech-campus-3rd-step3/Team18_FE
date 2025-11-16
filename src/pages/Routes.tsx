@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
+import { ROUTE_PATH } from '@/app/constants/routerPath.ts';
 import { App } from '@/App.tsx';
-import { ROUTE_PATH } from '@/constants/routerPath.ts';
 import { ClubDetailEditPage } from '@/pages/admin/ClubDetailEdit/Page';
 import { DashboardPage } from '@/pages/admin/Dashboard/Page';
 

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CONTACT_EMAIL } from '../../constants/email';
+import { CONTACT_EMAIL } from '@/app/constants/email';
 
 export const EmptyState = () => {
   return (

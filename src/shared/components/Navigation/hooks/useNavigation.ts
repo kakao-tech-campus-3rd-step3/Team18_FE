@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { getNavItems } from '@/constants/navigation';
+import { getNavItems } from '@/app/constants/navigation';
 import { useAuth } from '@/providers/auth';
 import { type NavItemData } from '@/shared/types/navigation';
 import { replaceRouteParams } from '@/shared/utils/replaceRouteParams';

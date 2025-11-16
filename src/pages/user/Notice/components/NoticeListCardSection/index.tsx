@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { ROUTE_PATH } from '@/constants/routerPath';
+import { ROUTE_PATH } from '@/app/constants/routerPath';
 import { fetchNotices } from '@/pages/user/Notice/api/notices';
 import * as S from './index.styled';
 import type { Notice } from '@/pages/user/Notice/types/notice';

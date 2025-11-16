@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import { ROUTE_PATH } from '@/constants/routerPath';
+import { ROUTE_PATH } from '@/app/constants/routerPath';
 import { useAuth } from '@/providers/auth';
 import { getTemporaryToken, removeTemporaryToken } from '@/shared/auth/token';
 import { theme } from '@/shared/styles/theme';
