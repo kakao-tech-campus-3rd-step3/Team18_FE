@@ -1,7 +1,7 @@
 import { isAxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import { theme } from '@/shared/styles/theme';
+import { theme } from '@/app/styles/theme';
 import { overwriteApplicationForm, postApplicationForm } from '../api/apply';
 import type { FormInputs } from '../type/apply';
 import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
