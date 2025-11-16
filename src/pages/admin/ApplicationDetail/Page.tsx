@@ -1,11 +1,12 @@
 import { useParams } from 'react-router-dom';
-import { useAuth } from '@/providers/auth';
+import { useAuth } from '@/app/providers/auth';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicantInfoSection } from './components/ApplicantInfoSection';
 import { ApplicantProfileSection } from './components/ApplicantProfileSection/index';
 import { ApplicantQuestionSection } from './components/ApplicationQuestionSection';
 import { CommentSection } from './components/CommentSection';
 import { useDetailApplications } from './hooks/useDetailApplication';
+
 import * as S from './index.styled';
 
 export const ApplicationDetailPage = () => {

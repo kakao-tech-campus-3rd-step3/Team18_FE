@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { sentMessage } from '@/pages/admin/Dashboard/api/sentMessage';
-import { toast } from '@/utils/toast';
+import { toast } from '@/shared/utils/toast';
 import type { ApplicationStage } from '@/pages/admin/Dashboard/types/dashboard';
 
 interface BackendErrorResponse {

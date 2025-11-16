@@ -1,5 +1,5 @@
 import type { LoginResponse } from '@/pages/admin/Login/api/auth';
-import type { Role } from '@/types/navigation';
+import type { Role } from '@/shared/types/navigation';
 
 const mockClubListInfo: { clubId: number; clubName: string; role: Role }[] = [
   {

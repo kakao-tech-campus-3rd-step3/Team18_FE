@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { theme } from '@/styles/theme';
+import { theme } from '@/app/styles/theme';
 
 type NavigationContainerProps = {
   children: ReactNode;

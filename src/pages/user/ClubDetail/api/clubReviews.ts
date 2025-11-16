@@ -1,4 +1,4 @@
-import { apiInstance } from '@/api/initInstance';
+import { apiInstance } from '@/app/api/initInstance';
 import type { ClubReview, PostClubReviewRequest } from '@/pages/user/ClubDetail/types/review';
 
 const handleAxiosError = (error: unknown, defaultMessage: string): never => {

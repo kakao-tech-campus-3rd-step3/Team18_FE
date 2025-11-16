@@ -1,9 +1,9 @@
 import { isAxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ROUTE_PATH } from '@/constants/routerPath';
-import { useAuth } from '@/providers/auth';
-import { handleAxiosError } from '@/utils/handleAxiosError';
+import { ROUTE_PATH } from '@/app/constants/routerPath';
+import { useAuth } from '@/app/providers/auth';
+import { handleAxiosError } from '@/shared/utils/handleAxiosError';
 import type { LoginResponse } from '../api/auth';
 
 export function useKakaoLogin() {

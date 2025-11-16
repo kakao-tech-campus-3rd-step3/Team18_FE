@@ -2,7 +2,7 @@ import { type Club, type RecruitStatus } from '@/pages/user/Main/types/club.ts';
 import { getNoSearchMessage } from '@/pages/user/Main/utils/searchClubs.ts';
 import { Text } from '@/shared/components/Text';
 import * as S from './Club.styled.ts';
-import type { ClubCategoryEng } from '@/types/club.ts';
+import type { ClubCategoryEng } from '@/shared/types/club.ts';
 
 const NoSearchResult = (
   filteredClubs: Club[],

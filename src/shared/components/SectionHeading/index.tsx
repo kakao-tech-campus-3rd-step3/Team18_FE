@@ -1,20 +1,20 @@
 import styled from '@emotion/styled';
 
-interface SectionTitleProps {
+type Props = {
   required?: boolean;
   children: React.ReactNode;
-}
+};
 
-export const SectionTitle = ({ required, children }: SectionTitleProps) => {
+export const SectionHeading = ({ required, children }: Props) => {
   return (
-    <StyledTitle>
+    <StyledHeading>
       {children}
       {required && <RequiredMark>*</RequiredMark>}
-    </StyledTitle>
+    </StyledHeading>
   );
 };
 
-const StyledTitle = styled.h2(({ theme }) => ({
+const StyledHeading = styled.h2(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   fontSize: theme.font.size.lg,

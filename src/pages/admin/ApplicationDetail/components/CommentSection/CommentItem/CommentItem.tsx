@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useAuth } from '@/app/providers/auth';
 import { ApplicantStarRating } from '@/pages/admin/ApplicationDetail/components/CommentSection/ApplicantStarRating';
 import { useComments } from '@/pages/admin/ApplicationDetail/hooks/useComments';
-import { useAuth } from '@/providers/auth';
 import { Text } from '@/shared/components/Text';
 import { CommentEditForm } from './CommentEditForm';
 import * as S from './CommentItem.styles';

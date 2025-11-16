@@ -1,6 +1,6 @@
 import { type AxiosResponse } from 'axios';
-import { apiInstance } from '@/api/initInstance';
-import { handleAxiosError } from '@/utils/handleAxiosError';
+import { apiInstance } from '@/app/api/initInstance';
+import { handleAxiosError } from '@/shared/utils/handleAxiosError';
 import { toApplyRequest } from './mappers/apply';
 import type { ApplicationForm, FormInputs } from '@/pages/user/Apply/type/apply.ts';
 

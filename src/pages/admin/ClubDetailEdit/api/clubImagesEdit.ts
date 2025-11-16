@@ -1,5 +1,5 @@
-import { apiInstance } from '@/api/initInstance';
-import { handleAxiosError } from '@/utils/handleAxiosError';
+import { apiInstance } from '@/app/api/initInstance';
+import { handleAxiosError } from '@/shared/utils/handleAxiosError';
 
 export const updateClubImages = async (
   clubId: number | string,

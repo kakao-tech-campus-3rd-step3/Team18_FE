@@ -1,6 +1,6 @@
-import { apiInstance } from '@/api/initInstance';
+import { apiInstance } from '@/app/api/initInstance';
 import type { Club } from '@/pages/user/Main/types/club';
-import type { ClubCategoryEng } from '@/types/club';
+import type { ClubCategoryEng } from '@/shared/types/club';
 import type { AxiosResponse } from 'axios';
 
 export type ClubResponse = {

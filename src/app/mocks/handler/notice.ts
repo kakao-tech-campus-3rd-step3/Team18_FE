@@ -1,5 +1,5 @@
 import { http, HttpResponse, type PathParams } from 'msw';
-import { noticeRepository } from '@/mocks/repositories/notice';
+import { noticeRepository } from '@/app/mocks/repositories/notice';
 
 const getNoticesResolver = ({ request }: { request: Request }) => {
   const url = new URL(request.url);

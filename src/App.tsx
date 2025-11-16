@@ -2,11 +2,11 @@ import { ThemeProvider } from '@emotion/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Outlet } from 'react-router-dom';
 import { Toaster } from 'sonner';
+import { UserProvider } from '@/app/providers/auth';
+import { theme } from '@/app/styles/theme';
 import { Navigation } from '@/shared/components/Navigation';
-import { theme } from '@/styles/theme';
-import { UserProvider } from './providers/auth';
+import { AppContainer, MainContent } from './app/styles/Layout/App.styled';
 import Footer from './shared/components/Footer';
-import { AppContainer, MainContent } from './styles/Layout/App.styled';
 
 const queryClient = new QueryClient();
 

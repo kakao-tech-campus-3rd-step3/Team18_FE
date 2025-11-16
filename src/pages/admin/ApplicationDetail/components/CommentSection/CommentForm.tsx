@@ -5,7 +5,7 @@ import { Button } from '@/shared/components/Button';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { Text } from '@/shared/components/Text';
 import { ApplicantStarRating } from './ApplicantStarRating';
-import type { CreateCommentRequest } from '@/mocks/handler/applicant';
+import type { CreateCommentRequest } from '@/app/mocks/handler/applicant';
 import type { CommentFormData } from '@/pages/admin/ApplicationDetail/types/comments';
 
 type Props = {

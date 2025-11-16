@@ -3,15 +3,12 @@ import { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { theme } from '@/app/styles/theme';
 import { Button } from '@/shared/components/Button';
-import { ClubHeaderSection } from '@/shared/components/ClubDetailLayout/ClubHeaderSection';
-import {
-  Layout,
-  ContentLeft,
-  ContentRight,
-} from '@/shared/components/ClubDetailLayout/index.styled';
-import { theme } from '@/styles/theme';
-import { engToKorCategory } from '@/utils/formatting';
+import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
+import { PageHeader } from '@/shared/components/PageHeader';
+import { engToKorCategory } from '@/shared/utils/formatting';
 import { updateClubDetailEdit } from './api/clubDetailEdit';
 import { updateClubImages } from './api/clubImagesEdit';
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
@@ -19,8 +16,9 @@ import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSect
 import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
 import { ClubShortIntroductionEditSection } from './components/ClubShortIntroductionEditSection';
 import { useClubDetailEdit } from './hooks/useClubDetailEdit';
+
 import type { ClubDetailUpdatePayload } from './types/clubDetailEdit';
-import type { ClubCategoryEng } from '@/types/club';
+import type { ClubCategoryEng } from '@/shared/types/club';
 
 export const ClubDetailEditPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
@@ -60,53 +58,53 @@ export const ClubDetailEditPage = () => {
         });
       });
   };
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>데이터를 불러오는 중 오류가 발생했습니다.</div>;
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <div>에러발생 : {error.message}</div>;
   if (!club) return null;
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Layout>
-          <ContentLeft>
-            <ClubHeaderSection
-              clubName={club.clubName}
-              category={
-                club.category in engToKorCategory ? (club.category as ClubCategoryEng) : 'ALL'
-              }
-            />
-            <ClubShortIntroductionEditSection />
+        <TwoColumnLayout
+          left={
+            <>
+              <PageHeader
+                clubName={club.clubName}
+                category={
+                  club.category in engToKorCategory ? (club.category as ClubCategoryEng) : 'ALL'
+                }
+              />
+              <ClubShortIntroductionEditSection />
+              <ClubActivityPhotosEditSection
+                clubId={club.clubId}
+                images={club.introductionImages}
+                onUpload={(files: File[]) =>
+                  updateClubImages(club.clubId, files, club.introductionImages)
+                }
+              />
+              <ClubDescriptionEditSection />
+              {errors.presidentPhoneNumber && (
+                <ErrorMessage>{errors.presidentPhoneNumber.message}</ErrorMessage>
+              )}
 
-            <ClubActivityPhotosEditSection
-              clubId={club.clubId}
-              images={club.introductionImages}
-              onUpload={(files: File[]) =>
-                updateClubImages(club.clubId, files, club.introductionImages)
-              }
-            />
+              <ButtonGroup>
+                <Button type='submit' disabled={isSubmitting}>
+                  {isSubmitting ? '저장 중...' : '수정하기'}
+                </Button>
+                <Button variant='light' to={`/admin/clubs/${clubId}/dashboard`}>
+                  취소
+                </Button>
+              </ButtonGroup>
 
-            <ClubDescriptionEditSection />
-            {errors.presidentPhoneNumber && (
-              <ErrorMessage>{errors.presidentPhoneNumber.message}</ErrorMessage>
-            )}
-
-            <ButtonGroup>
-              <Button type='submit' disabled={isSubmitting}>
-                {isSubmitting ? '저장 중...' : '수정하기'}
-              </Button>
-              <Button variant='light' onClick={() => navigate(-1)}>
-                취소
-              </Button>
-            </ButtonGroup>
-
-            {isSubmitSuccessful && <SuccessMessage>저장 완료!</SuccessMessage>}
-          </ContentLeft>
-
-          <ContentRight>
-            <ClubInfoSidebarEditSection />
-          </ContentRight>
-        </Layout>
+              {isSubmitSuccessful && <SuccessMessage>저장 완료!</SuccessMessage>}
+            </>
+          }
+          right={
+            <>
+              <ClubInfoSidebarEditSection />
+            </>
+          }
+        />
       </form>
     </FormProvider>
   );

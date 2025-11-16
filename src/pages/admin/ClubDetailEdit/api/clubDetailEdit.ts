@@ -1,5 +1,5 @@
-import { apiInstance } from '@/api/initInstance';
-import { handleAxiosError } from '@/utils/handleAxiosError';
+import { apiInstance } from '@/app/api/initInstance';
+import { handleAxiosError } from '@/shared/utils/handleAxiosError';
 import type { ClubDetailEdit, ClubDetailUpdatePayload } from '../types/clubDetailEdit';
 
 export const fetchClubDetailEdit = async (clubId: string | number): Promise<ClubDetailEdit> => {

@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { type ClubResponse, getClubsByCategory } from '@/pages/user/Main/api/club.ts';
 import { searchClubs } from '../utils/searchClubs';
 import type { Club, RecruitStatus } from '@/pages/user/Main/types/club';
-import type { ClubCategoryEng } from '@/types/club';
-import type { UseApiQueryResult } from '@/types/useApiQueryResult';
+import type { ClubCategoryEng } from '@/shared/types/club';
+import type { UseApiQueryResult } from '@/shared/types/useApiQueryResult';
 
 export const useClubFiltering = (
   filter: ClubCategoryEng,

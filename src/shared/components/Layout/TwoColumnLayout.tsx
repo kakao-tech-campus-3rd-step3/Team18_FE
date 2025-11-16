@@ -1,6 +1,21 @@
+import type { ReactNode } from 'react';
 import styled from '@emotion/styled';
 
-export const Layout = styled.main(({ theme }) => ({
+type Props = {
+  left: ReactNode;
+  right: ReactNode;
+};
+
+export const TwoColumnLayout = ({ left, right }: Props) => {
+  return (
+    <Container>
+      <ContentLeft>{left}</ContentLeft>
+      <ContentRight>{right}</ContentRight>
+    </Container>
+  );
+};
+
+const Container = styled.main(({ theme }) => ({
   minHeight: '100vh',
   display: 'flex',
   gap: '1.5rem',
@@ -21,7 +36,7 @@ export const Layout = styled.main(({ theme }) => ({
   },
 }));
 
-export const ContentLeft = styled.div(({ theme }) => ({
+const ContentLeft = styled.div(({ theme }) => ({
   flex: '1 1 0',
   backgroundColor: theme.colors.bg,
   display: 'flex',
@@ -39,7 +54,7 @@ export const ContentLeft = styled.div(({ theme }) => ({
   },
 }));
 
-export const ContentRight = styled.div(({ theme }) => ({
+const ContentRight = styled.div(({ theme }) => ({
   flex: '0 0 25rem',
   backgroundColor: theme.colors.bg,
   padding: '1.5rem',

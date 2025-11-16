@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { apiInstance } from '@/api/initInstance';
+import { apiInstance } from '@/app/api/initInstance';
 
 const MAX_FILE_SIZE_MB = 5;
 const MAX_TOTAL_SIZE_MB = 50;

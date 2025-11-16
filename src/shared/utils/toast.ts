@@ -1,5 +1,5 @@
 import { toast as sonnerToast } from 'sonner';
-import { theme } from '@/styles/theme';
+import { theme } from '@/app/styles/theme';
 
 const TOAST_DURATION = 1000;
 

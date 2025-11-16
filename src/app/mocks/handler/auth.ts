@@ -1,5 +1,5 @@
 import { http, HttpResponse } from 'msw';
-import { authRepository } from '@/mocks/repositories/auth';
+import { authRepository } from '@/app/mocks/repositories/auth';
 import type { LoginResponse } from '@/pages/admin/Login/api/auth';
 
 interface AuthRequest {

@@ -1,4 +1,4 @@
-import { apiInstance } from '@/api/initInstance';
+import { apiInstance } from '@/app/api/initInstance';
 import type { Notice, NoticeDetail } from '@/pages/user/Notice/types/notice';
 
 const handleAxiosError = (error: unknown, defaultMessage: string): never => {
