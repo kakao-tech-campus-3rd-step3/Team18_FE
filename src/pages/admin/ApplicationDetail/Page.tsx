@@ -6,6 +6,7 @@ import { ApplicantProfileSection } from './components/ApplicantProfileSection/in
 import { ApplicantQuestionSection } from './components/ApplicationQuestionSection';
 import { CommentSection } from './components/CommentSection';
 import { useDetailApplications } from './hooks/useDetailApplication';
+
 import * as S from './index.styled';
 
 export const ApplicationDetailPage = () => {
