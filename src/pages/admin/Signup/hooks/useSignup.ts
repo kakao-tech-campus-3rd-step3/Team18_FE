@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 import { ROUTE_PATH } from '@/constants/routerPath';
 import { useAuth } from '@/providers/auth';
 import { getTemporaryToken, removeTemporaryToken } from '@/shared/auth/token';
-import { theme } from '@/styles/theme';
+import { theme } from '@/shared/styles/theme';
 import type { SignupFormInputs } from '../type/signup';
 
 export const useSignup = () => {

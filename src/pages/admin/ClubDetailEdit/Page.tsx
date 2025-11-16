@@ -7,7 +7,7 @@ import { Button } from '@/shared/components/Button';
 import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { PageHeader } from '@/shared/components/PageHeader';
-import { theme } from '@/styles/theme';
+import { theme } from '@/shared/styles/theme';
 import { engToKorCategory } from '@/utils/formatting';
 import { updateClubDetailEdit } from './api/clubDetailEdit';
 import { updateClubImages } from './api/clubImagesEdit';
@@ -18,7 +18,7 @@ import { ClubShortIntroductionEditSection } from './components/ClubShortIntroduc
 import { useClubDetailEdit } from './hooks/useClubDetailEdit';
 
 import type { ClubDetailUpdatePayload } from './types/clubDetailEdit';
-import type { ClubCategoryEng } from '@/types/club';
+import type { ClubCategoryEng } from '@/shared/types/club';
 
 export const ClubDetailEditPage = () => {
   const { clubId } = useParams<{ clubId: string }>();

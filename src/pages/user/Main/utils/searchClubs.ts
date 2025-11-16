@@ -1,7 +1,7 @@
 import { CLUB_CATEGORY_MAP } from '@/constants/clubCategory.ts';
 import { engToKorCategory } from '@/utils/formatting.ts';
 import { RECRUIT_STATUS_MAP, type Club, type RecruitStatus } from '../types/club.ts';
-import type { ClubCategoryEng } from '@/types/club.ts';
+import type { ClubCategoryEng } from '@/shared/types/club.ts';
 
 export const searchClubs = (clubs: Club[], searchKeyword: string): Club[] => {
   return searchKeyword

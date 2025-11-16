@@ -1,4 +1,4 @@
-import { type Role, type NavItemData, ROLE } from '@/types/navigation';
+import { type Role, type NavItemData, ROLE } from '@/shared/types/navigation';
 
 export const getNavItems = (role: Role): NavItemData[] => {
   const commonItems: NavItemData[] = [

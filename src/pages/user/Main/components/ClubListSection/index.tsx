@@ -5,7 +5,7 @@ import { engToKorCategory } from '@/utils/formatting.ts';
 import * as S from './Club.styled.ts';
 import NoSearchResult from './NoSearchResult.tsx';
 import type { Club, RecruitStatus } from '@/pages/user/Main/types/club.ts';
-import type { ClubCategoryEng } from '@/types/club';
+import type { ClubCategoryEng } from '@/shared/types/club';
 
 type ClubFilteringProps = {
   categoryFilter: ClubCategoryEng;

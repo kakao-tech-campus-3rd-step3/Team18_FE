@@ -1,6 +1,6 @@
 import { engToKorCategory } from '@/utils/formatting';
 import * as S from './index.styled';
-import type { ClubCategoryEng } from '@/types/club';
+import type { ClubCategoryEng } from '@/shared/types/club';
 
 interface ClubHeaderSectionProps {
   clubName: string;

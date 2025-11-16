@@ -9,10 +9,10 @@ import {
   setTemporaryToken,
   storeUserData,
 } from '@/shared/auth/token';
-import { ROLE } from '@/types/navigation';
+import { ROLE } from '@/shared/types/navigation';
 import { handleAxiosError } from '@/utils/handleAxiosError';
 import type { SignupFormInputs } from '@/pages/admin/Signup/type/signup';
-import type { User, AuthContextType } from '@/types/auth';
+import type { User, AuthContextType } from '@/shared/types/auth';
 
 const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
 const LOGOUT_REDIRECT_URI = import.meta.env.VITE_LOGOUT_REDIRECT_URI;

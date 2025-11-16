@@ -11,7 +11,7 @@ import { ClubInfoSidebarSection } from './components/ClubInfoSidebarSection';
 import { ClubReviewsSection } from './components/ClubReviewsSection';
 
 import type { ClubDetail } from './types/clubDetail';
-import type { ClubCategoryEng } from '@/types/club';
+import type { ClubCategoryEng } from '@/shared/types/club';
 
 export const ClubDetailPage = () => {
   const { clubId } = useParams<{ clubId: string }>();

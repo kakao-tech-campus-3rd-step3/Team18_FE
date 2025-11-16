@@ -8,7 +8,7 @@ import { engToKorCategory, korToEngCategory, korToEngRecruitStatus } from '@/uti
 import * as S from './Banner.styled.ts';
 import { BannerSlideshow } from './BannerSlideshow';
 import * as B from './BannerText.styled.ts';
-import type { ClubCategory, ClubCategoryEng } from '@/types/club';
+import type { ClubCategory, ClubCategoryEng } from '@/shared/types/club';
 
 type FilterRecruitStatus = RecruitStatus | '전체';
 type Props = {

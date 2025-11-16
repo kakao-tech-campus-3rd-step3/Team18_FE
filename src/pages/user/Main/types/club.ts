@@ -1,4 +1,4 @@
-import type { ClubCategoryEng } from '@/types/club';
+import type { ClubCategoryEng } from '@/shared/types/club';
 
 export type Club = {
   id: number;
