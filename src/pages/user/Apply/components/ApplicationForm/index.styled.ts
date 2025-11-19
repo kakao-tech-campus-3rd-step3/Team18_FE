@@ -40,7 +40,7 @@ export const FormField = styled.div({
 export const FormRow = styled.div({
   display: 'flex',
   flexDirection: 'row',
-  gap: '2.5rem',
+  gap: '1rem',
   width: '100%',
   '& > *': {
     flex: '1 1 0',
@@ -53,6 +53,7 @@ export const Label = styled.label(({ theme }) => ({
   alignItems: 'center',
   gap: '4px',
   fontWeight: theme.font.weight.medium,
+  lineHeight: '1.5',
 }));
 
 const FlexColumn = styled.div({
