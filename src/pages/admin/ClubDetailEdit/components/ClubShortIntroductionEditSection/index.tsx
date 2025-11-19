@@ -33,7 +33,7 @@ export const ClubShortIntroductionEditSection = () => {
 
 const ShortIntroContainer = styled.div(({ theme }) => ({
   backgroundColor: theme.colors.bg,
-  padding: '16px',
+  paddingTop: '16px',
   paddingBottom: 0,
   display: 'flex',
   flexDirection: 'column',

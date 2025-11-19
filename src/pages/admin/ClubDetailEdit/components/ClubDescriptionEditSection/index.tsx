@@ -17,47 +17,59 @@ export const ClubDescriptionEditSection = () => {
 
   return (
     <DescriptionContainer>
-      <SectionHeading required>동아리 소개</SectionHeading>
-      <OutlineTextareaField
-        {...register('introductionOverview', {
-          required: '동아리 소개를 입력해주세요.',
-          maxLength: { value: maxLength, message: `${maxLength}자 이하로 입력해주세요.` },
-        })}
-        invalid={!!errors.introductionOverview}
-        message={errors.introductionOverview?.message}
-        placeholder='동아리 소개를 입력하세요.'
-      />
+      <SectionWrapper>
+        <SectionHeading required>동아리 소개</SectionHeading>
+        <OutlineTextareaField
+          {...register('introductionOverview', {
+            required: '동아리 소개를 입력해주세요.',
+            maxLength: { value: maxLength, message: `${maxLength}자 이하로 입력해주세요.` },
+          })}
+          invalid={!!errors.introductionOverview}
+          message={errors.introductionOverview?.message}
+          placeholder='동아리 소개를 입력하세요.'
+        />
+      </SectionWrapper>
 
-      <SectionHeading required>활동 내용</SectionHeading>
-      <OutlineTextareaField
-        {...register('introductionActivity', {
-          required: '활동 내용을 입력해주세요.',
-          maxLength: { value: maxLength, message: `${maxLength}자 이하로 입력해주세요.` },
-        })}
-        invalid={!!errors.introductionActivity}
-        message={errors.introductionActivity?.message}
-        placeholder='활동 내용을 입력하세요.'
-      />
+      <SectionWrapper>
+        <SectionHeading required>활동 내용</SectionHeading>
+        <OutlineTextareaField
+          {...register('introductionActivity', {
+            required: '활동 내용을 입력해주세요.',
+            maxLength: { value: maxLength, message: `${maxLength}자 이하로 입력해주세요.` },
+          })}
+          invalid={!!errors.introductionActivity}
+          message={errors.introductionActivity?.message}
+          placeholder='활동 내용을 입력하세요.'
+        />
+      </SectionWrapper>
 
-      <SectionHeading required>모집하는 사람</SectionHeading>
-      <OutlineTextareaField
-        {...register('introductionIdeal', {
-          required: '모집 대상을 입력해주세요.',
-          maxLength: { value: maxLength, message: `${maxLength}자 이하로 입력해주세요.` },
-        })}
-        invalid={!!errors.introductionIdeal}
-        message={errors.introductionIdeal?.message}
-        placeholder='모집 대상을 입력하세요.'
-      />
+      <SectionWrapper>
+        <SectionHeading required>모집하는 사람</SectionHeading>
+        <OutlineTextareaField
+          {...register('introductionIdeal', {
+            required: '모집 대상을 입력해주세요.',
+            maxLength: { value: maxLength, message: `${maxLength}자 이하로 입력해주세요.` },
+          })}
+          invalid={!!errors.introductionIdeal}
+          message={errors.introductionIdeal?.message}
+          placeholder='모집 대상을 입력하세요.'
+        />
+      </SectionWrapper>
     </DescriptionContainer>
   );
 };
 
 const DescriptionContainer = styled.div(({ theme }) => ({
   backgroundColor: theme.colors.bg,
-  padding: '16px',
   borderRadius: theme.radius.md,
+  paddingTop: '16px',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '2.5rem',
+}));
+
+const SectionWrapper = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: '1rem',
-}));
+});
