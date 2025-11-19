@@ -46,9 +46,10 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
       ))}
 
       <S.ReviewForm>
-        <S.FormTitle>
-          후기 작성 <S.FormNote>*수정 및 삭제가 불가능하니, 신중히 작성해 주세요!</S.FormNote>
-        </S.FormTitle>
+        <SectionHeading>
+          후기 작성 <S.FormNote>* 수정 및 삭제가 불가능하니, 신중히 작성해 주세요!</S.FormNote>
+        </SectionHeading>
+
         {error && (
           <Text size='xs' color={'red'}>
             {error}

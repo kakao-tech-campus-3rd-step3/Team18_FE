@@ -46,15 +46,14 @@ export const ReviewContent = styled.p(({ theme }) => ({
   fontSize: theme.font.size.sm,
 }));
 
-export const ReviewForm = styled.div(({ theme }) => ({
+export const ReviewForm = styled.div({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.75rem',
-  paddingTop: '1rem',
-  borderTop: `1px solid ${theme.colors.border}`,
+  paddingTop: '1.8rem',
 
   width: '100%',
-}));
+});
 
 export const FormTitle = styled.p(({ theme }) => ({
   fontWeight: theme.font.weight.bold,
@@ -67,6 +66,7 @@ export const FormTitle = styled.p(({ theme }) => ({
 export const FormNote = styled.span(({ theme }) => ({
   fontSize: theme.font.size.xs,
   color: theme.colors.textSecondary,
+  marginLeft: '0.5rem',
 }));
 
 export const ButtonWrapper = styled.div({
