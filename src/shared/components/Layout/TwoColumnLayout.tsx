@@ -32,7 +32,7 @@ const Container = styled.main(({ theme }) => ({
   },
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     display: 'block',
-    padding: '1rem',
+    padding: 0,
   },
 }));
 
