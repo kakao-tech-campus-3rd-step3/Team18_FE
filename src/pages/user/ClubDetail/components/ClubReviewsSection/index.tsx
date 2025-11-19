@@ -68,7 +68,7 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
           onChange={(e) => setContent(e.target.value)}
         />
         <S.ButtonWrapper>
-          <Button variant='light' width='10rem' onClick={handleSubmit}>
+          <Button variant='outline' width='10rem' onClick={handleSubmit}>
             후기 등록
           </Button>
         </S.ButtonWrapper>
