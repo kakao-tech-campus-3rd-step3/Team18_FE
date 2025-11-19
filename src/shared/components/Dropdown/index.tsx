@@ -48,7 +48,7 @@ export const Dropdown = <T extends string>({
   };
 
   return (
-    <div ref={dropdownRef}>
+    <S.DropdownWrapper ref={dropdownRef}>
       <S.SelectBox onClick={handleToggleOptions} disabled={disabled}>
         <Text color='#757575'>{value || placeholder}</Text>
         {isShowOptions && (
@@ -65,6 +65,6 @@ export const Dropdown = <T extends string>({
           </S.SelectOptions>
         )}
       </S.SelectBox>
-    </div>
+    </S.DropdownWrapper>
   );
 };

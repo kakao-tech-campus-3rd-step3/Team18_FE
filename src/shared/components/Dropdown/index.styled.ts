@@ -1,5 +1,11 @@
 import styled from '@emotion/styled';
 
+export const DropdownWrapper = styled.div(({ theme }) => ({
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    width: '100%',
+  },
+}));
+
 export const SelectBox = styled.div<{ disabled: boolean }>(({ theme, disabled }) => ({
   display: 'flex',
   alignItems: 'center',

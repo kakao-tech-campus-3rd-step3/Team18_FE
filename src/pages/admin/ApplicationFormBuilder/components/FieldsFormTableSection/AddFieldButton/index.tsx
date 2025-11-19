@@ -39,4 +39,15 @@ const StyledButton = styled.button(({ theme }) => ({
   svg: {
     fontSize: '1.25rem',
   },
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    marginTop: '1.5rem',
+    padding: '0.75rem',
+    fontSize: '0.875rem',
+    height: '2.5rem',
+
+    svg: {
+      fontSize: '1.1rem',
+    },
+  },
 }));

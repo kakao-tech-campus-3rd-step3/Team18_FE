@@ -144,9 +144,15 @@ const OptionsWrapper = styled.div`
   padding-top: 1rem;
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 1rem;
-`;
+const Wrapper = styled.div(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  gap: '1rem',
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    gap: '0.75rem',
+  },
+}));

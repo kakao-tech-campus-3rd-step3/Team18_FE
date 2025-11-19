@@ -41,14 +41,19 @@ export const ApplicationFormBuilderHeaderSection = ({
   );
 };
 
-const Container = styled.div({
+const Container = styled.div(({ theme }) => ({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
   gap: '1.2rem',
   padding: '2.5rem 0 1rem 0',
   boxSizing: 'border-box',
-});
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    padding: '1.5rem 0 0.5rem 0',
+    gap: '0.8rem',
+  },
+}));
 
 const HeaderWrapper = styled.div({
   display: 'flex',
@@ -64,4 +69,8 @@ const ButtonWrapper = styled.div({
 const Title = styled.h1(({ theme }) => ({
   fontSize: '2.5rem',
   fontWeight: theme.font.weight.medium,
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    fontSize: '1.5rem',
+  },
 }));

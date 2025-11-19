@@ -97,17 +97,27 @@ const Layout = styled.div(({ theme }) => ({
   width: '100%',
   border: `1px solid ${theme.colors.gray200}`,
   borderRadius: theme.radius.sm,
-  padding: '1.5rem ',
+  padding: '1.5rem',
   backgroundColor: 'white',
   display: 'flex',
   flexDirection: 'column',
   gap: '2.5rem',
   boxSizing: 'border-box',
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    padding: '1rem',
+    gap: '1.5rem',
+  },
 }));
 
-const Wrapper = styled.div({
+const Wrapper = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
   gap: '1.5rem',
   width: '100%',
-});
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    flexDirection: 'column',
+    gap: '1rem',
+  },
+}));

@@ -52,4 +52,8 @@ const Divider = styled.div(({ theme }) => ({
   borderBottom: `1px solid ${theme.colors.gray200}`,
   width: '100%',
   margin: '2rem 0 1.3rem 0',
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    margin: '1.5rem 0 1rem 0',
+  },
 }));
