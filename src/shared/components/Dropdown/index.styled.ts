@@ -1,35 +1,38 @@
 import styled from '@emotion/styled';
 
-export const SelectBox = styled.div<{ width: string; disabled: boolean }>(
-  ({ theme, width, disabled }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    position: 'relative',
-    width: width,
-    height: '1.4rem',
-    padding: '10px',
-    borderRadius: theme.radius.md,
-    backgroundColor: disabled ? theme.colors.gray00 : theme.colors.bg,
-    alignSelf: 'center',
-    border: `1px solid ${theme.colors.gray200}`,
-    minWidth: '8rem',
+export const SelectBox = styled.div<{ disabled: boolean }>(({ theme, disabled }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  position: 'relative',
+  width: '100%',
+  height: '2.65rem',
+  padding: '10px',
+  borderRadius: theme.radius.md,
+  backgroundColor: disabled ? theme.colors.gray00 : theme.colors.bg,
+  alignSelf: 'center',
+  border: `1px solid ${theme.colors.gray200}`,
+  minWidth: '8rem',
+  boxSizing: 'border-box',
 
-    '&::before': {
-      content: '"⌵"',
-      position: 'absolute',
-      top: '6px',
-      right: '13px',
-      color: theme.colors.textSecondary,
-      fontSize: '22px',
-      fontWeight: 'bold',
-    },
-  }),
-);
+  '&::before': {
+    content: '"⌵"',
+    position: 'absolute',
+    top: '6px',
+    right: '13px',
+    color: theme.colors.textSecondary,
+    fontSize: '22px',
+    fontWeight: 'bold',
+  },
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    minWidth: 'auto',
+  },
+}));
 
 export const SelectOptions = styled.ul(({ theme }) => ({
-  padding: '0.5rem',
+  padding: '0.3rem',
   position: 'absolute',
-  top: '50px',
+  top: '45px',
   left: '0',
   maxHeight: '12.5rem',
   overflowY: 'auto',

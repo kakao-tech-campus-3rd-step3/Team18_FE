@@ -56,7 +56,7 @@ export const BannerSection = ({
       <ContentContainer>
         <B.BannerTextWrapper>
           <B.HeaderText>함께할 사람이 있는 곳, 동아리움.</B.HeaderText>
-          <B.SubText>관심 있는 전남대학교 동아리를 찾고, 참여해보세요.</B.SubText>
+          <B.SubText>관심 있는 동아리를 찾고, 참여해보세요.</B.SubText>
         </B.BannerTextWrapper>
 
         <SearchContainer>
@@ -144,7 +144,7 @@ export const DropdownWrapper = styled.div(({ theme }) => ({
     width: '100%',
     gap: 12,
     '& > *': {
-      flex: 1,
+      width: 'calc(50% - 6px)',
     },
   },
 }));
