@@ -73,7 +73,8 @@ export const Grid = styled.div(({ theme }) => ({
   display: 'grid',
   gap: 30,
   padding: '30px 0',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+  justifyContent: 'center',
   justifyItems: 'center',
 
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
