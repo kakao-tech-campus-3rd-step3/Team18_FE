@@ -111,12 +111,19 @@ export const TimeSpan = styled.span<TimeSpanProps>(({ theme, selected }) => ({
 export const Wrapper = styled.div({
   display: 'flex',
   flexDirection: 'column',
+  gap: '1rem',
+});
+
+export const TimeSlotsContainer = styled.div({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '8px',
 });
 
 export const DateText = styled.span(({ theme }) => ({
   textAlign: 'left',
   minWidth: '150px',
-  padding: '10px 0 10px 8px',
+  padding: '10px 0 10px 3px',
   fontWeight: theme.font.weight.bold,
   fontSize: theme.font.size.sm,
   whiteSpace: 'nowrap',
