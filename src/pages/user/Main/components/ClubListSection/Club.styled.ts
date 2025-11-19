@@ -113,10 +113,17 @@ export const NoSearchResultContainer = styled.div({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  height: 130,
   marginBottom: 10,
   padding: 16,
   gap: 16,
+});
+
+export const EmptyStateWrapper = styled.div({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  minHeight: '50vh',
+  width: '100%',
 });
 
 export const TextWrapper = styled.div({

@@ -16,7 +16,7 @@ const NoSearchResult = (
   const subText = '동아리명, 카테고리, 동아리 소개로 검색해 보세요.';
 
   return (
-    <S.ClubListContainer>
+    <S.EmptyStateWrapper>
       <S.NoSearchResultContainer>
         <S.SearchImage
           src='/assets/noSearchResults.svg'
@@ -33,7 +33,7 @@ const NoSearchResult = (
           </Text>
         </S.TextWrapper>
       </S.NoSearchResultContainer>
-    </S.ClubListContainer>
+    </S.EmptyStateWrapper>
   );
 };
 
