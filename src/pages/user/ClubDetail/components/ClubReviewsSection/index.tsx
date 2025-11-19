@@ -39,7 +39,7 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
             <S.ReviewAuthor>{review.writer}</S.ReviewAuthor>
             <S.ReviewDate>
               {review.createdAt ? new Date(review.createdAt).toLocaleDateString('ko-KR') : '-'}
-            </S.ReviewDate>{' '}
+            </S.ReviewDate>
           </S.ReviewHeader>
           <S.ReviewContent>{review.content}</S.ReviewContent>
         </S.ReviewItem>
