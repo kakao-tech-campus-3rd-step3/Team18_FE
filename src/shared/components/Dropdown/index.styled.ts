@@ -11,7 +11,7 @@ export const SelectBox = styled.div<{ disabled: boolean }>(({ theme, disabled })
   backgroundColor: disabled ? theme.colors.gray00 : theme.colors.bg,
   alignSelf: 'center',
   border: `1px solid ${theme.colors.gray200}`,
-  minWidth: '8rem',
+  minWidth: '9rem',
   boxSizing: 'border-box',
 
   '&::before': {
