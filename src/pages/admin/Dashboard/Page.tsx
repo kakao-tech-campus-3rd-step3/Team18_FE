@@ -30,7 +30,8 @@ const Layout = styled.div({
 });
 
 const Container = styled.main({
-  padding: '2.5rem',
-  maxWidth: '1250px',
+  maxWidth: '1200px',
   width: '100%',
+  padding: '1.5rem',
+  boxSizing: 'border-box',
 });

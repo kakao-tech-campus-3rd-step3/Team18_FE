@@ -10,11 +10,11 @@ import type {
   ApplicationStage,
 } from '@/pages/admin/Dashboard/types/dashboard';
 
-interface ApplicantListSectionProps {
+type ApplicantListSectionProps = {
   stage: ApplicationStage;
   setStage: React.Dispatch<React.SetStateAction<ApplicationStage>>;
   clubId: number;
-}
+};
 
 export const ApplicantListSection = ({ stage, setStage, clubId }: ApplicantListSectionProps) => {
   const [searchParams, setSearchParams] = useSearchParams();

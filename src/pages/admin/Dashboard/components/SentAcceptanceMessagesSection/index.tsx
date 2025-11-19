@@ -51,7 +51,7 @@ export const SentAcceptanceMessagesSection = ({ stage }: SentAcceptanceMessagesS
 };
 
 const Container = styled.div({
-  margin: '3rem 1.7rem 0 0',
+  marginTop: '3rem',
 
   display: 'flex',
   flexDirection: 'column',
@@ -62,4 +62,9 @@ const ButtonWrapper = styled.div({
   display: 'flex',
   justifyContent: 'center',
   width: '100%',
+  '@media (max-width: 430px)': {
+    '& > *': {
+      width: '100%',
+    },
+  },
 });
