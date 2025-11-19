@@ -13,6 +13,10 @@ export const ReviewsContainer = styled.div(({ theme }) => ({
   backgroundColor: theme.colors.bg,
   padding: '2rem 1.5rem',
   borderRadius: theme.radius.lg,
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    padding: '1.5rem 0',
+  },
 }));
 
 export const ReviewItem = styled.div(({ theme }) => ({
@@ -52,8 +56,6 @@ export const ReviewForm = styled.div(({ theme }) => ({
   gap: '0.75rem',
   paddingTop: '1rem',
   borderTop: `1px solid ${theme.colors.border}`,
-
-  maxWidth: '38rem',
 
   width: '100%',
 }));
