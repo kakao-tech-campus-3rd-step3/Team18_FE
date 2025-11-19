@@ -86,10 +86,9 @@ const ContentContainer = styled.div(({ theme }) => ({
   zIndex: 2,
   width: '100%',
   maxWidth: '1200px',
-  margin: '0 auto',
   display: 'flex',
   flexDirection: 'column',
-  gap: '16px',
+  gap: '30px',
   padding: '0 80px',
   boxSizing: 'border-box',
 
