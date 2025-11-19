@@ -86,18 +86,15 @@ const ContentContainer = styled.div(({ theme }) => ({
   zIndex: 2,
   width: '100%',
   maxWidth: '1200px',
+  margin: '0 auto',
   display: 'flex',
   flexDirection: 'column',
-  gap: '30px',
-  padding: '0 80px',
+  gap: '16px',
+  padding: '0 1.5rem',
   boxSizing: 'border-box',
 
-  [`@media (max-width: ${theme.breakpoints.web})`]: {
-    padding: '0 40px',
-  },
-
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    padding: '0 16px',
+    padding: '0 1rem',
     gap: '12px',
   },
 }));
@@ -110,22 +107,14 @@ export const SearchContainer = styled.div(({ theme }) => ({
   justifyContent: 'flex-start',
   alignItems: 'center',
   width: '100%',
-  maxWidth: '1200px',
   gap: 16,
-  padding: '0 20px 0 80px',
   boxSizing: 'border-box',
   opacity: 1,
-
-  [`@media (max-width: ${theme.breakpoints.web})`]: {
-    gap: 16,
-    padding: '0 16px 0 40px',
-  },
 
   [`@media(max-width: ${theme.breakpoints.mobile})`]: {
     flexDirection: 'column',
     gap: 12,
     width: '100%',
-    padding: '0 16px',
     '& > *': {
       width: '100%',
       boxSizing: 'border-box',

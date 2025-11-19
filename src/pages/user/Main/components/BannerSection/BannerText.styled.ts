@@ -5,16 +5,13 @@ export const BannerTextWrapper = styled.div(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'flex-start',
   gap: '12px',
-  marginLeft: '80px',
   position: 'relative',
   zIndex: 2,
 
   [`@media(max-width: ${theme.breakpoints.web})`]: {
-    marginLeft: '40px',
     gap: '10px',
   },
   [`@media(max-width: ${theme.breakpoints.mobile})`]: {
-    marginLeft: '16px',
     gap: '8px',
   },
 }));
