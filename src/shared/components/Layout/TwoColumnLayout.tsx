@@ -65,6 +65,8 @@ const ContentRight = styled.div(({ theme }) => ({
   borderRadius: theme.radius.lg,
   height: 'auto',
   alignSelf: 'flex-start',
+  position: 'sticky',
+  top: '3rem',
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
     flex: '1 1 100%',
