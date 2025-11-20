@@ -13,10 +13,6 @@ export const ReviewsContainer = styled.div(({ theme }) => ({
   backgroundColor: theme.colors.bg,
   padding: '16px',
   borderRadius: theme.radius.lg,
-
-  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    padding: '16px',
-  },
 }));
 
 export const ReviewItem = styled.div({
