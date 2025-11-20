@@ -9,6 +9,19 @@ export const Container = styled.div(({ theme }) => ({
   padding: '24px 40px',
   border: `1px solid ${theme.colors.border}`,
   marginTop: '48px',
+  [`@media (max-width: ${theme.breakpoints.tablet})`]: {
+    width: '90%',
+    padding: '20px 24px',
+    marginTop: '32px',
+  },
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    width: '100%',
+    padding: '16px 16px',
+    marginTop: '24px',
+    borderRadius: theme.radius.md,
+    border: 'none',
+    boxShadow: 'none',
+  },
 }));
 
 export const NoticeRow = styled.div(({ theme }) => ({
@@ -26,27 +39,49 @@ export const NoticeRow = styled.div(({ theme }) => ({
     fontWeight: theme.font.weight.bold,
     transform: 'translateY(-1px)',
   },
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: '8px',
+    padding: '12px 0',
+  },
 }));
 
 export const NoticeText = styled.span(({ theme }) => ({
   fontSize: theme.font.size.sm,
   color: theme.colors.textPrimary,
   flex: 1,
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    width: '100%',
+    fontSize: theme.font.size.base,
+    lineHeight: 1.4,
+  },
 }));
 
-export const NoticeRight = styled.div({
+export const NoticeRight = styled.div(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   gap: '12px',
   minWidth: '160px',
   justifyContent: 'flex-end',
-});
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    width: '100%',
+    minWidth: 'auto',
+    justifyContent: 'flex-start',
+    gap: '8px',
+  },
+}));
 
 export const NoticeDate = styled.span(({ theme }) => ({
   fontSize: theme.font.size.xs,
   color: theme.colors.textSecondary,
   width: '80px',
   textAlign: 'right',
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    width: 'auto',
+    textAlign: 'left',
+    fontSize: '11px',
+  },
 }));
 
 export const NoticeAuthor = styled.span(({ theme }) => ({
@@ -54,14 +89,24 @@ export const NoticeAuthor = styled.span(({ theme }) => ({
   color: theme.colors.textSecondary,
   width: '60px',
   textAlign: 'right',
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    width: 'auto',
+    textAlign: 'left',
+    fontSize: '11px',
+  },
 }));
 
-export const PaginationWrapper = styled.div({
+export const PaginationWrapper = styled.div(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   marginTop: '20px',
   gap: '8px',
-});
+  flexWrap: 'wrap',
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    marginTop: '16px',
+    gap: '6px',
+  },
+}));
 
 export const PageButton = styled.button<{ $active?: boolean }>(({ theme, $active }) => ({
   padding: '6px 12px',
@@ -75,5 +120,10 @@ export const PageButton = styled.button<{ $active?: boolean }>(({ theme, $active
   transition: 'background-color 0.2s ease, color 0.2s ease',
   '&:hover': {
     backgroundColor: $active ? theme.colors.primary700 : theme.colors.bgGreen,
+  },
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    padding: '6px 10px',
+    fontSize: theme.font.size.xs,
+    minWidth: '32px',
   },
 }));

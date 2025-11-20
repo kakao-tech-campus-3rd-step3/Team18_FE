@@ -22,10 +22,22 @@ const Wrapper = styled.div(({ theme }) => ({
   padding: '60px 0',
   backgroundColor: theme.colors.bg,
   minHeight: 'calc(100vh - 291px)',
+  [`@media (max-width: ${theme.breakpoints.tablet})`]: {
+    padding: '40px 16px',
+  },
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    padding: '30px 16px',
+  },
 }));
 
 const ContactInfo = styled.p(({ theme }) => ({
   marginTop: '30px',
   fontSize: theme.font.size.xs,
   color: theme.colors.textSecondary,
+  textAlign: 'center',
+  padding: '0 16px',
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    marginTop: '20px',
+    fontSize: '11px',
+  },
 }));
