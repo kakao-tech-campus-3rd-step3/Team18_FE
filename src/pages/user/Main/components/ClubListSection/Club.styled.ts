@@ -105,8 +105,8 @@ export const ClubItem = styled.div(({ theme }) => ({
   gap: 16,
   transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
   '&:hover': {
-    transform: 'scale(1.02)',
-    boxShadow: `0 0 10px ${theme.colors.blue200}50`,
+    transform: 'scale(1.01)',
+    cursor: 'pointer',
   },
 }));
 
