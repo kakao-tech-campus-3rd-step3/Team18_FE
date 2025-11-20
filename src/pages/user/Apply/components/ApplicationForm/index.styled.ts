@@ -17,19 +17,21 @@ export const OptionInput = styled.input<OptionInputProps>(({ theme, type }) => (
   },
 }));
 
-export const UserInfoWrapper = styled.div(({ theme }) => ({
-  boxSizing: 'border-box',
-  width: '48rem',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '30px',
-  borderBottom: `1px solid ${theme.colors.gray200}`,
-  paddingBottom: '3rem',
+export const UserInfoWrapper = styled.div(({ theme }) => {
+  return {
+    boxSizing: 'border-box',
+    width: '48rem',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '30px',
+    borderBottom: `1px solid ${theme.colors.gray200}`,
+    paddingBottom: '3rem',
 
-  '@media (max-width: 48rem)': {
-    width: '100%',
-  },
-}));
+    [`@media (max-width: ${theme.breakpoints.tablet})`]: {
+      width: '100%',
+    },
+  };
+});
 
 export const FormField = styled.div({
   display: 'flex',

@@ -27,7 +27,7 @@ const ContentContainer = styled.div`
   flex-direction: column;
   box-sizing: border-box;
 
-  @media (max-width: 48rem) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     width: 100%;
   }
 `;

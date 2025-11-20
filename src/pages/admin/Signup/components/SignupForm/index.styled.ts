@@ -9,7 +9,7 @@ export const UserInfoWrapper = styled.div(({ theme }) => ({
   borderBottom: `1px solid ${theme.colors.gray200}`,
   paddingBottom: '3rem',
 
-  '@media (max-width: 48rem)': {
+  [`@media (max-width: ${theme.breakpoints.tablet})`]: {
     width: '100%',
   },
 }));
