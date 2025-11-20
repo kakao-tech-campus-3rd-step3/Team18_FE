@@ -96,7 +96,7 @@ const ContentContainer = styled.div(({ theme }) => ({
   gap: '1rem',
   boxSizing: 'border-box',
 
-  '@media (max-width: 48rem)': {
+  [`@media (max-width: ${theme.breakpoints.tablet})`]: {
     width: '100%',
   },
 
