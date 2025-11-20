@@ -28,6 +28,7 @@ const Input = styled.input<Pick<Props, 'invalid'>>(({ theme, invalid }) => ({
   lineHeight: 1.6,
   resize: 'vertical',
   transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+  boxSizing: 'border-box',
 
   '&:focus': {
     outline: 'none',

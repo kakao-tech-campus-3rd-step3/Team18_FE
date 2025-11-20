@@ -89,14 +89,18 @@ const Layout = styled.main(({ theme }) => ({
   },
 }));
 
-const ContentContainer = styled.div`
-  width: 48rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  box-sizing: border-box;
+const ContentContainer = styled.div(({ theme }) => ({
+  width: '48rem',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem',
+  boxSizing: 'border-box',
 
-  @media (max-width: 48rem) {
-    width: 100%;
-  }
-`;
+  [`@media (max-width: ${theme.breakpoints.tablet})`]: {
+    width: '100%',
+  },
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    gap: '0.75rem',
+  },
+}));

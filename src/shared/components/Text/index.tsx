@@ -27,6 +27,7 @@ const StyledText = styled.div<{ size: FontSizeKey; weight: FontWeightKey; color:
   font-weight: ${({ theme, weight }) => theme.font.weight[weight]};
   color: ${({ color }) => color};
   white-space: normal;
+  line-height: 1.5;
 `;
 
 type FontSizeKey = keyof typeof theme.font.size;

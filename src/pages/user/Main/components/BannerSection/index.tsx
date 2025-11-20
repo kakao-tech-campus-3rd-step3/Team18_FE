@@ -56,7 +56,7 @@ export const BannerSection = ({
       <ContentContainer>
         <B.BannerTextWrapper>
           <B.HeaderText>함께할 사람이 있는 곳, 동아리움.</B.HeaderText>
-          <B.SubText>관심 있는 전남대학교 동아리를 찾고, 참여해보세요.</B.SubText>
+          <B.SubText>관심 있는 동아리를 찾고, 참여해보세요.</B.SubText>
         </B.BannerTextWrapper>
 
         <SearchContainer>
@@ -90,15 +90,11 @@ const ContentContainer = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: '16px',
-  padding: '0 80px',
+  padding: '0 1.5rem',
   boxSizing: 'border-box',
 
-  [`@media (max-width: ${theme.breakpoints.web})`]: {
-    padding: '0 40px',
-  },
-
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    padding: '0 16px',
+    padding: '0 1rem',
     gap: '12px',
   },
 }));
@@ -111,22 +107,14 @@ export const SearchContainer = styled.div(({ theme }) => ({
   justifyContent: 'flex-start',
   alignItems: 'center',
   width: '100%',
-  maxWidth: '1200px',
   gap: 16,
-  padding: '0 20px 0 80px',
   boxSizing: 'border-box',
   opacity: 1,
-
-  [`@media (max-width: ${theme.breakpoints.web})`]: {
-    gap: 16,
-    padding: '0 16px 0 40px',
-  },
 
   [`@media(max-width: ${theme.breakpoints.mobile})`]: {
     flexDirection: 'column',
     gap: 12,
     width: '100%',
-    padding: '0 16px',
     '& > *': {
       width: '100%',
       boxSizing: 'border-box',
@@ -144,7 +132,7 @@ export const DropdownWrapper = styled.div(({ theme }) => ({
     width: '100%',
     gap: 12,
     '& > *': {
-      flex: 1,
+      width: 'calc(50% - 6px)',
     },
   },
 }));

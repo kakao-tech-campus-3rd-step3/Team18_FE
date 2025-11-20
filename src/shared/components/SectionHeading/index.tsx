@@ -19,7 +19,6 @@ const StyledHeading = styled.h2(({ theme }) => ({
   alignItems: 'center',
   fontSize: theme.font.size.lg,
   fontWeight: theme.font.weight.bold,
-  margin: '1.5rem 0 0 0',
   color: theme.colors.textPrimary,
   width: '100%',
   gap: '0.25rem',

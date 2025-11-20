@@ -39,5 +39,7 @@ const DescriptionContainer = styled.div(({ theme }) => ({
 const DescriptionText = styled.p(({ theme }) => ({
   fontSize: theme.font.size.base,
   lineHeight: 1.6,
+  paddingBottom: '1.5rem',
+  color: theme.colors.textPrimary,
   margin: 0,
 }));

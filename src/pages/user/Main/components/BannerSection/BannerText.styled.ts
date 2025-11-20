@@ -5,22 +5,19 @@ export const BannerTextWrapper = styled.div(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'flex-start',
   gap: '12px',
-  marginLeft: '80px',
   position: 'relative',
   zIndex: 2,
 
   [`@media(max-width: ${theme.breakpoints.web})`]: {
-    marginLeft: '40px',
     gap: '10px',
   },
   [`@media(max-width: ${theme.breakpoints.mobile})`]: {
-    marginLeft: '16px',
     gap: '8px',
   },
 }));
 
 export const HeaderText = styled.h2(({ theme }) => ({
-  fontSize: '35px',
+  fontSize: '38px',
   fontWeight: theme.font.weight.bold,
   color: theme.colors.bg,
   textShadow: '0 3px 6px rgba(0, 0, 0, 0.4)',
@@ -35,7 +32,7 @@ export const HeaderText = styled.h2(({ theme }) => ({
 }));
 
 export const SubText = styled.p(({ theme }) => ({
-  fontSize: theme.font.size.base,
+  fontSize: theme.font.size.lg,
   fontWeight: theme.font.weight.regular,
   color: 'rgba(255, 255, 255, 0.9)',
   textShadow: '0 2px 5px rgba(0, 0, 0, 0.3)',

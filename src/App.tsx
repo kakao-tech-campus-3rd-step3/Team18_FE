@@ -5,6 +5,7 @@ import { Toaster } from 'sonner';
 import { UserProvider } from '@/app/providers/auth';
 import { theme } from '@/app/styles/theme';
 import { Navigation } from '@/shared/components/Navigation';
+import { ScrollToTop } from '@/shared/components/ScrollToTop';
 import { AppContainer, MainContent } from './app/styles/Layout/App.styled';
 import Footer from './shared/components/Footer';
 
@@ -15,6 +16,7 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <UserProvider>
+          <ScrollToTop />
           <ToastContainer />
           <Navigation />
           <AppContainer>

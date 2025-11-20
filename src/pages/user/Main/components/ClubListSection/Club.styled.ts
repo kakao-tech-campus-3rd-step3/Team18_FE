@@ -73,7 +73,8 @@ export const Grid = styled.div(({ theme }) => ({
   display: 'grid',
   gap: 30,
   padding: '30px 0',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+  justifyContent: 'center',
   justifyItems: 'center',
 
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
@@ -104,8 +105,8 @@ export const ClubItem = styled.div(({ theme }) => ({
   gap: 16,
   transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
   '&:hover': {
-    transform: 'scale(1.02)',
-    boxShadow: `0 0 10px ${theme.colors.blue200}50`,
+    transform: 'scale(1.01)',
+    cursor: 'pointer',
   },
 }));
 
@@ -113,10 +114,17 @@ export const NoSearchResultContainer = styled.div({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  height: 130,
   marginBottom: 10,
   padding: 16,
   gap: 16,
+});
+
+export const EmptyStateWrapper = styled.div({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  minHeight: '50vh',
+  width: '100%',
 });
 
 export const TextWrapper = styled.div({

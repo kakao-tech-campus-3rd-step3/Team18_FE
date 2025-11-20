@@ -39,16 +39,17 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
             <S.ReviewAuthor>{review.writer}</S.ReviewAuthor>
             <S.ReviewDate>
               {review.createdAt ? new Date(review.createdAt).toLocaleDateString('ko-KR') : '-'}
-            </S.ReviewDate>{' '}
+            </S.ReviewDate>
           </S.ReviewHeader>
           <S.ReviewContent>{review.content}</S.ReviewContent>
         </S.ReviewItem>
       ))}
 
       <S.ReviewForm>
-        <S.FormTitle>
-          후기 작성 <S.FormNote>*수정 및 삭제가 불가능하니, 신중히 작성해 주세요!</S.FormNote>
-        </S.FormTitle>
+        <SectionHeading>
+          후기 작성 <S.FormNote>* 수정 및 삭제가 불가능하니, 신중히 작성해 주세요!</S.FormNote>
+        </SectionHeading>
+
         {error && (
           <Text size='xs' color={'red'}>
             {error}
@@ -67,7 +68,7 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
           onChange={(e) => setContent(e.target.value)}
         />
         <S.ButtonWrapper>
-          <Button variant='light' width='10rem' onClick={handleSubmit}>
+          <Button variant='outline' width='10rem' onClick={handleSubmit}>
             후기 등록
           </Button>
         </S.ButtonWrapper>

@@ -23,11 +23,19 @@ export const NoticeDetailPage = () => {
   );
 };
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 24px;
-  margin-top: 30px;
-  min-height: calc(100vh - 250px);
-  align-items: flex-start;
-`;
+const Wrapper = styled.div(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  padding: '24px',
+  marginTop: '30px',
+  minHeight: 'calc(100vh - 250px)',
+  alignItems: 'flex-start',
+  [`@media (max-width: ${theme.breakpoints.tablet})`]: {
+    padding: '20px 16px',
+    marginTop: '24px',
+  },
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    padding: '16px',
+    marginTop: '20px',
+  },
+}));

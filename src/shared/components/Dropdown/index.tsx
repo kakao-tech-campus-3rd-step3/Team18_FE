@@ -7,7 +7,6 @@ type Props<T extends string> = {
   options: T[];
   placeholder?: string;
   onSelect: (value: T) => void;
-  width?: string;
   disabled?: boolean;
 };
 
@@ -16,7 +15,6 @@ export const Dropdown = <T extends string>({
   options,
   placeholder,
   onSelect,
-  width = 'auto',
   disabled = false,
 }: Props<T>) => {
   const [isShowOptions, setIsShowOptions] = useState(false);
@@ -50,8 +48,8 @@ export const Dropdown = <T extends string>({
   };
 
   return (
-    <div ref={dropdownRef}>
-      <S.SelectBox width={width} onClick={handleToggleOptions} disabled={disabled}>
+    <S.DropdownWrapper ref={dropdownRef}>
+      <S.SelectBox onClick={handleToggleOptions} disabled={disabled}>
         <Text color='#757575'>{value || placeholder}</Text>
         {isShowOptions && (
           <S.SelectOptions>
@@ -67,6 +65,6 @@ export const Dropdown = <T extends string>({
           </S.SelectOptions>
         )}
       </S.SelectBox>
-    </div>
+    </S.DropdownWrapper>
   );
 };

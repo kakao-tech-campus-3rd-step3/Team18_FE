@@ -30,6 +30,7 @@ const Input = styled.textarea<Pick<Props, 'invalid'>>(({ theme, invalid }) => ({
   transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
   marginBottom: '0.3rem',
   minHeight: '8rem',
+  boxSizing: 'border-box',
 
   '&:focus': {
     outline: 'none',

@@ -17,19 +17,21 @@ export const OptionInput = styled.input<OptionInputProps>(({ theme, type }) => (
   },
 }));
 
-export const UserInfoWrapper = styled.div(({ theme }) => ({
-  boxSizing: 'border-box',
-  width: '48rem',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '30px',
-  borderBottom: `1px solid ${theme.colors.gray200}`,
-  paddingBottom: '3rem',
+export const UserInfoWrapper = styled.div(({ theme }) => {
+  return {
+    boxSizing: 'border-box',
+    width: '48rem',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '30px',
+    borderBottom: `1px solid ${theme.colors.gray200}`,
+    paddingBottom: '3rem',
 
-  '@media (max-width: 48rem)': {
-    width: '100%',
-  },
-}));
+    [`@media (max-width: ${theme.breakpoints.tablet})`]: {
+      width: '100%',
+    },
+  };
+});
 
 export const FormField = styled.div({
   display: 'flex',
@@ -40,7 +42,7 @@ export const FormField = styled.div({
 export const FormRow = styled.div({
   display: 'flex',
   flexDirection: 'row',
-  gap: '2.5rem',
+  gap: '1rem',
   width: '100%',
   '& > *': {
     flex: '1 1 0',
@@ -53,6 +55,7 @@ export const Label = styled.label(({ theme }) => ({
   alignItems: 'center',
   gap: '4px',
   fontWeight: theme.font.weight.medium,
+  lineHeight: '1.5',
 }));
 
 const FlexColumn = styled.div({
@@ -110,12 +113,19 @@ export const TimeSpan = styled.span<TimeSpanProps>(({ theme, selected }) => ({
 export const Wrapper = styled.div({
   display: 'flex',
   flexDirection: 'column',
+  gap: '1rem',
+});
+
+export const TimeSlotsContainer = styled.div({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '8px',
 });
 
 export const DateText = styled.span(({ theme }) => ({
   textAlign: 'left',
   minWidth: '150px',
-  padding: '10px 0 10px 8px',
+  padding: '10px 0 10px 3px',
   fontWeight: theme.font.weight.bold,
   fontSize: theme.font.size.sm,
   whiteSpace: 'nowrap',
