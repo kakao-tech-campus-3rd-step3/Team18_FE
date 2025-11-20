@@ -4,10 +4,7 @@ export const Container = styled.div(({ theme }) => ({
   width: '80%',
   maxWidth: '780px',
   backgroundColor: theme.colors.bg,
-  borderRadius: theme.radius.lg,
-  boxShadow: theme.shadow.sm,
   padding: '24px 40px',
-  border: `1px solid ${theme.colors.border}`,
   marginTop: '48px',
   [`@media (max-width: ${theme.breakpoints.tablet})`]: {
     width: '90%',
@@ -18,9 +15,6 @@ export const Container = styled.div(({ theme }) => ({
     width: '100%',
     padding: '16px 16px',
     marginTop: '24px',
-    borderRadius: theme.radius.md,
-    border: 'none',
-    boxShadow: 'none',
   },
 }));
 
@@ -48,9 +42,10 @@ export const NoticeRow = styled.div(({ theme }) => ({
 }));
 
 export const NoticeText = styled.span(({ theme }) => ({
-  fontSize: theme.font.size.sm,
+  fontSize: theme.font.size.base,
   color: theme.colors.textPrimary,
   flex: 1,
+  lineHeight: 1.5,
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     width: '100%',
     fontSize: theme.font.size.base,
@@ -73,26 +68,26 @@ export const NoticeRight = styled.div(({ theme }) => ({
 }));
 
 export const NoticeDate = styled.span(({ theme }) => ({
-  fontSize: theme.font.size.xs,
+  fontSize: theme.font.size.sm,
   color: theme.colors.textSecondary,
   width: '80px',
   textAlign: 'right',
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     width: 'auto',
     textAlign: 'left',
-    fontSize: '11px',
+    fontSize: theme.font.size.sm,
   },
 }));
 
 export const NoticeAuthor = styled.span(({ theme }) => ({
-  fontSize: theme.font.size.xs,
+  fontSize: theme.font.size.sm,
   color: theme.colors.textSecondary,
   width: '60px',
   textAlign: 'right',
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     width: 'auto',
     textAlign: 'left',
-    fontSize: '11px',
+    fontSize: theme.font.size.sm,
   },
 }));
 
