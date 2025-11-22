@@ -31,15 +31,14 @@ export const StatusContainer = styled.div({
   gap: '8px',
   alignItems: 'center',
 });
-
 export const RecruitStatusBox = styled.div<Props>(({ theme, status }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   textAlign: 'center',
-  padding: '6px 10px',
+  padding: '6px 12px',
   borderRadius: '10rem',
-  width: 60,
+  whiteSpace: 'nowrap',
   backgroundColor: status === '모집중' ? theme.colors.primary : theme.colors.gray200,
 }));
 
