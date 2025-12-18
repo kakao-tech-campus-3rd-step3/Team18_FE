@@ -11,7 +11,7 @@ export const ItemWrapper = styled.div`
 
   &:hover {
     cursor: pointer;
-    background-color: #f5f5f5;
+    background-color: ${({ theme }) => theme.colors.gray00};
   }
 
   & > p {
