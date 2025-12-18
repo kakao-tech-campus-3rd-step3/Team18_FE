@@ -10,6 +10,7 @@ export const ItemWrapper = styled.div`
 
   &:hover {
     cursor: pointer;
+    background-color: #f5f5f5;
   }
 
   & > p {
