@@ -7,9 +7,11 @@ export const ItemWrapper = styled.div`
   gap: 2rem;
   align-items: center;
   padding: 1.5rem 0;
+  transition: background-color 0.2s ease;
 
   &:hover {
     cursor: pointer;
+    background-color: ${({ theme }) => theme.colors.gray00};
   }
 
   & > p {
