@@ -6,6 +6,7 @@ import type { ClubDetail } from '@/pages/user/ClubDetail/types/clubDetail';
 type ClubInfoSidebarSectionProps = Pick<
   ClubDetail,
   | 'clubId'
+  | 'clubName'
   | 'presidentName'
   | 'presidentPhoneNumber'
   | 'location'
@@ -18,6 +19,7 @@ type ClubInfoSidebarSectionProps = Pick<
 
 export const ClubInfoSidebarSection = ({
   clubId,
+  clubName,
   presidentName,
   presidentPhoneNumber,
   location,
@@ -37,7 +39,12 @@ export const ClubInfoSidebarSection = ({
       </InfoItem>
       <InfoItem>정기 모임: {regularMeetingInfo}</InfoItem>
       <InfoItem>모집 상태: {recruitStatus}</InfoItem>
-      <ApplyButton recruitStatus={recruitStatus} to={`/clubs/${clubId}/apply`} width={'auto'} />
+      <ApplyButton
+        recruitStatus={recruitStatus}
+        to={`/clubs/${clubId}/apply`}
+        width={'auto'}
+        clubName={clubName}
+      />
       <Notice>{applicationNotice}</Notice>
     </SidebarContainer>
   );
