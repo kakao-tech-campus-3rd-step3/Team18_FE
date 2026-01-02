@@ -19,14 +19,12 @@ declare global {
 
 const queryClient = new QueryClient();
 
-const GA_TRACKING_ID = 'G-WVZCKKQ8HQ';
-
 export function App() {
   const location = useLocation();
 
   useEffect(() => {
     if (!window.window.GA_INITIALIZED) {
-      ReactGA.initialize(GA_TRACKING_ID);
+      ReactGA.initialize(import.meta.env.VITE_GA_TRACKING_ID);
       window.window.GA_INITIALIZED = true;
     }
 
