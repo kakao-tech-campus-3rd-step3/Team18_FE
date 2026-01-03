@@ -24,7 +24,7 @@ export function App() {
 
   useEffect(() => {
     if (!window.GA_INITIALIZED) {
-      ReactGA.initialize(import.meta.env.VITE_GA_TRACKING_ID);
+      ReactGA.initialize('G-WVZCKKQ8HQ');
       window.GA_INITIALIZED = true;
     }
   }, []);
