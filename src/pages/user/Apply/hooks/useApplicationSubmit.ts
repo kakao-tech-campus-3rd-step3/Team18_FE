@@ -20,7 +20,7 @@ export const useApplicationSubmit = (
       await overwriteApplicationForm(clubId, data, questionArray);
 
       // [GA] 덮어쓰기 제출 성공 이벤트 전송
-      ReactGA.event('click_submit_button', {
+      ReactGA.event('click_submit_button_overwrite', {
         event_category: 'ApplicationForm',
         club_name: clubName,
         status: 'overwrite',
