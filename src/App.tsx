@@ -23,11 +23,13 @@ export function App() {
   const location = useLocation();
 
   useEffect(() => {
-    if (!window.window.GA_INITIALIZED) {
+    if (!window.GA_INITIALIZED) {
       ReactGA.initialize(import.meta.env.VITE_GA_TRACKING_ID);
-      window.window.GA_INITIALIZED = true;
+      window.GA_INITIALIZED = true;
     }
+  }, []);
 
+  useEffect(() => {
     ReactGA.set({ page: location.pathname });
     ReactGA.send({ hitType: 'pageview', page: location.pathname + location.search });
   }, [location]);
