@@ -1,4 +1,5 @@
 import { isAxiosError } from 'axios';
+import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { theme } from '@/app/styles/theme';
@@ -8,13 +9,23 @@ import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 
 export const useApplicationSubmit = (
   clubId: number,
+  clubName: string,
   questionArray: string[],
   onSuccess?: () => void,
 ) => {
   const navigate = useNavigate();
+
   const handleOverwriteConfirm = async (data: FormInputs) => {
     try {
       await overwriteApplicationForm(clubId, data, questionArray);
+
+      // [GA] 덮어쓰기 제출 성공 이벤트 전송
+      ReactGA.event('click_submit_button_overwrite', {
+        event_category: 'ApplicationForm',
+        club_name: clubName,
+        status: 'overwrite',
+      });
+
       toast.success('제출 성공!', {
         style: {
           backgroundColor: theme.colors.primary,
@@ -36,9 +47,11 @@ export const useApplicationSubmit = (
       });
     }
   };
+
   const handleSubmit = async (data: FormInputs) => {
     try {
       const result = await postApplicationForm(clubId, data, questionArray);
+
       if (result.status === 202) {
         toast('이미 제출된 지원서가 있습니다.', {
           description: '덮어쓰시겠습니까?',
@@ -54,6 +67,14 @@ export const useApplicationSubmit = (
         });
         return;
       }
+
+      // [GA] 신규 제출 성공 이벤트 전송
+      ReactGA.event('click_submit_button', {
+        event_category: 'ApplicationForm',
+        club_name: clubName,
+        status: 'new',
+      });
+
       toast.success('제출 성공!', {
         style: {
           backgroundColor: theme.colors.primary,
@@ -85,5 +106,6 @@ export const useApplicationSubmit = (
       }
     }
   };
+
   return { handleSubmit };
 };
