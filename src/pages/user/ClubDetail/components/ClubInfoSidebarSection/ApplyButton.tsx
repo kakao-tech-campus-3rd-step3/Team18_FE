@@ -1,4 +1,5 @@
 import ReactGA from 'react-ga4';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/shared/components/Button';
 import type { RecruitStatus } from '@/pages/user/Main/types/club';
 
@@ -11,6 +12,7 @@ type Props = {
 };
 
 const ApplyButton = ({ recruitStatus, to, width, clubName }: Props) => {
+  const navigate = useNavigate();
   const isRecruiting = recruitStatus === '모집중';
 
   const applyButtonProps = {
@@ -25,9 +27,10 @@ const ApplyButton = ({ recruitStatus, to, width, clubName }: Props) => {
       club_name: clubName || 'unknown',
       status: recruitStatus,
     });
+    navigate(to);
   };
 
-  return <Button {...applyButtonProps} to={to} width={width} onClick={handleApplyClick} />;
+  return <Button {...applyButtonProps} width={width} onClick={handleApplyClick} />;
 };
 
 export default ApplyButton;
