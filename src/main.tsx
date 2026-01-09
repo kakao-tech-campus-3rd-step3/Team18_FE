@@ -6,11 +6,10 @@ import TagManager from 'react-gtm-module';
 import { RouterProvider } from 'react-router-dom';
 import { router } from '@/pages/Routes.tsx';
 
-const tagManagerArgs = {
-  gtmId: 'GTM-MTNVTX87',
-};
-
-TagManager.initialize(tagManagerArgs);
+const gtmId = import.meta.env.VITE_GTM_TRACKING_ID;
+if (gtmId) {
+  TagManager.initialize({ gtmId });
+}
 
 async function enableMocking() {
   if (import.meta.env.VITE_ENABLE_MSW === 'true') {

@@ -106,6 +106,8 @@ jobs:
           VITE_KAKAO_REDIRECT_URI: ${{ secrets.VITE_KAKAO_REDIRECT_URI }}
           VITE_KAKAO_REST_API_KEY: ${{ secrets.VITE_KAKAO_REST_API_KEY }}
           VITE_LOGOUT_REDIRECT_URI: ${{ secrets.VITE_LOGOUT_REDIRECT_URI }}
+          VITE_GTM_TRACKING_ID: ${{ secrets.VITE_GTM_TRACKING_ID }}
+          VITE_GA_TRACKING_ID: ${{ secrets.VITE_GA_TRACKING_ID }}
         run: npm run build
 
       - name: Upload dist as artifact
