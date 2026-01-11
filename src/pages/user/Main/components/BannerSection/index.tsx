@@ -1,54 +1,14 @@
 import styled from '@emotion/styled';
-import { useSearchParams } from 'react-router-dom';
-import { CLUB_CATEGORY } from '@/app/constants/clubCategory';
 import { ClubSearchInput } from '@/pages/user/Main/components/BannerSection/ClubSearchInput.tsx';
-import { CLUB_RECRUIT_STATUS_KOR, type RecruitStatus } from '@/pages/user/Main/types/club.ts';
-import { Dropdown } from '@/shared/components/Dropdown/index.tsx';
-import {
-  engToKorCategory,
-  korToEngCategory,
-  korToEngRecruitStatus,
-} from '@/shared/utils/formatting.ts';
 import * as S from './Banner.styled.ts';
 import { BannerSlideshow } from './BannerSlideshow';
 import * as B from './BannerText.styled.ts';
-import type { ClubCategory, ClubCategoryEng } from '@/shared/types/club';
 
-type FilterRecruitStatus = RecruitStatus | '전체';
 type Props = {
   onChangeSearch: (searchText: string) => void;
-  onSelectCategory: (category: ClubCategoryEng) => void;
-  onSelectStatus: (recruitStatus: FilterRecruitStatus) => void;
-  selectedCategory: ClubCategoryEng;
-  selectedRecruitStatus: RecruitStatus | undefined;
 };
 
-export const BannerSection = ({
-  onChangeSearch,
-  onSelectCategory,
-  onSelectStatus,
-  selectedCategory,
-  selectedRecruitStatus,
-}: Props) => {
-  const [filterParams, setFilterParams] = useSearchParams();
-
-  const handleCategoryClick = (newCategory: ClubCategory) => {
-    const engCategory = korToEngCategory[newCategory];
-    onSelectCategory(engCategory);
-    filterParams.set('category', engCategory);
-    setFilterParams(filterParams);
-  };
-
-  const handleRecruitStatusClick = (status: RecruitStatus) => {
-    onSelectStatus(status);
-    if (status === '전체') {
-      filterParams.delete('status');
-    } else {
-      filterParams.set('status', korToEngRecruitStatus[status]);
-    }
-    setFilterParams(filterParams);
-  };
-
+export const BannerSection = ({ onChangeSearch }: Props) => {
   return (
     <S.BannerWrapper>
       <BannerSlideshow />
@@ -58,25 +18,11 @@ export const BannerSection = ({
           <B.HeaderText>함께할 사람이 있는 곳, 동아리움.</B.HeaderText>
           <B.SubText>관심 있는 동아리를 찾고, 참여해보세요.</B.SubText>
         </B.BannerTextWrapper>
-
-        <SearchContainer>
-          <ClubSearchInput onChangeSearch={onChangeSearch} />
-          <DropdownWrapper>
-            <Dropdown
-              placeholder='동아리 카테고리'
-              value={engToKorCategory[selectedCategory]}
-              options={CLUB_CATEGORY}
-              onSelect={handleCategoryClick}
-            />
-            <Dropdown
-              placeholder='모집 상태'
-              value={selectedRecruitStatus === '전체' ? undefined : selectedRecruitStatus}
-              options={['전체', ...CLUB_RECRUIT_STATUS_KOR] as RecruitStatus[]}
-              onSelect={handleRecruitStatusClick}
-            />
-          </DropdownWrapper>
-        </SearchContainer>
       </ContentContainer>
+
+      <SearchContainer>
+        <ClubSearchInput onChangeSearch={onChangeSearch} />
+      </SearchContainer>
     </S.BannerWrapper>
   );
 };
@@ -89,50 +35,40 @@ const ContentContainer = styled.div(({ theme }) => ({
   margin: '0 auto',
   display: 'flex',
   flexDirection: 'column',
-  gap: '16px',
+  gap: '24px',
   padding: '0 1.5rem',
   boxSizing: 'border-box',
+  paddingBottom: '60px',
 
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     padding: '0 1rem',
-    gap: '12px',
+    paddingBottom: '50px',
+    gap: '16px',
   },
 }));
 
 export const SearchContainer = styled.div(({ theme }) => ({
-  position: 'relative',
+  position: 'absolute',
+  bottom: '-30px',
+  left: '0',
+  right: '0',
   zIndex: 10,
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-  width: '100%',
-  gap: 16,
+  width: '700px',
+  maxWidth: '90%',
+  margin: '0 auto',
+  marginLeft: 'calc((100% - 1200px) / 2 + 1.5rem)',
   boxSizing: 'border-box',
-  opacity: 1,
 
-  [`@media(max-width: ${theme.breakpoints.mobile})`]: {
-    flexDirection: 'column',
-    gap: 12,
-    width: '100%',
-    '& > *': {
-      width: '100%',
-      boxSizing: 'border-box',
-    },
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    width: '600px',
+    bottom: '-25px',
+    marginLeft: '1.5rem',
   },
-}));
 
-export const DropdownWrapper = styled.div(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'row',
-  gap: 16,
-  zIndex: 3,
-
-  [`@media(max-width: ${theme.breakpoints.mobile})`]: {
-    width: '100%',
-    gap: 12,
-    '& > *': {
-      width: 'calc(50% - 6px)',
-    },
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    width: 'calc(100% - 2rem)',
+    bottom: '-25px',
+    marginLeft: '1rem',
+    marginRight: '1rem',
   },
 }));
