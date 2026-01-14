@@ -35,10 +35,18 @@ export const ApplicationFormBuilderHeaderSection = ({
         )}
       </S.HeaderWrapper>
       <S.CheckboxWrapper>
-        <S.CustomCheckbox type='checkbox' />
-        <Text size='sm' weight='bold' color='#339356'>
-          면접 전형을 진행하시면 체크박스를 눌러주세요!
-        </Text>
+        {isEditMode ? (
+          <>
+            <S.CustomCheckbox type='checkbox' />
+            <Text size='sm' weight='bold' color='#339356'>
+              면접 전형을 진행하시면 체크박스를 눌러주세요!
+            </Text>
+          </>
+        ) : (
+          <Text size='sm' weight='bold' color='#339356'>
+            면접날짜는 타임 슬롯을 이용해서 안내할 수 있어요!
+          </Text>
+        )}
       </S.CheckboxWrapper>
     </S.Container>
   );
