@@ -34,9 +34,12 @@ export const ApplicationFormBuilderHeaderSection = ({
           </Button>
         )}
       </HeaderWrapper>
-      <Text size='sm' color='#339356'>
-        면접날짜는 타임 슬롯을 이용해서 안내할 수 있어요!
-      </Text>
+      <CheckboxWrapper>
+        <CustomCheckbox type='checkbox' />
+        <Text size='sm' weight='bold' color='#339356'>
+          면접 전형을 진행하시면 체크박스를 눌러주세요!
+        </Text>
+      </CheckboxWrapper>
     </Container>
   );
 };
@@ -72,5 +75,49 @@ const Title = styled.h1(({ theme }) => ({
 
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     fontSize: '1.5rem',
+  },
+}));
+
+const CheckboxWrapper = styled.div({
+  display: 'flex',
+  gap: '0.5rem',
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+});
+
+const CustomCheckbox = styled.input(({ theme }) => ({
+  width: '1.15rem',
+  height: '1.15rem',
+  cursor: 'pointer',
+  appearance: 'none',
+  border: `2px solid ${theme.colors.primary}`,
+  borderRadius: '4px',
+  position: 'relative',
+  transition: 'all 0.2s ease',
+
+  '&:checked': {
+    backgroundColor: theme.colors.primary,
+    borderColor: theme.colors.primary,
+  },
+
+  '&:checked::after': {
+    content: '"✓"',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    color: 'white',
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+  },
+
+  '&:hover': {
+    borderColor: theme.colors.primary800,
+    boxShadow: `0 0 0 3px ${theme.colors.primary}20`,
+  },
+
+  '&:focus': {
+    outline: 'none',
+    boxShadow: `0 0 0 3px ${theme.colors.primary}40`,
   },
 }));
