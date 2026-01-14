@@ -42,5 +42,5 @@ export const ApplicantStatusToggle = ({ status, updateStatus }: Props) => {
 
 const Container = styled.div(() => ({
   display: 'flex',
-  gap: '2rem',
+  gap: '1.5rem',
 }));
