@@ -102,6 +102,6 @@ const ButtonWrapper = styled.div({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  marginRight: '-2rem',
+  marginRight: '-0.35rem',
   padding: '0 0.3rem',
 });
