@@ -4,13 +4,12 @@ export const Container = styled.div(({ theme }) => ({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
-  gap: '1.2rem',
-  padding: '2.5rem 0 1rem 0',
+  gap: '2rem',
+  padding: '2.5rem 0 0 0',
   boxSizing: 'border-box',
 
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    padding: '1.5rem 0 0.5rem 0',
-    gap: '0.8rem',
+    gap: '0.5rem',
   },
 }));
 
@@ -30,16 +29,21 @@ export const Title = styled.h1(({ theme }) => ({
   fontWeight: theme.font.weight.medium,
 
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    fontSize: '1.5rem',
+    fontSize: '2rem',
   },
 }));
 
-export const CheckboxWrapper = styled.div({
+export const CheckboxWrapper = styled.div(({ theme }) => ({
   display: 'flex',
   gap: '0.5rem',
   justifyContent: 'flex-end',
   alignItems: 'center',
-});
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    padding: '1.5rem 0 0.5rem 0',
+    justifyContent: 'flex-start',
+  },
+}));
 
 export const CustomCheckbox = styled.input(({ theme }) => ({
   width: '1.15rem',
