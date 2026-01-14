@@ -46,7 +46,6 @@ export const ClubDetailPage = () => {
       }
       right={
         <ClubInfoSidebarSection
-          clubName={club.clubName}
           presidentName={club.presidentName}
           presidentPhoneNumber={club.presidentPhoneNumber}
           location={club.location}
