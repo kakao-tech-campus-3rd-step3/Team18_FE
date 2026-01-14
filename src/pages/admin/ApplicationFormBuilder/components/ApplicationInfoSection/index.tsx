@@ -42,7 +42,7 @@ export const ApplicationInfoSection = ({ formHandler, isEditMode }: Props) => {
   return (
     <>
       <Global styles={datePickerStyles} />
-      <Layout>
+      <Layout isEditMode={isEditMode}>
         <Wrapper>
           <UnderlineInputField
             placeholder='ex. 동아리명 10기 신입부원 모집'
@@ -93,16 +93,17 @@ export const ApplicationInfoSection = ({ formHandler, isEditMode }: Props) => {
   );
 };
 
-const Layout = styled.div(({ theme }) => ({
+const Layout = styled.div<{ isEditMode: boolean }>(({ theme, isEditMode }) => ({
   width: '100%',
   border: `1px solid ${theme.colors.gray200}`,
   borderRadius: theme.radius.sm,
   padding: '1.5rem',
-  backgroundColor: 'white',
+  backgroundColor: isEditMode ? theme.colors.bg : theme.colors.gray00,
   display: 'flex',
   flexDirection: 'column',
   gap: '2.5rem',
   boxSizing: 'border-box',
+  cursor: 'auto',
 
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     padding: '1rem',
