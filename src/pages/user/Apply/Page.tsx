@@ -16,7 +16,7 @@ export const ClubApplicationPage = () => {
     <Layout>
       <ContentContainer>
         <ClubDescription title={formData.title} description={formData?.description ?? ''} />
-        <ApplicationForm questions={formData.formQuestions} clubName={formData.title} />
+        <ApplicationForm questions={formData.formQuestions} />
       </ContentContainer>
     </Layout>
   );
