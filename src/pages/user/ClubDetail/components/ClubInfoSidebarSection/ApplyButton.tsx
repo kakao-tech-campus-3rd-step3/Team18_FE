@@ -1,4 +1,3 @@
-import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/shared/components/Button';
 import type { RecruitStatus } from '@/pages/user/Main/types/club';
@@ -8,10 +7,9 @@ type Props = {
   to: string;
   width?: string;
   children?: React.ReactNode;
-  clubName?: string;
 };
 
-const ApplyButton = ({ recruitStatus, to, width, clubName }: Props) => {
+const ApplyButton = ({ recruitStatus, to, width }: Props) => {
   const navigate = useNavigate();
   const isRecruiting = recruitStatus === '모집중';
 
@@ -21,12 +19,6 @@ const ApplyButton = ({ recruitStatus, to, width, clubName }: Props) => {
   };
 
   const handleApplyClick = () => {
-    // [GA] 지원하기 버튼 클릭 이벤트 전송
-    ReactGA.event('click_apply_button', {
-      event_category: 'ClubDetail',
-      club_name: clubName || 'unknown',
-      status: recruitStatus,
-    });
     navigate(to);
   };
 
