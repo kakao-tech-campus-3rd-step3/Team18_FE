@@ -4,6 +4,7 @@ import { clubHandlers } from '@/app/mocks/handler/club';
 import { noticeHandlers } from '@/app/mocks/handler/notice';
 import { applyFormHandlers } from './handler/applyForm';
 import { authHandlers } from './handler/auth';
+import { dashboardHandlers } from './handler/dashboard';
 
 export const client = setupWorker(
   ...clubHandlers,
@@ -11,4 +12,5 @@ export const client = setupWorker(
   ...noticeHandlers,
   ...applyFormHandlers,
   ...authHandlers,
+  ...dashboardHandlers,
 );
