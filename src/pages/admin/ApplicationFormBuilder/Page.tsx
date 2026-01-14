@@ -15,7 +15,7 @@ import type { ApplicationFormData } from './types/fieldType';
 export const ApplicationFormBuilder = () => {
   const { clubId } = useParams();
   const [isEditMode, setIsEditMode] = useState(false);
-
+  const [isInterviewMode, setIsInterviewMode] = useState(false);
   const { data, isLoading, error } = useAdaptedApplicationForm(Number(clubId));
   const { adaptedPatchForm } = useAdaptedPatchApplicationForm(Number(clubId));
 
@@ -50,6 +50,10 @@ export const ApplicationFormBuilder = () => {
     });
   });
 
+  const handleInterviewChange = (checked: boolean) => {
+    setIsInterviewMode(checked);
+  };
+
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;
 
@@ -61,6 +65,8 @@ export const ApplicationFormBuilder = () => {
           onEdit={handleEdit}
           onSave={handleSave}
           onCancel={handleCancel}
+          isInterviewMode={isInterviewMode}
+          onInterviewChange={handleInterviewChange}
         />
         <ApplicationInfoSection formHandler={formHandler} isEditMode={isEditMode} />
         <ApplicationFieldsFormTableSection formHandler={formHandler} isEditMode={isEditMode} />

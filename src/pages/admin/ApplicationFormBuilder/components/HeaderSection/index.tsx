@@ -7,6 +7,8 @@ type Props = {
   onEdit: () => void;
   onSave: () => void;
   onCancel: () => void;
+  isInterviewMode: boolean;
+  onInterviewChange: (checked: boolean) => void;
 };
 
 export const ApplicationFormBuilderHeaderSection = ({
@@ -14,6 +16,8 @@ export const ApplicationFormBuilderHeaderSection = ({
   onEdit,
   onSave,
   onCancel,
+  isInterviewMode,
+  onInterviewChange,
 }: Props) => {
   return (
     <S.Container>
@@ -37,7 +41,11 @@ export const ApplicationFormBuilderHeaderSection = ({
       <S.CheckboxWrapper>
         {isEditMode ? (
           <>
-            <S.CustomCheckbox type='checkbox' />
+            <S.CustomCheckbox
+              type='checkbox'
+              checked={isInterviewMode}
+              onChange={(e) => onInterviewChange(e.target.checked)}
+            />
             <Text size='sm' weight='bold' color='#339356'>
               면접 전형을 진행하시면 체크박스를 눌러주세요!
             </Text>
