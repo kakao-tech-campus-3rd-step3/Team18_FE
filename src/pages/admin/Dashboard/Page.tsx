@@ -32,6 +32,6 @@ const Layout = styled.div({
 const Container = styled.main({
   maxWidth: '1200px',
   width: '100%',
-  padding: '1.5rem',
+  padding: '3rem 1.5rem',
   boxSizing: 'border-box',
 });
