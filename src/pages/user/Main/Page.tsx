@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { useCallback, useState } from 'react';
 import { BannerSection } from '@/pages/user/Main/components/BannerSection';
 import { ClubListSection } from '@/pages/user/Main/components/ClubListSection';
+import { FiltersSection } from '@/pages/user/Main/components/FiltersSection';
 import type { RecruitStatus } from './types/club';
 import type { ClubCategoryEng } from '@/shared/types/club';
 
@@ -20,12 +21,12 @@ export const MainPage = () => {
 
   return (
     <Container>
-      <BannerSection
+      <BannerSection onChangeSearch={(s: string) => setSearchText(s)} />
+      <FiltersSection
         selectedCategory={categoryFilter}
         selectedRecruitStatus={recruitStatus}
         onSelectCategory={handleCategoryFilter}
         onSelectStatus={handleRecruitStatusFilter}
-        onChangeSearch={(s: string) => setSearchText(s)}
       />
       <ClubListSection
         categoryFilter={categoryFilter}

@@ -9,13 +9,13 @@ export const BannerWrapper = styled.div(({ theme }) => ({
   alignItems: 'flex-start',
   width: '100%',
   maxWidth: '100vw',
-  height: 400,
+  height: '300px',
   gap: '16px',
   boxSizing: 'border-box',
   backgroundColor: theme.colors.bg,
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
-    minHeight: 300,
+    minHeight: 240,
     gap: 24,
     zIndex: 1000,
   },

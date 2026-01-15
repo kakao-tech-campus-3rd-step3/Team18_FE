@@ -7,6 +7,7 @@ export const BannerTextWrapper = styled.div(({ theme }) => ({
   gap: '12px',
   position: 'relative',
   zIndex: 2,
+  marginTop: '88px',
 
   [`@media(max-width: ${theme.breakpoints.web})`]: {
     gap: '10px',
@@ -33,9 +34,9 @@ export const HeaderText = styled.h2(({ theme }) => ({
 
 export const SubText = styled.p(({ theme }) => ({
   fontSize: theme.font.size.lg,
-  fontWeight: theme.font.weight.regular,
+  fontWeight: theme.font.weight.medium,
   color: 'rgba(255, 255, 255, 0.9)',
-  textShadow: '0 2px 5px rgba(0, 0, 0, 0.3)',
+  textShadow: '0 2px 5px rgba(0, 0, 0, 0.5)',
   margin: 0,
   lineHeight: 1.5,
 }));

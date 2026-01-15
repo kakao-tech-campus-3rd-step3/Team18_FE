@@ -5,24 +5,21 @@ import { FiSearch } from 'react-icons/fi';
 const InputWrapper = styled.div(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  width: '400px',
-  maxWidth: '100%',
-  border: `1px solid ${theme.colors.border}`,
-  borderRadius: theme.radius.md,
-  padding: '10px 10px',
+  width: '100%',
+  border: 'none',
+  borderRadius: '50px',
+  padding: '16px 28px',
   backgroundColor: theme.colors.bg,
   boxSizing: 'border-box',
-  boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)',
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
-    width: 300,
-    maxWidth: '100%',
+    padding: '14px 24px',
   },
 
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    gap: 12,
-    width: '100%',
-    padding: '8px 12px',
+    padding: '12px 20px',
+    borderRadius: '40px',
   },
 }));
 
@@ -31,12 +28,28 @@ const Input = styled.input(({ theme }) => ({
   border: 'none',
   outline: 'none',
   fontSize: theme.font.size.base,
+  backgroundColor: 'transparent',
+
+  '::placeholder': {
+    color: theme.colors.textSecondary,
+  },
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    fontSize: theme.font.size.sm,
+  },
 }));
 
-const SearchIcon = styled(FiSearch)({
-  marginRight: '8px',
-  color: '#666',
-});
+const SearchIcon = styled(FiSearch)(({ theme }) => ({
+  marginRight: '12px', // marginLeft → marginRight
+  fontSize: '20px',
+  color: theme.colors.textSecondary,
+  flexShrink: 0,
+
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    fontSize: '18px',
+    marginRight: '8px', // marginLeft → marginRight
+  },
+}));
 
 type Props = {
   onChangeSearch: (s: string) => void;
@@ -50,8 +63,8 @@ export function ClubSearchInput({ onChangeSearch }: Props) {
 
   return (
     <InputWrapper>
-      <Input onChange={handleChange} placeholder='동아리를 검색하세요.' />
       <SearchIcon />
+      <Input onChange={handleChange} placeholder='동아리를 검색하세요.' />
     </InputWrapper>
   );
 }
