@@ -55,7 +55,7 @@ export const SearchContainer = styled.div(({ theme }) => ({
   zIndex: 10,
   width: '700px',
   maxWidth: '90%',
-  marginLeft: 'calc((100% - 1200px) / 2 + 1.5rem)',
+  marginLeft: 'max(20px, calc((100vw - 1200px) / 2))',
   boxSizing: 'border-box',
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
