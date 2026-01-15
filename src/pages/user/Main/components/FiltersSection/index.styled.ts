@@ -39,6 +39,9 @@ export const TabsWrapper = styled.div(({ theme }) => ({
     gap: '8px',
     width: '100%',
   },
+  '@media (max-width: 409px)': {
+    gap: '6px',
+  },
 }));
 
 type TabButtonProps = {
@@ -82,6 +85,10 @@ export const TabButton = styled.button<TabButtonProps>(({ theme, isSelected }) =
 
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     padding: '8px 16px',
+    fontSize: theme.font.size.sm,
+  },
+  '@media (max-width: 400px)': {
+    padding: '8px 11px',
     fontSize: theme.font.size.sm,
   },
 }));
