@@ -55,7 +55,6 @@ export const SearchContainer = styled.div(({ theme }) => ({
   zIndex: 10,
   width: '700px',
   maxWidth: '90%',
-  margin: '0 auto',
   marginLeft: 'calc((100% - 1200px) / 2 + 1.5rem)',
   boxSizing: 'border-box',
 
