@@ -40,14 +40,14 @@ const Input = styled.input(({ theme }) => ({
 }));
 
 const SearchIcon = styled(FiSearch)(({ theme }) => ({
-  marginLeft: '12px',
+  marginRight: '12px', // marginLeft → marginRight
   fontSize: '20px',
   color: theme.colors.textSecondary,
   flexShrink: 0,
 
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     fontSize: '18px',
-    marginLeft: '8px',
+    marginRight: '8px', // marginLeft → marginRight
   },
 }));
 
@@ -63,8 +63,8 @@ export function ClubSearchInput({ onChangeSearch }: Props) {
 
   return (
     <InputWrapper>
-      <Input onChange={handleChange} placeholder='동아리를 검색하세요.' />
       <SearchIcon />
+      <Input onChange={handleChange} placeholder='동아리를 검색하세요.' />
     </InputWrapper>
   );
 }
