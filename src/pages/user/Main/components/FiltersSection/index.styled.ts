@@ -16,18 +16,18 @@ export const FilterTabsContainer = styled.div(({ theme }) => ({
   },
 }));
 
-export const FilterRow = styled.div(({ theme }) => ({
+export const FilterRow = styled.div({
   display: 'flex',
   alignItems: 'center',
   width: '100%',
   gap: '48px',
 
-  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+  '@media (max-width: 672px)': {
     flexDirection: 'column',
     alignItems: 'flex-start',
     gap: '16px',
   },
-}));
+});
 
 export const TabsWrapper = styled.div(({ theme }) => ({
   display: 'flex',
