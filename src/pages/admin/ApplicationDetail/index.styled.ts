@@ -4,6 +4,10 @@ export const PageLayout = styled.div({
   display: 'flex',
   gap: '1.5rem',
   padding: '2rem 2.2rem 2rem 2rem',
+  maxWidth: '1400px',
+  margin: '1rem auto',
+  width: '100%',
+  boxSizing: 'border-box',
 
   '@media (max-width: 72.5rem)': {
     flexDirection: 'column',
