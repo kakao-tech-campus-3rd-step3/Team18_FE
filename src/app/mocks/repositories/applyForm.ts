@@ -5,6 +5,7 @@ const applyForms: Record<string, ApplicationFormData> = {
     title: '카태켐 12기 지원서',
     description: '카카오테크 캠퍼스 12기 모집을 위한 지원서입니다.',
     recruitDate: '2025-03-01 ~ 2025-03-31',
+    interviewRequired: false,
     formQuestions: [
       {
         questionNum: 1,
@@ -28,20 +29,6 @@ const applyForms: Record<string, ApplicationFormData> = {
         isRequired: true,
         optionList: [{ value: 'JAVA' }, { value: 'C' }, { value: 'C++' }],
         displayOrder: 3,
-      },
-      {
-        questionNum: 4,
-        question: '면접 시간을 설정해주세요.',
-        fieldType: 'TIME_SLOT',
-        isRequired: true,
-        displayOrder: 4,
-        timeSlotOptions: {
-          date: '2025-09-24 ~ 2025-09-25',
-          availableTime: {
-            start: '10:00',
-            end: '21:00',
-          },
-        },
       },
     ],
   },
