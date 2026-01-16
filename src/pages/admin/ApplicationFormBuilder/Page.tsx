@@ -15,7 +15,6 @@ import type { ApplicationFormData } from './types/fieldType';
 export const ApplicationFormBuilderPage = () => {
   const { clubId } = useParams();
   const [isEditMode, setIsEditMode] = useState(false);
-  const [isInterviewMode, setIsInterviewMode] = useState(false);
   const { data, isLoading, error } = useAdaptedApplicationForm(Number(clubId));
   const { adaptedPatchForm } = useAdaptedPatchApplicationForm(Number(clubId));
 
@@ -51,8 +50,9 @@ export const ApplicationFormBuilderPage = () => {
     });
   });
 
+  const isInterviewMode = formHandler.watch('interviewRequired');
   const handleInterviewChange = (checked: boolean) => {
-    setIsInterviewMode(checked);
+    formHandler.setValue('interviewRequired', checked);
   };
 
   if (isLoading) return <LoadingSpinner />;
