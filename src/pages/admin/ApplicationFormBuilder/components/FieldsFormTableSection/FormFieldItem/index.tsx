@@ -39,7 +39,18 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
 
   const questionType = watch(`formQuestions.${index}.fieldType`);
 
-  const currentDisplayType = reverseTypeMapping[questionType] || '텍스트';
+  const getDisplayType = (qType: typeof questionType): QuestionType => {
+    switch (qType) {
+      case 'TEXT':
+      case 'RADIO':
+      case 'CHECKBOX':
+        return reverseTypeMapping[qType];
+      case 'TIME_SLOT':
+      default:
+        return '텍스트';
+    }
+  };
+  const currentDisplayType = getDisplayType(questionType);
 
   const renderOptionsBuilder = () => {
     switch (currentDisplayType) {
