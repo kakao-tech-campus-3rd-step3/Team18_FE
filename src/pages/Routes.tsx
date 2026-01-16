@@ -10,7 +10,7 @@ import { MainPage } from '@/pages/user/Main/Page.tsx';
 import { NoticeDetailPage } from '@/pages/user/Notice/DetailPage';
 import { NoticeListPage } from '@/pages/user/Notice/Page';
 import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
-import { ApplicationFormBuilder } from './admin/ApplicationFormBuilder/Page';
+import { ApplicationFormBuilderPage } from './admin/ApplicationFormBuilder/Page';
 import { KakaoCallback } from './admin/Login/KakaoCallback';
 import { LoginPage } from './admin/Login/Page';
 import { AdminSignupPage } from './admin/Signup/Page';
@@ -69,7 +69,7 @@ export const router = createBrowserRouter([
           },
           {
             path: ADMIN.APPLICATION_FORM_BUILDER,
-            element: <ApplicationFormBuilder />,
+            element: <ApplicationFormBuilderPage />,
           },
         ],
       },

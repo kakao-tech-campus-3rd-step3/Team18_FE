@@ -22,6 +22,7 @@ export type ApplicationFormData = {
   title: string;
   description: string;
   recruitDate: string;
+  interviewRequired: boolean;
   formQuestions: QuestionFormData[];
 };
 

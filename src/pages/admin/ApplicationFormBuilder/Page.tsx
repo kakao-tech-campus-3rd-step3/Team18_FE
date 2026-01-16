@@ -12,7 +12,7 @@ import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableS
 import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection';
 import type { ApplicationFormData } from './types/fieldType';
 
-export const ApplicationFormBuilder = () => {
+export const ApplicationFormBuilderPage = () => {
   const { clubId } = useParams();
   const [isEditMode, setIsEditMode] = useState(false);
   const [isInterviewMode, setIsInterviewMode] = useState(false);
@@ -24,6 +24,7 @@ export const ApplicationFormBuilder = () => {
       title: '',
       description: '',
       recruitDate: '',
+      interviewRequired: false,
       formQuestions: [],
     },
   });
