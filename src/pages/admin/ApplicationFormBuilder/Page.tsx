@@ -53,6 +53,29 @@ export const ApplicationFormBuilderPage = () => {
   const isInterviewMode = formHandler.watch('interviewRequired');
   const handleInterviewChange = (checked: boolean) => {
     formHandler.setValue('interviewRequired', checked);
+
+    const currentQuestions = formHandler.getValues('formQuestions');
+
+    if (checked) {
+      formHandler.setValue('formQuestions', [
+        {
+          questionNum: 1,
+          fieldType: 'TIME_SLOT',
+          displayOrder: 1,
+          question: '면접 시간 선택',
+          isRequired: true,
+          optionList: [],
+          timeSlotOptions: { date: '', availableTime: { start: '09:00:00', end: '18:00:00' } },
+        },
+        ...currentQuestions.map((q, i) => ({ ...q, questionNum: i + 2, displayOrder: i + 2 })),
+      ]);
+    } else {
+      const filtered = currentQuestions.filter((q) => q.fieldType !== 'TIME_SLOT');
+      formHandler.setValue(
+        'formQuestions',
+        filtered.map((q, i) => ({ ...q, questionNum: i + 1, displayOrder: i + 1 })),
+      );
+    }
   };
 
   if (isLoading) return <LoadingSpinner />;
@@ -70,6 +93,7 @@ export const ApplicationFormBuilderPage = () => {
           onInterviewChange={handleInterviewChange}
         />
         <ApplicationInfoSection formHandler={formHandler} isEditMode={isEditMode} />
+
         <ApplicationFieldsFormTableSection formHandler={formHandler} isEditMode={isEditMode} />
       </ContentContainer>
     </Layout>
