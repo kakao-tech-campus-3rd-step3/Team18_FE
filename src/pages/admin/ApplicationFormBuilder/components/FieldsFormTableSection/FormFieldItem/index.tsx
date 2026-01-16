@@ -11,7 +11,6 @@ import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineIn
 import { CheckboxOptionsBuilder } from './Builders/CheckboxOptionsBuilder';
 import { RadioOptionsBuilder } from './Builders/RadioOptionsBuilder';
 import { TextOptionsBuilder } from './Builders/TextOptionsBuilder';
-import { TimeslotFieldBuilder } from './Builders/TimeslotFieldBuilder';
 import type {
   QuestionType,
   ApplicationFormData,
@@ -23,7 +22,7 @@ type Props = {
   onRemove?: () => void;
   isEditMode: boolean;
 };
-const fieldTypes: QuestionType[] = ['텍스트', '라디오', '체크박스', '타임슬롯'];
+const fieldTypes: QuestionType[] = ['텍스트', '라디오', '체크박스'];
 
 export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Props) => {
   const {
@@ -62,14 +61,7 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
             isEditMode={isEditMode}
           />
         );
-      case '타임슬롯':
-        return (
-          <TimeslotFieldBuilder
-            formHandler={formHandler}
-            questionIndex={index}
-            isEditMode={isEditMode}
-          />
-        );
+
       default:
         return null;
     }
@@ -81,11 +73,6 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
 
     if (newType === 'RADIO' || newType === 'CHECKBOX') {
       setValue(`formQuestions.${index}.optionList`, [{ value: '' }]);
-    } else if (newType === 'TIME_SLOT') {
-      setValue(`formQuestions.${index}.timeSlotOptions`, {
-        date: '',
-        availableTime: { start: '07:00:00', end: '07:00:00' },
-      });
     }
   };
 
