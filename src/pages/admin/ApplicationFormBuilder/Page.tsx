@@ -62,10 +62,13 @@ export const ApplicationFormBuilderPage = () => {
           questionNum: 1,
           fieldType: 'TIME_SLOT',
           displayOrder: 1,
-          question: '면접 시간 선택',
+          question: '면접 가능한 시간을 선택해주세요',
           isRequired: true,
           optionList: [],
-          timeSlotOptions: { date: '', availableTime: { start: '09:00:00', end: '18:00:00' } },
+          timeSlotOptions: {
+            date: '',
+            availableTime: { start: '09:00:00', end: '18:00:00' },
+          },
         },
         ...currentQuestions.map((q, i) => ({ ...q, questionNum: i + 2, displayOrder: i + 2 })),
       ]);

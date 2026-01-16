@@ -8,6 +8,7 @@ import { datePickerStyles } from '@/pages/admin/ApplicationFormBuilder/styles/da
 import * as S from '@/pages/admin/ApplicationFormBuilder/styles/timeslot.styled';
 import { generateTimes } from '@/pages/admin/ApplicationFormBuilder/utils/generateTimes';
 import { Dropdown } from '@/shared/components/Dropdown';
+import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { Text } from '@/shared/components/Text';
 import type { CustomInputProps } from '@/pages/admin/ApplicationFormBuilder/types/clubInfo';
 import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
@@ -27,7 +28,12 @@ const CustomInput = ({ value, onClick }: CustomInputProps) => (
 );
 
 export const TimeslotFieldBuilder = ({ formHandler, questionIndex, isEditMode }: Props) => {
-  const { register, setValue, watch } = formHandler;
+  const {
+    register,
+    setValue,
+    watch,
+    formState: { errors },
+  } = formHandler;
 
   const timeSlotDate = watch(`formQuestions.${questionIndex}.timeSlotOptions.date`);
 
@@ -54,7 +60,19 @@ export const TimeslotFieldBuilder = ({ formHandler, questionIndex, isEditMode }:
   return (
     <>
       <Global styles={datePickerStyles} />
-      <S.Layout>
+      <S.HeaderWrapper>
+        <OutlineInputField
+          placeholder='질문 내용을 입력하세요.'
+          {...register(`formQuestions.${questionIndex}.question`, {
+            required: '질문 내용을 입력해주세요.',
+            minLength: { value: 1, message: '질문 내용은 최소 한 글자 이상 입력해야 합니다.' },
+          })}
+          invalid={!!errors.formQuestions?.[questionIndex]?.question}
+          message={errors.formQuestions?.[questionIndex]?.question?.message}
+          disabled={!isEditMode}
+        />
+      </S.HeaderWrapper>
+      <S.Container>
         <S.DatePickerWrapper>
           <DatePicker
             locale={ko}
@@ -71,9 +89,14 @@ export const TimeslotFieldBuilder = ({ formHandler, questionIndex, isEditMode }:
           <input
             type='hidden'
             {...register(`formQuestions.${questionIndex}.timeSlotOptions.date`, {
-              required: '모집 기간을 선택해주세요',
+              required: '면접 기간을 선택해주세요',
             })}
           />
+          {errors.formQuestions?.[questionIndex]?.timeSlotOptions?.date && (
+            <S.ErrorMessage>
+              {errors.formQuestions[questionIndex].timeSlotOptions.date.message}
+            </S.ErrorMessage>
+          )}
         </S.DatePickerWrapper>
 
         <S.TimeSelectContainer>
@@ -96,7 +119,7 @@ export const TimeslotFieldBuilder = ({ formHandler, questionIndex, isEditMode }:
             />
           </S.TimeSelectWrapper>
         </S.TimeSelectContainer>
-      </S.Layout>
+      </S.Container>
     </>
   );
 };
