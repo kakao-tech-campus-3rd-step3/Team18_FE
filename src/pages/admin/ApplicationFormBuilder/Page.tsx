@@ -57,6 +57,7 @@ export const ApplicationFormBuilderPage = () => {
     const currentQuestions = formHandler.getValues('formQuestions');
 
     if (checked) {
+      const filteredQuestions = currentQuestions.filter((q) => q.fieldType !== 'TIME_SLOT');
       formHandler.setValue('formQuestions', [
         {
           questionNum: 1,
@@ -70,7 +71,7 @@ export const ApplicationFormBuilderPage = () => {
             availableTime: { start: '09:00:00', end: '18:00:00' },
           },
         },
-        ...currentQuestions.map((q, i) => ({ ...q, questionNum: i + 2, displayOrder: i + 2 })),
+        ...filteredQuestions.map((q, i) => ({ ...q, questionNum: i + 2, displayOrder: i + 2 })),
       ]);
     } else {
       const filtered = currentQuestions.filter((q) => q.fieldType !== 'TIME_SLOT');
