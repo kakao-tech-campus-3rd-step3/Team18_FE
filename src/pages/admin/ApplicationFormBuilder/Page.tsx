@@ -12,10 +12,9 @@ import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableS
 import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection';
 import type { ApplicationFormData } from './types/fieldType';
 
-export const ApplicationFormBuilder = () => {
+export const ApplicationFormBuilderPage = () => {
   const { clubId } = useParams();
   const [isEditMode, setIsEditMode] = useState(false);
-
   const { data, isLoading, error } = useAdaptedApplicationForm(Number(clubId));
   const { adaptedPatchForm } = useAdaptedPatchApplicationForm(Number(clubId));
 
@@ -24,6 +23,7 @@ export const ApplicationFormBuilder = () => {
       title: '',
       description: '',
       recruitDate: '',
+      interviewRequired: false,
       formQuestions: [],
     },
   });
@@ -50,6 +50,38 @@ export const ApplicationFormBuilder = () => {
     });
   });
 
+  const isInterviewMode = formHandler.watch('interviewRequired');
+  const handleInterviewChange = (checked: boolean) => {
+    formHandler.setValue('interviewRequired', checked);
+
+    const currentQuestions = formHandler.getValues('formQuestions');
+
+    if (checked) {
+      const filteredQuestions = currentQuestions.filter((q) => q.fieldType !== 'TIME_SLOT');
+      formHandler.setValue('formQuestions', [
+        {
+          questionNum: 1,
+          fieldType: 'TIME_SLOT',
+          displayOrder: 1,
+          question: '면접 가능한 시간을 선택해주세요',
+          isRequired: true,
+          optionList: [],
+          timeSlotOptions: {
+            date: '',
+            availableTime: { start: '09:00:00', end: '18:00:00' },
+          },
+        },
+        ...filteredQuestions.map((q, i) => ({ ...q, questionNum: i + 2, displayOrder: i + 2 })),
+      ]);
+    } else {
+      const filtered = currentQuestions.filter((q) => q.fieldType !== 'TIME_SLOT');
+      formHandler.setValue(
+        'formQuestions',
+        filtered.map((q, i) => ({ ...q, questionNum: i + 1, displayOrder: i + 1 })),
+      );
+    }
+  };
+
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>에러발생 : {error.message}</div>;
 
@@ -61,8 +93,11 @@ export const ApplicationFormBuilder = () => {
           onEdit={handleEdit}
           onSave={handleSave}
           onCancel={handleCancel}
+          isInterviewMode={isInterviewMode}
+          onInterviewChange={handleInterviewChange}
         />
         <ApplicationInfoSection formHandler={formHandler} isEditMode={isEditMode} />
+
         <ApplicationFieldsFormTableSection formHandler={formHandler} isEditMode={isEditMode} />
       </ContentContainer>
     </Layout>

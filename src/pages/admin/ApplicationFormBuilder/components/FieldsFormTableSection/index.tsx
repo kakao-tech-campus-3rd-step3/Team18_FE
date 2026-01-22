@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { useFieldArray } from 'react-hook-form';
 import { AddFieldButton } from './AddFieldButton';
 import { FormFieldItem } from './FormFieldItem';
+import { TimeslotFieldBuilder } from './FormFieldItem/Builders/TimeslotFieldBuilder';
 import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/types/fieldType';
 
 type Props = {
@@ -35,12 +36,20 @@ export const ApplicationFieldsFormTableSection = ({ formHandler, isEditMode }: P
       {fields.map((data, index) => (
         <div key={data.id}>
           {index !== 0 && <Divider />}
-          <FormFieldItem
-            index={index}
-            formHandler={formHandler}
-            onRemove={() => remove(index)}
-            isEditMode={isEditMode}
-          />
+          {data.fieldType === 'TIME_SLOT' ? (
+            <TimeslotFieldBuilder
+              formHandler={formHandler}
+              questionIndex={index}
+              isEditMode={isEditMode}
+            />
+          ) : (
+            <FormFieldItem
+              index={index}
+              formHandler={formHandler}
+              onRemove={() => remove(index)}
+              isEditMode={isEditMode}
+            />
+          )}
         </div>
       ))}
       {isEditMode && <AddFieldButton onClick={handleAddFormField} />}

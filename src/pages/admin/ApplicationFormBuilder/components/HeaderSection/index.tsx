@@ -1,12 +1,14 @@
-import styled from '@emotion/styled';
 import { Button } from '@/shared/components/Button';
 import { Text } from '@/shared/components/Text';
+import * as S from './index.styled';
 
 type Props = {
   isEditMode: boolean;
   onEdit: () => void;
   onSave: () => void;
   onCancel: () => void;
+  isInterviewMode: boolean;
+  onInterviewChange: (checked: boolean) => void;
 };
 
 export const ApplicationFormBuilderHeaderSection = ({
@@ -14,63 +16,46 @@ export const ApplicationFormBuilderHeaderSection = ({
   onEdit,
   onSave,
   onCancel,
+  isInterviewMode,
+  onInterviewChange,
 }: Props) => {
   return (
-    <Container>
-      <HeaderWrapper>
-        <Title>지원폼 생성</Title>
+    <S.Container>
+      <S.HeaderWrapper>
+        <S.Title>지원폼 생성</S.Title>
         {isEditMode ? (
-          <ButtonWrapper>
+          <S.ButtonWrapper>
             <Button variant='outline' width='4rem' onClick={onCancel}>
               취소
             </Button>
             <Button width='6rem' onClick={onSave}>
               저장하기
             </Button>
-          </ButtonWrapper>
+          </S.ButtonWrapper>
         ) : (
           <Button variant='outline' width='6rem' onClick={onEdit}>
             수정하기
           </Button>
         )}
-      </HeaderWrapper>
-      <Text size='sm' color='#339356'>
-        면접날짜는 타임 슬롯을 이용해서 안내할 수 있어요!
-      </Text>
-    </Container>
+      </S.HeaderWrapper>
+      <S.CheckboxWrapper>
+        {isEditMode ? (
+          <>
+            <S.CustomCheckbox
+              type='checkbox'
+              checked={isInterviewMode}
+              onChange={(e) => onInterviewChange(e.target.checked)}
+            />
+            <Text size='sm' weight='bold' color='#339356'>
+              면접 전형을 진행하시면 체크박스를 눌러주세요!
+            </Text>
+          </>
+        ) : (
+          <Text size='sm' weight='bold' color='#339356'>
+            면접날짜는 타임 슬롯을 이용해서 안내할 수 있어요!
+          </Text>
+        )}
+      </S.CheckboxWrapper>
+    </S.Container>
   );
 };
-
-const Container = styled.div(({ theme }) => ({
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '1.2rem',
-  padding: '2.5rem 0 1rem 0',
-  boxSizing: 'border-box',
-
-  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    padding: '1.5rem 0 0.5rem 0',
-    gap: '0.8rem',
-  },
-}));
-
-const HeaderWrapper = styled.div({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-});
-
-const ButtonWrapper = styled.div({
-  display: 'flex',
-  gap: '0.5rem',
-});
-
-const Title = styled.h1(({ theme }) => ({
-  fontSize: '2.5rem',
-  fontWeight: theme.font.weight.medium,
-
-  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    fontSize: '1.5rem',
-  },
-}));

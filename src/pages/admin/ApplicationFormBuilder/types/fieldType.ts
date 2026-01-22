@@ -1,4 +1,4 @@
-export type QuestionType = '텍스트' | '라디오' | '체크박스' | '타임슬롯';
+export type QuestionType = '텍스트' | '라디오' | '체크박스';
 
 type TimeSlotOption = {
   date: string;
@@ -22,6 +22,7 @@ export type ApplicationFormData = {
   title: string;
   description: string;
   recruitDate: string;
+  interviewRequired: boolean;
   formQuestions: QuestionFormData[];
 };
 

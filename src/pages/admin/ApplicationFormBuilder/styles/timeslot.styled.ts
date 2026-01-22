@@ -1,19 +1,19 @@
 import styled from '@emotion/styled';
 
-export const Layout = styled.div(({ theme }) => ({
+export const Container = styled.div(({ theme }) => ({
   display: 'flex',
-  maxWidth: '37.6rem',
   justifyContent: 'space-between',
-
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     flexDirection: 'column',
     gap: '1.5rem',
   },
 }));
 
-export const DatePickerWrapper = styled.div(({ theme }) => ({
-  position: 'relative',
+export const HeaderWrapper = styled.div({
+  marginBottom: '2rem',
+});
 
+export const DatePickerWrapper = styled.div(({ theme }) => ({
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     width: '100%',
     display: 'block',
@@ -34,7 +34,7 @@ export const CustomInputWrapper = styled.div(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: '15rem',
+  width: '20rem',
   cursor: 'pointer',
   position: 'relative',
   borderBottom: `1px solid ${theme.colors.gray200}`,
@@ -74,10 +74,26 @@ export const TimeSelectWrapper = styled.div(({ theme }) => ({
   alignItems: 'center',
   gap: '1rem',
 
+  '& > div:last-child': {
+    minWidth: '12rem',
+  },
+
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     flexDirection: 'column',
     alignItems: 'flex-start',
     gap: '0.5rem',
     width: '100%',
+
+    '& > div:last-child': {
+      minWidth: 'auto',
+      width: '100%',
+    },
   },
+}));
+
+export const ErrorMessage = styled.span(({ theme }) => ({
+  color: theme.colors.error,
+  fontSize: '0.75rem',
+  marginTop: '0.5rem',
+  display: 'block',
 }));
