@@ -35,10 +35,11 @@ export const overwriteApplicationForm = async (
   const applicationDto = toApplyRequest(formData, questionArray);
 
   try {
-    const overwriteResponse = await apiInstance.post(`/clubs/${clubId}/apply-submit`, {
-      ...applicationDto,
-      overwrite: true,
-    });
+    const overwriteResponse = await apiInstance.post(
+      `/clubs/${clubId}/apply-submit`,
+      applicationDto,
+      { params: { overwrite: true } },
+    );
     return overwriteResponse.data;
   } catch (error: unknown) {
     return handleAxiosError(error, '지원서 제출이 실패하였습니다.');
