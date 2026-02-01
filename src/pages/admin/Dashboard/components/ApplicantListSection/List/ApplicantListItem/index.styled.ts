@@ -3,8 +3,8 @@ import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
 
 export const ItemWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1.5fr 1.5fr 2fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 1fr 1fr 1fr 1.2fr 1.5fr 1fr 1.2fr;
+  gap: 1rem;
   align-items: center;
   padding: 1.5rem 0;
   transition: background-color 0.2s ease;
@@ -19,29 +19,34 @@ export const ItemWrapper = styled.div`
   }
 
   @media (max-width: 1200px) {
-    grid-template-columns: 1fr 1fr 1.5fr 1.5fr 1fr;
-    & > p:nth-of-type(5) {
-      display: none;
-    }
-  }
+    grid-template-columns: 1fr 1fr 1fr 1.5fr 1fr 1.2fr;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.web}) {
-    grid-template-columns: 1fr 1fr 1.5fr 1fr;
     & > p:nth-of-type(4) {
       display: none;
     }
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    grid-template-columns: 1fr 1fr 1fr;
+  @media (max-width: ${({ theme }) => theme.breakpoints.web}) {
+    grid-template-columns: 1fr 1fr 1.5fr 1fr 1.2fr;
+
     & > p:nth-of-type(3) {
       display: none;
     }
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    grid-template-columns: 1.5fr 1fr;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1.5fr 1fr 1.2fr;
+
     & > p:nth-of-type(2) {
+      display: none;
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    grid-template-columns: 1fr 1fr;
+
+    & > p:nth-of-type(5),
+    & > p:nth-of-type(7) {
       display: none;
     }
   }

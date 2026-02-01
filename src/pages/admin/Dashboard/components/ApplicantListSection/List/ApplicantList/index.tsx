@@ -6,6 +6,7 @@ import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicantListItem } from '../ApplicantListItem';
 import * as S from './index.styled';
 import type {
+  ApplicateInfoCategory,
   ApplicationFilterOption,
   ApplicationStage,
 } from '@/pages/admin/Dashboard/types/dashboard';
@@ -15,7 +16,6 @@ type Props = {
   stage: ApplicationStage;
 };
 
-type ApplicateInfoCategory = '이름' | '학번' | '학과' | '전화번호' | '이메일' | '결과';
 const INFO_CATEGORY: ApplicateInfoCategory[] = [
   '이름',
   '학번',
@@ -23,6 +23,7 @@ const INFO_CATEGORY: ApplicateInfoCategory[] = [
   '전화번호',
   '이메일',
   '결과',
+  '면접 시간',
 ];
 
 export const ApplicantList = ({ filterOption, stage }: Props) => {

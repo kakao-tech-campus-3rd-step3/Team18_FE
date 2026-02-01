@@ -4,6 +4,15 @@ export type DashboardCard = {
   value: string | number;
 };
 
+export type ApplicateInfoCategory =
+  | '이름'
+  | '학번'
+  | '학과'
+  | '전화번호'
+  | '이메일'
+  | '결과'
+  | '면접 시간';
+
 export type StatusLabel = '합격' | '불합격' | '미정';
 export type ApplicationStatus = 'APPROVED' | 'REJECTED' | 'PENDING';
 export type ApplicationFilterOption = 'ALL' | ApplicationStatus;

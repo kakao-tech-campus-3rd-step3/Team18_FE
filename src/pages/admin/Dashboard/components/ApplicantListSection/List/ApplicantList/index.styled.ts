@@ -6,7 +6,7 @@ export const Container = styled.div({
 
 export const ApplicantInfoCategoryList = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1.5fr 1.5fr 2fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1.2fr 1.5fr 1fr 1.2fr;
   background-color: #f9fbfc;
   border-bottom: 1.8px solid ${({ theme }) => theme.colors.gray100};
   padding: 1.7rem 0 1.5rem 0;
@@ -16,29 +16,34 @@ export const ApplicantInfoCategoryList = styled.div`
   }
 
   @media (max-width: 1200px) {
-    grid-template-columns: 1fr 1fr 1.5fr 1.5fr 1fr;
-    & > div:nth-of-type(5) {
-      display: none;
-    }
-  }
+    grid-template-columns: 1fr 1fr 1fr 1.5fr 1fr 1.2fr;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.web}) {
-    grid-template-columns: 1fr 1fr 1.5fr 1fr;
     & > div:nth-of-type(4) {
       display: none;
     }
   }
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr 1fr 1fr;
+  @media (max-width: ${({ theme }) => theme.breakpoints.web}) {
+    grid-template-columns: 1fr 1fr 1.5fr 1fr 1.2fr;
+
     & > div:nth-of-type(3) {
       display: none;
     }
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    grid-template-columns: 1.5fr 1fr;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1.5fr 1fr 1.2fr;
+
     & > div:nth-of-type(2) {
+      display: none;
+    }
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    grid-template-columns: 1fr 1fr;
+
+    & > div:nth-of-type(5),
+    & > div:nth-of-type(7) {
       display: none;
     }
   }
