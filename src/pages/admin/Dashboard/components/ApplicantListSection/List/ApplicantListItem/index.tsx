@@ -20,8 +20,14 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
   phoneNumber,
   email,
   status,
+  confirmedTime,
   onClick,
 }: Props) {
+  const handleTimeSetterClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // 모달 열기
+  };
+
   return (
     <S.ItemWrapper onClick={() => onClick(applicantId)}>
       <S.InfoText>{name || '-'}</S.InfoText>
@@ -30,6 +36,13 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
       <S.InfoText>{phoneNumber || '-'}</S.InfoText>
       <S.InfoText>{email || '-'}</S.InfoText>
       <S.StatusBadge status={status}>{STATUS_LABEL[status] || '-'}</S.StatusBadge>
+      {status === 'APPROVED' ? (
+        <S.InfoText>
+          {confirmedTime || <S.TimeSetter onClick={handleTimeSetterClick}>시간 선택</S.TimeSetter>}
+        </S.InfoText>
+      ) : (
+        <S.InfoText>-</S.InfoText>
+      )}
     </S.ItemWrapper>
   );
 });

@@ -68,6 +68,7 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
               phoneNumber={applicant.phoneNumber}
               email={applicant.email}
               status={applicant.status}
+              confirmedTime={applicant.confirmedTime}
               onClick={handleItemClick}
             />
           ))

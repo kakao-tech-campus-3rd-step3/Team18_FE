@@ -52,10 +52,21 @@ export const ItemWrapper = styled.div`
   }
 `;
 
-export const InfoText = styled.p({
-  fontSize: '1.1rem',
+export const InfoText = styled.p(({ theme }) => ({
+  fontSize: theme.font.size.lg,
+
   color: '#434547',
-});
+}));
+
+export const TimeSetter = styled.button(({ theme }) => ({
+  color: theme.colors.gray500,
+  background: 'none',
+  fontSize: theme.font.size.lg,
+  border: 'none',
+  textDecoration: 'underline',
+  textUnderlineOffset: '5px',
+  cursor: 'pointer',
+}));
 
 export const StatusBadge = styled.p<Pick<ApplicantData, 'status'>>(({ theme, status }) => {
   const styles = {
