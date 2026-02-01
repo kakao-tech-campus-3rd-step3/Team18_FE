@@ -8,6 +8,11 @@ export type StatusLabel = '합격' | '불합격' | '미정';
 export type ApplicationStatus = 'APPROVED' | 'REJECTED' | 'PENDING';
 export type ApplicationFilterOption = 'ALL' | ApplicationStatus;
 
+export type InterviewInfo = {
+  interviewDate: string;
+  availableTimes: string[];
+};
+
 export type ApplicantData = {
   applicantId: number;
   name: string;
@@ -16,6 +21,8 @@ export type ApplicantData = {
   phoneNumber: string;
   email: string;
   status: ApplicationStatus;
+  confirmedTime?: string;
+  interviewInfo?: InterviewInfo[];
 };
 
 export type DashboardSummary = {
