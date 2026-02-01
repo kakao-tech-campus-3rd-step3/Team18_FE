@@ -10,6 +10,13 @@ const applicants: ApplicantData[] = [
     phoneNumber: '010-1010-1010',
     email: 'ddd@naver.com',
     status: 'PENDING',
+    confirmedTime: '2026-09-02T15:00:00',
+    interviewInfo: [
+      {
+        interviewDate: '2026-09-02',
+        availableTimes: ['10:00', '11:00', '15:00'],
+      },
+    ],
   },
   {
     applicantId: 2,
@@ -19,6 +26,13 @@ const applicants: ApplicantData[] = [
     phoneNumber: '010-1010-1010',
     email: 'ddd@naver.com',
     status: 'APPROVED',
+    confirmedTime: '2026-09-03T14:00:00',
+    interviewInfo: [
+      {
+        interviewDate: '2026-09-03',
+        availableTimes: ['14:00', '15:00'],
+      },
+    ],
   },
   {
     applicantId: 3,
@@ -28,6 +42,13 @@ const applicants: ApplicantData[] = [
     phoneNumber: '010-1010-1010',
     email: 'ddd@naver.com',
     status: 'REJECTED',
+    confirmedTime: '2026-09-02T16:00:00',
+    interviewInfo: [
+      {
+        interviewDate: '2026-09-02',
+        availableTimes: ['16:00'],
+      },
+    ],
   },
   {
     applicantId: 4,
@@ -37,6 +58,12 @@ const applicants: ApplicantData[] = [
     phoneNumber: '010-1010-1010',
     email: 'ddd@naver.com',
     status: 'PENDING',
+    interviewInfo: [
+      {
+        interviewDate: '2026-09-04',
+        availableTimes: ['10:00', '11:00', '14:00'],
+      },
+    ],
   },
 ];
 
