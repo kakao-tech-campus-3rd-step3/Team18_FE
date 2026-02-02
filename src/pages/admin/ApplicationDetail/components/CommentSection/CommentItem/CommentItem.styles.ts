@@ -21,6 +21,12 @@ export const AuthorInfo = styled.div({
   marginRight: '1rem',
 });
 
+export const RatingWrapper = styled.div({
+  marginLeft: '0.5rem',
+  display: 'flex',
+  alignItems: 'center',
+});
+
 export const NameRatingGroup = styled.div({
   display: 'flex',
   alignItems: 'center',
@@ -66,4 +72,11 @@ export const EditButtonContainer = styled.div({
   display: 'flex',
   justifyContent: 'flex-end',
   gap: '0.5rem',
+});
+
+export const ButtonGroup = styled.div({
+  display: 'flex',
+  gap: '0.5rem',
+  justifyContent: 'flex-end',
+  marginTop: '1.5rem',
 });
