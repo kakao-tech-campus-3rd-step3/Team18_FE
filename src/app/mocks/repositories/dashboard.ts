@@ -12,57 +12,6 @@ const MOCK_DASHBOARD_SUMMARY: DashboardSummary = {
   endDay: '2024-03-31',
 };
 
-const MOCK_APPLICANTS: ApplicantData[] = [
-  {
-    applicantId: 1,
-    name: '김철수',
-    studentId: '202401',
-    department: '컴퓨터공학과',
-    phoneNumber: '010-1234-5678',
-    email: 'test1@example.com',
-    status: 'PENDING',
-    confirmedTime: '2026-09-02T14:00:00',
-    interviewInfo: [
-      {
-        interviewDate: '2026-09-02',
-        availableTimes: ['14:00', '15:00', '16:00'],
-      },
-    ],
-  },
-  {
-    applicantId: 2,
-    name: '이영희',
-    studentId: '202402',
-    department: '경영학과',
-    phoneNumber: '010-2345-6789',
-    email: 'test2@example.com',
-    status: 'APPROVED',
-    confirmedTime: '',
-    interviewInfo: [
-      {
-        interviewDate: '2026-09-02',
-        availableTimes: ['10:00', '11:00'],
-      },
-    ],
-  },
-  {
-    applicantId: 3,
-    name: '박민수',
-    studentId: '202403',
-    department: '전자공학과',
-    phoneNumber: '010-3456-7890',
-    email: 'test3@example.com',
-    status: 'REJECTED',
-    confirmedTime: '2026-09-03T10:00:00',
-    interviewInfo: [
-      {
-        interviewDate: '2026-09-03',
-        availableTimes: ['10:00', '11:00', '14:00'],
-      },
-    ],
-  },
-];
-
 const MOCK_INTERVIEW_SCHEDULE: InterviewSchedule[] = [
   {
     date: '2026-09-02',
@@ -78,6 +27,59 @@ const MOCK_INTERVIEW_SCHEDULE: InterviewSchedule[] = [
       { time: '10:00', assignedCount: 1 },
       { time: '11:00', assignedCount: 0 },
       { time: '14:00', assignedCount: 0 },
+    ],
+  },
+];
+
+const MOCK_APPLICANTS: ApplicantData[] = [
+  {
+    applicantId: 1,
+    name: '김철수',
+    studentId: '202401',
+    department: '컴퓨터공학과',
+    phoneNumber: '010-1234-5678',
+    email: 'test1@example.com',
+    status: 'APPROVED',
+    confirmedTime: undefined,
+    interviewInfo: [
+      {
+        interviewDate: '2026-09-02',
+        availableTimes: ['14:00', '15:00', '16:00'],
+      },
+    ],
+    interviewSchedule: MOCK_INTERVIEW_SCHEDULE,
+  },
+  {
+    applicantId: 2,
+    name: '이영희',
+    studentId: '202402',
+    department: '경영학과',
+    phoneNumber: '010-2345-6789',
+    email: 'test2@example.com',
+    status: 'APPROVED',
+    confirmedTime: undefined,
+    interviewInfo: [
+      {
+        interviewDate: '2026-09-02',
+        availableTimes: ['10:00', '11:00'],
+      },
+    ],
+    interviewSchedule: MOCK_INTERVIEW_SCHEDULE,
+  },
+  {
+    applicantId: 3,
+    name: '박민수',
+    studentId: '202403',
+    department: '전자공학과',
+    phoneNumber: '010-3456-7890',
+    email: 'test3@example.com',
+    status: 'REJECTED',
+    confirmedTime: '2026-09-03T10:00:00',
+    interviewInfo: [
+      {
+        interviewDate: '2026-09-03',
+        availableTimes: ['10:00', '11:00', '14:00'],
+      },
     ],
   },
 ];
