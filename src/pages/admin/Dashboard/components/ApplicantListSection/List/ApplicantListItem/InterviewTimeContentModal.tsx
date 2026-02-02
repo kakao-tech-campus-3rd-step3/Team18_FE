@@ -13,7 +13,7 @@ export const InterviewTimeContentModal = ({ interviewInfo, interviewSchedule }: 
       <S.Section>
         {interviewSchedule?.map((schedule) => (
           <S.ScheduleRow key={schedule.date}>
-            <S.SchedulDateLabel>{formatDateWithoutYear(schedule.date)}</S.SchedulDateLabel>
+            <S.ScheduleDateLabel>{formatDateWithoutYear(schedule.date)}</S.ScheduleDateLabel>
             <S.SlotsContainer>
               {schedule.slots.map((slot) => (
                 <S.TimeSlot key={slot.time}>

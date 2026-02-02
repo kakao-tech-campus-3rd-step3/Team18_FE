@@ -25,7 +25,7 @@ export const ScheduleRow = styled.div({
   alignItems: 'flex-start',
   gap: '1rem',
 });
-export const SchedulDateLabel = styled.span(({ theme }) => ({
+export const ScheduleDateLabel = styled.span(({ theme }) => ({
   fontSize: theme.font.size.sm,
   fontWeight: 600,
   color: theme.colors.gray700,
