@@ -1,7 +1,9 @@
 import React, { useRef } from 'react';
 import { STATUS_LABEL } from '@/pages/admin/Dashboard/utils/labelMap';
 import { Modal } from '@/shared/components/Modal';
+import { Text } from '@/shared/components/Text';
 import { useModal } from '@/shared/hooks/useModal';
+import { formatDateTime } from '@/shared/utils/dateUtils';
 import * as S from './index.styled';
 import { InterviewTimeContentModal } from './InterviewTimeContentModal';
 import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
@@ -40,16 +42,18 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
         <S.InfoText>{phoneNumber || '-'}</S.InfoText>
         <S.InfoText>{email || '-'}</S.InfoText>
         <S.StatusBadge status={status}>{STATUS_LABEL[status] || '-'}</S.StatusBadge>
-        {status === 'APPROVED' ? (
+        {status === 'APPROVED' && (
           <S.InfoText>
-            {confirmedTime || (
+            {confirmedTime ? (
+              <Text color='#8C8C8C' size='lg'>
+                {formatDateTime(confirmedTime)}
+              </Text>
+            ) : (
               <S.TimeSetter ref={timeSetterRef} onClick={handleTimeSetterClick}>
                 시간 선택
               </S.TimeSetter>
             )}
           </S.InfoText>
-        ) : (
-          <S.InfoText>-</S.InfoText>
         )}
       </S.ItemWrapper>
       <Modal

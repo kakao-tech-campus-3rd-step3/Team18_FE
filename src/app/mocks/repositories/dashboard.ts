@@ -40,7 +40,7 @@ const MOCK_APPLICANTS: ApplicantData[] = [
     phoneNumber: '010-1234-5678',
     email: 'test1@example.com',
     status: 'APPROVED',
-    confirmedTime: undefined,
+    confirmedTime: '2026-09-02T15:00:00',
     interviewInfo: [
       {
         interviewDate: '2026-09-02',
