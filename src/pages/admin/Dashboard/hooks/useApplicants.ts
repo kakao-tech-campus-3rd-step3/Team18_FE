@@ -30,7 +30,7 @@ export const useApplicants = (
     enabled: !!stage,
   });
 
-  const applicants = responseData?.applicants || [];
+  const applicants = useMemo(() => responseData?.applicants || [], [responseData?.applicants]);
 
   const filteredData = useMemo(() => {
     if (!Array.isArray(applicants)) return [];
