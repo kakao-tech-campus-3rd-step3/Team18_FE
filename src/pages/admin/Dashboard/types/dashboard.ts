@@ -32,6 +32,7 @@ export type ApplicantData = {
   status: ApplicationStatus;
   confirmedTime?: string;
   interviewInfo?: InterviewInfo[];
+  interviewSchedule?: InterviewSchedule[];
 };
 
 export type DashboardSummary = {
