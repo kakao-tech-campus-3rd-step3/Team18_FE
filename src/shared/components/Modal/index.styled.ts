@@ -28,7 +28,7 @@ type OverlayProps = {
 export const Overlay = styled.div<OverlayProps>(({ $variant = 'modal' }) => ({
   position: 'fixed',
   inset: 0,
-  backgroundColor: $variant === 'popover' ? 'transparent' : 'rgba(0, 0, 0, 0.5)',
+  backgroundColor: $variant === 'popover' ? 'transparent' : 'rgba(0, 0, 0, 0.3)',
   display: $variant === 'popover' ? 'block' : 'flex',
   alignItems: $variant === 'popover' ? undefined : 'center',
   justifyContent: $variant === 'popover' ? undefined : 'center',
@@ -63,6 +63,8 @@ export const Content = styled.div<ContentProps>(
     overflow: 'auto',
     padding: $variant === 'popover' ? '1.5rem' : '2rem',
     animation: `${scaleIn} 0.2s ease-out`,
+    display: 'flex',
+    flexDirection: 'column',
 
     // popover일 때 position 계산 전에는 숨김
     ...($variant === 'popover' &&
@@ -127,5 +129,7 @@ export const Header = styled.div({
 });
 
 export const Body = styled.div({
-  marginBottom: '1.5rem',
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
 });
