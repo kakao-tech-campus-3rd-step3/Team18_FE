@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
-import { stageMap } from '@/pages/admin/Dashboard/utils/stageMap';
+import { STAGE_LABEL } from '@/pages/admin/Dashboard/utils/labelMap';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicantListItem } from '../ApplicantListItem';
 import * as S from './index.styled';
@@ -31,7 +31,7 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
 
   const navigate = useNavigate();
 
-  const apiStage = stageMap[stage];
+  const apiStage = STAGE_LABEL[stage];
 
   const {
     data: applicants,
@@ -69,6 +69,8 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
               email={applicant.email}
               status={applicant.status}
               confirmedTime={applicant.confirmedTime}
+              interviewInfo={applicant.interviewInfo}
+              interviewSchedule={applicant.interviewSchedule}
               onClick={handleItemClick}
             />
           ))

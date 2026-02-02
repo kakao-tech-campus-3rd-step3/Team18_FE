@@ -1,5 +1,5 @@
 import { apiInstance } from '@/app/api/initInstance';
-import { stageMap } from '../utils/stageMap';
+import { STAGE_LABEL } from '../utils/labelMap';
 import type { ApplicationStage } from '@/pages/admin/Dashboard/types/dashboard';
 
 export const sentMessage = async (
@@ -7,7 +7,7 @@ export const sentMessage = async (
   message: string,
   stage: ApplicationStage,
 ): Promise<void> => {
-  const apiStage = stageMap[stage];
+  const apiStage = STAGE_LABEL[stage];
 
   try {
     await apiInstance.patch(`/clubs/${clubId}/club-apply-form/result?stage=${apiStage}`, {
