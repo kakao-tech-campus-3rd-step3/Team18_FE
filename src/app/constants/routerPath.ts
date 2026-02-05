@@ -8,6 +8,7 @@ export const ROUTE_PATH = {
     APPLICATION_DETAIL: 'clubs/:clubId/applicants/:applicantId',
     CLUB_EDIT: 'clubs/:clubId/edit',
     APPLICATION_FORM_BUILDER: 'clubs/:clubId/application/form/create',
+    MEMBER_MANAGEMENT: '/admin/clubs/:clubId/members',
   },
 
   COMMON: {
