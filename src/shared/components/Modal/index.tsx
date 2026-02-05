@@ -156,14 +156,19 @@ export const Modal = ({
 
       // 배경 스크롤 방지 (modal variant만)
       const originalOverflow = document.body.style.overflow;
+      const originalPaddingRight = document.body.style.paddingRight;
       if (variant === 'modal') {
+        // 스크롤바 너비 계산
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
         document.body.style.overflow = 'hidden';
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
       }
 
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
         if (variant === 'modal') {
           document.body.style.overflow = originalOverflow;
+          document.body.style.paddingRight = originalPaddingRight;
         }
       };
     }
