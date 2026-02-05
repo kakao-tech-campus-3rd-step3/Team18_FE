@@ -16,6 +16,7 @@ export const getNavItems = (role: Role): NavItemData[] => {
       { key: 'applicants', label: '지원자 관리', to: '/admin/clubs/:clubId/dashboard' },
       { key: 'clubEdit', label: '동아리페이지 관리', to: '/admin/clubs/:clubId/edit' },
       { key: 'form', label: '지원폼 관리', to: '/admin/clubs/:clubId/application/form/create' },
+      { key: 'members', label: '동아리원 관리', to: '/admin/clubs/:clubId/members' },
       { key: 'logout', label: '로그아웃', to: '#' },
     ];
   }

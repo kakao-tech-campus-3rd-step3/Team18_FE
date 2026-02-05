@@ -13,6 +13,7 @@ import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
 import { ApplicationFormBuilderPage } from './admin/ApplicationFormBuilder/Page';
 import { KakaoCallback } from './admin/Login/KakaoCallback';
 import { LoginPage } from './admin/Login/Page';
+import { MemberManagementPage } from './admin/MemberManagement/Page';
 import { AdminSignupPage } from './admin/Signup/Page';
 import { ClubApplicationPage } from './user/Apply/Page';
 
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
           {
             path: ADMIN.APPLICATION_FORM_BUILDER,
             element: <ApplicationFormBuilderPage />,
+          },
+          {
+            path: ADMIN.MEMBER_MANAGEMENT,
+            element: <MemberManagementPage />,
           },
         ],
       },

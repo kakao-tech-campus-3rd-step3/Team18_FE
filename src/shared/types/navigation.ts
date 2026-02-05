@@ -17,8 +17,8 @@ export type NavItemData = {
 export type NavRoute = [
   '동아리움',
   '공지사항',
-  'FAQ',
   '지원자관리',
-  '동아리페이지관리',
   '지원폼관리',
+  '동아리페이지관리',
+  '동아리원관리',
 ];
