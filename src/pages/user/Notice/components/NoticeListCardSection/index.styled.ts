@@ -72,6 +72,7 @@ export const NoticeDate = styled.span(({ theme }) => ({
   color: theme.colors.textSecondary,
   width: '80px',
   textAlign: 'right',
+  whiteSpace: 'nowrap',
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     width: 'auto',
     textAlign: 'left',
@@ -84,6 +85,7 @@ export const NoticeAuthor = styled.span(({ theme }) => ({
   color: theme.colors.textSecondary,
   width: '60px',
   textAlign: 'right',
+  whiteSpace: 'nowrap',
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     width: 'auto',
     textAlign: 'left',
