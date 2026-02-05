@@ -2,6 +2,7 @@ import type {
   DashboardSummary,
   ApplicantsApiResponse,
   ApplicantData,
+  InterviewSchedule,
 } from '@/pages/admin/Dashboard/types/dashboard';
 
 const MOCK_DASHBOARD_SUMMARY: DashboardSummary = {
@@ -11,6 +12,25 @@ const MOCK_DASHBOARD_SUMMARY: DashboardSummary = {
   endDay: '2024-03-31',
 };
 
+const MOCK_INTERVIEW_SCHEDULE: InterviewSchedule[] = [
+  {
+    date: '2026-09-02',
+    slots: [
+      { time: '14:00', assignedCount: 1 },
+      { time: '15:00', assignedCount: 1 },
+      { time: '16:00', assignedCount: 0 },
+    ],
+  },
+  {
+    date: '2026-09-03',
+    slots: [
+      { time: '10:00', assignedCount: 1 },
+      { time: '11:00', assignedCount: 0 },
+      { time: '14:00', assignedCount: 0 },
+    ],
+  },
+];
+
 const MOCK_APPLICANTS: ApplicantData[] = [
   {
     applicantId: 1,
@@ -19,7 +39,15 @@ const MOCK_APPLICANTS: ApplicantData[] = [
     department: '컴퓨터공학과',
     phoneNumber: '010-1234-5678',
     email: 'test1@example.com',
-    status: 'PENDING',
+    status: 'APPROVED',
+    confirmedTime: '2026-09-02T15:00:00',
+    interviewInfo: [
+      {
+        interviewDate: '2026-09-02',
+        availableTimes: ['14:00', '15:00', '16:00'],
+      },
+    ],
+    interviewSchedule: MOCK_INTERVIEW_SCHEDULE,
   },
   {
     applicantId: 2,
@@ -29,6 +57,14 @@ const MOCK_APPLICANTS: ApplicantData[] = [
     phoneNumber: '010-2345-6789',
     email: 'test2@example.com',
     status: 'APPROVED',
+    confirmedTime: undefined,
+    interviewInfo: [
+      {
+        interviewDate: '2026-09-02',
+        availableTimes: ['10:00', '11:00'],
+      },
+    ],
+    interviewSchedule: MOCK_INTERVIEW_SCHEDULE,
   },
   {
     applicantId: 3,
@@ -38,6 +74,13 @@ const MOCK_APPLICANTS: ApplicantData[] = [
     phoneNumber: '010-3456-7890',
     email: 'test3@example.com',
     status: 'REJECTED',
+    confirmedTime: '2026-09-03T10:00:00',
+    interviewInfo: [
+      {
+        interviewDate: '2026-09-03',
+        availableTimes: ['10:00', '11:00', '14:00'],
+      },
+    ],
   },
 ];
 
@@ -49,6 +92,7 @@ export const dashboardRepository = {
   getApplicants: (): ApplicantsApiResponse => {
     return {
       applicants: MOCK_APPLICANTS,
+      interviewSchedule: MOCK_INTERVIEW_SCHEDULE,
       message: null,
     };
   },

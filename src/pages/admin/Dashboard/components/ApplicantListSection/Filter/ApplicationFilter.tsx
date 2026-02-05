@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
-import { stageMap } from '@/pages/admin/Dashboard/utils/stageMap';
+import { STAGE_LABEL } from '@/pages/admin/Dashboard/utils/labelMap';
 import { ApplicantFilterButton } from './ApplicationFilterButton';
 
 import type {
@@ -16,7 +16,7 @@ export type Props = {
 };
 
 export const ApplicationStatusFilter = ({ option, onOptionChange, stage, clubId }: Props) => {
-  const apiStage = stageMap[stage];
+  const apiStage = STAGE_LABEL[stage];
   const { counts } = useApplicants(clubId, apiStage);
 
   return (

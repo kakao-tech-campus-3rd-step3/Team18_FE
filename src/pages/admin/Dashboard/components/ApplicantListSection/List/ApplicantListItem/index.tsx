@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { STATUS_LABEL } from '@/pages/admin/Dashboard/utils/labelMap';
+// import { Modal } from '@/shared/components/Modal';
+import { Text } from '@/shared/components/Text';
+// import { useModal } from '@/shared/hooks/useModal';
+import { formatDateTime } from '@/shared/utils/dateUtils';
 import * as S from './index.styled';
+// import { InterviewTimeContentModal } from './InterviewTimeContentModal';
 import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = ApplicantData & {
   onClick: (id: number) => void;
-};
-
-const STATUS_LABEL: Record<ApplicantData['status'], string> = {
-  PENDING: '미정',
-  REJECTED: '불합격',
-  APPROVED: '합격',
 };
 
 export const ApplicantListItem = React.memo(function ApplicantListItem({
@@ -20,16 +20,55 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
   phoneNumber,
   email,
   status,
+  confirmedTime,
+  // interviewInfo,
+  // interviewSchedule,
   onClick,
 }: Props) {
+  // const { isOpen, openModal, closeModal } = useModal();
+  const timeSetterRef = useRef<HTMLButtonElement>(null);
+
+  const handleTimeSetterClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    // openModal();
+  };
+
   return (
-    <S.ItemWrapper onClick={() => onClick(applicantId)}>
-      <S.InfoText>{name || '-'}</S.InfoText>
-      <S.InfoText>{studentId || '-'}</S.InfoText>
-      <S.InfoText>{department || '-'}</S.InfoText>
-      <S.InfoText>{phoneNumber || '-'}</S.InfoText>
-      <S.InfoText>{email || '-'}</S.InfoText>
-      <S.StatusBadge status={status}>{STATUS_LABEL[status] || '-'}</S.StatusBadge>
-    </S.ItemWrapper>
+    <>
+      <S.ItemWrapper onClick={() => onClick(applicantId)}>
+        <S.InfoText>{name || '-'}</S.InfoText>
+        <S.InfoText>{studentId || '-'}</S.InfoText>
+        <S.InfoText>{department || '-'}</S.InfoText>
+        <S.InfoText>{phoneNumber || '-'}</S.InfoText>
+        <S.InfoText>{email || '-'}</S.InfoText>
+        <S.StatusBadge status={status}>{STATUS_LABEL[status] || '-'}</S.StatusBadge>
+        {status === 'APPROVED' && (
+          <S.InfoText>
+            {confirmedTime ? (
+              <Text color='#8C8C8C' size='lg'>
+                {formatDateTime(confirmedTime)}
+              </Text>
+            ) : (
+              <S.TimeSetter ref={timeSetterRef} onClick={handleTimeSetterClick}>
+                시간 선택
+              </S.TimeSetter>
+            )}
+          </S.InfoText>
+        )}
+      </S.ItemWrapper>
+      {/* <Modal
+        isOpen={isOpen}
+        onClose={closeModal}
+        title='동아리 면접 공지 일정'
+        size='md'
+        variant='popover'
+        anchorRef={timeSetterRef}
+      >
+        <InterviewTimeContentModal
+          interviewInfo={interviewInfo}
+          interviewSchedule={interviewSchedule}
+        />
+      </Modal> */}
+    </>
   );
 });

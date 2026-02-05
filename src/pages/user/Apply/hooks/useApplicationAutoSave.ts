@@ -1,5 +1,5 @@
 import type { UseFormReset, UseFormWatch } from 'react-hook-form';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { debounce } from '@/shared/utils/debounce';
 import type { FormInputs } from '../type/apply';
 
@@ -12,11 +12,12 @@ interface UseApplicationAutoSaveProps {
 export const useApplicationAutoSave = ({ clubId, watch, reset }: UseApplicationAutoSaveProps) => {
   const [isSaving, setIsSaving] = useState(false);
 
-  const debouncedSave = useCallback(
-    debounce((data: FormInputs) => {
-      localStorage.setItem(`application-form-${clubId}`, JSON.stringify(data));
-      setIsSaving(false);
-    }, 3000),
+  const debouncedSave = useMemo(
+    () =>
+      debounce((data: FormInputs) => {
+        localStorage.setItem(`application-form-${clubId}`, JSON.stringify(data));
+        setIsSaving(false);
+      }, 3000),
     [clubId],
   );
 
