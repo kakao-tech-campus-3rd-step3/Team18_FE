@@ -17,7 +17,7 @@ type MemberTableProps = {
 
 const ROLES = ['회장단', '운영팀', '동아리원'] as const;
 
-export const MemberTable = ({ members, onRoleChange, onDelete }: MemberTableProps) => {
+export const MemberTableSection = ({ members, onRoleChange, onDelete }: MemberTableProps) => {
   return (
     <S.TableWrapper>
       <S.Table>
