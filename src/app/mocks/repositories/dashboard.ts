@@ -47,7 +47,6 @@ const MOCK_APPLICANTS: ApplicantData[] = [
         availableTimes: ['14:00', '15:00', '16:00'],
       },
     ],
-    interviewSchedule: MOCK_INTERVIEW_SCHEDULE,
   },
   {
     applicantId: 2,
@@ -64,7 +63,6 @@ const MOCK_APPLICANTS: ApplicantData[] = [
         availableTimes: ['10:00', '11:00'],
       },
     ],
-    interviewSchedule: MOCK_INTERVIEW_SCHEDULE,
   },
   {
     applicantId: 3,
