@@ -67,7 +67,7 @@ export const RoleButton = styled.button<{ active: boolean }>(({ theme, active })
   transition: 'all 0.2s',
   whiteSpace: 'nowrap',
   ['@media (max-width: 910px)']: {
-    ontSize: theme.font.size.sm,
+    fontSize: theme.font.size.sm,
     padding: '0.25rem 0.75rem',
     borderRadius: theme.radius.sm,
   },
