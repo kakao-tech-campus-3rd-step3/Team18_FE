@@ -30,9 +30,8 @@ export type ApplicantData = {
   phoneNumber: string;
   email: string;
   status: ApplicationStatus;
-  confirmedTime?: string;
+  confirmedTime?: string | null;
   interviewInfo?: InterviewInfo[];
-  interviewSchedule?: InterviewSchedule[];
 };
 
 export type DashboardSummary = {
