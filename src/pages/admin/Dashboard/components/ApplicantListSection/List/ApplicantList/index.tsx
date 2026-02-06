@@ -70,7 +70,6 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
               status={applicant.status}
               confirmedTime={applicant.confirmedTime}
               interviewInfo={applicant.interviewInfo}
-              interviewSchedule={applicant.interviewSchedule}
               onClick={handleItemClick}
             />
           ))

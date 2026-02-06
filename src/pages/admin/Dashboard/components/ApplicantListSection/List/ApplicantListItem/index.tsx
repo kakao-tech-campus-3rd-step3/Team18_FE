@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import { STATUS_LABEL } from '@/pages/admin/Dashboard/utils/labelMap';
-// import { Modal } from '@/shared/components/Modal';
+import { Modal } from '@/shared/components/Modal';
 import { Text } from '@/shared/components/Text';
-// import { useModal } from '@/shared/hooks/useModal';
+import { useModal } from '@/shared/hooks/useModal';
 import { formatDateTime } from '@/shared/utils/dateUtils';
 import * as S from './index.styled';
-// import { InterviewTimeContentModal } from './InterviewTimeContentModal';
+import { InterviewTimeContentModal } from './InterviewTimeContentModal';
 import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = ApplicantData & {
@@ -21,16 +21,15 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
   email,
   status,
   confirmedTime,
-  // interviewInfo,
-  // interviewSchedule,
+  interviewInfo,
   onClick,
 }: Props) {
-  // const { isOpen, openModal, closeModal } = useModal();
+  const { isOpen, openModal, closeModal } = useModal();
   const timeSetterRef = useRef<HTMLButtonElement>(null);
 
   const handleTimeSetterClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // openModal();
+    openModal();
   };
 
   return (
@@ -56,7 +55,7 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
           </S.InfoText>
         )}
       </S.ItemWrapper>
-      {/* <Modal
+      <Modal
         isOpen={isOpen}
         onClose={closeModal}
         title='동아리 면접 공지 일정'
@@ -64,11 +63,8 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
         variant='popover'
         anchorRef={timeSetterRef}
       >
-        <InterviewTimeContentModal
-          interviewInfo={interviewInfo}
-          interviewSchedule={interviewSchedule}
-        />
-      </Modal> */}
+        <InterviewTimeContentModal interviewInfo={interviewInfo} />
+      </Modal>
     </>
   );
 });
