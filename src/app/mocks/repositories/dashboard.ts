@@ -89,6 +89,7 @@ export const dashboardRepository = {
 
   getApplicants: (): ApplicantsApiResponse => {
     return {
+      interviewRequired: true,
       applicants: MOCK_APPLICANTS,
       interviewSchedule: MOCK_INTERVIEW_SCHEDULE,
       message: null,

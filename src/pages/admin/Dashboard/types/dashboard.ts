@@ -62,6 +62,7 @@ export type InterviewSchedule = {
 };
 
 export type ApplicantsApiResponse = {
+  interviewRequired: boolean;
   applicants: ApplicantData[];
   interviewSchedule: InterviewSchedule[];
   message: string | null;
