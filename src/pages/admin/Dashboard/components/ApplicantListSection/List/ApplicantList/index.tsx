@@ -16,19 +16,8 @@ type Props = {
   stage: ApplicationStage;
 };
 
-const INFO_CATEGORY: ApplicateInfoCategory[] = [
-  '이름',
-  '학번',
-  '학과',
-  '전화번호',
-  '이메일',
-  '결과',
-  '면접 시간',
-];
-
 export const ApplicantList = ({ filterOption, stage }: Props) => {
   const { clubId } = useParams();
-
   const navigate = useNavigate();
 
   const apiStage = STAGE_LABEL[stage];
@@ -38,7 +27,13 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
     isLoading,
     error,
     interviewSchedule,
+    interviewRequired,
   } = useApplicants(Number(clubId), apiStage, filterOption);
+
+  const categories = () => {
+    const base: ApplicateInfoCategory[] = ['이름', '학번', '학과', '전화번호', '이메일', '결과'];
+    return interviewRequired ? [...base, '면접 시간'] : base;
+  };
 
   const handleItemClick = useCallback(
     (applicantId: number) => {
@@ -52,11 +47,12 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
 
   return (
     <S.Container>
-      <S.ApplicantInfoCategoryList>
-        {INFO_CATEGORY.map((category) => (
+      <S.ApplicantInfoCategoryList hasInterview={interviewRequired}>
+        {categories().map((category) => (
           <S.CategoryText key={category}>{category}</S.CategoryText>
         ))}
       </S.ApplicantInfoCategoryList>
+
       <S.ApplicantInfoDataList>
         {applicants.length > 0 ? (
           applicants.map((applicant) => (
@@ -72,6 +68,7 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
               confirmedTime={applicant.confirmedTime}
               interviewInfo={applicant.interviewInfo}
               interviewSchedule={interviewSchedule}
+              interviewRequired={interviewRequired}
               onClick={handleItemClick}
             />
           ))

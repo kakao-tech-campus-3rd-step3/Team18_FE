@@ -10,6 +10,7 @@ import type { ApplicantData, InterviewSchedule } from '@/pages/admin/Dashboard/t
 
 type Props = ApplicantData & {
   interviewSchedule: InterviewSchedule[];
+  interviewRequired: boolean;
   onClick: (id: number) => void;
 };
 
@@ -24,6 +25,7 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
   confirmedTime,
   interviewInfo,
   interviewSchedule,
+  interviewRequired,
   onClick,
 }: Props) {
   const { isOpen, openModal, closeModal } = useModal();
@@ -33,17 +35,16 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
     e.stopPropagation();
     openModal();
   };
-
   return (
     <>
-      <S.ItemWrapper onClick={() => onClick(applicantId)}>
+      <S.ItemWrapper hasInterview={interviewRequired} onClick={() => onClick(applicantId)}>
         <S.InfoText>{name || '-'}</S.InfoText>
         <S.InfoText>{studentId || '-'}</S.InfoText>
         <S.InfoText>{department || '-'}</S.InfoText>
         <S.InfoText>{phoneNumber || '-'}</S.InfoText>
         <S.InfoText>{email || '-'}</S.InfoText>
         <S.StatusBadge status={status}>{STATUS_LABEL[status] || '-'}</S.StatusBadge>
-        {status === 'APPROVED' && (
+        {interviewRequired && status === 'APPROVED' && (
           <S.InfoText>
             {confirmedTime ? (
               <Text color='#8C8C8C' size='lg'>
