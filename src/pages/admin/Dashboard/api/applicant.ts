@@ -14,3 +14,18 @@ export const fetchApplicants = async (
     throw error;
   }
 };
+
+export const updateInterviewTime = async (
+  clubId: number,
+  applicantId: number,
+  interviewAt: string,
+): Promise<void> => {
+  try {
+    await apiInstance.patch(`/clubs/${clubId}/applicants/${applicantId}/interview`, {
+      interviewAt,
+    });
+  } catch (error: unknown) {
+    handleAxiosError(error);
+    throw error;
+  }
+};
