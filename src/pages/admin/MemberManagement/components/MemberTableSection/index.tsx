@@ -1,22 +1,14 @@
 import { FiX } from 'react-icons/fi';
 import * as S from './index.styled';
-
-type Member = {
-  id: number;
-  name: string;
-  generation: string;
-  department: string;
-  phoneNumber: string;
-  role: '회장단' | '운영팀' | '동아리원';
-};
+import type { Member, MemberRole } from '../../types/member';
 
 type MemberTableProps = {
   members: Member[];
-  onRoleChange: (memberId: number, newRole: string) => void;
+  onRoleChange: (memberId: number, newRole: MemberRole) => void;
   onDelete: (memberId: number) => void;
 };
 
-const ROLES = ['회장단', '운영팀', '동아리원'] as const;
+const ROLES: MemberRole[] = ['회장단', '운영팀', '동아리원'];
 
 export const MemberTableSection = ({ members, onRoleChange, onDelete }: MemberTableProps) => {
   return (
