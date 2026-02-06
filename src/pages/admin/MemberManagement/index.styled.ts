@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div({
+export const Container = styled.div(({ theme }) => ({
+  backgroundColor: theme.colors.bg,
   minHeight: '100vh',
-  backgroundColor: '#FAFAFA',
-});
+}));
 
 export const ContentWrapper = styled.div({
   maxWidth: '1200px',
