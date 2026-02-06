@@ -37,6 +37,7 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
     data: applicants,
     isLoading,
     error,
+    interviewSchedule,
   } = useApplicants(Number(clubId), apiStage, filterOption);
 
   const handleItemClick = useCallback(
@@ -70,6 +71,7 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
               status={applicant.status}
               confirmedTime={applicant.confirmedTime}
               interviewInfo={applicant.interviewInfo}
+              interviewSchedule={interviewSchedule}
               onClick={handleItemClick}
             />
           ))

@@ -6,9 +6,10 @@ import { useModal } from '@/shared/hooks/useModal';
 import { formatDateTime } from '@/shared/utils/dateUtils';
 import * as S from './index.styled';
 import { InterviewTimeContentModal } from './InterviewTimeContentModal';
-import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
+import type { ApplicantData, InterviewSchedule } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = ApplicantData & {
+  interviewSchedule: InterviewSchedule[];
   onClick: (id: number) => void;
 };
 
@@ -22,6 +23,7 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
   status,
   confirmedTime,
   interviewInfo,
+  interviewSchedule,
   onClick,
 }: Props) {
   const { isOpen, openModal, closeModal } = useModal();
@@ -63,7 +65,10 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
         variant='popover'
         anchorRef={timeSetterRef}
       >
-        <InterviewTimeContentModal interviewInfo={interviewInfo} />
+        <InterviewTimeContentModal
+          interviewInfo={interviewInfo}
+          interviewSchedule={interviewSchedule}
+        />
       </Modal>
     </>
   );
