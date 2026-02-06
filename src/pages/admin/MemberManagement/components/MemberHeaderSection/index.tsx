@@ -29,9 +29,9 @@ export const MemberHeaderSection = ({
     <S.Header>
       <S.LeftGroup>
         <Text size='xl' weight='medium'>
-          {clubName} 회원 명단
+          {clubName} 동아리원 명단
         </Text>
-        <S.AddButton onClick={onAddMember}>단건 추가</S.AddButton>
+        <S.AddButton onClick={onAddMember}>동아리원 추가</S.AddButton>
         <S.AddButton onClick={onBulkUpload}>엑셀로 일괄 등록</S.AddButton>
       </S.LeftGroup>
 

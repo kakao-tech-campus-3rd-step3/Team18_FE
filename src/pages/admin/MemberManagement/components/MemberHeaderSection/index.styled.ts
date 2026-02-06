@@ -4,9 +4,15 @@ export const Header = styled.div(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  padding: '1.5rem 2rem',
+  padding: '1.5rem 2rem 1.5rem 0rem',
   backgroundColor: theme.colors.bg,
   gap: '1rem',
+
+  '@media (max-width: 1018px)': {
+    //동아리명이 7글자인 경우까지 핸들하는 수치
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
 }));
 
 export const LeftGroup = styled.div({
@@ -24,17 +30,17 @@ export const RightGroup = styled.div({
 export const AddButton = styled.button(({ theme }) => ({
   fontSize: theme.font.size.sm,
   fontWeight: theme.font.weight.medium,
-  color: theme.colors.primary800,
-  backgroundColor: theme.colors.primary100,
-  border: 'none',
+  color: theme.colors.primary,
+  backgroundColor: theme.colors.bg,
+  border: `1px solid ${theme.colors.primary}`,
   borderRadius: theme.radius.md,
   padding: '0.5rem 1rem',
   cursor: 'pointer',
   transition: 'background-color 0.2s',
-  height: '36px', // 드롭다운과 높이 통일
+  height: '36px',
 
   '&:hover': {
-    backgroundColor: theme.colors.primary200,
+    backgroundColor: theme.colors.primary100,
   },
 }));
 
@@ -42,9 +48,9 @@ export const SearchInputWrapper = styled.div(({ theme }) => ({
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
-  width: '240px',
-  height: '36px', // 드롭다운과 높이 통일
-  border: `1px solid ${theme.colors.gray300}`,
+  width: '180px',
+  height: '40px',
+  border: `1px solid ${theme.colors.gray200}`,
   borderRadius: theme.radius.md,
   backgroundColor: theme.colors.bg,
   padding: '0 0.75rem',
@@ -52,7 +58,7 @@ export const SearchInputWrapper = styled.div(({ theme }) => ({
   transition: 'border-color 0.2s',
 
   '&:focus-within': {
-    borderColor: theme.colors.primary500,
+    borderColor: theme.colors.primary,
   },
 }));
 
@@ -60,7 +66,7 @@ export const SearchIcon = styled.span(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   color: theme.colors.gray500,
-  fontSize: '1rem',
+  fontSize: '1.2rem',
   flexShrink: 0,
 }));
 
@@ -69,7 +75,7 @@ export const SearchInput = styled.input(({ theme }) => ({
   border: 'none',
   outline: 'none',
   backgroundColor: 'transparent',
-  fontSize: theme.font.size.sm,
+  fontSize: theme.font.size.base,
   color: theme.colors.textPrimary,
 
   '&::placeholder': {
