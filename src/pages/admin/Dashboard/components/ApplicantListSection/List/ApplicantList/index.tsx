@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
 import { STAGE_LABEL } from '@/pages/admin/Dashboard/utils/labelMap';
@@ -30,10 +30,10 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
     interviewRequired,
   } = useApplicants(Number(clubId), apiStage, filterOption);
 
-  const categories = () => {
+  const categories = useMemo(() => {
     const base: ApplicateInfoCategory[] = ['이름', '학번', '학과', '전화번호', '이메일', '결과'];
     return interviewRequired ? [...base, '면접 시간'] : base;
-  };
+  }, [interviewRequired]);
 
   const handleItemClick = useCallback(
     (applicantId: number) => {
@@ -48,7 +48,7 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
   return (
     <S.Container>
       <S.ApplicantInfoCategoryList hasInterview={interviewRequired}>
-        {categories().map((category) => (
+        {categories.map((category) => (
           <S.CategoryText key={category}>{category}</S.CategoryText>
         ))}
       </S.ApplicantInfoCategoryList>
