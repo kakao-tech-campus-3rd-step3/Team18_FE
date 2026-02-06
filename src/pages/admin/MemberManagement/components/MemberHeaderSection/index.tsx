@@ -1,3 +1,4 @@
+import { FiSearch } from 'react-icons/fi';
 import { Dropdown } from '@/shared/components/Dropdown';
 import { Text } from '@/shared/components/Text';
 import * as S from './index.styled';
@@ -26,24 +27,25 @@ export const MemberHeaderSection = ({
 }: Props) => {
   return (
     <S.Header>
-      <Text size='xl' weight='medium'>
-        {clubName} 회원 명단
-      </Text>
-
-      <S.ActionGroup>
+      <S.LeftGroup>
+        <Text size='xl' weight='medium'>
+          {clubName} 회원 명단
+        </Text>
         <S.AddButton onClick={onAddMember}>단건 추가</S.AddButton>
         <S.AddButton onClick={onBulkUpload}>엑셀로 일괄 등록</S.AddButton>
-      </S.ActionGroup>
+      </S.LeftGroup>
 
-      <S.FilterBar>
+      <S.RightGroup>
         <S.SearchInputWrapper>
+          <S.SearchIcon>
+            <FiSearch />
+          </S.SearchIcon>
           <S.SearchInput
             type='text'
             placeholder='검색'
             value={searchText}
             onChange={(e) => onSearchChange(e.target.value)}
           />
-          <S.SearchIcon>🔍</S.SearchIcon>
         </S.SearchInputWrapper>
 
         <Dropdown
@@ -52,7 +54,7 @@ export const MemberHeaderSection = ({
           placeholder='정렬 기준'
           onSelect={onSortChange}
         />
-      </S.FilterBar>
+      </S.RightGroup>
     </S.Header>
   );
 };

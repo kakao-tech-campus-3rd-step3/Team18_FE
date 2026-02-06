@@ -2,16 +2,23 @@ import styled from '@emotion/styled';
 
 export const Header = styled.div(({ theme }) => ({
   display: 'flex',
-  flexDirection: 'column',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  padding: '1.5rem 2rem',
+  backgroundColor: theme.colors.bg,
   gap: '1rem',
-  padding: '1.5rem',
-  borderBottom: `1px solid ${theme.colors.gray200}`,
 }));
 
-export const ActionGroup = styled.div({
+export const LeftGroup = styled.div({
   display: 'flex',
-  gap: '0.5rem',
   alignItems: 'center',
+  gap: '0.75rem',
+});
+
+export const RightGroup = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.75rem',
 });
 
 export const AddButton = styled.button(({ theme }) => ({
@@ -24,48 +31,48 @@ export const AddButton = styled.button(({ theme }) => ({
   padding: '0.5rem 1rem',
   cursor: 'pointer',
   transition: 'background-color 0.2s',
+  height: '36px', // 드롭다운과 높이 통일
 
   '&:hover': {
     backgroundColor: theme.colors.primary200,
   },
 }));
 
-export const FilterBar = styled.div({
-  display: 'flex',
-  gap: '0.75rem',
-  alignItems: 'center',
-});
-
-export const SearchInputWrapper = styled.div({
+export const SearchInputWrapper = styled.div(({ theme }) => ({
   position: 'relative',
-  flex: 1,
-  maxWidth: '400px',
-});
-
-export const SearchInput = styled.input(({ theme }) => ({
-  width: '100%',
-  padding: '0.5rem 2.25rem 0.5rem 0.75rem',
+  display: 'flex',
+  alignItems: 'center',
+  width: '240px',
+  height: '36px', // 드롭다운과 높이 통일
   border: `1px solid ${theme.colors.gray300}`,
   borderRadius: theme.radius.md,
-  fontSize: theme.font.size.sm,
+  backgroundColor: theme.colors.bg,
+  padding: '0 0.75rem',
+  gap: '0.5rem',
   transition: 'border-color 0.2s',
 
-  '&:focus': {
-    outline: 'none',
+  '&:focus-within': {
     borderColor: theme.colors.primary500,
-  },
-
-  '&::placeholder': {
-    color: theme.colors.gray500,
   },
 }));
 
 export const SearchIcon = styled.span(({ theme }) => ({
-  position: 'absolute',
-  right: '0.75rem',
-  top: '50%',
-  transform: 'translateY(-50%)',
-  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
   color: theme.colors.gray500,
+  fontSize: '1rem',
+  flexShrink: 0,
+}));
+
+export const SearchInput = styled.input(({ theme }) => ({
+  flex: 1,
+  border: 'none',
+  outline: 'none',
+  backgroundColor: 'transparent',
   fontSize: theme.font.size.sm,
+  color: theme.colors.textPrimary,
+
+  '&::placeholder': {
+    color: theme.colors.gray500,
+  },
 }));
