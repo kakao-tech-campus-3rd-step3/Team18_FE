@@ -1,4 +1,4 @@
-import { FiSearch } from 'react-icons/fi';
+import { FiSearch, FiPlus } from 'react-icons/fi';
 import { Dropdown } from '@/shared/components/Dropdown';
 import { Text } from '@/shared/components/Text';
 import * as S from './index.styled';
@@ -33,6 +33,9 @@ export const MemberHeaderSection = ({
         </Text>
         <S.AddButton onClick={onAddMember}>동아리원 추가</S.AddButton>
         <S.AddButton onClick={onBulkUpload}>엑셀로 일괄 등록</S.AddButton>
+        <S.AddIconButton onClick={onAddMember}>
+          <FiPlus />
+        </S.AddIconButton>
       </S.LeftGroup>
 
       <S.RightGroup>

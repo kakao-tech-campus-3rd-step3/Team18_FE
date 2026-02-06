@@ -4,6 +4,8 @@ export const TableWrapper = styled.div(({ theme }) => ({
   backgroundColor: theme.colors.bg,
   borderRadius: theme.radius.md,
   overflow: 'hidden',
+  paddingLeft: '5px',
+  minWidth: '462px',
 }));
 
 export const Table = styled.table({
@@ -19,7 +21,7 @@ export const TableHead = styled.thead(({ theme }) => ({
 export const Th = styled.th<{ width?: string }>(({ theme, width }) => ({
   textAlign: 'left',
   padding: '1rem',
-  fontSize: theme.font.size.sm,
+  fontSize: theme.font.size.base,
   fontWeight: theme.font.weight.medium,
   color: theme.colors.gray500,
   ...(width && { width }),
@@ -32,9 +34,13 @@ export const TableRow = styled.tr(({ theme }) => ({
 }));
 
 export const Td = styled.td(({ theme }) => ({
-  padding: '1rem',
+  padding: '1.2rem',
   fontSize: theme.font.size.base,
   color: theme.colors.textSecondary,
+
+  ['@media (max-width: 833px)']: {
+    fontSize: theme.font.size.sm,
+  },
 }));
 
 export const TdName = styled(Td)(({ theme }) => ({
@@ -44,18 +50,27 @@ export const TdName = styled(Td)(({ theme }) => ({
 
 export const RoleButtonGroup = styled.div({
   display: 'flex',
-  gap: '0.5rem',
+  gap: '1.0rem',
   flexWrap: 'wrap',
+
+  ['@media (max-width: 854px)']: {
+    gap: '0.5rem',
+  },
 });
 
 export const RoleButton = styled.button<{ active: boolean }>(({ theme, active }) => ({
-  fontSize: theme.font.size.xs,
-  padding: '0.25rem 0.75rem',
-  borderRadius: theme.radius.sm,
+  fontSize: theme.font.size.base,
+  padding: '0.5rem 1.4rem',
+  borderRadius: theme.radius.md,
   border: 'none',
   cursor: 'pointer',
   transition: 'all 0.2s',
   whiteSpace: 'nowrap',
+  ['@media (max-width: 910px)']: {
+    ontSize: theme.font.size.sm,
+    padding: '0.25rem 0.75rem',
+    borderRadius: theme.radius.sm,
+  },
 
   ...(active
     ? {
@@ -99,3 +114,16 @@ export const EmptyMessage = styled.div(({ theme }) => ({
   fontSize: theme.font.size.base,
   color: theme.colors.textSecondary,
 }));
+
+//797px 이하에서는 역할버튼 숨김
+export const ThRole = styled(Th)({
+  ['@media (max-width: 797px)']: {
+    display: 'none',
+  },
+});
+
+export const TdRole = styled(Td)({
+  ['@media (max-width: 797px)']: {
+    display: 'none',
+  },
+});

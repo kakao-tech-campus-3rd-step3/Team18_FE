@@ -4,12 +4,12 @@ export const Header = styled.div(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  padding: '1.5rem 2rem 1.5rem 0rem',
+  padding: '1.5rem 2rem 2.5rem 0rem',
   backgroundColor: theme.colors.bg,
   gap: '1rem',
 
-  '@media (max-width: 1018px)': {
-    //동아리명이 7글자인 경우까지 핸들하는 수치
+  ['@media (max-width: 1018px)']: {
+    //동아리명이 7글자인 경우까지 핸들
     flexDirection: 'column',
     alignItems: 'flex-start',
   },
@@ -42,6 +42,34 @@ export const AddButton = styled.button(({ theme }) => ({
   '&:hover': {
     backgroundColor: theme.colors.primary100,
   },
+  ['@media (max-width: 638px)']: {
+    display: 'none',
+  },
+}));
+
+// 플러스 아이콘 버튼 (638px 이하에만 표시)
+export const AddIconButton = styled.button(({ theme }) => ({
+  display: 'none',
+
+  ['@media (max-width: 638px)']: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '32px',
+    height: '32px',
+    cursor: 'pointer',
+    color: theme.colors.gray500,
+    fontSize: '24px',
+    backgroundColor: 'transparent',
+    border: 'none',
+    padding: '0',
+    transition: 'color 0.2s ease, transform 0.3s ease',
+
+    '&:hover': {
+      color: theme.colors.gray700,
+      transform: 'rotate(90deg)',
+    },
+  },
 }));
 
 export const SearchInputWrapper = styled.div(({ theme }) => ({
@@ -59,6 +87,9 @@ export const SearchInputWrapper = styled.div(({ theme }) => ({
 
   '&:focus-within': {
     borderColor: theme.colors.primary,
+  },
+  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    width: '50%',
   },
 }));
 

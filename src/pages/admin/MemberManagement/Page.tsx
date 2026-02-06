@@ -53,7 +53,7 @@ export const MemberManagementPage = () => {
     <S.Container>
       <S.ContentWrapper>
         <MemberHeaderSection
-          clubName='인터렉스'
+          clubName='인터엑스'
           searchText={searchText}
           sortBy={sortBy}
           onSearchChange={setSearchText}

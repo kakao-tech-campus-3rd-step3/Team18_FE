@@ -20,8 +20,8 @@ export const MemberTableSection = ({ members, onRoleChange, onDelete }: MemberTa
             <S.Th>기수</S.Th>
             <S.Th>학과</S.Th>
             <S.Th>전화번호</S.Th>
-            <S.Th>역할 (권한)</S.Th>
-            <S.Th width='50px'></S.Th>
+            <S.ThRole>역할 (권한)</S.ThRole>
+            <S.Th width='30px'></S.Th>
           </tr>
         </S.TableHead>
         <tbody>
@@ -31,7 +31,7 @@ export const MemberTableSection = ({ members, onRoleChange, onDelete }: MemberTa
               <S.Td>{member.generation}</S.Td>
               <S.Td>{member.department}</S.Td>
               <S.Td>{member.phoneNumber}</S.Td>
-              <S.Td>
+              <S.TdRole>
                 <S.RoleButtonGroup>
                   {ROLES.map((role) => (
                     <S.RoleButton
@@ -43,7 +43,7 @@ export const MemberTableSection = ({ members, onRoleChange, onDelete }: MemberTa
                     </S.RoleButton>
                   ))}
                 </S.RoleButtonGroup>
-              </S.Td>
+              </S.TdRole>
               <S.Td>
                 <S.DeleteButton onClick={() => onDelete(member.id)}>
                   <FiX />
