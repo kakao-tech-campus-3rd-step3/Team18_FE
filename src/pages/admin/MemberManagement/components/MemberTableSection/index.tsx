@@ -1,3 +1,4 @@
+import { FiX } from 'react-icons/fi';
 import * as S from './index.styled';
 
 type Member = {
@@ -27,7 +28,7 @@ export const MemberTableSection = ({ members, onRoleChange, onDelete }: MemberTa
             <S.Th>기수</S.Th>
             <S.Th>학과</S.Th>
             <S.Th>전화번호</S.Th>
-            <S.Th>역할</S.Th>
+            <S.Th>역할 (권한)</S.Th>
             <S.Th width='50px'></S.Th>
           </tr>
         </S.TableHead>
@@ -52,7 +53,9 @@ export const MemberTableSection = ({ members, onRoleChange, onDelete }: MemberTa
                 </S.RoleButtonGroup>
               </S.Td>
               <S.Td>
-                <S.DeleteButton onClick={() => onDelete(member.id)}>×</S.DeleteButton>
+                <S.DeleteButton onClick={() => onDelete(member.id)}>
+                  <FiX />
+                </S.DeleteButton>
               </S.Td>
             </S.TableRow>
           ))}
