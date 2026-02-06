@@ -1,7 +1,8 @@
 import { useState } from 'react';
 // import { useParams } from 'react-router-dom';
+import { Dropdown } from '@/shared/components/Dropdown';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
-import { PageHeader } from '@/shared/components/PageHeader';
+import { Text } from '@/shared/components/Text';
 import { MemberTable } from './components/MemberTableSection';
 import * as S from './index.styled';
 
@@ -15,10 +16,13 @@ const MOCK_MEMBERS = Array.from({ length: 10 }, (_, i) => ({
   role: ['회장단', '운영팀', '동아리원'][i % 3] as '회장단' | '운영팀' | '동아리원',
 }));
 
+const SORT_OPTIONS = ['이름순', '기수순'] as const;
+type SortOption = (typeof SORT_OPTIONS)[number];
+
 export const MemberManagementPage = () => {
   //   const { clubId } = useParams<{ clubId: string }>();
   const [searchText, setSearchText] = useState('');
-  const [sortBy, setSortBy] = useState<'name' | 'generation'>('name');
+  const [sortBy, setSortBy] = useState<SortOption>('이름순');
 
   // TODO: API 연동
   const clubName = '인터렉스'; // 실제로는 club 정보에서 가져와야 함
@@ -34,7 +38,7 @@ export const MemberManagementPage = () => {
   );
 
   const sortedMembers = [...filteredMembers].sort((a, b) => {
-    if (sortBy === 'name') {
+    if (sortBy === '이름순') {
       return a.name.localeCompare(b.name, 'ko');
     }
     return a.generation.localeCompare(b.generation);
@@ -65,11 +69,11 @@ export const MemberManagementPage = () => {
 
   return (
     <S.Container>
-      <PageHeader clubName={clubName} category='ALL' />
-
       <S.ContentWrapper>
         <S.Header>
-          <S.Title>{clubName} 회원 명단</S.Title>
+          <Text size='xl' weight='medium'>
+            {clubName} 회원 명단
+          </Text>
           <S.ActionGroup>
             <S.AddButton onClick={handleAddMember}>단건 추가</S.AddButton>
             <S.AddButton onClick={handleBulkUpload}>엑셀로 일괄 등록</S.AddButton>
@@ -84,13 +88,12 @@ export const MemberManagementPage = () => {
               />
               <S.SearchIcon>🔍</S.SearchIcon>
             </S.SearchWrapper>
-            <S.SortSelect
+            <Dropdown
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as 'name' | 'generation')}
-            >
-              <option value='name'>이름순</option>
-              <option value='generation'>기수순</option>
-            </S.SortSelect>
+              options={[...SORT_OPTIONS]}
+              placeholder='정렬 기준'
+              onSelect={setSortBy}
+            />
           </S.ControlGroup>
         </S.Header>
 

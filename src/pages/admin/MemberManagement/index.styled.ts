@@ -19,16 +19,10 @@ export const Header = styled.div({
   flexWrap: 'wrap',
 });
 
-export const Title = styled.h1(({ theme }) => ({
-  fontSize: theme.font.size.xl,
-  fontWeight: theme.font.weight.bold,
-  color: theme.colors.textPrimary,
-  marginRight: 'auto',
-}));
-
 export const ActionGroup = styled.div({
   display: 'flex',
   gap: '0.5rem',
+  marginLeft: 'auto',
 });
 
 export const AddButton = styled.button(({ theme }) => ({
@@ -51,6 +45,7 @@ export const ControlGroup = styled.div({
   display: 'flex',
   alignItems: 'center',
   gap: '0.75rem',
+  width: '100%', // 새로운 줄에서 전체 너비 사용
 });
 
 export const SearchWrapper = styled.div({
@@ -82,18 +77,3 @@ export const SearchIcon = styled.span({
   fontSize: '14px',
   pointerEvents: 'none',
 });
-
-export const SortSelect = styled.select(({ theme }) => ({
-  fontSize: theme.font.size.sm,
-  padding: '0.5rem 0.75rem',
-  borderRadius: theme.radius.sm,
-  border: `1px solid ${theme.colors.gray200}`,
-  backgroundColor: theme.colors.bg,
-  color: theme.colors.textPrimary,
-  cursor: 'pointer',
-  outline: 'none',
-
-  '&:focus': {
-    borderColor: theme.colors.primary600,
-  },
-}));
