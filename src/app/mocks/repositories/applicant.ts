@@ -1,7 +1,7 @@
 import type { DetailApplication } from '@/pages/admin/ApplicationDetail/types/detailApplication';
 import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
 
-const applicants: ApplicantData[] = [
+const applicants: Omit<ApplicantData, 'confirmedTime' | 'interviewInfo'>[] = [
   {
     applicantId: 1,
     name: '김동글',

@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
 import type { ApplicantData } from '@/pages/admin/Dashboard/types/dashboard';
 
-export const ItemWrapper = styled.div`
+export const ItemWrapper = styled.div<{ hasInterview: boolean }>`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1.2fr 1.5fr 1fr 1.2fr;
+  grid-template-columns: ${({ hasInterview }) =>
+    '1fr 1fr 1fr 1.2fr 1.5fr 1fr' + (hasInterview ? ' 1.2fr' : '')};
   gap: 1rem;
   align-items: center;
   padding: 1.5rem 0;
@@ -19,7 +20,8 @@ export const ItemWrapper = styled.div`
   }
 
   @media (max-width: 1200px) {
-    grid-template-columns: 1fr 1fr 1fr 1.5fr 1fr 1.2fr;
+    grid-template-columns: ${({ hasInterview }) =>
+      '1fr 1fr 1fr 1.5fr 1fr' + (hasInterview ? ' 1.2fr' : '')};
 
     & > p:nth-of-type(4) {
       display: none;
@@ -27,7 +29,8 @@ export const ItemWrapper = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.web}) {
-    grid-template-columns: 1fr 1fr 1.5fr 1fr 1.2fr;
+    grid-template-columns: ${({ hasInterview }) =>
+      '1fr 1fr 1.5fr 1fr' + (hasInterview ? ' 1.2fr' : '')};
 
     & > p:nth-of-type(3) {
       display: none;
@@ -35,7 +38,8 @@ export const ItemWrapper = styled.div`
   }
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr 1.5fr 1fr 1.2fr;
+    grid-template-columns: ${({ hasInterview }) =>
+      '1fr 1.5fr 1fr' + (hasInterview ? ' 1.2fr' : '')};
 
     & > p:nth-of-type(2) {
       display: none;
