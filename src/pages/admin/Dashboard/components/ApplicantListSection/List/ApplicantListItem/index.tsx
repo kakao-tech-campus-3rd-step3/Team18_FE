@@ -44,19 +44,22 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
         <S.InfoText>{phoneNumber || '-'}</S.InfoText>
         <S.InfoText>{email || '-'}</S.InfoText>
         <S.StatusBadge status={status}>{STATUS_LABEL[status] || '-'}</S.StatusBadge>
-        {interviewRequired && status === 'APPROVED' && (
-          <S.InfoText>
-            {confirmedTime ? (
-              <Text color='#8C8C8C' size='lg'>
-                {formatDateTime(confirmedTime)}
-              </Text>
-            ) : (
-              <S.TimeSetter ref={timeSetterRef} onClick={handleTimeSetterClick}>
-                시간 선택
-              </S.TimeSetter>
-            )}
-          </S.InfoText>
-        )}
+        {interviewRequired &&
+          (status === 'APPROVED' ? (
+            <S.InfoText>
+              {confirmedTime ? (
+                <Text color='#8C8C8C' size='lg'>
+                  {formatDateTime(confirmedTime)}
+                </Text>
+              ) : (
+                <S.TimeSetter ref={timeSetterRef} onClick={handleTimeSetterClick}>
+                  시간 선택
+                </S.TimeSetter>
+              )}
+            </S.InfoText>
+          ) : (
+            <S.InfoText>-</S.InfoText>
+          ))}
       </S.ItemWrapper>
       <Modal
         isOpen={isOpen}
