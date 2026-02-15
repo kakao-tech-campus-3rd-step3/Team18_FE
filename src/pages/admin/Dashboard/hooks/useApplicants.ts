@@ -6,11 +6,14 @@ import type {
   ApplicantsApiResponse,
   ApplicationFilterOption,
   ApplicantCounts,
+  InterviewSchedule,
 } from '@/pages/admin/Dashboard/types/dashboard';
 import type { UseApiQueryResult } from '@/shared/types/useApiQueryResult';
 
 export interface ExtendedUseApiQueryResult<T> extends UseApiQueryResult<T> {
   counts: ApplicantCounts;
+  interviewRequired: boolean;
+  interviewSchedule: InterviewSchedule[];
 }
 
 export const useApplicants = (
@@ -60,5 +63,7 @@ export const useApplicants = (
     isLoading,
     error,
     counts,
+    interviewRequired: responseData?.interviewRequired ?? false,
+    interviewSchedule: responseData?.interviewSchedule || [],
   };
 };

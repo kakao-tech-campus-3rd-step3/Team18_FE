@@ -4,9 +4,10 @@ export const Container = styled.div({
   width: '100%',
 });
 
-export const ApplicantInfoCategoryList = styled.div`
+export const ApplicantInfoCategoryList = styled.div<{ hasInterview: boolean }>`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1.2fr 1.5fr 1fr 1.2fr;
+  grid-template-columns: ${({ hasInterview }) =>
+    `1fr 1fr 1fr 1.2fr 1.5fr 1fr${hasInterview ? ' 1.2fr' : ''}`};
   background-color: #f9fbfc;
   border-bottom: 1.8px solid ${({ theme }) => theme.colors.gray100};
   padding: 1.7rem 0 1.5rem 0;
@@ -16,7 +17,8 @@ export const ApplicantInfoCategoryList = styled.div`
   }
 
   @media (max-width: 1200px) {
-    grid-template-columns: 1fr 1fr 1fr 1.5fr 1fr 1.2fr;
+    grid-template-columns: ${({ hasInterview }) =>
+      `1fr 1fr 1fr 1.5fr 1fr${hasInterview ? ' 1.2fr' : ''}`};
 
     & > div:nth-of-type(4) {
       display: none;
@@ -24,7 +26,8 @@ export const ApplicantInfoCategoryList = styled.div`
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.web}) {
-    grid-template-columns: 1fr 1fr 1.5fr 1fr 1.2fr;
+    grid-template-columns: ${({ hasInterview }) =>
+      `1fr 1fr 1.5fr 1fr${hasInterview ? ' 1.2fr' : ''}`};
 
     & > div:nth-of-type(3) {
       display: none;
@@ -32,7 +35,7 @@ export const ApplicantInfoCategoryList = styled.div`
   }
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr 1.5fr 1fr 1.2fr;
+    grid-template-columns: ${({ hasInterview }) => `1fr 1.5fr 1fr${hasInterview ? ' 1.2fr' : ''}`};
 
     & > div:nth-of-type(2) {
       display: none;

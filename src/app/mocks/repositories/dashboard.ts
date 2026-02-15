@@ -47,7 +47,6 @@ const MOCK_APPLICANTS: ApplicantData[] = [
         availableTimes: ['14:00', '15:00', '16:00'],
       },
     ],
-    interviewSchedule: MOCK_INTERVIEW_SCHEDULE,
   },
   {
     applicantId: 2,
@@ -57,14 +56,13 @@ const MOCK_APPLICANTS: ApplicantData[] = [
     phoneNumber: '010-2345-6789',
     email: 'test2@example.com',
     status: 'APPROVED',
-    confirmedTime: undefined,
+    confirmedTime: null,
     interviewInfo: [
       {
         interviewDate: '2026-09-02',
         availableTimes: ['10:00', '11:00'],
       },
     ],
-    interviewSchedule: MOCK_INTERVIEW_SCHEDULE,
   },
   {
     applicantId: 3,
@@ -91,6 +89,7 @@ export const dashboardRepository = {
 
   getApplicants: (): ApplicantsApiResponse => {
     return {
+      interviewRequired: true,
       applicants: MOCK_APPLICANTS,
       interviewSchedule: MOCK_INTERVIEW_SCHEDULE,
       message: null,
