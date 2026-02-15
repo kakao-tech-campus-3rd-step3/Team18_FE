@@ -40,14 +40,14 @@ const Input = styled.input(({ theme }) => ({
 }));
 
 const SearchIcon = styled(FiSearch)(({ theme }) => ({
-  marginRight: '12px', // marginLeft → marginRight
+  marginRight: '12px',
   fontSize: '20px',
   color: theme.colors.textSecondary,
   flexShrink: 0,
 
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
     fontSize: '18px',
-    marginRight: '8px', // marginLeft → marginRight
+    marginRight: '8px',
   },
 }));
 
