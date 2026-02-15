@@ -1,11 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateMemberRole, deleteMember } from '../api/member';
+import type { MemberRole } from '@/pages/admin/MemberManagement/types/member';
 
 export const useMemberMutations = (clubId: string) => {
   const queryClient = useQueryClient();
 
   const updateRoleMutation = useMutation({
-    mutationFn: ({ memberId, role }: { memberId: number; role: string }) =>
+    mutationFn: ({ memberId, role }: { memberId: number; role: MemberRole }) =>
       updateMemberRole(clubId, memberId, role),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['members', clubId] });
@@ -19,7 +20,7 @@ export const useMemberMutations = (clubId: string) => {
     },
   });
 
-  const handleRoleChange = (memberId: number, newRole: string) => {
+  const handleRoleChange = (memberId: number, newRole: MemberRole) => {
     // TODO: API 연동 시 주석 해제
     console.log(`회원 ${memberId}의 역할을 ${newRole}로 변경`);
     // updateRoleMutation.mutate({ memberId, role: newRole });
