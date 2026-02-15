@@ -1,6 +1,6 @@
 import { FiX } from 'react-icons/fi';
 import * as S from './index.styled';
-import type { Member, MemberRole } from '../../types/member';
+import type { Member, MemberRole } from '@/pages/admin/MemberManagement/types/member';
 
 type MemberTableProps = {
   members: Member[];
@@ -8,7 +8,42 @@ type MemberTableProps = {
   onDelete: (memberId: number) => void;
 };
 
+type MemberTableRowProps = {
+  member: Member;
+  onRoleChange: (memberId: number, newRole: MemberRole) => void;
+  onDelete: (memberId: number) => void;
+};
+
 const ROLES: MemberRole[] = ['회장단', '운영팀', '동아리원'];
+
+const MemberTableRow = ({ member, onRoleChange, onDelete }: MemberTableRowProps) => {
+  return (
+    <S.TableRow>
+      <S.TdName>{member.name}</S.TdName>
+      <S.Td>{member.generation}</S.Td>
+      <S.Td>{member.department}</S.Td>
+      <S.Td>{member.phoneNumber}</S.Td>
+      <S.TdRole>
+        <S.RoleButtonGroup>
+          {ROLES.map((role) => (
+            <S.RoleButton
+              key={role}
+              active={member.role === role}
+              onClick={() => onRoleChange(member.id, role)}
+            >
+              {role}
+            </S.RoleButton>
+          ))}
+        </S.RoleButtonGroup>
+      </S.TdRole>
+      <S.Td>
+        <S.DeleteButton onClick={() => onDelete(member.id)}>
+          <FiX />
+        </S.DeleteButton>
+      </S.Td>
+    </S.TableRow>
+  );
+};
 
 export const MemberTableSection = ({ members, onRoleChange, onDelete }: MemberTableProps) => {
   return (
@@ -26,30 +61,12 @@ export const MemberTableSection = ({ members, onRoleChange, onDelete }: MemberTa
         </S.TableHead>
         <tbody>
           {members.map((member) => (
-            <S.TableRow key={member.id}>
-              <S.TdName>{member.name}</S.TdName>
-              <S.Td>{member.generation}</S.Td>
-              <S.Td>{member.department}</S.Td>
-              <S.Td>{member.phoneNumber}</S.Td>
-              <S.TdRole>
-                <S.RoleButtonGroup>
-                  {ROLES.map((role) => (
-                    <S.RoleButton
-                      key={role}
-                      active={member.role === role}
-                      onClick={() => onRoleChange(member.id, role)}
-                    >
-                      {role}
-                    </S.RoleButton>
-                  ))}
-                </S.RoleButtonGroup>
-              </S.TdRole>
-              <S.Td>
-                <S.DeleteButton onClick={() => onDelete(member.id)}>
-                  <FiX />
-                </S.DeleteButton>
-              </S.Td>
-            </S.TableRow>
+            <MemberTableRow
+              key={member.id}
+              member={member}
+              onRoleChange={onRoleChange}
+              onDelete={onDelete}
+            />
           ))}
         </tbody>
       </S.Table>
