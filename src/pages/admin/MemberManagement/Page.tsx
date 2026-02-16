@@ -9,19 +9,9 @@ import { BulkUploadModal } from './components/modals/BulkUploadModal';
 import { DeleteConfirmModal } from './components/modals/DeleteConfirmModal';
 import { useMemberFilter } from './hooks/useMemberFilter';
 import { useMemberMutations } from './hooks/useMemberMutations';
+import { useMembers } from './hooks/useMembers';
 import * as S from './index.styled';
-import type { Member, AddMemberFormData } from './types/member';
-
-// TODO: API 연동 시 삭제
-const MOCK_MEMBERS: Member[] = Array.from({ length: 10 }, (_, i) => ({
-  id: i + 1,
-  name: `홍길동${i + 1}`,
-  studentId: `2026${String(i + 1).padStart(2, '0')}`,
-  department: '영어영문학과',
-  phoneNumber: '010-1234-5678',
-  role: ['회장단', '운영팀', '동아리원'][i % 3] as Member['role'],
-  joinDate: `2026-${String((i % 12) + 1).padStart(2, '0')}`,
-}));
+import type { AddMemberFormData } from './types/member';
 
 export const MemberManagementPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
@@ -32,15 +22,7 @@ export const MemberManagementPage = () => {
   const deleteModal = useModal();
   const [deleteTarget, setDeleteTarget] = useState<{ id: number; name: string } | null>(null);
 
-  // TODO: API 연동
-  // const { data: members = [], isLoading, error } = useQuery({
-  //   queryKey: ['members', clubId],
-  //   queryFn: () => fetchMembers(clubId!),
-  //   enabled: !!clubId,
-  // });
-  const members = MOCK_MEMBERS;
-  const isLoading = false;
-  const error = null;
+  const { data: members, isLoading, error } = useMembers(clubId || '');
 
   const { searchText, sortBy, filteredMembers, setSearchText, setSortBy } =
     useMemberFilter(members);

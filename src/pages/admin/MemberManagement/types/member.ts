@@ -1,5 +1,3 @@
-// TODO: 차후 api에 맞게 수정할 예정
-
 // UI용 역할 타입 (화면 표시용)
 export type MemberRole = '회장단' | '운영팀' | '동아리원';
 
@@ -8,6 +6,24 @@ export type ApiRole =
   | 'CLUB_ADMIN' // 회장단
   | 'CLUB_EXECUTIVE' // 운영팀
   | 'CLUB_MEMBER'; // 동아리원
+
+// API → UI 역할 매핑
+export const API_ROLE_TO_UI: Record<ApiRole, MemberRole> = {
+  CLUB_ADMIN: '회장단',
+  CLUB_EXECUTIVE: '운영팀',
+  CLUB_MEMBER: '동아리원',
+};
+
+// 동아리원 목록 조회 API 응답 타입
+export type MemberApiResponse = {
+  clubMemberProfileId: number;
+  name: string;
+  department: string;
+  studentId: string;
+  phoneNumber: string;
+  role: ApiRole;
+  joinDate: string;
+};
 
 // 학적상태 타입
 export type AcademicStatus =
