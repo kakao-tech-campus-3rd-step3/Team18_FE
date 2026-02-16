@@ -40,5 +40,10 @@ export type AddMemberFormData = {
   joinDate: string; // YYYY-MM
 };
 
+// 동아리원 정보 수정 요청 타입
+export type UpdateMemberData = Partial<
+  Pick<Member, 'name' | 'studentId' | 'department' | 'phoneNumber'>
+>;
+
 // 정렬 옵션 타입
 export type SortOption = '이름순' | '등록순';

@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateMemberRole, deleteMember } from '../api/member';
+import { deleteMember } from '../api/deleteMember';
+import { updateMemberRole } from '../api/updateMemberRole';
 import type { Member, MemberRole } from '@/pages/admin/MemberManagement/types/member';
 
 export const useMemberMutations = (clubId: string) => {
