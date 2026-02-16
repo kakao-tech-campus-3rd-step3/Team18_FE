@@ -25,23 +25,30 @@ export const MemberTableRow = ({
   return (
     <S.TableRow>
       <S.TdName>
-        <EditableCell value={member.name} onSave={(val) => handleFieldUpdate('name', val)} />
+        <EditableCell
+          value={member.name}
+          maxWidth='60px'
+          onSave={(val) => handleFieldUpdate('name', val)}
+        />
       </S.TdName>
       <S.Td>
         <EditableCell
           value={member.studentId}
+          maxWidth='80px'
           onSave={(val) => handleFieldUpdate('studentId', val)}
         />
       </S.Td>
       <S.Td>
         <EditableCell
           value={member.department}
+          maxWidth='120px'
           onSave={(val) => handleFieldUpdate('department', val)}
         />
       </S.Td>
       <S.TdPhone>
         <EditableCell
           value={member.phoneNumber}
+          maxWidth='120px'
           onSave={(val) => handleFieldUpdate('phoneNumber', val)}
         />
       </S.TdPhone>

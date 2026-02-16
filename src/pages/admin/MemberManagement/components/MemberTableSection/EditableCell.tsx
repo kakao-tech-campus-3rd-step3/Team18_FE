@@ -4,14 +4,15 @@ import { UnderlineInputField } from '@/shared/components/Form/InputField/Underli
 
 type EditableCellProps = {
   value: string;
+  maxWidth?: string;
   onSave: (newValue: string) => void;
 };
 
-const InputWrapper = styled.div({
-  maxWidth: '200px',
+const InputWrapper = styled.div<{ maxWidth?: string }>(({ maxWidth }) => ({
   width: '100%',
+  maxWidth: maxWidth ?? '100%',
   margin: '0 auto',
-});
+}));
 
 const CellContent = styled.div(({ theme }) => ({
   cursor: 'pointer',
@@ -28,7 +29,7 @@ const CellContent = styled.div(({ theme }) => ({
   },
 }));
 
-export const EditableCell = ({ value, onSave }: EditableCellProps) => {
+export const EditableCell = ({ value, maxWidth, onSave }: EditableCellProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(value);
 
@@ -60,7 +61,7 @@ export const EditableCell = ({ value, onSave }: EditableCellProps) => {
 
   if (isEditing) {
     return (
-      <InputWrapper>
+      <InputWrapper maxWidth={maxWidth}>
         <UnderlineInputField
           value={editValue}
           onChange={(e) => setEditValue(e.target.value)}
