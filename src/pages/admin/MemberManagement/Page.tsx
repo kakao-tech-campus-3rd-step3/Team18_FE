@@ -10,8 +10,7 @@ import { DeleteConfirmModal } from './components/modals/DeleteConfirmModal';
 import { useMemberFilter } from './hooks/useMemberFilter';
 import { useMemberMutations } from './hooks/useMemberMutations';
 import * as S from './index.styled';
-import type { AddMemberFormData } from './components/modals/AddMemberModal';
-import type { Member } from './types/member';
+import type { Member, AddMemberFormData } from './types/member';
 
 // TODO: API 연동 시 삭제
 const MOCK_MEMBERS: Member[] = Array.from({ length: 10 }, (_, i) => ({

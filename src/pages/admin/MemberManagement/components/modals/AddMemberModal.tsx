@@ -4,29 +4,11 @@ import { Dropdown } from '@/shared/components/Dropdown';
 import { UnderlineInputField } from '@/shared/components/Form/InputField/UnderlineInputField';
 import { Modal } from '@/shared/components/Modal';
 import * as S from './AddMemberModal.styled';
-
-export type AcademicStatus =
-  | 'ENROLLED' // 재학
-  | 'LEAVE_OF_ABSENCE' // 휴학
-  | 'GRADUATED' // 졸업
-  | 'COMPLETED' // 수료
-  | 'EXPELLED'; // 제적
-
-export type ApiRole =
-  | 'CLUB_MEMBER' // 동아리원
-  | 'CLUB_EXECUTIVE' // 운영팀
-  | 'CLUB_ADMIN'; // 회장단
-
-export type AddMemberFormData = {
-  name: string;
-  studentId: string;
-  phoneNumber: string;
-  college: string;
-  department: string;
-  academicStatus: AcademicStatus;
-  role: ApiRole;
-  joinDate: string; // YYYY-MM
-};
+import type {
+  AcademicStatus,
+  AddMemberFormData,
+  ApiRole,
+} from '@/pages/admin/MemberManagement/types/member';
 
 type AddMemberModalProps = {
   isOpen: boolean;

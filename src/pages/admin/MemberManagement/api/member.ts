@@ -2,8 +2,7 @@
 
 import { apiInstance } from '@/app/api/initInstance';
 import { handleAxiosError } from '@/shared/utils/handleAxiosError';
-import type { AddMemberFormData } from '../components/modals/AddMemberModal';
-import type { Member, MemberRole } from '../types/member';
+import type { Member, MemberRole, AddMemberFormData } from '../types/member';
 
 export const fetchMembers = async (clubId: string): Promise<Member[]> => {
   try {
