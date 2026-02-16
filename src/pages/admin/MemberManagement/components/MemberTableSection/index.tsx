@@ -6,14 +6,14 @@ import type { Member, MemberRole } from '@/pages/admin/MemberManagement/types/me
 type MemberTableProps = {
   members: Member[];
   onRoleChange: (memberId: number, newRole: MemberRole) => void;
-  onDelete: (memberId: number) => void;
+  onDelete: (memberId: number, memberName: string) => void;
   onMemberUpdate: (memberId: number, field: keyof Member, value: string) => void;
 };
 
 type MemberTableRowProps = {
   member: Member;
   onRoleChange: (memberId: number, newRole: MemberRole) => void;
-  onDelete: (memberId: number) => void;
+  onDelete: (memberId: number, memberName: string) => void;
   onMemberUpdate: (memberId: number, field: keyof Member, value: string) => void;
 };
 
@@ -67,7 +67,7 @@ const MemberTableRow = ({
         </S.RoleButtonGroup>
       </S.TdRole>
       <S.Td>
-        <S.DeleteButton onClick={() => onDelete(member.id)}>
+        <S.DeleteButton onClick={() => onDelete(member.id, member.name)}>
           <FiX />
         </S.DeleteButton>
       </S.Td>

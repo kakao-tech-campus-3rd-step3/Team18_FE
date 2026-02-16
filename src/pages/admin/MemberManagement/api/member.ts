@@ -2,6 +2,7 @@
 
 import { apiInstance } from '@/app/api/initInstance';
 import { handleAxiosError } from '@/shared/utils/handleAxiosError';
+import type { AddMemberFormData } from '../components/modals/AddMemberModal';
 import type { Member, MemberRole } from '../types/member';
 
 export const fetchMembers = async (clubId: string): Promise<Member[]> => {
@@ -30,5 +31,28 @@ export const deleteMember = async (clubId: string, memberId: number): Promise<vo
     await apiInstance.delete(`/clubs/${clubId}/members/${memberId}`);
   } catch (e: unknown) {
     return handleAxiosError(e, '회원 삭제에 실패했습니다.');
+  }
+};
+
+export const addMember = async (clubId: string, data: AddMemberFormData): Promise<void> => {
+  try {
+    await apiInstance.post(`/clubs/${clubId}/members`, data);
+  } catch (e: unknown) {
+    return handleAxiosError(e, '회원 추가에 실패했습니다.');
+  }
+};
+
+export const bulkUploadMembers = async (clubId: string, file: File): Promise<void> => {
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    await apiInstance.post(`/clubs/${clubId}/members/bulk`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  } catch (e: unknown) {
+    return handleAxiosError(e, '일괄 등록에 실패했습니다.');
   }
 };
