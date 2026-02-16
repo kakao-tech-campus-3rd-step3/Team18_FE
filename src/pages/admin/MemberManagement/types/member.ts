@@ -5,7 +5,7 @@ export type MemberRole = '회장단' | '운영팀' | '동아리원';
 export type Member = {
   id: number;
   name: string;
-  generation: string;
+  studentId: string;
   department: string;
   phoneNumber: string;
   role: MemberRole;

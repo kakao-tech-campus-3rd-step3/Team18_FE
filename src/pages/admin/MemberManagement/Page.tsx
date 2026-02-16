@@ -11,11 +11,11 @@ import type { Member } from './types/member';
 const MOCK_MEMBERS: Member[] = Array.from({ length: 10 }, (_, i) => ({
   id: i + 1,
   name: `홍길동${i + 1}`,
-  generation: `${(i % 3) + 1}기`,
+  studentId: `2026${String(i + 1).padStart(2, '0')}`,
   department: '영어영문학과',
   phoneNumber: '010-1234-5678',
   role: ['회장단', '운영팀', '동아리원'][i % 3] as Member['role'],
-  joinDate: new Date(2024, 0, i + 1).toISOString(),
+  joinDate: `2026-${String((i % 12) + 1).padStart(2, '0')}`,
 }));
 
 export const MemberManagementPage = () => {

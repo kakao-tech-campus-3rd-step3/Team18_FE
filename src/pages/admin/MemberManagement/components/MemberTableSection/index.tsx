@@ -36,8 +36,8 @@ const MemberTableRow = ({
       </S.TdName>
       <S.Td>
         <EditableCell
-          value={member.generation}
-          onSave={(val) => handleFieldUpdate('generation', val)}
+          value={member.studentId}
+          onSave={(val) => handleFieldUpdate('studentId', val)}
         />
       </S.Td>
       <S.Td>
@@ -52,6 +52,7 @@ const MemberTableRow = ({
           onSave={(val) => handleFieldUpdate('phoneNumber', val)}
         />
       </S.Td>
+      <S.Td>{member.joinDate}</S.Td>
       <S.TdRole>
         <S.RoleButtonGroup>
           {ROLES.map((role) => (
@@ -86,9 +87,10 @@ export const MemberTableSection = ({
         <S.TableHead>
           <tr>
             <S.Th>이름</S.Th>
-            <S.Th>기수</S.Th>
+            <S.Th>학번</S.Th>
             <S.Th>학과</S.Th>
             <S.Th>전화번호</S.Th>
+            <S.Th>등록일</S.Th>
             <S.ThRole>역할 (권한)</S.ThRole>
             <S.Th width='30px'></S.Th>
           </tr>
