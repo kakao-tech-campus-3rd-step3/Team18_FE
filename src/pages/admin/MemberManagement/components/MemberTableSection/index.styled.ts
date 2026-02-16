@@ -27,7 +27,18 @@ export const Th = styled.th<{ width?: string }>(({ theme, width }) => ({
   ...(width && { width }),
 }));
 
-//797px 이하에서는 역할버튼 숨김
+export const ThPhone = styled(Th)({
+  ['@media (max-width: 940px)']: {
+    display: 'none',
+  },
+});
+
+export const ThJoinDate = styled(Th)({
+  ['@media (max-width: 965px)']: {
+    display: 'none',
+  },
+});
+
 export const ThRole = styled(Th)({
   ['@media (max-width: 797px)']: {
     display: 'none',

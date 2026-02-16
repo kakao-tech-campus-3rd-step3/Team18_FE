@@ -11,7 +11,7 @@ export const Td = styled.td(({ theme }) => ({
   fontSize: theme.font.size.base,
   color: theme.colors.textSecondary,
 
-  ['@media (max-width: 833px)']: {
+  ['@media (max-width: 1013px)']: {
     fontSize: theme.font.size.sm,
   },
 }));
@@ -20,6 +20,18 @@ export const TdName = styled(Td)(({ theme }) => ({
   fontWeight: theme.font.weight.bold,
   color: theme.colors.textPrimary,
 }));
+
+export const TdPhone = styled(Td)({
+  ['@media (max-width: 940px)']: {
+    display: 'none',
+  },
+});
+
+export const TdJoinDate = styled(Td)({
+  ['@media (max-width: 965px)']: {
+    display: 'none',
+  },
+});
 
 export const TdRole = styled(Td)({
   ['@media (max-width: 797px)']: {
@@ -32,7 +44,7 @@ export const RoleButtonGroup = styled.div({
   gap: '1.0rem',
   flexWrap: 'wrap',
 
-  ['@media (max-width: 854px)']: {
+  ['@media (max-width: 1120px)']: {
     gap: '0.5rem',
   },
 });
@@ -45,7 +57,7 @@ export const RoleButton = styled.button<{ active: boolean }>(({ theme, active })
   cursor: 'pointer',
   transition: 'all 0.2s',
   whiteSpace: 'nowrap',
-  ['@media (max-width: 910px)']: {
+  ['@media (max-width: 1092px)']: {
     fontSize: theme.font.size.sm,
     padding: '0.25rem 0.75rem',
     borderRadius: theme.radius.sm,

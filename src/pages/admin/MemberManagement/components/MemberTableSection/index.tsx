@@ -23,8 +23,8 @@ export const MemberTableSection = ({
             <S.Th>이름</S.Th>
             <S.Th>학번</S.Th>
             <S.Th>학과</S.Th>
-            <S.Th>전화번호</S.Th>
-            <S.Th>등록일</S.Th>
+            <S.ThPhone>전화번호</S.ThPhone>
+            <S.ThJoinDate>등록일</S.ThJoinDate>
             <S.ThRole>역할 (권한)</S.ThRole>
             <S.Th width='30px'></S.Th>
           </tr>

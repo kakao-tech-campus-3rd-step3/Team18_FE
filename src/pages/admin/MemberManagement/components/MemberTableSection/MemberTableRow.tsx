@@ -39,13 +39,13 @@ export const MemberTableRow = ({
           onSave={(val) => handleFieldUpdate('department', val)}
         />
       </S.Td>
-      <S.Td>
+      <S.TdPhone>
         <EditableCell
           value={member.phoneNumber}
           onSave={(val) => handleFieldUpdate('phoneNumber', val)}
         />
-      </S.Td>
-      <S.Td>{member.joinDate}</S.Td>
+      </S.TdPhone>
+      <S.TdJoinDate>{member.joinDate}</S.TdJoinDate>
       <S.TdRole>
         <S.RoleButtonGroup>
           {ROLES.map((role) => (
