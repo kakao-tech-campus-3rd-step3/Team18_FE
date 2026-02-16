@@ -1,4 +1,5 @@
 import { FiX } from 'react-icons/fi';
+import { EditableCell } from './EditableCell';
 import * as S from './index.styled';
 import type { Member, MemberRole } from '@/pages/admin/MemberManagement/types/member';
 
@@ -6,23 +7,51 @@ type MemberTableProps = {
   members: Member[];
   onRoleChange: (memberId: number, newRole: MemberRole) => void;
   onDelete: (memberId: number) => void;
+  onMemberUpdate: (memberId: number, field: keyof Member, value: string) => void;
 };
 
 type MemberTableRowProps = {
   member: Member;
   onRoleChange: (memberId: number, newRole: MemberRole) => void;
   onDelete: (memberId: number) => void;
+  onMemberUpdate: (memberId: number, field: keyof Member, value: string) => void;
 };
 
 const ROLES: MemberRole[] = ['회장단', '운영팀', '동아리원'];
 
-const MemberTableRow = ({ member, onRoleChange, onDelete }: MemberTableRowProps) => {
+const MemberTableRow = ({
+  member,
+  onRoleChange,
+  onDelete,
+  onMemberUpdate,
+}: MemberTableRowProps) => {
+  const handleFieldUpdate = (field: keyof Member, value: string) => {
+    onMemberUpdate(member.id, field, value);
+  };
+
   return (
     <S.TableRow>
-      <S.TdName>{member.name}</S.TdName>
-      <S.Td>{member.generation}</S.Td>
-      <S.Td>{member.department}</S.Td>
-      <S.Td>{member.phoneNumber}</S.Td>
+      <S.TdName>
+        <EditableCell value={member.name} onSave={(val) => handleFieldUpdate('name', val)} />
+      </S.TdName>
+      <S.Td>
+        <EditableCell
+          value={member.generation}
+          onSave={(val) => handleFieldUpdate('generation', val)}
+        />
+      </S.Td>
+      <S.Td>
+        <EditableCell
+          value={member.department}
+          onSave={(val) => handleFieldUpdate('department', val)}
+        />
+      </S.Td>
+      <S.Td>
+        <EditableCell
+          value={member.phoneNumber}
+          onSave={(val) => handleFieldUpdate('phoneNumber', val)}
+        />
+      </S.Td>
       <S.TdRole>
         <S.RoleButtonGroup>
           {ROLES.map((role) => (
@@ -45,7 +74,12 @@ const MemberTableRow = ({ member, onRoleChange, onDelete }: MemberTableRowProps)
   );
 };
 
-export const MemberTableSection = ({ members, onRoleChange, onDelete }: MemberTableProps) => {
+export const MemberTableSection = ({
+  members,
+  onRoleChange,
+  onDelete,
+  onMemberUpdate,
+}: MemberTableProps) => {
   return (
     <S.TableWrapper>
       <S.Table>
@@ -66,6 +100,7 @@ export const MemberTableSection = ({ members, onRoleChange, onDelete }: MemberTa
               member={member}
               onRoleChange={onRoleChange}
               onDelete={onDelete}
+              onMemberUpdate={onMemberUpdate}
             />
           ))}
         </tbody>

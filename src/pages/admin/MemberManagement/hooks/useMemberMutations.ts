@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateMemberRole, deleteMember } from '../api/member';
-import type { MemberRole } from '@/pages/admin/MemberManagement/types/member';
+import type { Member, MemberRole } from '@/pages/admin/MemberManagement/types/member';
 
 export const useMemberMutations = (clubId: string) => {
   const queryClient = useQueryClient();
@@ -34,9 +34,16 @@ export const useMemberMutations = (clubId: string) => {
     // }
   };
 
+  const handleMemberUpdate = (memberId: number, field: keyof Member, value: string) => {
+    // TODO: API 연동 시 주석 해제
+    console.log(`회원 ${memberId}의 ${field}을(를) ${value}로 변경`);
+    // updateMemberMutation.mutate({ memberId, field, value });
+  };
+
   return {
     handleRoleChange,
     handleDeleteMember,
+    handleMemberUpdate,
     isUpdatingRole: updateRoleMutation.isPending,
     isDeleting: deleteMemberMutation.isPending,
   };

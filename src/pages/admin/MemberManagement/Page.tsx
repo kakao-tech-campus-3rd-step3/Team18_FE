@@ -34,7 +34,9 @@ export const MemberManagementPage = () => {
   const { searchText, sortBy, filteredMembers, setSearchText, setSortBy } =
     useMemberFilter(members);
 
-  const { handleRoleChange, handleDeleteMember } = useMemberMutations(clubId || '');
+  const { handleRoleChange, handleDeleteMember, handleMemberUpdate } = useMemberMutations(
+    clubId || '',
+  );
 
   const handleAddMember = () => {
     // TODO: 단건 추가 모달 열기
@@ -66,6 +68,7 @@ export const MemberManagementPage = () => {
           members={filteredMembers}
           onRoleChange={handleRoleChange}
           onDelete={handleDeleteMember}
+          onMemberUpdate={handleMemberUpdate}
         />
       </S.ContentWrapper>
     </S.Container>
