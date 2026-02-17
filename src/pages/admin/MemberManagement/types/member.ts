@@ -14,6 +14,13 @@ export const API_ROLE_TO_UI: Record<ApiRole, MemberRole> = {
   CLUB_MEMBER: '동아리원',
 };
 
+// UI → API 역할 매핑
+export const UI_ROLE_TO_API: Record<MemberRole, ApiRole> = {
+  회장단: 'CLUB_ADMIN',
+  운영팀: 'CLUB_EXECUTIVE',
+  동아리원: 'CLUB_MEMBER',
+};
+
 // 동아리원 목록 조회 API 응답 타입
 export type MemberApiResponse = {
   clubMemberProfileId: number;

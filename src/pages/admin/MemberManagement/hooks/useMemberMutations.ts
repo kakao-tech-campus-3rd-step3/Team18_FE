@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UI_ROLE_TO_API } from '@/pages/admin/MemberManagement/types/member';
 import { addMember } from '../api/addMember';
 import { bulkUploadMembers } from '../api/bulkUploadMembers';
 import { deleteMember } from '../api/deleteMember';
@@ -6,6 +7,7 @@ import { updateMember } from '../api/updateMember';
 import { updateMemberRole } from '../api/updateMemberRole';
 import type {
   AddMemberFormData,
+  ApiRole,
   Member,
   MemberRole,
   UpdateMemberData,
@@ -22,8 +24,8 @@ export const useMemberMutations = (clubId: string) => {
   });
 
   const updateRoleMutation = useMutation({
-    mutationFn: ({ memberId, role }: { memberId: number; role: MemberRole }) =>
-      updateMemberRole(clubId, memberId, role),
+    mutationFn: ({ profileId, role }: { profileId: number; role: ApiRole }) =>
+      updateMemberRole(clubId, profileId, role),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['members', clubId] });
     },
@@ -60,9 +62,8 @@ export const useMemberMutations = (clubId: string) => {
   };
 
   const handleRoleChange = (memberId: number, newRole: MemberRole) => {
-    // TODO: API 연동 시 주석 해제
-    console.log(`회원 ${memberId}의 역할을 ${newRole}로 변경`);
-    // updateRoleMutation.mutate({ memberId, role: newRole });
+    const apiRole = UI_ROLE_TO_API[newRole];
+    updateRoleMutation.mutate({ profileId: memberId, role: apiRole });
   };
 
   const handleDeleteMember = (memberId: number) => {

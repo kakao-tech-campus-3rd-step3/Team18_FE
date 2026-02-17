@@ -1,11 +1,11 @@
 import { apiInstance } from '@/app/api/initInstance';
 import { handleAxiosError } from '@/shared/utils/handleAxiosError';
-import type { MemberRole } from '../types/member';
+import type { ApiRole } from '../types/member';
 
 export const updateMemberRole = async (
   clubId: string,
   profileId: number,
-  role: MemberRole,
+  role: ApiRole,
 ): Promise<void> => {
   try {
     await apiInstance.patch(`/clubs/${clubId}/members/${profileId}/role`, { role });
