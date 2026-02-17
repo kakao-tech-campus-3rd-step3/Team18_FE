@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { UI_ROLE_TO_API } from '@/pages/admin/MemberManagement/types/member';
+import { toast } from '@/shared/utils/toast';
 import { addMember } from '../api/addMember';
 import { bulkUploadMembers } from '../api/bulkUploadMembers';
 import { deleteMember } from '../api/deleteMember';
@@ -28,6 +29,9 @@ export const useMemberMutations = (clubId: string) => {
       updateMemberRole(clubId, profileId, role),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['members', clubId] });
+    },
+    onError: () => {
+      toast.error('동아리원 직책 변경은 회장만 가능합니다.');
     },
   });
 
