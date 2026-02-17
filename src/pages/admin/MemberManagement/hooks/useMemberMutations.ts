@@ -1,10 +1,22 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { addMember } from '../api/addMember';
 import { deleteMember } from '../api/deleteMember';
 import { updateMemberRole } from '../api/updateMemberRole';
-import type { Member, MemberRole } from '@/pages/admin/MemberManagement/types/member';
+import type {
+  AddMemberFormData,
+  Member,
+  MemberRole,
+} from '@/pages/admin/MemberManagement/types/member';
 
 export const useMemberMutations = (clubId: string) => {
   const queryClient = useQueryClient();
+
+  const addMemberMutation = useMutation({
+    mutationFn: (data: AddMemberFormData) => addMember(clubId, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['members', clubId] });
+    },
+  });
 
   const updateRoleMutation = useMutation({
     mutationFn: ({ memberId, role }: { memberId: number; role: MemberRole }) =>
@@ -20,6 +32,10 @@ export const useMemberMutations = (clubId: string) => {
       queryClient.invalidateQueries({ queryKey: ['members', clubId] });
     },
   });
+
+  const submitAddMember = (data: AddMemberFormData) => {
+    addMemberMutation.mutate(data);
+  };
 
   const handleRoleChange = (memberId: number, newRole: MemberRole) => {
     // TODO: API 연동 시 주석 해제
@@ -42,9 +58,11 @@ export const useMemberMutations = (clubId: string) => {
   };
 
   return {
+    submitAddMember,
     handleRoleChange,
     handleDeleteMember,
     handleMemberUpdate,
+    isAddingMember: addMemberMutation.isPending,
     isUpdatingRole: updateRoleMutation.isPending,
     isDeleting: deleteMemberMutation.isPending,
   };

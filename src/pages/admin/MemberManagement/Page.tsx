@@ -27,7 +27,9 @@ export const MemberManagementPage = () => {
   const { searchText, sortBy, filteredMembers, setSearchText, setSortBy } =
     useMemberFilter(members);
 
-  const { handleRoleChange, handleMemberUpdate } = useMemberMutations(clubId || '');
+  const { submitAddMember, handleRoleChange, handleMemberUpdate } = useMemberMutations(
+    clubId || '',
+  );
 
   const handleDeleteMember = (memberId: number) => {
     console.log(`회원 ${memberId} 삭제`);
@@ -54,8 +56,7 @@ export const MemberManagementPage = () => {
   };
 
   const handleSubmitAddMember = (data: AddMemberFormData) => {
-    console.log('동아리원 추가:', data);
-    // TODO: API 호출
+    submitAddMember(data);
   };
 
   const handleSubmitBulkUpload = (file: File) => {
