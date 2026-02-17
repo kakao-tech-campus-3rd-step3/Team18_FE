@@ -2,11 +2,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addMember } from '../api/addMember';
 import { bulkUploadMembers } from '../api/bulkUploadMembers';
 import { deleteMember } from '../api/deleteMember';
+import { updateMember } from '../api/updateMember';
 import { updateMemberRole } from '../api/updateMemberRole';
 import type {
   AddMemberFormData,
   Member,
   MemberRole,
+  UpdateMemberData,
 } from '@/pages/admin/MemberManagement/types/member';
 
 export const useMemberMutations = (clubId: string) => {
@@ -29,6 +31,14 @@ export const useMemberMutations = (clubId: string) => {
 
   const deleteMemberMutation = useMutation({
     mutationFn: (memberId: number) => deleteMember(clubId, memberId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['members', clubId] });
+    },
+  });
+
+  const updateMemberMutation = useMutation({
+    mutationFn: ({ profileId, data }: { profileId: number; data: UpdateMemberData }) =>
+      updateMember(clubId, profileId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['members', clubId] });
     },
@@ -64,9 +74,7 @@ export const useMemberMutations = (clubId: string) => {
   };
 
   const handleMemberUpdate = (memberId: number, field: keyof Member, value: string) => {
-    // TODO: API 연동 시 주석 해제
-    console.log(`회원 ${memberId}의 ${field}을(를) ${value}로 변경`);
-    // updateMemberMutation.mutate({ memberId, field, value });
+    updateMemberMutation.mutate({ profileId: memberId, data: { [field]: value } });
   };
 
   return {
@@ -78,6 +86,7 @@ export const useMemberMutations = (clubId: string) => {
     isAddingMember: addMemberMutation.isPending,
     isBulkUploading: bulkUploadMutation.isPending,
     isUpdatingRole: updateRoleMutation.isPending,
+    isUpdatingMember: updateMemberMutation.isPending,
     isDeleting: deleteMemberMutation.isPending,
   };
 };
