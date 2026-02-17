@@ -27,13 +27,13 @@ export const MemberManagementPage = () => {
   const { searchText, sortBy, filteredMembers, setSearchText, setSortBy } =
     useMemberFilter(members);
 
-  const { submitAddMember, submitBulkUpload, handleRoleChange, handleMemberUpdate } =
-    useMemberMutations(clubId || '');
-
-  const handleDeleteMember = (memberId: number) => {
-    console.log(`회원 ${memberId} 삭제`);
-    // TODO: API 호출
-  };
+  const {
+    submitAddMember,
+    submitBulkUpload,
+    handleRoleChange,
+    handleDeleteMember,
+    handleMemberUpdate,
+  } = useMemberMutations(clubId || '');
 
   const handleDeleteClick = (memberId: number, memberName: string) => {
     const shouldSkip = sessionStorage.getItem('skipDeleteConfirmation') === 'true';

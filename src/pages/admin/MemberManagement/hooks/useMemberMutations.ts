@@ -38,7 +38,11 @@ export const useMemberMutations = (clubId: string) => {
   const deleteMemberMutation = useMutation({
     mutationFn: (memberId: number) => deleteMember(clubId, memberId),
     onSuccess: () => {
+      toast.success('동아리원이 삭제되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['members', clubId] });
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || '동아리원 삭제에 실패했습니다.');
     },
   });
 
@@ -71,11 +75,7 @@ export const useMemberMutations = (clubId: string) => {
   };
 
   const handleDeleteMember = (memberId: number) => {
-    // TODO: 삭제 확인 모달 + API 호출
-    console.log(`회원 ${memberId} 삭제`);
-    // if (confirm('정말 삭제하시겠습니까?')) {
-    //   deleteMemberMutation.mutate(memberId);
-    // }
+    deleteMemberMutation.mutate(memberId);
   };
 
   const handleMemberUpdate = (memberId: number, field: keyof Member, value: string) => {
