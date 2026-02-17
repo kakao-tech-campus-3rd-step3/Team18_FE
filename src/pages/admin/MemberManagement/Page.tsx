@@ -27,9 +27,8 @@ export const MemberManagementPage = () => {
   const { searchText, sortBy, filteredMembers, setSearchText, setSortBy } =
     useMemberFilter(members);
 
-  const { submitAddMember, handleRoleChange, handleMemberUpdate } = useMemberMutations(
-    clubId || '',
-  );
+  const { submitAddMember, submitBulkUpload, handleRoleChange, handleMemberUpdate } =
+    useMemberMutations(clubId || '');
 
   const handleDeleteMember = (memberId: number) => {
     console.log(`회원 ${memberId} 삭제`);
@@ -60,8 +59,7 @@ export const MemberManagementPage = () => {
   };
 
   const handleSubmitBulkUpload = (file: File) => {
-    console.log('엑셀 업로드:', file);
-    // TODO: API 호출
+    submitBulkUpload(file);
   };
 
   if (isLoading) return <LoadingSpinner />;

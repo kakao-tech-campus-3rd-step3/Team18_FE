@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addMember } from '../api/addMember';
+import { bulkUploadMembers } from '../api/bulkUploadMembers';
 import { deleteMember } from '../api/deleteMember';
 import { updateMemberRole } from '../api/updateMemberRole';
 import type {
@@ -33,8 +34,19 @@ export const useMemberMutations = (clubId: string) => {
     },
   });
 
+  const bulkUploadMutation = useMutation({
+    mutationFn: (file: File) => bulkUploadMembers(clubId, file),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['members', clubId] });
+    },
+  });
+
   const submitAddMember = (data: AddMemberFormData) => {
     addMemberMutation.mutate(data);
+  };
+
+  const submitBulkUpload = (file: File) => {
+    bulkUploadMutation.mutate(file);
   };
 
   const handleRoleChange = (memberId: number, newRole: MemberRole) => {
@@ -59,10 +71,12 @@ export const useMemberMutations = (clubId: string) => {
 
   return {
     submitAddMember,
+    submitBulkUpload,
     handleRoleChange,
     handleDeleteMember,
     handleMemberUpdate,
     isAddingMember: addMemberMutation.isPending,
+    isBulkUploading: bulkUploadMutation.isPending,
     isUpdatingRole: updateRoleMutation.isPending,
     isDeleting: deleteMemberMutation.isPending,
   };
