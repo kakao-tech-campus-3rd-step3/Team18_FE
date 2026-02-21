@@ -13,7 +13,7 @@ export const fetchMembers = async (clubId: string): Promise<Member[]> => {
       studentId: item.studentId,
       department: item.department,
       phoneNumber: item.phoneNumber,
-      role: API_ROLE_TO_UI[item.role],
+      role: API_ROLE_TO_UI[item.role] ?? '동아리원',
       joinDate: item.joinDate,
     }));
   } catch (e: unknown) {
