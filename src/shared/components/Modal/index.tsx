@@ -140,37 +140,37 @@ export const Modal = ({
     [getFocusableElements, onClose],
   );
 
-  // 모달 열림 시 포커스 관리 & 이벤트 리스너
+  // 모달 열림 시 초기 포커스 & 스크롤 방지
   useEffect(() => {
     if (isOpen) {
-      // 현재 포커스 저장
       previousFocusRef.current = document.activeElement as HTMLElement;
 
-      // 제목으로 포커스 이동
       setTimeout(() => {
         titleRef.current?.focus();
       }, 100);
 
-      // 키보드 이벤트 리스너
-      document.addEventListener('keydown', handleKeyDown);
-
-      // 배경 스크롤 방지 (modal variant만)
       const originalOverflow = document.body.style.overflow;
       const originalPaddingRight = document.body.style.paddingRight;
       if (variant === 'modal') {
-        // 스크롤바 너비 계산
         const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
         document.body.style.overflow = 'hidden';
         document.body.style.paddingRight = `${scrollbarWidth}px`;
       }
 
       return () => {
-        document.removeEventListener('keydown', handleKeyDown);
         if (variant === 'modal') {
           document.body.style.overflow = originalOverflow;
           document.body.style.paddingRight = originalPaddingRight;
         }
       };
+    }
+  }, [isOpen, variant]);
+
+  // 키보드 이벤트 리스너 (handleKeyDown 변경 시 리스너만 교체)
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
     }
   }, [isOpen, handleKeyDown]);
 
