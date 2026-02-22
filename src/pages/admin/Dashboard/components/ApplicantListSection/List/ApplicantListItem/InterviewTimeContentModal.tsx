@@ -6,17 +6,21 @@ import type { InterviewInfo, InterviewSchedule } from '@/pages/admin/Dashboard/t
 type Props = {
   interviewInfo: InterviewInfo[];
   interviewSchedule: InterviewSchedule[];
+  confirmedTime?: string | null;
   onTimeSelect: (interviewAt: string) => void;
 };
 
 export const InterviewTimeContentModal = ({
   interviewInfo,
   interviewSchedule,
+  confirmedTime,
   onTimeSelect,
 }: Props) => {
   const handleSlotClick = (date: string, time: string) => {
     onTimeSelect(`${date}T${time}:00`);
   };
+
+  const isSelected = (date: string, time: string) => confirmedTime === `${date}T${time}:00`;
 
   return (
     <S.Container>
@@ -30,6 +34,7 @@ export const InterviewTimeContentModal = ({
                   {schedule.slots.map((slot) => (
                     <S.TimeSlot
                       key={slot.time}
+                      $selected={isSelected(schedule.date, slot.time)}
                       onClick={() => handleSlotClick(schedule.date, slot.time)}
                     >
                       <S.SlotTime>{slot.time}</S.SlotTime>
