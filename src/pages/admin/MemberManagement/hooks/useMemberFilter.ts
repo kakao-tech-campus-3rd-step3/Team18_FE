@@ -8,7 +8,7 @@ export const useMemberFilter = (members: Member[]) => {
   const filteredAndSortedMembers = useMemo(() => {
     // 1. 검색 필터링
     const filtered = members.filter((member) =>
-      [member.name, member.generation, member.department].some((field) =>
+      [member.name, member.studentId, member.department].some((field) =>
         field.includes(searchText),
       ),
     );

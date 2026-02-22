@@ -1,60 +1,30 @@
-import { FiX } from 'react-icons/fi';
 import * as S from './index.styled';
+import { MemberTableRow } from './MemberTableRow';
 import type { Member, MemberRole } from '@/pages/admin/MemberManagement/types/member';
 
 type MemberTableProps = {
   members: Member[];
   onRoleChange: (memberId: number, newRole: MemberRole) => void;
-  onDelete: (memberId: number) => void;
+  onDelete: (memberId: number, memberName: string) => void;
+  onMemberUpdate: (memberId: number, field: keyof Member, value: string) => void;
 };
 
-type MemberTableRowProps = {
-  member: Member;
-  onRoleChange: (memberId: number, newRole: MemberRole) => void;
-  onDelete: (memberId: number) => void;
-};
-
-const ROLES: MemberRole[] = ['회장단', '운영팀', '동아리원'];
-
-const MemberTableRow = ({ member, onRoleChange, onDelete }: MemberTableRowProps) => {
-  return (
-    <S.TableRow>
-      <S.TdName>{member.name}</S.TdName>
-      <S.Td>{member.generation}</S.Td>
-      <S.Td>{member.department}</S.Td>
-      <S.Td>{member.phoneNumber}</S.Td>
-      <S.TdRole>
-        <S.RoleButtonGroup>
-          {ROLES.map((role) => (
-            <S.RoleButton
-              key={role}
-              active={member.role === role}
-              onClick={() => onRoleChange(member.id, role)}
-            >
-              {role}
-            </S.RoleButton>
-          ))}
-        </S.RoleButtonGroup>
-      </S.TdRole>
-      <S.Td>
-        <S.DeleteButton onClick={() => onDelete(member.id)}>
-          <FiX />
-        </S.DeleteButton>
-      </S.Td>
-    </S.TableRow>
-  );
-};
-
-export const MemberTableSection = ({ members, onRoleChange, onDelete }: MemberTableProps) => {
+export const MemberTableSection = ({
+  members,
+  onRoleChange,
+  onDelete,
+  onMemberUpdate,
+}: MemberTableProps) => {
   return (
     <S.TableWrapper>
       <S.Table>
         <S.TableHead>
           <tr>
             <S.Th>이름</S.Th>
-            <S.Th>기수</S.Th>
+            <S.Th>학번</S.Th>
             <S.Th>학과</S.Th>
-            <S.Th>전화번호</S.Th>
+            <S.ThPhone>전화번호</S.ThPhone>
+            <S.ThJoinDate>등록일</S.ThJoinDate>
             <S.ThRole>역할 (권한)</S.ThRole>
             <S.Th width='30px'></S.Th>
           </tr>
@@ -66,6 +36,7 @@ export const MemberTableSection = ({ members, onRoleChange, onDelete }: MemberTa
               member={member}
               onRoleChange={onRoleChange}
               onDelete={onDelete}
+              onMemberUpdate={onMemberUpdate}
             />
           ))}
         </tbody>
