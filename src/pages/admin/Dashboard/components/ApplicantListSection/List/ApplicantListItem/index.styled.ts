@@ -71,6 +71,16 @@ export const TimeSetter = styled.button(({ theme }) => ({
   cursor: 'pointer',
 }));
 
+export const ConfirmedTimeSetter = styled.button(({ theme }) => ({
+  color: '#8C8C8C',
+  background: 'none',
+  fontSize: theme.font.size.lg,
+  border: 'none',
+  textDecoration: 'underline',
+  textUnderlineOffset: '5px',
+  cursor: 'pointer',
+}));
+
 export const StatusBadge = styled.p<Pick<ApplicantData, 'status'>>(({ theme, status }) => {
   const styles = {
     APPROVED: {
