@@ -30,10 +30,12 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
     interviewRequired,
   } = useApplicants(Number(clubId), apiStage, filterOption);
 
+  const showInterviewColumn = interviewRequired && stage === '서류';
+
   const categories = useMemo(() => {
     const base: ApplicateInfoCategory[] = ['이름', '학번', '학과', '전화번호', '이메일', '결과'];
-    return interviewRequired ? [...base, '면접 시간'] : base;
-  }, [interviewRequired]);
+    return showInterviewColumn ? [...base, '면접 시간'] : base;
+  }, [showInterviewColumn]);
 
   const handleItemClick = useCallback(
     (applicantId: number) => {
@@ -47,7 +49,7 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
 
   return (
     <S.Container>
-      <S.ApplicantInfoCategoryList hasInterview={interviewRequired}>
+      <S.ApplicantInfoCategoryList hasInterview={showInterviewColumn}>
         {categories.map((category) => (
           <S.CategoryText key={category}>{category}</S.CategoryText>
         ))}
@@ -68,7 +70,7 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
               confirmedTime={applicant.confirmedTime}
               interviewInfo={applicant.interviewInfo}
               interviewSchedule={interviewSchedule}
-              interviewRequired={interviewRequired}
+              interviewRequired={showInterviewColumn}
               onClick={handleItemClick}
             />
           ))
