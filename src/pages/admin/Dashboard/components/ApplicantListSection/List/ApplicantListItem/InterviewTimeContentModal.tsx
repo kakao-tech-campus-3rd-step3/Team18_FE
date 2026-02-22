@@ -6,9 +6,18 @@ import type { InterviewInfo, InterviewSchedule } from '@/pages/admin/Dashboard/t
 type Props = {
   interviewInfo: InterviewInfo[];
   interviewSchedule: InterviewSchedule[];
+  onTimeSelect: (interviewAt: string) => void;
 };
 
-export const InterviewTimeContentModal = ({ interviewInfo, interviewSchedule }: Props) => {
+export const InterviewTimeContentModal = ({
+  interviewInfo,
+  interviewSchedule,
+  onTimeSelect,
+}: Props) => {
+  const handleSlotClick = (date: string, time: string) => {
+    onTimeSelect(`${date}T${time}:00`);
+  };
+
   return (
     <S.Container>
       <S.Section>
@@ -19,7 +28,10 @@ export const InterviewTimeContentModal = ({ interviewInfo, interviewSchedule }: 
                 <S.ScheduleDateLabel>{formatDateWithoutYear(schedule.date)}</S.ScheduleDateLabel>
                 <S.SlotsContainer>
                   {schedule.slots.map((slot) => (
-                    <S.TimeSlot key={slot.time}>
+                    <S.TimeSlot
+                      key={slot.time}
+                      onClick={() => handleSlotClick(schedule.date, slot.time)}
+                    >
                       <S.SlotTime>{slot.time}</S.SlotTime>
                       <S.SlotCount>({slot.assignedCount}명 선택)</S.SlotCount>
                     </S.TimeSlot>
