@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { UnderlineInputField } from '@/shared/components/Form/InputField/UnderlineInputField';
 
 type EditableCellProps = {
@@ -32,6 +32,12 @@ const CellContent = styled.div(({ theme }) => ({
 export const EditableCell = ({ value, maxWidth, onSave }: EditableCellProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(value);
+
+  useEffect(() => {
+    if (!isEditing) {
+      setEditValue(value);
+    }
+  }, [value, isEditing]);
 
   const handleClick = () => {
     setIsEditing(true);
