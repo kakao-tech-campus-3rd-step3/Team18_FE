@@ -31,7 +31,7 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
 }: Props) {
   const { clubId } = useParams();
   const { isOpen, openModal, closeModal } = useModal();
-  const { updateTime } = useUpdateInterviewTime(Number(clubId), applicantId);
+  const { updateTime } = useUpdateInterviewTime(parseInt(clubId ?? '', 10), applicantId);
   const timeSetterRef = useRef<HTMLButtonElement>(null);
 
   const handleTimeSetterClick = (e: React.MouseEvent) => {
