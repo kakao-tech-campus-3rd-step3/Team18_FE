@@ -1,4 +1,6 @@
 import React, { useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import { useUpdateInterviewTime } from '@/pages/admin/Dashboard/hooks/useUpdateInterviewTime';
 import { STATUS_LABEL } from '@/pages/admin/Dashboard/utils/labelMap';
 import { Modal } from '@/shared/components/Modal';
 import { Text } from '@/shared/components/Text';
@@ -28,12 +30,18 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
   interviewRequired,
   onClick,
 }: Props) {
+  const { clubId } = useParams();
   const { isOpen, openModal, closeModal } = useModal();
+  const { updateTime } = useUpdateInterviewTime(Number(clubId), applicantId);
   const timeSetterRef = useRef<HTMLButtonElement>(null);
 
   const handleTimeSetterClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     openModal();
+  };
+
+  const handleTimeSelect = (interviewAt: string) => {
+    updateTime(interviewAt, { onSuccess: closeModal });
   };
   return (
     <>
@@ -72,6 +80,7 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
         <InterviewTimeContentModal
           interviewInfo={interviewInfo}
           interviewSchedule={interviewSchedule}
+          onTimeSelect={handleTimeSelect}
         />
       </Modal>
     </>
