@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import { UnderlineInputField } from '@/shared/components/Form/InputField/UnderlineInputField';
+import { toast } from '@/shared/utils/toast';
 
 type EditableCellProps = {
   value: string;
@@ -44,8 +45,17 @@ export const EditableCell = ({ value, maxWidth, onSave }: EditableCellProps) => 
   };
 
   const handleSave = () => {
-    if (editValue !== value && editValue.trim() !== '') {
-      onSave(editValue);
+    const trimmed = editValue.trim();
+
+    if (trimmed === '') {
+      toast.error('빈 값은 입력할 수 없습니다.');
+      setEditValue(value);
+      setIsEditing(false);
+      return;
+    }
+
+    if (trimmed !== value.trim()) {
+      onSave(trimmed);
     }
     setIsEditing(false);
   };
