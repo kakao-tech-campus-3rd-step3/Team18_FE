@@ -131,6 +131,15 @@ export const DateText = styled.span(({ theme }) => ({
   whiteSpace: 'nowrap',
 }));
 
+export const DatePickerRow = styled.div({
+  display: 'flex',
+  flexDirection: 'row',
+  gap: '8px',
+  overflowX: 'auto',
+  paddingBottom: '4px',
+  marginBottom: '1rem',
+});
+
 export const AutoSaveIndicator = styled.span(({ theme }) => ({
   position: 'fixed',
   top: '80px',
