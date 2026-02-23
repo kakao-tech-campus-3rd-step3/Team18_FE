@@ -1,6 +1,7 @@
 import type { UseFormReturn } from 'react-hook-form';
 import { Global } from '@emotion/react';
 import { ko } from 'date-fns/locale';
+import { useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useTimeslotState } from '@/pages/admin/ApplicationFormBuilder/hooks/useTimeslotState';
@@ -34,6 +35,11 @@ export const TimeslotFieldBuilder = ({ formHandler, questionIndex, isEditMode }:
     watch,
     formState: { errors },
   } = formHandler;
+
+  useEffect(() => {
+    setValue(`formQuestions.${questionIndex}.displayOrder`, questionIndex + 1);
+    setValue(`formQuestions.${questionIndex}.questionNum`, questionIndex + 1);
+  }, [questionIndex, setValue]);
 
   const timeSlotDate = watch(`formQuestions.${questionIndex}.timeSlotOptions.date`);
 
