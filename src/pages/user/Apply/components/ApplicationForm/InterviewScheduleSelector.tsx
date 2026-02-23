@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDragSelection } from '@/pages/user/Apply/hooks/useDragSelection';
 import { getTimeSlotsArray } from '@/pages/user/Apply/utils/time';
 import { Text } from '@/shared/components/Text';
-import { TimeSpan, Wrapper, DateText, TimeSlotsContainer } from './index.styled';
+import { TimeSpan, Wrapper, TimeSlotsContainer } from './index.styled';
 import type { InterviewSchedule } from '@/pages/user/Apply/type/apply';
 
 export const InterviewScheduleSelector = ({ availableTime, date, onChange }: InterviewSchedule) => {
@@ -28,7 +28,6 @@ export const InterviewScheduleSelector = ({ availableTime, date, onChange }: Int
 
   return (
     <Wrapper>
-      <DateText>{date}</DateText>
       <TimeSlotsContainer>
         {timeSlotsArray.map((e, idx) => {
           return (
