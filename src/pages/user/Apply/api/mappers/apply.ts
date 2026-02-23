@@ -1,5 +1,5 @@
-import { QuestionTypes } from '../../constants/questionType';
-import type { FormInputs } from '../../type/apply';
+import { QuestionTypes } from '@/pages/user/Apply/constants/questionType';
+import type { FormInputs } from '@/pages/user/Apply/type/apply';
 
 export const toApplyRequest = (formData: FormInputs, questions: string[]) => {
   const formDataAnswers = [...formData.answers];
