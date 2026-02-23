@@ -21,7 +21,7 @@ export const HorizontalInterviewScheduleSelector = ({ timeSlotOptions, onChange 
             type='button'
             variant={selectedDateIdx === idx ? undefined : 'outline'}
             onClick={() => setSelectedDateIdx(idx)}
-            width='8rem'
+            width='7.5rem'
           >
             {schedule.date}
           </Button>

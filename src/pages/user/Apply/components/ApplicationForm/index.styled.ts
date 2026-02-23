@@ -122,21 +122,10 @@ export const TimeSlotsContainer = styled.div({
   gap: '8px',
 });
 
-export const DateText = styled.span(({ theme }) => ({
-  textAlign: 'left',
-  minWidth: '150px',
-  padding: '10px 0 10px 3px',
-  fontWeight: theme.font.weight.bold,
-  fontSize: theme.font.size.sm,
-  whiteSpace: 'nowrap',
-}));
-
 export const DatePickerRow = styled.div({
   display: 'flex',
-  flexDirection: 'row',
+  flexWrap: 'wrap',
   gap: '8px',
-  overflowX: 'auto',
-  paddingBottom: '4px',
   marginBottom: '1rem',
 });
 
