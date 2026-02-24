@@ -8,14 +8,9 @@ import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { Text } from '@/shared/components/Text';
+import { HorizontalInterviewScheduleSelector } from './HorizontalInterviewScheduleSelector';
 import * as S from './index.styled';
-import { InterviewScheduleSelector } from './InterviewScheduleSelector';
-import type {
-  FormInputs,
-  InterviewSchedule,
-  Question,
-  SelectedInterviewValue,
-} from '@/pages/user/Apply/type/apply';
+import type { FormInputs, Question } from '@/pages/user/Apply/type/apply';
 
 type Props = {
   questions: Question[];
@@ -231,24 +226,15 @@ export const ApplicationForm = ({ questions }: Props) => {
                     control={methods.control}
                     rules={{ required: '면접 시간을 선택하세요.' }}
                     render={({ field: controllerField }) => (
-                      <>
-                        {field.timeSlotOptions?.map(
-                          (interviewSchedule: InterviewSchedule, idx: number) => (
-                            <InterviewScheduleSelector
-                              key={idx}
-                              availableTime={interviewSchedule.availableTime}
-                              date={interviewSchedule.date}
-                              value={controllerField.value?.value as SelectedInterviewValue}
-                              onChange={(selectedInterviewSchedule) =>
-                                controllerField.onChange({
-                                  value: selectedInterviewSchedule,
-                                  questionType: QuestionTypes.TIME_SLOT,
-                                })
-                              }
-                            />
-                          ),
-                        )}
-                      </>
+                      <HorizontalInterviewScheduleSelector
+                        timeSlotOptions={field.timeSlotOptions ?? []}
+                        onChange={(selectedInterviewSchedule) =>
+                          controllerField.onChange({
+                            value: selectedInterviewSchedule,
+                            questionType: QuestionTypes.TIME_SLOT,
+                          })
+                        }
+                      />
                     )}
                   />
                 </S.ChoiceFormFiled>
