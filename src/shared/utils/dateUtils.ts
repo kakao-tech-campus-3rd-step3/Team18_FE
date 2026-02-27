@@ -10,6 +10,8 @@ export const formatDateWithoutYear = (date: string | Date) => {
   return `${month}/${day}`;
 };
 
+export const formatTime = (time: string) => time.slice(0, 5);
+
 export const formatDateTime = (date: string | Date) => {
   const dateObj = typeof date === 'string' ? new Date(date) : date;
 
