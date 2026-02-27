@@ -17,10 +17,10 @@ export const InterviewTimeContentModal = ({
   onTimeSelect,
 }: Props) => {
   const handleSlotClick = (date: string, time: string) => {
-    onTimeSelect(`${date}T${time}:00`);
+    onTimeSelect(`${date}T${time}`);
   };
 
-  const isSelected = (date: string, time: string) => confirmedTime === `${date}T${time}:00`;
+  const isSelected = (date: string, time: string) => confirmedTime === `${date}T${time}`;
 
   return (
     <S.Container>
