@@ -17,14 +17,18 @@ export const InterviewTimeContentModal = ({
   confirmedTime,
   onTimeSelect,
 }: Props) => {
+  const confirmedDate = confirmedTime?.split('T')[0] ?? '';
   const [selectedScheduleDate, setSelectedScheduleDate] = useState<string>(
-    interviewSchedule?.[0]?.date ?? '',
+    interviewSchedule?.find((s) => s.date === confirmedDate)?.date ??
+      interviewSchedule?.[0]?.date ??
+      '',
   );
   const handleSlotClick = (date: string, time: string) => {
     onTimeSelect(`${date}T${time}`);
   };
 
-  const isSelected = (date: string, time: string) => confirmedTime === `${date}T${time}`;
+  const isSelected = (date: string, time: string) =>
+    confirmedTime?.startsWith(`${date}T${time}`) ?? false;
 
   const activeSchedule = interviewSchedule?.find((s) => s.date === selectedScheduleDate);
 
