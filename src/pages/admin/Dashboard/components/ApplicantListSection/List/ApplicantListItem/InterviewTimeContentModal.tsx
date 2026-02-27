@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Text } from '@/shared/components/Text';
-import { formatDateWithoutYear } from '@/shared/utils/dateUtils';
+import { formatDateWithoutYear, formatTime } from '@/shared/utils/dateUtils';
 import * as S from './InterviewTimeContentModal.styled';
 import type { InterviewInfo, InterviewSchedule } from '@/pages/admin/Dashboard/types/dashboard';
 
@@ -16,34 +17,52 @@ export const InterviewTimeContentModal = ({
   confirmedTime,
   onTimeSelect,
 }: Props) => {
+  const confirmedDate = confirmedTime?.split('T')[0] ?? '';
+  const getInitialSelectedDate = () => {
+    const confirmedDateExists = interviewSchedule?.some((s) => s.date === confirmedDate);
+    if (confirmedDate && confirmedDateExists) {
+      return confirmedDate;
+    }
+    return interviewSchedule?.[0]?.date ?? '';
+  };
+  const [selectedScheduleDate, setSelectedScheduleDate] = useState<string>(getInitialSelectedDate);
   const handleSlotClick = (date: string, time: string) => {
-    onTimeSelect(`${date}T${time}:00`);
+    onTimeSelect(`${date}T${time}`);
   };
 
-  const isSelected = (date: string, time: string) => confirmedTime === `${date}T${time}:00`;
+  const isSelected = (date: string, time: string) =>
+    confirmedTime?.startsWith(`${date}T${time}`) ?? false;
+
+  const activeSchedule = interviewSchedule?.find((s) => s.date === selectedScheduleDate);
 
   return (
     <S.Container>
       <S.Section>
         {interviewSchedule?.length ? (
           <>
-            {interviewSchedule?.map((schedule) => (
-              <S.ScheduleRow key={schedule.date}>
-                <S.ScheduleDateLabel>{formatDateWithoutYear(schedule.date)}</S.ScheduleDateLabel>
-                <S.SlotsContainer>
-                  {schedule.slots.map((slot) => (
-                    <S.TimeSlot
-                      key={slot.time}
-                      $selected={isSelected(schedule.date, slot.time)}
-                      onClick={() => handleSlotClick(schedule.date, slot.time)}
-                    >
-                      <S.SlotTime>{slot.time}</S.SlotTime>
-                      <S.SlotCount>({slot.assignedCount}명 선택)</S.SlotCount>
-                    </S.TimeSlot>
-                  ))}
-                </S.SlotsContainer>
-              </S.ScheduleRow>
-            ))}
+            <S.DateTabsContainer>
+              {interviewSchedule.map((schedule) => (
+                <S.DateTab
+                  key={schedule.date}
+                  $active={schedule.date === selectedScheduleDate}
+                  onClick={() => setSelectedScheduleDate(schedule.date)}
+                >
+                  {formatDateWithoutYear(schedule.date)}
+                </S.DateTab>
+              ))}
+            </S.DateTabsContainer>
+            <S.SlotsContainer>
+              {activeSchedule?.slots.map((slot) => (
+                <S.TimeSlot
+                  key={slot.time}
+                  $selected={isSelected(selectedScheduleDate, slot.time)}
+                  onClick={() => handleSlotClick(selectedScheduleDate, slot.time)}
+                >
+                  <S.SlotTime>{formatTime(slot.time)}</S.SlotTime>
+                  <S.SlotCount>({slot.assignedCount}명 선택)</S.SlotCount>
+                </S.TimeSlot>
+              ))}
+            </S.SlotsContainer>
           </>
         ) : (
           <Text color='#595959' size='sm'>
@@ -55,10 +74,12 @@ export const InterviewTimeContentModal = ({
         <S.SectionTitle>지원자 면접 희망 시간대</S.SectionTitle>
         {interviewInfo?.length ? (
           <>
-            {interviewInfo?.map((info) => (
+            {interviewInfo.map((info) => (
               <S.AvailableTimesRow key={info.interviewDate}>
                 <S.DateLabel>{formatDateWithoutYear(info.interviewDate)}</S.DateLabel>
-                <S.AvailableTimes>{(info.availableTimes ?? []).join(', ')}</S.AvailableTimes>
+                <S.AvailableTimes>
+                  {(info.availableTimes ?? []).map(formatTime).join(', ')}
+                </S.AvailableTimes>
               </S.AvailableTimesRow>
             ))}
           </>
