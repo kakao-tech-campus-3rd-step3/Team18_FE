@@ -58,7 +58,9 @@ export const InterviewTimeContentModal = ({
             {interviewInfo?.map((info) => (
               <S.AvailableTimesRow key={info.interviewDate}>
                 <S.DateLabel>{formatDateWithoutYear(info.interviewDate)}</S.DateLabel>
-                <S.AvailableTimes>{(info.availableTimes ?? []).join(', ')}</S.AvailableTimes>
+                <S.AvailableTimes>
+                  {(info.availableTimes ?? []).map(formatTime).join(', ')}
+                </S.AvailableTimes>
               </S.AvailableTimesRow>
             ))}
           </>
