@@ -1,5 +1,5 @@
 import { Text } from '@/shared/components/Text';
-import { formatDateWithoutYear } from '@/shared/utils/dateUtils';
+import { formatDateWithoutYear, formatTime } from '@/shared/utils/dateUtils';
 import * as S from './InterviewTimeContentModal.styled';
 import type { InterviewInfo, InterviewSchedule } from '@/pages/admin/Dashboard/types/dashboard';
 
@@ -37,7 +37,7 @@ export const InterviewTimeContentModal = ({
                       $selected={isSelected(schedule.date, slot.time)}
                       onClick={() => handleSlotClick(schedule.date, slot.time)}
                     >
-                      <S.SlotTime>{slot.time}</S.SlotTime>
+                      <S.SlotTime>{formatTime(slot.time)}</S.SlotTime>
                       <S.SlotCount>({slot.assignedCount}명 선택)</S.SlotCount>
                     </S.TimeSlot>
                   ))}
