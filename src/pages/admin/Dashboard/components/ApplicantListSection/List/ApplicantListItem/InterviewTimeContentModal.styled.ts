@@ -20,31 +20,33 @@ export const SectionTitle = styled.h3(({ theme }) => ({
   borderBottom: `1px solid ${theme.colors.gray200}`,
 }));
 
-export const ScheduleRow = styled.div({
+export const DateTabsContainer = styled.div({
   display: 'flex',
-  alignItems: 'flex-start',
-  gap: '1rem',
+  flexWrap: 'wrap',
+  gap: '0.5rem',
 });
-export const ScheduleDateLabel = styled.span(({ theme }) => ({
-  fontSize: theme.font.size.sm,
-  fontWeight: 600,
-  color: theme.colors.gray700,
-  minWidth: '2.5rem',
-  paddingTop: '0.5rem',
-}));
 
-export const DateLabel = styled.span(({ theme }) => ({
+export const DateTab = styled.button<{ $active?: boolean }>(({ theme, $active }) => ({
+  padding: '0.375rem 0.75rem',
+  borderRadius: theme.radius.md,
+  border: `1px solid ${$active ? theme.colors.primary : theme.colors.gray300}`,
+  backgroundColor: $active ? theme.colors.primary00 : theme.colors.bg,
+  color: $active ? theme.colors.primary : theme.colors.gray600,
   fontSize: theme.font.size.sm,
-  fontWeight: 600,
-  color: theme.colors.gray700,
-  minWidth: '2.5rem',
+  fontWeight: $active ? 600 : 400,
+  cursor: 'pointer',
+  transition: 'all 0.2s',
+
+  '&:hover': {
+    borderColor: theme.colors.primary,
+    color: theme.colors.primary,
+  },
 }));
 
 export const SlotsContainer = styled.div({
   display: 'flex',
   flexWrap: 'wrap',
   gap: '0.5rem',
-  flex: 1,
 });
 
 export const TimeSlot = styled.button<{ $selected?: boolean }>(({ theme, $selected }) => ({
@@ -82,6 +84,13 @@ export const AvailableTimesRow = styled.div({
   alignItems: 'center',
   gap: '1rem',
 });
+
+export const DateLabel = styled.span(({ theme }) => ({
+  fontSize: theme.font.size.sm,
+  fontWeight: 600,
+  color: theme.colors.gray700,
+  minWidth: '2.5rem',
+}));
 
 export const AvailableTimes = styled.span(({ theme }) => ({
   fontSize: theme.font.size.sm,
