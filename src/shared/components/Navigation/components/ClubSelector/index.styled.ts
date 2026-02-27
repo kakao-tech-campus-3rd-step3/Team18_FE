@@ -21,6 +21,13 @@ export const Selected = styled.div(({ theme }) => ({
   },
 }));
 
+export const ClubNameText = styled.span({
+  maxWidth: '8rem',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+});
+
 export const ChevronDownIcon = styled(FiChevronDown)(({ theme }) => ({
   color: theme.colors.gray400,
   transition: 'transform 0.2s ease-in-out, color 0.2s ease-in-out',
