@@ -47,9 +47,9 @@ export const ApplicantListItem = React.memo(function ApplicantListItem({
       <S.ItemWrapper hasInterview={interviewRequired} onClick={() => onClick(applicantId)}>
         <S.InfoText>{name || '-'}</S.InfoText>
         <S.InfoText>{studentId || '-'}</S.InfoText>
-        <S.InfoText>{department || '-'}</S.InfoText>
-        <S.InfoText>{phoneNumber || '-'}</S.InfoText>
-        <S.InfoText>{email || '-'}</S.InfoText>
+        <S.InfoText title={department}>{department || '-'}</S.InfoText>
+        <S.InfoText title={phoneNumber}>{phoneNumber || '-'}</S.InfoText>
+        <S.InfoText title={email}>{email || '-'}</S.InfoText>
         <S.StatusBadge status={status}>{STATUS_LABEL[status] || '-'}</S.StatusBadge>
         {interviewRequired &&
           (status === 'APPROVED' ? (
