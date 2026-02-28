@@ -136,4 +136,8 @@ export const Body = styled.div({
   flexDirection: 'column',
   overflowY: 'auto',
   overscrollBehavior: 'contain',
+  scrollbarWidth: 'none',
+  '&::-webkit-scrollbar': {
+    display: 'none',
+  },
 });
