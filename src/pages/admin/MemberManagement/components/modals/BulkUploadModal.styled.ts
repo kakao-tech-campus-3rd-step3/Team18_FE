@@ -57,6 +57,23 @@ export const Notice = styled.p(({ theme }) => ({
   lineHeight: 1.5,
 }));
 
+export const DownloadLink = styled.button(({ theme }) => ({
+  fontSize: theme.font.size.sm,
+  color: theme.colors.textPrimary,
+  background: 'none',
+  border: 'none',
+  padding: 0,
+  margin: 0,
+  textDecoration: 'underline',
+  cursor: 'pointer',
+  transition: 'color 0.2s, transform 0.2s',
+
+  '&:hover': {
+    color: theme.colors.blue700,
+    transform: 'translateY(-2px)',
+  },
+}));
+
 export const ButtonWrapper = styled.div({
   display: 'flex',
   justifyContent: 'center',

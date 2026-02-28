@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { downloadRegistrationForm } from '@/pages/admin/MemberManagement/api/downloadRegistrationForm';
 import { Button } from '@/shared/components/Button';
 import { Modal } from '@/shared/components/Modal';
+import { toast } from '@/shared/utils/toast';
 import * as S from './BulkUploadModal.styled';
 
 type BulkUploadModalProps = {
@@ -22,6 +24,14 @@ export const BulkUploadModal = ({ isOpen, onClose, onUpload }: BulkUploadModalPr
       } else {
         alert('엑셀 파일(.xlsx, .xls)만 업로드 가능합니다.');
       }
+    }
+  };
+
+  const handleDownloadTemplate = async () => {
+    try {
+      await downloadRegistrationForm();
+    } catch {
+      toast.error('양식 파일 다운로드에 실패했습니다.');
     }
   };
 
@@ -56,6 +66,9 @@ export const BulkUploadModal = ({ isOpen, onClose, onUpload }: BulkUploadModalPr
         {file && <S.FileName>선택된 파일: {file.name}</S.FileName>}
 
         <S.Notice>※ 주의: 엑셀 파일의 첫번째 줄(헤더)는 정해진 양식을 따라야 합니다.</S.Notice>
+        <S.DownloadLink type='button' onClick={handleDownloadTemplate}>
+          양식 다운로드하기!
+        </S.DownloadLink>
 
         <S.ButtonWrapper>
           <Button onClick={handleSubmit} disabled={!file}>
