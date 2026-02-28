@@ -79,7 +79,7 @@ export const Content = styled.div<ContentProps>(
         position: 'fixed',
         top: $position.top - 10,
         left: $position.left - 30,
-        maxHeight: $position.maxHeight != null ? `${$position.maxHeight}px` : '80vh',
+        maxHeight: $position.maxHeight != null ? `min(30rem, ${$position.maxHeight}px)` : '30rem',
       }),
 
     [`@media (max-width: ${theme.breakpoints.mobile})`]: {
