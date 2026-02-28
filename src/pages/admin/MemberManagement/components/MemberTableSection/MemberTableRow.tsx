@@ -10,7 +10,7 @@ type MemberTableRowProps = {
   onMemberUpdate: (memberId: number, field: keyof Member, value: string) => void;
 };
 
-const ROLES: MemberRole[] = ['회장단', '운영팀', '동아리원'];
+const ROLES: MemberRole[] = ['회장', '운영팀', '동아리원'];
 
 export const MemberTableRow = ({
   member,

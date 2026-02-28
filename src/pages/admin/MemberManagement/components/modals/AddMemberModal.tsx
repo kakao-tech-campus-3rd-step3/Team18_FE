@@ -37,7 +37,7 @@ const ROLE_OPTIONS: ApiRole[] = ['CLUB_MEMBER', 'CLUB_EXECUTIVE', 'CLUB_ADMIN'];
 const ROLE_LABELS: Record<ApiRole, string> = {
   CLUB_MEMBER: '동아리원',
   CLUB_EXECUTIVE: '운영팀',
-  CLUB_ADMIN: '회장단',
+  CLUB_ADMIN: '회장',
 };
 
 const getCurrentYearMonth = (): string => {
