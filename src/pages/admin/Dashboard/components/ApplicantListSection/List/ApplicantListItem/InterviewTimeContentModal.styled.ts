@@ -44,8 +44,8 @@ export const DateTab = styled.button<{ $active?: boolean }>(({ theme, $active })
 }));
 
 export const SlotsContainer = styled.div({
-  display: 'flex',
-  flexWrap: 'wrap',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(4, 1fr)',
   gap: '0.5rem',
 });
 
@@ -77,6 +77,7 @@ export const SlotCount = styled.span(({ theme }) => ({
   fontSize: theme.font.size.xs,
   color: theme.colors.gray500,
   marginTop: '0.125rem',
+  whiteSpace: 'nowrap',
 }));
 
 export const AvailableTimesRow = styled.div({
