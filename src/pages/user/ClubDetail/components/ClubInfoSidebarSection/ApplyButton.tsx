@@ -28,18 +28,20 @@ const ApplyButton = ({
     disabled: !isRecruiting,
   };
 
+  const isValidUrl = (url: string) => /^https?:\/\//.test(url);
+
   const handleApplyClick = () => {
     if (isRegistered) {
       navigate(to);
       return;
     }
 
-    if (googleFormUrl) {
+    if (googleFormUrl && isValidUrl(googleFormUrl)) {
       window.open(googleFormUrl, '_blank');
       return;
     }
 
-    if (everyTimeUrl) {
+    if (everyTimeUrl && isValidUrl(everyTimeUrl)) {
       window.open(everyTimeUrl, '_blank');
       return;
     }
