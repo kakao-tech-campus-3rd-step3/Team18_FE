@@ -44,7 +44,7 @@ const MOCK_APPLICANTS: ApplicantData[] = [
     interviewInfo: [
       {
         interviewDate: '2026-09-02',
-        availableTimes: ['14:00', '15:00', '16:00'],
+        availableTime: ['14:00', '15:00', '16:00'],
       },
     ],
   },
@@ -60,7 +60,7 @@ const MOCK_APPLICANTS: ApplicantData[] = [
     interviewInfo: [
       {
         interviewDate: '2026-09-02',
-        availableTimes: ['10:00', '11:00'],
+        availableTime: ['10:00', '11:00'],
       },
     ],
   },
@@ -76,7 +76,7 @@ const MOCK_APPLICANTS: ApplicantData[] = [
     interviewInfo: [
       {
         interviewDate: '2026-09-03',
-        availableTimes: ['10:00', '11:00', '14:00'],
+        availableTime: ['10:00', '11:00', '14:00'],
       },
     ],
   },
