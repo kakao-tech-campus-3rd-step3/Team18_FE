@@ -68,13 +68,14 @@ export const Modal = ({
           modalWidthRef.current = modalWidth;
         }
 
+        const VIEWPORT_BOTTOM_MARGIN = 36;
         const topPos = anchorRect.top;
-        const availableHeight = window.innerHeight - topPos - 36;
+        const availableHeight = window.innerHeight - topPos - VIEWPORT_BOTTOM_MARGIN;
 
         setPosition({
           top: topPos,
           left: anchorRect.left - modalWidth,
-          maxHeight: Math.max(200, availableHeight),
+          maxHeight: Math.max(0, availableHeight),
         });
       }
     },
