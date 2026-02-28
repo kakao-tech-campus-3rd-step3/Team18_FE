@@ -1,4 +1,4 @@
-import { type AxiosResponse } from 'axios';
+import axios, { type AxiosResponse } from 'axios';
 import { apiInstance } from '@/app/api/initInstance';
 import { handleAxiosError } from '@/shared/utils/handleAxiosError';
 import type { ApplicationForm } from '../types/fieldType';
@@ -42,6 +42,12 @@ export const patchApplicationForm = async ({
     );
     return response.data;
   } catch (e) {
+    if (axios.isAxiosError(e)) {
+      const detail = e.response?.data?.detail;
+      if (typeof detail === 'string') {
+        throw new Error(detail.split(': ').pop());
+      }
+    }
     return handleAxiosError(e, '지원서 저장에 실패했습니다.');
   }
 };
