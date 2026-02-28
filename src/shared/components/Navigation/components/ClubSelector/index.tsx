@@ -25,7 +25,7 @@ export const ClubSelector = () => {
   return (
     <S.Wrapper>
       <S.Selected onClick={() => hasMultiple && setIsOpen((prev) => !prev)}>
-        <span>{displayName}</span>
+        <S.ClubNameText title={displayName}>{displayName}</S.ClubNameText>
         {hasMultiple && <S.ChevronDownIcon size={24} />}
       </S.Selected>
 

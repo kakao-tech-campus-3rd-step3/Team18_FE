@@ -57,8 +57,10 @@ export const ItemWrapper = styled.div<{ hasInterview: boolean }>`
 
 export const InfoText = styled.p(({ theme }) => ({
   fontSize: theme.font.size.lg,
-
   color: '#434547',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
 }));
 
 export const TimeSetter = styled.button(({ theme }) => ({
