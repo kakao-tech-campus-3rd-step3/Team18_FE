@@ -35,9 +35,13 @@ export const patchApplicationForm = async ({
   clubId: number;
   form: Partial<ApplicationForm>;
 }): Promise<ApplicationForm> => {
-  const response: AxiosResponse<ApplicationForm> = await apiInstance.patch(
-    `/clubs/${clubId}/dashboard/apply-form`,
-    form,
-  );
-  return response.data;
+  try {
+    const response: AxiosResponse<ApplicationForm> = await apiInstance.patch(
+      `/clubs/${clubId}/dashboard/apply-form`,
+      form,
+    );
+    return response.data;
+  } catch (e) {
+    return handleAxiosError(e, '지원서 저장에 실패했습니다.');
+  }
 };
