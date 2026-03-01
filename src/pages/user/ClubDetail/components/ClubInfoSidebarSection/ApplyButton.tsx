@@ -31,6 +31,8 @@ const ApplyButton = ({
   const isValidUrl = (url: string) => /^https?:\/\//.test(url);
 
   const handleApplyClick = () => {
+    if (!isRecruiting) return;
+
     if (isRegistered) {
       navigate(to);
       return;
