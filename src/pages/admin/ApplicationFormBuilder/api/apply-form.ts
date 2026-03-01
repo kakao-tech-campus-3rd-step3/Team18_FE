@@ -21,11 +21,15 @@ export const postApplicationForm = async ({
   clubId: number;
   form: ApplicationForm;
 }): Promise<ApplicationForm> => {
-  const response: AxiosResponse<ApplicationForm> = await apiInstance.post(
-    `/clubs/${clubId}/dashboard/apply-form`,
-    form,
-  );
-  return response.data;
+  try {
+    const response: AxiosResponse<ApplicationForm> = await apiInstance.post(
+      `/clubs/${clubId}/dashboard/apply-form`,
+      form,
+    );
+    return response.data;
+  } catch (e) {
+    return handleAxiosError(e);
+  }
 };
 
 export const patchApplicationForm = async ({
