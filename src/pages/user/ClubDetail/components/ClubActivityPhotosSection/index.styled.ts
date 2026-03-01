@@ -23,7 +23,7 @@ export const PhotosContainer = styled.div({
 
 export const Photo = styled.img({
   flex: '0 0 auto',
-  height: 'clamp(320px, 50vw, 500px)',
+  height: 'clamp(320px, 50vw, 400px)',
   width: 'auto',
   borderRadius: '8px',
   objectFit: 'cover',
