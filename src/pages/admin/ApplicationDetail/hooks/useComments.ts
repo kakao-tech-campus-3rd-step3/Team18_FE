@@ -5,6 +5,7 @@ import {
   deleteComment,
   updateComment,
 } from '@/pages/admin/ApplicationDetail/api/comments';
+import { toast } from '@/shared/utils/toast';
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 import type { UseApiQueryResult } from '@/shared/types/useApiQueryResult';
 
@@ -36,6 +37,9 @@ export const useComments = (applicationId: number): UseCommentsResult => {
         return [newComment];
       });
     },
+    onError: (error: Error) => {
+      toast.error(error.message || '댓글 작성에 실패했습니다.');
+    },
   });
 
   const { mutate: deleteCommentMutation } = useMutation({
@@ -47,6 +51,9 @@ export const useComments = (applicationId: number): UseCommentsResult => {
         }
         return [];
       });
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || '댓글 삭제에 실패했습니다.');
     },
   });
 
@@ -69,6 +76,9 @@ export const useComments = (applicationId: number): UseCommentsResult => {
         }
         return [];
       });
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || '댓글 수정에 실패했습니다.');
     },
   });
 
