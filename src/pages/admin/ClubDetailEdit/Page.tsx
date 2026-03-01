@@ -2,13 +2,12 @@ import styled from '@emotion/styled';
 import { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
-import { theme } from '@/app/styles/theme';
 import { Button } from '@/shared/components/Button';
 import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { PageHeader } from '@/shared/components/PageHeader';
 import { engToKorCategory } from '@/shared/utils/formatting';
+import { toast } from '@/shared/utils/toast';
 import { updateClubDetailEdit } from './api/clubDetailEdit';
 import { updateClubImages } from './api/clubImagesEdit';
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
@@ -45,17 +44,10 @@ export const ClubDetailEditPage = () => {
 
     updateClubDetailEdit(clubId ?? '', payload)
       .then(() => {
-        toast.success('수정 성공!', {
-          style: { backgroundColor: theme.colors.primary, color: 'white' },
-          duration: 1000,
-          onAutoClose: () => navigate(`/clubs/${clubId}`),
-        });
+        toast.success('수정 성공!', () => navigate(`/clubs/${clubId}`));
       })
-      .catch(() => {
-        toast.error('수정 실패!', {
-          duration: 1000,
-          style: { backgroundColor: 'white', color: theme.colors.error },
-        });
+      .catch((error: Error) => {
+        toast.error(error.message || '수정 실패!');
       });
   };
   if (isLoading) return <LoadingSpinner />;
