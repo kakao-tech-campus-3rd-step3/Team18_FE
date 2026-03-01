@@ -61,16 +61,25 @@ export const useMemberMutations = (clubId: string) => {
       queryClient.invalidateQueries({ queryKey: ['members', clubId] });
     },
     onError: (error: unknown) => {
-      const data = (error as { response?: { data?: { message?: string; detail?: string } } })
-        .response?.data;
+      const data = (
+        error as {
+          response?: { data?: { message?: string; detail?: string | string[] } };
+        }
+      ).response?.data;
 
       const detail = data?.detail;
       const EXCEL_ERROR_DURATION = 3000;
 
+      if (Array.isArray(detail)) {
+        detail.forEach((item) => toast.error(item, EXCEL_ERROR_DURATION));
+        return;
+      }
+
       if (typeof detail === 'string') {
-        if (detail.startsWith('[')) {
-          const items = detail.match(/'([^']+)'/g)?.map((s) => s.slice(1, -1));
-          if (items) {
+        if (detail.startsWith('[') && detail.endsWith(']')) {
+          const inner = detail.slice(1, -1);
+          const items = inner.split(/,\s*(?=\d+행:|학번)/).map((s) => s.trim());
+          if (items.length > 1) {
             items.forEach((item) => toast.error(item, EXCEL_ERROR_DURATION));
             return;
           }
