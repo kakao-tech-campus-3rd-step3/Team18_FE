@@ -20,4 +20,7 @@ export type ClubDetail = {
   recruitStart: string;
   recruitEnd: string;
   applicationNotice: string;
+  isRegistered: boolean;
+  everyTimeUrl: string;
+  googleFormUrl: string;
 };

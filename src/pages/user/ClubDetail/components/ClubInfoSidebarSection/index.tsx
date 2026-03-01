@@ -14,6 +14,9 @@ type ClubInfoSidebarSectionProps = Pick<
   | 'regularMeetingInfo'
   | 'recruitStatus'
   | 'applicationNotice'
+  | 'isRegistered'
+  | 'everyTimeUrl'
+  | 'googleFormUrl'
 >;
 
 export const ClubInfoSidebarSection = ({
@@ -26,6 +29,9 @@ export const ClubInfoSidebarSection = ({
   regularMeetingInfo,
   recruitStatus,
   applicationNotice,
+  isRegistered,
+  everyTimeUrl,
+  googleFormUrl,
 }: ClubInfoSidebarSectionProps) => {
   return (
     <SidebarContainer>
@@ -37,7 +43,14 @@ export const ClubInfoSidebarSection = ({
       </InfoItem>
       <InfoItem>정기 모임: {regularMeetingInfo}</InfoItem>
       <InfoItem>모집 상태: {recruitStatus}</InfoItem>
-      <ApplyButton recruitStatus={recruitStatus} to={`/clubs/${clubId}/apply`} width={'auto'} />
+      <ApplyButton
+        recruitStatus={recruitStatus}
+        to={`/clubs/${clubId}/apply`}
+        width={'auto'}
+        isRegistered={isRegistered}
+        everyTimeUrl={everyTimeUrl}
+        googleFormUrl={googleFormUrl}
+      />
       <Notice>{applicationNotice}</Notice>
     </SidebarContainer>
   );

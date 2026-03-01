@@ -7,6 +7,7 @@ import {
   useAdaptedPatchApplicationForm,
 } from '@/pages/admin/ApplicationFormBuilder/hooks/useApplicationFormAdapter';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
+import { toast } from '@/shared/utils/toast';
 import { ApplicationInfoSection } from './components/ApplicationInfoSection';
 import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
 import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection';
@@ -46,6 +47,9 @@ export const ApplicationFormBuilderPage = () => {
     adaptedPatchForm(formData, {
       onSuccess: () => {
         setIsEditMode(false);
+      },
+      onError: (error) => {
+        toast.error(error.message || '지원서 저장에 실패했습니다.');
       },
     });
   });

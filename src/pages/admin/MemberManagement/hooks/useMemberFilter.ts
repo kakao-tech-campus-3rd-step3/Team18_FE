@@ -1,5 +1,11 @@
 import { useState, useMemo } from 'react';
-import type { Member, SortOption } from '../types/member';
+import type { Member, MemberRole, SortOption } from '../types/member';
+
+const ROLE_PRIORITY: Record<MemberRole, number> = {
+  회장: 0,
+  운영팀: 1,
+  동아리원: 2,
+};
 
 export const useMemberFilter = (members: Member[]) => {
   const [searchText, setSearchText] = useState('');
@@ -13,12 +19,14 @@ export const useMemberFilter = (members: Member[]) => {
       ),
     );
 
-    // 2. 정렬
+    // 2. 정렬 (역할 우선, 같은 역할 내에서 이름순/등록순)
     const sorted = [...filtered].sort((a, b) => {
+      const roleDiff = ROLE_PRIORITY[a.role] - ROLE_PRIORITY[b.role];
+      if (roleDiff !== 0) return roleDiff;
+
       if (sortBy === '이름순') {
         return a.name.localeCompare(b.name, 'ko');
       }
-      // 등록순 (joinDate 기준)
       return new Date(a.joinDate).getTime() - new Date(b.joinDate).getTime();
     });
 

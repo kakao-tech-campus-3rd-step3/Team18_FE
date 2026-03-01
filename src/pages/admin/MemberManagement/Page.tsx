@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useAuth } from '@/app/providers/auth';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { useModal } from '@/shared/hooks/useModal';
 import { MemberHeaderSection } from './components/MemberHeaderSection';
@@ -15,6 +16,7 @@ import type { AddMemberFormData } from './types/member';
 
 export const MemberManagementPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
+  const { user } = useAuth();
 
   // Modal states
   const addMemberModal = useModal();
@@ -70,7 +72,7 @@ export const MemberManagementPage = () => {
       <S.Container>
         <S.ContentWrapper>
           <MemberHeaderSection
-            clubName='인터엑스'
+            clubName={user?.clubName ?? ''}
             searchText={searchText}
             sortBy={sortBy}
             onSearchChange={setSearchText}

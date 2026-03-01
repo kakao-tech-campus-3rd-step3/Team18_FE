@@ -55,6 +55,9 @@ export const ClubDetailPage = () => {
           recruitStatus={club.recruitStatus}
           applicationNotice={club.applicationNotice}
           clubId={club.clubId}
+          isRegistered={club.isRegistered}
+          everyTimeUrl={club.everyTimeUrl}
+          googleFormUrl={club.googleFormUrl}
         />
       }
     />

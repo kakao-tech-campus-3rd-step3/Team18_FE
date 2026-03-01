@@ -1,22 +1,22 @@
 // UI용 역할 타입 (화면 표시용)
-export type MemberRole = '회장단' | '운영팀' | '동아리원';
+export type MemberRole = '회장' | '운영팀' | '동아리원';
 
 // API용 역할 타입
 export type ApiRole =
-  | 'CLUB_ADMIN' // 회장단
+  | 'CLUB_ADMIN' // 회장
   | 'CLUB_EXECUTIVE' // 운영팀
   | 'CLUB_MEMBER'; // 동아리원
 
 // API → UI 역할 매핑
 export const API_ROLE_TO_UI: Record<ApiRole, MemberRole> = {
-  CLUB_ADMIN: '회장단',
+  CLUB_ADMIN: '회장',
   CLUB_EXECUTIVE: '운영팀',
   CLUB_MEMBER: '동아리원',
 };
 
 // UI → API 역할 매핑
 export const UI_ROLE_TO_API: Record<MemberRole, ApiRole> = {
-  회장단: 'CLUB_ADMIN',
+  회장: 'CLUB_ADMIN',
   운영팀: 'CLUB_EXECUTIVE',
   동아리원: 'CLUB_MEMBER',
 };

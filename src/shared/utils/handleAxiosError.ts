@@ -1,6 +1,20 @@
-export const handleAxiosError = (error: unknown, defaultMessage?: string): never => {
+export const handleAxiosError = (
+  error: unknown,
+  defaultMessage?: string,
+  { useDetail = false }: { useDetail?: boolean } = {},
+): never => {
   if (error && typeof error === 'object' && 'response' in error) {
-    const axiosError = error as { response?: { data?: { message?: string } } };
+    const axiosError = error as {
+      response?: { data?: { message?: string; detail?: string } };
+    };
+
+    if (useDetail) {
+      const detail = axiosError.response?.data?.detail;
+      if (typeof detail === 'string') {
+        throw new Error(detail.split(': ').pop());
+      }
+    }
+
     const message = axiosError.response?.data?.message || defaultMessage;
     throw new Error(message);
   }
