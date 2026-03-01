@@ -65,17 +65,19 @@ export const useMemberMutations = (clubId: string) => {
         .response?.data;
 
       const detail = data?.detail;
+      const EXCEL_ERROR_DURATION = 3000;
+
       if (typeof detail === 'string') {
         if (detail.startsWith('[')) {
           const items = detail.match(/'([^']+)'/g)?.map((s) => s.slice(1, -1));
           if (items) {
-            items.forEach((item) => toast.error(item));
+            items.forEach((item) => toast.error(item, EXCEL_ERROR_DURATION));
             return;
           }
         }
+        toast.error(detail, EXCEL_ERROR_DURATION);
+        return;
       }
-      toast.error(detail);
-      return;
 
       toast.error(data?.message || '일괄 등록에 실패했습니다.');
     },
