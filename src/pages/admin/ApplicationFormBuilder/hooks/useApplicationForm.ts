@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { toast } from '@/shared/utils/toast';
 import { fetchApplicationForm, patchApplicationForm, postApplicationForm } from '../api/apply-form';
 import type { ApplicationForm } from '../types/fieldType';
 
@@ -22,6 +23,9 @@ export const usePostApplicationForm = (clubId: number) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['apply-form', clubId] });
     },
+    onError: (error: Error) => {
+      toast.error(error.message || '지원서 양식 저장에 실패했습니다.');
+    },
   });
   return { postForm, isSuccess };
 };
@@ -36,6 +40,9 @@ export const usePatchApplicationForm = (clubId: number) => {
     mutationFn: (form: Partial<ApplicationForm>) => patchApplicationForm({ clubId, form }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['apply-form', clubId] });
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || '지원서 양식 수정에 실패했습니다.');
     },
   });
 

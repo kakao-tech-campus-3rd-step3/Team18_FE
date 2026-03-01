@@ -1,4 +1,5 @@
 import { apiInstance } from '@/app/api/initInstance';
+import { handleAxiosError } from '@/shared/utils/handleAxiosError';
 import type { DetailApplication } from '@/pages/admin/ApplicationDetail/types/detailApplication';
 
 export const fetchDetailApplication = async (
@@ -10,8 +11,8 @@ export const fetchDetailApplication = async (
       `/clubs/${clubId}/applicants/${applicantId}/application`,
     );
     return data;
-  } catch {
-    throw new Error('지원서 상세 정보를 가져오지 못했습니다');
+  } catch (error: unknown) {
+    return handleAxiosError(error);
   }
 };
 
@@ -26,7 +27,7 @@ export const updateApplicationStatus = async (
       { status },
     );
     return data;
-  } catch {
-    throw new Error('지원서 상태를 업데이트하지 못했습니다');
+  } catch (error: unknown) {
+    return handleAxiosError(error);
   }
 };

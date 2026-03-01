@@ -1,4 +1,5 @@
 import { apiInstance } from '@/app/api/initInstance';
+import { handleAxiosError } from '@/shared/utils/handleAxiosError';
 import { STAGE_LABEL } from '../utils/labelMap';
 import type { ApplicationStage } from '@/pages/admin/Dashboard/types/dashboard';
 
@@ -7,14 +8,11 @@ export const sentMessage = async (
   message: string,
   stage: ApplicationStage,
 ): Promise<void> => {
-  const apiStage = STAGE_LABEL[stage];
-
   try {
-    await apiInstance.patch(`/clubs/${clubId}/club-apply-form/result?stage=${apiStage}`, {
+    await apiInstance.patch(`/clubs/${clubId}/club-apply-form/result?stage=${STAGE_LABEL[stage]}`, {
       message,
     });
-  } catch (error) {
-    console.error('메시지 전송에 실패하였습니다:', error);
-    throw error;
+  } catch (error: unknown) {
+    return handleAxiosError(error);
   }
 };

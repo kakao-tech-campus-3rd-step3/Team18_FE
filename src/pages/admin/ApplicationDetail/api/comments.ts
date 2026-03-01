@@ -1,4 +1,5 @@
 import { apiInstance } from '@/app/api/initInstance';
+import { handleAxiosError } from '@/shared/utils/handleAxiosError';
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
 
 export const fetchComments = async (applicationId: number): Promise<Comment[]> => {
@@ -17,13 +18,17 @@ export const createComment = async (
       rating,
     });
     return data;
-  } catch {
-    throw new Error('Failed to fetch comments');
+  } catch (error: unknown) {
+    return handleAxiosError(error);
   }
 };
 
 export const deleteComment = async (applicationId: number, commentId: number): Promise<void> => {
-  await apiInstance.delete(`/applications/${applicationId}/comments/${commentId}`);
+  try {
+    await apiInstance.delete(`/applications/${applicationId}/comments/${commentId}`);
+  } catch (error: unknown) {
+    return handleAxiosError(error);
+  }
 };
 
 export const updateComment = async (
@@ -41,7 +46,7 @@ export const updateComment = async (
       },
     );
     return data;
-  } catch {
-    throw new Error('Failed to create comment');
+  } catch (error: unknown) {
+    return handleAxiosError(error);
   }
 };

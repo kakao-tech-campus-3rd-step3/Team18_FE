@@ -10,7 +10,7 @@ export const fetchApplicationForm = async (clubId: number): Promise<ApplicationF
       `/clubs/${clubId}/apply`,
     );
     return response.data;
-  } catch (e) {
+  } catch (e: unknown) {
     return handleAxiosError(e);
   }
 };

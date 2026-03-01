@@ -17,6 +17,6 @@ export const updateClubImages = async (
     const { data } = await apiInstance.put(`/clubs/${clubId}/images`, formData);
     return data;
   } catch (e: unknown) {
-    handleAxiosError(e, '이미지 업데이트 실패');
+    return handleAxiosError(e, '이미지 업데이트 실패');
   }
 };
