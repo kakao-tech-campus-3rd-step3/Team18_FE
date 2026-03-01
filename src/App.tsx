@@ -35,6 +35,7 @@ const ToastContainer = () => (
   <Toaster
     position='top-center'
     richColors
+    expand
     toastOptions={{
       style: {
         borderRadius: theme.radius.md,
