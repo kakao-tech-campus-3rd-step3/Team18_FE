@@ -42,6 +42,7 @@ const ToastContainer = () => (
         fontWeight: theme.font.weight.bold,
         fontSize: theme.font.size.base,
         boxShadow: theme.shadow.md,
+        width: '380px',
       },
     }}
   />
