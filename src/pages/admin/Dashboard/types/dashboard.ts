@@ -19,7 +19,7 @@ export type ApplicationFilterOption = 'ALL' | ApplicationStatus;
 
 export type InterviewInfo = {
   interviewDate: string;
-  availableTimes: string[];
+  availableTime: string[];
 };
 
 export type ApplicantData = {
