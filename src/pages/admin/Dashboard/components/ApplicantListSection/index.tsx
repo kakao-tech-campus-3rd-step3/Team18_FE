@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
 import { Text } from '@/shared/components/Text';
 import { ApplicationStatusFilter } from './Filter/ApplicationFilter';
 import { ApplicantList } from './List/ApplicantList';
@@ -22,6 +23,8 @@ export const ApplicantListSection = ({ stage, setStage, clubId }: ApplicantListS
 
   const [filterOption, setFilterOption] = useState<ApplicationFilterOption>(optionType);
 
+  const { interviewRequired } = useApplicants(clubId, 'INTERVIEW');
+
   const handleFilterOptionChange = (option: ApplicationFilterOption) => {
     setFilterOption(option);
 
@@ -38,7 +41,7 @@ export const ApplicantListSection = ({ stage, setStage, clubId }: ApplicantListS
           <Text size='xl' weight='medium'>
             지원자 목록
           </Text>
-          <StageToggle value={stage} onChange={setStage} />
+          {interviewRequired && <StageToggle value={stage} onChange={setStage} />}
         </LeftSection>
         <ApplicationStatusFilter
           option={filterOption}
