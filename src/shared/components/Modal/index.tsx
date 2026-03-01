@@ -45,7 +45,11 @@ export const Modal = ({
   const modalWidthRef = useRef<number>(0);
   const titleId = useId();
   const descriptionId = useId();
-  const [position, setPosition] = useState<{ top: number; left: number } | null>(null);
+  const [position, setPosition] = useState<{
+    top: number;
+    left: number;
+    maxHeight?: number;
+  } | null>(null);
 
   // popover 위치 계산 함수
   const updatePosition = useCallback(
@@ -64,9 +68,14 @@ export const Modal = ({
           modalWidthRef.current = modalWidth;
         }
 
+        const VIEWPORT_BOTTOM_MARGIN = 36;
+        const topPos = anchorRect.top;
+        const availableHeight = window.innerHeight - topPos - VIEWPORT_BOTTOM_MARGIN;
+
         setPosition({
-          top: anchorRect.top,
+          top: topPos,
           left: anchorRect.left - modalWidth,
+          maxHeight: Math.max(0, availableHeight),
         });
       }
     },

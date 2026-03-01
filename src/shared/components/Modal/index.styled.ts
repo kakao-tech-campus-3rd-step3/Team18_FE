@@ -40,7 +40,7 @@ export const Overlay = styled.div<OverlayProps>(({ $variant = 'modal' }) => ({
 type ContentProps = {
   $size?: 'sm' | 'md' | 'lg';
   $variant?: 'modal' | 'popover';
-  $position?: { top: number; left: number };
+  $position?: { top: number; left: number; maxHeight?: number };
 };
 
 const sizeMap = {
@@ -60,7 +60,7 @@ export const Content = styled.div<ContentProps>(
     width: sizeMap[$size],
     maxWidth: '100%',
     maxHeight: $variant === 'popover' ? '80vh' : '90vh',
-    overflow: 'auto',
+    overflow: 'hidden',
     padding: $variant === 'popover' ? '1.5rem' : '2rem',
     animation: `${scaleIn} 0.2s ease-out`,
     display: 'flex',
@@ -79,6 +79,7 @@ export const Content = styled.div<ContentProps>(
         position: 'fixed',
         top: $position.top - 10,
         left: $position.left - 30,
+        maxHeight: $position.maxHeight != null ? `min(30rem, ${$position.maxHeight}px)` : '30rem',
       }),
 
     [`@media (max-width: ${theme.breakpoints.mobile})`]: {
@@ -130,6 +131,13 @@ export const Header = styled.div({
 
 export const Body = styled.div({
   flex: 1,
+  minHeight: 0,
   display: 'flex',
   flexDirection: 'column',
+  overflowY: 'auto',
+  overscrollBehavior: 'contain',
+  scrollbarWidth: 'none',
+  '&::-webkit-scrollbar': {
+    display: 'none',
+  },
 });
