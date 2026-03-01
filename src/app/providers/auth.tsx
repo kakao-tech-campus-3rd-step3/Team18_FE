@@ -89,7 +89,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
             break;
         }
         return response;
-      } catch (e) {
+      } catch (e: unknown) {
         if (e instanceof Error && e.name === 'CanceledError') throw e;
         return handleAxiosError(e, '로그인 중 오류가 발생했습니다.');
       }
@@ -103,7 +103,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       clearAuthData();
       const kakaoLogoutUrl = `https://kauth.kakao.com/oauth/logout?client_id=${REST_API_KEY}&logout_redirect_uri=${LOGOUT_REDIRECT_URI}`;
       window.location.href = kakaoLogoutUrl;
-    } catch (e) {
+    } catch (e: unknown) {
       handleAxiosError(e, '로그아웃 중 오류가 발생했습니다.');
     }
   }, []);

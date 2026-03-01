@@ -9,7 +9,7 @@ export const fetchApplicationForm = async (clubId: number): Promise<ApplicationF
       `/clubs/${clubId}/dashboard/apply-form`,
     );
     return response.data;
-  } catch (e) {
+  } catch (e: unknown) {
     return handleAxiosError(e);
   }
 };
@@ -27,7 +27,7 @@ export const postApplicationForm = async ({
       form,
     );
     return response.data;
-  } catch (e) {
+  } catch (e: unknown) {
     return handleAxiosError(e);
   }
 };
@@ -45,7 +45,7 @@ export const patchApplicationForm = async ({
       form,
     );
     return response.data;
-  } catch (e) {
+  } catch (e: unknown) {
     return handleAxiosError(e, '지원서 저장에 실패했습니다.', { useDetail: true });
   }
 };
