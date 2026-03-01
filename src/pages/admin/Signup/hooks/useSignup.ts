@@ -1,9 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
 import { ROUTE_PATH } from '@/app/constants/routerPath';
 import { useAuth } from '@/app/providers/auth';
-import { theme } from '@/app/styles/theme';
 import { getTemporaryToken, removeTemporaryToken } from '@/shared/auth/token';
+import { toast } from '@/shared/utils/toast';
 import type { SignupFormInputs } from '../type/signup';
 
 export const useSignup = () => {
@@ -21,21 +20,11 @@ export const useSignup = () => {
     try {
       completeSignup(signupFormValue, temporaryToken);
 
-      toast.success('회원가입 완료!', {
-        style: { backgroundColor: theme.colors.primary, color: 'white' },
-        duration: 1000,
-        onAutoClose: () => navigate(ROUTE_PATH.COMMON.MAIN),
-      });
+      toast.success('회원가입 완료!', () => navigate(ROUTE_PATH.COMMON.MAIN));
       removeTemporaryToken();
     } catch (e: unknown) {
       if (e instanceof Error) {
-        toast.error(e.message, {
-          duration: 1000,
-          style: {
-            backgroundColor: 'white',
-            color: theme.colors.error,
-          },
-        });
+        toast.error(e.message);
       }
     }
   };
