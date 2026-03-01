@@ -24,13 +24,15 @@ const ApplyButton = ({
   const isRecruiting = recruitStatus === '모집중';
 
   const applyButtonProps = {
-    children: isRecruiting ? '지원하기' : '모집 종료',
+    children: isRecruiting ? '지원하기' : recruitStatus,
     disabled: !isRecruiting,
   };
 
   const isValidUrl = (url: string) => /^https?:\/\//.test(url);
 
   const handleApplyClick = () => {
+    if (!isRecruiting) return;
+
     if (isRegistered) {
       navigate(to);
       return;
