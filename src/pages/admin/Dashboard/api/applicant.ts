@@ -26,6 +26,5 @@ export const updateInterviewTime = async (
     });
   } catch (error: unknown) {
     handleAxiosError(error);
-    throw error;
   }
 };
