@@ -65,13 +65,17 @@ export const useMemberMutations = (clubId: string) => {
         .response?.data;
 
       const detail = data?.detail;
-      if (typeof detail === 'string' && detail.startsWith('[')) {
-        const items = detail.match(/'([^']+)'/g)?.map((s) => s.slice(1, -1));
-        if (items) {
-          items.forEach((item) => toast.error(item));
-          return;
+      if (typeof detail === 'string') {
+        if (detail.startsWith('[')) {
+          const items = detail.match(/'([^']+)'/g)?.map((s) => s.slice(1, -1));
+          if (items) {
+            items.forEach((item) => toast.error(item));
+            return;
+          }
         }
       }
+      toast.error(detail);
+      return;
 
       toast.error(data?.message || '일괄 등록에 실패했습니다.');
     },
