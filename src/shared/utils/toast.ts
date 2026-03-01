@@ -1,7 +1,7 @@
 import { toast as sonnerToast } from 'sonner';
 import { theme } from '@/app/styles/theme';
 
-const TOAST_DURATION = 1000;
+const TOAST_DURATION = 3000;
 
 export const toast = {
   success: (message: string, onAutoClose?: () => void) => {
@@ -11,9 +11,9 @@ export const toast = {
       onAutoClose,
     });
   },
-  error: (message: string, duration: number = TOAST_DURATION) => {
+  error: (message: string) => {
     sonnerToast.error(message, {
-      duration,
+      duration: TOAST_DURATION,
       style: { backgroundColor: 'white', color: theme.colors.error },
     });
   },

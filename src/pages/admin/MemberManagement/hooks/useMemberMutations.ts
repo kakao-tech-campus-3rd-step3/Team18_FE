@@ -68,10 +68,9 @@ export const useMemberMutations = (clubId: string) => {
       ).response?.data;
 
       const detail = data?.detail;
-      const EXCEL_ERROR_DURATION = 3000;
 
       if (Array.isArray(detail)) {
-        detail.forEach((item) => toast.error(item, EXCEL_ERROR_DURATION));
+        detail.forEach((item) => toast.error(item));
         return;
       }
 
@@ -80,11 +79,11 @@ export const useMemberMutations = (clubId: string) => {
           const inner = detail.slice(1, -1);
           const items = inner.split(/,\s*(?=\d+행:|학번)/).map((s) => s.trim());
           if (items.length > 1) {
-            items.forEach((item) => toast.error(item, EXCEL_ERROR_DURATION));
+            items.forEach((item) => toast.error(item));
             return;
           }
         }
-        toast.error(detail, EXCEL_ERROR_DURATION);
+        toast.error(detail);
         return;
       }
 
