@@ -3,6 +3,7 @@ import {
   fetchDetailApplication,
   updateApplicationStatus,
 } from '@/pages/admin/ApplicationDetail/api/detailApplication';
+import { toast } from '@/shared/utils/toast';
 import type { DetailApplication } from '@/pages/admin/ApplicationDetail/types/detailApplication';
 import type { UseApiQueryResult } from '@/shared/types/useApiQueryResult';
 
@@ -41,6 +42,9 @@ export const useDetailApplications = (
       );
       queryClient.invalidateQueries({ queryKey: ['applicants', clubId] });
       queryClient.invalidateQueries({ queryKey: ['dashboardSummary', clubId] });
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || '지원서 상태 변경에 실패했습니다.');
     },
   });
 
