@@ -31,9 +31,12 @@ export function useKakaoLogin() {
         if (isAxiosError(e) && e.code === 'ERR_CANCELED') {
           return;
         }
-        const message = isAxiosError(e)
-          ? e.response?.data?.message || '로그인 중 오류가 발생했습니다.'
-          : '로그인 중 오류가 발생했습니다.';
+        let message = '로그인 중 오류가 발생했습니다.';
+        if (isAxiosError(e)) {
+          message = e.response?.data?.message || message;
+        } else if (e instanceof Error) {
+          message = e.message;
+        }
         toast.error(message);
       } finally {
         setIsLoading(false);
