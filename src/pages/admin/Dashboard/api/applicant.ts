@@ -10,8 +10,7 @@ export const fetchApplicants = async (
     const { data } = await apiInstance.get(`/clubs/${clubId}/dashboard/applicants?stage=${stage}`);
     return data;
   } catch (error: unknown) {
-    handleAxiosError(error);
-    throw error;
+    return handleAxiosError(error);
   }
 };
 
@@ -25,6 +24,6 @@ export const updateInterviewTime = async (
       interviewAt,
     });
   } catch (error: unknown) {
-    handleAxiosError(error);
+    return handleAxiosError(error);
   }
 };

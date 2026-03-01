@@ -13,6 +13,6 @@ export const sentMessage = async (
       message,
     });
   } catch (error: unknown) {
-    handleAxiosError(error);
+    return handleAxiosError(error);
   }
 };
