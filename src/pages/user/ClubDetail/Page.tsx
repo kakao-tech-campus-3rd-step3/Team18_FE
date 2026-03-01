@@ -35,7 +35,9 @@ export const ClubDetailPage = () => {
               club.category in engToKorCategory ? (club.category as ClubCategoryEng) : 'ALL'
             }
           />
-          <ClubActivityPhotosSection images={club.introductionImages} />
+          {club.introductionImages.length > 0 && (
+            <ClubActivityPhotosSection images={club.introductionImages} />
+          )}
           <ClubDescriptionSection
             introductionOverview={club.introductionOverview}
             introductionActivity={club.introductionActivity}
