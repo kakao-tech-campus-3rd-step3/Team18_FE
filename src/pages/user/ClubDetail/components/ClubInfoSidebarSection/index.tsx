@@ -36,7 +36,9 @@ export const ClubInfoSidebarSection = ({
   return (
     <SidebarContainer>
       <InfoItem>회장 이름: {presidentName}</InfoItem>
-      <InfoItem>연락처: {presidentPhoneNumber}</InfoItem>
+      {!/^010-0000/.test(presidentPhoneNumber) && (
+        <InfoItem>연락처: {presidentPhoneNumber}</InfoItem>
+      )}
       <InfoItem>동방 위치: {location}</InfoItem>
       <InfoItem>
         모집 기간: {formatDate(recruitStart)} ~ {formatDate(recruitEnd)}
