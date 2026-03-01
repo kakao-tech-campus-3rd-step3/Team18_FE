@@ -11,9 +11,9 @@ export const toast = {
       onAutoClose,
     });
   },
-  error: (message: string) => {
+  error: (message: string, duration: number = TOAST_DURATION) => {
     sonnerToast.error(message, {
-      duration: TOAST_DURATION,
+      duration,
       style: { backgroundColor: 'white', color: theme.colors.error },
     });
   },
