@@ -18,6 +18,7 @@ export const ClubInfoSidebarEditSection = () => {
     recruitEnd: string | null;
     regularMeetingInfo: string;
     applicationNotice: string;
+    instagramUrl: string;
   }>();
 
   const formValues = getValues();
@@ -38,7 +39,7 @@ export const ClubInfoSidebarEditSection = () => {
             {...register('presidentPhoneNumber', {
               pattern: {
                 value: /^\d{3}-\d{4}-\d{4}$/,
-                message: '’ - ’를 포함한 형식으로 입력해주세요.',
+                message: "'-'를 포함한 형식으로 입력해주세요.",
               },
               validate: (value) =>
                 !value ||
@@ -47,6 +48,18 @@ export const ClubInfoSidebarEditSection = () => {
             })}
             invalid={!!errors.presidentPhoneNumber}
             message={errors.presidentPhoneNumber?.message}
+          />
+        </S.InputWrapper>
+      </S.InfoItem>
+
+      <S.InfoItem>
+        <S.Label>인스타그램 링크</S.Label>
+        <S.InputWrapper>
+          <UnderlineInputField
+            {...register('instagramUrl')}
+            placeholder='https://www.instagram.com/...'
+            invalid={!!errors.instagramUrl}
+            message={errors.instagramUrl?.message}
           />
         </S.InputWrapper>
       </S.InfoItem>
