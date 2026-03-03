@@ -34,10 +34,7 @@ export const ClubListSection = ({
 
   const isDefaultSort = !searchText && categoryFilter === 'ALL' && !filterStatus;
   const sortedClubs = isDefaultSort
-    ? [...filteredClubs].sort((a, b) => {
-        if (a.isRegistered === b.isRegistered) return 0;
-        return a.isRegistered ? -1 : 1;
-      })
+    ? [...filteredClubs].sort((a, b) => Number(!!b.isRegistered) - Number(!!a.isRegistered))
     : filteredClubs;
 
   if (sortedClubs.length === 0)
