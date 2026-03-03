@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { toast } from 'sonner';
 import { useClubReviews } from '@/pages/user/ClubDetail/hooks/useClubReviews';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
@@ -13,16 +12,21 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
   const { reviews, loading, error, addReview } = useClubReviews(clubId);
   const [studentId, setStudentId] = useState('');
   const [content, setContent] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async () => {
-    const success = await addReview(studentId, content);
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
-    if (success) {
-      setContent('');
-      setStudentId('');
-      toast.success('후기가 등록되었습니다!', { duration: 2000 });
-    } else {
-      toast.error('후기 등록에 실패했습니다.', { duration: 2000 });
+    try {
+      const success = await addReview(studentId, content);
+
+      if (success) {
+        setContent('');
+        setStudentId('');
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -68,8 +72,8 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
           onChange={(e) => setContent(e.target.value)}
         />
         <S.ButtonWrapper>
-          <Button variant='outline' width='10rem' onClick={handleSubmit}>
-            후기 등록
+          <Button variant='outline' width='10rem' onClick={handleSubmit} disabled={isSubmitting}>
+            {isSubmitting ? '등록 중...' : '후기 등록'}
           </Button>
         </S.ButtonWrapper>
       </S.ReviewForm>
