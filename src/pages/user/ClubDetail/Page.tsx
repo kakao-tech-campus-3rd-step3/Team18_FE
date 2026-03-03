@@ -60,6 +60,7 @@ export const ClubDetailPage = () => {
           isRegistered={club.isRegistered}
           everyTimeUrl={club.everyTimeUrl}
           googleFormUrl={club.googleFormUrl}
+          instagramUrl={club.instagramUrl}
         />
       }
     />
