@@ -6,6 +6,7 @@ export type Club = {
   category: ClubCategoryEng;
   shortIntroduction: string;
   recruitStatus: RecruitStatus;
+  isRegistered?: boolean;
 };
 
 export const RECRUIT_STATUS_MAP = {

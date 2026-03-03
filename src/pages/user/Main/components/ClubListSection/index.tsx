@@ -31,13 +31,22 @@ export const ClubListSection = ({
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>{error.message}</div>;
 
-  if (filteredClubs.length === 0)
+  // 기본 정렬: 검색이나 필터가 적용되지 않았을 때 isRegistered가 true인 동아리를 상위에 표시
+  const isDefaultSort = !searchText && categoryFilter === 'ALL' && !filterStatus;
+  const sortedClubs = isDefaultSort
+    ? [...filteredClubs].sort((a, b) => {
+        if (a.isRegistered === b.isRegistered) return 0;
+        return a.isRegistered ? -1 : 1;
+      })
+    : filteredClubs;
+
+  if (sortedClubs.length === 0)
     return NoSearchResult(filteredClubs, searchText, categoryFilter, filterStatus);
 
   return (
     <S.ClubListContainer>
       <S.Grid>
-        {filteredClubs.map((club: Club) => (
+        {sortedClubs.map((club: Club) => (
           <S.ClubItem onClick={() => navigate(`/clubs/${club.id}`)} key={club.id}>
             <S.ClubNameText>{club.name}</S.ClubNameText>
             <S.ClubIntroduction>{club.shortIntroduction}</S.ClubIntroduction>
