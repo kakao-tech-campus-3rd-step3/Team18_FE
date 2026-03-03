@@ -7,7 +7,7 @@ export const searchClubs = (clubs: Club[], searchKeyword: string): Club[] => {
   return searchKeyword
     ? clubs.filter(
         (club) =>
-          club.name.replace(/\s+/g, '').includes(searchKeyword) ||
+          club.name.replace(/\s+/g, '').toLowerCase().includes(searchKeyword.toLowerCase()) ||
           club.category.includes(searchKeyword) ||
           club.shortIntroduction.replace(/\s+/g, '').includes(searchKeyword),
       )
