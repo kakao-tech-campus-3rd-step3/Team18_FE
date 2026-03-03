@@ -173,10 +173,8 @@ export const ApplicationForm = ({ questions }: Props) => {
                         value={option}
                         {...methods.register(`answers.${field.originalIndex}`, {
                           validate: (value) => {
-                            if (Array.isArray(value) && value.length > 0) {
-                              return true;
-                            }
-                            return '하나 이상 선택해야 합니다.';
+                            const hasValue = Array.isArray(value) ? value.length > 0 : !!value;
+                            return hasValue || '하나 이상 선택해야 합니다.';
                           },
                         })}
                       />
