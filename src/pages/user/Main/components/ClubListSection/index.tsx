@@ -1,3 +1,4 @@
+import { BsFillPatchCheckFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useClubFiltering } from '@/pages/user/Main/hooks/useClubFiltering.ts';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
@@ -48,7 +49,15 @@ export const ClubListSection = ({
       <S.Grid>
         {sortedClubs.map((club: Club) => (
           <S.ClubItem onClick={() => navigate(`/clubs/${club.id}`)} key={club.id}>
-            <S.ClubNameText>{club.name}</S.ClubNameText>
+            <S.ClubNameContainer>
+              <S.ClubNameText>{club.name}</S.ClubNameText>
+              {club.isRegistered && (
+                <S.VerifiedBadge>
+                  <BsFillPatchCheckFill size={14} />
+                  <S.VerifiedText>안심동아리</S.VerifiedText>
+                </S.VerifiedBadge>
+              )}
+            </S.ClubNameContainer>
             <S.ClubIntroduction>{club.shortIntroduction}</S.ClubIntroduction>
             <S.StatusContainer>
               <S.CategoryStatusBox>
