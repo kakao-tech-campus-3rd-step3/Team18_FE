@@ -24,7 +24,7 @@ export const VerifiedText = styled.span(({ theme }) => ({
   fontSize: '10px',
   fontWeight: theme.font.weight.medium,
   color: theme.colors.primary,
-}));
+})); //차후 추가 (등록뱃지 옆 문구)
 
 export const ClubIntroduction = styled.div(({ theme }) => ({
   fontSize: theme?.font?.size?.xs,

@@ -32,7 +32,6 @@ export const ClubListSection = ({
   if (isLoading) return <LoadingSpinner />;
   if (error) return <div>{error.message}</div>;
 
-  // 기본 정렬: 검색이나 필터가 적용되지 않았을 때 isRegistered가 true인 동아리를 상위에 표시
   const isDefaultSort = !searchText && categoryFilter === 'ALL' && !filterStatus;
   const sortedClubs = isDefaultSort
     ? [...filteredClubs].sort((a, b) => {
@@ -54,7 +53,6 @@ export const ClubListSection = ({
               {club.isRegistered && (
                 <S.VerifiedBadge>
                   <BsFillPatchCheckFill size={14} />
-                  <S.VerifiedText>안심동아리</S.VerifiedText>
                 </S.VerifiedBadge>
               )}
             </S.ClubNameContainer>
