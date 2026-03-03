@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Button } from '@/shared/components/Button';
 import { formatDate } from '@/shared/utils/dateUtils';
 import ApplyButton from './ApplyButton';
 import type { ClubDetail } from '@/pages/user/ClubDetail/types/clubDetail';
@@ -17,6 +18,7 @@ type ClubInfoSidebarSectionProps = Pick<
   | 'isRegistered'
   | 'everyTimeUrl'
   | 'googleFormUrl'
+  | 'instagramUrl'
 >;
 
 export const ClubInfoSidebarSection = ({
@@ -32,6 +34,7 @@ export const ClubInfoSidebarSection = ({
   isRegistered,
   everyTimeUrl,
   googleFormUrl,
+  instagramUrl,
 }: ClubInfoSidebarSectionProps) => {
   return (
     <SidebarContainer>
@@ -45,6 +48,11 @@ export const ClubInfoSidebarSection = ({
       </InfoItem>
       <InfoItem>정기 모임: {regularMeetingInfo}</InfoItem>
       <InfoItem>모집 상태: {recruitStatus}</InfoItem>
+      {instagramUrl && (
+        <Button variant='outline' onClick={() => window.open(instagramUrl, '_blank')} width='100%'>
+          공식 인스타그램 보기
+        </Button>
+      )}
       <ApplyButton
         recruitStatus={recruitStatus}
         to={`/clubs/${clubId}/apply`}

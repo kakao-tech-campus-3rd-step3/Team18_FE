@@ -282,6 +282,7 @@ export const mockClubDetail: ClubDetail[] = [
     isRegistered: true,
     everyTimeUrl: '',
     googleFormUrl: '',
+    instagramUrl: '',
   },
   {
     clubId: 2,
@@ -325,6 +326,7 @@ export const mockClubDetail: ClubDetail[] = [
     isRegistered: true,
     everyTimeUrl: '',
     googleFormUrl: '',
+    instagramUrl: '',
   },
   {
     clubId: 3,
@@ -368,6 +370,7 @@ export const mockClubDetail: ClubDetail[] = [
     isRegistered: true,
     everyTimeUrl: '',
     googleFormUrl: '',
+    instagramUrl: '',
   },
 ];
 

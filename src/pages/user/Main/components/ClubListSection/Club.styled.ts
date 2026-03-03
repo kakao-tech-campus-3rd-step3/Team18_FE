@@ -1,11 +1,30 @@
 import styled from '@emotion/styled';
 import type { RecruitStatus } from '@/pages/user/Main/types/club';
 
+export const ClubNameContainer = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '6px',
+});
+
 export const ClubNameText = styled.div(({ theme }) => ({
   fontSize: theme?.font?.size?.lg,
   fontWeight: theme.font.weight.bold,
   color: theme?.colors?.textPrimary,
 }));
+
+export const VerifiedBadge = styled.div(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '3px',
+  color: theme.colors.primary,
+}));
+
+export const VerifiedText = styled.span(({ theme }) => ({
+  fontSize: '10px',
+  fontWeight: theme.font.weight.medium,
+  color: theme.colors.primary,
+})); //차후 추가 (등록뱃지 옆 문구)
 
 export const ClubIntroduction = styled.div(({ theme }) => ({
   fontSize: theme?.font?.size?.xs,
