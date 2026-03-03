@@ -6,7 +6,6 @@ import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/Out
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { SectionHeading } from '@/shared/components/SectionHeading';
 import { Text } from '@/shared/components/Text';
-import { toast } from '@/shared/utils/toast';
 import * as S from './index.styled';
 
 export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
@@ -25,9 +24,6 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
       if (success) {
         setContent('');
         setStudentId('');
-        toast.success('후기가 등록되었습니다!');
-      } else {
-        toast.error('후기 등록에 실패했습니다.');
       }
     } finally {
       setIsSubmitting(false);
