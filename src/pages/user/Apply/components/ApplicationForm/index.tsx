@@ -198,10 +198,10 @@ export const ApplicationForm = ({ questions }: Props) => {
 
                 {field.questionType === QuestionTypes.TEXT && (
                   <OutlineTextareaField
-                    placeholder='1000자 미만으로 입력하세요.'
+                    placeholder='250자 미만으로 입력하세요.'
                     {...methods.register(`answers.${field.originalIndex}`, {
                       required: '내용을 입력하세요.',
-                      maxLength: { value: 1000, message: '최대 1000자까지 입력 가능합니다.' },
+                      maxLength: { value: 250, message: '최대 250자까지 입력 가능합니다.' },
                     })}
                   />
                 )}
