@@ -130,7 +130,8 @@ type DropdownIconProps = {
 };
 
 export const DropdownIcon = styled.span<DropdownIconProps>(({ theme, isOpen }) => ({
-  fontSize: '10px',
+  display: 'flex',
+  alignItems: 'center',
   transition: 'transform 0.2s ease',
   transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
   color: theme.colors.gray400,

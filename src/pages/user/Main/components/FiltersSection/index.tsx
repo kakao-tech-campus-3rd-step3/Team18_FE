@@ -64,7 +64,17 @@ export const FiltersSection = ({
         <S.DropdownWrapper>
           <S.DropdownButton onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
             {selectedRecruitStatus || '전체'}
-            <S.DropdownIcon isOpen={isDropdownOpen}>▼</S.DropdownIcon>
+            <S.DropdownIcon isOpen={isDropdownOpen}>
+              <svg width='10' height='10' viewBox='0 0 10 10' fill='none' aria-hidden='true'>
+                <path
+                  d='M1 3L5 7L9 3'
+                  stroke='currentColor'
+                  strokeWidth='1.5'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                />
+              </svg>
+            </S.DropdownIcon>
           </S.DropdownButton>
 
           {isDropdownOpen && (
