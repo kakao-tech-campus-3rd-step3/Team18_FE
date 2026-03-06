@@ -4,6 +4,8 @@ import { toast } from '@/shared/utils/toast';
 import type { RecruitStatus } from '@/pages/user/Main/types/club';
 
 type Props = {
+  clubId: number;
+  clubName: string;
   recruitStatus: RecruitStatus;
   to: string;
   width?: string;
@@ -13,6 +15,8 @@ type Props = {
 };
 
 const ApplyButton = ({
+  clubId,
+  clubName,
   recruitStatus,
   to,
   width,
@@ -32,6 +36,8 @@ const ApplyButton = ({
 
   const handleApplyClick = () => {
     if (!isRecruiting) return;
+
+    window.dataLayer?.push({ event: 'click_apply_button', club_id: clubId, club_name: clubName });
 
     if (isRegistered) {
       navigate(to);
