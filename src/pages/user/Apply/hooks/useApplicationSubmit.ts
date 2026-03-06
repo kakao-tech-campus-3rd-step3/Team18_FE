@@ -41,11 +41,7 @@ export const useApplicationSubmit = (
   };
 
   const handleSubmit = async (data: FormInputs) => {
-    window.dataLayer?.push({
-      event: 'click_submit_application',
-      club_id: clubId,
-      club_name: clubName,
-    });
+    window.dataLayer?.push({ event: 'club_submit_click', clubId, clubName });
 
     try {
       const result = await postApplicationForm(clubId, data, questionArray);

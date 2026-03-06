@@ -54,11 +54,7 @@ export const ClubInfoSidebarSection = ({
         <Button
           variant='outline'
           onClick={() => {
-            window.dataLayer?.push({
-              event: 'click_instagram_button',
-              club_id: clubId,
-              club_name: clubName,
-            });
+            window.dataLayer?.push({ event: 'club_instagram_click', clubId, clubName });
             window.open(instagramUrl, '_blank');
           }}
           width='100%'

@@ -37,7 +37,7 @@ const ApplyButton = ({
   const handleApplyClick = () => {
     if (!isRecruiting) return;
 
-    window.dataLayer?.push({ event: 'click_apply_button', club_id: clubId, club_name: clubName });
+    window.dataLayer?.push({ event: 'club_apply_click', clubId, clubName });
 
     if (isRegistered) {
       navigate(to);
