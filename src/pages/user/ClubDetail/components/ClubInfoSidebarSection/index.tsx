@@ -7,6 +7,7 @@ import type { ClubDetail } from '@/pages/user/ClubDetail/types/clubDetail';
 type ClubInfoSidebarSectionProps = Pick<
   ClubDetail,
   | 'clubId'
+  | 'clubName'
   | 'presidentName'
   | 'presidentPhoneNumber'
   | 'location'
@@ -23,6 +24,7 @@ type ClubInfoSidebarSectionProps = Pick<
 
 export const ClubInfoSidebarSection = ({
   clubId,
+  clubName,
   presidentName,
   presidentPhoneNumber,
   location,
@@ -49,11 +51,24 @@ export const ClubInfoSidebarSection = ({
       <InfoItem>정기 모임: {regularMeetingInfo}</InfoItem>
       <InfoItem>모집 상태: {recruitStatus}</InfoItem>
       {instagramUrl && (
-        <Button variant='outline' onClick={() => window.open(instagramUrl, '_blank')} width='100%'>
+        <Button
+          variant='outline'
+          onClick={() => {
+            window.dataLayer?.push({
+              event: 'click_instagram_button',
+              club_id: clubId,
+              club_name: clubName,
+            });
+            window.open(instagramUrl, '_blank');
+          }}
+          width='100%'
+        >
           공식 인스타그램 보기
         </Button>
       )}
       <ApplyButton
+        clubId={clubId}
+        clubName={clubName}
         recruitStatus={recruitStatus}
         to={`/clubs/${clubId}/apply`}
         width={'auto'}
