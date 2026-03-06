@@ -14,9 +14,10 @@ import type { FormInputs, Question } from '@/pages/user/Apply/type/apply';
 
 type Props = {
   questions: Question[];
+  clubName: string;
 };
 
-export const ApplicationForm = ({ questions }: Props) => {
+export const ApplicationForm = ({ questions, clubName }: Props) => {
   const [formKey, setFormKey] = useState(0);
 
   const { clubId } = useParams<{ clubId: string }>();
@@ -57,7 +58,12 @@ export const ApplicationForm = ({ questions }: Props) => {
   }, [clubIdNumber, reset]);
 
   const questionArray = questions.map((e) => e.question);
-  const { handleSubmit } = useApplicationSubmit(clubIdNumber, questionArray, clearFormAndStorage);
+  const { handleSubmit } = useApplicationSubmit(
+    clubIdNumber,
+    clubName,
+    questionArray,
+    clearFormAndStorage,
+  );
 
   const questionsWithIndex = questions.map((q, i) => ({ ...q, originalIndex: i }));
   const timeSlotQuestions = questionsWithIndex.filter(
