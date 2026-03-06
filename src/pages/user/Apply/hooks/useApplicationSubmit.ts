@@ -8,6 +8,7 @@ import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 
 export const useApplicationSubmit = (
   clubId: number,
+  clubName: string,
   questionArray: string[],
   onSuccess?: () => void,
 ) => {
@@ -40,6 +41,8 @@ export const useApplicationSubmit = (
   };
 
   const handleSubmit = async (data: FormInputs) => {
+    window.dataLayer?.push({ event: 'club_submit_click', clubId, clubName });
+
     try {
       const result = await postApplicationForm(clubId, data, questionArray);
 
