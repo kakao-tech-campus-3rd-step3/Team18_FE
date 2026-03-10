@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { ROUTE_PATH } from '@/app/constants/routerPath.ts';
 import { ClubGuard } from '@/app/providers/guards/ClubGuard';
@@ -9,6 +10,7 @@ import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
 import { MainPage } from '@/pages/user/Main/Page.tsx';
 import { NoticeDetailPage } from '@/pages/user/Notice/DetailPage';
 import { NoticeListPage } from '@/pages/user/Notice/Page';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
 import { ApplicationFormBuilderPage } from './admin/ApplicationFormBuilder/Page';
 import { KakaoCallback } from './admin/Login/KakaoCallback';
@@ -26,7 +28,11 @@ export const router = createBrowserRouter([
       { path: COMMON.MAIN, element: <MainPage /> },
       {
         path: COMMON.CLUB_DETAIL,
-        element: <ClubDetailPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <ClubDetailPage />
+          </Suspense>
+        ),
       },
       {
         path: COMMON.LOGIN,
