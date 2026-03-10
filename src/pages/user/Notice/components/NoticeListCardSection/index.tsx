@@ -1,25 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ROUTE_PATH } from '@/app/constants/routerPath';
-import { fetchNotices } from '@/pages/user/Notice/api/notices';
+import { useNotices } from '@/pages/user/Notice/hooks/useNotices';
 import * as S from './index.styled';
-import type { Notice } from '@/pages/user/Notice/types/notice';
 
 export const NoticeListCardSection = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [notices, setNotices] = useState<Notice[]>([]);
-  const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(Number(searchParams.get('page')) || 1);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetchNotices(currentPage);
-      setNotices(res.content);
-      setTotalPages(res.pageInfo.totalPages);
-    };
-    fetchData();
-  }, [currentPage]);
+  const { content: notices, pageInfo } = useNotices(currentPage);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -48,7 +38,7 @@ export const NoticeListCardSection = () => {
       </S.Container>
 
       <S.PaginationWrapper>
-        {Array.from({ length: totalPages }, (_, i) => (
+        {Array.from({ length: pageInfo.totalPages }, (_, i) => (
           <S.PageButton
             key={i}
             onClick={() => handlePageChange(i + 1)}
