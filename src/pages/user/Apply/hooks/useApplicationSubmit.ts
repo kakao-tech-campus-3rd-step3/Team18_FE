@@ -1,10 +1,9 @@
-import { isAxiosError } from 'axios';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
-import { theme } from '@/app/styles/theme';
+import { toast as sonnerToast } from 'sonner';
+import { toast } from '@/shared/utils/toast';
 import { overwriteApplicationForm, postApplicationForm } from '../api/apply';
 import type { FormInputs } from '../type/apply';
-import type { ErrorResponse } from '@/pages/admin/Signup/type/error';
 
 export const useApplicationSubmit = (
   clubId: number,
@@ -14,44 +13,28 @@ export const useApplicationSubmit = (
 ) => {
   const navigate = useNavigate();
 
-  const handleOverwriteConfirm = async (data: FormInputs) => {
-    try {
-      await overwriteApplicationForm(clubId, data, questionArray);
-
-      toast.success('제출 성공!', {
-        style: {
-          backgroundColor: theme.colors.primary,
-          color: 'white',
-        },
-        duration: 1000,
-        onAutoClose: () => {
-          navigate(`/clubs/${clubId}`);
-          onSuccess?.();
-        },
+  const { mutateAsync: overwrite } = useMutation({
+    mutationFn: (data: FormInputs) => overwriteApplicationForm(clubId, data, questionArray),
+    onSuccess: () => {
+      toast.success('제출 성공!', () => {
+        navigate(`/clubs/${clubId}`);
+        onSuccess?.();
       });
-    } catch {
-      toast.error('제출 실패!', {
-        duration: 1000,
-        style: {
-          backgroundColor: 'white',
-          color: theme.colors.error,
-        },
-      });
-    }
-  };
+    },
+    onError: () => {
+      toast.error('제출 실패!');
+    },
+  });
 
-  const handleSubmit = async (data: FormInputs) => {
-    window.dataLayer?.push({ event: 'club_submit_click', clubId, clubName });
-
-    try {
-      const result = await postApplicationForm(clubId, data, questionArray);
-
+  const { mutateAsync: submit } = useMutation({
+    mutationFn: (data: FormInputs) => postApplicationForm(clubId, data, questionArray),
+    onSuccess: (result, data) => {
       if (result.status === 202) {
-        toast('이미 제출된 지원서가 있습니다.', {
+        sonnerToast('이미 제출된 지원서가 있습니다.', {
           description: '덮어쓰시겠습니까?',
           action: {
             label: '예',
-            onClick: () => handleOverwriteConfirm(data),
+            onClick: () => overwrite(data),
           },
           cancel: {
             label: '아니오',
@@ -62,36 +45,19 @@ export const useApplicationSubmit = (
         return;
       }
 
-      toast.success('제출 성공!', {
-        style: {
-          backgroundColor: theme.colors.primary,
-          color: 'white',
-        },
-        duration: 1000,
-        onAutoClose: () => {
-          navigate(`/clubs/${clubId}`);
-          onSuccess?.();
-        },
+      toast.success('제출 성공!', () => {
+        navigate(`/clubs/${clubId}`);
+        onSuccess?.();
       });
-    } catch (e: unknown) {
-      if (isAxiosError<ErrorResponse>(e)) {
-        toast.error(e.response?.data.message, {
-          duration: 1000,
-          style: {
-            backgroundColor: 'white',
-            color: theme.colors.error,
-          },
-        });
-      } else {
-        toast.error('알 수 없는 오류가 발생했습니다.', {
-          duration: 1000,
-          style: {
-            backgroundColor: 'white',
-            color: theme.colors.error,
-          },
-        });
-      }
-    }
+    },
+    onError: (error: Error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const handleSubmit = (data: FormInputs) => {
+    window.dataLayer?.push({ event: 'club_submit_click', clubId, clubName });
+    submit(data);
   };
 
   return { handleSubmit };

@@ -22,9 +22,11 @@ export const postApplicationForm = async (
 ) => {
   const applicationDto = toApplyRequest(formData, questionArray);
 
-  const response = await apiInstance.post(`/clubs/${clubId}/apply-submit`, applicationDto);
-
-  return response;
+  try {
+    return await apiInstance.post(`/clubs/${clubId}/apply-submit`, applicationDto);
+  } catch (error: unknown) {
+    return handleAxiosError(error, '지원서 제출에 실패했습니다.');
+  }
 };
 
 export const overwriteApplicationForm = async (
@@ -35,13 +37,10 @@ export const overwriteApplicationForm = async (
   const applicationDto = toApplyRequest(formData, questionArray);
 
   try {
-    const overwriteResponse = await apiInstance.post(
-      `/clubs/${clubId}/apply-submit`,
-      applicationDto,
-      { params: { overwrite: true } },
-    );
-    return overwriteResponse.data;
+    return await apiInstance.post(`/clubs/${clubId}/apply-submit`, applicationDto, {
+      params: { overwrite: true },
+    });
   } catch (error: unknown) {
-    return handleAxiosError(error, '지원서 제출이 실패하였습니다.');
+    return handleAxiosError(error, '지원서 제출에 실패했습니다.');
   }
 };
