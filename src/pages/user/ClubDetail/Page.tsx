@@ -1,5 +1,7 @@
+import { Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { PageHeader } from '@/shared/components/PageHeader';
 import { engToKorCategory } from '@/shared/utils/formatting';
 import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
@@ -32,7 +34,9 @@ export const ClubDetailPage = () => {
             introductionActivity={club.introductionActivity}
             introductionIdeal={club.introductionIdeal}
           />
-          <ClubReviewsSection clubId={club.clubId} />
+          <Suspense fallback={<LoadingSpinner />}>
+            <ClubReviewsSection clubId={club.clubId} />
+          </Suspense>
         </>
       }
       right={<ClubInfoSidebarSection {...club} />}
