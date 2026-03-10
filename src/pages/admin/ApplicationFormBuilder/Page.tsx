@@ -1,12 +1,11 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import {
   useAdaptedApplicationForm,
   useAdaptedPatchApplicationForm,
 } from '@/pages/admin/ApplicationFormBuilder/hooks/useApplicationFormAdapter';
-import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { toast } from '@/shared/utils/toast';
 import { ApplicationInfoSection } from './components/ApplicationInfoSection';
 import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
@@ -16,24 +15,12 @@ import type { ApplicationFormData } from './types/fieldType';
 export const ApplicationFormBuilderPage = () => {
   const { clubId } = useParams();
   const [isEditMode, setIsEditMode] = useState(false);
-  const { data, isLoading, error } = useAdaptedApplicationForm(Number(clubId));
+  const { data } = useAdaptedApplicationForm(Number(clubId));
   const { adaptedPatchForm } = useAdaptedPatchApplicationForm(Number(clubId));
 
   const formHandler = useForm<ApplicationFormData>({
-    defaultValues: {
-      title: '',
-      description: '',
-      recruitDate: '',
-      interviewRequired: false,
-      formQuestions: [],
-    },
+    defaultValues: data,
   });
-
-  useEffect(() => {
-    if (data) {
-      formHandler.reset(data);
-    }
-  }, [data, formHandler]);
 
   const handleEdit = () => setIsEditMode(true);
   const handleCancel = () => {
@@ -85,9 +72,6 @@ export const ApplicationFormBuilderPage = () => {
       );
     }
   };
-
-  if (isLoading) return <LoadingSpinner />;
-  if (error) return <div>에러발생 : {error.message}</div>;
 
   return (
     <Layout>
