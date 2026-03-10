@@ -35,24 +35,7 @@ export const ClubDetailPage = () => {
           <ClubReviewsSection clubId={club.clubId} />
         </>
       }
-      right={
-        <ClubInfoSidebarSection
-          clubName={club.clubName}
-          presidentName={club.presidentName}
-          presidentPhoneNumber={club.presidentPhoneNumber}
-          location={club.location}
-          recruitStart={club.recruitStart}
-          recruitEnd={club.recruitEnd}
-          regularMeetingInfo={club.regularMeetingInfo}
-          recruitStatus={club.recruitStatus}
-          applicationNotice={club.applicationNotice}
-          clubId={club.clubId}
-          isRegistered={club.isRegistered}
-          everyTimeUrl={club.everyTimeUrl}
-          googleFormUrl={club.googleFormUrl}
-          instagramUrl={club.instagramUrl}
-        />
-      }
+      right={<ClubInfoSidebarSection {...club} />}
     />
   );
 };
