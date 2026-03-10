@@ -80,7 +80,11 @@ export const router = createBrowserRouter([
           },
           {
             path: ADMIN.CLUB_EDIT,
-            element: <ClubDetailEditPage />,
+            element: (
+              <Suspense fallback={<LoadingSpinner />}>
+                <ClubDetailEditPage />
+              </Suspense>
+            ),
           },
           {
             path: ADMIN.APPLICATION_FORM_BUILDER,
