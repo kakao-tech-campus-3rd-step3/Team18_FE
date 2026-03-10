@@ -1,18 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { fetchApplicationForm } from '@/pages/user/Apply/api/apply.ts';
-import type { ApplicationForm } from '../type/apply';
 
 export const useApplicationForm = (clubId: number) => {
-  const [clubApplicationForm, setClubApplicationForm] = useState<ApplicationForm | null>(null);
+  const { data } = useSuspenseQuery({
+    queryKey: ['applicationForm', clubId],
+    queryFn: () => fetchApplicationForm(clubId),
+  });
 
-  useEffect(() => {
-    if (!clubId) return;
-    const setFormStateAfterFetch = async () => {
-      const applicationForm = await fetchApplicationForm(clubId);
-      setClubApplicationForm(applicationForm);
-    };
-    setFormStateAfterFetch();
-  }, [clubId]);
-
-  return clubApplicationForm;
+  return data;
 };
