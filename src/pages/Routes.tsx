@@ -72,7 +72,11 @@ export const router = createBrowserRouter([
           },
           {
             path: ADMIN.APPLICATION_DETAIL,
-            element: <ApplicationDetailPage />,
+            element: (
+              <Suspense fallback={<LoadingSpinner />}>
+                <ApplicationDetailPage />
+              </Suspense>
+            ),
           },
           {
             path: ADMIN.CLUB_EDIT,
