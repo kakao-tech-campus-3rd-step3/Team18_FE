@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
+import { Suspense } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { NoticeDetailCardSection } from './components/NoticeDetailCardSection';
 
 export const NoticeDetailPage = () => {
@@ -18,7 +20,9 @@ export const NoticeDetailPage = () => {
 
   return (
     <Wrapper>
-      <NoticeDetailCardSection noticeId={noticeId} onBack={() => navigate(-1)} />
+      <Suspense fallback={<LoadingSpinner />}>
+        <NoticeDetailCardSection noticeId={noticeId} onBack={() => navigate(-1)} />
+      </Suspense>
     </Wrapper>
   );
 };
