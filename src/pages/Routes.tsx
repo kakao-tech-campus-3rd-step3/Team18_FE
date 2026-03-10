@@ -40,7 +40,11 @@ export const router = createBrowserRouter([
       },
       {
         path: USER.APPLICATION,
-        element: <ClubApplicationPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <ClubApplicationPage />
+          </Suspense>
+        ),
       },
       {
         path: COMMON.CALLBACK,
