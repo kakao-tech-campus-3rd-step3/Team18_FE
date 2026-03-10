@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useClubReviews } from '@/pages/user/ClubDetail/hooks/useClubReviews';
 import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
@@ -7,32 +7,23 @@ import { SectionHeading } from '@/shared/components/SectionHeading';
 import { Text } from '@/shared/components/Text';
 import * as S from './index.styled';
 
+type ReviewFormValues = {
+  studentId: string;
+  content: string;
+};
+
 export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
   const { reviews, apiError, addReview } = useClubReviews(clubId);
-  const [studentId, setStudentId] = useState('');
-  const [content, setContent] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ReviewFormValues>();
 
-  const isStudentIdInvalid = submitted && !studentId.trim();
-  const isContentInvalid = submitted && !content.trim();
-
-  const handleSubmit = async () => {
-    if (isSubmitting) return;
-    setSubmitted(true);
-    if (!studentId.trim() || !content.trim()) return;
-
-    setIsSubmitting(true);
-    try {
-      const success = await addReview(studentId, content);
-      if (success) {
-        setContent('');
-        setStudentId('');
-        setSubmitted(false);
-      }
-    } finally {
-      setIsSubmitting(false);
-    }
+  const onSubmit = async ({ studentId, content }: ReviewFormValues) => {
+    const success = await addReview(studentId, content);
+    if (success) reset();
   };
 
   return (
@@ -52,7 +43,7 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
         </S.ReviewItem>
       ))}
 
-      <S.ReviewForm>
+      <S.ReviewForm onSubmit={handleSubmit(onSubmit)}>
         <SectionHeading>
           후기 작성 <S.FormNote>* 수정 및 삭제가 불가능하니, 신중히 작성해 주세요!</S.FormNote>
         </SectionHeading>
@@ -64,22 +55,19 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
         )}
         <OutlineInputField
           placeholder='학번 입력 (학번은 노출되지 않습니다.)'
-          value={studentId}
-          invalid={isStudentIdInvalid}
-          message={isStudentIdInvalid ? '학번을 입력해 주세요.' : undefined}
-          onChange={(e) => setStudentId(e.target.value)}
+          invalid={!!errors.studentId}
+          message={errors.studentId?.message}
+          {...register('studentId', { required: '학번을 입력해 주세요.' })}
         />
-
         <OutlineTextareaField
           placeholder='후기를 입력하세요'
           rows={4}
-          value={content}
-          invalid={isContentInvalid}
-          message={isContentInvalid ? '후기를 입력해 주세요.' : undefined}
-          onChange={(e) => setContent(e.target.value)}
+          invalid={!!errors.content}
+          message={errors.content?.message}
+          {...register('content', { required: '후기를 입력해 주세요.' })}
         />
         <S.ButtonWrapper>
-          <Button variant='outline' width='10rem' onClick={handleSubmit} disabled={isSubmitting}>
+          <Button variant='outline' width='10rem' type='submit' disabled={isSubmitting}>
             {isSubmitting ? '등록 중...' : '후기 등록'}
           </Button>
         </S.ButtonWrapper>
