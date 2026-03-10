@@ -4,7 +4,6 @@ import { Button } from '@/shared/components/Button';
 import { OutlineInputField } from '@/shared/components/Form/InputField/OutlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { SectionHeading } from '@/shared/components/SectionHeading';
-import { Text } from '@/shared/components/Text';
 import * as S from './index.styled';
 
 type ReviewFormValues = {
@@ -13,7 +12,7 @@ type ReviewFormValues = {
 };
 
 export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
-  const { reviews, apiError, addReview } = useClubReviews(clubId);
+  const { reviews, addReview } = useClubReviews(clubId);
   const {
     register,
     handleSubmit,
@@ -48,11 +47,6 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
           후기 작성 <S.FormNote>* 수정 및 삭제가 불가능하니, 신중히 작성해 주세요!</S.FormNote>
         </SectionHeading>
 
-        {apiError && (
-          <Text size='xs' color={'red'}>
-            {apiError}
-          </Text>
-        )}
         <OutlineInputField
           placeholder='학번 입력 (학번은 노출되지 않습니다.)'
           invalid={!!errors.studentId}

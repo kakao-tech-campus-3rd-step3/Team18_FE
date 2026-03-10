@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
+import { toast } from '@/shared/utils/toast';
 import { fetchClubReviews, postClubReview } from '../api/clubReviews';
 
 export const useClubReviews = (clubId: number) => {
@@ -9,10 +10,13 @@ export const useClubReviews = (clubId: number) => {
     queryFn: () => fetchClubReviews(clubId),
   });
 
-  const { mutateAsync, error: mutationError } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: (body: { studentId: string; content: string }) => postClubReview(clubId, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['clubReviews', clubId] });
+    },
+    onError: (error: Error) => {
+      toast.error(error.message);
     },
   });
 
@@ -25,9 +29,5 @@ export const useClubReviews = (clubId: number) => {
     }
   };
 
-  return {
-    reviews,
-    addReview,
-    apiError: mutationError?.message ?? null,
-  };
+  return { reviews, addReview };
 };
