@@ -84,7 +84,11 @@ export const router = createBrowserRouter([
           },
           {
             path: ADMIN.APPLICATION_FORM_BUILDER,
-            element: <ApplicationFormBuilderPage />,
+            element: (
+              <Suspense fallback={<LoadingSpinner />}>
+                <ApplicationFormBuilderPage />
+              </Suspense>
+            ),
           },
           {
             path: ADMIN.MEMBER_MANAGEMENT,
