@@ -96,7 +96,11 @@ export const router = createBrowserRouter([
           },
           {
             path: ADMIN.MEMBER_MANAGEMENT,
-            element: <MemberManagementPage />,
+            element: (
+              <Suspense fallback={<LoadingSpinner />}>
+                <MemberManagementPage />
+              </Suspense>
+            ),
           },
         ],
       },
