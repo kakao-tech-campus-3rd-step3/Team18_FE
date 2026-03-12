@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicantListSection } from './components/ApplicantListSection';
 import { DashboardSummarySection } from './components/DashboardSummarySection';
 import { SentAcceptanceMessagesSection } from './components/SentAcceptanceMessagesSection';
@@ -13,8 +14,10 @@ export const DashboardPage = () => {
   return (
     <Layout>
       <Container>
-        <DashboardSummarySection />
-        <ApplicantListSection stage={stage} setStage={setStage} clubId={Number(clubId)} />
+        <Suspense fallback={<LoadingSpinner />}>
+          <DashboardSummarySection />
+          <ApplicantListSection stage={stage} setStage={setStage} clubId={Number(clubId)} />
+        </Suspense>
         <SentAcceptanceMessagesSection stage={stage} />
       </Container>
     </Layout>
