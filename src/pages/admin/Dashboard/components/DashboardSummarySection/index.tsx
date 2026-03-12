@@ -1,22 +1,13 @@
 import styled from '@emotion/styled';
 import { useParams } from 'react-router-dom';
 import { useDashboardSummary } from '@/pages/admin/Dashboard/hooks/useDashboardSummary';
-import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { formatDateWithoutYear } from '@/shared/utils/dateUtils';
 import { SummaryCard } from './SummaryCard';
 
 export const DashboardSummarySection = () => {
   const { clubId } = useParams();
 
-  const { data: summary, isLoading, error } = useDashboardSummary(Number(clubId));
-
-  if (isLoading) return <LoadingSpinner />;
-  if (error) {
-    return <Wrapper>Error: {error.message}</Wrapper>;
-  }
-  if (!summary) {
-    return null;
-  }
+  const summary = useDashboardSummary(Number(clubId));
 
   const recruitmentPeriod =
     summary.startDay && summary.endDay
