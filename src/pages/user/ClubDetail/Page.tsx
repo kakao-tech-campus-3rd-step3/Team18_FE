@@ -1,3 +1,4 @@
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -111,6 +112,17 @@ const NarrowOnly = styled.div(({ theme }) => ({
   },
 }));
 
+const slideUp = keyframes`
+  from {
+    transform: translateY(1.5rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
 const FixedBottomBar = styled.div(({ theme }) => ({
   display: 'none',
   [`@media (max-width: ${theme.breakpoints.web})`]: {
@@ -121,5 +133,6 @@ const FixedBottomBar = styled.div(({ theme }) => ({
     right: 0,
     padding: '0.75rem 1.3rem',
     zIndex: 100,
+    animation: `${slideUp} 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both`,
   },
 }));
