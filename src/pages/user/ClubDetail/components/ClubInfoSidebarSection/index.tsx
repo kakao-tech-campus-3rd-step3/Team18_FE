@@ -92,6 +92,13 @@ const SidebarContainer = styled.div(({ theme }) => ({
   flexDirection: 'column',
   gap: '1rem',
   border: '1px solid #E5E7ED',
+
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    border: 'none',
+    marginTop: 0,
+    borderRadius: 0,
+    padding: '0 0.5rem',
+  },
 }));
 
 const Notice = styled.div(({ theme }) => ({
