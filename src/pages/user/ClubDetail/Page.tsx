@@ -35,6 +35,8 @@ export const ClubDetailPage = () => {
             category={
               club.category in engToKorCategory ? (club.category as ClubCategoryEng) : 'ALL'
             }
+            instagramUrl={club.instagramUrl}
+            clubId={club.clubId}
           />
           <NarrowOnly>
             <ClubInfoSidebarSection
@@ -51,7 +53,6 @@ export const ClubDetailPage = () => {
               isRegistered={club.isRegistered}
               everyTimeUrl={club.everyTimeUrl}
               googleFormUrl={club.googleFormUrl}
-              instagramUrl={club.instagramUrl}
             />
           </NarrowOnly>
           {club.introductionImages.length > 0 && (

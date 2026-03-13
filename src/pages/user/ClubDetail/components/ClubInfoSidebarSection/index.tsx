@@ -22,8 +22,7 @@ type ClubInfoSidebarSectionProps = Pick<
   | 'isRegistered'
   | 'everyTimeUrl'
   | 'googleFormUrl'
-  | 'instagramUrl'
->;
+> & { instagramUrl?: string };
 
 export const ClubInfoSidebarSection = ({
   clubId,
