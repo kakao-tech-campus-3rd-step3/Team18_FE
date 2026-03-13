@@ -12,10 +12,12 @@ export const ClubInfoRow = ({ icon, label, value }: Props) => {
   return (
     <Row>
       <Icon>{icon}</Icon>
-      <Text size='sm' color='#757575'>
-        {label}
-      </Text>
-      {value}
+      <LabelCell>
+        <Text size='sm' color='#757575'>
+          {label}
+        </Text>
+      </LabelCell>
+      <ValueCell>{value}</ValueCell>
     </Row>
   );
 };
@@ -27,6 +29,16 @@ const Row = styled.div(({ theme }) => ({
   fontSize: theme.font.size.sm,
   color: theme.colors.textPrimary,
 }));
+
+const LabelCell = styled.span({
+  width: '5rem',
+  flexShrink: 0,
+  whiteSpace: 'nowrap',
+});
+
+const ValueCell = styled.span({
+  flex: 1,
+});
 
 const Icon = styled.span(({ theme }) => ({
   display: 'flex',
