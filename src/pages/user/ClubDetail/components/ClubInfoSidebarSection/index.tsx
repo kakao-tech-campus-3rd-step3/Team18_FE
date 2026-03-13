@@ -22,7 +22,7 @@ type ClubInfoSidebarSectionProps = Pick<
   | 'isRegistered'
   | 'everyTimeUrl'
   | 'googleFormUrl'
-> & { instagramUrl?: string };
+> & { instagramUrl?: string; showApplyButton?: boolean };
 
 export const ClubInfoSidebarSection = ({
   clubId,
@@ -39,6 +39,7 @@ export const ClubInfoSidebarSection = ({
   everyTimeUrl,
   googleFormUrl,
   instagramUrl,
+  showApplyButton = true,
 }: ClubInfoSidebarSectionProps) => {
   return (
     <SidebarContainer>
@@ -67,16 +68,18 @@ export const ClubInfoSidebarSection = ({
           공식 인스타그램 보기
         </Button>
       )}
-      <ApplyButton
-        clubId={clubId}
-        clubName={clubName}
-        recruitStatus={recruitStatus}
-        to={`/clubs/${clubId}/apply`}
-        width={'auto'}
-        isRegistered={isRegistered}
-        everyTimeUrl={everyTimeUrl}
-        googleFormUrl={googleFormUrl}
-      />
+      {showApplyButton && (
+        <ApplyButton
+          clubId={clubId}
+          clubName={clubName}
+          recruitStatus={recruitStatus}
+          to={`/clubs/${clubId}/apply`}
+          width={'auto'}
+          isRegistered={isRegistered}
+          everyTimeUrl={everyTimeUrl}
+          googleFormUrl={googleFormUrl}
+        />
+      )}
       <Notice>{applicationNotice}</Notice>
     </SidebarContainer>
   );
