@@ -38,6 +38,7 @@ const LabelCell = styled.span({
 
 const ValueCell = styled.span({
   flex: 1,
+  lineHeight: '1.2rem',
 });
 
 const Icon = styled.span(({ theme }) => ({
