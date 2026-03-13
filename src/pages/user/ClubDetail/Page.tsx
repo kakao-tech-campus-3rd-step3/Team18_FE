@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
@@ -35,6 +36,24 @@ export const ClubDetailPage = () => {
               club.category in engToKorCategory ? (club.category as ClubCategoryEng) : 'ALL'
             }
           />
+          <NarrowOnly>
+            <ClubInfoSidebarSection
+              clubName={club.clubName}
+              presidentName={club.presidentName}
+              presidentPhoneNumber={club.presidentPhoneNumber}
+              location={club.location}
+              recruitStart={club.recruitStart}
+              recruitEnd={club.recruitEnd}
+              regularMeetingInfo={club.regularMeetingInfo}
+              recruitStatus={club.recruitStatus}
+              applicationNotice={club.applicationNotice}
+              clubId={club.clubId}
+              isRegistered={club.isRegistered}
+              everyTimeUrl={club.everyTimeUrl}
+              googleFormUrl={club.googleFormUrl}
+              instagramUrl={club.instagramUrl}
+            />
+          </NarrowOnly>
           {club.introductionImages.length > 0 && (
             <ClubActivityPhotosSection images={club.introductionImages} />
           )}
@@ -67,3 +86,10 @@ export const ClubDetailPage = () => {
     />
   );
 };
+
+const NarrowOnly = styled.div(({ theme }) => ({
+  display: 'none',
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    display: 'block',
+  },
+}));

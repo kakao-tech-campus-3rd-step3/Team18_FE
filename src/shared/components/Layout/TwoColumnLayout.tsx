@@ -69,13 +69,6 @@ const ContentRight = styled.div(({ theme }) => ({
   top: '3rem',
 
   [`@media (max-width: ${theme.breakpoints.web})`]: {
-    flex: '1 1 100%',
-    margin: '1.5rem auto 0 auto',
-  },
-  [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-    flex: 'initial',
-    maxWidth: '100%',
-    margin: '1rem 0 0 0',
-    padding: '1rem',
+    display: 'none',
   },
 }));
