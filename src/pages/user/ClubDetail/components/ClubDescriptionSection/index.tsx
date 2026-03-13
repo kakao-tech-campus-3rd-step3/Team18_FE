@@ -42,4 +42,5 @@ const DescriptionText = styled.p(({ theme }) => ({
   paddingBottom: '1.5rem',
   color: theme.colors.textPrimary,
   margin: 0,
+  overflowWrap: 'break-word',
 }));
