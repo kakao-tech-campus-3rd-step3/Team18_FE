@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
+import { BiListUl } from 'react-icons/bi';
+import { PiCalendarDotsDuotone } from 'react-icons/pi';
 import { Button } from '@/shared/components/Button';
+import { Text } from '@/shared/components/Text';
 import { formatDate } from '@/shared/utils/dateUtils';
 import ApplyButton from './ApplyButton';
 import type { ClubDetail } from '@/pages/user/ClubDetail/types/clubDetail';
@@ -40,16 +43,62 @@ export const ClubInfoSidebarSection = ({
 }: ClubInfoSidebarSectionProps) => {
   return (
     <SidebarContainer>
-      <InfoItem>회장 이름: {presidentName}</InfoItem>
-      {!/^010-0000/.test(presidentPhoneNumber) && (
-        <InfoItem>연락처: {presidentPhoneNumber}</InfoItem>
-      )}
-      <InfoItem>동방 위치: {location}</InfoItem>
       <InfoItem>
-        모집 기간: {formatDate(recruitStart)} ~ {formatDate(recruitEnd)}
+        <InfoIcon>
+          <BiListUl />
+        </InfoIcon>
+        <Text size='sm' color='#757575'>
+          회장 이름
+        </Text>
+        {presidentName}
       </InfoItem>
-      <InfoItem>정기 모임: {regularMeetingInfo}</InfoItem>
-      <InfoItem>모집 상태: {recruitStatus}</InfoItem>
+      {!/^010-0000/.test(presidentPhoneNumber) && (
+        <InfoItem>
+          <InfoIcon>
+            <BiListUl />
+          </InfoIcon>
+          <Text size='sm' color='#757575'>
+            연락처
+          </Text>
+          {presidentPhoneNumber}
+        </InfoItem>
+      )}
+      <InfoItem>
+        <InfoIcon>
+          <BiListUl />
+        </InfoIcon>
+        <Text size='sm' color='#757575'>
+          동방 위치
+        </Text>
+        {location}
+      </InfoItem>
+      <InfoItem>
+        <InfoIcon>
+          <PiCalendarDotsDuotone />
+        </InfoIcon>
+        <Text size='sm' color='#757575'>
+          모집 기간
+        </Text>
+        {formatDate(recruitStart)} ~ {formatDate(recruitEnd)}
+      </InfoItem>
+      <InfoItem>
+        <InfoIcon>
+          <BiListUl />
+        </InfoIcon>
+        <Text size='sm' color='#757575'>
+          정기 모임
+        </Text>
+        {regularMeetingInfo}
+      </InfoItem>
+      <InfoItem>
+        <InfoIcon>
+          <BiListUl />
+        </InfoIcon>
+        <Text size='sm' color='#757575'>
+          모집 상태
+        </Text>
+        {recruitStatus}
+      </InfoItem>
       {instagramUrl && (
         <Button
           variant='outline'
@@ -89,8 +138,19 @@ const SidebarContainer = styled.div(({ theme }) => ({
 }));
 
 const InfoItem = styled.div(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.4rem',
   fontSize: theme.font.size.sm,
   color: theme.colors.textPrimary,
+}));
+
+const InfoIcon = styled.span(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  color: theme.colors.textSecondary,
+  flexShrink: 0,
+  fontSize: '1.2rem',
 }));
 
 const Notice = styled.div(({ theme }) => ({
