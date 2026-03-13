@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 import { BiListUl } from 'react-icons/bi';
 import { PiCalendarDotsDuotone } from 'react-icons/pi';
 import { Button } from '@/shared/components/Button';
-import { Text } from '@/shared/components/Text';
 import { formatDate } from '@/shared/utils/dateUtils';
 import ApplyButton from './ApplyButton';
+import { ClubInfoRow } from './ClubInfoRow';
 import type { ClubDetail } from '@/pages/user/ClubDetail/types/clubDetail';
 
 type ClubInfoSidebarSectionProps = Pick<
@@ -43,62 +43,19 @@ export const ClubInfoSidebarSection = ({
 }: ClubInfoSidebarSectionProps) => {
   return (
     <SidebarContainer>
-      <InfoItem>
-        <InfoIcon>
-          <BiListUl />
-        </InfoIcon>
-        <Text size='sm' color='#757575'>
-          회장 이름
-        </Text>
-        {presidentName}
-      </InfoItem>
+      <ClubInfoRow icon={<BiListUl />} label='회장 이름' value={presidentName} />
       {!/^010-0000/.test(presidentPhoneNumber) && (
-        <InfoItem>
-          <InfoIcon>
-            <BiListUl />
-          </InfoIcon>
-          <Text size='sm' color='#757575'>
-            연락처
-          </Text>
-          {presidentPhoneNumber}
-        </InfoItem>
+        <ClubInfoRow icon={<BiListUl />} label='연락처' value={presidentPhoneNumber} />
       )}
-      <InfoItem>
-        <InfoIcon>
-          <BiListUl />
-        </InfoIcon>
-        <Text size='sm' color='#757575'>
-          동방 위치
-        </Text>
-        {location}
-      </InfoItem>
-      <InfoItem>
-        <InfoIcon>
-          <PiCalendarDotsDuotone />
-        </InfoIcon>
-        <Text size='sm' color='#757575'>
-          모집 기간
-        </Text>
-        {formatDate(recruitStart)} ~ {formatDate(recruitEnd)}
-      </InfoItem>
-      <InfoItem>
-        <InfoIcon>
-          <BiListUl />
-        </InfoIcon>
-        <Text size='sm' color='#757575'>
-          정기 모임
-        </Text>
-        {regularMeetingInfo}
-      </InfoItem>
-      <InfoItem>
-        <InfoIcon>
-          <BiListUl />
-        </InfoIcon>
-        <Text size='sm' color='#757575'>
-          모집 상태
-        </Text>
-        {recruitStatus}
-      </InfoItem>
+      <ClubInfoRow icon={<BiListUl />} label='동방 위치' value={location} />
+      <ClubInfoRow
+        icon={<PiCalendarDotsDuotone />}
+        label='모집 기간'
+        value={`${formatDate(recruitStart)} ~ ${formatDate(recruitEnd)}`}
+      />
+      {regularMeetingInfo !== '-' && (
+        <ClubInfoRow icon={<BiListUl />} label='정기 모임' value={regularMeetingInfo} />
+      )}
       {instagramUrl && (
         <Button
           variant='outline'
@@ -135,22 +92,6 @@ const SidebarContainer = styled.div(({ theme }) => ({
   flexDirection: 'column',
   gap: '1rem',
   border: '1px solid #E5E7ED',
-}));
-
-const InfoItem = styled.div(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.4rem',
-  fontSize: theme.font.size.sm,
-  color: theme.colors.textPrimary,
-}));
-
-const InfoIcon = styled.span(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  color: theme.colors.textSecondary,
-  flexShrink: 0,
-  fontSize: '1.2rem',
 }));
 
 const Notice = styled.div(({ theme }) => ({
