@@ -101,6 +101,6 @@ const FixedBottomBar = styled.div(({ theme }) => ({
     right: 0,
     padding: '0.75rem 1.3rem',
     zIndex: 100,
-    animation: `${slideUp} 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both`,
+    animation: `${slideUp} 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both`,
   },
 }));
