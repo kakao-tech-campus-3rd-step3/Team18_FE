@@ -7,22 +7,7 @@ import ApplyButton from './ApplyButton';
 import { ClubInfoRow } from './ClubInfoRow';
 import type { ClubDetail } from '@/pages/user/ClubDetail/types/clubDetail';
 
-type ClubInfoSidebarSectionProps = Pick<
-  ClubDetail,
-  | 'clubId'
-  | 'clubName'
-  | 'presidentName'
-  | 'presidentPhoneNumber'
-  | 'location'
-  | 'recruitStart'
-  | 'recruitEnd'
-  | 'regularMeetingInfo'
-  | 'recruitStatus'
-  | 'applicationNotice'
-  | 'isRegistered'
-  | 'everyTimeUrl'
-  | 'googleFormUrl'
-> & { instagramUrl?: string; showApplyButton?: boolean };
+type ClubInfoSidebarSectionProps = ClubDetail & { showApplyButton?: boolean };
 
 export const ClubInfoSidebarSection = ({
   clubId,

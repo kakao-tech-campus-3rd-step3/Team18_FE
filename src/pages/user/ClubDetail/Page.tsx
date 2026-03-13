@@ -42,22 +42,7 @@ export const ClubDetailPage = () => {
               clubId={club.clubId}
             />
             <NarrowOnly>
-              <ClubInfoSidebarSection
-                clubName={club.clubName}
-                presidentName={club.presidentName}
-                presidentPhoneNumber={club.presidentPhoneNumber}
-                location={club.location}
-                recruitStart={club.recruitStart}
-                recruitEnd={club.recruitEnd}
-                regularMeetingInfo={club.regularMeetingInfo}
-                recruitStatus={club.recruitStatus}
-                applicationNotice={club.applicationNotice}
-                clubId={club.clubId}
-                isRegistered={club.isRegistered}
-                everyTimeUrl={club.everyTimeUrl}
-                googleFormUrl={club.googleFormUrl}
-                showApplyButton={false}
-              />
+              <ClubInfoSidebarSection {...club} instagramUrl={undefined} showApplyButton={false} />
             </NarrowOnly>
             {club.introductionImages.length > 0 && (
               <ClubActivityPhotosSection images={club.introductionImages} />
@@ -70,24 +55,7 @@ export const ClubDetailPage = () => {
             <ClubReviewsSection clubId={club.clubId} />
           </>
         }
-        right={
-          <ClubInfoSidebarSection
-            clubName={club.clubName}
-            presidentName={club.presidentName}
-            presidentPhoneNumber={club.presidentPhoneNumber}
-            location={club.location}
-            recruitStart={club.recruitStart}
-            recruitEnd={club.recruitEnd}
-            regularMeetingInfo={club.regularMeetingInfo}
-            recruitStatus={club.recruitStatus}
-            applicationNotice={club.applicationNotice}
-            clubId={club.clubId}
-            isRegistered={club.isRegistered}
-            everyTimeUrl={club.everyTimeUrl}
-            googleFormUrl={club.googleFormUrl}
-            instagramUrl={club.instagramUrl}
-          />
-        }
+        right={<ClubInfoSidebarSection {...club} />}
       />
       <FixedBottomBar>
         <ApplyButton
