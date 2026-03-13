@@ -106,4 +106,8 @@ const SidebarContainer = styled.div(({ theme }) => ({
 const Notice = styled.div(({ theme }) => ({
   fontSize: theme.font.size.xs,
   color: theme.colors.textSecondary,
+  [`@media (max-width: ${theme.breakpoints.web})`]: {
+    paddingBottom: '1.8rem',
+    borderBottom: '0.5px solid #E5E7ED',
+  },
 }));
