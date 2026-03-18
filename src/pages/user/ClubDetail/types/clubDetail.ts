@@ -23,5 +23,5 @@ export type ClubDetail = {
   isRegistered: boolean;
   everyTimeUrl: string;
   googleFormUrl: string;
-  instagramUrl: string;
+  instagramUrl?: string;
 };
