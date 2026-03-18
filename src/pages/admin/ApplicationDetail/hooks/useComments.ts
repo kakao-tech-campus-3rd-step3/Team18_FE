@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import {
   fetchComments,
   createComment,
@@ -7,21 +7,11 @@ import {
 } from '@/pages/admin/ApplicationDetail/api/comments';
 import { toast } from '@/shared/utils/toast';
 import type { Comment } from '@/pages/admin/ApplicationDetail/types/comments';
-import type { UseApiQueryResult } from '@/shared/types/useApiQueryResult';
 
-type CreateCommentPayload = Pick<Comment, 'content' | 'rating'>;
-type UpdateCommentPayload = Pick<Comment, 'commentId' | 'content' | 'rating'>;
-
-type UseCommentsResult = UseApiQueryResult<Comment[]> & {
-  createComment: (comment: CreateCommentPayload) => void;
-  deleteComment: (commentId: number) => void;
-  updateComment: (comment: UpdateCommentPayload) => void;
-};
-
-export const useComments = (applicationId: number): UseCommentsResult => {
+export const useComments = (applicationId: number) => {
   const queryClient = useQueryClient();
 
-  const { data, isLoading, error } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ['comments', applicationId],
     queryFn: () => fetchComments(applicationId),
   });
@@ -83,9 +73,7 @@ export const useComments = (applicationId: number): UseCommentsResult => {
   });
 
   return {
-    data: data || [],
-    isLoading,
-    error,
+    data,
     createComment: createCommentMutation,
     deleteComment: deleteCommentMutation,
     updateComment: updateCommentMutation,

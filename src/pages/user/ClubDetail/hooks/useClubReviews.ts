@@ -1,54 +1,33 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
+import { toast } from '@/shared/utils/toast';
 import { fetchClubReviews, postClubReview } from '../api/clubReviews';
-import type { ClubReview } from '@/pages/user/ClubDetail/types/review';
 
 export const useClubReviews = (clubId: number) => {
-  const [reviews, setReviews] = useState<ClubReview[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
-  const loadReviews = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await fetchClubReviews(clubId);
-      setReviews(data);
-    } catch {
-      setError('후기를 불러오지 못했습니다.');
-    } finally {
-      setLoading(false);
-    }
-  }, [clubId]);
+  const { data: reviews } = useSuspenseQuery({
+    queryKey: ['clubReviews', clubId],
+    queryFn: () => fetchClubReviews(clubId),
+  });
 
-  const addReview = useCallback(
-    async (studentId: string, content: string) => {
-      if (!studentId.trim() || !content.trim()) {
-        setError('학번과 내용을 입력해 주세요.');
-        return false;
-      }
-
-      try {
-        setError(null);
-        const newReview = await postClubReview(clubId, { studentId, content });
-        setReviews((prev) => [newReview, ...prev]);
-        return true;
-      } catch {
-        setError('학번이 일치하지 않습니다.');
-        return false;
-      }
+  const { mutateAsync } = useMutation({
+    mutationFn: (body: { studentId: string; content: string }) => postClubReview(clubId, body),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['clubReviews', clubId] });
     },
-    [clubId],
-  );
+    onError: (error: Error) => {
+      toast.error(error.message);
+    },
+  });
 
-  useEffect(() => {
-    loadReviews();
-  }, [loadReviews]);
-
-  return {
-    reviews,
-    loading,
-    error,
-    addReview,
-    reload: loadReviews,
+  const addReview = async (studentId: string, content: string): Promise<boolean> => {
+    try {
+      await mutateAsync({ studentId, content });
+      return true;
+    } catch {
+      return false;
+    }
   };
+
+  return { reviews, addReview };
 };

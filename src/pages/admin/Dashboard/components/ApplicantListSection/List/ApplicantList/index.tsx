@@ -2,7 +2,6 @@ import { useCallback, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
 import { STAGE_LABEL } from '@/pages/admin/Dashboard/utils/labelMap';
-import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicantListItem } from '../ApplicantListItem';
 import * as S from './index.styled';
 import type {
@@ -24,8 +23,6 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
 
   const {
     data: applicants,
-    isLoading,
-    error,
     interviewSchedule,
     interviewRequired,
   } = useApplicants(Number(clubId), apiStage, filterOption);
@@ -43,9 +40,6 @@ export const ApplicantList = ({ filterOption, stage }: Props) => {
     },
     [clubId, navigate],
   );
-
-  if (isLoading) return <LoadingSpinner />;
-  if (error) return <div>에러발생 : {error.message}</div>;
 
   return (
     <S.Container>

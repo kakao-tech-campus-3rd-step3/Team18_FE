@@ -1,36 +1,21 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { fetchApplicants } from '@/pages/admin/Dashboard/api/applicant';
 import type {
-  ApplicantData,
   ApplicantsApiResponse,
   ApplicationFilterOption,
-  ApplicantCounts,
-  InterviewSchedule,
 } from '@/pages/admin/Dashboard/types/dashboard';
-import type { UseApiQueryResult } from '@/shared/types/useApiQueryResult';
-
-export interface ExtendedUseApiQueryResult<T> extends UseApiQueryResult<T> {
-  counts: ApplicantCounts;
-  interviewRequired: boolean;
-  interviewSchedule: InterviewSchedule[];
-}
 
 export const useApplicants = (
   clubId: number,
   stage: 'INTERVIEW' | 'FINAL',
   status?: ApplicationFilterOption,
-): ExtendedUseApiQueryResult<ApplicantData[]> => {
-  const {
-    data: responseData,
-    isLoading,
-    error,
-  } = useQuery<ApplicantsApiResponse>({
+) => {
+  const { data: responseData } = useSuspenseQuery<ApplicantsApiResponse>({
     queryKey: ['applicants', clubId, stage],
     queryFn: () => fetchApplicants(clubId, stage),
     staleTime: 1000 * 60 * 5,
     refetchInterval: 30000,
-    enabled: !!stage,
   });
 
   const applicants = useMemo(() => responseData?.applicants || [], [responseData?.applicants]);
@@ -60,8 +45,6 @@ export const useApplicants = (
 
   return {
     data: filteredData,
-    isLoading,
-    error,
     counts,
     interviewRequired: responseData?.interviewRequired ?? false,
     interviewSchedule: responseData?.interviewSchedule || [],

@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { ROUTE_PATH } from '@/app/constants/routerPath.ts';
 import { ClubGuard } from '@/app/providers/guards/ClubGuard';
@@ -9,6 +10,7 @@ import { ClubDetailPage } from '@/pages/user/ClubDetail/Page';
 import { MainPage } from '@/pages/user/Main/Page.tsx';
 import { NoticeDetailPage } from '@/pages/user/Notice/DetailPage';
 import { NoticeListPage } from '@/pages/user/Notice/Page';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { ApplicationDetailPage } from './admin/ApplicationDetail/Page';
 import { ApplicationFormBuilderPage } from './admin/ApplicationFormBuilder/Page';
 import { KakaoCallback } from './admin/Login/KakaoCallback';
@@ -26,7 +28,11 @@ export const router = createBrowserRouter([
       { path: COMMON.MAIN, element: <MainPage /> },
       {
         path: COMMON.CLUB_DETAIL,
-        element: <ClubDetailPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <ClubDetailPage />
+          </Suspense>
+        ),
       },
       {
         path: COMMON.LOGIN,
@@ -34,7 +40,11 @@ export const router = createBrowserRouter([
       },
       {
         path: USER.APPLICATION,
-        element: <ClubApplicationPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <ClubApplicationPage />
+          </Suspense>
+        ),
       },
       {
         path: COMMON.CALLBACK,
@@ -62,19 +72,35 @@ export const router = createBrowserRouter([
           },
           {
             path: ADMIN.APPLICATION_DETAIL,
-            element: <ApplicationDetailPage />,
+            element: (
+              <Suspense fallback={<LoadingSpinner />}>
+                <ApplicationDetailPage />
+              </Suspense>
+            ),
           },
           {
             path: ADMIN.CLUB_EDIT,
-            element: <ClubDetailEditPage />,
+            element: (
+              <Suspense fallback={<LoadingSpinner />}>
+                <ClubDetailEditPage />
+              </Suspense>
+            ),
           },
           {
             path: ADMIN.APPLICATION_FORM_BUILDER,
-            element: <ApplicationFormBuilderPage />,
+            element: (
+              <Suspense fallback={<LoadingSpinner />}>
+                <ApplicationFormBuilderPage />
+              </Suspense>
+            ),
           },
           {
             path: ADMIN.MEMBER_MANAGEMENT,
-            element: <MemberManagementPage />,
+            element: (
+              <Suspense fallback={<LoadingSpinner />}>
+                <MemberManagementPage />
+              </Suspense>
+            ),
           },
         ],
       },
