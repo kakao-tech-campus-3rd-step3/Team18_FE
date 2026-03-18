@@ -1,15 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { fetchDashboardSummary } from '@/pages/admin/Dashboard/api/dashboard';
-import type { DashboardSummary } from '@/pages/admin/Dashboard/types/dashboard';
-import type { UseApiQueryResult } from '@/shared/types/useApiQueryResult';
 
-export const useDashboardSummary = (clubId: number): UseApiQueryResult<DashboardSummary | null> => {
-  const { data, isLoading, error } = useQuery<DashboardSummary | undefined>({
+export const useDashboardSummary = (clubId: number) => {
+  const { data } = useSuspenseQuery({
     queryKey: ['dashboardSummary', clubId],
     queryFn: () => fetchDashboardSummary(clubId),
     staleTime: 1000 * 60 * 5,
     refetchInterval: 30000,
   });
 
-  return { data: data || null, isLoading, error };
+  return data;
 };

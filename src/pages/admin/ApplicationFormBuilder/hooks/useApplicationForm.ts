@@ -1,19 +1,15 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { toast } from '@/shared/utils/toast';
 import { fetchApplicationForm, patchApplicationForm, postApplicationForm } from '../api/apply-form';
 import type { ApplicationForm } from '../types/fieldType';
 
 export const useApplicationForm = (clubId: number) => {
-  const { data, isLoading, error } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ['apply-form', clubId],
     queryFn: () => fetchApplicationForm(clubId),
   });
 
-  return {
-    data: data || undefined,
-    isLoading,
-    error,
-  };
+  return { data };
 };
 
 export const usePostApplicationForm = (clubId: number) => {

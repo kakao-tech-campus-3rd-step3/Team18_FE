@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
-import { useCallback, useState } from 'react';
+import { Suspense, useCallback, useState } from 'react';
 import { BannerSection } from '@/pages/user/Main/components/BannerSection';
 import { ClubListSection } from '@/pages/user/Main/components/ClubListSection';
 import { FiltersSection } from '@/pages/user/Main/components/FiltersSection';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import type { RecruitStatus } from './types/club';
 import type { ClubCategoryEng } from '@/shared/types/club';
 
@@ -28,11 +29,13 @@ export const MainPage = () => {
         onSelectCategory={handleCategoryFilter}
         onSelectStatus={handleRecruitStatusFilter}
       />
-      <ClubListSection
-        categoryFilter={categoryFilter}
-        searchText={searchText}
-        recruitStatus={recruitStatus}
-      />
+      <Suspense fallback={<LoadingSpinner />}>
+        <ClubListSection
+          categoryFilter={categoryFilter}
+          searchText={searchText}
+          recruitStatus={recruitStatus}
+        />
+      </Suspense>
     </Container>
   );
 };

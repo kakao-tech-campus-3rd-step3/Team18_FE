@@ -1,29 +1,20 @@
-import { useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { PageHeader } from '@/shared/components/PageHeader';
 import { engToKorCategory } from '@/shared/utils/formatting';
-import { fetchClubDetail } from './api/clubDetail';
 import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
 import { ClubDescriptionSection } from './components/ClubDescriptionSection';
 import { ClubInfoSidebarSection } from './components/ClubInfoSidebarSection';
 import { ClubReviewsSection } from './components/ClubReviewsSection';
+import { useClubDetail } from './hooks/useClubDetail';
 
-import type { ClubDetail } from './types/clubDetail';
 import type { ClubCategoryEng } from '@/shared/types/club';
 
 export const ClubDetailPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
-  const clubIdNumber = Number(clubId);
-  const [club, setClub] = useState<ClubDetail | null>(null);
-
-  useEffect(() => {
-    if (!clubIdNumber) return;
-    fetchClubDetail(clubIdNumber).then(setClub).catch(console.error);
-  }, [clubIdNumber]);
-
-  if (!club) return <LoadingSpinner />;
+  const club = useClubDetail(Number(clubId));
 
   return (
     <TwoColumnLayout
@@ -43,27 +34,12 @@ export const ClubDetailPage = () => {
             introductionActivity={club.introductionActivity}
             introductionIdeal={club.introductionIdeal}
           />
-          <ClubReviewsSection clubId={club.clubId} />
+          <Suspense fallback={<LoadingSpinner />}>
+            <ClubReviewsSection clubId={club.clubId} />
+          </Suspense>
         </>
       }
-      right={
-        <ClubInfoSidebarSection
-          clubName={club.clubName}
-          presidentName={club.presidentName}
-          presidentPhoneNumber={club.presidentPhoneNumber}
-          location={club.location}
-          recruitStart={club.recruitStart}
-          recruitEnd={club.recruitEnd}
-          regularMeetingInfo={club.regularMeetingInfo}
-          recruitStatus={club.recruitStatus}
-          applicationNotice={club.applicationNotice}
-          clubId={club.clubId}
-          isRegistered={club.isRegistered}
-          everyTimeUrl={club.everyTimeUrl}
-          googleFormUrl={club.googleFormUrl}
-          instagramUrl={club.instagramUrl}
-        />
-      }
+      right={<ClubInfoSidebarSection {...club} />}
     />
   );
 };

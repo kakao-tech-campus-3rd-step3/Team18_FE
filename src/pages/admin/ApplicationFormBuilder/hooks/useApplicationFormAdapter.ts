@@ -7,11 +7,9 @@ import {
 import type { ApplicationForm, ApplicationFormData } from '../types/fieldType';
 
 export const useAdaptedApplicationForm = (clubId: number) => {
-  const { data: apiData, isLoading, error } = useApplicationForm(clubId);
+  const { data: apiData } = useApplicationForm(clubId);
 
   const adaptedData = useMemo(() => {
-    if (!apiData) return undefined;
-
     return {
       ...apiData,
       formQuestions: apiData.formQuestions.map((question) => {
@@ -33,7 +31,7 @@ export const useAdaptedApplicationForm = (clubId: number) => {
     };
   }, [apiData]);
 
-  return { data: adaptedData, isLoading, error };
+  return { data: adaptedData };
 };
 
 export const useAdaptedPatchApplicationForm = (clubId: number) => {

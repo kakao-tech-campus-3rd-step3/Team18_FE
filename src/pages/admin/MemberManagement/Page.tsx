@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '@/app/providers/auth';
-import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { useModal } from '@/shared/hooks/useModal';
 import { MemberHeaderSection } from './components/MemberHeaderSection';
 import { MemberTableSection } from './components/MemberTableSection';
@@ -24,7 +23,7 @@ export const MemberManagementPage = () => {
   const deleteModal = useModal();
   const [deleteTarget, setDeleteTarget] = useState<{ id: number; name: string } | null>(null);
 
-  const { data: members, isLoading, error } = useMembers(clubId || '');
+  const members = useMembers(clubId || '');
 
   const { searchText, sortBy, filteredMembers, setSearchText, setSortBy } =
     useMemberFilter(members);
@@ -63,9 +62,6 @@ export const MemberManagementPage = () => {
   const handleSubmitBulkUpload = (file: File) => {
     submitBulkUpload(file);
   };
-
-  if (isLoading) return <LoadingSpinner />;
-  if (error) return <div>에러 발생</div>;
 
   return (
     <>

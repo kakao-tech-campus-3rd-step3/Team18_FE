@@ -1,10 +1,8 @@
 import styled from '@emotion/styled';
-import { useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/shared/components/Button';
 import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
-import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { PageHeader } from '@/shared/components/PageHeader';
 import { engToKorCategory } from '@/shared/utils/formatting';
 import { toast } from '@/shared/utils/toast';
@@ -21,21 +19,17 @@ import type { ClubCategoryEng } from '@/shared/types/club';
 
 export const ClubDetailEditPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
-  const { data: club, isLoading, error } = useClubDetailEdit(clubId ?? '');
+  const club = useClubDetailEdit(clubId ?? '');
 
   const methods = useForm<ClubDetailUpdatePayload>({
     mode: 'onTouched',
+    defaultValues: club,
   });
 
   const {
     handleSubmit,
-    reset,
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = methods;
-
-  useEffect(() => {
-    if (club) reset(club);
-  }, [club, reset]);
 
   const navigate = useNavigate();
 
@@ -50,9 +44,6 @@ export const ClubDetailEditPage = () => {
         toast.error(error.message || '수정 실패!');
       });
   };
-  if (isLoading) return <LoadingSpinner />;
-  if (error) return <div>에러발생 : {error.message}</div>;
-  if (!club) return null;
 
   return (
     <FormProvider {...methods}>

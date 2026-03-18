@@ -1,25 +1,17 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import {
   fetchDetailApplication,
   updateApplicationStatus,
 } from '@/pages/admin/ApplicationDetail/api/detailApplication';
 import { toast } from '@/shared/utils/toast';
 import type { DetailApplication } from '@/pages/admin/ApplicationDetail/types/detailApplication';
-import type { UseApiQueryResult } from '@/shared/types/useApiQueryResult';
 
-type UseDetailApplicationResult = UseApiQueryResult<DetailApplication | null> & {
-  updateStatus: (status: DetailApplication['status']) => void;
-};
-
-export const useDetailApplications = (
-  clubId: number,
-  applicantId: number,
-): UseDetailApplicationResult => {
+export const useDetailApplications = (clubId: number, applicantId: number) => {
   const queryClient = useQueryClient();
 
-  const { data, isLoading, error } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ['detailApplications', clubId, applicantId],
-    queryFn: () => fetchDetailApplication(clubId!, applicantId!),
+    queryFn: () => fetchDetailApplication(clubId, applicantId),
     staleTime: 1000 * 60 * 5,
   });
 
@@ -48,10 +40,5 @@ export const useDetailApplications = (
     },
   });
 
-  return {
-    data: data || null,
-    isLoading,
-    error,
-    updateStatus,
-  };
+  return { data, updateStatus };
 };

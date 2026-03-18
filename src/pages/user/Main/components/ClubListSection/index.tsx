@@ -1,7 +1,6 @@
 import { BsFillPatchCheckFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useClubFiltering } from '@/pages/user/Main/hooks/useClubFiltering.ts';
-import { LoadingSpinner } from '@/shared/components/LoadingSpinner.tsx';
 import { engToKorCategory } from '@/shared/utils/formatting.ts';
 import * as S from './Club.styled.ts';
 import NoSearchResult from './NoSearchResult.tsx';
@@ -22,15 +21,7 @@ export const ClubListSection = ({
   const navigate = useNavigate();
 
   const filterStatus = recruitStatus === '전체' ? undefined : recruitStatus;
-
-  const {
-    data: filteredClubs,
-    isLoading,
-    error,
-  } = useClubFiltering(categoryFilter, searchText, filterStatus);
-
-  if (isLoading) return <LoadingSpinner />;
-  if (error) return <div>{error.message}</div>;
+  const filteredClubs = useClubFiltering(categoryFilter, searchText, filterStatus);
 
   const isDefaultSort = !searchText && categoryFilter === 'ALL' && !filterStatus;
   const sortedClubs = isDefaultSort

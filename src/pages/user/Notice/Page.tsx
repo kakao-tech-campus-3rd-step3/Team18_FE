@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
+import { Suspense } from 'react';
 import { CONTACT_EMAIL } from '@/app/constants/email';
+import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { Text } from '@/shared/components/Text';
 import { NoticeListCardSection } from './components/NoticeListCardSection';
 
@@ -9,7 +11,9 @@ export const NoticeListPage = () => {
       <Text size='xl' weight='bold' color='#000000'>
         공지사항
       </Text>
-      <NoticeListCardSection />
+      <Suspense fallback={<LoadingSpinner />}>
+        <NoticeListCardSection />
+      </Suspense>
       <ContactInfo>개발진과 연락하기 : {CONTACT_EMAIL}</ContactInfo>
     </Wrapper>
   );
