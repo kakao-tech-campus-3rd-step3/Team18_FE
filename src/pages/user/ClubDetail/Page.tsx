@@ -43,7 +43,9 @@ export const ClubDetailPage = () => {
               introductionActivity={club.introductionActivity}
               introductionIdeal={club.introductionIdeal}
             />
-            <ClubReviewsSection clubId={club.clubId} />
+            <Suspense fallback={<LoadingSpinner />}>
+              <ClubReviewsSection clubId={club.clubId} />
+            </Suspense>
           </>
         }
         right={<ClubInfoSidebarSection {...club} />}
