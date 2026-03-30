@@ -13,6 +13,7 @@ export const useKeyboardVisible = () => {
     };
 
     viewport.addEventListener('resize', handleResize);
+    handleResize();
     return () => viewport.removeEventListener('resize', handleResize);
   }, []);
 
