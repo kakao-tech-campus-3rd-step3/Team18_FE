@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { PageHeader } from '@/shared/components/PageHeader';
+import { useKeyboardVisible } from '@/shared/hooks/useKeyboardVisible';
 import { engToKorCategory } from '@/shared/utils/formatting';
 import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
 import { ClubDescriptionSection } from './components/ClubDescriptionSection';
@@ -18,6 +19,7 @@ import type { ClubCategoryEng } from '@/shared/types/club';
 export const ClubDetailPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
   const club = useClubDetail(Number(clubId));
+  const isKeyboardVisible = useKeyboardVisible();
 
   return (
     <>
@@ -50,18 +52,20 @@ export const ClubDetailPage = () => {
         }
         right={<ClubInfoSidebarSection {...club} />}
       />
-      <FixedBottomBar>
-        <ApplyButton
-          clubId={club.clubId}
-          clubName={club.clubName}
-          recruitStatus={club.recruitStatus}
-          to={`/clubs/${club.clubId}/apply`}
-          width='100%'
-          isRegistered={club.isRegistered}
-          everyTimeUrl={club.everyTimeUrl}
-          googleFormUrl={club.googleFormUrl}
-        />
-      </FixedBottomBar>
+      {!isKeyboardVisible && (
+        <FixedBottomBar>
+          <ApplyButton
+            clubId={club.clubId}
+            clubName={club.clubName}
+            recruitStatus={club.recruitStatus}
+            to={`/clubs/${club.clubId}/apply`}
+            width='100%'
+            isRegistered={club.isRegistered}
+            everyTimeUrl={club.everyTimeUrl}
+            googleFormUrl={club.googleFormUrl}
+          />
+        </FixedBottomBar>
+      )}
     </>
   );
 };
