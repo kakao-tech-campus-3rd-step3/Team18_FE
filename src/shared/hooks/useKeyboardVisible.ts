@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export const useKeyboardVisible = () => {
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+  const initialHeightRef = useRef(window.innerHeight);
 
   useEffect(() => {
     const viewport = window.visualViewport;
     if (!viewport) return;
 
     const handleResize = () => {
-      setIsKeyboardVisible(viewport.height < window.innerHeight * 0.75);
+      setIsKeyboardVisible(viewport.height < initialHeightRef.current * 0.75);
     };
 
     viewport.addEventListener('resize', handleResize);
