@@ -13,7 +13,7 @@ export const ClubInfoSidebarSection = ({
   clubId,
   clubName,
   presidentName,
-  presidentPhoneNumber,
+  // presidentPhoneNumber,
   location,
   recruitStart,
   recruitEnd,
@@ -29,9 +29,9 @@ export const ClubInfoSidebarSection = ({
   return (
     <SidebarContainer>
       <ClubInfoRow icon={<BiListUl />} label='회장 이름' value={presidentName} />
-      {!/^010-0000/.test(presidentPhoneNumber) && (
+      {/* {!/^010-0000/.test(presidentPhoneNumber) && (
         <ClubInfoRow icon={<BiListUl />} label='연락처' value={presidentPhoneNumber} />
-      )}
+      )} */}
       <ClubInfoRow icon={<BiListUl />} label='동방 위치' value={location} />
       <ClubInfoRow
         icon={<PiCalendarDotsDuotone />}
