@@ -6,6 +6,8 @@ import {
   useAdaptedApplicationForm,
   useAdaptedPatchApplicationForm,
 } from '@/pages/admin/ApplicationFormBuilder/hooks/useApplicationFormAdapter';
+import { OnboardingPopup } from '@/shared/components/OnboardingPopup';
+import { useOnboardingPopup } from '@/shared/hooks/useOnboardingPopup';
 import { toast } from '@/shared/utils/toast';
 import { ApplicationInfoSection } from './components/ApplicationInfoSection';
 import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
@@ -15,6 +17,9 @@ import type { ApplicationFormData } from './types/fieldType';
 export const ApplicationFormBuilderPage = () => {
   const { clubId } = useParams();
   const [isEditMode, setIsEditMode] = useState(false);
+  const { isOpen: isFormPopupOpen, confirm: confirmFormPopup } = useOnboardingPopup('form', {
+    triggerMode: 'pageVisit',
+  });
   const { data } = useAdaptedApplicationForm(Number(clubId));
   const { adaptedPatchForm } = useAdaptedPatchApplicationForm(Number(clubId));
 
@@ -75,6 +80,13 @@ export const ApplicationFormBuilderPage = () => {
 
   return (
     <Layout>
+      <OnboardingPopup
+        isOpen={isFormPopupOpen}
+        imageSrc='/assets/onboarding/form-guide.webp'
+        imageAlt='지원폼 관리 가이드'
+        title='지원폼 관리 기능 안내'
+        onConfirm={confirmFormPopup}
+      />
       <ContentContainer>
         <ApplicationFormBuilderHeaderSection
           isEditMode={isEditMode}
