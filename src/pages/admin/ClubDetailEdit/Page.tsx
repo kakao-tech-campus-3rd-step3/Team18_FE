@@ -3,7 +3,9 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/shared/components/Button';
 import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
+import { OnboardingPopup } from '@/shared/components/OnboardingPopup';
 import { PageHeader } from '@/shared/components/PageHeader';
+import { useOnboardingPopup } from '@/shared/hooks/useOnboardingPopup';
 import { engToKorCategory } from '@/shared/utils/formatting';
 import { toast } from '@/shared/utils/toast';
 import { updateClubDetailEdit } from './api/clubDetailEdit';
@@ -20,6 +22,10 @@ import type { ClubCategoryEng } from '@/shared/types/club';
 export const ClubDetailEditPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
   const club = useClubDetailEdit(clubId ?? '');
+  const { isOpen: isClubPagePopupOpen, confirm: confirmClubPagePopup } = useOnboardingPopup(
+    'club-page',
+    { triggerMode: 'pageVisit' },
+  );
 
   const methods = useForm<ClubDetailUpdatePayload>({
     mode: 'onTouched',
@@ -46,50 +52,59 @@ export const ClubDetailEditPage = () => {
   };
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TwoColumnLayout
-          left={
-            <>
-              <PageHeader
-                clubName={club.clubName}
-                category={
-                  club.category in engToKorCategory ? (club.category as ClubCategoryEng) : 'ALL'
-                }
-              />
-              <ClubShortIntroductionEditSection />
-              <ClubActivityPhotosEditSection
-                clubId={club.clubId}
-                images={club.introductionImages}
-                onUpload={(files: File[]) =>
-                  updateClubImages(club.clubId, files, club.introductionImages)
-                }
-              />
-              <ClubDescriptionEditSection />
-              {errors.presidentPhoneNumber && (
-                <ErrorMessage>{errors.presidentPhoneNumber.message}</ErrorMessage>
-              )}
+    <>
+      <OnboardingPopup
+        isOpen={isClubPagePopupOpen}
+        imageSrc='/assets/onboarding/club-page/1.webp'
+        imageAlt='동아리페이지 관리 가이드'
+        title='동아리페이지 관리 기능 안내'
+        onConfirm={confirmClubPagePopup}
+      />
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <TwoColumnLayout
+            left={
+              <>
+                <PageHeader
+                  clubName={club.clubName}
+                  category={
+                    club.category in engToKorCategory ? (club.category as ClubCategoryEng) : 'ALL'
+                  }
+                />
+                <ClubShortIntroductionEditSection />
+                <ClubActivityPhotosEditSection
+                  clubId={club.clubId}
+                  images={club.introductionImages}
+                  onUpload={(files: File[]) =>
+                    updateClubImages(club.clubId, files, club.introductionImages)
+                  }
+                />
+                <ClubDescriptionEditSection />
+                {errors.presidentPhoneNumber && (
+                  <ErrorMessage>{errors.presidentPhoneNumber.message}</ErrorMessage>
+                )}
 
-              <ButtonGroup>
-                <Button type='submit' disabled={isSubmitting}>
-                  {isSubmitting ? '저장 중...' : '수정하기'}
-                </Button>
-                <Button variant='light' to={`/admin/clubs/${clubId}/dashboard`}>
-                  취소
-                </Button>
-              </ButtonGroup>
+                <ButtonGroup>
+                  <Button type='submit' disabled={isSubmitting}>
+                    {isSubmitting ? '저장 중...' : '수정하기'}
+                  </Button>
+                  <Button variant='light' to={`/admin/clubs/${clubId}/dashboard`}>
+                    취소
+                  </Button>
+                </ButtonGroup>
 
-              {isSubmitSuccessful && <SuccessMessage>저장 완료!</SuccessMessage>}
-            </>
-          }
-          right={
-            <>
-              <ClubInfoSidebarEditSection />
-            </>
-          }
-        />
-      </form>
-    </FormProvider>
+                {isSubmitSuccessful && <SuccessMessage>저장 완료!</SuccessMessage>}
+              </>
+            }
+            right={
+              <>
+                <ClubInfoSidebarEditSection />
+              </>
+            }
+          />
+        </form>
+      </FormProvider>
+    </>
   );
 };
 
