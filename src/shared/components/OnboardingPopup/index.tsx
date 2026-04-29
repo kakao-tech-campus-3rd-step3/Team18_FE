@@ -4,32 +4,54 @@ import { Modal } from '@/shared/components/Modal';
 
 type OnboardingPopupProps = {
   isOpen: boolean;
-  imageSrc: string;
+  images: string[];
   imageAlt: string;
-  title: string;
   onConfirm: () => void;
 };
 
 export const OnboardingPopup = ({
   isOpen,
-  imageSrc,
+  images = [],
   imageAlt,
-  title,
   onConfirm,
 }: OnboardingPopupProps) => {
   const [open, setOpen] = useState(isOpen);
+  const [page, setPage] = useState(0);
+  const isLast = page === images.length - 1;
 
-  const handleConfirm = () => {
+  const isFirst = page === 0;
+
+  const handleNext = () => {
+    if (isLast) {
+      onConfirm();
+      setOpen(false);
+    } else {
+      setPage((p) => p + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    setPage((p) => p - 1);
+  };
+
+  const handleClose = () => {
     onConfirm();
     setOpen(false);
   };
 
   return (
-    <Modal isOpen={open} onClose={handleConfirm} title={title} size='lg'>
-      <Image src={imageSrc} alt={imageAlt} />
-      <ConfirmButton type='button' onClick={handleConfirm}>
-        확인
-      </ConfirmButton>
+    <Modal isOpen={open} onClose={handleClose} size='xxl' contentPadding='0 0 1.5rem 0'>
+      <Image src={images[page]} alt={`${imageAlt} ${page + 1}`} />
+      <Footer>
+        {!isFirst && (
+          <PrevButton type='button' onClick={handlePrev}>
+            이전
+          </PrevButton>
+        )}
+        <NextButton type='button' onClick={handleNext}>
+          {isLast ? '확인' : '다음'}
+        </NextButton>
+      </Footer>
     </Modal>
   );
 };
@@ -39,12 +61,30 @@ const Image = styled.img({
   height: 'auto',
   display: 'block',
   borderRadius: '0.5rem',
-  marginBottom: '1.5rem',
 });
 
-const ConfirmButton = styled.button(({ theme }) => ({
-  width: '100%',
-  padding: '0.75rem',
+const Footer = styled.div({
+  display: 'flex',
+  justifyContent: 'flex-end',
+  gap: '0.5rem',
+  padding: '0 1.5rem',
+});
+
+const PrevButton = styled.button(({ theme }) => ({
+  padding: '0.625rem 1.5rem',
+  backgroundColor: theme.colors.gray100,
+  color: theme.colors.gray700,
+  border: 'none',
+  borderRadius: theme.radius.md,
+  fontSize: theme.font.size.base,
+  fontWeight: 600,
+  cursor: 'pointer',
+  transition: 'opacity 0.2s',
+  '&:hover': { opacity: 0.9 },
+}));
+
+const NextButton = styled.button(({ theme }) => ({
+  padding: '0.625rem 1.5rem',
   backgroundColor: theme.colors.primary,
   color: '#fff',
   border: 'none',
@@ -53,7 +93,5 @@ const ConfirmButton = styled.button(({ theme }) => ({
   fontWeight: 600,
   cursor: 'pointer',
   transition: 'opacity 0.2s',
-  '&:hover': {
-    opacity: 0.9,
-  },
+  '&:hover': { opacity: 0.9 },
 }));
