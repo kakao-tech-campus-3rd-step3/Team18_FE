@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '@/app/providers/auth';
+import { OnboardingPopup } from '@/shared/components/OnboardingPopup';
 import { useModal } from '@/shared/hooks/useModal';
+import { useOnboardingPopup } from '@/shared/hooks/useOnboardingPopup';
 import { MemberHeaderSection } from './components/MemberHeaderSection';
 import { MemberTableSection } from './components/MemberTableSection';
 import { AddMemberModal } from './components/modals/AddMemberModal';
@@ -27,6 +29,11 @@ export const MemberManagementPage = () => {
 
   const { searchText, sortBy, filteredMembers, setSearchText, setSortBy } =
     useMemberFilter(members);
+
+  const { isOpen: isMembersPopupOpen, confirm: confirmMembersPopup } = useOnboardingPopup(
+    'members',
+    { triggerMode: 'pageVisit' },
+  );
 
   const {
     submitAddMember,
@@ -65,6 +72,13 @@ export const MemberManagementPage = () => {
 
   return (
     <>
+      <OnboardingPopup
+        isOpen={isMembersPopupOpen}
+        imageSrc='/assets/onboarding/members/1.webp'
+        imageAlt='동아리원 관리 가이드'
+        title='동아리원 관리 기능 안내'
+        onConfirm={confirmMembersPopup}
+      />
       <S.Container>
         <S.ContentWrapper>
           <MemberHeaderSection
