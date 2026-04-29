@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PATH } from '@/app/constants/routerPath';
 import { useAuth } from '@/app/providers/auth';
+import { getOnboardingSeen, setPendingOnboarding } from '@/shared/auth/token';
 import { toast } from '@/shared/utils/toast';
 import type { LoginResponse } from '../api/auth';
 
@@ -25,8 +26,12 @@ export function useKakaoLogin() {
     const processLogin = async () => {
       try {
         const response: LoginResponse = await login(code, controller.signal);
-        if (response.status === 'LOGIN_SUCCESS') navigate(ROUTE_PATH.COMMON.MAIN);
-        else navigate(`/${ROUTE_PATH.COMMON.SIGNUP}`);
+        if (response.status === 'LOGIN_SUCCESS') {
+          if (!getOnboardingSeen().includes('dashboard')) {
+            setPendingOnboarding('dashboard');
+          }
+          navigate(ROUTE_PATH.COMMON.MAIN);
+        } else navigate(`/${ROUTE_PATH.COMMON.SIGNUP}`);
       } catch (e: unknown) {
         if (isAxiosError(e) && e.code === 'ERR_CANCELED') {
           return;
