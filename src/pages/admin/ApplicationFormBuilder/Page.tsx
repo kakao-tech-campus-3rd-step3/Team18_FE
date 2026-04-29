@@ -82,7 +82,7 @@ export const ApplicationFormBuilderPage = () => {
     <Layout>
       <OnboardingPopup
         isOpen={isFormPopupOpen}
-        imageSrc='/assets/onboarding/form-guide.webp'
+        images={[1, 2, 3].map((n) => `/assets/onboarding/form/${n}.webp`)}
         imageAlt='지원폼 관리 가이드'
         title='지원폼 관리 기능 안내'
         onConfirm={confirmFormPopup}

@@ -25,15 +25,15 @@ export const MemberManagementPage = () => {
   const deleteModal = useModal();
   const [deleteTarget, setDeleteTarget] = useState<{ id: number; name: string } | null>(null);
 
-  const members = useMembers(clubId || '');
-
-  const { searchText, sortBy, filteredMembers, setSearchText, setSortBy } =
-    useMemberFilter(members);
-
   const { isOpen: isMembersPopupOpen, confirm: confirmMembersPopup } = useOnboardingPopup(
     'members',
     { triggerMode: 'pageVisit' },
   );
+
+  const members = useMembers(clubId || '');
+
+  const { searchText, sortBy, filteredMembers, setSearchText, setSortBy } =
+    useMemberFilter(members);
 
   const {
     submitAddMember,
@@ -74,7 +74,7 @@ export const MemberManagementPage = () => {
     <>
       <OnboardingPopup
         isOpen={isMembersPopupOpen}
-        imageSrc='/assets/onboarding/members/1.webp'
+        images={[1, 2].map((n) => `/assets/onboarding/members/${n}.webp`)}
         imageAlt='동아리원 관리 가이드'
         title='동아리원 관리 기능 안내'
         onConfirm={confirmMembersPopup}

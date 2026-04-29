@@ -53,7 +53,7 @@ export const MainPage = () => {
       {isAdmin && (
         <OnboardingPopup
           isOpen={isDashboardPopupOpen}
-          imageSrc='/assets/onboarding/dashboard-guide.webp'
+          images={[1, 2, 3, 4, 5].map((n) => `/assets/onboarding/dashboard/${n}.webp`)}
           imageAlt='지원자 관리 가이드'
           title='지원자 관리 기능 안내'
           onConfirm={confirmDashboardPopup}

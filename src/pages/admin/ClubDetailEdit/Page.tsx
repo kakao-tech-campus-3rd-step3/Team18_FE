@@ -21,11 +21,11 @@ import type { ClubCategoryEng } from '@/shared/types/club';
 
 export const ClubDetailEditPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
-  const club = useClubDetailEdit(clubId ?? '');
   const { isOpen: isClubPagePopupOpen, confirm: confirmClubPagePopup } = useOnboardingPopup(
     'club-page',
     { triggerMode: 'pageVisit' },
   );
+  const club = useClubDetailEdit(clubId ?? '');
 
   const methods = useForm<ClubDetailUpdatePayload>({
     mode: 'onTouched',
@@ -55,7 +55,7 @@ export const ClubDetailEditPage = () => {
     <>
       <OnboardingPopup
         isOpen={isClubPagePopupOpen}
-        imageSrc='/assets/onboarding/club-page/1.webp'
+        images={[1, 2, 3].map((n) => `/assets/onboarding/club-page/${n}.webp`)}
         imageAlt='동아리페이지 관리 가이드'
         title='동아리페이지 관리 기능 안내'
         onConfirm={confirmClubPagePopup}
