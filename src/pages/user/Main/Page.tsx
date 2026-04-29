@@ -1,34 +1,66 @@
 import styled from '@emotion/styled';
-import { Suspense, useCallback, useState } from 'react';
+import { Suspense, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { useAuth } from '@/app/providers/auth';
 import { BannerSection } from '@/pages/user/Main/components/BannerSection';
 import { ClubListSection } from '@/pages/user/Main/components/ClubListSection';
 import { FiltersSection } from '@/pages/user/Main/components/FiltersSection';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
+import { OnboardingPopup } from '@/shared/components/OnboardingPopup';
+import { useOnboardingPopup } from '@/shared/hooks/useOnboardingPopup';
+import { ROLE } from '@/shared/types/navigation';
 import type { RecruitStatus } from './types/club';
 import type { ClubCategoryEng } from '@/shared/types/club';
 
+const VALID_CATEGORIES: ClubCategoryEng[] = [
+  'ALL',
+  'LITERATURE',
+  'STUDY',
+  'SPORTS',
+  'RELIGION',
+  'VOLUNTEER',
+];
+
+const ENG_TO_KOR_STATUS: Record<string, RecruitStatus> = {
+  RECRUITING: '모집중',
+  CLOSED: '모집 종료',
+  PREPARING: '모집 준비중',
+  NOT_SCHEDULED: '모집 일정 미정',
+};
+
 export const MainPage = () => {
-  const [categoryFilter, setCategoryFilter] = useState<ClubCategoryEng>('ALL');
-  const [recruitStatus, setRecruitStatus] = useState<RecruitStatus>('전체');
+  const { user } = useAuth();
+  const isAdmin = user?.role === ROLE.CLUB_ADMIN || user?.role === ROLE.CLUB_EXECUTIVE;
+  const { isOpen: isDashboardPopupOpen, confirm: confirmDashboardPopup } = useOnboardingPopup(
+    'dashboard',
+    { triggerMode: 'login' },
+  );
+
+  const [searchParams] = useSearchParams();
+
+  const rawCategory = searchParams.get('category') as ClubCategoryEng | null;
+  const categoryFilter: ClubCategoryEng =
+    rawCategory && VALID_CATEGORIES.includes(rawCategory) ? rawCategory : 'ALL';
+
+  const rawStatus = searchParams.get('status');
+  const recruitStatus: RecruitStatus =
+    rawStatus && ENG_TO_KOR_STATUS[rawStatus] ? ENG_TO_KOR_STATUS[rawStatus] : '전체';
+
   const [searchText, setSearchText] = useState('');
-
-  const handleCategoryFilter = useCallback((category: ClubCategoryEng) => {
-    setCategoryFilter(category);
-  }, []);
-
-  const handleRecruitStatusFilter = useCallback((status: RecruitStatus) => {
-    setRecruitStatus(status);
-  }, []);
 
   return (
     <Container>
+      {isAdmin && (
+        <OnboardingPopup
+          isOpen={isDashboardPopupOpen}
+          imageSrc='/assets/onboarding/dashboard-guide.webp'
+          imageAlt='지원자 관리 가이드'
+          title='지원자 관리 기능 안내'
+          onConfirm={confirmDashboardPopup}
+        />
+      )}
       <BannerSection onChangeSearch={(s: string) => setSearchText(s)} />
-      <FiltersSection
-        selectedCategory={categoryFilter}
-        selectedRecruitStatus={recruitStatus}
-        onSelectCategory={handleCategoryFilter}
-        onSelectStatus={handleRecruitStatusFilter}
-      />
+      <FiltersSection selectedCategory={categoryFilter} selectedRecruitStatus={recruitStatus} />
       <Suspense fallback={<LoadingSpinner />}>
         <ClubListSection
           categoryFilter={categoryFilter}
