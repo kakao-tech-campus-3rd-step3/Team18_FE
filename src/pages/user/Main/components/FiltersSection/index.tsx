@@ -15,28 +15,22 @@ type FilterRecruitStatus = RecruitStatus | '전체';
 type FiltersSectionProps = {
   selectedCategory: ClubCategoryEng;
   selectedRecruitStatus: RecruitStatus | undefined;
-  onSelectCategory: (category: ClubCategoryEng) => void;
-  onSelectStatus: (recruitStatus: FilterRecruitStatus) => void;
 };
 
 export const FiltersSection = ({
   selectedCategory,
   selectedRecruitStatus,
-  onSelectCategory,
-  onSelectStatus,
 }: FiltersSectionProps) => {
   const [filterParams, setFilterParams] = useSearchParams();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleCategoryClick = (newCategory: ClubCategory) => {
     const engCategory = korToEngCategory[newCategory];
-    onSelectCategory(engCategory);
     filterParams.set('category', engCategory);
     setFilterParams(filterParams);
   };
 
   const handleRecruitStatusClick = (status: FilterRecruitStatus) => {
-    onSelectStatus(status);
     if (status === '전체') {
       filterParams.delete('status');
     } else {
