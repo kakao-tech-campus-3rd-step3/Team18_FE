@@ -57,7 +57,6 @@ export const ClubDetailEditPage = () => {
         isOpen={isClubPagePopupOpen}
         images={[1, 2, 3].map((n) => `/assets/onboarding/club-page/${n}.webp`)}
         imageAlt='동아리페이지 관리 가이드'
-        title='동아리페이지 관리 기능 안내'
         onConfirm={confirmClubPagePopup}
       />
       <FormProvider {...methods}>

@@ -14,12 +14,13 @@ import * as S from './index.styled';
 type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  title: string;
+  title?: string;
   children: ReactNode;
   description?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   variant?: 'modal' | 'popover';
   anchorRef?: RefObject<HTMLElement | null>;
+  contentPadding?: string;
 };
 
 /**
@@ -38,6 +39,7 @@ export const Modal = ({
   description,
   variant = 'modal',
   anchorRef,
+  contentPadding,
 }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -208,18 +210,21 @@ export const Modal = ({
         $size={size}
         $variant={variant}
         $position={position ?? undefined}
+        $padding={contentPadding}
         role='dialog'
         aria-modal='true'
         aria-labelledby={titleId}
         aria-describedby={description ? descriptionId : undefined}
         onClick={(e) => e.stopPropagation()}
       >
-        <S.Header>
-          <S.Title id={titleId} ref={titleRef} tabIndex={-1}>
-            {title}
-          </S.Title>
-          {description && <S.Description id={descriptionId}>{description}</S.Description>}
-        </S.Header>
+        {title && (
+          <S.Header>
+            <S.Title id={titleId} ref={titleRef} tabIndex={-1}>
+              {title}
+            </S.Title>
+            {description && <S.Description id={descriptionId}>{description}</S.Description>}
+          </S.Header>
+        )}
 
         <S.Body>{children}</S.Body>
       </S.Content>

@@ -76,7 +76,6 @@ export const MemberManagementPage = () => {
         isOpen={isMembersPopupOpen}
         images={[1, 2].map((n) => `/assets/onboarding/members/${n}.webp`)}
         imageAlt='동아리원 관리 가이드'
-        title='동아리원 관리 기능 안내'
         onConfirm={confirmMembersPopup}
       />
       <S.Container>
