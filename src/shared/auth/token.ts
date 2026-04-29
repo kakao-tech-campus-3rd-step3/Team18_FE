@@ -45,6 +45,32 @@ export const clearAuthData = (): void => {
   removeStoredUserData();
 };
 
+const ONBOARDING_SEEN_KEY = 'onboarding_seen';
+const PENDING_ONBOARDING_KEY = 'pending_onboarding';
+
+export const getOnboardingSeen = (): string[] => {
+  try {
+    const data = localStorage.getItem(ONBOARDING_SEEN_KEY);
+    return data ? (JSON.parse(data) as string[]) : [];
+  } catch {
+    return [];
+  }
+};
+
+export const markOnboardingSeen = (id: string): void => {
+  const seen = getOnboardingSeen();
+  if (!seen.includes(id)) {
+    localStorage.setItem(ONBOARDING_SEEN_KEY, JSON.stringify([...seen, id]));
+  }
+  sessionStorage.removeItem(PENDING_ONBOARDING_KEY);
+};
+
+export const getPendingOnboarding = (): string | null =>
+  sessionStorage.getItem(PENDING_ONBOARDING_KEY);
+
+export const setPendingOnboarding = (id: string): void =>
+  sessionStorage.setItem(PENDING_ONBOARDING_KEY, id);
+
 export const getStoredUserData = (): User | null => {
   try {
     const data = localStorage.getItem(USER_DATA_KEY);
