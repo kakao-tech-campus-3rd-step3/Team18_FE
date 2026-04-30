@@ -14,7 +14,7 @@ export const useOnboardingPopup = (
   id: string,
   { triggerMode }: UseOnboardingPopupOptions,
 ): UseOnboardingPopupReturn => {
-  const [isOpen] = useState(() => {
+  const [isOpen, setIsOpen] = useState(() => {
     const seen = getOnboardingSeen();
     if (seen.includes(id)) return false;
     if (triggerMode === 'login') return getPendingOnboarding() === id;
@@ -23,6 +23,7 @@ export const useOnboardingPopup = (
 
   const confirm = () => {
     markOnboardingSeen(id);
+    setIsOpen(false);
   };
 
   return { isOpen, confirm };
