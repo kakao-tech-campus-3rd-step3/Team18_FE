@@ -38,19 +38,22 @@ export const Overlay = styled.div<OverlayProps>(({ $variant = 'modal' }) => ({
 }));
 
 type ContentProps = {
-  $size?: 'sm' | 'md' | 'lg';
+  $size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
   $variant?: 'modal' | 'popover';
   $position?: { top: number; left: number; maxHeight?: number };
+  $padding?: string;
 };
 
 const sizeMap = {
   sm: '13rem',
   md: '20rem',
   lg: '30rem',
+  xl: '42rem',
+  xxl: '56rem',
 };
 
 export const Content = styled.div<ContentProps>(
-  ({ theme, $size = 'md', $variant = 'modal', $position }) => ({
+  ({ theme, $size = 'md', $variant = 'modal', $position, $padding }) => ({
     backgroundColor: '#fff',
     borderRadius: theme.radius.lg,
     boxShadow:
@@ -61,7 +64,7 @@ export const Content = styled.div<ContentProps>(
     maxWidth: '100%',
     maxHeight: $variant === 'popover' ? '80vh' : '90vh',
     overflow: 'hidden',
-    padding: $variant === 'popover' ? '1.5rem' : '2rem',
+    padding: $padding ?? ($variant === 'popover' ? '1.5rem' : '2rem'),
     animation: `${scaleIn} 0.2s ease-out`,
     display: 'flex',
     flexDirection: 'column',

@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '@/app/providers/auth';
+import { OnboardingPopup } from '@/shared/components/OnboardingPopup';
 import { useModal } from '@/shared/hooks/useModal';
+import { useOnboardingPopup } from '@/shared/hooks/useOnboardingPopup';
 import { MemberHeaderSection } from './components/MemberHeaderSection';
 import { MemberTableSection } from './components/MemberTableSection';
 import { AddMemberModal } from './components/modals/AddMemberModal';
@@ -22,6 +24,11 @@ export const MemberManagementPage = () => {
   const bulkUploadModal = useModal();
   const deleteModal = useModal();
   const [deleteTarget, setDeleteTarget] = useState<{ id: number; name: string } | null>(null);
+
+  const { isOpen: isMembersPopupOpen, confirm: confirmMembersPopup } = useOnboardingPopup(
+    'members',
+    { triggerMode: 'pageVisit' },
+  );
 
   const members = useMembers(clubId || '');
 
@@ -65,6 +72,12 @@ export const MemberManagementPage = () => {
 
   return (
     <>
+      <OnboardingPopup
+        isOpen={isMembersPopupOpen}
+        images={[1, 2].map((n) => `/assets/onboarding/members/${n}.webp`)}
+        imageAlt='동아리원 관리 가이드'
+        onConfirm={confirmMembersPopup}
+      />
       <S.Container>
         <S.ContentWrapper>
           <MemberHeaderSection
