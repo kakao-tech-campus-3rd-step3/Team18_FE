@@ -213,7 +213,7 @@ export const Modal = ({
         $padding={contentPadding}
         role='dialog'
         aria-modal='true'
-        aria-labelledby={titleId}
+        aria-labelledby={title ? titleId : undefined}
         aria-describedby={description ? descriptionId : undefined}
         onClick={(e) => e.stopPropagation()}
       >
