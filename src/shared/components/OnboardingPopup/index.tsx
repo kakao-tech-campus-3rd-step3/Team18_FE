@@ -15,32 +15,33 @@ export const OnboardingPopup = ({
   imageAlt,
   onConfirm,
 }: OnboardingPopupProps) => {
-  const [open, setOpen] = useState(isOpen);
   const [page, setPage] = useState(0);
-  const isLast = page === images.length - 1;
 
+  if (images.length === 0) return null;
+
+  const isLast = page === images.length - 1;
   const isFirst = page === 0;
 
   const handleNext = () => {
     if (isLast) {
       onConfirm();
-      setOpen(false);
     } else {
       setPage((p) => p + 1);
     }
   };
 
   const handlePrev = () => {
-    setPage((p) => p - 1);
+    if (!isFirst) {
+      setPage((p) => p - 1);
+    }
   };
 
   const handleClose = () => {
     onConfirm();
-    setOpen(false);
   };
 
   return (
-    <Modal isOpen={open} onClose={handleClose} size='xxl' contentPadding='0 0 1.5rem 0'>
+    <Modal isOpen={isOpen} onClose={handleClose} size='xxl' contentPadding='0 0 1.5rem 0'>
       <Image src={images[page]} alt={`${imageAlt} ${page + 1}`} />
       <Footer>
         {!isFirst && (
