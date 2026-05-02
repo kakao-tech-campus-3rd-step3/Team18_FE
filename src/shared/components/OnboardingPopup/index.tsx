@@ -41,7 +41,7 @@ export const OnboardingPopup = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} size='xxl' contentPadding='0 0 1.5rem 0'>
+    <Modal isOpen={isOpen} onClose={handleClose} size='xxl' contentPadding='1.5rem 0 1.5rem 0'>
       <Image src={images[page]} alt={`${imageAlt} ${page + 1}`} />
       <Footer>
         {!isFirst && (

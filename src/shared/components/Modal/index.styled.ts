@@ -86,7 +86,7 @@ export const Content = styled.div<ContentProps>(
       }),
 
     [`@media (max-width: ${theme.breakpoints.mobile})`]: {
-      padding: '1.5rem',
+      padding: $padding ?? '1.5rem',
       maxHeight: '85vh',
     },
   }),
