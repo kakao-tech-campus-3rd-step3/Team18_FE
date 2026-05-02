@@ -25,14 +25,14 @@ type OverlayProps = {
   $variant?: 'modal' | 'popover';
 };
 
-export const Overlay = styled.div<OverlayProps>(({ $variant = 'modal' }) => ({
+export const Overlay = styled.div<OverlayProps>(({ theme, $variant = 'modal' }) => ({
   position: 'fixed',
   inset: 0,
   backgroundColor: $variant === 'popover' ? 'transparent' : 'rgba(0, 0, 0, 0.3)',
   display: $variant === 'popover' ? 'block' : 'flex',
   alignItems: $variant === 'popover' ? undefined : 'center',
   justifyContent: $variant === 'popover' ? undefined : 'center',
-  zIndex: 50,
+  zIndex: theme.zIndex.modal,
   padding: $variant === 'popover' ? 0 : '1rem',
   animation: `${fadeIn} 0.2s ease-out`,
 }));
