@@ -22,7 +22,7 @@ export const TextWrapper = styled.div({
 export const Title = styled.h1(({ theme }) => ({
   fontSize: '2.5rem',
   fontWeight: theme.font.weight.medium,
-  margin: '1rem 0 0 0.5rem',
+  margin: '0 0 0 0.5rem',
 }));
 
 export const Category = styled.span(({ theme }) => ({
@@ -30,6 +30,13 @@ export const Category = styled.span(({ theme }) => ({
   color: theme.colors.textSecondary,
   margin: '0.5rem 0 0 0.5rem',
 }));
+
+export const TitleGroup = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+  marginTop: '1rem',
+});
 
 export const InstagramLink = styled.a(({ theme }) => ({
   display: 'none',

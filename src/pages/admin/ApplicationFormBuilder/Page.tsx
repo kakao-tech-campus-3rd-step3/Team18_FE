@@ -17,9 +17,11 @@ import type { ApplicationFormData } from './types/fieldType';
 export const ApplicationFormBuilderPage = () => {
   const { clubId } = useParams();
   const [isEditMode, setIsEditMode] = useState(false);
-  const { isOpen: isFormPopupOpen, confirm: confirmFormPopup } = useOnboardingPopup('form', {
-    triggerMode: 'pageVisit',
-  });
+  const {
+    isOpen: isFormPopupOpen,
+    confirm: confirmFormPopup,
+    reopen: reopenFormPopup,
+  } = useOnboardingPopup('form', { triggerMode: 'pageVisit' });
   const { data } = useAdaptedApplicationForm(Number(clubId));
   const { adaptedPatchForm } = useAdaptedPatchApplicationForm(Number(clubId));
 
@@ -86,6 +88,7 @@ export const ApplicationFormBuilderPage = () => {
         imageAlt='지원폼 관리 가이드'
         onConfirm={confirmFormPopup}
       />
+
       <ContentContainer>
         <ApplicationFormBuilderHeaderSection
           isEditMode={isEditMode}
@@ -94,6 +97,7 @@ export const ApplicationFormBuilderPage = () => {
           onCancel={handleCancel}
           isInterviewMode={isInterviewMode}
           onInterviewChange={handleInterviewChange}
+          onOpenGuide={reopenFormPopup}
         />
         <ApplicationInfoSection formHandler={formHandler} isEditMode={isEditMode} />
 

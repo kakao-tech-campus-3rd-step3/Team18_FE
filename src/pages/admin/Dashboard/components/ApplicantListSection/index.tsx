@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useApplicants } from '@/pages/admin/Dashboard/hooks/useApplicants';
+import { GuideIconButton } from '@/shared/components/GuideIconButton';
 import { Text } from '@/shared/components/Text';
 import { ApplicationStatusFilter } from './Filter/ApplicationFilter';
 import { ApplicantList } from './List/ApplicantList';
@@ -15,9 +16,15 @@ type ApplicantListSectionProps = {
   stage: ApplicationStage;
   setStage: React.Dispatch<React.SetStateAction<ApplicationStage>>;
   clubId: number;
+  onOpenGuide?: () => void;
 };
 
-export const ApplicantListSection = ({ stage, setStage, clubId }: ApplicantListSectionProps) => {
+export const ApplicantListSection = ({
+  stage,
+  setStage,
+  clubId,
+  onOpenGuide,
+}: ApplicantListSectionProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const optionType = 'ALL' as ApplicationFilterOption;
 
@@ -38,9 +45,12 @@ export const ApplicantListSection = ({ stage, setStage, clubId }: ApplicantListS
     <>
       <ApplicantFilterTopBarWrapper>
         <LeftSection>
-          <Text size='xl' weight='medium'>
-            지원자 목록
-          </Text>
+          <TitleWrapper>
+            <Text size='xl' weight='medium'>
+              지원자 목록
+            </Text>
+            {onOpenGuide && <GuideIconButton onClick={onOpenGuide} />}
+          </TitleWrapper>
           {interviewRequired && <StageToggle value={stage} onChange={setStage} />}
         </LeftSection>
         <ApplicationStatusFilter
@@ -81,6 +91,12 @@ const LeftSection = styled.div`
     justify-content: space-between;
   }
 `;
+
+const TitleWrapper = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+});
 
 const ListWrapper = styled.main(({ theme }) => ({
   minHeight: 'auto',

@@ -8,6 +8,7 @@ type UseOnboardingPopupOptions = {
 type UseOnboardingPopupReturn = {
   isOpen: boolean;
   confirm: () => void;
+  reopen: () => void;
 };
 
 export const useOnboardingPopup = (
@@ -26,5 +27,7 @@ export const useOnboardingPopup = (
     setIsOpen(false);
   };
 
-  return { isOpen, confirm };
+  const reopen = () => setIsOpen(true);
+
+  return { isOpen, confirm, reopen };
 };

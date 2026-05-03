@@ -1,4 +1,5 @@
 import { Button } from '@/shared/components/Button';
+import { GuideIconButton } from '@/shared/components/GuideIconButton';
 import { Text } from '@/shared/components/Text';
 import * as S from './index.styled';
 
@@ -9,6 +10,7 @@ type Props = {
   onCancel: () => void;
   isInterviewMode: boolean;
   onInterviewChange: (checked: boolean) => void;
+  onOpenGuide?: () => void;
 };
 
 export const ApplicationFormBuilderHeaderSection = ({
@@ -18,11 +20,15 @@ export const ApplicationFormBuilderHeaderSection = ({
   onCancel,
   isInterviewMode,
   onInterviewChange,
+  onOpenGuide,
 }: Props) => {
   return (
     <S.Container>
       <S.HeaderWrapper>
-        <S.Title>지원폼 생성</S.Title>
+        <S.TitleWrapper>
+          <S.Title>지원폼 생성</S.Title>
+          {onOpenGuide && <GuideIconButton onClick={onOpenGuide} />}
+        </S.TitleWrapper>
         {isEditMode ? (
           <S.ButtonWrapper>
             <Button variant='outline' width='4rem' onClick={onCancel}>

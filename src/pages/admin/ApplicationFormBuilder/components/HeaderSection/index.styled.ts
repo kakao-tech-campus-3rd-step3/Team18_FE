@@ -45,6 +45,12 @@ export const CheckboxWrapper = styled.div(({ theme }) => ({
   },
 }));
 
+export const TitleWrapper = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+});
+
 export const CustomCheckbox = styled.input(({ theme }) => ({
   width: '1.15rem',
   height: '1.15rem',

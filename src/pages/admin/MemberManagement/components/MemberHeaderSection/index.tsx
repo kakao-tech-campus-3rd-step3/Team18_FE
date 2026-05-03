@@ -1,5 +1,6 @@
 import { FiSearch, FiPlus } from 'react-icons/fi';
 import { Dropdown } from '@/shared/components/Dropdown';
+import { GuideIconButton } from '@/shared/components/GuideIconButton';
 import { Text } from '@/shared/components/Text';
 import * as S from './index.styled';
 import type { SortOption } from '../../types/member';
@@ -12,6 +13,7 @@ type Props = {
   onSortChange: (sort: SortOption) => void;
   onAddMember: () => void;
   onBulkUpload: () => void;
+  onOpenGuide?: () => void;
 };
 
 const SORT_OPTIONS: SortOption[] = ['이름순', '등록순'];
@@ -24,6 +26,7 @@ export const MemberHeaderSection = ({
   onSortChange,
   onAddMember,
   onBulkUpload,
+  onOpenGuide,
 }: Props) => {
   return (
     <S.Header>
@@ -31,6 +34,7 @@ export const MemberHeaderSection = ({
         <Text size='xl' weight='medium'>
           {clubName} 동아리원 명단
         </Text>
+        {onOpenGuide && <GuideIconButton onClick={onOpenGuide} />}
         <S.AddButton onClick={onAddMember}>동아리원 추가</S.AddButton>
         <S.AddButton onClick={onBulkUpload}>엑셀로 일괄 등록</S.AddButton>
         <S.AddIconButton onClick={onAddMember}>
