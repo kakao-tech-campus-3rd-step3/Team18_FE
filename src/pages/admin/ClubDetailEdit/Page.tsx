@@ -71,13 +71,15 @@ export const ClubDetailEditPage = () => {
                   }
                 />
                 <ClubShortIntroductionEditSection />
-                <ClubActivityPhotosEditSection
-                  clubId={club.clubId}
-                  images={club.introductionImages}
-                  onUpload={(files: File[]) =>
-                    updateClubImages(club.clubId, files, club.introductionImages)
-                  }
-                />
+                <div style={{ pointerEvents: isClubPagePopupOpen ? 'none' : undefined }}>
+                  <ClubActivityPhotosEditSection
+                    clubId={club.clubId}
+                    images={club.introductionImages}
+                    onUpload={(files: File[]) =>
+                      updateClubImages(club.clubId, files, club.introductionImages)
+                    }
+                  />
+                </div>
                 <ClubDescriptionEditSection />
                 {errors.presidentPhoneNumber && (
                   <ErrorMessage>{errors.presidentPhoneNumber.message}</ErrorMessage>
