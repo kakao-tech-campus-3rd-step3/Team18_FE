@@ -75,7 +75,6 @@ export const Overlay = styled.div(({ theme }) => ({
   transition: 'opacity 0.25s ease, transform 0.25s ease',
   color: theme.colors.gray800,
   fontSize: theme.font.size.xl,
-  zIndex: theme.zIndex.header,
 }));
 
 const ripple = keyframes`
