@@ -16,7 +16,7 @@ export const DashboardPage = () => {
     isOpen: isDashboardPopupOpen,
     confirm: confirmDashboardPopup,
     reopen: reopenDashboardPopup,
-  } = useOnboardingPopup('dashboard', { triggerMode: 'pageVisit' });
+  } = useOnboardingPopup('dashboard', { triggerMode: 'login' });
 
   return (
     <Layout>
