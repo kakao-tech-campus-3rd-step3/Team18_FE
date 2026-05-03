@@ -25,10 +25,11 @@ export const MemberManagementPage = () => {
   const deleteModal = useModal();
   const [deleteTarget, setDeleteTarget] = useState<{ id: number; name: string } | null>(null);
 
-  const { isOpen: isMembersPopupOpen, confirm: confirmMembersPopup } = useOnboardingPopup(
-    'members',
-    { triggerMode: 'pageVisit' },
-  );
+  const {
+    isOpen: isMembersPopupOpen,
+    confirm: confirmMembersPopup,
+    reopen: reopenMembersPopup,
+  } = useOnboardingPopup('members', { triggerMode: 'pageVisit' });
 
   const members = useMembers(clubId || '');
 
@@ -88,6 +89,7 @@ export const MemberManagementPage = () => {
             onSortChange={setSortBy}
             onAddMember={handleAddMember}
             onBulkUpload={handleBulkUpload}
+            onOpenGuide={reopenMembersPopup}
           />
 
           <MemberTableSection
