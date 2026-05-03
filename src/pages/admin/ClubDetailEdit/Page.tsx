@@ -21,10 +21,11 @@ import type { ClubCategoryEng } from '@/shared/types/club';
 
 export const ClubDetailEditPage = () => {
   const { clubId } = useParams<{ clubId: string }>();
-  const { isOpen: isClubPagePopupOpen, confirm: confirmClubPagePopup } = useOnboardingPopup(
-    'club-page',
-    { triggerMode: 'pageVisit' },
-  );
+  const {
+    isOpen: isClubPagePopupOpen,
+    confirm: confirmClubPagePopup,
+    reopen: reopenClubPagePopup,
+  } = useOnboardingPopup('club-page', { triggerMode: 'pageVisit' });
   const club = useClubDetailEdit(clubId ?? '');
 
   const methods = useForm<ClubDetailUpdatePayload>({
@@ -69,6 +70,7 @@ export const ClubDetailEditPage = () => {
                   category={
                     club.category in engToKorCategory ? (club.category as ClubCategoryEng) : 'ALL'
                   }
+                  onOpenGuide={reopenClubPagePopup}
                 />
                 <ClubShortIntroductionEditSection />
                 <ClubActivityPhotosEditSection
