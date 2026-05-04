@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { memo } from 'react';
 import { Text } from '@/shared/components/Text';
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
   }[];
 };
 
-export const ApplicantQuestionSection = ({ questionsAndAnswers }: Props) => {
+export const ApplicantQuestionSection = memo(({ questionsAndAnswers }: Props) => {
   return (
     <Wrapper>
       {questionsAndAnswers.map((item, index) => {
@@ -25,7 +26,8 @@ export const ApplicantQuestionSection = ({ questionsAndAnswers }: Props) => {
       })}
     </Wrapper>
   );
-};
+});
+ApplicantQuestionSection.displayName = 'ApplicantQuestionSection';
 
 const Wrapper = styled.div(({ theme }) => ({
   border: `1px solid ${theme.colors.gray200}`,
