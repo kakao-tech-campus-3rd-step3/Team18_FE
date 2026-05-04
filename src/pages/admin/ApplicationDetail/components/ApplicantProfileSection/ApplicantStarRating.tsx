@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 
 const getFillPercentage = (rating: number, index: number) => {
   if (rating >= index) return 100;
@@ -9,7 +9,7 @@ const getFillPercentage = (rating: number, index: number) => {
 
 const STAR_INDICES = [1, 2, 3, 4, 5];
 
-export const ApplicantStarRating = ({ rating = 0 }: { rating?: number }) => {
+export const ApplicantStarRating = memo(({ rating = 0 }: { rating?: number }) => {
   const stars = useMemo(() => {
     return STAR_INDICES.map((i) => {
       const fillPercentage = getFillPercentage(rating, i);
@@ -24,7 +24,8 @@ export const ApplicantStarRating = ({ rating = 0 }: { rating?: number }) => {
   }, [rating]);
 
   return <StarContainer>{stars}</StarContainer>;
-};
+});
+ApplicantStarRating.displayName = 'ApplicantStarRating';
 
 const StarContainer = styled.div({
   display: 'flex',

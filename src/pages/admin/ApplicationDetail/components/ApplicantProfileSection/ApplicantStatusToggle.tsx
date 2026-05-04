@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { ApplicantStatusButton } from './ApplicantStatusButton';
 import type { ApplicationStatus } from '@/pages/admin/Dashboard/types/dashboard';
 
@@ -8,13 +8,16 @@ type Props = {
   updateStatus: (status: ApplicationStatus) => void;
 };
 
-export const ApplicantStatusToggle = ({ status, updateStatus }: Props) => {
+export const ApplicantStatusToggle = memo(({ status, updateStatus }: Props) => {
   const [statusOption, setStatusOption] = useState(status);
 
-  const handleClick = (newStatus: ApplicationStatus) => {
-    setStatusOption(newStatus);
-    updateStatus(newStatus);
-  };
+  const handleClick = useCallback(
+    (newStatus: ApplicationStatus) => {
+      setStatusOption(newStatus);
+      updateStatus(newStatus);
+    },
+    [updateStatus],
+  );
 
   return (
     <Container>
@@ -38,7 +41,8 @@ export const ApplicantStatusToggle = ({ status, updateStatus }: Props) => {
       />
     </Container>
   );
-};
+});
+ApplicantStatusToggle.displayName = 'ApplicantStatusToggle';
 
 const Container = styled.div(() => ({
   display: 'flex',

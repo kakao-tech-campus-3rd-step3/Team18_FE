@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { memo } from 'react';
 import { Text } from '@/shared/components/Text';
 
 type Props = {
@@ -6,7 +7,7 @@ type Props = {
   email?: string;
   phoneNumber?: string;
 };
-export const ApplicantInfoSection = ({ studentId, email, phoneNumber }: Props) => {
+export const ApplicantInfoSection = memo(({ studentId, email, phoneNumber }: Props) => {
   return (
     <Layout>
       <Title>
@@ -30,7 +31,8 @@ export const ApplicantInfoSection = ({ studentId, email, phoneNumber }: Props) =
       </InfoContainer>
     </Layout>
   );
-};
+});
+ApplicantInfoSection.displayName = 'ApplicantInfoSection';
 
 const Layout = styled.div(({ theme }) => ({
   border: `1px solid ${theme.colors.gray200}`,

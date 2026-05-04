@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { memo } from 'react';
 import type { StatusLabel, ApplicationStatus } from '@/pages/admin/Dashboard/types/dashboard';
 
 type Props = {
@@ -8,13 +9,14 @@ type Props = {
   onClick: (status: ApplicationStatus) => void;
 };
 
-export const ApplicantStatusButton = ({ label, value, selected, onClick }: Props) => {
+export const ApplicantStatusButton = memo(({ label, value, selected, onClick }: Props) => {
   return (
     <Wrapper label={label} selected={selected} onClick={() => onClick(value)}>
       {label}
     </Wrapper>
   );
-};
+});
+ApplicantStatusButton.displayName = 'ApplicantStatusButton';
 
 const Wrapper = styled.button<Pick<Props, 'selected' | 'label'>>(({ theme, selected, label }) => {
   const statusStyles = {
