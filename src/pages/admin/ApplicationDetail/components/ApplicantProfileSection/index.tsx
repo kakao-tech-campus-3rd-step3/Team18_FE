@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { memo } from 'react';
 import { Text } from '@/shared/components/Text';
 import { ApplicantStarRating } from './ApplicantStarRating';
 import { ApplicantStatusToggle } from './ApplicantStatusToggle';
@@ -12,28 +13,25 @@ type Props = {
   updateStatus: (status: ApplicationStatus) => void;
 };
 
-export const ApplicantProfileSection = ({
-  name,
-  department,
-  status,
-  rating,
-  updateStatus,
-}: Props) => {
-  return (
-    <Container>
-      <LeftSection>
-        <ProfileWrapper>
-          <Text size='xl'>{name}</Text>
-          <Text color='#616677'>{department}</Text>
-        </ProfileWrapper>
-        <ApplicantStarRating rating={rating} />
-      </LeftSection>
-      <RightSection>
-        <ApplicantStatusToggle status={status} updateStatus={updateStatus} />
-      </RightSection>
-    </Container>
-  );
-};
+export const ApplicantProfileSection = memo(
+  ({ name, department, status, rating, updateStatus }: Props) => {
+    return (
+      <Container>
+        <LeftSection>
+          <ProfileWrapper>
+            <Text size='xl'>{name}</Text>
+            <Text color='#616677'>{department}</Text>
+          </ProfileWrapper>
+          <ApplicantStarRating rating={rating} />
+        </LeftSection>
+        <RightSection>
+          <ApplicantStatusToggle status={status} updateStatus={updateStatus} />
+        </RightSection>
+      </Container>
+    );
+  },
+);
+ApplicantProfileSection.displayName = 'ApplicantProfileSection';
 
 const Container = styled.div(() => ({
   display: 'flex',
