@@ -17,6 +17,7 @@ export type ClubDetail = {
   recruitStatus: RecruitStatus;
   presidentName: string;
   presidentPhoneNumber: string;
+  isTelNoOpen: boolean;
   recruitStart: string;
   recruitEnd: string;
   applicationNotice: string;

@@ -9,11 +9,12 @@ export const SidebarContainer = styled.div(({ theme }) => ({
   borderRadius: theme.radius.md,
 }));
 
-export const InfoItem = styled.div<{ column?: boolean }>(({ column }) => ({
+export const InfoItem = styled.div<{ column?: boolean; tight?: boolean }>(({ column, tight }) => ({
   display: 'flex',
   alignItems: column ? 'flex-start' : 'center',
   flexDirection: column ? 'column' : 'row',
-  paddingTop: column ? '2rem' : '0',
+  paddingTop: column && !tight ? '2rem' : '0',
+  marginTop: tight ? '-0.5rem' : '0',
   gap: '0.5rem',
 }));
 
@@ -57,4 +58,30 @@ export const SubText = styled.span(({ theme }) => ({
   fontSize: theme.font.size.sm,
   color: theme.colors.textSecondary,
   lineHeight: 0.1,
+}));
+
+export const ToggleGroup = styled.div({
+  display: 'flex',
+  gap: '0.4rem',
+  width: '100%',
+  justifyContent: 'flex-end',
+});
+
+export const ToggleButton = styled.button<{ active: boolean }>(({ theme, active }) => ({
+  padding: '0.3rem 1rem',
+  borderRadius: '4rem',
+  fontSize: theme.font.size.sm,
+  fontWeight: active ? theme.font.weight.bold : theme.font.weight.regular,
+  cursor: 'pointer',
+  transition: 'all 200ms ease-in-out',
+  border: `1px solid ${active ? theme.colors.primary : theme.colors.gray300}`,
+  backgroundColor: active ? theme.colors.primary100 : theme.colors.bg,
+  color: active ? theme.colors.primary : theme.colors.gray600,
+}));
+
+export const ToggleHelp = styled.span(({ theme }) => ({
+  fontSize: theme.font.size.xs,
+  color: theme.colors.textSecondary,
+  marginTop: '-1rem',
+  textAlign: 'right',
 }));
