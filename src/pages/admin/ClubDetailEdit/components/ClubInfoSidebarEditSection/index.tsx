@@ -1,5 +1,5 @@
 import 'react-datepicker/dist/react-datepicker.css';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { UnderlineInputField } from '@/shared/components/Form/InputField/UnderlineInputField';
 import { OutlineTextareaField } from '@/shared/components/Form/TextAreaField/OutlineTextareaField';
 import { formatDate } from '@/shared/utils/dateUtils';
@@ -8,11 +8,13 @@ import * as S from './index.styled';
 export const ClubInfoSidebarEditSection = () => {
   const {
     register,
+    control,
     formState: { errors },
     getValues,
   } = useFormContext<{
     presidentName: string;
     presidentPhoneNumber: string;
+    isTelNoOpen: boolean;
     location: string;
     recruitStart: string | null;
     recruitEnd: string | null;
@@ -22,6 +24,7 @@ export const ClubInfoSidebarEditSection = () => {
   }>();
 
   const formValues = getValues();
+  const isTelNoOpen = useWatch({ control, name: 'isTelNoOpen' });
 
   return (
     <S.SidebarContainer>
@@ -32,25 +35,60 @@ export const ClubInfoSidebarEditSection = () => {
         </S.DisplayWrapper>
       </S.InfoItem>
 
-      <S.InfoItem>
-        <S.Label>연락처</S.Label>
-        <S.InputWrapper>
-          <UnderlineInputField
-            {...register('presidentPhoneNumber', {
-              pattern: {
-                value: /^\d{3}-\d{4}-\d{4}$/,
-                message: "'-'를 포함한 형식으로 입력해주세요.",
-              },
-              validate: (value) =>
-                !value ||
-                /^\d{3}-\d{4}-\d{4}$/.test(value) ||
-                '전화번호 형식은 000-0000-0000입니다.',
-            })}
-            invalid={!!errors.presidentPhoneNumber}
-            message={errors.presidentPhoneNumber?.message}
-          />
-        </S.InputWrapper>
-      </S.InfoItem>
+      <S.FieldGroup>
+        <S.InfoItem>
+          <S.Label>연락처</S.Label>
+          <S.InputWrapper>
+            <UnderlineInputField
+              {...register('presidentPhoneNumber', {
+                pattern: {
+                  value: /^\d{3}-\d{4}-\d{4}$/,
+                  message: "'-'를 포함한 형식으로 입력해주세요.",
+                },
+                validate: (value) =>
+                  !value ||
+                  /^\d{3}-\d{4}-\d{4}$/.test(value) ||
+                  '전화번호 형식은 000-0000-0000입니다.',
+              })}
+              invalid={!!errors.presidentPhoneNumber}
+              message={errors.presidentPhoneNumber?.message}
+            />
+          </S.InputWrapper>
+        </S.InfoItem>
+
+        <S.InfoItem>
+          <S.InputWrapper>
+            <Controller
+              name='isTelNoOpen'
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <S.ToggleGroup>
+                  <S.ToggleButton
+                    type='button'
+                    active={value === true}
+                    onClick={() => onChange(true)}
+                  >
+                    공개
+                  </S.ToggleButton>
+                  <S.ToggleButton
+                    type='button'
+                    active={value === false}
+                    onClick={() => onChange(false)}
+                  >
+                    비공개
+                  </S.ToggleButton>
+                </S.ToggleGroup>
+              )}
+            />
+          </S.InputWrapper>
+        </S.InfoItem>
+
+        <S.ToggleHelp>
+          {isTelNoOpen
+            ? '동아리 상세 페이지에 연락처가 노출됩니다.'
+            : '연락처가 외부에 노출되지 않습니다.'}
+        </S.ToggleHelp>
+      </S.FieldGroup>
 
       <S.InfoItem>
         <S.Label>인스타그램 링크</S.Label>
