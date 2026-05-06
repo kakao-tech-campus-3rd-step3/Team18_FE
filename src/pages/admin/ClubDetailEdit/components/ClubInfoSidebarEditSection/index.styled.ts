@@ -9,14 +9,19 @@ export const SidebarContainer = styled.div(({ theme }) => ({
   borderRadius: theme.radius.md,
 }));
 
-export const InfoItem = styled.div<{ column?: boolean; tight?: boolean }>(({ column, tight }) => ({
+export const InfoItem = styled.div<{ column?: boolean }>(({ column }) => ({
   display: 'flex',
   alignItems: column ? 'flex-start' : 'center',
   flexDirection: column ? 'column' : 'row',
-  paddingTop: column && !tight ? '2rem' : '0',
-  marginTop: tight ? '-0.5rem' : '0',
+  paddingTop: column ? '2rem' : '0',
   gap: '0.5rem',
 }));
+
+export const FieldGroup = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.4rem',
+});
 
 export const InputWrapper = styled.div({
   display: 'flex',
@@ -82,6 +87,5 @@ export const ToggleButton = styled.button<{ active: boolean }>(({ theme, active 
 export const ToggleHelp = styled.span(({ theme }) => ({
   fontSize: theme.font.size.xs,
   color: theme.colors.textSecondary,
-  marginTop: '-1rem',
   textAlign: 'right',
 }));
