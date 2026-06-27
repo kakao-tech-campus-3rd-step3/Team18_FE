@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ROUTE_PATH } from '@/app/constants/routerPath';
 import {
   AUTH_ERRORS,
   getAccessToken,
@@ -34,7 +35,7 @@ apiInstance.interceptors.request.use((config) => {
 
 const handleLogout = (errorMessage: string) => {
   removeAccessToken();
-  window.location.href = LOGOUT_REDIRECT_URI_REISSUE;
+  window.location.href = LOGOUT_REDIRECT_URI_REISSUE || ROUTE_PATH.COMMON.MAIN;
   throw new Error(errorMessage);
 };
 
