@@ -21,7 +21,14 @@ type Props = {
   index: number;
   onRemove?: () => void;
 };
-const fieldTypes: QuestionType[] = ['텍스트', '라디오 (1개선택)', '체크박스 (복수선택)'];
+const fieldTypes: QuestionType[] = ['텍스트', '라디오', '체크박스'];
+
+// 옵션 목록에서만 선택 방식 안내를 붙여서 보여준다(선택된 값 표시는 짧게 유지).
+const fieldTypeLabels: Record<QuestionType, string> = {
+  텍스트: '텍스트',
+  라디오: '라디오 (1개선택)',
+  체크박스: '체크박스 (복수선택)',
+};
 
 export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
   const {
@@ -55,9 +62,9 @@ export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
     switch (currentDisplayType) {
       case '텍스트':
         return <TextOptionsBuilder />;
-      case '라디오 (1개선택)':
+      case '라디오':
         return <RadioOptionsBuilder formHandler={formHandler} questionIndex={index} />;
-      case '체크박스 (복수선택)':
+      case '체크박스':
         return <CheckboxOptionsBuilder formHandler={formHandler} questionIndex={index} />;
 
       default:
@@ -96,7 +103,12 @@ export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
             invalid={!!errors.formQuestions?.[index]?.question}
             message={errors.formQuestions?.[index]?.question?.message}
           />
-          <Dropdown value={currentDisplayType} onSelect={handleTypeSelect} options={fieldTypes} />
+          <Dropdown
+            value={currentDisplayType}
+            onSelect={handleTypeSelect}
+            options={fieldTypes}
+            getOptionLabel={(option) => fieldTypeLabels[option]}
+          />
         </Wrapper>
       </CommonHeader>
 

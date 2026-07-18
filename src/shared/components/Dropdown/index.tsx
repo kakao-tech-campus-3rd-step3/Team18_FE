@@ -8,6 +8,8 @@ type Props<T extends string> = {
   placeholder?: string;
   onSelect: (value: T) => void;
   disabled?: boolean;
+  // 옵션 목록에 표시할 라벨을 값과 다르게 지정할 때 사용한다(선택된 값 표시는 value 그대로).
+  getOptionLabel?: (option: T) => string;
 };
 
 export const Dropdown = <T extends string>({
@@ -16,6 +18,7 @@ export const Dropdown = <T extends string>({
   placeholder,
   onSelect,
   disabled = false,
+  getOptionLabel,
 }: Props<T>) => {
   const [isShowOptions, setIsShowOptions] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -59,7 +62,7 @@ export const Dropdown = <T extends string>({
                 onClick={() => handleSelectOption(option)}
                 selected={value === option}
               >
-                {option}
+                {getOptionLabel ? getOptionLabel(option) : option}
               </S.Option>
             ))}
           </S.SelectOptions>
