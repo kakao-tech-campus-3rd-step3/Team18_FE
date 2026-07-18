@@ -12,7 +12,8 @@ export const SelectBox = styled.div<{ disabled: boolean }>(({ theme, disabled })
   position: 'relative',
   width: '100%',
   height: '2.65rem',
-  padding: '10px',
+  // 오른쪽은 ::before 화살표(⌵) 영역과 겹치지 않도록 여유를 둔다.
+  padding: '10px 2.2rem 10px 10px',
   borderRadius: theme.radius.md,
   backgroundColor: disabled ? theme.colors.gray00 : theme.colors.bg,
   alignSelf: 'center',

@@ -21,7 +21,7 @@ type Props = {
   index: number;
   onRemove?: () => void;
 };
-const fieldTypes: QuestionType[] = ['텍스트', '라디오', '체크박스'];
+const fieldTypes: QuestionType[] = ['텍스트', '라디오 (1개선택)', '체크박스 (복수선택)'];
 
 export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
   const {
@@ -55,9 +55,9 @@ export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
     switch (currentDisplayType) {
       case '텍스트':
         return <TextOptionsBuilder />;
-      case '라디오':
+      case '라디오 (1개선택)':
         return <RadioOptionsBuilder formHandler={formHandler} questionIndex={index} />;
-      case '체크박스':
+      case '체크박스 (복수선택)':
         return <CheckboxOptionsBuilder formHandler={formHandler} questionIndex={index} />;
 
       default:
