@@ -8,10 +8,9 @@ import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/t
 
 type Props = {
   formHandler: UseFormReturn<ApplicationFormData>;
-  isEditMode: boolean;
 };
 
-export const ApplicationFieldsFormTableSection = ({ formHandler, isEditMode }: Props) => {
+export const ApplicationFieldsFormTableSection = ({ formHandler }: Props) => {
   const { control } = formHandler;
 
   const { fields, append, remove } = useFieldArray({
@@ -37,22 +36,13 @@ export const ApplicationFieldsFormTableSection = ({ formHandler, isEditMode }: P
         <div key={data.id}>
           {index !== 0 && <Divider />}
           {data.fieldType === 'TIME_SLOT' ? (
-            <TimeslotFieldBuilder
-              formHandler={formHandler}
-              questionIndex={index}
-              isEditMode={isEditMode}
-            />
+            <TimeslotFieldBuilder formHandler={formHandler} questionIndex={index} />
           ) : (
-            <FormFieldItem
-              index={index}
-              formHandler={formHandler}
-              onRemove={() => remove(index)}
-              isEditMode={isEditMode}
-            />
+            <FormFieldItem index={index} formHandler={formHandler} onRemove={() => remove(index)} />
           )}
         </div>
       ))}
-      {isEditMode && <AddFieldButton onClick={handleAddFormField} />}
+      <AddFieldButton onClick={handleAddFormField} />
     </>
   );
 };

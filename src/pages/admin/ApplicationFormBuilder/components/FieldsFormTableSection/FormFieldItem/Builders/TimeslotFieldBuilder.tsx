@@ -17,7 +17,6 @@ import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/t
 type Props = {
   formHandler: UseFormReturn<ApplicationFormData>;
   questionIndex: number;
-  isEditMode: boolean;
 };
 
 const times = generateTimes();
@@ -28,7 +27,7 @@ const CustomInput = ({ value, onClick }: CustomInputProps) => (
   </S.CustomInputWrapper>
 );
 
-export const TimeslotFieldBuilder = ({ formHandler, questionIndex, isEditMode }: Props) => {
+export const TimeslotFieldBuilder = ({ formHandler, questionIndex }: Props) => {
   const {
     register,
     setValue,
@@ -75,7 +74,6 @@ export const TimeslotFieldBuilder = ({ formHandler, questionIndex, isEditMode }:
           })}
           invalid={!!errors.formQuestions?.[questionIndex]?.question}
           message={errors.formQuestions?.[questionIndex]?.question?.message}
-          disabled={!isEditMode}
         />
       </S.HeaderWrapper>
       <S.Container>
@@ -90,7 +88,6 @@ export const TimeslotFieldBuilder = ({ formHandler, questionIndex, isEditMode }:
             selectsRange
             customInput={<CustomInput value={formatDateRange()} />}
             popperPlacement='bottom'
-            disabled={!isEditMode}
           />
           <input
             type='hidden'
@@ -108,21 +105,11 @@ export const TimeslotFieldBuilder = ({ formHandler, questionIndex, isEditMode }:
         <S.TimeSelectContainer>
           <S.TimeSelectWrapper>
             <Text color='#6E6E6E'>시작시간</Text>
-            <Dropdown
-              value={currentStartTime}
-              onSelect={handleStartTimeSelect}
-              options={times}
-              disabled={!isEditMode}
-            />
+            <Dropdown value={currentStartTime} onSelect={handleStartTimeSelect} options={times} />
           </S.TimeSelectWrapper>
           <S.TimeSelectWrapper>
             <Text color='#6E6E6E'>마감시간</Text>
-            <Dropdown
-              value={currentEndTime}
-              onSelect={handleEndTimeSelect}
-              options={times}
-              disabled={!isEditMode}
-            />
+            <Dropdown value={currentEndTime} onSelect={handleEndTimeSelect} options={times} />
           </S.TimeSelectWrapper>
         </S.TimeSelectContainer>
       </S.Container>

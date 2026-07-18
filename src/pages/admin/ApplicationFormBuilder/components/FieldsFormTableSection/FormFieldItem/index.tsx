@@ -20,11 +20,10 @@ type Props = {
   formHandler: UseFormReturn<ApplicationFormData>;
   index: number;
   onRemove?: () => void;
-  isEditMode: boolean;
 };
 const fieldTypes: QuestionType[] = ['텍스트', '라디오', '체크박스'];
 
-export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Props) => {
+export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
   const {
     watch,
     setValue,
@@ -57,21 +56,9 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
       case '텍스트':
         return <TextOptionsBuilder />;
       case '라디오':
-        return (
-          <RadioOptionsBuilder
-            formHandler={formHandler}
-            questionIndex={index}
-            isEditMode={isEditMode}
-          />
-        );
+        return <RadioOptionsBuilder formHandler={formHandler} questionIndex={index} />;
       case '체크박스':
-        return (
-          <CheckboxOptionsBuilder
-            formHandler={formHandler}
-            questionIndex={index}
-            isEditMode={isEditMode}
-          />
-        );
+        return <CheckboxOptionsBuilder formHandler={formHandler} questionIndex={index} />;
 
       default:
         return null;
@@ -92,14 +79,12 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
       <input type='hidden' {...register(`formQuestions.${index}.displayOrder`)} />
       <CommonHeader>
         <Wrapper>
-          {isEditMode && (
-            <IoCloseOutline
-              size={'2rem'}
-              color='#757575'
-              onClick={onRemove}
-              style={{ cursor: 'pointer' }}
-            />
-          )}
+          <IoCloseOutline
+            size={'2rem'}
+            color='#757575'
+            onClick={onRemove}
+            style={{ cursor: 'pointer' }}
+          />
         </Wrapper>
         <Wrapper>
           <OutlineInputField
@@ -110,14 +95,8 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
             })}
             invalid={!!errors.formQuestions?.[index]?.question}
             message={errors.formQuestions?.[index]?.question?.message}
-            disabled={!isEditMode}
           />
-          <Dropdown
-            value={currentDisplayType}
-            onSelect={handleTypeSelect}
-            options={fieldTypes}
-            disabled={!isEditMode}
-          />
+          <Dropdown value={currentDisplayType} onSelect={handleTypeSelect} options={fieldTypes} />
         </Wrapper>
       </CommonHeader>
 
