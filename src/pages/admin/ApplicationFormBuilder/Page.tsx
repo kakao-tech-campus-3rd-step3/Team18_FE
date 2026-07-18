@@ -11,6 +11,7 @@ import { useOnboardingPopup } from '@/shared/hooks/useOnboardingPopup';
 import { toast } from '@/shared/utils/toast';
 import { ApplicationInfoSection } from './components/ApplicationInfoSection';
 import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
+import { ApplicationFormLinkCopySection } from './components/FormLinkCopySection';
 import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection';
 import type { ApplicationFormData } from './types/fieldType';
 
@@ -90,6 +91,7 @@ export const ApplicationFormBuilderPage = () => {
       />
 
       <ContentContainer>
+        <ApplicationFormLinkCopySection clubId={Number(clubId)} />
         <ApplicationFormBuilderHeaderSection
           isEditMode={isEditMode}
           onEdit={handleEdit}
