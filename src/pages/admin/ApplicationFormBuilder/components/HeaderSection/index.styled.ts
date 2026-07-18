@@ -18,11 +18,6 @@ export const HeaderWrapper = styled.div({
   alignItems: 'center',
 });
 
-export const ButtonWrapper = styled.div({
-  display: 'flex',
-  gap: '0.5rem',
-});
-
 export const Title = styled.h1(({ theme }) => ({
   fontSize: '2.5rem',
   fontWeight: theme.font.weight.medium,

@@ -13,7 +13,6 @@ import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/t
 
 type Props = {
   formHandler: UseFormReturn<ApplicationFormData>;
-  isEditMode: boolean;
 };
 
 const CustomInput = ({ value, onClick }: CustomInputProps) => (
@@ -24,7 +23,7 @@ const CustomInput = ({ value, onClick }: CustomInputProps) => (
   </S.CustomInputWrapper>
 );
 
-export const ApplicationInfoSection = ({ formHandler, isEditMode }: Props) => {
+export const ApplicationInfoSection = ({ formHandler }: Props) => {
   const {
     register,
     watch,
@@ -42,7 +41,7 @@ export const ApplicationInfoSection = ({ formHandler, isEditMode }: Props) => {
   return (
     <>
       <Global styles={datePickerStyles} />
-      <Layout isEditMode={isEditMode}>
+      <Layout>
         <Wrapper>
           <UnderlineInputField
             placeholder='ex. 동아리명 10기 신입부원 모집'
@@ -55,7 +54,6 @@ export const ApplicationInfoSection = ({ formHandler, isEditMode }: Props) => {
             })}
             invalid={!!errors.title}
             message={errors.title?.message}
-            disabled={!isEditMode}
           />
           <S.DatePickerWrapper>
             <DatePicker
@@ -68,7 +66,6 @@ export const ApplicationInfoSection = ({ formHandler, isEditMode }: Props) => {
               selectsRange
               customInput={<CustomInput value={formatDateRange()} />}
               popperPlacement='bottom'
-              disabled={!isEditMode}
             />
             <input
               type='hidden'
@@ -86,19 +83,18 @@ export const ApplicationInfoSection = ({ formHandler, isEditMode }: Props) => {
           })}
           invalid={!!errors.description}
           message={errors.description?.message}
-          disabled={!isEditMode}
         />
       </Layout>
     </>
   );
 };
 
-const Layout = styled.div<{ isEditMode: boolean }>(({ theme, isEditMode }) => ({
+const Layout = styled.div(({ theme }) => ({
   width: '100%',
   border: `1px solid ${theme.colors.gray200}`,
   borderRadius: theme.radius.sm,
   padding: '1.5rem',
-  backgroundColor: isEditMode ? theme.colors.bg : theme.colors.gray00,
+  backgroundColor: theme.colors.bg,
   display: 'flex',
   flexDirection: 'column',
   gap: '2.5rem',

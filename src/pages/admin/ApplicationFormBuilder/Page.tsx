@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import {
@@ -11,13 +10,13 @@ import { useOnboardingPopup } from '@/shared/hooks/useOnboardingPopup';
 import { toast } from '@/shared/utils/toast';
 import { ApplicationInfoSection } from './components/ApplicationInfoSection';
 import { ApplicationFieldsFormTableSection } from './components/FieldsFormTableSection';
+import { ApplicationFormActionsSection } from './components/FormActionsSection';
 import { ApplicationFormLinkCopySection } from './components/FormLinkCopySection';
 import { ApplicationFormBuilderHeaderSection } from './components/HeaderSection';
 import type { ApplicationFormData } from './types/fieldType';
 
 export const ApplicationFormBuilderPage = () => {
   const { clubId } = useParams();
-  const [isEditMode, setIsEditMode] = useState(false);
   const {
     isOpen: isFormPopupOpen,
     confirm: confirmFormPopup,
@@ -30,9 +29,7 @@ export const ApplicationFormBuilderPage = () => {
     defaultValues: data,
   });
 
-  const handleEdit = () => setIsEditMode(true);
   const handleCancel = () => {
-    setIsEditMode(false);
     if (data) {
       formHandler.reset(data);
     }
@@ -41,7 +38,7 @@ export const ApplicationFormBuilderPage = () => {
   const handleSave = formHandler.handleSubmit((formData) => {
     adaptedPatchForm(formData, {
       onSuccess: () => {
-        setIsEditMode(false);
+        toast.success('지원폼이 저장되었습니다.');
       },
       onError: (error) => {
         toast.error(error.message || '지원서 저장에 실패했습니다.');
@@ -93,17 +90,15 @@ export const ApplicationFormBuilderPage = () => {
       <ContentContainer>
         <ApplicationFormLinkCopySection clubId={Number(clubId)} />
         <ApplicationFormBuilderHeaderSection
-          isEditMode={isEditMode}
-          onEdit={handleEdit}
-          onSave={handleSave}
-          onCancel={handleCancel}
           isInterviewMode={isInterviewMode}
           onInterviewChange={handleInterviewChange}
           onOpenGuide={reopenFormPopup}
         />
-        <ApplicationInfoSection formHandler={formHandler} isEditMode={isEditMode} />
+        <ApplicationInfoSection formHandler={formHandler} />
 
-        <ApplicationFieldsFormTableSection formHandler={formHandler} isEditMode={isEditMode} />
+        <ApplicationFieldsFormTableSection formHandler={formHandler} />
+
+        <ApplicationFormActionsSection onCancel={handleCancel} onSave={handleSave} />
       </ContentContainer>
     </Layout>
   );

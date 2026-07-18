@@ -11,10 +11,9 @@ import type { ApplicationFormData } from '@/pages/admin/ApplicationFormBuilder/t
 type Props = {
   formHandler: UseFormReturn<ApplicationFormData>;
   questionIndex: number;
-  isEditMode: boolean;
 };
 
-export const CheckboxOptionsBuilder = ({ formHandler, questionIndex, isEditMode }: Props) => {
+export const CheckboxOptionsBuilder = ({ formHandler, questionIndex }: Props) => {
   const {
     register,
     control,
@@ -45,21 +44,18 @@ export const CheckboxOptionsBuilder = ({ formHandler, questionIndex, isEditMode 
             message={
               errors.formQuestions?.[questionIndex]?.optionList?.[optionIndex]?.value?.message
             }
-            disabled={!isEditMode}
           />
           <AiOutlineCloseCircle
             size={'1.5rem'}
             color='#757575'
-            onClick={isEditMode ? () => remove(optionIndex) : undefined}
+            onClick={() => remove(optionIndex)}
           />
         </OptionFieldWrapper>
       ))}
 
-      {isEditMode && (
-        <AddOptionButton onClick={handleAddOption}>
-          <FiPlus /> <Text size='sm'>옵션 추가</Text>
-        </AddOptionButton>
-      )}
+      <AddOptionButton onClick={handleAddOption}>
+        <FiPlus /> <Text size='sm'>옵션 추가</Text>
+      </AddOptionButton>
     </Layout>
   );
 };

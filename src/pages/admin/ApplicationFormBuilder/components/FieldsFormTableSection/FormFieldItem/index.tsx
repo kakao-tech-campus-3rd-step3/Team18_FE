@@ -20,11 +20,10 @@ type Props = {
   formHandler: UseFormReturn<ApplicationFormData>;
   index: number;
   onRemove?: () => void;
-  isEditMode: boolean;
 };
-const fieldTypes: QuestionType[] = ['텍스트', '라디오', '체크박스'];
+const fieldTypes: QuestionType[] = ['서술형', '1개 선택', '복수 선택'];
 
-export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Props) => {
+export const FormFieldItem = ({ formHandler, index, onRemove }: Props) => {
   const {
     watch,
     setValue,
@@ -47,31 +46,19 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
         return reverseTypeMapping[qType];
       case 'TIME_SLOT':
       default:
-        return '텍스트';
+        return '서술형';
     }
   };
   const currentDisplayType = getDisplayType(questionType);
 
   const renderOptionsBuilder = () => {
     switch (currentDisplayType) {
-      case '텍스트':
+      case '서술형':
         return <TextOptionsBuilder />;
-      case '라디오':
-        return (
-          <RadioOptionsBuilder
-            formHandler={formHandler}
-            questionIndex={index}
-            isEditMode={isEditMode}
-          />
-        );
-      case '체크박스':
-        return (
-          <CheckboxOptionsBuilder
-            formHandler={formHandler}
-            questionIndex={index}
-            isEditMode={isEditMode}
-          />
-        );
+      case '1개 선택':
+        return <RadioOptionsBuilder formHandler={formHandler} questionIndex={index} />;
+      case '복수 선택':
+        return <CheckboxOptionsBuilder formHandler={formHandler} questionIndex={index} />;
 
       default:
         return null;
@@ -92,14 +79,12 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
       <input type='hidden' {...register(`formQuestions.${index}.displayOrder`)} />
       <CommonHeader>
         <Wrapper>
-          {isEditMode && (
-            <IoCloseOutline
-              size={'2rem'}
-              color='#757575'
-              onClick={onRemove}
-              style={{ cursor: 'pointer' }}
-            />
-          )}
+          <IoCloseOutline
+            size={'2rem'}
+            color='#757575'
+            onClick={onRemove}
+            style={{ cursor: 'pointer' }}
+          />
         </Wrapper>
         <Wrapper>
           <OutlineInputField
@@ -110,14 +95,8 @@ export const FormFieldItem = ({ formHandler, index, onRemove, isEditMode }: Prop
             })}
             invalid={!!errors.formQuestions?.[index]?.question}
             message={errors.formQuestions?.[index]?.question?.message}
-            disabled={!isEditMode}
           />
-          <Dropdown
-            value={currentDisplayType}
-            onSelect={handleTypeSelect}
-            options={fieldTypes}
-            disabled={!isEditMode}
-          />
+          <Dropdown value={currentDisplayType} onSelect={handleTypeSelect} options={fieldTypes} />
         </Wrapper>
       </CommonHeader>
 
