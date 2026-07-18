@@ -1,4 +1,5 @@
 import { FiCopy, FiLink } from 'react-icons/fi';
+import { copyToClipboard } from '@/shared/utils/copyToClipboard';
 import { toast } from '@/shared/utils/toast';
 import * as S from './index.styled';
 
@@ -7,13 +8,15 @@ type Props = {
 };
 
 export const ApplicationFormLinkCopySection = ({ clubId }: Props) => {
+  if (Number.isNaN(clubId)) return null;
+
   const formLink = `${window.location.origin}/clubs/${clubId}/apply`;
 
   const handleCopyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(formLink);
+    const copied = await copyToClipboard(formLink);
+    if (copied) {
       toast.success('지원폼 링크가 복사되었습니다.');
-    } catch {
+    } else {
       toast.error('지원폼 링크 복사에 실패했습니다.');
     }
   };
