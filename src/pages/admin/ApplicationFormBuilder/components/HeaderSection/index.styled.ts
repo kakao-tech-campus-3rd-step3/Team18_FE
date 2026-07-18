@@ -5,7 +5,6 @@ export const Container = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: '2rem',
-  padding: '2.5rem 0 0 0',
   boxSizing: 'border-box',
 
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {

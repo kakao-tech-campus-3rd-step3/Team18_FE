@@ -6,6 +6,7 @@ import { ROUTE_PATH } from '@/app/constants/routerPath';
 import { SPONSOR_ACCOUNT } from '@/app/constants/sponsor';
 import { Modal } from '@/shared/components/Modal';
 import { useModal } from '@/shared/hooks/useModal';
+import { copyToClipboard } from '@/shared/utils/copyToClipboard';
 import { toast } from '@/shared/utils/toast';
 import * as S from './index.styled';
 
@@ -18,10 +19,10 @@ const Footer = () => {
     matchPath(`/${ROUTE_PATH.USER.APPLICATION}`, pathname) !== null;
 
   const handleCopyAccount = async () => {
-    try {
-      await navigator.clipboard.writeText(SPONSOR_ACCOUNT.number);
+    const copied = await copyToClipboard(SPONSOR_ACCOUNT.number);
+    if (copied) {
       toast.success('계좌번호가 복사되었습니다.');
-    } catch {
+    } else {
       toast.error('계좌번호 복사에 실패했습니다.');
     }
   };
