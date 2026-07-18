@@ -1,9 +1,9 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
-const ENVELOPE_WIDTH = 240;
-const ENVELOPE_HEIGHT = 150;
-const FLAP_HEIGHT = 78;
+const ENVELOPE_WIDTH = 96;
+const ENVELOPE_HEIGHT = 60;
+const FLAP_HEIGHT = 31;
 
 const hintBob = keyframes({
   '0%, 100%': { transform: 'translateY(0)' },
