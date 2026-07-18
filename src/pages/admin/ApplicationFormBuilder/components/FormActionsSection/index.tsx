@@ -9,24 +9,27 @@ type Props = {
 export const ApplicationFormActionsSection = ({ onCancel, onSave }: Props) => {
   return (
     <Layout>
-      <Button variant='outline' width='4rem' onClick={onCancel}>
+      <Button variant='outline' onClick={onCancel}>
         취소
       </Button>
-      <Button width='6rem' onClick={onSave}>
-        저장하기
-      </Button>
+      <Button onClick={onSave}>저장하기</Button>
     </Layout>
   );
 };
 
 const Layout = styled.div(({ theme }) => ({
   display: 'flex',
-  justifyContent: 'flex-end',
-  gap: '0.5rem',
+  gap: '1.5rem',
   width: '100%',
   marginTop: '1rem',
 
+  '& > *': {
+    width: 'auto',
+    flex: '1 1 0',
+  },
+
   [`@media (max-width: ${theme.breakpoints.mobile})`]: {
+    gap: '1rem',
     marginTop: '0.5rem',
   },
 }));
