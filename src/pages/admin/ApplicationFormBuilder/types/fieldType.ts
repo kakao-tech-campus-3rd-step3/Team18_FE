@@ -1,4 +1,4 @@
-export type QuestionType = '텍스트' | '라디오' | '체크박스';
+export type QuestionType = '서술형' | '1개 선택' | '복수 선택';
 
 type TimeSlotOption = {
   date: string;
