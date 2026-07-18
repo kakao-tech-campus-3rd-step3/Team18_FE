@@ -6,7 +6,7 @@ export const Container = styled.div(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'space-between',
   gap: '0.75rem',
-  marginTop: '2.5rem',
+  margin: '2.5rem 0 0.5rem 0',
   padding: '0.75rem 0.75rem 0.75rem 1rem',
   borderRadius: theme.radius.md,
   backgroundColor: theme.colors.bgGreen,
