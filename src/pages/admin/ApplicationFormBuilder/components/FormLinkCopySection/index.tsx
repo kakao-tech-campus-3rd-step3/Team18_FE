@@ -31,6 +31,9 @@ export const ApplicationFormLinkCopySection = ({ clubId }: Props) => {
         <FiCopy />
         복사
       </S.CopyButton>
+      <S.Tooltip role='tooltip'>
+        복사하지 않아도 동아리움에서는 지원 시기에 맞게 지원하기 버튼이 활성화 돼요!
+      </S.Tooltip>
     </S.Container>
   );
 };

@@ -1,6 +1,28 @@
 import styled from '@emotion/styled';
 
+export const Tooltip = styled.span(({ theme }) => ({
+  position: 'absolute',
+  top: 'calc(100% + 0.5rem)',
+  right: 0,
+  width: 'max-content',
+  maxWidth: '100%',
+  padding: '0.5rem 0.75rem',
+  borderRadius: theme.radius.sm,
+  backgroundColor: theme.colors.gray800,
+  color: theme.colors.bg,
+  fontSize: theme.font.size.xs,
+  lineHeight: 1.5,
+  boxShadow: theme.shadow.sm,
+  opacity: 0,
+  visibility: 'hidden',
+  transition: 'opacity 0.15s ease',
+  pointerEvents: 'none',
+  zIndex: 1,
+  boxSizing: 'border-box',
+}));
+
 export const Container = styled.div(({ theme }) => ({
+  position: 'relative',
   width: '100%',
   display: 'flex',
   alignItems: 'center',
@@ -12,6 +34,11 @@ export const Container = styled.div(({ theme }) => ({
   backgroundColor: theme.colors.bgGreen,
   border: `1px solid ${theme.colors.border}`,
   boxSizing: 'border-box',
+
+  [`&:hover ${Tooltip}, &:focus-within ${Tooltip}`]: {
+    opacity: 1,
+    visibility: 'visible',
+  },
 }));
 
 export const LinkInfo = styled.div({
