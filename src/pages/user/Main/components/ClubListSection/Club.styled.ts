@@ -1,11 +1,60 @@
+import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import type { RecruitStatus } from '@/pages/user/Main/types/club';
+
+export const ClubHeader = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  gap: '8px',
+});
 
 export const ClubNameContainer = styled.div({
   display: 'flex',
   alignItems: 'center',
   gap: '6px',
+  minWidth: 0,
 });
+
+const pulse = keyframes({
+  '0%': { transform: 'scale(1)', opacity: 1 },
+  '50%': { transform: 'scale(1.25)', opacity: 0.5 },
+  '100%': { transform: 'scale(1)', opacity: 1 },
+});
+
+export const LiveViewerBadge = styled.div(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '6px',
+  flexShrink: 0,
+  fontSize: theme.font.size.xs,
+  fontWeight: theme.font.weight.medium,
+  color: theme.colors.textSecondary,
+  whiteSpace: 'nowrap',
+}));
+
+export const LiveDot = styled.span(({ theme }) => ({
+  width: '6px',
+  height: '6px',
+  borderRadius: '50%',
+  backgroundColor: theme.colors.primary600,
+  animation: `${pulse} 1.6s ease-in-out infinite`,
+  '@media (prefers-reduced-motion: reduce)': {
+    animation: 'none',
+  },
+}));
+
+export const TodayViewCount = styled.div(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '4px',
+  flexShrink: 0,
+  fontSize: theme.font.size.xs,
+  fontWeight: theme.font.weight.regular,
+  color: theme.colors.gray500,
+  whiteSpace: 'nowrap',
+  marginLeft: 'auto', // 보는 중 배지가 없어도 항상 우측 정렬
+}));
 
 export const ClubNameText = styled.div(({ theme }) => ({
   fontSize: theme?.font?.size?.lg,
@@ -91,7 +140,9 @@ export const Grid = styled.div(({ theme }) => ({
   display: 'grid',
   gap: 30,
   padding: '30px 0',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+  // 최소 폭 320px → 1200px 컨테이너에서 3열, 좁아지면 2열/1열로 자동 축소
+  // min(320px, 100%)로 감싸 초소형 화면에서 트랙이 넘치지 않도록 함
+  gridTemplateColumns: 'repeat(auto-fill, minmax(min(320px, 100%), 1fr))',
   justifyContent: 'center',
   justifyItems: 'center',
 

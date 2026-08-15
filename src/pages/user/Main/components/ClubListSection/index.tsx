@@ -1,4 +1,4 @@
-import { BsFillPatchCheckFill } from 'react-icons/bs';
+import { BsEye, BsFillPatchCheckFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useClubFiltering } from '@/pages/user/Main/hooks/useClubFiltering.ts';
 import { engToKorCategory } from '@/shared/utils/formatting.ts';
@@ -36,14 +36,22 @@ export const ClubListSection = ({
       <S.Grid>
         {sortedClubs.map((club: Club) => (
           <S.ClubItem onClick={() => navigate(`/clubs/${club.id}`)} key={club.id}>
-            <S.ClubNameContainer>
-              <S.ClubNameText>{club.name}</S.ClubNameText>
-              {club.isRegistered && (
-                <S.VerifiedBadge>
-                  <BsFillPatchCheckFill size={14} />
-                </S.VerifiedBadge>
+            <S.ClubHeader>
+              <S.ClubNameContainer>
+                <S.ClubNameText>{club.name}</S.ClubNameText>
+                {club.isRegistered && (
+                  <S.VerifiedBadge>
+                    <BsFillPatchCheckFill size={14} />
+                  </S.VerifiedBadge>
+                )}
+              </S.ClubNameContainer>
+              {!!club.currentViewerCount && (
+                <S.LiveViewerBadge title='현재 이 동아리를 보고 있는 사람 수'>
+                  <S.LiveDot />
+                  {club.currentViewerCount}명
+                </S.LiveViewerBadge>
               )}
-            </S.ClubNameContainer>
+            </S.ClubHeader>
             <S.ClubIntroduction>{club.shortIntroduction}</S.ClubIntroduction>
             <S.StatusContainer>
               <S.CategoryStatusBox>
@@ -58,6 +66,12 @@ export const ClubListSection = ({
                   {club.recruitStatus}
                 </S.RecruitStatusText>
               </S.RecruitStatusBox>
+              {club.todayViewCount !== undefined && (
+                <S.TodayViewCount title='오늘 조회수'>
+                  <BsEye size={14} />
+                  오늘 {club.todayViewCount.toLocaleString()}
+                </S.TodayViewCount>
+              )}
             </S.StatusContainer>
           </S.ClubItem>
         ))}
