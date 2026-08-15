@@ -7,8 +7,6 @@ export type Club = {
   shortIntroduction: string;
   recruitStatus: RecruitStatus;
   isRegistered?: boolean;
-  currentViewerCount?: number;
-  todayViewCount?: number;
 };
 
 export const RECRUIT_STATUS_MAP = {

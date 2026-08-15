@@ -1,6 +1,7 @@
 import { BsEye, BsFillPatchCheckFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useClubFiltering } from '@/pages/user/Main/hooks/useClubFiltering.ts';
+import { usePopularClubs } from '@/pages/user/Main/hooks/usePopularClubs.ts';
 import { engToKorCategory } from '@/shared/utils/formatting.ts';
 import * as S from './Club.styled.ts';
 import NoSearchResult from './NoSearchResult.tsx';
@@ -22,6 +23,7 @@ export const ClubListSection = ({
 
   const filterStatus = recruitStatus === '전체' ? undefined : recruitStatus;
   const filteredClubs = useClubFiltering(categoryFilter, searchText, filterStatus);
+  const popularClubs = usePopularClubs();
 
   const isDefaultSort = !searchText && categoryFilter === 'ALL' && !filterStatus;
   const sortedClubs = isDefaultSort
@@ -34,47 +36,51 @@ export const ClubListSection = ({
   return (
     <S.ClubListContainer>
       <S.Grid>
-        {sortedClubs.map((club: Club) => (
-          <S.ClubItem onClick={() => navigate(`/clubs/${club.id}`)} key={club.id}>
-            <S.ClubHeader>
-              <S.ClubNameContainer>
-                <S.ClubNameText>{club.name}</S.ClubNameText>
-                {club.isRegistered && (
-                  <S.VerifiedBadge>
-                    <BsFillPatchCheckFill size={14} />
-                  </S.VerifiedBadge>
+        {sortedClubs.map((club: Club) => {
+          const popular = popularClubs.get(club.id);
+
+          return (
+            <S.ClubItem onClick={() => navigate(`/clubs/${club.id}`)} key={club.id}>
+              <S.ClubHeader>
+                <S.ClubNameContainer>
+                  <S.ClubNameText>{club.name}</S.ClubNameText>
+                  {club.isRegistered && (
+                    <S.VerifiedBadge>
+                      <BsFillPatchCheckFill size={14} />
+                    </S.VerifiedBadge>
+                  )}
+                </S.ClubNameContainer>
+                {popular?.activeViewerBadge && (
+                  <S.LiveViewerBadge title='현재 이 동아리를 보고 있는 사람 수'>
+                    <S.LiveDot />
+                    {popular.activeViewerCount}명
+                  </S.LiveViewerBadge>
                 )}
-              </S.ClubNameContainer>
-              {!!club.currentViewerCount && (
-                <S.LiveViewerBadge title='현재 이 동아리를 보고 있는 사람 수'>
-                  <S.LiveDot />
-                  {club.currentViewerCount}명
-                </S.LiveViewerBadge>
-              )}
-            </S.ClubHeader>
-            <S.ClubIntroduction>{club.shortIntroduction}</S.ClubIntroduction>
-            <S.StatusContainer>
-              <S.CategoryStatusBox>
-                <S.CategoryStatusText>
-                  {club.category in engToKorCategory
-                    ? engToKorCategory[club.category as ClubCategoryEng]
-                    : '전체'}
-                </S.CategoryStatusText>
-              </S.CategoryStatusBox>
-              <S.RecruitStatusBox status={club.recruitStatus}>
-                <S.RecruitStatusText status={club.recruitStatus}>
-                  {club.recruitStatus}
-                </S.RecruitStatusText>
-              </S.RecruitStatusBox>
-              {club.todayViewCount !== undefined && (
-                <S.TodayViewCount title='오늘 조회수'>
-                  <BsEye size={14} />
-                  오늘 {club.todayViewCount.toLocaleString()}
-                </S.TodayViewCount>
-              )}
-            </S.StatusContainer>
-          </S.ClubItem>
-        ))}
+              </S.ClubHeader>
+              <S.ClubIntroduction>{club.shortIntroduction}</S.ClubIntroduction>
+              <S.StatusContainer>
+                <S.CategoryStatusBox>
+                  <S.CategoryStatusText>
+                    {club.category in engToKorCategory
+                      ? engToKorCategory[club.category as ClubCategoryEng]
+                      : '전체'}
+                  </S.CategoryStatusText>
+                </S.CategoryStatusBox>
+                <S.RecruitStatusBox status={club.recruitStatus}>
+                  <S.RecruitStatusText status={club.recruitStatus}>
+                    {club.recruitStatus}
+                  </S.RecruitStatusText>
+                </S.RecruitStatusBox>
+                {popular?.recentViewerBadge && (
+                  <S.TodayViewCount title='오늘 조회수'>
+                    <BsEye size={14} />
+                    오늘 {popular.recentViewerCount.toLocaleString()}
+                  </S.TodayViewCount>
+                )}
+              </S.StatusContainer>
+            </S.ClubItem>
+          );
+        })}
       </S.Grid>
     </S.ClubListContainer>
   );
