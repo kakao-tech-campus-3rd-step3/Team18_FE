@@ -410,8 +410,6 @@ export const popularClubRepository = {
   getPopularClubs: (): PopularClub[] =>
     clubs
       .map((club) => {
-        // 일부 동아리만 인기 기준을 넘도록 id로 갈라둔다. 전부 배지가 붙으면 반환 필터도,
-        // 배지가 없는 카드의 레이아웃도 검증할 수 없다.
         const isRecentPopular = club.id % 3 === 0;
         const isActivePopular = club.id % 5 === 0;
 

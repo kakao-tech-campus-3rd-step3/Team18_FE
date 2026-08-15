@@ -53,7 +53,7 @@ export const TodayViewCount = styled.div(({ theme }) => ({
   fontWeight: theme.font.weight.regular,
   color: theme.colors.gray500,
   whiteSpace: 'nowrap',
-  marginLeft: 'auto', // 보는 중 배지가 없어도 항상 우측 정렬
+  marginLeft: 'auto',
 }));
 
 export const ClubNameText = styled.div(({ theme }) => ({
@@ -140,8 +140,6 @@ export const Grid = styled.div(({ theme }) => ({
   display: 'grid',
   gap: 30,
   padding: '30px 0',
-  // 최소 폭 320px → 1200px 컨테이너에서 3열, 좁아지면 2열/1열로 자동 축소
-  // min(320px, 100%)로 감싸 초소형 화면에서 트랙이 넘치지 않도록 함
   gridTemplateColumns: 'repeat(auto-fill, minmax(min(320px, 100%), 1fr))',
   justifyContent: 'center',
   justifyItems: 'center',
