@@ -13,6 +13,7 @@ import { ClubInfoSidebarSection } from './components/ClubInfoSidebarSection';
 import ApplyButton from './components/ClubInfoSidebarSection/ApplyButton';
 import { ClubReviewsSection } from './components/ClubReviewsSection';
 import { useClubDetail } from './hooks/useClubDetail';
+import { useClubHeartbeat } from './hooks/useClubHeartbeat';
 import { useRecordClubView } from './hooks/useRecordClubView';
 
 import type { ClubCategoryEng } from '@/shared/types/club';
@@ -23,6 +24,7 @@ export const ClubDetailPage = () => {
   const isKeyboardVisible = useKeyboardVisible();
 
   useRecordClubView(club.clubId);
+  useClubHeartbeat(club.clubId);
 
   return (
     <>
