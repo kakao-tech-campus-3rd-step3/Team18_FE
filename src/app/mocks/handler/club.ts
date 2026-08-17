@@ -133,6 +133,7 @@ export const clubHandlers = [
     import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/apply-submit',
     postApplicationSubmitResolver,
   ),
+  http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/views', postClubViewResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', getClubDetailResolver),
   http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', postClubDetailResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/reviews', getClubReviewsResolver),
