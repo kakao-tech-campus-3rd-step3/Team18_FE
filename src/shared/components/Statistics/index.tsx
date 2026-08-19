@@ -3,7 +3,13 @@ import { SectionHeading } from '@/shared/components/SectionHeading';
 import { useClubStatistics } from '@/shared/hooks/useClubStatistics';
 import { formatHourMinute } from '@/shared/utils/dateUtils';
 import { BarChart } from './BarChart';
-import { DIMENSION_TITLE, MASKED_MESSAGE, MIN_VISIBLE_APPLICANTS, SCOPE_TITLE } from './constants';
+import {
+  DIMENSION_TITLE,
+  EMPTY_MESSAGE,
+  MASKED_MESSAGE,
+  MIN_VISIBLE_APPLICANTS,
+  SCOPE_TITLE,
+} from './constants';
 import * as S from './index.styled';
 import { TrendChart } from './TrendChart';
 import type { StatisticsScope } from '@/shared/types/statistics';
@@ -31,8 +37,18 @@ export const StatisticsSection = ({ clubId, scope }: Props) => {
   }
 
   const results = data.results.filter((result) => result.buckets.length > 0);
-  const isHidden =
-    data.masked || data.totalApplicants < MIN_VISIBLE_APPLICANTS || results.length === 0;
+
+  /** 최소 공개 기준은 공개 통계에만 적용하고, 관리자에게는 원본 수치를 그대로 보여준다. */
+  const isMasked =
+    data.masked || (scope === 'public' && data.totalApplicants < MIN_VISIBLE_APPLICANTS);
+
+  const getNoticeMessage = () => {
+    if (isMasked) return MASKED_MESSAGE[scope];
+    if (data.totalApplicants === 0 || results.length === 0) return EMPTY_MESSAGE[scope];
+    return null;
+  };
+
+  const noticeMessage = getNoticeMessage();
 
   return (
     <S.Container>
@@ -44,8 +60,8 @@ export const StatisticsSection = ({ clubId, scope }: Props) => {
         </S.Caption>
       </S.Header>
 
-      {isHidden ? (
-        <S.Notice>{MASKED_MESSAGE[scope]}</S.Notice>
+      {noticeMessage ? (
+        <S.Notice>{noticeMessage}</S.Notice>
       ) : (
         <S.Grid>
           {results.map((result) => (

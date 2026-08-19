@@ -83,12 +83,30 @@ describe('StatisticsSection', () => {
     expect(screen.getByText('3월 4일')).toBeInTheDocument();
   });
 
-  it('지원자가 3명 미만이면 분포 대신 안내 문구를 표시한다', async () => {
+  it('공개 통계는 지원자가 3명 미만이면 분포 대신 안내 문구를 표시한다', async () => {
     mockedFetch.mockResolvedValueOnce(createStatistics({ totalApplicants: 2 }));
 
-    renderSection();
+    renderSection('public');
 
-    expect(await screen.findByText(/3명 미만/)).toBeInTheDocument();
+    expect(await screen.findByText(/3명 이상 모이면/)).toBeInTheDocument();
+    expect(screen.queryByText('성별')).not.toBeInTheDocument();
+  });
+
+  it('관리자 통계는 지원자가 3명 미만이어도 원본 분포를 그대로 표시한다', async () => {
+    mockedFetch.mockResolvedValueOnce(createStatistics({ totalApplicants: 2 }));
+
+    renderSection('admin');
+
+    expect(await screen.findByText('성별')).toBeInTheDocument();
+    expect(screen.getByText('남성')).toBeInTheDocument();
+  });
+
+  it('지원자가 없으면 빈 차트 대신 안내 문구를 표시한다', async () => {
+    mockedFetch.mockResolvedValueOnce(createStatistics({ totalApplicants: 0 }));
+
+    renderSection('admin');
+
+    expect(await screen.findByText('아직 지원자가 없습니다.')).toBeInTheDocument();
     expect(screen.queryByText('성별')).not.toBeInTheDocument();
   });
 
