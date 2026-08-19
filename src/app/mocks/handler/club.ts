@@ -14,6 +14,8 @@ const getPopularClubsResolver = () => {
   return HttpResponse.json({ clubs }, { status: 200 });
 };
 
+const postClubViewResolver = () => new HttpResponse(null, { status: 204 });
+
 const postClubHeartbeatResolver = () => new HttpResponse(null, { status: 204 });
 
 interface ClubApplicationParams extends PathParams {
