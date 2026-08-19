@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { TwoColumnLayout } from '@/shared/components/Layout/TwoColumnLayout';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { PageHeader } from '@/shared/components/PageHeader';
+import { StatisticsSection } from '@/shared/components/Statistics';
 import { useKeyboardVisible } from '@/shared/hooks/useKeyboardVisible';
 import { engToKorCategory } from '@/shared/utils/formatting';
 import { ClubActivityPhotosSection } from './components/ClubActivityPhotosSection';
@@ -45,6 +46,7 @@ export const ClubDetailPage = () => {
               introductionActivity={club.introductionActivity}
               introductionIdeal={club.introductionIdeal}
             />
+            <StatisticsSection clubId={club.clubId} scope='public' />
             <Suspense fallback={<LoadingSpinner />}>
               <ClubReviewsSection clubId={club.clubId} />
             </Suspense>
