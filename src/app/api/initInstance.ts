@@ -25,6 +25,10 @@ export const apiInstance = initInstance({
   baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
+export const publicApiInstance = initInstance({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+});
+
 apiInstance.interceptors.request.use((config) => {
   const token = getAccessToken();
   if (token) {

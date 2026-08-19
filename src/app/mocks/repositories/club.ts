@@ -1,6 +1,7 @@
 import type { ClubDetail } from '@/pages/user/ClubDetail/types/clubDetail';
 import type { ClubReview, PostClubReviewRequest } from '@/pages/user/ClubDetail/types/review';
 import type { Club } from '@/pages/user/Main/types/club';
+import type { PopularClub } from '@/pages/user/Main/types/popularClub';
 
 export const clubs: Club[] = [
   // 문예
@@ -400,6 +401,31 @@ export const mockClubReviews: Record<number, ClubReview[]> = {
       createdAt: '2025-10-11T12:00:00Z',
     },
   ],
+};
+
+const RECENT_VIEWER_THRESHOLD = 10;
+const ACTIVE_VIEWER_THRESHOLD = 3;
+
+export const popularClubRepository = {
+  getPopularClubs: (): PopularClub[] =>
+    clubs
+      .map((club) => {
+        const isRecentPopular = club.id % 3 === 0;
+        const isActivePopular = club.id % 5 === 0;
+
+        const recentViewerCount = isRecentPopular ? ((club.id * 7) % 40) + 10 : (club.id * 5) % 10;
+        const activeViewerCount = isActivePopular ? (club.id % 6) + 3 : club.id % 3;
+
+        return {
+          clubId: club.id,
+          recentViewerCount,
+          activeViewerCount,
+          recentViewerBadge: recentViewerCount >= RECENT_VIEWER_THRESHOLD,
+          activeViewerBadge: activeViewerCount >= ACTIVE_VIEWER_THRESHOLD,
+        };
+      })
+
+      .filter((club) => club.recentViewerBadge || club.activeViewerBadge),
 };
 
 export const clubRepository = {

@@ -1,11 +1,16 @@
 import { http, HttpResponse, type PathParams } from 'msw';
 import { ApplicationRepository } from '@/app/mocks/repositories/application.ts';
-import { clubRepository, clubReviewRepository } from '../repositories/club';
+import { clubRepository, clubReviewRepository, popularClubRepository } from '../repositories/club';
 
 const getClubsResolver = ({ request }: { request: Request }) => {
   const url = new URL(request.url);
   const categoryName = url.searchParams.get('category') ?? 'all';
   const clubs = clubRepository.getClubsByCategory(categoryName);
+  return HttpResponse.json({ clubs }, { status: 200 });
+};
+
+const getPopularClubsResolver = () => {
+  const clubs = popularClubRepository.getPopularClubs();
   return HttpResponse.json({ clubs }, { status: 200 });
 };
 
@@ -121,6 +126,8 @@ const putClubImagesResolver = async ({
 
 export const clubHandlers = [
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs?category', getClubsResolver),
+  // '/clubs/:clubId'보다 반드시 앞에 등록한다. 뒤에 두면 popular가 clubId로 잡힌다.
+  http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/popular', getPopularClubsResolver),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:Id/apply', getClubApplicationResolver),
   http.post(
     import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/apply-submit',
