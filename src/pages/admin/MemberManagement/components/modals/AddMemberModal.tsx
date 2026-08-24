@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { Button } from '@/shared/components/Button';
 import { Dropdown } from '@/shared/components/Dropdown';
 import { UnderlineInputField } from '@/shared/components/Form/InputField/UnderlineInputField';
@@ -60,17 +60,6 @@ export const AddMemberModal = ({ isOpen, onClose, onSubmit }: AddMemberModalProp
   });
 
   const [errors, setErrors] = useState<Partial<Record<keyof AddMemberFormData, string>>>({});
-
-  // 필수 필드가 모두 채워졌는지 확인
-  const isFormValid = useMemo(() => {
-    return (
-      formData.name.trim().length >= 2 &&
-      formData.studentId.length === 6 &&
-      /^010-\d{4}-\d{4}$/.test(formData.phoneNumber) &&
-      formData.college.trim().length > 0 &&
-      formData.department.trim().length > 0
-    );
-  }, [formData]);
 
   const validateForm = (): boolean => {
     const newErrors: Partial<Record<keyof AddMemberFormData, string>> = {};
@@ -213,9 +202,7 @@ export const AddMemberModal = ({ isOpen, onClose, onSubmit }: AddMemberModalProp
       </S.ScrollableBody>
 
       <S.ButtonWrapper>
-        <Button onClick={handleSubmit} disabled={!isFormValid}>
-          등록하기
-        </Button>
+        <Button onClick={handleSubmit}>등록하기</Button>
       </S.ButtonWrapper>
     </Modal>
   );
