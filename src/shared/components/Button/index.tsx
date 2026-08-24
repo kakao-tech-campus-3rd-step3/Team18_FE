@@ -52,6 +52,7 @@ export const Button = ({
   return (
     <StyledButton
       onClick={onClick}
+      disabled={disabled}
       $disabled={disabled}
       $variant={variant}
       $width={width}
