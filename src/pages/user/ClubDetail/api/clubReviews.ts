@@ -12,9 +12,8 @@ export const fetchClubReviews = async (clubId: number): Promise<ClubReview[]> =>
 export const postClubReview = async (
   clubId: number,
   body: PostClubReviewRequest,
-): Promise<ClubReview> => {
-  return apiInstance
-    .post<ClubReview>(`/clubs/${clubId}/reviews`, body)
-    .then((res) => res.data)
+): Promise<void> => {
+  await apiInstance
+    .post(`/clubs/${clubId}/reviews`, body)
     .catch((error) => handleAxiosError(error, '후기 등록에 실패했습니다.'));
 };
