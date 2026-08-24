@@ -54,7 +54,7 @@ export const ClubReviewsSection = ({ clubId }: { clubId: number }) => {
           {...register('studentId', { required: '학번을 입력해 주세요.' })}
         />
         <OutlineTextareaField
-          placeholder='후기를 입력하세요'
+          placeholder='후기를 입력하세요 (등록된 동아리회원만 작성 가능)'
           rows={4}
           invalid={!!errors.content}
           message={errors.content?.message}
