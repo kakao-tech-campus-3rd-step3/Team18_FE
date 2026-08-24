@@ -42,7 +42,7 @@ export const ReviewContent = styled.p(({ theme }) => ({
   fontSize: theme.font.size.sm,
 }));
 
-export const ReviewForm = styled.div({
+export const ReviewForm = styled.form({
   display: 'flex',
   flexDirection: 'column',
   gap: '0.75rem',
