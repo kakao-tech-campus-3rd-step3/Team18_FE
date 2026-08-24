@@ -14,6 +14,10 @@ const getPopularClubsResolver = () => {
   return HttpResponse.json({ clubs }, { status: 200 });
 };
 
+const postClubViewResolver = () => new HttpResponse(null, { status: 204 });
+
+const postClubHeartbeatResolver = () => new HttpResponse(null, { status: 204 });
+
 interface ClubApplicationParams extends PathParams {
   clubId: string;
 }
@@ -132,6 +136,11 @@ export const clubHandlers = [
   http.post(
     import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/apply-submit',
     postApplicationSubmitResolver,
+  ),
+  http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/views', postClubViewResolver),
+  http.post(
+    import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId/heartbeat',
+    postClubHeartbeatResolver,
   ),
   http.get(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', getClubDetailResolver),
   http.post(import.meta.env.VITE_API_BASE_URL + '/clubs/:clubId', postClubDetailResolver),
