@@ -10,8 +10,8 @@ type Props = {
   to: string;
   width?: string;
   isRegistered: boolean;
-  everyTimeUrl: string;
-  googleFormUrl: string;
+  everyTimeUrl: string | null;
+  googleFormUrl: string | null;
 };
 
 const ApplyButton = ({
@@ -39,11 +39,6 @@ const ApplyButton = ({
 
     window.dataLayer?.push({ event: 'club_apply_click', clubId, clubName });
 
-    if (isRegistered) {
-      navigate(to);
-      return;
-    }
-
     if (googleFormUrl && isValidUrl(googleFormUrl)) {
       window.open(googleFormUrl, '_blank');
       return;
@@ -51,6 +46,11 @@ const ApplyButton = ({
 
     if (everyTimeUrl && isValidUrl(everyTimeUrl)) {
       window.open(everyTimeUrl, '_blank');
+      return;
+    }
+
+    if (isRegistered) {
+      navigate(to);
       return;
     }
 
