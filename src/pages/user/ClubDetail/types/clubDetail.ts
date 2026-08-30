@@ -22,7 +22,7 @@ export type ClubDetail = {
   recruitEnd: string;
   applicationNotice: string;
   isRegistered: boolean;
-  everyTimeUrl: string;
-  googleFormUrl: string;
+  everyTimeUrl: string | null;
+  googleFormUrl: string | null;
   instagramUrl?: string;
 };
