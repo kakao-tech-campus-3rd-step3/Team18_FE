@@ -8,10 +8,33 @@ import type { InterviewSchedule } from '@/pages/user/Apply/type/apply';
 export const InterviewScheduleSelector = ({ availableTime, date, onChange }: InterviewSchedule) => {
   const timeSlotsArray: [string, string][] = getTimeSlotsArray(availableTime);
 
-  const { handleMouseDown, handleMouseMove, handleMouseUp, states } = useDragSelection(
+  const { handleDragStart, handleDragOver, handleDragEnd, states } = useDragSelection(
     date,
     timeSlotsArray,
   );
+
+  // 드래그 중인 손가락 좌표로 현재 슬롯을 찾아 선택 갱신
+  const getSlotIndexAtPoint = (clientX: number, clientY: number): number | null => {
+    const slot = document.elementFromPoint(clientX, clientY)?.closest<HTMLElement>('[data-index]');
+    if (!slot) return null;
+
+    return Number(slot.dataset.index);
+  };
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const index = getSlotIndexAtPoint(e.clientX, e.clientY);
+    if (index === null) return;
+
+    e.preventDefault();
+    handleDragStart(index);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const index = getSlotIndexAtPoint(e.clientX, e.clientY);
+    if (index === null) return;
+
+    handleDragOver(index);
+  };
 
   useEffect(() => {
     if (!onChange) return;
@@ -28,17 +51,14 @@ export const InterviewScheduleSelector = ({ availableTime, date, onChange }: Int
 
   return (
     <Wrapper>
-      <TimeSlotsContainer>
+      <TimeSlotsContainer
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handleDragEnd}
+      >
         {timeSlotsArray.map((e, idx) => {
           return (
-            <TimeSpan
-              key={idx}
-              data-index={idx}
-              selected={states.isSelectedStates[idx]}
-              onMouseDown={handleMouseDown}
-              onMouseEnter={handleMouseMove}
-              onMouseUp={handleMouseUp}
-            >
+            <TimeSpan key={idx} data-index={idx} selected={states.isSelectedStates[idx]}>
               <Text size='xs'>{`${e[0]}~${e[1]}`}</Text>
             </TimeSpan>
           );
