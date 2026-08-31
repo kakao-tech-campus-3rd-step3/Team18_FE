@@ -7,13 +7,9 @@ import { updateDragState, updateSelectedState } from '../utils/drag';
 import { getIndexDiffSign } from '../utils/math';
 import type { DragAction, DragState } from '../type/apply';
 
-function getSelectedIndex(e: React.MouseEvent<HTMLSpanElement>) {
-  return Number(e.currentTarget.dataset.index);
-}
-
 function dragReducer(state: DragState, action: DragAction) {
   switch (action.type) {
-    case 'mouseDown': {
+    case 'dragStart': {
       const newSelectedStates: boolean[] = [...state.isSelectedStates];
       newSelectedStates[action.index] = action.isSelectionMode;
 
@@ -28,7 +24,7 @@ function dragReducer(state: DragState, action: DragAction) {
         previousIndexDiffSign: null,
       };
     }
-    case 'mouseMove': {
+    case 'dragOver': {
       const currentIndex = action.index;
       const indexDiffSign = action.indexDiffSign;
 
@@ -56,7 +52,7 @@ function dragReducer(state: DragState, action: DragAction) {
         previousIndexDiffSign: newPreviousIndexDiffSign,
       };
     }
-    case 'mouseUp': {
+    case 'dragEnd': {
       return {
         ...state,
         isMouseDown: false,
@@ -76,43 +72,37 @@ export function useDragSelection(date: string, timeIntervalArray: [string, strin
     generateInitialDragState(timeIntervalArray.length),
   );
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLSpanElement>) => {
-    e.preventDefault();
+  const handleDragStart = (index: number) => {
     dispatch({
-      type: 'mouseDown',
-      index: getSelectedIndex(e),
-      isSelectionMode: !states.isSelectedStates[getSelectedIndex(e)],
+      type: 'dragStart',
+      index,
+      isSelectionMode: !states.isSelectedStates[index],
     });
   };
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLSpanElement>) => {
-    if (
-      !e.currentTarget.dataset.index ||
-      getSelectedIndex(e) === states.lastHoveredIndex ||
-      !states.isMouseDown
-    )
-      return;
+  const handleDragOver = (index: number) => {
+    if (!states.isMouseDown || index === states.lastHoveredIndex) return;
 
     dispatch({
-      type: 'mouseMove',
-      index: getSelectedIndex(e),
-      indexDiffSign: getIndexDiffSign(getSelectedIndex(e), states.lastHoveredIndex),
+      type: 'dragOver',
+      index,
+      indexDiffSign: getIndexDiffSign(index, states.lastHoveredIndex),
     });
   };
 
-  const handleMouseUp = () => {
+  const handleDragEnd = () => {
     if (!states.isMouseDown) return;
     dispatch({
-      type: 'mouseUp',
+      type: 'dragEnd',
     });
 
     updateInterviewSchedule(states.isSelectedStates);
   };
 
   return {
-    handleMouseDown,
-    handleMouseMove,
-    handleMouseUp,
+    handleDragStart,
+    handleDragOver,
+    handleDragEnd,
     states,
   };
 }
