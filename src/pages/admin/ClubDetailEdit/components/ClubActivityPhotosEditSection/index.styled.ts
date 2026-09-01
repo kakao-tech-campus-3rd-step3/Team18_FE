@@ -25,6 +25,17 @@ export const AddButton = styled.div(({ theme }) => ({
   },
 }));
 
+export const Description = styled.p(({ theme }) => ({
+  margin: '0.25rem 0 0.75rem 1rem',
+  fontSize: theme.font.size.sm,
+  color: theme.colors.textSecondary,
+  lineHeight: 1.5,
+  '& strong': {
+    fontWeight: theme.font.weight.bold,
+    color: theme.colors.textPrimary,
+  },
+}));
+
 export const PhotosWrapper = styled.div(({ theme }) => ({
   overflowX: 'auto',
   paddingBottom: '4px',
@@ -61,6 +72,21 @@ export const Photo = styled.img(({ theme }) => ({
   objectFit: 'cover',
   display: 'block',
   boxShadow: theme.shadow.sm,
+}));
+
+export const PendingBadge = styled.span(({ theme }) => ({
+  position: 'absolute',
+  top: '8px',
+  left: '8px',
+  padding: '2px 8px',
+  borderRadius: theme.radius.sm,
+  backgroundColor: theme.colors.primary,
+  color: theme.colors.bg,
+  fontSize: theme.font.size.xs,
+  fontWeight: theme.font.weight.medium,
+  boxShadow: theme.shadow.sm,
+  pointerEvents: 'none',
+  zIndex: 1,
 }));
 
 export const Overlay = styled.div(({ theme }) => ({

@@ -1,26 +1,54 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { updateClubImages } from '@/pages/admin/ClubDetailEdit/api/clubImagesEdit';
 import { toast } from '@/shared/utils/toast';
 
 const MAX_FILE_SIZE_MB = 5;
 const MAX_TOTAL_SIZE_MB = 50;
 
-export const useClubActivityPhotos = (
-  clubId: string | number,
-  initialImages: { id: number; url: string }[],
-) => {
-  const [images, setImages] = useState<{ id: number; url: string }[]>(initialImages);
+type ExistingImage = { id: number; url: string };
+
+type PendingImage = { key: string; file: File; url: string };
+
+export type ActivityPhoto = {
+  key: string;
+  url: string;
+  isNew: boolean;
+};
+
+const toMB = (bytes: number) => bytes / 1024 / 1024;
+
+const toExistingKey = (id: number) => `existing-${id}`;
+
+const toPendingKey = (file: File) => `new-${file.name}-${file.size}-${file.lastModified}`;
+
+/**
+ * 활동 사진 편집 상태를 로컬에서만 관리한다.
+ * 추가·삭제는 화면에 즉시 반영되지만 서버 반영은 `saveImages`를 호출했을 때만 일어난다.
+ */
+export const useClubActivityPhotos = (initialImages: ExistingImage[]) => {
+  const [savedImages, setSavedImages] = useState<ExistingImage[]>(initialImages);
+  const [keptImages, setKeptImages] = useState<ExistingImage[]>(initialImages);
+  const [pendingImages, setPendingImages] = useState<PendingImage[]>([]);
+
+  const pendingImagesRef = useRef<PendingImage[]>([]);
+  pendingImagesRef.current = pendingImages;
+
+  useEffect(() => {
+    return () => {
+      pendingImagesRef.current.forEach((image) => URL.revokeObjectURL(image.url));
+    };
+  }, []);
 
   const validateFiles = (files: File[]) => {
-    for (const file of files) {
-      if (file.size / 1024 / 1024 > MAX_FILE_SIZE_MB) {
-        toast.error(`${file.name} 파일이 ${MAX_FILE_SIZE_MB}MB를 초과합니다.`);
-        return false;
-      }
+    const oversized = files.find((file) => toMB(file.size) > MAX_FILE_SIZE_MB);
+    if (oversized) {
+      toast.error(`${oversized.name} 파일이 ${MAX_FILE_SIZE_MB}MB를 초과합니다.`);
+      return false;
     }
 
-    const totalSizeMB = files.reduce((acc, f) => acc + f.size / 1024 / 1024, 0);
-    if (totalSizeMB > MAX_TOTAL_SIZE_MB) {
+    const pendingSize = pendingImages.reduce((acc, image) => acc + image.file.size, 0);
+    const newSize = files.reduce((acc, file) => acc + file.size, 0);
+    if (toMB(pendingSize + newSize) > MAX_TOTAL_SIZE_MB) {
       toast.error(`전체 업로드 이미지 합이 ${MAX_TOTAL_SIZE_MB}MB를 초과합니다.`);
       return false;
     }
@@ -28,27 +56,24 @@ export const useClubActivityPhotos = (
     return true;
   };
 
-  const handleDelete = async (id: number) => {
-    const updated = images.filter((img) => img.id !== id);
-    setImages(updated);
-
-    try {
-      await updateClubImages(clubId, [], updated);
-    } catch (err: unknown) {
-      toast.error((err as Error).message || '이미지 삭제에 실패했습니다.');
-    }
-  };
-
-  const uploadFiles = async (files: File[]) => {
+  const addFiles = (files: File[]) => {
     if (files.length === 0) return;
-    if (!validateFiles(files)) return;
 
-    try {
-      const data = await updateClubImages(clubId, files, images);
-      if (Array.isArray(data)) setImages(data);
-    } catch (err: unknown) {
-      toast.error((err as Error).message || '이미지 업로드에 실패했습니다.');
+    const pendingKeys = new Set(pendingImages.map((image) => image.key));
+    const uniqueFiles = files.filter((file) => !pendingKeys.has(toPendingKey(file)));
+
+    if (uniqueFiles.length === 0) {
+      toast.error('이미 추가된 사진입니다.');
+      return;
     }
+    if (!validateFiles(uniqueFiles)) return;
+
+    const added = uniqueFiles.map((file) => ({
+      key: toPendingKey(file),
+      file,
+      url: URL.createObjectURL(file),
+    }));
+    setPendingImages((prev) => [...prev, ...added]);
   };
 
   const handleAdd = () => {
@@ -60,17 +85,58 @@ export const useClubActivityPhotos = (
     input.onchange = (e: Event) => {
       const target = e.target as HTMLInputElement;
       if (!target.files) return;
-      const files = Array.from(target.files);
-      uploadFiles(files);
+      addFiles(Array.from(target.files));
     };
 
     input.click();
   };
 
+  const handleDelete = (photo: ActivityPhoto) => {
+    if (photo.isNew) {
+      setPendingImages((prev) => {
+        const target = prev.find((image) => image.key === photo.key);
+        if (target) URL.revokeObjectURL(target.url);
+        return prev.filter((image) => image.key !== photo.key);
+      });
+      return;
+    }
+
+    setKeptImages((prev) => prev.filter((image) => toExistingKey(image.id) !== photo.key));
+  };
+
+  const photos: ActivityPhoto[] = [
+    ...keptImages.map((image) => ({ key: toExistingKey(image.id), url: image.url, isNew: false })),
+    ...pendingImages.map((image) => ({ key: image.key, url: image.url, isNew: true })),
+  ];
+
+  const isDirty = pendingImages.length > 0 || keptImages.length !== savedImages.length;
+
+  const saveImages = useCallback(
+    async (clubId: string | number) => {
+      if (!isDirty) return;
+
+      const data = await updateClubImages(
+        clubId,
+        pendingImages.map((image) => image.file),
+        keptImages,
+      );
+
+      pendingImages.forEach((image) => URL.revokeObjectURL(image.url));
+      setPendingImages([]);
+
+      const nextImages = Array.isArray(data) ? data : keptImages;
+      setSavedImages(nextImages);
+      setKeptImages(nextImages);
+    },
+    [isDirty, pendingImages, keptImages],
+  );
+
   return {
-    images,
+    photos,
+    isDirty,
+    addFiles,
     handleAdd,
     handleDelete,
-    uploadFiles,
+    saveImages,
   };
 };

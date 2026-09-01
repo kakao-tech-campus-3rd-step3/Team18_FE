@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import _ from 'lodash';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/shared/components/Button';
@@ -9,14 +10,14 @@ import { useOnboardingPopup } from '@/shared/hooks/useOnboardingPopup';
 import { engToKorCategory } from '@/shared/utils/formatting';
 import { toast } from '@/shared/utils/toast';
 import { updateClubDetailEdit } from './api/clubDetailEdit';
-import { updateClubImages } from './api/clubImagesEdit';
 import { ClubActivityPhotosEditSection } from './components/ClubActivityPhotosEditSection';
 import { ClubDescriptionEditSection } from './components/ClubDescriptionEditSection';
 import { ClubInfoSidebarEditSection } from './components/ClubInfoSidebarEditSection';
 import { ClubShortIntroductionEditSection } from './components/ClubShortIntroductionEditSection';
+import { useClubActivityPhotos } from './hooks/useClubActivityPhotos';
 import { useClubDetailEdit } from './hooks/useClubDetailEdit';
 
-import type { ClubDetailUpdatePayload } from './types/clubDetailEdit';
+import type { ClubDetailEdit, ClubDetailUpdatePayload } from './types/clubDetailEdit';
 import type { ClubCategoryEng } from '@/shared/types/club';
 
 export const ClubDetailEditPage = () => {
@@ -27,6 +28,12 @@ export const ClubDetailEditPage = () => {
     reopen: reopenClubPagePopup,
   } = useOnboardingPopup('club-page', { triggerMode: 'pageVisit' });
   const club = useClubDetailEdit(clubId ?? '');
+  const {
+    photos,
+    handleAdd: handleAddPhoto,
+    handleDelete: handleDeletePhoto,
+    saveImages,
+  } = useClubActivityPhotos(club.introductionImages);
 
   const methods = useForm<ClubDetailUpdatePayload>({
     mode: 'onTouched',
@@ -35,21 +42,30 @@ export const ClubDetailEditPage = () => {
 
   const {
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors, isSubmitting },
   } = methods;
 
   const navigate = useNavigate();
 
   const onSubmit = async (data: ClubDetailUpdatePayload) => {
-    const payload = { ...data };
+    // defaultValues로 들어온 진입 시점의 introductionImages는 이미지 전용 API에서만 다룬다.
+    const payload: ClubDetailUpdatePayload = _.omit(data as ClubDetailEdit, 'introductionImages');
 
-    updateClubDetailEdit(clubId ?? '', payload)
-      .then(() => {
-        toast.success('수정 성공!', () => navigate(`/clubs/${clubId}`));
-      })
-      .catch((error: Error) => {
-        toast.error(error.message || '수정 실패!');
-      });
+    try {
+      await saveImages(club.clubId);
+    } catch (error) {
+      toast.error((error as Error).message || '활동 사진 저장에 실패했습니다.');
+      return;
+    }
+
+    try {
+      await updateClubDetailEdit(clubId ?? '', payload);
+    } catch (error) {
+      toast.error((error as Error).message || '수정 실패!');
+      return;
+    }
+
+    toast.success('수정 성공!', () => navigate(`/clubs/${clubId}`));
   };
 
   return (
@@ -75,11 +91,9 @@ export const ClubDetailEditPage = () => {
                 <ClubShortIntroductionEditSection />
                 <div style={{ pointerEvents: isClubPagePopupOpen ? 'none' : undefined }}>
                   <ClubActivityPhotosEditSection
-                    clubId={club.clubId}
-                    images={club.introductionImages}
-                    onUpload={(files: File[]) =>
-                      updateClubImages(club.clubId, files, club.introductionImages)
-                    }
+                    photos={photos}
+                    onAdd={handleAddPhoto}
+                    onDelete={handleDeletePhoto}
                   />
                 </div>
                 <ClubDescriptionEditSection />
@@ -95,8 +109,6 @@ export const ClubDetailEditPage = () => {
                     취소
                   </Button>
                 </ButtonGroup>
-
-                {isSubmitSuccessful && <SuccessMessage>저장 완료!</SuccessMessage>}
               </>
             }
             right={
@@ -121,11 +133,5 @@ const ButtonGroup = styled.div({
 const ErrorMessage = styled.span(({ theme }) => ({
   color: theme.colors.error,
   marginTop: '0.5rem',
-  display: 'block',
-}));
-
-const SuccessMessage = styled.span(({ theme }) => ({
-  color: theme.colors.success,
-  marginTop: '1rem',
   display: 'block',
 }));
