@@ -3,6 +3,7 @@ import { Suspense, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { LoadingSpinner } from '@/shared/components/LoadingSpinner';
 import { OnboardingPopup } from '@/shared/components/OnboardingPopup';
+import { StatisticsSection } from '@/shared/components/Statistics';
 import { useOnboardingPopup } from '@/shared/hooks/useOnboardingPopup';
 import { ApplicantListSection } from './components/ApplicantListSection';
 import { DashboardSummarySection } from './components/DashboardSummarySection';
@@ -29,6 +30,9 @@ export const DashboardPage = () => {
       <Container>
         <Suspense fallback={<LoadingSpinner />}>
           <DashboardSummarySection />
+          <StatisticsWrapper>
+            <StatisticsSection clubId={Number(clubId)} scope='admin' />
+          </StatisticsWrapper>
           <ApplicantListSection
             stage={stage}
             setStage={setStage}
@@ -48,6 +52,10 @@ const Layout = styled.div({
   alignItems: 'flex-start',
   minHeight: '100vh',
   width: '100%',
+});
+
+const StatisticsWrapper = styled.div({
+  margin: '2.5rem 0',
 });
 
 const Container = styled.main({
