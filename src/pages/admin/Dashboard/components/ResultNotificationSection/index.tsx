@@ -15,8 +15,6 @@ type Props = {
 export const EMPTY_MESSAGE = '아직 결과를 발송한 기록이 없습니다.';
 export const ERROR_MESSAGE = '발송 현황을 불러오지 못했습니다.';
 
-const formatCost = (cost: number) => `${cost.toLocaleString('ko-KR')}원`;
-
 const ResultNotificationRow = ({ request }: { request: ResultNotificationRequest }) => {
   const unsettled = request.pending + request.accepted;
 
@@ -39,9 +37,7 @@ const ResultNotificationRow = ({ request }: { request: ResultNotificationRequest
         </S.CountList>
       </S.Td>
       <S.Td align='right'>
-        {request.sms + request.lms > 0
-          ? `${request.sms + request.lms}건 · ${formatCost(request.estimatedCost)}`
-          : '-'}
+        {request.sms + request.lms > 0 ? `${request.sms + request.lms}건` : '-'}
       </S.Td>
     </S.Tr>
   );
@@ -89,7 +85,7 @@ export const ResultNotificationSection = ({ clubId }: Props) => {
               <S.Th>상태</S.Th>
               <S.Th align='right'>발송 건수</S.Th>
               <S.Th>전달 결과</S.Th>
-              <S.Th align='right'>문자 · 예상비용</S.Th>
+              <S.Th align='right'>문자</S.Th>
             </tr>
           </S.TableHead>
           <tbody>

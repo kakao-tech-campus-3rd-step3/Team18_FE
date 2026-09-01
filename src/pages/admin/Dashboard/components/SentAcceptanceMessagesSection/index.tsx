@@ -22,7 +22,7 @@ type FormValues = {
 
 export const MESSAGE_MAX_LENGTH = 800;
 export const CHANNEL_REQUIRED_MESSAGE = '알림 채널을 하나 이상 선택해주세요.';
-export const SMS_NOTICE = '문자는 한 번에 최대 50명까지 발송할 수 있으며 발송 비용이 발생합니다.';
+export const SMS_NOTICE = '문자는 한 번에 최대 50명까지 발송할 수 있습니다.';
 
 const CHANNEL_OPTIONS = Object.keys(CHANNEL_LABEL) as NotificationChannel[];
 
