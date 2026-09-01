@@ -3,7 +3,45 @@ import type {
   ApplicantsApiResponse,
   ApplicantData,
   InterviewSchedule,
+  ResultNotificationRequest,
+  ResultNotificationsApiResponse,
 } from '@/pages/admin/Dashboard/types/dashboard';
+
+/** 첫 항목은 처리 중으로 두어 발송 현황 폴링 동작을 확인할 수 있게 한다. */
+const MOCK_RESULT_NOTIFICATIONS: ResultNotificationRequest[] = [
+  {
+    requestId: 11,
+    idempotencyKey: '9b2d6c1e-3f4a-4b5c-8d6e-7f8091a2b3c4',
+    stage: 'FINAL',
+    requestStatus: 'PROCESSING',
+    requestedAt: '2026-08-31T10:30:00',
+    total: 6,
+    pending: 2,
+    accepted: 1,
+    sent: 3,
+    failed: 0,
+    unknown: 0,
+    sms: 2,
+    lms: 1,
+    estimatedCost: 69.3,
+  },
+  {
+    requestId: 10,
+    idempotencyKey: '550e8400-e29b-41d4-a716-446655440000',
+    stage: 'INTERVIEW',
+    requestStatus: 'COMPLETED',
+    requestedAt: '2026-08-13T13:00:00',
+    total: 5,
+    pending: 0,
+    accepted: 0,
+    sent: 4,
+    failed: 1,
+    unknown: 0,
+    sms: 0,
+    lms: 0,
+    estimatedCost: 0,
+  },
+];
 
 const MOCK_DASHBOARD_SUMMARY: DashboardSummary = {
   totalApplicantCount: 45,
@@ -94,5 +132,9 @@ export const dashboardRepository = {
       interviewSchedule: MOCK_INTERVIEW_SCHEDULE,
       message: null,
     };
+  },
+
+  getResultNotifications: (limit: number): ResultNotificationsApiResponse => {
+    return { requests: MOCK_RESULT_NOTIFICATIONS.slice(0, limit) };
   },
 };

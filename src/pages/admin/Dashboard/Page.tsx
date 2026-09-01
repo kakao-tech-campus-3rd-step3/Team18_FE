@@ -6,6 +6,7 @@ import { OnboardingPopup } from '@/shared/components/OnboardingPopup';
 import { useOnboardingPopup } from '@/shared/hooks/useOnboardingPopup';
 import { ApplicantListSection } from './components/ApplicantListSection';
 import { DashboardSummarySection } from './components/DashboardSummarySection';
+import { ResultNotificationSection } from './components/ResultNotificationSection';
 import { SentAcceptanceMessagesSection } from './components/SentAcceptanceMessagesSection';
 import type { ApplicationStage } from '@/pages/admin/Dashboard/types/dashboard';
 
@@ -37,6 +38,7 @@ export const DashboardPage = () => {
           />
         </Suspense>
         <SentAcceptanceMessagesSection stage={stage} />
+        <ResultNotificationSection clubId={Number(clubId)} />
       </Container>
     </Layout>
   );
