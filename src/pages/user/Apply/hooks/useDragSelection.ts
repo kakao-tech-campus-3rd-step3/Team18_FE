@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer, useRef } from 'react';
 import { useInterviewScheduleUpdater } from './useFormDataUpdate';
 
 import { generateInitialDragState } from '../constants/initialDragState';
@@ -90,19 +90,38 @@ export function useDragSelection(date: string, timeIntervalArray: [string, strin
     });
   };
 
-  const handleDragEnd = () => {
+  // 슬롯 영역 바깥에서 놓아도 드래그가 끝나야 한다.
+  useEffect(() => {
     if (!states.isMouseDown) return;
-    dispatch({
-      type: 'dragEnd',
-    });
 
-    updateInterviewSchedule(states.isSelectedStates);
-  };
+    const endDrag = () => dispatch({ type: 'dragEnd' });
+
+    window.addEventListener('pointerup', endDrag);
+    window.addEventListener('pointercancel', endDrag);
+
+    return () => {
+      window.removeEventListener('pointerup', endDrag);
+      window.removeEventListener('pointercancel', endDrag);
+    };
+  }, [states.isMouseDown]);
+
+  // 드래그를 놓는 시점이 아니라 선택이 바뀔 때마다 폼에 반영한다.
+  const isInitialRender = useRef(true);
+  const updateRef = useRef(updateInterviewSchedule);
+  updateRef.current = updateInterviewSchedule;
+
+  useEffect(() => {
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+      return;
+    }
+
+    updateRef.current(states.isSelectedStates);
+  }, [states.isSelectedStates]);
 
   return {
     handleDragStart,
     handleDragOver,
-    handleDragEnd,
     states,
   };
 }
