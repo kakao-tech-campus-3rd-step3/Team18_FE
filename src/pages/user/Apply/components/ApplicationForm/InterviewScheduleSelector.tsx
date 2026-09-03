@@ -8,10 +8,7 @@ import type { InterviewSchedule } from '@/pages/user/Apply/type/apply';
 export const InterviewScheduleSelector = ({ availableTime, date, onChange }: InterviewSchedule) => {
   const timeSlotsArray: [string, string][] = getTimeSlotsArray(availableTime);
 
-  const { handleDragStart, handleDragOver, handleDragEnd, states } = useDragSelection(
-    date,
-    timeSlotsArray,
-  );
+  const { handleDragStart, handleDragOver, states } = useDragSelection(date, timeSlotsArray);
 
   // 드래그 중인 손가락 좌표로 현재 슬롯을 찾아 선택 갱신
   const getSlotIndexAtPoint = (clientX: number, clientY: number): number | null => {
@@ -51,11 +48,7 @@ export const InterviewScheduleSelector = ({ availableTime, date, onChange }: Int
 
   return (
     <Wrapper>
-      <TimeSlotsContainer
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handleDragEnd}
-      >
+      <TimeSlotsContainer onPointerDown={handlePointerDown} onPointerMove={handlePointerMove}>
         {timeSlotsArray.map((e, idx) => {
           return (
             <TimeSpan key={idx} data-index={idx} selected={states.isSelectedStates[idx]}>
